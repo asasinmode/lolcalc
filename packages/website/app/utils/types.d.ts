@@ -40,7 +40,7 @@ export interface IDamageResultTableSection {
 	selectValue?: string;
 	/** use with selectOptions */
 	selectLabel?: string;
-	hoverTooltipData?: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps | Pick<IDragonHoverTooltipProps, 'precomputedDescription'>;
+	hoverTooltipData: ShallowRef<IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps | Pick<IDragonHoverTooltipProps, 'precomputedDescription'> | undefined>;
 	rows: ShallowRef<IDamageResultTableSectionRow[]>;
 }
 

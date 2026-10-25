@@ -505,6 +505,7 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 		/* expected to be filled by async stuff below */
 		image: shallowRef(),
 		rows: shallowRef([]),
+		hoverTooltipData: shallowRef(),
 		notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
@@ -535,9 +536,7 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 		section.image.value = [abilityImage(precomputedDescription.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
 		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = abilityVariableCellValue;
-		section.hoverTooltipData = {
-			precomputedDescription,
-		};
+		section.hoverTooltipData.value = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.item) {
 		const item = ITEMS[abilityId.id]!;
 
@@ -550,7 +549,7 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 		section.image.value = [imgUrl(`img/item/${item.image}`, true), 64];
 		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = itemVariableCellValue;
-		section.hoverTooltipData = { precomputedDescription };
+		section.hoverTooltipData.value = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.dragon) {
 		if (!INTERESTING_SOULS_DRAGONS.includes(abilityId.id)) {
 			removeBeingAddedSection(section);
@@ -565,7 +564,7 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 		section.image.value = await gameAbilityImage(abilityId);
 		section.rows.value = await getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = dragonVariableCellValue;
-		section.hoverTooltipData = { precomputedDescription };
+		section.hoverTooltipData.value = { precomputedDescription };
 	} else {
 		const effectSpecific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[abilityId.id]!;
 		if (!effectSpecific.variables) {
@@ -592,13 +591,14 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 			unknownVariables: [],
 		});
 		section.getCellValue = effectVariableCellValue;
-		section.hoverTooltipData = { abilityId };
+		section.hoverTooltipData.value = { abilityId };
 	}
 
 	addComputedSection(section.id);
 	triggerRef(resultSections);
 	triggerRef(section.image);
 	triggerRef(section.rows);
+	triggerRef(section.hoverTooltipData);
 }
 
 async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): Promise<UnwrapRef<IDamageResultTableSection['rows']>> {
@@ -1078,7 +1078,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
-function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSection) {
+function sectionHasTooltip(section: IDamageResultTableSection) {
 	// TODO check if is not reran too much
 	return section.hoverTooltipData || section.id === ResultSectionId.BasicAttack;
 }
@@ -1086,10 +1086,10 @@ function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSect
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
 let hoveredSectionPopoverEl: HTMLElement | undefined;
 
-const { bind: bindSectionHoverTooltip } = useHoverTooltip<{ index: number; section: IDamageResultTableSection }>({
+const { bind: bindSectionHoverTooltip } = useHoverTooltip<IDamageResultTableSection>({
 	el: () => hoveredSectionPopoverEl,
-	beforeShow({ index, section }, trigger) {
-		if (!sectionHasTooltip(index, section)) return false;
+	beforeShow(section, trigger) {
+		if (!sectionHasTooltip(section)) return false;
 		const popover = trigger.querySelector<HTMLElement>('[popover]');
 		if (popover) {
 			hoveredSectionType = section.abilityId.type;
@@ -1500,10 +1500,10 @@ defineExpose({
 							</button>
 						</td>
 						<th :id="`results-table-section-header-${section.id}`" scope="colgroup" :colspan="1 + resultColumns.length">
-							<div v-bind="bindSectionHoverTooltip({ index, section })">
+							<div v-bind="bindSectionHoverTooltip(section)">
 								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
-								<template v-if="sectionHasTooltip(index, section)">
+								<template v-if="sectionHasTooltip(section)">
 									<article v-if="section.abilityId.type === AbilityType.item" popover="hint" class="hover-tooltip champion-item" :data-expanded="isTooltipExpanded || undefined">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 									</article>

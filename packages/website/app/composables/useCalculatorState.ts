@@ -91,6 +91,7 @@ export function initCalculatorState(): ICalculatorState {
 					value: `${source.computed.formattedStatTotals.value[rowId as IChampionStatName]}${CHAMPION_STAT_META[rowId as IChampionStatName].isPercentage ? '%' : ''}`,
 				};
 			},
+			hoverTooltipData: shallowRef(),
 		},
 		{
 			id: ResultSectionId.BasicAttack,
@@ -130,6 +131,7 @@ export function initCalculatorState(): ICalculatorState {
 				['average', 'average'],
 			]),
 			selectLabel: 'attack type',
+			hoverTooltipData: shallowRef(),
 		},
 		{
 			id: ResultSectionId.CustomTotal,
@@ -148,6 +150,7 @@ export function initCalculatorState(): ICalculatorState {
 				console.warn("results section custom total 'getCellValue' called, should be handled manually");
 				return { value: 0, numberValue: 0 };
 			},
+			hoverTooltipData: shallowRef(),
 		},
 	]) as unknown as ShallowRef<IDamageResultTableSection[]>;
 
