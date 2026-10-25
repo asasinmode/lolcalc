@@ -1,7 +1,7 @@
 <script setup vapor lang="ts">
 import type { DamageSource, IComputedAppliedEffect } from '@lolcalc/core/DamageSource';
 import { computeAbilityDescription, computeDragonAbilityDescription, computeItemDescription } from '@lolcalc/core/DamageSource';
-import type { IChampionAbilityId, IDragonAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
+import type { IDragonAbilityId, IGameAbilityId, IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import { gameAbilityImage, simpleDescriptionFormatting } from '@lolcalc/core/misc';
@@ -35,7 +35,6 @@ defineProps<{
 const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
-const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { bindTrigger: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
@@ -73,9 +72,6 @@ interface IDamageSectionOption {
 		name: string;
 	}[];
 }
-
-/** array containing `boolean` of whether a section is implemented or not, used for `enableUnimplementedUi` */
-const implementedDamageSectionsMap = computed(() => resultSections.value.map((section) => enableUnimplementedUi.value || !(section.abilityId.type === 'champion' && section.abilityId.abilityKey !== 'passive')));
 
 const uniqueDamageSourceChampions = computed<Set<IChampion>>(
 	() =>
@@ -1084,7 +1080,7 @@ const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemH
 
 function sectionHasTooltip(sectionIndex: number, section: IDamageResultTableSection) {
 	// TODO check if is not reran too much
-	return implementedDamageSectionsMap.value[sectionIndex] && (section.hoverTooltipData || section.id === ResultSectionId.BasicAttack);
+	return section.hoverTooltipData || section.id === ResultSectionId.BasicAttack;
 }
 
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
@@ -1287,27 +1283,13 @@ defineExpose({
 								<label for="results-table-row-new-section-ability">add section</label>
 								<select id="results-table-row-new-section-ability" name="sectionOptionIndex" required :disabled="!damageSectionOptions.length">
 									<option v-if="!damageSectionOptions.length">no options left</option>
-									<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
-										<option
-											v-for="(ability, abilityIndex) in option.abilities"
-											:key="GameAbilityId.stringify(ability.id)"
-											:value="`${optionIndex}-${abilityIndex}`"
-											:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== AbilityType.champion || ability.id.abilityKey === 'passive')"
-										>
+									<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="option.optionName">
+										<option v-for="(ability, abilityIndex) in option.abilities" :key="GameAbilityId.stringify(ability.id)" :value="`${optionIndex}-${abilityIndex}`">
 											{{ ability.name }}
 										</option>
 									</optgroup>
 								</select>
-								<button
-									class="pretend-ui-btn"
-									type="submit"
-									:disabled="
-										!damageSectionOptions.length ||
-										(!enableUnimplementedUi && !damageSectionOptions.some((option) => option.type !== AbilityType.champion || option.abilities.some((ability) => (ability.id as IChampionAbilityId).abilityKey === 'passive')))
-									"
-								>
-									add
-								</button>
+								<button class="pretend-ui-btn" type="submit" :disabled="!damageSectionOptions.length">add</button>
 							</form>
 						</div>
 					</td>
@@ -1565,12 +1547,7 @@ defineExpose({
 					@dragleave="onResultSectionDragleave"
 					@drop="onResultSectionDrop($event, index, false)"
 				>
-					<tr v-if="!implementedDamageSectionsMap[index]" class="info-row">
-						<td :colspan="2 + resultColumns.length">
-							<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
-						</td>
-					</tr>
-					<tr v-else-if="!section.image" class="info-row">
+					<tr v-if="!section.image" class="info-row">
 						<td :colspan="2 + resultColumns.length">loading...</td>
 					</tr>
 					<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length" class="info-row">
@@ -1578,11 +1555,7 @@ defineExpose({
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
 					</tr>
-					<tr
-						v-for="row in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : implementedDamageSectionsMap[index] ? toValue(section.rows) : []"
-						:key="`${section.id}_${row.id}`"
-						:class="{ unknown: row.isUnknown }"
-					>
+					<tr v-for="row in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : toValue(section.rows)" :key="`${section.id}_${row.id}`" :class="{ unknown: row.isUnknown }">
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label>
 								<span>include in custom total</span>

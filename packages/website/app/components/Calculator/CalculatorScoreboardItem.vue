@@ -1237,14 +1237,12 @@ defineExpose({ el });
 						/>
 						<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
 					</div>
-					<ComingSoonCover feature="abilities" class="text-white pt-1 inset-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] absolute items-start!" />
 					<div
 						v-for="abilityKey in ['q', 'w', 'e', 'r'] satisfies INonPassiveAbilityKey[]"
 						:key="abilityKey"
 						:data-ability="abilityKey"
 						:data-level="value.abilityLevels.value[abilityKey]"
 						:class="{ disabled: value.computed.abilities.value[abilityKey][0]?.isDisabled }"
-						:inert="!enableUnimplementedUi"
 					>
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
