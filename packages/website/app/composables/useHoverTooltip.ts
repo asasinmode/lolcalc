@@ -75,6 +75,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		restoreType = pin && type !== 'manual' ? type : null;
 		restoreType !== null && popover.setAttribute('popover', 'manual');
 		emulateDismiss = pin || !isPopoverHintSupported.value;
+		document.getElementById('click-eater')?.showPopover();
 		popover.showPopover({ source: trigger });
 		if (pin) {
 			popover.setAttribute('data-pinned', '');
@@ -93,6 +94,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 
 	function onPopoverToggle(event: ToggleEvent) {
 		if (event.newState !== 'closed') return;
+		document.getElementById('click-eater')?.hidePopover();
 		const popover = event.currentTarget as HTMLElement;
 		popover.removeAttribute('data-pinned');
 		popover.removeEventListener('toggle', onPopoverToggle);

@@ -91,8 +91,10 @@ function hideSharePopover() {
 const header = useTemplateRef('header');
 const menuBtn = useTemplateRef('menuBtn');
 
+let observer: IntersectionObserver | undefined;
+
 onMounted(() => {
-	const observer = new IntersectionObserver(
+	observer = new IntersectionObserver(
 		([entry]) => {
 			if (entry!.isIntersecting) {
 				menuBtn.value?.removeAttribute('data-stuck');
@@ -104,11 +106,29 @@ onMounted(() => {
 	);
 
 	header.value && observer.observe(header.value);
+	window.addEventListener('resize', closeClickEaterOnResize, { passive: true });
 });
+
+onBeforeUnmount(() => {
+	observer?.disconnect();
+	window.removeEventListener('resize', closeClickEaterOnResize);
+});
+
+const clickEater = useTemplateRef('clickEater');
+
+function toggleClickEater(event: ToggleEvent) {
+	clickEater.value?.togglePopover(event.newState === 'open');
+}
+
+function closeClickEaterOnResize() {
+	if (window.innerWidth >= 680 && !isTooltipPinned.value && clickEater.value?.matches(':popover-open')) {
+		clickEater.value.hidePopover();
+	}
+}
 </script>
 
 <template>
-	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav">
+	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav" @click="clickEater?.showPopover()">
 		<span>menu</span>
 		<Icon class="i-ph:list-bold" />
 	</button>
@@ -126,7 +146,7 @@ onMounted(() => {
 					<img src="/asasinmode.webp" width="200" height="200" alt="asasinmode avatar - a white outline of a cupcake with a smily face on a background looking like a galaxy" />
 				</a>
 			</span>
-			<nav id="page-nav" popover @focusout="closeMenuIfOutside">
+			<nav id="page-nav" popover @focusout="closeMenuIfOutside" @toggle="toggleClickEater">
 				<button id="menu-close-btn" title="zamknij menu" popovertargetaction="hide" popovertarget="page-nav">
 					<span>zamknij menu</span>
 					<Icon class="i-ph:x-bold" />
@@ -188,7 +208,7 @@ onMounted(() => {
 					</li>
 				</ul>
 			</nav>
-			<span :data-show="isTooltipPinned || undefined" @touchstart.stop.prevent="" />
+			<span id="click-eater" ref="clickEater" popover="manual" aria-hidden="true" :data-eat="isTooltipPinned || undefined" />
 		</div>
 	</header>
 	<NuxtPage />
@@ -428,20 +448,17 @@ onMounted(() => {
 					}
 				}
 
-				/* for eating clicks on nav backdrop */
-				> nav:popover-open + span,
-				> nav + span[data-show] {
-					--at-apply: 'fixed inset-0 z-1000';
-				}
+				#click-eater {
+					--at-apply: 'inset-0 fixed size-full pointer-events-none';
 
-				> nav + span[data-show] {
-					--at-apply: 'bg-pink-500';
-				}
-
-				@media (width >= 680px) {
-					> nav + span:not([data-show]) {
+					&::backdrop {
 						--at-apply: 'hidden';
 					}
+				}
+
+				> nav:popover-open + #click-eater,
+				#click-eater[data-eat] {
+					--at-apply: 'pointer-events-auto';
 				}
 
 				> h1 {
