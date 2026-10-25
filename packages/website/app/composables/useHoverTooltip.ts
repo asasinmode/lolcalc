@@ -190,7 +190,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		}
 	}
 
-	function startPress(event: PointerEvent, trigger: HTMLElement, data: TData) {
+	function startPress(event: PointerEvent, trigger: HTMLElement, data: TData, openOnTap = false) {
 		endPress(true);
 		const { clientX: startX, clientY: startY } = event;
 		const abort = new AbortController();
@@ -206,7 +206,14 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 			},
 			{ signal, passive: true },
 		);
-		trigger.addEventListener('pointerup', () => endPress(false), { signal });
+		trigger.addEventListener(
+			'pointerup',
+			() => {
+				if (openOnTap && !session.fired && show(event, trigger, data, true)) session.swallowCtl = swallowNextClick();
+				endPress(false);
+			},
+			{ signal },
+		);
 		/* browser took the gesture over (scroll / pan) */
 		trigger.addEventListener('pointercancel', () => endPress(true), { signal });
 
@@ -218,7 +225,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		}, LONG_PRESS_MS);
 	}
 
-	function onPointerenter(event: PointerEvent, rawData: MaybeRefOrGetter<TData> | undefined) {
+	function onPointerenter(event: PointerEvent, rawData: MaybeRefOrGetter<TData> | undefined, openOnTap = false) {
 		const trigger = event.currentTarget as HTMLElement | null;
 		/* isTooltipPinned checked at the beginning because browsers might dismiss at different moments */
 		if (
@@ -238,7 +245,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 			/* also covers the pointer coming back from the popover onto the trigger (already open, so `show` did nothing) */
 			addTriggerPointerleaveListener(trigger);
 		} else {
-			startPress(event, trigger, data);
+			startPress(event, trigger, data, openOnTap);
 		}
 	}
 
@@ -288,10 +295,10 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		}
 	}
 
-	function bind(data?: MaybeRefOrGetter<TData>) {
+	function bind(data?: MaybeRefOrGetter<TData>, openOnTap = false) {
 		return {
 			'data-tooltip-trigger': '',
-			onPointerenter: (event: PointerEvent) => onPointerenter(event, data),
+			onPointerenter: (event: PointerEvent) => onPointerenter(event, data, openOnTap),
 			onFocusin: (event: FocusEvent) => onFocusin(event, data),
 			onFocusout,
 			onContextmenuCapture,

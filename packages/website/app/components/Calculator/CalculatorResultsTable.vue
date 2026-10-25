@@ -1541,7 +1541,7 @@ defineExpose({
 									</select>
 								</template>
 								<template v-if="section.notImplemented">
-									<span :aria-describedby="`${section.id}-tooltip-not-implemented`" tabindex="0" class="info-tooltip-trigger warning" v-bind="bindInfoTriggerAttrs()">
+									<span :aria-describedby="`${section.id}-tooltip-not-implemented`" tabindex="0" class="info-tooltip-trigger warning" v-bind="bindInfoTriggerAttrs(undefined, true)">
 										<span>not fully implemented</span>
 										<Icon class="i-ph:warning-fill" />
 									</span>
@@ -1593,13 +1593,13 @@ defineExpose({
 							<img v-if="row.image" v-bind="gameImageAttrs(row.image, 24)" aria-hidden="true" />
 							<span v-if="row.isUnknown">unknown</span>
 							{{ row.name }}
-							<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs()">
+							<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs(undefined, true)">
 								<img src="/logo_dark.webp" alt="lolcalc logo" width="192" height="192" />
 							</span>
 							<p :id="`${section.id}-${row.id}-tooltip-custom`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
 								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existing one
 							</p>
-							<span v-if="row.additionalInfo" :aria-describedby="`${section.id}-${row.id}-tooltip-info`" class="info-tooltip-trigger" tabindex="0" v-bind="bindInfoTriggerAttrs()">
+							<span v-if="row.additionalInfo" :aria-describedby="`${section.id}-${row.id}-tooltip-info`" class="info-tooltip-trigger" tabindex="0" v-bind="bindInfoTriggerAttrs(undefined, true)">
 								<span>additional info</span>
 								<Icon class="i-ph:info-fill" />
 							</span>

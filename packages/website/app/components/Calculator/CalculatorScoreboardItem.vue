@@ -1206,7 +1206,7 @@ defineExpose({ el });
 			<section ref="abilities" class="abilities" :inert="value.isLoading.value">
 				<h4>abilties</h4>
 				<template v-if="championNotImplemented">
-					<span :aria-describedby="`not-implemented-${idSuffix}`" tabindex="0" class="info-tooltip-trigger warning" v-bind="bindInfoTriggerAttrs()">
+					<span :aria-describedby="`not-implemented-${idSuffix}`" tabindex="0" class="info-tooltip-trigger warning" v-bind="bindInfoTriggerAttrs(undefined, true)">
 						<span>not fully implemented</span>
 						<Icon class="i-ph:warning-fill" />
 					</span>

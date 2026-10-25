@@ -17,7 +17,7 @@ const { bindTrigger, bindPopover } = useInfoTooltip();
 
 <template>
 	<template v-if="tooltip">
-		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" v-bind="bindTrigger()">
+		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" v-bind="bindTrigger(undefined, true)">
 			<slot name="trigger">
 				<span>additional info</span>
 			</slot>
