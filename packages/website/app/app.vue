@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
 import { version as rawPackageVersion } from '~~/package.json';
+import { acquireClickEater } from '~/composables/useClickEater';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 
 const runtimeConfig = useRuntimeConfig();
@@ -114,21 +115,19 @@ onBeforeUnmount(() => {
 	window.removeEventListener('resize', closeClickEaterOnResize);
 });
 
-const clickEater = useTemplateRef('clickEater');
+const pageNav = useTemplateRef('pageNav');
 
 function toggleClickEater(event: ToggleEvent) {
-	clickEater.value?.togglePopover(event.newState === 'open');
+	event.newState === 'closed' && releaseClickEater(event.currentTarget as HTMLElement);
 }
 
 function closeClickEaterOnResize() {
-	if (window.innerWidth >= 680 && !isTooltipPinned.value && clickEater.value?.matches(':popover-open')) {
-		clickEater.value.hidePopover();
-	}
+	window.innerWidth >= 680 && pageNav.value && releaseClickEater(pageNav.value);
 }
 </script>
 
 <template>
-	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav" @click="clickEater?.showPopover()">
+	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav" @click="pageNav && acquireClickEater(pageNav)">
 		<span>menu</span>
 		<Icon class="i-ph:list-bold" />
 	</button>
@@ -146,7 +145,7 @@ function closeClickEaterOnResize() {
 					<img src="/asasinmode.webp" width="200" height="200" alt="asasinmode avatar - a white outline of a cupcake with a smily face on a background looking like a galaxy" />
 				</a>
 			</span>
-			<nav id="page-nav" popover @focusout="closeMenuIfOutside" @toggle="toggleClickEater">
+			<nav id="page-nav" ref="pageNav" popover @focusout="closeMenuIfOutside" @toggle="toggleClickEater">
 				<button id="menu-close-btn" title="zamknij menu" popovertargetaction="hide" popovertarget="page-nav">
 					<span>zamknij menu</span>
 					<Icon class="i-ph:x-bold" />
@@ -208,7 +207,6 @@ function closeClickEaterOnResize() {
 					</li>
 				</ul>
 			</nav>
-			<span id="click-eater" ref="clickEater" popover="manual" aria-hidden="true" :data-eat="isTooltipPinned || undefined" />
 		</div>
 	</header>
 	<NuxtPage />
@@ -446,19 +444,6 @@ function closeClickEaterOnResize() {
 							}
 						}
 					}
-				}
-
-				#click-eater {
-					--at-apply: 'inset-0 fixed size-full pointer-events-none';
-
-					&::backdrop {
-						--at-apply: 'hidden';
-					}
-				}
-
-				> nav:popover-open + #click-eater,
-				#click-eater[data-eat] {
-					--at-apply: 'pointer-events-auto';
 				}
 
 				> h1 {

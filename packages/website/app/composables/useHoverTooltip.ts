@@ -75,7 +75,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		restoreType = pin && type !== 'manual' ? type : null;
 		restoreType !== null && popover.setAttribute('popover', 'manual');
 		emulateDismiss = pin || !isPopoverHintSupported.value;
-		document.getElementById('click-eater')?.showPopover();
+		acquireClickEater(popover);
 		popover.showPopover({ source: trigger });
 		if (pin) {
 			popover.setAttribute('data-pinned', '');
@@ -94,8 +94,8 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 
 	function onPopoverToggle(event: ToggleEvent) {
 		if (event.newState !== 'closed') return;
-		document.getElementById('click-eater')?.hidePopover();
 		const popover = event.currentTarget as HTMLElement;
+		releaseClickEater(popover);
 		popover.removeAttribute('data-pinned');
 		popover.removeEventListener('toggle', onPopoverToggle);
 		hoverLeaveCtl?.abort();
@@ -320,7 +320,10 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		hoverLeaveCtl?.abort();
 		removeGlobalListeners();
 		/* the element is going away without a toggle event, don't leave the global pinned flag stuck */
-		if (activePopover) isTooltipPinned.value = false;
+		if (activePopover) {
+			releaseClickEater(activePopover);
+			isTooltipPinned.value = false;
+		}
 	});
 
 	/** Spread on a popover that is a SIBLING of its trigger and can be interacted with, specifically for useInfoTooltip. Not needed when the popover is a child of the trigger. */
