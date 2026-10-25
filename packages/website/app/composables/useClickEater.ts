@@ -16,6 +16,7 @@ export function acquireClickEater(owner: HTMLElement) {
 		eater.id = 'click-eater';
 		eater.setAttribute('popover', 'manual');
 		eater.setAttribute('aria-hidden', 'true');
+		eater.ontouchstart = (event) => event.preventDefault();
 	}
 	if (!owners.size) {
 		/* a modal dialog makes everything outside it inert, top layer included, so the eater must live inside the one containing the owner */
