@@ -13,6 +13,7 @@ const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
 const { _component: EffectsDialog } = useEffectsDialog();
 const { _component: DamageSourceDebugDialog } = useDamageSourceDebug();
+const { isTooltipPinned } = useTooltipState();
 
 useHead({
 	htmlAttrs: { lang: 'en' },
@@ -187,7 +188,7 @@ onMounted(() => {
 					</li>
 				</ul>
 			</nav>
-			<span />
+			<span :data-show="isTooltipPinned || undefined" @touchstart.stop.prevent="" />
 		</div>
 	</header>
 	<NuxtPage />
@@ -428,12 +429,17 @@ onMounted(() => {
 				}
 
 				/* for eating clicks on nav backdrop */
-				> nav:popover-open + span {
+				> nav:popover-open + span,
+				> nav + span[data-show] {
 					--at-apply: 'fixed inset-0 z-1000';
 				}
 
+				> nav + span[data-show] {
+					--at-apply: 'bg-pink-500';
+				}
+
 				@media (width >= 680px) {
-					> nav + span {
+					> nav + span:not([data-show]) {
 						--at-apply: 'hidden';
 					}
 				}
