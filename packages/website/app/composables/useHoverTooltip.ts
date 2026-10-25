@@ -58,9 +58,8 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 	function hide() {
 		const popover = activePopover;
 		if (popover?.matches(':popover-open')) {
-			popover.removeAttribute('data-pinned');
+			setPinned(popover, false);
 			popover.hidePopover();
-			isTooltipPinned.value = false;
 		}
 	}
 
@@ -78,8 +77,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		acquireClickEater(popover);
 		popover.showPopover({ source: trigger });
 		if (pin) {
-			popover.setAttribute('data-pinned', '');
-			isTooltipPinned.value = true;
+			setPinned(popover, true);
 		}
 		window.addEventListener('keydown', onKeyDown);
 		popover.addEventListener('toggle', onPopoverToggle);
@@ -92,10 +90,17 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		document.removeEventListener('pointerdown', onOutsidePointerdown, true);
 	}
 
+	function setPinned(popover: HTMLElement, pinned: boolean) {
+		popover.toggleAttribute('data-pinned', pinned);
+		isTooltipPinned.value = pinned;
+		setClickEaterEating(popover, pinned);
+	}
+
 	function onPopoverToggle(event: ToggleEvent) {
 		if (event.newState !== 'closed') return;
 		const popover = event.currentTarget as HTMLElement;
 		releaseClickEater(popover);
+		isTooltipPinned.value = false;
 		popover.removeAttribute('data-pinned');
 		popover.removeEventListener('toggle', onPopoverToggle);
 		hoverLeaveCtl?.abort();
@@ -110,7 +115,6 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		}
 		emulateDismiss = false;
 		onHide?.();
-		isTooltipPinned.value = false;
 	}
 
 	/** only registered when not `isPopoverHintSupported`, emulate dismiss on click outside */
@@ -126,8 +130,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 			if (activePopover.hasAttribute('data-pinned')) {
 				hide();
 			} else {
-				activePopover.setAttribute('data-pinned', '');
-				isTooltipPinned.value = true;
+				setPinned(activePopover, true);
 			}
 		}
 	}

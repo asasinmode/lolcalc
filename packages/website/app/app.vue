@@ -14,7 +14,6 @@ const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
 const { _component: EffectsDialog } = useEffectsDialog();
 const { _component: DamageSourceDebugDialog } = useDamageSourceDebug();
-const { isTooltipPinned } = useTooltipState();
 
 useHead({
 	htmlAttrs: { lang: 'en' },
@@ -127,7 +126,7 @@ function closeClickEaterOnResize() {
 </script>
 
 <template>
-	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav" @click="pageNav && acquireClickEater(pageNav)">
+	<button id="menu-btn" ref="menuBtn" title="menu" popovertarget="page-nav" @click="pageNav && acquireClickEater(pageNav, true)">
 		<span>menu</span>
 		<Icon class="i-ph:list-bold" />
 	</button>
@@ -138,7 +137,7 @@ function closeClickEaterOnResize() {
 				<a :href="runtimeConfig.app.baseURL"> <span>link to the lolcalc home page</span> </a>
 				<img src="/logo_dark.webp" width="192" height="192" alt="lolcalc logo - the letter L with a calculator icon next to it" />
 			</h1>
-			<span> 26{{ vSemver.slice(vSemver.indexOf('.')) }} </span>
+			<span>26{{ vSemver.slice(vSemver.indexOf('.')) }}</span>
 			<span id="by-asasinmode">
 				by
 				<a href="https://asasinmode.com" target="_blank" title="asasinmode">

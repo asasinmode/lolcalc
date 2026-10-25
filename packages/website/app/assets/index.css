@@ -219,10 +219,10 @@
 		&::backdrop {
 			--at-apply: 'hidden';
 		}
-	}
 
-	html:has(:is(.hover-tooltip, .effect-hover-tooltip-container)[data-pinned], #page-nav:popover-open) #click-eater {
-		pointer-events: auto;
+		&[data-eat] {
+			--at-apply: 'pointer-events-auto';
+		}
 	}
 
 	.hover-tooltip,
