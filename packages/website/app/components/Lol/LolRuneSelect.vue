@@ -366,24 +366,24 @@ defineExpose({
 			'primary gap secondary'
 			'primary gap shards';
 
-		@media (width < 760px) {
-			& {
-				--at-apply: 'flex-col pbe-5';
-			}
-		}
-
 		&[open] {
 			--at-apply: 'grid';
+		}
 
-			@media (width < 760px) {
-				& {
-					--at-apply: 'flex';
-				}
+		@media (width < 760px) {
+			& {
+				--at-apply: 'grid-cols-1 grid-rows-none auto-rows-auto';
+				grid-template-areas:
+					'header'
+					'primary'
+					'secondary'
+					'shards';
 			}
 		}
 
 		> header {
-			--at-apply: 'pbe-[--fluid-f420-12-8-t760] pbs-[--fluid-8-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20 inline-full';
+			/* z-index higher than comingsooncover of 50 */
+			--at-apply: 'pbe-[--fluid-f420-12-8-t760] pbs-[--fluid-8-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-51 inline-full';
 			grid-area: header;
 
 			> h1 {
@@ -821,16 +821,21 @@ defineExpose({
 			--padding-size-share: 0.4;
 			--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
 			--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
-
-			@media (width < 760px) {
-				& {
-					--at-apply: 'my-0';
-					--slot-row-button-size: calc(7.5 * var(--spacing));
-				}
-			}
+			--vertical-pbe: calc(5 * var(--spacing));
 
 			&:before {
 				--at-apply: 'top-[calc(var(--slot-row-height)_/_2)]';
+			}
+
+			@media (width < 760px) {
+				& {
+					--at-apply: 'my-0 pbe-[--vertical-pbe]';
+					--slot-row-button-size: calc(7.5 * var(--spacing));
+				}
+
+				&::before {
+					--at-apply: 'inset-be-[calc(0.5*var(--slot-row-height)+var(--vertical-pbe))]';
+				}
 			}
 		}
 
