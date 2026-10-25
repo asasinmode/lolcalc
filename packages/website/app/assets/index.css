@@ -312,7 +312,7 @@
 	}
 
 	.info-tooltip-trigger {
-		--at-apply: 'relative inline-block size-4.5 align-[-0.25rem] ms-0.5';
+		--at-apply: 'relative inline-block size-4.5 align-[-0.25rem] ms-0.5 select-none';
 		anchor-name: --parent;
 
 		&:before {

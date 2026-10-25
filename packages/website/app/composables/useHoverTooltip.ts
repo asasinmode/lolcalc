@@ -8,10 +8,10 @@ interface Options<TData> {
 	onHide?: () => unknown;
 }
 
-const LONG_PRESS_MS = 500;
+const LONG_PRESS_MS = 400;
 const LONG_PRESS_MOVE_TOLERANCE_PX = 10;
 /** after touch ends, for how long a click that follows a long press is swallowed */
-const CLICK_SWALLOW_MS = 400;
+const CLICK_SWALLOW_MS = 300;
 
 /**
  * for global tooltip state. Currently only 1 tooltip is expected to be shown/pinned at a time
@@ -49,6 +49,10 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 	let hoverLeaveCtl: AbortController | undefined;
 	let press: PressSession | undefined;
 	let isDragging = false;
+	/** when a close on click outside has to be handled manually */
+	let emulateDismiss = false;
+	/** `popover` attribute value to restore on close, set when the open popover was switched to manual */
+	let restoreType: string | null = null;
 
 	/* `onHide` called in popover toggle listener */
 	function hide() {
@@ -66,6 +70,11 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		activeTrigger = trigger;
 		if (!popover || popover.matches(':popover-open')) return false;
 		activePopover = popover;
+		/* touch long press: a hint popover opened while the finger is down is light-dismissed by the pointerup that ends the hold, so open it as manual and dismiss it ourselves, same as the Safari fallback */
+		const type = popover.getAttribute('popover');
+		restoreType = pin && type !== 'manual' ? type : null;
+		restoreType !== null && popover.setAttribute('popover', 'manual');
+		emulateDismiss = pin || !isPopoverHintSupported.value;
 		popover.showPopover({ source: trigger });
 		if (pin) {
 			popover.setAttribute('data-pinned', '');
@@ -73,7 +82,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 		}
 		window.addEventListener('keydown', onKeyDown);
 		popover.addEventListener('toggle', onPopoverToggle);
-		!isPopoverHintSupported.value && document.addEventListener('pointerdown', onOutsidePointerdown, true);
+		emulateDismiss && document.addEventListener('pointerdown', onOutsidePointerdown, true);
 		return true;
 	}
 
@@ -93,6 +102,11 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 			activePopover = undefined;
 			activeTrigger = undefined;
 		}
+		if (restoreType !== null) {
+			popover.setAttribute('popover', restoreType);
+			restoreType = null;
+		}
+		emulateDismiss = false;
 		onHide?.();
 		isTooltipPinned.value = false;
 	}
@@ -105,7 +119,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 	function onKeyDown(event: KeyboardEvent) {
 		if (!activePopover) return;
 		if (event.key === 'Escape') {
-			!isPopoverHintSupported.value && hide();
+			emulateDismiss && hide();
 		} else if (event.key.toLowerCase() === 'k' && !event.repeat && !(event.target instanceof HTMLElement && event.target.closest('input, textarea, select'))) {
 			if (activePopover.hasAttribute('data-pinned')) {
 				hide();

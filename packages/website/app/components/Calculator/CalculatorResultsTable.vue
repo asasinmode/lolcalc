@@ -21,6 +21,7 @@ import type { IChampion, IDragonName } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils';
+/* `toValue` and `ResultSectionId` imported manually, despite Nuxt autoimporting them, because when app is built they seem to not be available in the template. Started happening on vue@3.6-rc.13 and nuxt@4.6.0 */
 import { toValue } from 'vue';
 import type { UnwrapRef, WatchHandle } from 'vue';
 import { ResultSectionId } from '~/composables/useCalculatorState';
