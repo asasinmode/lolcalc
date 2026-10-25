@@ -2053,7 +2053,7 @@ defineExpose({ el });
 			}
 
 			.runes {
-				--at-apply: 'b b-[--ui-btn-border-clr] b-e-0';
+				--at-apply: 'b b-[--ui-btn-border-clr] b-e-0 relative';
 				grid-area: runes;
 
 				@media (width < 460px) {
