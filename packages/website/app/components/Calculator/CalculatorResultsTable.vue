@@ -1925,7 +1925,7 @@ defineExpose({
 			anchor-scope: all;
 
 			&:not([aria-labelledby]) {
-				--at-apply: 'sticky inset-bs-[--header-h] z-4 bg-[--bg-clr]';
+				--at-apply: 'sticky inset-bs-[calc(var(--header-h)-0.5px)] z-4 bg-[--bg-clr]';
 				--tooltip-offset-y: 0px;
 
 				> tr {
