@@ -176,6 +176,11 @@ const { bind: bindTooltipAttrs, hide: hideTooltip } = useHoverTooltip<{
 	appliedEffect?: IDamageSourceEffect;
 }>({
 	el: () => effectHoverTooltipEl.value?.el,
+	beforeShow({ effectId, isApplied }) {
+		if (effectHoverTooltipEl.value?.el) {
+			effectHoverTooltipEl.value?.el.style.setProperty('position-anchor', `--effect-${effectId.id}-${isApplied ? 'applied' : 'all'}`);
+		}
+	},
 	onShow({ effectId, isApplied, appliedEffect }) {
 		const specific = EFFECT_SPECIFICS[effectId.id];
 
@@ -334,12 +339,7 @@ defineExpose({
 				</li>
 			</ul>
 		</template>
-		<LolEffectHoverTooltip
-			ref="effectHoverTooltip"
-			:ability-id="hoveredEffectId"
-			:damage-source="hoveredEffectTooltipOverrideDamageSource ?? hoveredAppliedEffect?.source.value"
-			:style="hoveredEffectId && `position-anchor: --effect-${hoveredEffectId.id}-${hoveringApplied ? 'applied' : 'all'}`"
-		/>
+		<LolEffectHoverTooltip ref="effectHoverTooltip" :ability-id="hoveredEffectId" :damage-source="hoveredEffectTooltipOverrideDamageSource ?? hoveredAppliedEffect?.source.value" />
 	</VDialog>
 </template>
 
