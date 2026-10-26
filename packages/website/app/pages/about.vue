@@ -38,7 +38,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<ul>
 				<li><NuxtLink to="#what-is-it">what is it?</NuxtLink></li>
 				<li><NuxtLink to="#does-it-work">does it work?</NuxtLink></li>
-				<li><NuxtLink to="#known-discrepancies">currently known discrepancies</NuxtLink></li>
+				<li><NuxtLink to="#known-discrepancies">known calculation discrepancies</NuxtLink></li>
 				<li><NuxtLink to="#implemented-champions">fully implemented champions</NuxtLink></li>
 				<li><NuxtLink to="#support">support</NuxtLink></li>
 				<li><NuxtLink to="#acknowledgements">acknowledgements</NuxtLink></li>

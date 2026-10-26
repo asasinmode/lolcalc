@@ -40,6 +40,10 @@ node .\scripts\updateTestFixture.ts 16.16 -d infernal:stack -d mountain:stack
 node .\scripts\updateTestFixture.ts 16.16 -e SummonerHaste -e 3153
 ```
 
+## discord? telegram? whatsapp group chat?
+
+These and other chat platforms are cool but anything discussed there doesn't show up when I google it. If you think other people might find whatever you want to discuss/need help with useful, open a [discussion on the project's github](discussions).
+
 ## versioning
 
-Versioning isn't doesn't follow semver rules. At the moment it's vibes based. Check the [github releases](https://github.com/asasinmode/lolcalc/releases) for version changelog.
+Versioning isn't doesn't follow semver rules. At the moment it's vibes based. Check the [github releases](https://github.com/asasinmode/lolcalc/releases) for the version changelog.
