@@ -1507,7 +1507,7 @@ defineExpose({ el });
 				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';
 			grid-template-columns: repeat(5, max-content) minmax(0, 1fr) max-content;
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
+			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					grid-template-areas:
 						'select-champion	select-runes	select-items	items			manipulate'
@@ -1624,7 +1624,7 @@ defineExpose({ el });
 			}
 		}
 
-		@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
+		@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 			.move-up,
 			.move-down,
 			.move-group,
@@ -1642,7 +1642,7 @@ defineExpose({ el });
 				--at-apply: 'bg-cyan-900';
 			}
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
+			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					--at-apply: 'grid';
 				}
@@ -1655,7 +1655,7 @@ defineExpose({ el });
 			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
+			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					--at-apply: 'ms-0';
 				}
@@ -1788,12 +1788,23 @@ defineExpose({ el });
 			anchor-name: --scoreboard-item-items;
 			--me: calc(3 * var(--spacing));
 			--computed-me: var(--me);
-			--ms: calc(5 * var(--spacing));
+			--ms: var(--fluid-f1240-12-20-t1248);
 
-			@media (width < 1680px) and ((width >= 1079px) or (width < 600px)) {
+			@media (width < 1230px) {
 				& {
-					--me: var(--fluid-f540-7-12-t600);
-					--ms: var(--fluid-f540-10-20-t600);
+					--ms: calc(5 * var(--spacing));
+				}
+			}
+
+			@media (width < 1079px) {
+				& {
+					--ms: var(--fluid-f600-12-20-t616);
+				}
+			}
+			@media (width < 594px) {
+				& {
+					--me: var(--fluid-f540-7-12-t594);
+					--ms: var(--fluid-f540-10-20-t594);
 				}
 			}
 
@@ -2837,7 +2848,7 @@ defineExpose({ el });
 				'clear			items				select-items		select-runes	select-champion move-group	move-up'
 				'expand			items				select-items		select-runes	select-champion	duplicate		move-down';
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
+			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					grid-template-areas:
 						'manipulate items			select-items	select-runes	select-champion'
@@ -2873,7 +2884,7 @@ defineExpose({ el });
 		.select-champion {
 			--at-apply: 'ms-[--me] me-[--ms]';
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 600px)) {
+			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					--at-apply: 'me-0';
 				}
@@ -2966,7 +2977,7 @@ defineExpose({ el });
 					'role-quest-dragons stats runes';
 			}
 
-			@media (width < 1194px) and ((width >= 1079px) or (width < 840px)) {
+			@media (width < 1230px) and ((width >= 1079px) or (width < 840px)) {
 				.select-champion {
 					--at-apply: 'ms-0 me-[--me]';
 				}

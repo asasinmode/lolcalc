@@ -482,13 +482,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 			@media (width < 1680px) {
 				& {
 					--extra-cols: 2;
-					grid-template-columns: repeat(
-						2,
-						minmax(
-							calc(var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)),
-							calc(var(--extra-cols) * var(--extra-item-max-w) + var(--extras-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w))
-						)
-					);
+					grid-template-columns: repeat(2, minmax(calc(var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)), 1fr));
 				}
 			}
 
