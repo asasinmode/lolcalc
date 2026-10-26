@@ -354,7 +354,7 @@ const {
 		if (event instanceof PointerEvent) {
 			itemTooltipAnchor = trigger;
 			trigger.addEventListener('mousemove', updateTooltipPosition, { passive: true });
-			updateTooltipPosition(event);
+			updateTooltipPosition(event, false);
 		} else {
 			/* no cursor to follow, but --height is still needed */
 			nextTick(updateTooltipHeight);
@@ -367,16 +367,18 @@ const {
 	},
 });
 
-function updateTooltipHeight() {
-	itemTooltip.value?.style.setProperty('--height', `${itemTooltip.value.clientHeight}px`);
+function updateTooltipHeight(event?: ToggleEvent) {
+	if (!event || event.newState === 'open') {
+		itemTooltip.value?.style.setProperty('--height', `${itemTooltip.value.clientHeight}px`);
+	}
 }
 
-function updateTooltipPosition(event: MouseEvent | TouchEvent) {
+function updateTooltipPosition(event: MouseEvent | TouchEvent, updateHeight = true) {
 	if (!isTooltipPinned.value) {
 		const { clientX, clientY } = 'touches' in event ? (event.touches[0] ?? {}) : event;
 		clientX !== undefined && itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
 		clientY !== undefined && itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
-		updateTooltipHeight();
+		updateHeight && updateTooltipHeight();
 	}
 }
 
@@ -949,7 +951,7 @@ defineExpose({
 			</p>
 			<button :disabled="!damageSource || !damageSource.items.value.some(Boolean)" @click="sellAll">sell all</button>
 		</footer>
-		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip" :data-expanded="isTooltipExpanded || undefined">
+		<article id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip" :data-expanded="isTooltipExpanded || undefined" @toggle="updateTooltipHeight">
 			<LolItemDescription :item="hoveredItem?.item" :damage-source="damageSource" :show-masterwork="hoveredItemShowMasterwork" header-subtitles hover-tooltip source="Shop" />
 		</article>
 	</VDialog>
@@ -1700,8 +1702,8 @@ defineExpose({
 			--at-apply: 'w-(--width) fixed p-[--default-hover-tooltip-p]';
 			--width: 40rem;
 			max-block-size: calc(100dvb - 2.5 * var(--hover-tooltip-margin));
-			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
-			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height) + 2 * var(--spacing))));
+			inset-inline-start: clamp(0px, var(--left), calc(100svi - min(100vw, var(--width))));
+			inset-block-start: clamp(0px, var(--top), calc(100svb - min(100vh, var(--height) + 2 * var(--spacing))));
 		}
 
 		:is(#item-shop-search-listbox > li, #builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where([data-bought], [data-buyability='0'], [data-buyability='-1']) > img,
