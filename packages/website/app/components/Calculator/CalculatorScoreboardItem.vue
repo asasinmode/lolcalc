@@ -2958,7 +2958,7 @@ defineExpose({ el });
 	.mirrored [data-scoreboard-item][data-group='targets'] {
 		> :where(details) {
 			&::details-content {
-				--at-apply: 'grid-cols-[minmax(0,1fr)_var(--runes-stats-section-w)_calc(var(--runes-stats-section-w)+1px)]';
+				--at-apply: 'grid-cols-[minmax(0,1fr)_calc(var(--runes-stats-section-w)+1px)_var(--runes-stats-section-w)]';
 				grid-template-areas:
 					'abilities stats effects'
 					'resources stats effects'
@@ -2985,13 +2985,11 @@ defineExpose({ el });
 			}
 
 			.runes {
-				> dl {
-					--at-apply: 'b-e b-s-0';
+				--at-apply: 'b-e b-s-0';
 
-					@media (width < 460px) {
-						& {
-							--at-apply: 'b-s';
-						}
+				@media (width < 460px) {
+					& {
+						--at-apply: 'b-s';
 					}
 				}
 			}
