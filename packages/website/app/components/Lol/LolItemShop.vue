@@ -1702,7 +1702,6 @@ defineExpose({
 			max-block-size: calc(100dvb - 2.5 * var(--hover-tooltip-margin));
 			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height) + 2 * var(--spacing))));
-			position-try: flip-block;
 		}
 
 		:is(#item-shop-search-listbox > li, #builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where([data-bought], [data-buyability='0'], [data-buyability='-1']) > img,
