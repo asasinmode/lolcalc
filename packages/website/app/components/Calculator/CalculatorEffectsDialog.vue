@@ -301,7 +301,7 @@ defineExpose({
 						:damage-source
 						:data-ability-id="effect.abilityId.id"
 						id-suffix="effects-dialog-applied"
-						v-bind="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
+						:tooltip-trigger-attrs="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
 					>
 						<button class="pretend-ui-btn remove" title="remove" @click="damageSource?.removeEffect(effect.abilityId.id)">
 							<span>remove</span>
@@ -325,7 +325,7 @@ defineExpose({
 							:damage-source
 							id-suffix="effects-dialog-all"
 							:data-ability-id="effect.abilityId.id"
-							v-bind="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: false })"
+							:tooltip-trigger-attrs="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: false })"
 						/>
 						<template #fallback>
 							<ExtraLoading />
