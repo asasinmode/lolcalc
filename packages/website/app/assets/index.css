@@ -232,6 +232,10 @@
 		max-block-size: calc(100dvb - 2 * var(--hover-tooltip-margin));
 		inset-block-start: calc(anchor(end) + var(--tooltip-offset-y, 0px));
 		justify-self: anchor-center;
+		/*
+		 * as of 2026.10.26 the positioning seems to work fine on android/ios chrome/firefox/safari
+		 * except for android firefox 158.0.2 for effects dialog hover tooltip. When showing source ability, tooltip doesn't try the --hover-tooltip-sheet fallback (if it's not already in it, then works fine) and the second tooltip goes off screen
+		 */
 		position-try-fallbacks: flip-block, --hover-tooltip-sheet;
 		position-visibility: always;
 

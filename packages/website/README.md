@@ -143,7 +143,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
 - [ ] mobile version and make look better
   - [x] results sticky horizontal headers, probably unwanted on mobile, headers might be unwanted too with `@media (height < ...)`
-  - [ ] tooltips
+  - [x] tooltips
 - [ ] calculations
   - [x] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
   - [x] stats from rune shards
