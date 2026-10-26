@@ -1210,22 +1210,21 @@ const colW = computed(() => {
 });
 
 const { updateThumbnail } = useDamageSourceThumbnail();
+let thumbnailTooltipPopoverEl: HTMLElement | null = null;
 
-function showColumnSourceThumbnail(event: Event, damageSource: DamageSource | undefined) {
-	if (damageSource) {
-		(event.currentTarget as HTMLElement).addEventListener('mouseleave', hideColumnSourceThumbnail, {
-			passive: true,
-			once: true,
-		});
-		const popoverEl = (event.currentTarget as HTMLElement).nextElementSibling?.nextElementSibling as HTMLElement | undefined;
-		popoverEl?.showPopover();
-		popoverEl?.firstElementChild && updateThumbnail(popoverEl.firstElementChild as HTMLElement, damageSource);
-	}
-}
-
-function hideColumnSourceThumbnail(event: Event) {
-	((event.currentTarget as HTMLElement).nextElementSibling?.nextElementSibling as HTMLElement | undefined)?.hidePopover();
-}
+const { bind: bindThumbnailTriggerAttrs, bindPopover: bindThumbnailPopoverAttrs } = useHoverTooltip<{ index: number; isTarget?: boolean }>({
+	el: () => thumbnailTooltipPopoverEl,
+	beforeShow({ index, isTarget }, trigger) {
+		const damageSource = resultColumns.value[index]![isTarget ? 'target' : 'source'];
+		if (!damageSource) return false;
+		const popover = trigger.parentElement?.lastElementChild;
+		if (popover) {
+			thumbnailTooltipPopoverEl = popover as HTMLElement;
+			popover.firstElementChild && updateThumbnail(popover.firstElementChild as HTMLElement, damageSource);
+			return true;
+		}
+	},
+});
 
 defineExpose({
 	addResultsColumn,
@@ -1316,9 +1315,7 @@ defineExpose({
 								label="column's damage source"
 								:options="sourceOptions"
 								clearable
-								:tooltip-trigger-attrs="{
-									onMouseenter: (event: MouseEvent) => showColumnSourceThumbnail(event, resultColumns[index]!.source),
-								}"
+								:tooltip-trigger-attrs="bindThumbnailTriggerAttrs({ index, isTarget: false })"
 								@update:model-value="setColumnChampion(column, damageSources, $event)"
 							>
 								<img
@@ -1332,7 +1329,7 @@ defineExpose({
 								/>
 								<img v-else :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`" width="256" height="256" style="--focus-brightness: 1.5" aria-hidden="true" />
 								<template #post>
-									<div popover="hint">
+									<div popover="hint" v-bind="bindThumbnailPopoverAttrs()">
 										<CalculatorDamageSourceThumbnail />
 									</div>
 								</template>
@@ -1344,9 +1341,7 @@ defineExpose({
 								label="column's damage target"
 								:options="targetOptions"
 								clearable
-								:tooltip-trigger-attrs="{
-									onMouseenter: (event: MouseEvent) => showColumnSourceThumbnail(event, resultColumns[index]!.target),
-								}"
+								:tooltip-trigger-attrs="bindThumbnailTriggerAttrs({ index, isTarget: true })"
 								@update:model-value="setColumnChampion(column, damageTargets, $event)"
 							>
 								<img
@@ -1360,7 +1355,7 @@ defineExpose({
 								/>
 								<img v-else :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`" width="256" height="256" style="--focus-brightness: 1.5" aria-hidden="true" />
 								<template #post>
-									<div popover="hint">
+									<div popover="hint" v-bind="bindThumbnailPopoverAttrs()">
 										<CalculatorDamageSourceThumbnail />
 									</div>
 								</template>
