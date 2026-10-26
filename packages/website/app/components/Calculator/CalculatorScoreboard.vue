@@ -255,17 +255,40 @@ function setLocalMirrorLayout(event: Event) {
 }
 
 const isDisplayingTargets = ref(false);
+const listContainer = useTemplateRef('listContainer');
+
+function updateSmallScreenScrollX() {
+	const el = listContainer.value;
+	if (!el) return;
+
+	if (window.matchMedia('(width < 1079px)').matches) {
+		const gap = parseFloat(getComputedStyle(el).columnGap) ?? 0;
+		el.style.setProperty('--children-offset-x', `${(0.5 * (gap + el.clientWidth)).toFixed(4)}px`);
+	}
+}
+
+function toggleDisplayedList() {
+	isDisplayingTargets.value = !isDisplayingTargets.value;
+	updateSmallScreenScrollX();
+}
+
+onMounted(() => {
+	window.addEventListener('resize', updateSmallScreenScrollX, { passive: true });
+	updateSmallScreenScrollX();
+});
+
+onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScrollX));
 </script>
 
 <template>
 	<section id="scoreboard" :class="{ mirrored: mirrorLayout }">
-		<h2>configuration scoreboard {{ dragging?.index }} {{ dragDropIndex }} {{ dragDropTarget === damageTargets ? 'target' : 'source' }}</h2>
-		<button class="switch-group pretend-ui-btn" @click="isDisplayingTargets = !isDisplayingTargets">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
+		<h2>configuration scoreboard</h2>
+		<button class="switch-group pretend-ui-btn" @click="toggleDisplayedList">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
 		<label for="scoreboard-mirror-layout">
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @change="setLocalMirrorLayout" />
 			mirror layout
 		</label>
-		<div :class="{ 'displaying-targets': isDisplayingTargets }">
+		<div ref="listContainer" :class="{ 'displaying-targets': isDisplayingTargets }">
 			<h3>damage sources</h3>
 			<ul
 				@dragenter="onDragenter($event, damageSources.length - 1, damageSources, true)"
@@ -475,39 +498,39 @@ const isDisplayingTargets = ref(false);
 					--scoreboard-item-ps: var(--scoreboard-item-base-px);
 					--scoreboard-item-pe: var(--scoreboard-item-base-px);
 
-					> * {
-						--at-apply: 'translate-x-[calc(50%+0.5*var(--scoreboard-gap-x)+1px)]';
+					> ul:first-of-type,
+					> h3:first-of-type {
+						--at-apply: '-me-[--children-offset-x,0px]';
 					}
 
-					> ul:first-of-type {
-						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w) + 1px);
-					}
-
-					> ul:last-of-type {
-						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w) + 1px);
+					> ul:last-of-type,
+					> h3:last-of-type {
+						--at-apply: 'ms-[--children-offset-x,0px]';
 					}
 
 					&.displaying-targets {
-						> * {
-							--at-apply: 'translate-x-[calc(-50%-0.5*var(--scoreboard-gap-x))]';
+						> ul:first-of-type,
+						> h3:first-of-type {
+							--at-apply: 'me-[--children-offset-x,0px]';
 						}
+
+						> ul:last-of-type,
+						> h3:last-of-type {
+							--at-apply: '-ms-[--children-offset-x,0px]';
+						}
+					}
+
+					> ul:first-of-type {
+						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) - var(--scoreboard-item-b-w));
+					}
+
+					> ul:last-of-type {
+						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) - var(--scoreboard-item-b-w));
 					}
 				}
 
 				&::after {
 					--at-apply: 'hidden';
-				}
-			}
-
-			@media (width < 600px) and (width >= 375px) {
-				& {
-					> ul:first-of-type {
-						--scoreboard-item-pe: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
-					}
-
-					> ul:last-of-type {
-						--scoreboard-item-ps: calc(var(--scoreboard-item-base-px) + var(--scoreboard-item-b-w));
-					}
 				}
 			}
 
