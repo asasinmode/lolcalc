@@ -351,7 +351,7 @@ const {
 		addItemTooltipViewListeners();
 		hoveredItem.value = item!;
 		hoveredItemShowMasterwork.value = showMasterwork;
-		if (event instanceof PointerEvent && event.pointerType === 'mouse') {
+		if (event instanceof PointerEvent) {
 			itemTooltipAnchor = trigger;
 			trigger.addEventListener('mousemove', updateTooltipPosition, { passive: true });
 			updateTooltipPosition(event);
@@ -371,11 +371,11 @@ function updateTooltipHeight() {
 	itemTooltip.value?.style.setProperty('--height', `${itemTooltip.value.clientHeight}px`);
 }
 
-function updateTooltipPosition(event: MouseEvent) {
+function updateTooltipPosition(event: MouseEvent | TouchEvent) {
 	if (!isTooltipPinned.value) {
-		const { clientX, clientY } = event;
-		itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
-		itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
+		const { clientX, clientY } = 'touches' in event ? (event.touches[0] ?? {}) : event;
+		clientX !== undefined && itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
+		clientY !== undefined && itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
 		updateTooltipHeight();
 	}
 }
