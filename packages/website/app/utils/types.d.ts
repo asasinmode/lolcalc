@@ -72,6 +72,7 @@ export interface IDamageResultTableSectionRow {
 }
 export interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	sectionId: string;
+	section: IDamageResultTableSection;
 	/** the index the target row is at in its section */
 	rowIndex: number;
 }

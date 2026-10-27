@@ -1084,11 +1084,17 @@ function sectionHasTooltip(section: IDamageResultTableSection) {
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
 let hoveredSectionPopoverEl: HTMLElement | undefined;
 
-const { bind: bindSectionHoverTooltip } = useHoverTooltip<IDamageResultTableSection>({
+const { bind: bindSectionHoverTooltip } = useHoverTooltip<{ section: IDamageResultTableSection; fromCustom?: boolean }>({
 	el: () => hoveredSectionPopoverEl,
-	beforeShow(section, trigger) {
-		const popover = trigger.querySelector<HTMLElement>('[popover]');
+	beforeShow({ section, fromCustom }, trigger) {
+		const popover = (fromCustom ? document.getElementById(`results-header-${section.id}`) : trigger)?.querySelector<HTMLElement>('[popover]');
+		console.log('beforeshow', fromCustom, section.id, section.name);
 		if (popover) {
+			if (fromCustom) {
+				popover.style.setProperty('position-anchor', '--custom-total-section-header');
+			} else {
+				popover.style.removeProperty('position-anchor');
+			}
 			hoveredSectionType = section.abilityId.type;
 			hoveredSectionPopoverEl = popover;
 			return true;
@@ -1260,7 +1266,7 @@ defineExpose({
 				<tr>
 					<td :width="`${colW.controls + colW.header}px`" colspan="2">
 						<div>
-							<a href="#results-table-section-header-aa" class="skip-link"> skip column controls </a>
+							<a href="#results-header-aa" class="skip-link"> skip column controls </a>
 							<label for="results-table-values-for">
 								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @change="recalculateAllColumns" />
 								flip target vs source
@@ -1439,8 +1445,8 @@ defineExpose({
 					@dragleave="onResultSectionDragleave"
 					@drop="onResultSectionDrop($event, index, true)"
 				>
-					<tr>
-						<td :headers="`results-table-section-header-${section.id}`">
+					<tr :id="`results-header-row-${section.id}`">
+						<td :headers="`results-header-${section.id}`">
 							<button
 								title="move up"
 								class="pretend-ui-btn"
@@ -1481,7 +1487,7 @@ defineExpose({
 								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
 								class="pretend-ui-btn"
 								:aria-expanded="expandedSections.includes(section.id)"
-								:aria-controls="`results-table-section-body-${section.id}`"
+								:aria-controls="`results-body-${section.id}`"
 								@dblclick.stop=""
 								@click.stop="toggleResultsSection(section.id)"
 							>
@@ -1491,8 +1497,8 @@ defineExpose({
 								<Icon class="i-ph:caret-down" />
 							</button>
 						</td>
-						<th :id="`results-table-section-header-${section.id}`" scope="colgroup" :colspan="1 + resultColumns.length">
-							<div v-bind="sectionHasTooltip(section) ? bindSectionHoverTooltip(section) : undefined">
+						<th :id="`results-header-${section.id}`" scope="colgroup" :colspan="1 + resultColumns.length">
+							<div v-bind="sectionHasTooltip(section) ? bindSectionHoverTooltip({ section }) : undefined">
 								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(section)">
@@ -1505,10 +1511,10 @@ defineExpose({
 									<article v-else-if="section.id === ResultSectionId.BasicAttack" popover="hint" class="hover-tooltip custom">TODO aa hover tooltip</article>
 								</template>
 								<template v-if="section.selectOptions?.length">
-									<label :for="`results-table-header-select-${section.id}`">
+									<label :for="`results-header-select-${section.id}`">
 										{{ section.selectLabel }}
 									</label>
-									<select :id="`results-table-header-select-${section.id}`" v-model="section.selectValue" @change="addComputedSection(section.id)">
+									<select :id="`results-header-select-${section.id}`" v-model="section.selectValue" @change="addComputedSection(section.id)">
 										<option v-for="[value, optionText] in section.selectOptions" :key="value" :value>
 											{{ optionText }}
 										</option>
@@ -1529,8 +1535,8 @@ defineExpose({
 					</tr>
 				</tbody>
 				<tbody
-					:id="`results-table-section-body-${section.id}`"
-					:aria-labelledby="`results-table-section-header-${section.id}`"
+					:id="`results-body-${section.id}`"
+					:aria-labelledby="`results-header-${section.id}`"
 					:hidden="!expandedSections.includes(section.id)"
 					:data-drop-direction="sectionDragDropIndex === index + 1 ? 'after' : undefined"
 					:aria-busy="!section.image"
@@ -1555,7 +1561,14 @@ defineExpose({
 							</label>
 						</td>
 						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-damage-type">
-							<img v-if="row.image" v-bind="gameImageAttrs(row.image, 24)" aria-hidden="true" />
+							<img
+								v-if="row.image"
+								aria-hidden="true"
+								v-bind="{
+									...gameImageAttrs(row.image, 24),
+									...((row as ICustomTotalSectionRow).section && sectionHasTooltip((row as ICustomTotalSectionRow).section) ? bindSectionHoverTooltip({ section: (row as ICustomTotalSectionRow).section, fromCustom: true }) : undefined),
+								}"
+							/>
 							<span v-if="row.isUnknown">unknown</span>
 							{{ row.name }}
 							<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs(undefined, true)">
@@ -1922,7 +1935,7 @@ defineExpose({
 		}
 
 		> tbody {
-			anchor-scope: all;
+			anchor-scope: --section-header-row, --results-section-name;
 
 			&:not([aria-labelledby]) {
 				--at-apply: 'sticky inset-bs-[calc(var(--header-h)-0.5px)] z-4 bg-[--bg-clr]';
@@ -1930,6 +1943,10 @@ defineExpose({
 
 				> tr {
 					anchor-name: --section-header-row;
+
+					&#results-header-row-a-cTtl {
+						anchor-name: --custom-total-section-header;
+					}
 
 					> td {
 						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2 ps-[--table-ps]';
@@ -1966,7 +1983,7 @@ defineExpose({
 						anchor-scope: --results-section-name;
 
 						> div {
-							--at-apply: 'sticky inset-s-0 ps-3 inline-fit align-middle';
+							--at-apply: 'sticky inset-s-0 ps-3 inline-fit';
 							anchor-name: --results-section-name;
 
 							> span,
@@ -1984,12 +2001,16 @@ defineExpose({
 								--at-apply: 'size-7 me-1.5 inline-block';
 							}
 
-							/** warning not implemented tooltip has id attribute, don't target it, just use the default info tooltip positioning (from `index.css`) */
+							/** not implemented warning tooltip has id attribute, don't target it, just use the default info tooltip positioning (from `index.css`) */
 							> [popover]:not([id]) {
 								position-anchor: --section-header-row;
 								inset-block-start: auto;
 								inset-block-end: calc(anchor(start) - var(--tooltip-offset-y, 0px));
 								position-try-fallbacks: --results-header-flip-block, --hover-tooltip-sheet;
+
+								&[style] {
+									position-try-fallbacks: --hover-tooltip-sheet;
+								}
 
 								.hover-tooltip.effect {
 									--at-apply: 'self-center';

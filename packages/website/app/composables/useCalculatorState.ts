@@ -171,6 +171,7 @@ export function initCalculatorState(): ICalculatorState {
 				return {
 					...row,
 					sectionId: section.id,
+					section,
 					rowIndex,
 					image: toValue(section.image),
 				};
