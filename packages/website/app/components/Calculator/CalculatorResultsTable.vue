@@ -1078,7 +1078,6 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
 function sectionHasTooltip(section: IDamageResultTableSection) {
-	// TODO check if is not reran too much
 	return section.hoverTooltipData || section.id === ResultSectionId.BasicAttack;
 }
 
@@ -1088,7 +1087,6 @@ let hoveredSectionPopoverEl: HTMLElement | undefined;
 const { bind: bindSectionHoverTooltip } = useHoverTooltip<IDamageResultTableSection>({
 	el: () => hoveredSectionPopoverEl,
 	beforeShow(section, trigger) {
-		if (!sectionHasTooltip(section)) return false;
 		const popover = trigger.querySelector<HTMLElement>('[popover]');
 		if (popover) {
 			hoveredSectionType = section.abilityId.type;
@@ -1494,7 +1492,7 @@ defineExpose({
 							</button>
 						</td>
 						<th :id="`results-table-section-header-${section.id}`" scope="colgroup" :colspan="1 + resultColumns.length">
-							<div v-bind="bindSectionHoverTooltip(section)">
+							<div v-bind="sectionHasTooltip(section) ? bindSectionHoverTooltip(section) : undefined">
 								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
 								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(section)">
