@@ -14,6 +14,12 @@ export function runesEmpty(runes: IChampionRunes): boolean {
 	return !(primarySlots.length || secondary || secondarySlots.length || shards.offensive || shards.flex || shards.defensive);
 }
 
+/** tmp dedicated computed on DamageSource properly showing if runes are invalid when enableUnimplementedUi is disabled */
+export function runeShardsInvalid(shards: IChampionRunes['shards']) {
+	const filledValues = Object.values(shards).filter(Boolean);
+	return filledValues.length && filledValues.length !== 3;
+}
+
 export function runesInvalid(runes: IChampionRunes, areEmpty: boolean = runesEmpty(runes)): boolean {
 	const {
 		paths: { primarySlots, secondary, secondarySlots },

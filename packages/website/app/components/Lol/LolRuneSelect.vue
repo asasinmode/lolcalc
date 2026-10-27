@@ -1,5 +1,5 @@
 <script setup vapor lang="ts">
-import { runesInvalid } from '@lolcalc/core/specifics/rune';
+import { runesInvalid, runeShardsInvalid } from '@lolcalc/core/specifics/rune';
 import { replaceGameVariables } from '@lolcalc/core/variables/game';
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
@@ -223,7 +223,7 @@ const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 	},
 });
 
-const configurationInvalid = computed(() => value.value && runesInvalid(value.value));
+const configurationInvalid = computed(() => value.value && (enableUnimplementedUi.value ? runesInvalid(value.value) : runeShardsInvalid(value.value.shards)));
 
 defineExpose({
 	open: () => vDialog.value?.open(),

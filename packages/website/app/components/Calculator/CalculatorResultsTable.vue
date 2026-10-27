@@ -1088,7 +1088,6 @@ const { bind: bindSectionHoverTooltip } = useHoverTooltip<{ section: IDamageResu
 	el: () => hoveredSectionPopoverEl,
 	beforeShow({ section, fromCustom }, trigger) {
 		const popover = (fromCustom ? document.getElementById(`results-header-${section.id}`) : trigger)?.querySelector<HTMLElement>('[popover]');
-		console.log('beforeshow', fromCustom, section.id, section.name);
 		if (popover) {
 			if (fromCustom) {
 				popover.style.setProperty('position-anchor', '--custom-total-section-header');

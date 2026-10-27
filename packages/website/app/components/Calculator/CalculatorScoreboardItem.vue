@@ -127,6 +127,8 @@ const runePathSecondary = computed(() => {
 	return undefined;
 });
 
+const areRunesInvalid = computed(() => (enableUnimplementedUi.value ? props.value.runesInvalid.value : props.value.runeShardsInvalid.value));
+
 const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
 
 function emitClear() {
@@ -1043,9 +1045,9 @@ defineExpose({ el });
 					<span>{{ value.level.value }}</span>
 				</VSelect>
 			</div>
-			<button :title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'" class="select-runes other-ui-btn" @click="selectRunes(value.runes)">
+			<button :title="areRunesInvalid ? 'runes (invalid)' : 'runes'" class="select-runes other-ui-btn" @click="selectRunes(value.runes)">
 				<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
-				<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5">
+				<span v-show="areRunesInvalid" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5">
 					<span class="sr-only">(invalid)</span>
 					<Icon class="i-ph:exclamation-mark-bold size-2.5" />
 				</span>

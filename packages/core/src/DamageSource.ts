@@ -38,7 +38,7 @@ import { calculateDynamicVariables, GLOBAL_MODIFY_VARIABLE_FNS_ENTRIES } from '.
 import type { IHypotheticalItemSpecifics, IItemSpecific, TItemSpecifics } from './specifics/item';
 import { consumeItemComponents, ITEM_SPECIFICS, itemBuyability } from './specifics/item.ts';
 import type { IHypotheticalRuneSpecifics } from './specifics/rune';
-import { RUNE_SPECIFICS, runesEmpty, runesInvalid } from './specifics/rune.ts';
+import { RUNE_SPECIFICS, runesEmpty, runesInvalid, runeShardsInvalid } from './specifics/rune.ts';
 import type { IDynamicVariables, IModifyVariableFunction, IReplacedGameVariable, IReplaceGameVariablesOptions, IReplaceGameVariablesRV, IVariableModifyMeta } from './variables/game.ts';
 import { championAbilityVariableValue, itemVariableValue, replaceGameVariables } from './variables/game.ts';
 import type { IReplaceStringtableVariablesRV } from './variables/stringtable.ts';
@@ -84,6 +84,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));
+	runeShardsInvalid = computed((): boolean | number => runeShardsInvalid(this.runes.value.shards));
 	runesInvalid = computed((): boolean => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	/** can go up to `maxHealth` which is ceiled, so when used in calculations should be `Math.min(stats.value.total.hp, value)` */
