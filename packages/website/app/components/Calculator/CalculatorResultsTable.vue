@@ -240,10 +240,9 @@ interface IComputedSectionRowColumn {
 const customTotalSection = resultSections.value.find((section) => section.isCustomTotal)!;
 const customTotalSectionTotalRow = computed(() => toValue(customTotalSection.rows)[0]);
 
-const computedResults = ref(
-	new Map<string, IComputedSection>(
-		[[customTotalSection.id, computeSection(customTotalSection)] as [string, IComputedSection]].concat(resultSections.value.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
-	),
+const computedResults = ref<Map<string, IComputedSection>>(new Map());
+computedResults.value = new Map<string, IComputedSection>(
+	[[customTotalSection.id, computeSection(customTotalSection)] as [string, IComputedSection]].concat(resultSections.value.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
 );
 
 const customTotalComputedSection = computedResults.value.get(ResultSectionId.CustomTotal)!;
@@ -298,9 +297,9 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 					return acc;
 				}
 
-				const computedColumn = computedResults.value.get(curr.sectionId)!.rows.get(curr.id)!.columns.get(column!.id)!;
+				const computedColumn = computedResults.value.get(curr.sectionId)?.rows.get(curr.id)?.columns.get(column!.id);
 
-				return acc + (computedColumn.numberValue ?? 0);
+				return acc + (computedColumn?.numberValue ?? 0);
 			}, 0) ?? 0;
 
 		rv.isIrrelevant = false;

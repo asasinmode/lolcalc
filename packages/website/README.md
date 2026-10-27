@@ -41,7 +41,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] hover tooltip
     - [ ] move with keyboard, shift + arrows?
   - [x] toggle button aria-controls, aria-expanded
-  - [ ] expanded
+  - [x] expanded
     - [x] stats
     - [x] current health/mana
     - [x] slider drag health/mana
@@ -177,14 +177,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] check redemption and other level calculations if they keep scaling past lvl 18 for toplaners
   - [x] check if can save only gold cost, not whole object
   - [x] are health/ability resource rounded? in ui they are probably ceiled (see ahri 16.9.1 test) so maybe to match UI you could `Math.ceil(value + Number.EPSILON)`
-  - [ ] moonstone/nilah passive, probably just add disclaimers in about. Maybe try to cheekily insert in detected heals/shields + `[moonstone icon] $value`?
 - [x] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
   - [ ] dragons
 - [x] disclaimer not endorsed by riot
-- [ ] alerts and info texts for stuff not implemented yet
+- [x] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups
   - [ ] dragging scoreboard elements, items, result sections/columns
   - [ ] right click to sell items
