@@ -29,6 +29,7 @@ useHead({
 }`,
 		},
 	],
+	meta: [{ name: 'robots', content: 'noindex, nofollow' }],
 });
 useSeoMeta({
 	title: 'lolcalc - Damage Calculator for League of Legends',
