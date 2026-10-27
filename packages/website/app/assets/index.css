@@ -277,10 +277,17 @@
 		justify-self: center;
 	}
 
-	/* for results sections, they have different top/bottom paddings and look off if are just flip block */
+	/* for results sections. They have different top/bottom paddings and look off if are just flip block */
 	@position-try --results-header-flip-block {
 		inset-block-end: auto;
 		inset-block-start: calc(anchor(end));
+	}
+
+	/* for the custom total results section. It uses tooltips from different sections and positioning them below the header like they do would cover the rows with the tooltip triggers. Show it below the custom total section body instead */
+	@position-try --results-ctotal-row-flip-block {
+		position-anchor: --custom-total-section-body;
+		inset-block-end: auto;
+		inset-block-start: calc(anchor(end) + var(--section-header-row-pt));
 	}
 
 	@media not ((hover: hover) and (pointer: fine)) {

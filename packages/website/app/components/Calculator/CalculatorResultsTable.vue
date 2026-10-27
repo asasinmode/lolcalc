@@ -1093,7 +1093,8 @@ const { bind: bindSectionHoverTooltip } = useHoverTooltip<{ section: IDamageResu
 			if (fromCustom) {
 				popover.style.setProperty('position-anchor', '--custom-total-section-header');
 			} else {
-				popover.style.removeProperty('position-anchor');
+				/* styles are applied based on `[style]` */
+				popover.removeAttribute('style');
 			}
 			hoveredSectionType = section.abilityId.type;
 			hoveredSectionPopoverEl = popover;
@@ -2008,8 +2009,9 @@ defineExpose({
 								inset-block-end: calc(anchor(start) - var(--tooltip-offset-y, 0px));
 								position-try-fallbacks: --results-header-flip-block, --hover-tooltip-sheet;
 
+								/* a style attribute is present when the tooltip is shown from a custom total row. The flip block in that case needs to be below the custom total body. This fallback is declared in `index.css` */
 								&[style] {
-									position-try-fallbacks: --hover-tooltip-sheet;
+									position-try-fallbacks: --results-ctotal-row-flip-block, --hover-tooltip-sheet;
 								}
 
 								.hover-tooltip.effect {
@@ -2053,6 +2055,10 @@ defineExpose({
 
 			&[aria-labelledby] {
 				--at-apply: 'text-neutral-200';
+
+				&#results-body-a-cTtl {
+					anchor-name: --custom-total-section-body;
+				}
 
 				> tr {
 					--at-apply: 'bg-[--bg-clr]';
