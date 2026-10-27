@@ -35,6 +35,7 @@ export interface ICalculatorState {
 	expandedSections: Ref<string[]>;
 	/** custom total row ids formatted like `${sectionId}_${rowId}` */
 	customTotalRowIds: Ref<string[]>;
+	isRestoringCustomTotalRows: Ref<boolean>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
 }
 
@@ -191,6 +192,7 @@ export function initCalculatorState(): ICalculatorState {
 		resultsTableFlip: ref(false),
 		expandedSections: ref<string[]>(resultSections.value.filter((section) => section.id !== ResultSectionId.Stats).map((section) => section.id)),
 		customTotalRowIds,
+		isRestoringCustomTotalRows: ref(false),
 		computedCustomTotalRows,
 	};
 
@@ -204,7 +206,7 @@ export function useCalculatorState(): ICalculatorState {
 }
 
 export function useManageCalculatorState(state = useCalculatorState()) {
-	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows } = state;
+	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows } = state;
 	const isStateTooLargeForQuery = ref(false);
 	const debounceTimeout = useState<ReturnType<typeof setTimeout> | undefined>('saveStateDebounce');
 
@@ -512,6 +514,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			resultsTable.value.addComputedColumnSources(resultColumns.value[0]!);
 		}
 
+		const restoredSectionPromises: Promise<any>[] = [];
+
 		const savedSections = params.getAll('tblSct');
 		let currentSectionIndex = 0;
 		for (const section of savedSections) {
@@ -540,25 +544,34 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			const abilityId = GameAbilityId.parse(id);
 			if (abilityId) {
-				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex);
+				restoredSectionPromises.push(resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex));
 				currentSectionIndex += 1;
 			}
 		}
 
+		const sectionsRestoredPromise = Promise.all(restoredSectionPromises);
+
 		const savedCustomTotalRows = params.get('tblCTtl');
 		if (savedCustomTotalRows?.length) {
-			for (const totalRow of savedCustomTotalRows.split('_')) {
-				const [rawSectionIndex, rawRowIndex] = totalRow.split('-');
-				const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
-				const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
-				if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
-					const section = resultSections.value[sectionIndex];
-					const row = section && toValue(section.rows)[rowIndex];
-					if (section && row && section.id !== 'a-cTtl') {
-						customTotalRowIds.value.push(`${section.id}_${row.id}`);
+			isRestoringCustomTotalRows.value = true;
+			sectionsRestoredPromise.then(() => {
+				for (const totalRow of savedCustomTotalRows.split('_')) {
+					const [rawSectionIndex, rawRowIndex] = totalRow.split('-');
+					const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
+					const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
+					if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
+						const section = resultSections.value[sectionIndex];
+						if (section && section.id !== ResultSectionId.Stats && section.id !== ResultSectionId.CustomTotal) {
+							const row = section && toValue(section.rows)[rowIndex];
+							if (row) {
+								const id = `${section.id}_${row.id}`;
+								!customTotalRowIds.value.includes(id) && customTotalRowIds.value.push(id);
+							}
+						}
 					}
 				}
-			}
+				isRestoringCustomTotalRows.value = false;
+			});
 		}
 	}
 

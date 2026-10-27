@@ -32,7 +32,7 @@ defineProps<{
 	showResults: boolean;
 }>();
 
-const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows } = useCalculatorState();
+const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -1542,7 +1542,7 @@ defineExpose({
 					<tr v-if="!section.image" class="info-row">
 						<td :colspan="2 + resultColumns.length">loading...</td>
 					</tr>
-					<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length" class="info-row">
+					<tr v-else-if="!isRestoringCustomTotalRows && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
 						<td :colspan="2 + resultColumns.length">
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
@@ -1599,6 +1599,9 @@ defineExpose({
 								{{ cell.computedColumn.value }}
 							</span>
 						</td>
+					</tr>
+					<tr v-if="section.id === ResultSectionId.CustomTotal && isRestoringCustomTotalRows" class="info-row">
+						<td :colspan="2 + resultColumns.length">loading...</td>
 					</tr>
 				</tbody>
 			</template>
