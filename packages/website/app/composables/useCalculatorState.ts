@@ -172,7 +172,7 @@ export function initCalculatorState(): ICalculatorState {
 					...row,
 					sectionId: section.id,
 					rowIndex,
-					image: section.image.value,
+					image: toValue(section.image),
 				};
 			}),
 		);
