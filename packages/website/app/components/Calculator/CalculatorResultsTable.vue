@@ -1255,7 +1255,7 @@ const variableTypeOptionNames: Partial<Record<VariableType, string>> = {
 	shield: 'shield',
 };
 
-const newCustomValueRowType = ref<VariableType>();
+const newCustomValueRowType = ref<VariableType>(VariableType.physical);
 const newCustomValueRowValue = ref<number>(0);
 
 function submitCustomValueRow() {
@@ -1589,7 +1589,7 @@ defineExpose({
 										</option>
 									</select>
 									<label for="result-custom-v-value">value</label>
-									<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" />
+									<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" required />
 									<button class="pretend-ui-btn" type="submit">add</button>
 								</form>
 							</td>
@@ -2257,9 +2257,38 @@ defineExpose({
 		}
 
 		#results-new-custom-v-row {
-			input,
-			select {
-				--at-apply: 'text-lg';
+			form {
+				--at-apply: 'max-inline-200 flex items-center';
+
+				@media (width >= 500px) {
+					& {
+						--at-apply: 'justify-center';
+					}
+				}
+
+				input,
+				select,
+				button {
+					--at-apply: 'block-[--manipulate-btn-size] leading-7';
+				}
+
+				input,
+				select {
+					--at-apply: 'text-black bg-white px-1.5 ms-1.25';
+				}
+
+				select {
+					--at-apply: 'me-4';
+					color-scheme: light;
+				}
+
+				input {
+					--at-apply: 'inline-20';
+				}
+
+				button {
+					--at-apply: 'px-2 ms-4';
+				}
 			}
 		}
 	}
