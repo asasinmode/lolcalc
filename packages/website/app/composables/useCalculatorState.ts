@@ -59,22 +59,24 @@ export function initCalculatorState(): ICalculatorState {
 			isPermanent: true,
 			image: shallowRef([`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32]),
 			rows: shallowRef(
-				ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
-					const icon = STAT_ICON[statName as IChampionStatName];
-					const image: IGameImageData = typeof icon === 'string' ? [`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`, 20] : icon;
-
-					return {
-						id: statName as string,
-						name: statMeta.name,
-						image,
-					};
-				}).concat([
+				[
 					{
 						id: 'eqValue',
 						name: 'Inventory Value',
 						image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
 					},
-				]),
+				].concat(
+					ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+						const icon = STAT_ICON[statName as IChampionStatName];
+						const image: IGameImageData = typeof icon === 'string' ? [`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`, 20] : icon;
+
+						return {
+							id: statName as string,
+							name: statMeta.name,
+							image,
+						};
+					}),
+				),
 			),
 			getCellValue(_section, rowId, source, _target) {
 				if (!source) {
@@ -177,7 +179,7 @@ export function initCalculatorState(): ICalculatorState {
 			},
 			hoverTooltipData: useSimpleDescription(
 				'results-custom-value',
-				`This section lets you add custom values for some variable types. For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a Briar receives, factoring in her passive.<br> Or, add a <magicdamage>magic damage</magicdamage> value that <strong>lolcalc</strong> doesn't have yet and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} crit) against column target's <scalemr>resists</scalemr>.
+				`This section lets you add custom values for some variable types.<br> For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a Briar receives, factoring in her passive. Or add a <magicdamage>magic damage</magicdamage> value that <strong>lolcalc</strong> doesn't have yet and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} crit) against column target's <scalemr>resists</scalemr>.
 `,
 			),
 		},
