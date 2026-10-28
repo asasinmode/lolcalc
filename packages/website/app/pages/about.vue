@@ -51,10 +51,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<strong>lolcalc</strong> is intended to be a tool for <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> that shows the same numbers the game does. The currently aimed for numbers are items, runes,
 			champion abilities and their + some other common effects/buffs/debuffs, for any combination of them.
 		</p>
-		<p>
-			<u>It's not a game simulation</u> and there is currently no timeline for implementing one. Adding something like the damage of a <span class="code-like">Q + W + aa + aa + E + R</span> combo is currently out of the scope of this
-			project.
-		</p>
+		<p><u>It's not a game simulation</u> and there is currently no timeline for implementing one. Something like the damage of a <span class="code-like">Q + W + aa + aa + E + R</span> combo is currently out of the scope of this project.</p>
 		<p><u>The main goal is build comparison</u>. <strong>lolcalc</strong> should, fairly accurately, show the difference between the damage and stats of various champion builds, making it easier to find the best one.</p>
 
 		<TextPageHeading id="does-it-work" text="does it work?" />
@@ -116,8 +113,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<dl>
 			<dt>alpha/beta/release versions</dt>
 			<dd>
-				The current <strong>alpha</strong> version will end when the <strong>stats</strong> of all champions and their <u>passives</u> (not QWER) are calculated properly with any items/rune shards/dragons/role quests and their effects
-				combination. For more details, check
+				The current <span class="code-like">alpha</span> version will end when the <strong>stats</strong> and <strong>basic attack damage</strong> of all champions and their <u>passives</u> (not QWER) are calculated properly with any
+				items/rune shards/dragons/role quests and their effects combination. For more details, check
 				<a href="#TODO">the roadmap</a>
 			</dd>
 			<dt>ads and paywalling</dt>

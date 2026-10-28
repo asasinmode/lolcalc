@@ -18,7 +18,7 @@ If the code produces a different value the game shows (and it doesn't full under
 
 ### clankers and slop
 
-Both clankers and people can produce code that's fit for this project and one that isn't. If you spam the repository pull requests with the unwanted one, you will be blocked.
+Both clankers and people can produce code that's fit for this project and one that isn't. If you spam the repository with the unwanted one, you will be blocked.
 
 ## project guide
 

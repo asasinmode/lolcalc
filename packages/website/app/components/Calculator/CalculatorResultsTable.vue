@@ -1508,7 +1508,10 @@ defineExpose({
 									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="section.hoverTooltipData as any" />
 									<LolEffectHoverTooltip v-else-if="section.abilityId.type === AbilityType.effect" v-bind="section.hoverTooltipData as any" />
 									<LolDragonHoverTooltip v-else-if="section.abilityId.type === AbilityType.dragon" v-bind="section.hoverTooltipData as any" />
-									<article v-else-if="section.id === ResultSectionId.BasicAttack" popover="hint" class="hover-tooltip custom">TODO aa hover tooltip</article>
+									<article v-else-if="section.id === ResultSectionId.BasicAttack" popover="hint" class="hover-tooltip custom game-description">
+										TODO aa hover tooltip<br />
+										<rules>lolcalc will leave alpha version when auto attack damage is calculated for all champion and item passives</rules>
+									</article>
 								</template>
 								<template v-if="section.selectOptions?.length">
 									<label :for="`results-header-select-${section.id}`">
