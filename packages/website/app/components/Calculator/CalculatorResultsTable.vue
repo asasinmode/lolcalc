@@ -1093,7 +1093,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
 function sectionHasTooltip(section: IDamageResultTableSection) {
-	return section.hoverTooltipData || section.id === ResultSectionId.BasicAttack;
+	return section.hoverTooltipData;
 }
 
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
@@ -1535,10 +1535,7 @@ defineExpose({
 									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="section.hoverTooltipData as any" />
 									<LolEffectHoverTooltip v-else-if="section.abilityId.type === AbilityType.effect" v-bind="section.hoverTooltipData as any" />
 									<LolDragonHoverTooltip v-else-if="section.abilityId.type === AbilityType.dragon" v-bind="section.hoverTooltipData as any" />
-									<article v-else-if="section.id === ResultSectionId.BasicAttack" popover="hint" class="hover-tooltip custom game-description">
-										TODO aa hover tooltip<br />
-										<rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>
-									</article>
+									<article v-else-if="typeof toValue(section.hoverTooltipData) === 'string'" popover="hint" class="hover-tooltip custom game-description info-tooltip" v-html="section.hoverTooltipData" />
 								</template>
 								<template v-if="section.selectOptions?.length">
 									<label :for="`results-header-select-${section.id}`">
@@ -2069,7 +2066,7 @@ defineExpose({
 							}
 
 							> .hover-tooltip.custom {
-								--at-apply: 'max-inline-160';
+								--tooltip-max-w: calc(160 * var(--spacing));
 							}
 
 							> label {

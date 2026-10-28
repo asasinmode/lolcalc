@@ -1,6 +1,6 @@
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
-import type { IGameImageData } from '@lolcalc/core/misc';
+import { linkedFormattedItemImage, type IGameImageData } from '@lolcalc/core/misc';
 import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
@@ -139,7 +139,7 @@ export function initCalculatorState(): ICalculatorState {
 				['average', 'average'],
 			]),
 			selectLabel: 'attack type',
-			hoverTooltipData: shallowRef(),
+			hoverTooltipData: shallowRef(`TODO aa hover tooltip<br> <rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
 		},
 		{
 			id: ResultSectionId.CustomTotal,
@@ -175,7 +175,11 @@ export function initCalculatorState(): ICalculatorState {
 				console.warn("results section custom value 'getCellValue' called, should be handled manually");
 				return { value: 0, numberValue: 0 };
 			},
-			hoverTooltipData: shallowRef(),
+			hoverTooltipData: useSimpleDescription(
+				'results-custom-value',
+				`This section lets you add custom values for some variable types. For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a Briar receives, factoring in her passive.<br> Or, add a <magicdamage>magic damage</magicdamage> value that <strong>lolcalc</strong> doesn't have yet and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} crit) against column target's <scalemr>resists</scalemr>.
+`,
+			),
 		},
 	]) as unknown as ShallowRef<IDamageResultTableSection[]>;
 
