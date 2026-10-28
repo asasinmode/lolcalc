@@ -1582,7 +1582,7 @@ defineExpose({
 										</option>
 									</select>
 									<label for="result-custom-v-value">value</label>
-									<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" required />
+									<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="0.001" required />
 									<button class="pretend-ui-btn" type="submit">add</button>
 								</form>
 							</td>
