@@ -614,7 +614,7 @@ defineExpose({
 							v-bind="bindTooltipAttrs(() => ({ item: shopItem }))"
 							@click="() => selectSearchResult(index, false)"
 							@click.right.prevent="() => selectSearchResult(index, true)"
-							@dblclick="() => selectSearchResult($index, true)"
+							@dblclick="() => selectSearchResult(index, true)"
 						>
 							<img :src="`https://ddragon.leagueoflegends.com/cdn/${vSemver}/img/item/${shopItem.item.image}`" width="64" height="64" class="item-shop-item-img" aria-hidden="true" loading="lazy" />
 							<span>{{ shopItem.item.name }}</span>
