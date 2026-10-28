@@ -39,9 +39,9 @@ catalogs:
   website:
     '@iconify-json/logos': ^1.2.15
     '@iconify-json/ph': ^1.2.2
-    '@nuxt/kit': ^4.6.0
+    '@nuxt/kit': ^4.6.3
     '@unocss/nuxt': ^66.10.5
     lightningcss: ^1.33.0
-    nuxt: ^4.6.0
+    nuxt: ^4.6.3
     unocss: ^66.10.5
     vue-router: ^5.4.0
