@@ -1,8 +1,9 @@
 /*
  * this file shouldn't import anything from specifics in order to avoid circular imports as it's used throughout them
  */
-import { CHAMPION_IMAGES, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
+import { CHAMPION_IMAGES, CHAMPIONS, EFFECTS, ICON_ON_HIT_IMG, imgUrl, ITEMS, PATCH_VERSION, STAT_ICON, textureBgImageAttrs, UI, useChampion } from '@lolcalc/data';
 import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
+import type { IChampionId } from '@lolcalc/data/types.js';
 import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES, ITEM_NAME_TO_ID, type TItemNameToId } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
 import type { IGameAbilityId } from './GameAbilityId';
@@ -125,36 +126,63 @@ export function linkedFormattedItemImage(itemName: keyof TItemNameToId, name?: s
 	return `[${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.item, itemId))}${name ?? item?.name ?? '<unknown>unknown</unknown>'}](https://wiki.leagueoflegends.com/en-us/${item?.name.replaceAll(' ', '_')})`;
 }
 
-export async function simpleDescriptionFormatting(text: string, addAlt?: boolean) {
-	const parts = replaceGameIcons(text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')).split(/(%a:[^-%]+-[^%]+%)/g);
+export function linkedFormattedChampionImage(championId: IChampionId, name?: string) {
+	const champion = CHAMPIONS[championId];
+	return `[%c:${championId}%${name ?? champion.name}](https://wiki.leagueoflegends.com/en-us/${champion.name.replaceAll(' ', '_')})`;
+}
 
-	for (let i = 0; i < parts.length; i++) {
-		const match = parts[i]!.match(/%a:(.+?)%/);
-		if (match) {
+export async function simpleDescriptionFormatting(text: string, addAlt?: boolean, textureSize?: number) {
+	const parts = replaceGameIcons(text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')).split(/(%[ac]:[^%]+%)/g);
+
+	for (let i = 1; i < parts.length; i += 2) {
+		const token = parts[i]!;
+
+		let abilityImage: IGameImageData;
+
+		if (token.startsWith('%a:')) {
+			const match = token.match(/%a:(.+?)%/);
+			if (!match) continue;
+
 			const abilityId = GameAbilityId.parse(match[1] ?? '');
 			if (!abilityId) {
 				console.warn('[simpleDescriptionFormatting] failed to parse game ability id from', match[1]);
 				continue;
 			}
-			const abilityImage = await gameAbilityImage(abilityId);
-
-			if (Array.isArray(abilityImage)) {
-				parts[i] = `<img src="${abilityImage[0]}" width="${abilityImage[1]}" height="${abilityImage[2] ?? abilityImage[1]}"${addAlt ? ` alt="${abilityImage[3] ?? 'unknown'} icon"` : ''}>`;
+			abilityImage = await gameAbilityImage(abilityId);
+		} else if (token.startsWith('%c:')) {
+			const championId = token.match(/%c:(.+?)%/)?.[1] as IChampionId | undefined;
+			const champion = championId && CHAMPIONS[championId];
+			if (champion) {
+				const src = CHAMPION_IMAGES.championImage(champion.image, championId);
+				const size = CHAMPION_IMAGES.championImageSize(championId);
+				abilityImage = [src, size, size, champion.name];
 			} else {
-				parts[i] = `<img ${Object.entries(textureBgImageAttrs(abilityImage, 16))
-					.map(
-						([attr, value]) =>
-							`${attr}="${
-								typeof value === 'string'
-									? value
-									: Object.entries(value)
-											.map(([vAttr, vValue]) => `${vAttr}: ${vValue}`)
-											.join('; ')
-							}"`,
-					)
-					.join(' ')}${addAlt ? ` alt="${abilityImage.abilityName ?? 'unknown'} icon"` : ''}>`;
+				continue;
 			}
 		}
+
+		parts[i] = formatImageHtml(abilityImage!, addAlt, textureSize);
 	}
+
 	return parts.join('');
+}
+
+function formatImageHtml(imageInfo: any, addAlt?: boolean, textureSize = 20) {
+	if (Array.isArray(imageInfo)) {
+		return `<img src="${imageInfo[0]}" width="${imageInfo[1]}" height="${imageInfo[2] ?? imageInfo[1]}"${addAlt ? ` alt="${imageInfo[3] ?? 'unknown'} icon"` : ''}>`;
+	} else {
+		const nameAttr = imageInfo.abilityName ?? imageInfo.championName ?? imageInfo.name ?? 'unknown';
+		return `<img ${Object.entries(textureBgImageAttrs(imageInfo, textureSize))
+			.map(
+				([attr, value]) =>
+					`${attr}="${
+						typeof value === 'string'
+							? value
+							: Object.entries(value)
+									.map(([vAttr, vValue]) => `${vAttr}: ${vValue}`)
+									.join('; ')
+					}"`,
+			)
+			.join(' ')}${addAlt ? ` alt="${nameAttr} icon"` : ''}>`;
+	}
 }
