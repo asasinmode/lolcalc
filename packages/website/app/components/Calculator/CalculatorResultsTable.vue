@@ -18,6 +18,7 @@ import type { IReplacedGameVariable, IReplaceGameVariablesRV } from '@lolcalc/co
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_IMAGES, imgUrl, INTERESTING_SOULS_DRAGONS, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
+import { VariableType } from '@lolcalc/shared';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils';
@@ -32,7 +33,19 @@ defineProps<{
 	showResults: boolean;
 }>();
 
-const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows } = useCalculatorState();
+const {
+	damageSources,
+	damageTargets,
+	resultSections,
+	resultColumns,
+	expandedSections,
+	resultsTableFlip: flipResults,
+	customTotalRowIds,
+	computedCustomTotalRows,
+	isRestoringCustomTotalRows,
+	customValueRowIds,
+	computedCustomValueRows,
+} = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -627,9 +640,11 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 }
 
 function removeResultsSection(index: number) {
-	const section = resultSections.value[index];
-	if (section!.isCustomTotal) {
+	const section = resultSections.value[index]!;
+	if (section.isCustomTotal) {
 		customTotalRowIds.value.length = 0;
+	} else if (section.isCustomValue) {
+		console.log('TODO clear/remove custom value');
 	} else {
 		const [section] = resultSections.value.splice(index, 1);
 		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
@@ -1212,6 +1227,8 @@ const colW = computed(() => {
 	};
 });
 
+const maxCols = computed(() => 2 + resultColumns.value.length);
+
 const { updateThumbnail } = useDamageSourceThumbnail();
 let thumbnailTooltipPopoverEl: HTMLElement | null = null;
 
@@ -1228,6 +1245,22 @@ const { bind: bindThumbnailTriggerAttrs, bindPopover: bindThumbnailPopoverAttrs 
 		}
 	},
 });
+
+const variableTypeOptionNames: Partial<Record<VariableType, string>> = {
+	physical: 'physical damage',
+	magic: 'magic damage',
+	adaptive: 'adaptive damage',
+	true: 'true damage',
+	heal: 'heal',
+	shield: 'shield',
+};
+
+const newCustomValueRowType = ref<VariableType>();
+const newCustomValueRowValue = ref<number>(0);
+
+function submitCustomValueRow() {
+	console.log('adding custom value', newCustomValueRowType.value, newCustomValueRowValue.value);
+}
 
 defineExpose({
 	addResultsColumn,
@@ -1473,15 +1506,9 @@ defineExpose({
 								<span>move down</span>
 								<Icon class="i-ph:arrow-down" />
 							</button>
-							<button
-								class="pretend-ui-btn remove"
-								:title="section.isCustomTotal ? 'clear' : 'remove'"
-								:disabled="section.isCustomTotal ? !customTotalRowIds.length : section.isPermanent"
-								@dblclick.stop=""
-								@click.stop="removeResultsSection(index)"
-							>
-								<span>{{ section.isCustomTotal ? 'clear' : 'remove' }}</span>
-								<Icon :class="section.isCustomTotal ? 'i-ph:eraser' : 'i-ph:trash'" />
+							<button class="pretend-ui-btn remove" :title="toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove'" @dblclick.stop="" @click.stop="removeResultsSection(index)">
+								<span>{{ toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove' }}</span>
+								<Icon :class="toValue(section.clearable) ? 'i-ph:eraser' : 'i-ph:trash'" />
 							</button>
 							<button
 								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
@@ -1510,7 +1537,7 @@ defineExpose({
 									<LolDragonHoverTooltip v-else-if="section.abilityId.type === AbilityType.dragon" v-bind="section.hoverTooltipData as any" />
 									<article v-else-if="section.id === ResultSectionId.BasicAttack" popover="hint" class="hover-tooltip custom game-description">
 										TODO aa hover tooltip<br />
-										<rules>lolcalc will leave alpha version when auto attack damage is calculated for all champion and item passives</rules>
+										<rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>
 									</article>
 								</template>
 								<template v-if="section.selectOptions?.length">
@@ -1549,10 +1576,30 @@ defineExpose({
 					@drop="onResultSectionDrop($event, index, false)"
 				>
 					<tr v-if="!section.image" class="info-row">
-						<td :colspan="2 + resultColumns.length">loading...</td>
+						<td :colspan="maxCols">loading...</td>
 					</tr>
+					<template v-else-if="section.isCustomValue">
+						<tr v-for="(row, rowIndex) in computedCustomValueRows" :key="rowIndex">
+							<td colspan="2">row {{ rowIndex }} {{ row.type }} {{ row.value }}</td>
+						</tr>
+						<tr id="results-new-custom-v-row">
+							<td :colspan="maxCols">
+								<form @submit.prevent="submitCustomValueRow">
+									<label for="results-custom-v-select">type</label>
+									<select id="results-custom-v-select" v-model="newCustomValueRowType">
+										<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
+											{{ name }}
+										</option>
+									</select>
+									<label for="result-custom-v-value">value</label>
+									<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" />
+									<button class="pretend-ui-btn" type="submit">add</button>
+								</form>
+							</td>
+						</tr>
+					</template>
 					<tr v-else-if="!isRestoringCustomTotalRows && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
-						<td :colspan="2 + resultColumns.length">
+						<td :colspan="maxCols">
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
 					</tr>
@@ -1617,7 +1664,7 @@ defineExpose({
 						</td>
 					</tr>
 					<tr v-if="section.id === ResultSectionId.CustomTotal && isRestoringCustomTotalRows" class="info-row">
-						<td :colspan="2 + resultColumns.length">loading...</td>
+						<td :colspan="maxCols">loading...</td>
 					</tr>
 				</tbody>
 			</template>
@@ -2209,6 +2256,13 @@ defineExpose({
 		> tfoot {
 			> tr > td {
 				--at-apply: 'pb-[--header-row-pt]';
+			}
+		}
+
+		#results-new-custom-v-row {
+			input,
+			select {
+				--at-apply: 'text-lg';
 			}
 		}
 	}

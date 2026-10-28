@@ -9,7 +9,7 @@ import { roundNumber } from '@lolcalc/shared/utils.js';
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
 import type { CalculatorResultsTable } from '#components';
-import type { ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import type { ICustomTotalSectionRow, ICustomValueSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const { vMinor } = PATCH_VERSION;
 
@@ -17,6 +17,7 @@ export const ResultSectionId = {
 	Stats: 'a-stats',
 	BasicAttack: 'a-ba',
 	CustomTotal: 'a-cTtl',
+	CustomValue: 'a-cV',
 } as const;
 export const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
@@ -37,6 +38,8 @@ export interface ICalculatorState {
 	customTotalRowIds: Ref<string[]>;
 	isRestoringCustomTotalRows: Ref<boolean>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
+	customValueRowIds: Ref<string[]>;
+	computedCustomValueRows: ComputedRef<ICustomValueSectionRow[]>;
 }
 
 export function initCalculatorState(): ICalculatorState {
@@ -44,6 +47,10 @@ export function initCalculatorState(): ICalculatorState {
 	const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 	const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+
+	const customTotalRowIds = ref<string[]>([]);
+	const customValueRowIds = ref<string[]>([]);
+
 	const resultSections = ref<IDamageResultTableSection[]>([
 		{
 			id: ResultSectionId.Stats,
@@ -140,6 +147,7 @@ export function initCalculatorState(): ICalculatorState {
 			name: 'custom total',
 			isPermanent: true,
 			isCustomTotal: true,
+			clearable: computed(() => customTotalRowIds.value.length),
 			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
 			rows: shallowRef([
 				{
@@ -153,10 +161,25 @@ export function initCalculatorState(): ICalculatorState {
 			},
 			hoverTooltipData: shallowRef(),
 		},
+		{
+			id: ResultSectionId.CustomValue,
+			abilityId: { type: 'all', id: 'customValue' },
+			name: 'custom value',
+			isPermanent: true,
+			isCustomValue: true,
+			clearable: computed(() => customValueRowIds.value.length),
+			// TODO look for a more fun img
+			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
+			rows: shallowRef([]),
+			getCellValue() {
+				console.warn("results section custom value 'getCellValue' called, should be handled manually");
+				return { value: 0, numberValue: 0 };
+			},
+			hoverTooltipData: shallowRef(),
+		},
 	]) as unknown as ShallowRef<IDamageResultTableSection[]>;
 
 	const customTotalSection = resultSections.value.find((section) => section.isCustomTotal)!;
-	const customTotalRowIds = ref<string[]>([]);
 
 	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 		/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
@@ -181,6 +204,10 @@ export function initCalculatorState(): ICalculatorState {
 		return rows;
 	});
 
+	const computedCustomValueRows = computed<ICustomValueSectionRow[]>(() => {
+		return [];
+	});
+
 	const state: ICalculatorState = {
 		damageSources,
 		damageTargets,
@@ -195,6 +222,8 @@ export function initCalculatorState(): ICalculatorState {
 		customTotalRowIds,
 		isRestoringCustomTotalRows: ref(false),
 		computedCustomTotalRows,
+		customValueRowIds,
+		computedCustomValueRows,
 	};
 
 	provide('calculatorState', state);

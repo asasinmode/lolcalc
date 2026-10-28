@@ -3,7 +3,7 @@ import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId } from '@lolc
 import type { IGameImageData } from '@lolcalc/core/misc';
 import type { IReplacedGameVariable, IVariableMeta } from '@lolcalc/core/variables/game';
 import type { IItem } from '@lolcalc/data/types';
-import type { IChampionAbilityKey } from '@lolcalc/shared/index';
+import type { IChampionAbilityKey, VariableType } from '@lolcalc/shared/index';
 
 export interface IDamageResultTableSection {
 	/** stringified `GameAbilityId` or freestyled for `all` */
@@ -13,7 +13,12 @@ export interface IDamageResultTableSection {
 	notImplemented?: boolean;
 	/** stats and basic attack cannot be removed */
 	isPermanent?: boolean;
+	/* section is the custom total section */
 	isCustomTotal?: boolean;
+	/* section is the custom value section */
+	isCustomValue?: boolean;
+	/* remove will be erase instead */
+	clearable?: ComputedRef<boolean | number | undefined>;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
 	/** technically should always be present but it can be undefined while async stuff is resolving */
@@ -70,11 +75,17 @@ export interface IDamageResultTableSectionRow {
 	additionalInfo?: IVariableMeta['additionalInfo'];
 	image?: IGameImageData;
 }
+
 export interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	sectionId: string;
 	section: IDamageResultTableSection;
 	/** the index the target row is at in its section */
 	rowIndex: number;
+}
+
+export interface ICustomValueSectionRow extends IDamageResultTableSectionRow {
+	type: VariableType;
+	value?: number;
 }
 
 export interface IChampionAbilityHoverTooltipProps {
