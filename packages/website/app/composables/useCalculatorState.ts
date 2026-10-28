@@ -1,10 +1,11 @@
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
-import { linkedFormattedItemImage, type IGameImageData } from '@lolcalc/core/misc';
+import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
+import type { IGameImageData } from '@lolcalc/core/misc';
 import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
-import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, CHAMPION_STAT_META } from '@lolcalc/shared';
+import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, ALL_VARIABLE_TYPES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.js';
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
@@ -38,8 +39,7 @@ export interface ICalculatorState {
 	customTotalRowIds: Ref<string[]>;
 	isRestoringCustomTotalRows: Ref<boolean>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
-	customValueRowIds: Ref<string[]>;
-	computedCustomValueRows: ComputedRef<ICustomValueSectionRow[]>;
+	customValueRows: Ref<ICustomValueSectionRow[]>;
 }
 
 export function initCalculatorState(): ICalculatorState {
@@ -48,8 +48,8 @@ export function initCalculatorState(): ICalculatorState {
 	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 	const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 
+	const customValueRows = ref<ICustomValueSectionRow[]>([]);
 	const customTotalRowIds = ref<string[]>([]);
-	const customValueRowIds = ref<string[]>([]);
 
 	const resultSections = ref<IDamageResultTableSection[]>([
 		{
@@ -141,7 +141,7 @@ export function initCalculatorState(): ICalculatorState {
 				['average', 'average'],
 			]),
 			selectLabel: 'attack type',
-			hoverTooltipData: shallowRef(`TODO aa hover tooltip<br> <rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
+			hoverTooltipData: useSimpleDescription('results-basic-attack', `TODO aa hover tooltip<br> <rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
 		},
 		{
 			id: ResultSectionId.CustomTotal,
@@ -150,7 +150,7 @@ export function initCalculatorState(): ICalculatorState {
 			isPermanent: true,
 			isCustomTotal: true,
 			clearable: computed(() => customTotalRowIds.value.length),
-			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
+			image: shallowRef([imgUrl('game/assets/ux/ruby/db_mode_statuseffecticon_doom.png'), 64]),
 			rows: shallowRef([
 				{
 					id: 'cTtl-total',
@@ -169,8 +169,7 @@ export function initCalculatorState(): ICalculatorState {
 			name: 'custom value',
 			isPermanent: true,
 			isCustomValue: true,
-			clearable: computed(() => customValueRowIds.value.length),
-			// TODO look for a more fun img
+			clearable: computed(() => customValueRows.value.length),
 			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
 			rows: shallowRef([]),
 			getCellValue() {
@@ -179,7 +178,7 @@ export function initCalculatorState(): ICalculatorState {
 			},
 			hoverTooltipData: useSimpleDescription(
 				'results-custom-value',
-				`This section lets you add custom values for some variable types.<br> For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a Briar receives, factoring in her passive. Or add a <magicdamage>magic damage</magicdamage> value that <strong>lolcalc</strong> doesn't have yet and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} crit) against column target's <scalemr>resists</scalemr>.
+				`This section lets you add custom values for some variable types.<br> For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a ${linkedFormattedChampionImage('Briar')} receives, factoring in her passive. Or add a <magicdamage>magic damage</magicdamage> value and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} passive) against column target's <scalemr>resists</scalemr>.
 `,
 			),
 		},
@@ -210,10 +209,6 @@ export function initCalculatorState(): ICalculatorState {
 		return rows;
 	});
 
-	const computedCustomValueRows = computed<ICustomValueSectionRow[]>(() => {
-		return [];
-	});
-
 	const state: ICalculatorState = {
 		damageSources,
 		damageTargets,
@@ -228,8 +223,7 @@ export function initCalculatorState(): ICalculatorState {
 		customTotalRowIds,
 		isRestoringCustomTotalRows: ref(false),
 		computedCustomTotalRows,
-		customValueRowIds,
-		computedCustomValueRows,
+		customValueRows,
 	};
 
 	provide('calculatorState', state);
@@ -242,7 +236,7 @@ export function useCalculatorState(): ICalculatorState {
 }
 
 export function useManageCalculatorState(state = useCalculatorState()) {
-	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows } = state;
+	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows, customValueRows } = state;
 	const isStateTooLargeForQuery = ref(false);
 	const debounceTimeout = useState<ReturnType<typeof setTimeout> | undefined>('saveStateDebounce');
 
@@ -391,15 +385,9 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 								: savedDragonsSoulAbilities.has(section.abilityId.id)),
 			) ?? [];
 		const savedSectionIds: string[] = [];
-		const isSectionsChanged =
-			keptSections?.[0] &&
-			(keptSections.length > 3 ||
-				/* check if default order was changed */
-				keptSections[0]!.id !== ResultSectionId.Stats ||
-				keptSections[1]!.id !== ResultSectionId.BasicAttack ||
-				keptSections.at(-1)!.id !== ResultSectionId.CustomTotal);
+		const isSectionsChanged = keptSections.length;
 
-		if (computedCustomTotalRows.value?.length || isSectionsChanged) {
+		if (isSectionsChanged) {
 			for (const section of keptSections) {
 				savedSectionIds.push(section.id);
 
@@ -416,8 +404,6 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			}
 
 			if (computedCustomTotalRows.value?.length) {
-				const params = new URLSearchParams();
-
 				const value: string[] = [];
 				for (const row of computedCustomTotalRows.value) {
 					const { sectionId, rowIndex } = row;
@@ -428,12 +414,20 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				}
 
 				if (value.length) {
-					params.append('tblCTtl', value.join('_'));
-					const str = params.toString();
+					const str = `tblCTtl=${value.join('_')}`;
 					wholeState += `&${str}`;
 					if (queryState.length + str.length < MAX_QUERY_STATE_STRING_LENGTH) {
 						queryState += `&${str}`;
 					}
+				}
+			}
+
+			const saveableCustomValueRows = customValueRows.value?.filter((row) => row.value);
+			if (saveableCustomValueRows.length) {
+				const str = `tblCV=${saveableCustomValueRows.map((v) => `${ALL_VARIABLE_TYPES.indexOf(v.type)}_${v.value ?? 0}`).join('-')}`;
+				wholeState += `&${str}`;
+				if (queryState.length + str.length < MAX_QUERY_STATE_STRING_LENGTH) {
+					queryState += `&${str}`;
 				}
 			}
 		}
@@ -608,6 +602,20 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				}
 				isRestoringCustomTotalRows.value = false;
 			});
+		}
+
+		const savedCustomValueRows = params.get('tblCV');
+		if (savedCustomValueRows) {
+			for (const rawRowId of savedCustomValueRows.split('-')) {
+				const [rawTypeIndex, rawValue] = rawRowId.split('_');
+				const typeIndex = rawTypeIndex === undefined ? undefined : Number.parseInt(rawTypeIndex);
+				if (typeIndex === undefined || Number.isNaN(typeIndex) || !ALL_VARIABLE_TYPES[typeIndex]) continue;
+
+				const value = rawValue === undefined ? undefined : Number.parseFloat(rawValue);
+				if (value !== undefined && !Number.isNaN(rawValue) && value > 0) {
+					customValueRows.value.push({ type: ALL_VARIABLE_TYPES[typeIndex]!, value });
+				}
+			}
 		}
 	}
 

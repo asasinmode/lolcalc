@@ -83,7 +83,7 @@ export interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	rowIndex: number;
 }
 
-export interface ICustomValueSectionRow extends IDamageResultTableSectionRow {
+export interface ICustomValueSectionRow {
 	type: VariableType;
 	value?: number;
 }

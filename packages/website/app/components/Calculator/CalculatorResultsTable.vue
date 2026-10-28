@@ -18,7 +18,7 @@ import type { IReplacedGameVariable, IReplaceGameVariablesRV } from '@lolcalc/co
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_IMAGES, imgUrl, INTERESTING_SOULS_DRAGONS, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
-import { VariableType } from '@lolcalc/shared';
+import { ALL_VARIABLE_TYPES, VariableType } from '@lolcalc/shared';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils';
@@ -33,19 +33,7 @@ defineProps<{
 	showResults: boolean;
 }>();
 
-const {
-	damageSources,
-	damageTargets,
-	resultSections,
-	resultColumns,
-	expandedSections,
-	resultsTableFlip: flipResults,
-	customTotalRowIds,
-	computedCustomTotalRows,
-	isRestoringCustomTotalRows,
-	customValueRowIds,
-	computedCustomValueRows,
-} = useCalculatorState();
+const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows, customValueRows } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -644,7 +632,7 @@ function removeResultsSection(index: number) {
 	if (section.isCustomTotal) {
 		customTotalRowIds.value.length = 0;
 	} else if (section.isCustomValue) {
-		console.log('TODO clear/remove custom value');
+		customValueRows.value.length = 0;
 	} else {
 		const [section] = resultSections.value.splice(index, 1);
 		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
@@ -1260,6 +1248,11 @@ const newCustomValueRowValue = ref<number>(0);
 
 function submitCustomValueRow() {
 	console.log('adding custom value', newCustomValueRowType.value, newCustomValueRowValue.value);
+	customValueRows.value.push({ type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
+
+	newCustomValueRowType.value = VariableType.physical;
+	newCustomValueRowValue.value = 0;
+	debouncedSaveState();
 }
 
 defineExpose({
@@ -1576,7 +1569,7 @@ defineExpose({
 						<td :colspan="maxCols">loading...</td>
 					</tr>
 					<template v-else-if="section.isCustomValue">
-						<tr v-for="(row, rowIndex) in computedCustomValueRows" :key="rowIndex">
+						<tr v-for="(row, rowIndex) in customValueRows" :key="rowIndex">
 							<td colspan="2">row {{ rowIndex }} {{ row.type }} {{ row.value }}</td>
 						</tr>
 						<tr id="results-new-custom-v-row">

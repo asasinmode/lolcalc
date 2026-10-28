@@ -838,19 +838,22 @@ export const CUSTOM_EFFECT_IMAGES: Partial<Record<EffectObjectName, [path: strin
 	[EffectObjectName.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
 };
 
+/** order is used for saving/restoring result table custom values. If it changes, `useCalculatorState` STATE_VERSION should probably be bumped */
 export const VariableType = {
-	shield: 'shield',
-	heal: 'heal',
-	hpRegen: 'hpRegen',
 	physical: 'physical',
 	magic: 'magic',
-	true: 'true',
 	adaptive: 'adaptive',
+	true: 'true',
+	heal: 'heal',
+	shield: 'shield',
+	hpRegen: 'hpRegen',
 	affectedByTenacity: 'affectedByTenacity',
 	affectedBySlowResist: 'affectedBySlowResist',
 } as const;
 
 export type VariableType = (typeof VariableType)[keyof typeof VariableType];
+
+export const ALL_VARIABLE_TYPES = Object.values(VariableType);
 
 export const CHAMPION_LEVEL = {
 	min: 1,
