@@ -640,6 +640,7 @@ function removeResultsSection(index: number) {
 		customTotalRowIds.value.length = 0;
 	} else if (section.isCustomValue) {
 		customValueRows.value.length = 0;
+		computedResults.value.get(section.id)?.rows.clear();
 	} else {
 		const [section] = resultSections.value.splice(index, 1);
 		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
@@ -1305,6 +1306,15 @@ function updateCustomValueRowType(rowIndex: number, event: Event) {
 	}
 }
 
+function removeCustomValueRow(rowIndex: number) {
+	const row = customValueRows.value[rowIndex];
+	if (row) {
+		customValueRows.value.splice(rowIndex, 1);
+		customValueComputedSection.rows.delete(row.id);
+		debouncedSaveState();
+	}
+}
+
 defineExpose({
 	addResultsColumn,
 	addComputedColumnSources,
@@ -1649,6 +1659,10 @@ defineExpose({
 										{{ name }}
 									</option>
 								</select>
+								<button class="pretend-ui-btn remove" title="remove" @click="removeCustomValueRow(rowIndex)">
+									<span>remove</span>
+									<Icon class="i-ph:trash" />
+								</button>
 							</div>
 							<template v-else>
 								<span v-if="row.isUnknown">unknown</span>
@@ -2272,6 +2286,14 @@ defineExpose({
 							> th {
 								> div {
 									--at-apply: 'flex items-center inline-full';
+
+									> button {
+										--at-apply: 'shrink-0 size-[--manipulate-btn-size] ms-2 grid place-items-center';
+
+										> .icon {
+											--at-apply: 'size-[--manipulate-icon-size]';
+										}
+									}
 								}
 
 								label {
@@ -2368,7 +2390,7 @@ defineExpose({
 			}
 
 			&:not(:nth-last-child(2)) {
-				#results-new-custom-v-row form {
+				#results-new-custom-v-row:nth-child(odd) form {
 					--at-apply: 'mbe-0';
 				}
 			}
