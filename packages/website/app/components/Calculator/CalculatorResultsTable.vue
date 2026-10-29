@@ -18,7 +18,7 @@ import type { IReplacedGameVariable, IReplaceGameVariablesRV } from '@lolcalc/co
 import { replaceStringtableVariables } from '@lolcalc/core/variables/stringtable';
 import { CHAMPION_IMAGES, imgUrl, INTERESTING_SOULS_DRAGONS, ITEMS, PATCH_VERSION, useChampion } from '@lolcalc/data';
 import type { IChampion, IDragonName } from '@lolcalc/data/types';
-import { ALL_VARIABLE_TYPES, VariableType } from '@lolcalc/shared';
+import { VariableType } from '@lolcalc/shared';
 import type { IChampionAbilityKey, IChampionStatName, TAbilityType } from '@lolcalc/shared';
 import { AbilityType, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils';
@@ -240,14 +240,21 @@ interface IComputedSectionRowColumn {
 
 const customTotalSection = resultSections.value.find((section) => section.isCustomTotal)!;
 const customTotalSectionTotalRow = computed(() => toValue(customTotalSection.rows)[0]);
+const customValueSection = resultSections.value.find((section) => section.isCustomValue)!;
 
 const computedResults = ref<Map<string, IComputedSection>>(new Map());
 computedResults.value = new Map<string, IComputedSection>(
-	[[customTotalSection.id, computeSection(customTotalSection)] as [string, IComputedSection]].concat(resultSections.value.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
+	(
+		[
+			[customTotalSection.id, computeSection(customTotalSection)],
+			[customValueSection.id, computeSection(customValueSection)],
+		] as [string, IComputedSection][]
+	).concat(resultSections.value.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
 );
 
 const customTotalComputedSection = computedResults.value.get(ResultSectionId.CustomTotal)!;
 const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('cTtl-total')!;
+const customValueComputedSection = computedResults.value.get(ResultSectionId.CustomValue)!;
 
 function addComputedSection(sectionId: string) {
 	const section = computeSection(resultSections.value.find((section) => section.id === sectionId)!);
@@ -258,18 +265,18 @@ function addComputedSection(sectionId: string) {
 function computeSection(section: IDamageResultTableSection): IComputedSection {
 	return {
 		sectionId: section.id,
-		rows: new Map(toValue(section.rows)?.map((row) => [row.id, computeSectionRow(section, row)])),
+		rows: new Map(toValue(section.rows)?.map((row) => [row.id, computeSectionRow(section, row.id)])),
 	};
 }
 
-function computeSectionRow(section: IDamageResultTableSection, row: IDamageResultTableSectionRow): IComputedSectionRow {
+function computeSectionRow(section: IDamageResultTableSection, rowId: string): IComputedSectionRow {
 	return {
-		rowId: row.id,
-		columns: new Map(resultColumns.value.map((column) => [column.id, computeSectionRowColumn(section, row, column)])),
+		rowId,
+		columns: new Map(resultColumns.value.map((column) => [column.id, computeSectionRowColumn(section, rowId, column)])),
 	};
 }
 
-function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSectionRow, column: IDamageResultTableColumn): IComputedSectionRowColumn {
+function computeSectionRowColumn(section: IDamageResultTableSection, rowId: string, column: IDamageResultTableColumn): IComputedSectionRowColumn {
 	const source = column[flipResults.value ? '_computedTarget' : '_computedSource'];
 	const target = column[flipResults.value ? '_computedSource' : '_computedTarget'];
 	const rv: IComputedSectionRowColumn = {
@@ -294,7 +301,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 
 		const sum =
 			computedCustomTotalRows.value.slice(1).reduce((acc, curr) => {
-				if (curr.id === row.id) {
+				if (curr.id === rowId) {
 					return acc;
 				}
 
@@ -307,7 +314,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		rv.numberValue = sum;
 		rv.value = roundNumber(sum);
 	} else {
-		const cellValue = section.getCellValue?.(section, row.id, source, target);
+		const cellValue = section.getCellValue?.(section, rowId, source, target);
 		if (cellValue) {
 			({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
 			rv.isIrrelevant = false;
@@ -333,7 +340,7 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 		const resultSection = resultSections.value.find((rSection) => rSection.id === section.sectionId)!;
 		for (const row of section.rows.values()) {
 			const resultRow = toValue(resultSection.rows).find((rRow) => rRow.id === row.rowId)!;
-			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow, column));
+			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow.id, column));
 		}
 	}
 }
@@ -698,13 +705,13 @@ onBeforeUnmount(() => {
 	}
 });
 
-function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultTableSectionRow) {
+function sectionRowCells(sectionId: string, rowId: string, rowSectionId?: string) {
 	return resultColumns.value.map((column) => {
 		return {
-			key: `${section.id}-${row.id}-${column.id}`,
+			key: `${sectionId}-${rowId}-${column.id}`,
 			computedColumn: computedResults.value
-				.get((row as ICustomTotalSectionRow).sectionId ?? section.id)!
-				.rows.get(row.id)!
+				.get(rowSectionId ?? sectionId)!
+				.rows.get(rowId)!
 				.columns.get(column!.id)!,
 		};
 	});
@@ -728,7 +735,7 @@ function recalculateAllColumns() {
 				computedResults.value
 					.get(section.id)!
 					.rows.get(row.id)!
-					.columns.set(column.id, computeSectionRowColumn(section, row, column));
+					.columns.set(column.id, computeSectionRowColumn(section, row.id, column));
 			}
 		}
 	}
@@ -745,7 +752,7 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 				computedResults.value
 					.get(section.id)!
 					.rows.get(row.id)!
-					.columns.set(column.id, computeSectionRowColumn(section, row, column));
+					.columns.set(column.id, computeSectionRowColumn(section, row.id, column));
 			}
 		}
 	}
@@ -1169,17 +1176,17 @@ function addColumnItems(columnIndex: number, isSource: boolean) {
 }
 
 function onCustomTotalRowsChange() {
-	recomputeCustomTotalRow();
+	recomputeCustomTotalRows();
 	if (!expandedSections.value.includes(customTotalSection.id) && customTotalRowIds.value.length) {
 		expandedSections.value.push(customTotalSection.id);
 	}
 	debouncedSaveState();
 }
 
-function recomputeCustomTotalRow() {
+function recomputeCustomTotalRows() {
 	if (customTotalSectionTotalRow.value) {
 		for (const column of resultColumns.value) {
-			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value, column));
+			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value.id, column));
 		}
 		calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 	}
@@ -1247,18 +1254,41 @@ const newCustomValueRowType = ref<VariableType>(VariableType.physical);
 const newCustomValueRowValue = ref<number>(0);
 
 function submitCustomValueRow() {
-	console.log('adding custom value', newCustomValueRowType.value, newCustomValueRowValue.value);
-	customValueRows.value.push({ type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
+	const id = crypto.randomUUID();
+	customValueRows.value.push({ id, name: id, type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
+	customValueComputedSection.rows.set(id, computeSectionRow(customValueSection, id));
 
 	newCustomValueRowType.value = VariableType.physical;
 	newCustomValueRowValue.value = 0;
 	debouncedSaveState();
 }
 
+function computeCustomValueRow(rowId: string) {
+	customValueComputedSection.rows.set(rowId, computeSectionRow(customValueSection, rowId));
+}
+
+function onCustomValueRowChange(rowId: string) {
+	recomputeCustomValueRow(rowId);
+	debouncedSaveState();
+}
+
+function recomputeCustomValueRow(rowId: string) {
+	const computedRow = customValueComputedSection?.rows.get(rowId);
+	if (computedRow) {
+		for (const column of resultColumns.value) {
+			computedRow.columns.set(column.id, computeSectionRowColumn(customValueSection, rowId, column));
+		}
+		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
+	} else {
+		console.warn('custom value row not found for recomputing', rowId);
+	}
+}
+
 defineExpose({
 	addResultsColumn,
 	addComputedColumnSources,
 	addResultsSection,
+	computeCustomValueRow,
 });
 </script>
 
@@ -1568,26 +1598,6 @@ defineExpose({
 					<tr v-if="!section.image" class="info-row">
 						<td :colspan="maxCols">loading...</td>
 					</tr>
-					<template v-else-if="section.isCustomValue">
-						<tr v-for="(row, rowIndex) in customValueRows" :key="rowIndex">
-							<td colspan="2">row {{ rowIndex }} {{ row.type }} {{ row.value }}</td>
-						</tr>
-						<tr id="results-new-custom-v-row">
-							<td :colspan="maxCols">
-								<form @submit.prevent="submitCustomValueRow">
-									<label for="results-custom-v-select">type</label>
-									<select id="results-custom-v-select" v-model="newCustomValueRowType">
-										<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
-											{{ name }}
-										</option>
-									</select>
-									<label for="result-custom-v-value">value</label>
-									<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="0.001" required />
-									<button class="pretend-ui-btn" type="submit">add</button>
-								</form>
-							</td>
-						</tr>
-					</template>
 					<tr v-else-if="!isRestoringCustomTotalRows && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
 						<td :colspan="maxCols">
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
@@ -1624,7 +1634,7 @@ defineExpose({
 							<p :id="`${section.id}-${row.id}-tooltip-info`" popover="hint" class="hover-tooltip game-description" v-bind="bindInfoPopoverAttrs()" v-html="row.additionalInfo" />
 						</th>
 						<td
-							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
+							v-for="(cell, cellIndex) in sectionRowCells(section.id, row.id, (row as ICustomTotalSectionRow).sectionId)"
 							:key="cell.key"
 							:class="{
 								unknown: cell.computedColumn.isUnknown,
@@ -1653,7 +1663,22 @@ defineExpose({
 							</span>
 						</td>
 					</tr>
-					<tr v-if="section.id === ResultSectionId.CustomTotal && isRestoringCustomTotalRows" class="info-row">
+					<tr v-if="section.isCustomValue" id="results-new-custom-v-row">
+						<td :colspan="maxCols">
+							<form @submit.prevent="submitCustomValueRow">
+								<label for="results-custom-v-select">type</label>
+								<select id="results-custom-v-select" v-model="newCustomValueRowType">
+									<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
+										{{ name }}
+									</option>
+								</select>
+								<label for="result-custom-v-value">value</label>
+								<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="0.001" required />
+								<button class="pretend-ui-btn" type="submit">add</button>
+							</form>
+						</td>
+					</tr>
+					<tr v-else-if="section.id === ResultSectionId.CustomTotal && isRestoringCustomTotalRows" class="info-row">
 						<td :colspan="maxCols">loading...</td>
 					</tr>
 				</tbody>
@@ -1766,6 +1791,46 @@ defineExpose({
 
 		th {
 			--at-apply: 'text-start font-normal';
+		}
+
+		#results-new-custom-v-row {
+			&:not(:first-child) form {
+				--at-apply: 'my-2';
+			}
+
+			form {
+				--at-apply: 'max-inline-200 flex items-center';
+
+				@media (width >= 500px) {
+					& {
+						--at-apply: 'justify-center';
+					}
+				}
+
+				input,
+				select,
+				button {
+					--at-apply: 'block-[--manipulate-btn-size] leading-7';
+				}
+
+				input,
+				select {
+					--at-apply: 'text-black bg-white px-1.5 ms-1.25';
+				}
+
+				select {
+					--at-apply: 'me-4';
+					color-scheme: light;
+				}
+
+				input {
+					--at-apply: 'inline-20';
+				}
+
+				button {
+					--at-apply: 'px-2 ms-4';
+				}
+			}
 		}
 
 		> thead {
@@ -2106,7 +2171,7 @@ defineExpose({
 						--at-apply: 'text-neutral-400 font-600';
 					}
 
-					&:where(:not(.info-row)):hover {
+					&:where(:not(.info-row, #results-new-custom-v-row)):hover {
 						--at-apply: 'text-white';
 
 						> * {
@@ -2199,6 +2264,12 @@ defineExpose({
 					}
 				}
 			}
+
+			&:not(:nth-last-child(2)) {
+				#results-new-custom-v-row form {
+					--at-apply: 'mbe-0';
+				}
+			}
 		}
 
 		&:not([inert]) {
@@ -2246,42 +2317,6 @@ defineExpose({
 		> tfoot {
 			> tr > td {
 				--at-apply: 'pb-[--header-row-pt]';
-			}
-		}
-
-		#results-new-custom-v-row {
-			form {
-				--at-apply: 'max-inline-200 flex items-center';
-
-				@media (width >= 500px) {
-					& {
-						--at-apply: 'justify-center';
-					}
-				}
-
-				input,
-				select,
-				button {
-					--at-apply: 'block-[--manipulate-btn-size] leading-7';
-				}
-
-				input,
-				select {
-					--at-apply: 'text-black bg-white px-1.5 ms-1.25';
-				}
-
-				select {
-					--at-apply: 'me-4';
-					color-scheme: light;
-				}
-
-				input {
-					--at-apply: 'inline-20';
-				}
-
-				button {
-					--at-apply: 'px-2 ms-4';
-				}
 			}
 		}
 	}

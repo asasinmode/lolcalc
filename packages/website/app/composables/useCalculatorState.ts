@@ -10,7 +10,7 @@ import { roundNumber } from '@lolcalc/shared/utils.js';
 import type { ShallowRef } from 'vue';
 import type { ComponentExposed } from 'vue-component-type-helpers';
 import type { CalculatorResultsTable } from '#components';
-import type { ICustomTotalSectionRow, ICustomValueSectionRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import type { ICustomTotalSectionRow, IDamageResultTableSectionCustomValueRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const { vMinor } = PATCH_VERSION;
 
@@ -39,7 +39,8 @@ export interface ICalculatorState {
 	customTotalRowIds: Ref<string[]>;
 	isRestoringCustomTotalRows: Ref<boolean>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
-	customValueRows: Ref<ICustomValueSectionRow[]>;
+	/** the same ref `resultSections` custom value section uses */
+	customValueRows: Ref<IDamageResultTableSectionCustomValueRow[]>;
 }
 
 export function initCalculatorState(): ICalculatorState {
@@ -48,7 +49,7 @@ export function initCalculatorState(): ICalculatorState {
 	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 	const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 
-	const customValueRows = ref<ICustomValueSectionRow[]>([]);
+	const customValueRows = ref<IDamageResultTableSectionCustomValueRow[]>([]);
 	const customTotalRowIds = ref<string[]>([]);
 
 	const resultSections = ref<IDamageResultTableSection[]>([
@@ -171,7 +172,7 @@ export function initCalculatorState(): ICalculatorState {
 			isCustomValue: true,
 			clearable: computed(() => customValueRows.value.length),
 			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
-			rows: shallowRef([]),
+			rows: customValueRows,
 			getCellValue() {
 				console.warn("results section custom value 'getCellValue' called, should be handled manually");
 				return { value: 0, numberValue: 0 };
@@ -613,7 +614,9 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 				const value = rawValue === undefined ? undefined : Number.parseFloat(rawValue);
 				if (value !== undefined && !Number.isNaN(rawValue) && value > 0) {
-					customValueRows.value.push({ type: ALL_VARIABLE_TYPES[typeIndex]!, value });
+					const id = crypto.randomUUID();
+					customValueRows.value.push({ id, name: id, type: ALL_VARIABLE_TYPES[typeIndex]!, value });
+					resultsTable.value.computeCustomValueRow(id);
 				}
 			}
 		}

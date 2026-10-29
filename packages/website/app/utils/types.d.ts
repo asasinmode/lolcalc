@@ -76,16 +76,16 @@ export interface IDamageResultTableSectionRow {
 	image?: IGameImageData;
 }
 
+export interface IDamageResultTableSectionCustomValueRow extends IDamageResultTableSectionRow {
+	type: VariableType;
+	value?: number;
+}
+
 export interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	sectionId: string;
 	section: IDamageResultTableSection;
 	/** the index the target row is at in its section */
 	rowIndex: number;
-}
-
-export interface ICustomValueSectionRow {
-	type: VariableType;
-	value?: number;
 }
 
 export interface IChampionAbilityHoverTooltipProps {
