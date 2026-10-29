@@ -1284,6 +1284,27 @@ function recomputeCustomValueRow(rowId: string) {
 	}
 }
 
+let currentCustomValueInputRowRef: IDamageResultTableSectionCustomValueRow | undefined;
+const customValueOnInput = useNumberInput(() => [currentCustomValueInputRowRef, 'value']);
+
+function updateCustomValueRowValue(rowIndex: number, event: Event) {
+	(event as any).composing = false;
+	const row = customValueRows.value[rowIndex];
+	if (row) {
+		currentCustomValueInputRowRef = row;
+		customValueOnInput(event);
+		onCustomValueRowChange(row.id);
+	}
+}
+
+function updateCustomValueRowType(rowIndex: number, event: Event) {
+	const row = customValueRows.value[rowIndex];
+	if (row) {
+		row.type = (event.target as HTMLInputElement).value as VariableType;
+		onCustomValueRowChange(row.id);
+	}
+}
+
 defineExpose({
 	addResultsColumn,
 	addComputedColumnSources,
@@ -1603,7 +1624,7 @@ defineExpose({
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
 					</tr>
-					<tr v-for="row in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : toValue(section.rows)" :key="`${section.id}_${row.id}`" :class="{ unknown: row.isUnknown }">
+					<tr v-for="(row, rowIndex) in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : toValue(section.rows)" :key="`${section.id}_${row.id}`" :class="{ unknown: row.isUnknown }">
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label>
 								<span>include in custom total</span>
@@ -1621,9 +1642,9 @@ defineExpose({
 							/>
 							<div v-if="section.isCustomValue">
 								<label :for="`value-${row.id}`">value</label>
-								<input :id="`value-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).value" type="number" min="0" step="any" required />
+								<input :id="`value-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).value" type="number" min="0" step="any" required @input="updateCustomValueRowValue(rowIndex, $event)" />
 								<label :for="`type-${row.id}`">type</label>
-								<select :id="`type-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).type">
+								<select :id="`type-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).type" @change="updateCustomValueRowType(rowIndex, $event)">
 									<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
 										{{ name }}
 									</option>
