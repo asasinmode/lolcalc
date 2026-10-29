@@ -459,22 +459,27 @@ defineExpose({ header });
 			--at-apply: 'text-white';
 		}
 
+		/* color duplicated in #results-body-a-cV, both should be updated if changes */
 		physicaldamage {
 			--at-apply: 'text-orange-600';
 		}
 
+		/* color duplicated in #results-body-a-cV, both should be updated if changes */
 		magicdamage {
 			--at-apply: 'text-cyan';
 		}
 
+		/* color duplicated in #results-body-a-cV, both should be updated if changes */
 		truedamage {
 			--at-apply: 'text-cyan-50';
 		}
 
+		/* color duplicated in #results-body-a-cV, both should be updated if changes */
 		healing {
 			--at-apply: 'text-green-300';
 		}
 
+		/* color duplicated in #results-body-a-cV, both should be updated if changes */
 		shield {
 			--at-apply: 'text-sky-400';
 		}

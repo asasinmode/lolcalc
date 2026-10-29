@@ -27,7 +27,7 @@ import { toValue } from 'vue';
 import type { UnwrapRef, WatchHandle } from 'vue';
 import { ResultSectionId } from '~/composables/useCalculatorState';
 import { gameImageAttrs } from '~/utils/image';
-import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow, IDamageResultTableSectionCustomValueRow } from '~/utils/types';
 
 defineProps<{
 	showResults: boolean;
@@ -1610,7 +1610,7 @@ defineExpose({
 								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @change="onCustomTotalRowsChange" />
 							</label>
 						</td>
-						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-damage-type">
+						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-damage-type" :data-type="(row as IDamageResultTableSectionCustomValueRow).type">
 							<img
 								v-if="row.image"
 								aria-hidden="true"
@@ -1619,19 +1619,31 @@ defineExpose({
 									...((row as ICustomTotalSectionRow).section && sectionHasTooltip((row as ICustomTotalSectionRow).section) ? bindSectionHoverTooltip({ section: (row as ICustomTotalSectionRow).section, fromCustom: true }) : undefined),
 								}"
 							/>
-							<span v-if="row.isUnknown">unknown</span>
-							{{ row.name }}
-							<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs(undefined, true)">
-								<img src="/logo_dark.webp" alt="lolcalc logo" width="192" height="192" />
-							</span>
-							<p :id="`${section.id}-${row.id}-tooltip-custom`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
-								this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existing one
-							</p>
-							<span v-if="row.additionalInfo" :aria-describedby="`${section.id}-${row.id}-tooltip-info`" class="info-tooltip-trigger" tabindex="0" v-bind="bindInfoTriggerAttrs(undefined, true)">
-								<span>additional info</span>
-								<Icon class="i-ph:info-fill" />
-							</span>
-							<p :id="`${section.id}-${row.id}-tooltip-info`" popover="hint" class="hover-tooltip game-description" v-bind="bindInfoPopoverAttrs()" v-html="row.additionalInfo" />
+							<template v-if="section.isCustomValue">
+								<label :for="`value-${row.id}`">value</label>
+								<input :id="`value-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).value" type="number" min="0" step="any" required />
+								<label :for="`type-${row.id}`">type</label>
+								<select :id="`type-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).type">
+									<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
+										{{ name }}
+									</option>
+								</select>
+							</template>
+							<template v-else>
+								<span v-if="row.isUnknown">unknown</span>
+								{{ row.name }}
+								<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs(undefined, true)">
+									<img src="/logo_dark.webp" alt="lolcalc logo" width="192" height="192" />
+								</span>
+								<p :id="`${section.id}-${row.id}-tooltip-custom`" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
+									this variable is added by <strong>lolcalc</strong>. It's either not present in the original description or a calculated version of an existing one
+								</p>
+								<span v-if="row.additionalInfo" :aria-describedby="`${section.id}-${row.id}-tooltip-info`" class="info-tooltip-trigger" tabindex="0" v-bind="bindInfoTriggerAttrs(undefined, true)">
+									<span>additional info</span>
+									<Icon class="i-ph:info-fill" />
+								</span>
+								<p :id="`${section.id}-${row.id}-tooltip-info`" popover="hint" class="hover-tooltip game-description" v-bind="bindInfoPopoverAttrs()" v-html="row.additionalInfo" />
+							</template>
 						</th>
 						<td
 							v-for="(cell, cellIndex) in sectionRowCells(section.id, row.id, (row as ICustomTotalSectionRow).sectionId)"
@@ -1673,7 +1685,7 @@ defineExpose({
 									</option>
 								</select>
 								<label for="result-custom-v-value">value</label>
-								<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="0.001" required />
+								<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="any" required />
 								<button class="pretend-ui-btn" type="submit">add</button>
 							</form>
 						</td>
@@ -1791,46 +1803,6 @@ defineExpose({
 
 		th {
 			--at-apply: 'text-start font-normal';
-		}
-
-		#results-new-custom-v-row {
-			&:not(:first-child) form {
-				--at-apply: 'my-2';
-			}
-
-			form {
-				--at-apply: 'max-inline-200 flex items-center';
-
-				@media (width >= 500px) {
-					& {
-						--at-apply: 'justify-center';
-					}
-				}
-
-				input,
-				select,
-				button {
-					--at-apply: 'block-[--manipulate-btn-size] leading-7';
-				}
-
-				input,
-				select {
-					--at-apply: 'text-black bg-white px-1.5 ms-1.25';
-				}
-
-				select {
-					--at-apply: 'me-4';
-					color-scheme: light;
-				}
-
-				input {
-					--at-apply: 'inline-20';
-				}
-
-				button {
-					--at-apply: 'px-2 ms-4';
-				}
-			}
 		}
 
 		> thead {
@@ -2263,6 +2235,107 @@ defineExpose({
 						background-color: color-mix(in srgb, white 5%, var(--bg-clr));
 					}
 				}
+
+				&#results-body-a-cV {
+					> tr {
+						input:not([type='checkbox']),
+						select {
+							--at-apply: 'ps-1.5 pe-1 leading-7 block-[--manipulate-btn-size]';
+						}
+
+						input:not([type='checkbox']) {
+							--at-apply: 'inline-20';
+						}
+
+						&:not(:last-child) {
+							> th {
+								> label {
+									--at-apply: 'sr-only';
+								}
+
+								input,
+								select {
+									--at-apply: '-my-0.5 border bg-black';
+								}
+
+								input {
+									--at-apply: '-me-px';
+								}
+
+								&[data-type='physical'] {
+									input,
+									select {
+										--at-apply: 'border-orange-600';
+									}
+								}
+
+								&[data-type='magic'] {
+									input,
+									select {
+										--at-apply: 'border-cyan';
+									}
+								}
+
+								&[data-type='adaptive'] {
+									input,
+									select {
+										/* 26.21 taken from infernal soul tooltip, it has <font color="..."> */
+										--at-apply: 'border-[#48c4b7]';
+									}
+								}
+
+								&[data-type='true'] {
+									input,
+									select {
+										--at-apply: 'border-cyan-50';
+									}
+								}
+
+								&[data-type='shield'] {
+									input,
+									select {
+										--at-apply: 'border-sky-400';
+									}
+								}
+
+								&[data-type='heal'] {
+									input,
+									select {
+										--at-apply: 'border-green-300';
+									}
+								}
+							}
+						}
+
+						&:last-child form {
+							--at-apply: 'max-inline-200 flex items-center';
+
+							@media (width >= 500px) {
+								& {
+									--at-apply: 'justify-center';
+								}
+							}
+
+							input,
+							select {
+								--at-apply: 'ms-1.25 bg-white text-black';
+							}
+
+							select {
+								--at-apply: 'me-3';
+								color-scheme: light;
+							}
+
+							button {
+								--at-apply: 'leading-7 block-[--manipulate-btn-size] px-2 ms-4';
+							}
+						}
+					}
+				}
+			}
+
+			#results-new-custom-v-row:not(:first-child) form {
+				--at-apply: 'my-2';
 			}
 
 			&:not(:nth-last-child(2)) {
