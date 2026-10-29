@@ -2255,7 +2255,7 @@ defineExpose({
 
 								input,
 								select {
-									--at-apply: '-my-0.5 border bg-black';
+									--at-apply: '-my-0.5 bg-black b b-op-70';
 								}
 
 								input {
@@ -2265,14 +2265,14 @@ defineExpose({
 								&[data-type='physical'] {
 									input,
 									select {
-										--at-apply: 'border-orange-600';
+										--at-apply: 'b-orange-600';
 									}
 								}
 
 								&[data-type='magic'] {
 									input,
 									select {
-										--at-apply: 'border-cyan';
+										--at-apply: 'b-cyan';
 									}
 								}
 
@@ -2280,28 +2280,28 @@ defineExpose({
 									input,
 									select {
 										/* 26.21 taken from infernal soul tooltip, it has <font color="..."> */
-										--at-apply: 'border-[#48c4b7]';
+										--at-apply: 'b-[#48c4b7]';
 									}
 								}
 
 								&[data-type='true'] {
 									input,
 									select {
-										--at-apply: 'border-cyan-50';
+										--at-apply: 'b-cyan-50';
 									}
 								}
 
 								&[data-type='shield'] {
 									input,
 									select {
-										--at-apply: 'border-sky-400';
+										--at-apply: 'b-sky-400';
 									}
 								}
 
 								&[data-type='heal'] {
 									input,
 									select {
-										--at-apply: 'border-green-300';
+										--at-apply: 'b-green-300';
 									}
 								}
 							}
