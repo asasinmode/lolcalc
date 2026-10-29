@@ -45,6 +45,8 @@ function updateValue(value: number | undefined) {
 }
 
 const step = computed(() => (ITEMS as TItems)[props.abilityId.id as (typeof UNTRANSFORMED_TEAR_ITEM_IDS)[number]].dataValues.ManaPerCharge ?? 3);
+
+const usedNumberInput = useNumberInput([props.damageSource.internalItemData as Ref<IData>, 'manaflow']);
 </script>
 
 <template>
@@ -53,7 +55,7 @@ const step = computed(() => (ITEMS as TItems)[props.abilityId.id as (typeof UNTR
 		:img-src="[imgUrl(`img/item/${abilityId.id}.png`, true), 64]"
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
 		label="Manaflow stacks"
-		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"
+		:used-number-input
 		:max="360"
 		:step
 		:id-suffix="`${abilityId.id}-${idSuffix}`"

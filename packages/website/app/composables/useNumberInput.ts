@@ -1,11 +1,12 @@
-import type { UnwrapRef } from 'vue';
+import { toValue } from 'vue';
+import type { MaybeRef, MaybeRefOrGetter } from 'vue';
 
 type NumberKey<T> = {
 	[K in keyof T]: T[K] extends number ? K : never;
 }[keyof T];
 
-export function useNumberInput<T extends Ref>(
-	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: MaybeRef<any[]>, targetIndex: number] | (() => [targetObject: MaybeRef<any[]>, targetIndex: number]),
+export function useNumberInput<T>(
+	targetRef: Ref<number | undefined> | MaybeRefOrGetter<[targetObject: MaybeRef<T>, targetKey: T extends any[] ? NumberKey<T> : keyof T]>,
 	isInt = true,
 	max?: MaybeRef<number>,
 	setComposing = false,
@@ -15,7 +16,6 @@ export function useNumberInput<T extends Ref>(
 			(event as any).composing = false;
 		}
 
-		const computedRef = typeof targetRef === 'function' ? targetRef() : targetRef;
 		const rawValue = (event.target as HTMLInputElement).value;
 		if (!isInt && !rawValue) {
 			(event.target as HTMLInputElement).value = '0';
@@ -47,14 +47,19 @@ export function useNumberInput<T extends Ref>(
 			(event.target as HTMLInputElement).value = value.toString();
 		}
 
-		if (Array.isArray(computedRef)) {
-			if (isRef(computedRef[0])) {
-				(computedRef[0].value[computedRef[1]] as number) = value;
+		const refValue = toValue(targetRef as MaybeRefOrGetter);
+		if (Array.isArray(refValue)) {
+			if (isRef(refValue[0])) {
+				(refValue[0].value as any)[refValue[1]] = value;
 			} else {
-				(computedRef[0] as any[])[computedRef[1] as number] = value;
+				(refValue[0] as any)[refValue[1]] = value;
 			}
-		} else {
-			computedRef.value = value;
+		} else if (isRef(refValue)) {
+			refValue.value = value;
+		} else if (isRef(targetRef)) {
+			(targetRef as any).value = value;
 		}
+
+		return value;
 	};
 }

@@ -43,7 +43,7 @@ const statInputs = MODIFIABLE_CHAMPION_STAT_ENTRIES.map(
 		return {
 			name: statMeta.name,
 			label: statMeta.isPercentage && !statMeta.name.startsWith('Percent') ? ' %' : '',
-			onInput: useNumberInput([props.damageSource.internalData as Ref<IChampionStats>, statName as IChampionStatName], Boolean(!statMeta.decimal || statMeta.isPercentage)),
+			onInput: useNumberInput([props.damageSource.internalData, statName], Boolean(!statMeta.decimal || statMeta.isPercentage)),
 		};
 	},
 );
