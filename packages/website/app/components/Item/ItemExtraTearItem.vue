@@ -4,7 +4,7 @@ import type { IItemAbilityId } from '@lolcalc/core/GameAbilityId';
 import type { IInternalItemDataOf } from '@lolcalc/core/specifics';
 import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
-import { imgUrl, ITEMS } from '@lolcalc/data';
+import { imgUrl, ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
 import { CalculatorExtraNumber } from '#components';
 import type { IExtraComponentProps } from '~/utils/types';
@@ -56,7 +56,7 @@ const usedNumberInput = useNumberInput([props.damageSource.internalItemData as R
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
 		label="Manaflow stacks"
 		:used-number-input
-		:max="360"
+		:max="ITEMS_BY_NAME.tear.dataValues.MaxMana"
 		:step
 		:id-suffix="`${abilityId.id}-${idSuffix}`"
 		:disabled="isTransformed"
