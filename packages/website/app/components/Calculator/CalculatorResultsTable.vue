@@ -1339,8 +1339,8 @@ defineExpose({
 					<th :width="`${colW.controls}px`" scope="col">
 						<span>row controls</span>
 					</th>
-					<th id="results-table-header-damage-type" scope="col" :width="`${colW.header}px`">
-						<span>damage type</span>
+					<th id="results-table-header-variable" scope="col" :width="`${colW.header}px`">
+						<span>variable</span>
 					</th>
 					<th v-for="column in resultColumns" :key="column.id" scope="col" :width="`${colW.result}px`">
 						<span>
@@ -1629,7 +1629,7 @@ defineExpose({
 					<tr v-if="!section.image" class="info-row">
 						<td :colspan="maxCols">loading...</td>
 					</tr>
-					<tr v-else-if="!isRestoringCustomTotalRows && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
+					<tr v-else-if="!isRestoringCustomTotalRows && !section.isCustomValue && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
 						<td :colspan="maxCols">
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
@@ -1641,7 +1641,7 @@ defineExpose({
 								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @change="onCustomTotalRowsChange" />
 							</label>
 						</td>
-						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-damage-type" :data-type="(row as IDamageResultTableSectionCustomValueRow).type">
+						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-variable" :data-type="(row as IDamageResultTableSectionCustomValueRow).type">
 							<img
 								v-if="row.image"
 								aria-hidden="true"
@@ -1711,16 +1711,16 @@ defineExpose({
 						</td>
 					</tr>
 					<tr v-if="section.isCustomValue" id="results-new-custom-v-row">
-						<td :colspan="maxCols">
+						<td :colspan="maxCols" :data-type="newCustomValueRowType">
 							<form @submit.prevent="submitCustomValueRow">
+								<label for="result-custom-v-value">value</label>
+								<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="any" required />
 								<label for="results-custom-v-select">type</label>
 								<select id="results-custom-v-select" v-model="newCustomValueRowType">
 									<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
 										{{ name }}
 									</option>
 								</select>
-								<label for="result-custom-v-value">value</label>
-								<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="any" required />
 								<button class="pretend-ui-btn" type="submit">add</button>
 							</form>
 						</td>
@@ -1746,7 +1746,7 @@ defineExpose({
 						<th :width="`${colW.controls}px`" scope="col">
 							<span>row controls</span>
 						</th>
-						<th id="results-table-header-damage-type" scope="col" :width="`${colW.header}px`">
+						<th id="results-table-header-variable" scope="col" :width="`${colW.header}px`">
 							<span>damage type</span>
 						</th>
 						<th scope="col" :width="`${colW.result}px`">
@@ -2172,6 +2172,7 @@ defineExpose({
 				}
 
 				> tr {
+					--ps: calc(2 * var(--manipulate-btn-size));
 					--at-apply: 'bg-[--bg-clr]';
 
 					&.info-row {
@@ -2214,7 +2215,6 @@ defineExpose({
 
 					> th {
 						--at-apply: 'hyphens-auto wrap-anywhere sticky inset-s-0 ps-1 z-2 bg-inherit';
-						--ps: calc(2 * var(--manipulate-btn-size));
 						anchor-scope: --parent;
 
 						&[colspan] {
@@ -2275,11 +2275,16 @@ defineExpose({
 					> tr {
 						input:not([type='checkbox']),
 						select {
-							--at-apply: 'ps-1.5 pe-1 leading-7 block-[--manipulate-btn-size]';
+							--at-apply: 'ps-1.5 pe-1 leading-7 block-[--manipulate-btn-size] bg-black b b-op-70';
 						}
 
 						input:not([type='checkbox']) {
-							--at-apply: 'inline-20';
+							/* to 930 because around there the header col reaches max width */
+							--at-apply: 'inline-[--fluid-80-87-t930] -me-px';
+						}
+
+						select {
+							--at-apply: 'truncate inline-full max-inline-40';
 						}
 
 						&:not(:last-child) {
@@ -2288,7 +2293,7 @@ defineExpose({
 									--at-apply: 'flex items-center inline-full';
 
 									> button {
-										--at-apply: 'shrink-0 size-[--manipulate-btn-size] ms-2 grid place-items-center';
+										--at-apply: 'shrink-0 size-[--manipulate-btn-size] ms-2 grid place-items-center -my-0.5';
 
 										> .icon {
 											--at-apply: 'size-[--manipulate-icon-size]';
@@ -2302,96 +2307,74 @@ defineExpose({
 
 								input,
 								select {
-									--at-apply: '-my-0.5 bg-black b b-op-70';
-								}
-
-								input {
-									--at-apply: '-me-px';
-								}
-
-								select {
-									--at-apply: 'truncate inline-full max-inline-37';
-								}
-
-								&[data-type='physical'] {
-									input,
-									select {
-										--at-apply: 'b-orange-600';
-									}
-								}
-
-								&[data-type='magic'] {
-									input,
-									select {
-										--at-apply: 'b-cyan';
-									}
-								}
-
-								&[data-type='adaptive'] {
-									input,
-									select {
-										/* 26.21 taken from infernal soul tooltip, it has <font color="..."> */
-										--at-apply: 'b-[#48c4b7]';
-									}
-								}
-
-								&[data-type='true'] {
-									input,
-									select {
-										--at-apply: 'b-cyan-50';
-									}
-								}
-
-								&[data-type='shield'] {
-									input,
-									select {
-										--at-apply: 'b-sky-400';
-									}
-								}
-
-								&[data-type='heal'] {
-									input,
-									select {
-										--at-apply: 'b-green-300';
-									}
+									--at-apply: '-my-0.5';
 								}
 							}
 						}
 
-						&:last-child form {
-							--at-apply: 'max-inline-200 flex items-center';
+						&:last-child {
+							> td {
+								padding-inline-start: calc(var(--table-ps) + var(--ps) + var(--spacing));
+							}
 
-							@media (width >= 500px) {
-								& {
-									--at-apply: 'justify-center';
+							form {
+								--at-apply: 'grid grid-rows-[auto_1fr] grid-cols-[auto_max-content_minmax(0,1fr)] grid-flow-col';
+
+								button {
+									--at-apply: 'row-span-full self-end leading-7 block-[--manipulate-btn-size] inline-max px-2 ms-2';
+								}
+
+								label {
+									--at-apply: 'text-start';
+								}
+							}
+						}
+
+						> * {
+							&[data-type='physical'] {
+								input,
+								select {
+									--at-apply: 'b-orange-600';
 								}
 							}
 
-							input,
-							select {
-								--at-apply: 'ms-1.25 bg-white text-black';
+							&[data-type='magic'] {
+								input,
+								select {
+									--at-apply: 'b-cyan';
+								}
 							}
 
-							select {
-								--at-apply: 'me-3';
-								color-scheme: light;
+							&[data-type='adaptive'] {
+								input,
+								select {
+									/* 26.21 taken from infernal soul tooltip, it has <font color="..."> */
+									--at-apply: 'b-[#48c4b7]';
+								}
 							}
 
-							button {
-								--at-apply: 'leading-7 block-[--manipulate-btn-size] px-2 ms-4';
+							&[data-type='true'] {
+								input,
+								select {
+									--at-apply: 'b-cyan-50';
+								}
+							}
+
+							&[data-type='shield'] {
+								input,
+								select {
+									--at-apply: 'b-sky-400';
+								}
+							}
+
+							&[data-type='heal'] {
+								input,
+								select {
+									--at-apply: 'b-green-300';
+								}
 							}
 						}
 					}
-				}
-			}
-
-			#results-new-custom-v-row:not(:first-child) form {
-				--at-apply: 'my-2';
-			}
-
-			&:not(:nth-last-child(2)) {
-				#results-new-custom-v-row:nth-child(odd) form {
-					--at-apply: 'mbe-0';
 				}
 			}
 		}
