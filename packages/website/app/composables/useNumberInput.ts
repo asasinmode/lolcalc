@@ -37,6 +37,12 @@ export function useNumberInput<T extends Ref>(
 			(event.target as HTMLInputElement).value = value.toString();
 		}
 
+		const maxed = Math.max(value, 0);
+		if (maxed !== value) {
+			value = maxed;
+			(event.target as HTMLInputElement).value = value.toString();
+		}
+
 		if (rawValue.startsWith('0') && (value >= 1 || value <= -1 || rawValue.startsWith('00'))) {
 			(event.target as HTMLInputElement).value = value.toString();
 		}
