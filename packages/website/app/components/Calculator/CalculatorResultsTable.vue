@@ -1619,7 +1619,7 @@ defineExpose({
 									...((row as ICustomTotalSectionRow).section && sectionHasTooltip((row as ICustomTotalSectionRow).section) ? bindSectionHoverTooltip({ section: (row as ICustomTotalSectionRow).section, fromCustom: true }) : undefined),
 								}"
 							/>
-							<template v-if="section.isCustomValue">
+							<div v-if="section.isCustomValue">
 								<label :for="`value-${row.id}`">value</label>
 								<input :id="`value-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).value" type="number" min="0" step="any" required />
 								<label :for="`type-${row.id}`">type</label>
@@ -1628,7 +1628,7 @@ defineExpose({
 										{{ name }}
 									</option>
 								</select>
-							</template>
+							</div>
 							<template v-else>
 								<span v-if="row.isUnknown">unknown</span>
 								{{ row.name }}
@@ -2249,7 +2249,11 @@ defineExpose({
 
 						&:not(:last-child) {
 							> th {
-								> label {
+								> div {
+									--at-apply: 'flex items-center inline-full';
+								}
+
+								label {
 									--at-apply: 'sr-only';
 								}
 
@@ -2260,6 +2264,10 @@ defineExpose({
 
 								input {
 									--at-apply: '-me-px';
+								}
+
+								select {
+									--at-apply: 'truncate inline-full max-inline-37';
 								}
 
 								&[data-type='physical'] {
