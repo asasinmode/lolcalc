@@ -1,4 +1,4 @@
-import type { IChampionStats, IEffectOntoTargetVars } from '@lolcalc/shared';
+import type { IChampionStats, IEffectOntoTargetVars, IDamageOutputVars } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
@@ -20,7 +20,7 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 }
 
 /** TODO intended to be a computed with everything related to source (and maybe takes in the target too, or that might be another separate thing) damage dealing */
-export function championDamage() {
+export function calculateSourceDamageOuputVars(self: DamageSource): IDamageOutputVars {
 	// total damage multipliers. known multiplicative - haunting guise and items it builds into. immortal path somewhere
 	// actualizer
 	// exhaust effect
@@ -41,6 +41,13 @@ export function championDamage() {
 	// elise spider form aa
 	// amumu E, can be marked as fully implemented then
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
+	const rv: IDamageOutputVars = {};
+
+	for (const item of self.items.value) {
+		item && (ITEM_SPECIFICS as Record<string, IItemSpecific>)[item.id]?.damageOutputVars?.(self, rv, self.calculationDamageTarget.value);
+	}
+
+	return rv;
 }
 
 /** TODO basic aa calc? not sure about the interface yet */

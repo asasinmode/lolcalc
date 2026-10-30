@@ -11,7 +11,7 @@ import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IDamageOutputVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import type { DetectItemVariables } from '../types';
@@ -3135,20 +3135,22 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'PercentCritDamageReduction', 'SlowAmount', 'SlowDuration'],
 		}),
-		modifyVariable: {
-			type: [VariableType.magic, VariableType.physical],
-			handler(value, meta) {
-				if (meta.critAdditionalDamage) {
-					const baseValue = value - meta.critAdditionalDamage;
-					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
-					meta.critAdditionalDamage = baseValue * meta.critMultiplier;
-					return baseValue + meta.critAdditionalDamage;
-				}
-				return value;
+		modifyVariable: [
+			{
+				type: [VariableType.magic, VariableType.physical, VariableType.adaptive],
+				handler(value, meta) {
+					if (meta.critAdditionalDamage) {
+						const baseValue = value - meta.critAdditionalDamage;
+						meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 - ITEMS_BY_NAME.randuinsOmen.dataValues?.PercentCritDamageReduction);
+						meta.critAdditionalDamage = baseValue * meta.critMultiplier;
+						return baseValue + meta.critAdditionalDamage;
+					}
+					return value;
+				},
+				priority: MODIFY_VARIABLE_PRIORITIES.items[ITEM_NAME_TO_ID.randuinsOmen],
+				isTargetItem: true,
 			},
-			priority: MODIFY_VARIABLE_PRIORITIES.items[ITEM_NAME_TO_ID.randuinsOmen],
-			isTargetItem: true,
-		},
+		],
 	},
 	[ITEM_NAME_TO_ID.rocketbelt]: {
 		variables: defineVariables({
@@ -4306,33 +4308,53 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			uninteresting: ['HealthThreshold', 'SpellItemDamageAmp'],
 		}),
-		modifyVariable: {
-			type: [VariableType.magic, VariableType.true],
-			handler(value, meta, _self, damageTarget) {
-				if (!damageTarget || Math.min(damageTarget.currentHealth.value, damageTarget.stats.value.total.hp) / (damageTarget.stats.value.total.hp || 1) >= ITEMS_BY_NAME.shadowflame?.dataValues.HealthThreshold) {
-					return value;
-				}
-				meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
-				meta.critAdditionalDamage = value * ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
-				return value + meta.critAdditionalDamage;
-			},
+		damageOutputVars(_self, vars, damageTarget) {
+			vars.shadowflameCrit = damageTarget && Math.min(damageTarget.currentHealth.value, damageTarget.stats.value.total.hp) / (damageTarget.stats.value.total.hp || 1) < ITEMS_BY_NAME.shadowflame?.dataValues.HealthThreshold;
 		},
+		modifyVariable: [
+			{
+				type: [VariableType.magic, VariableType.true],
+				handler(value, meta, self) {
+					if (self.damageOutputVars.value.shadowflameCrit) {
+						meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
+						meta.critAdditionalDamage = value * ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
+						return value + meta.critAdditionalDamage;
+					} else {
+						return value;
+					}
+				},
+			},
+			{
+				type: [VariableType.adaptive],
+				handler(value, meta, self) {
+					if (self.stats.value.meta.adaptiveDamageType === VariableType.magic && self.damageOutputVars.value.shadowflameCrit) {
+						meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
+						meta.critAdditionalDamage = value * ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
+						return value + meta.critAdditionalDamage;
+					} else {
+						return value;
+					}
+				},
+			},
+		],
 	},
 	[ITEM_NAME_TO_ID.infinityEdge]: {
-		modifyVariable: {
-			type: [VariableType.magic, VariableType.physical],
-			handler(value, meta, self) {
-				// TODO probably should be done always, not just when IE is present but atm it's only for cinderbloom crit magic damage
-				if (meta.critAdditionalDamage) {
-					const statsCritMultiplier = self.stats.value.total.critDamageMultiplier - self.stats.value.base.critDamageMultiplier;
-					meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 + statsCritMultiplier);
-					const additionalDamage = meta.critAdditionalDamage * statsCritMultiplier;
-					meta.critAdditionalDamage += additionalDamage;
-					return value + additionalDamage;
-				}
-				return value;
+		modifyVariable: [
+			{
+				type: [VariableType.magic, VariableType.true, VariableType.adaptive],
+				handler(value, meta, self) {
+					// TODO probably should be done always, not just when IE is present but atm it's only for cinderbloom crit magic damage
+					if (meta.critAdditionalDamage) {
+						const statsCritMultiplier = self.stats.value.total.critDamageMultiplier - self.stats.value.base.critDamageMultiplier;
+						meta.critMultiplier = (meta.critMultiplier ?? 0) * (1 + statsCritMultiplier);
+						const additionalDamage = meta.critAdditionalDamage * statsCritMultiplier;
+						meta.critAdditionalDamage += additionalDamage;
+						return value + additionalDamage;
+					}
+					return value;
+				},
 			},
-		},
+		],
 	},
 	[ITEM_NAME_TO_ID.ga]: {
 		variables: defineVariables({
@@ -4372,13 +4394,8 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 		calculateHooks?: ICalculateChampionStatsHookSource;
 		variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
 		effectOntoTargetVars?: IEffectOntoTargetVarsHook;
-		modifyVariable?: {
-			type: VariableType[];
-			handler: IItemModifyVariableFunction;
-			priority?: number;
-			/** if true, this modify variable function will be applied when the item is present on the `DamageSource.damageCalculationTarget` */
-			isTargetItem?: boolean;
-		};
+		damageOutputVars?: IDamageOutputVarsHook;
+		modifyVariable?: IItemModifyVariable[];
 		/**
 		 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)
 		 * ATM done only for textShop and textInventory, used for redemption, which by default shows `\@HealMin\@ - \@HealMax\@` that depends on ally level. Calculator gives an option to set ally's level to a concrete value so we should display the heal for selected ally level
@@ -4386,6 +4403,14 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 		preplaceTextInventory?: (value: string) => string;
 		[key: string]: any;
 	};
+
+interface IItemModifyVariable {
+	type: VariableType[];
+	handler: IItemModifyVariableFunction;
+	priority?: number;
+	/** if true, this modify variable function will be applied when the item is present on the `DamageSource.damageCalculationTarget` */
+	isTargetItem?: boolean;
+}
 
 export interface IItemModifyVariableFunction {
 	(value: number, meta: IVariableModifyMeta, self: DamageSource, damageTarget?: DamageSource): number;

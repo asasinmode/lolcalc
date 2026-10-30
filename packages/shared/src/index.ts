@@ -426,6 +426,11 @@ export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars,
 	lissandraPSlow?: number;
 }
 
+export interface IDamageOutputVars {
+	/** whether magic, true and adaptive (when it's magic) damage vars should be treated as crits from shadowflame */
+	shadowflameCrit?: boolean;
+}
+
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
 
 /**

@@ -177,7 +177,7 @@ export function initCalculatorState(): ICalculatorState {
 			getCellValue(_section, row, source) {
 				const { value: baseValue = 0, type } = row as IDamageResultTableSectionCustomValueRow;
 
-				const modifyMeta: IVariableModifyMeta = { type };
+				const modifyMeta: IVariableModifyMeta = {};
 				const value = source?.modifyVariableFunctions.value[type]?.reduce((acc, modify) => modify(acc, modifyMeta) as number, baseValue) ?? baseValue;
 
 				return {

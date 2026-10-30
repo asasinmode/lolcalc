@@ -7,6 +7,7 @@ import type {
 	IChampionAbilityKey,
 	IChampionStatName,
 	IEffectOntoTargetVars,
+	IDamageOutputVars,
 	INonPassiveAbilityKey,
 	IStatsCalculationDebuffs,
 	IStatsCalculationEffectVars,
@@ -21,7 +22,7 @@ import { roundNumber } from '@lolcalc/shared/utils.ts';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import { computed, markRaw, ref, shallowRef, toRaw, triggerRef, watch } from 'vue';
 import { calculateChampionStats, isMasterworkSlot } from './calculate/championStats.ts';
-import { calculateEffectsOntoTargetVars } from './calculate/damage.ts';
+import { calculateEffectsOntoTargetVars, calculateSourceDamageOuputVars } from './calculate/damage.ts';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
 import type { IGameImageData } from './misc.ts';
@@ -81,6 +82,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 	/** variables of effects applied onto the damage target, like slow applied onto target from this damage source's hextech soul */
 	effectsOntoTargetVars = computed((): IEffectOntoTargetVars => calculateEffectsOntoTargetVars(this));
+	damageOutputVars = computed((): IDamageOutputVars => calculateSourceDamageOuputVars(this));
 
 	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));
@@ -1394,13 +1396,17 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (const item of this.items.value) {
 			const specific = item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
-			if (specific?.modifyVariable && !specific.modifyVariable.isTargetItem) {
-				for (const type of specific.modifyVariable.type) {
-					const target = rv.find((group) => group[0] === type);
-					if (target) {
-						target[1].push([(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]);
-					} else {
-						rv.push([type, [[(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]]]);
+			if (specific?.modifyVariable?.length) {
+				for (const modifyVariable of specific.modifyVariable) {
+					if (!modifyVariable.isTargetItem) {
+						for (const type of modifyVariable.type) {
+							const target = rv.find((group) => group[0] === type);
+							if (target) {
+								target[1].push([(value, meta) => modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), modifyVariable.priority ?? 0]);
+							} else {
+								rv.push([type, [[(value, meta) => modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), modifyVariable.priority ?? 0]]]);
+							}
+						}
 					}
 				}
 			}
@@ -1408,13 +1414,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		if (this.calculationDamageTarget.value) {
 			for (const item of this.calculationDamageTarget.value.items.value) {
 				const specific = item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics];
-				if (specific?.modifyVariable?.isTargetItem) {
-					for (const type of specific.modifyVariable.type) {
-						const target = rv.find((group) => group[0] === type);
-						if (target) {
-							target[1].push([(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]);
-						} else {
-							rv.push([type, [[(value, meta) => specific.modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), specific.modifyVariable.priority ?? 0]]]);
+				if (specific?.modifyVariable?.length) {
+					for (const modifyVariable of specific.modifyVariable) {
+						for (const type of modifyVariable.type) {
+							const target = rv.find((group) => group[0] === type);
+							if (target) {
+								target[1].push([(value, meta) => modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), modifyVariable.priority ?? 0]);
+							} else {
+								rv.push([type, [[(value, meta) => modifyVariable!.handler(value, meta, this, this.calculationDamageTarget.value), modifyVariable.priority ?? 0]]]);
+							}
 						}
 					}
 				}
@@ -2634,6 +2642,10 @@ interface ICalculateChampionStatsHook<T extends (self: DamageSource, args: any) 
 
 export interface IEffectOntoTargetVarsHook<Id extends IChampionId | undefined = any> {
 	(self: DamageSource<Id>, vars: IEffectOntoTargetVars): void;
+}
+
+export interface IDamageOutputVarsHook<Id extends IChampionId | undefined = any> {
+	(self: DamageSource<Id>, vars: IDamageOutputVars, damageTarget?: DamageSource): void;
 }
 
 export type IDamageSourceModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;

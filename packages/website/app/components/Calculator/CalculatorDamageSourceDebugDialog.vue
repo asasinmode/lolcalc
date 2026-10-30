@@ -26,6 +26,24 @@ defineExpose({
 				</div>
 			</details>
 		</div>
+		<div>
+			<details open>
+				<summary>effectOntoTargetVars</summary>
+				<div>
+					<code class="whitespace-pre">
+						{{ JSON.stringify(damageSource?.effectsOntoTargetVars.value, null, 2) }}
+					</code>
+				</div>
+			</details>
+			<details open>
+				<summary>damageOutputVars</summary>
+				<div>
+					<code class="whitespace-pre">
+						{{ JSON.stringify(damageSource?.damageOutputVars.value, null, 2) }}
+					</code>
+				</div>
+			</details>
+		</div>
 	</VDialog>
 </template>
 
