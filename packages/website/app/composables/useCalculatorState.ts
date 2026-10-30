@@ -2,6 +2,7 @@ import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
 import type { IGameImageData } from '@lolcalc/core/misc';
+import type { IVariableModifyMeta } from '@lolcalc/core/variables/game.js';
 import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
@@ -173,9 +174,16 @@ export function initCalculatorState(): ICalculatorState {
 			clearable: computed(() => customValueRows.value.length),
 			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
 			rows: customValueRows,
-			getCellValue() {
-				console.warn("results section custom value 'getCellValue' called, should be handled manually");
-				return { value: 0, numberValue: 0 };
+			getCellValue(_section, row, source) {
+				const { value: baseValue = 0, type } = row as IDamageResultTableSectionCustomValueRow;
+
+				const modifyMeta: IVariableModifyMeta = {};
+				const value = source?.modifyVariableFunctions.value[type]?.reduce((acc, modify) => modify(acc, modifyMeta) as number, baseValue) ?? baseValue;
+
+				return {
+					value: roundNumber(value),
+					numberValue: value,
+				};
 			},
 			hoverTooltipData: useSimpleDescription(
 				'results-custom-value',
