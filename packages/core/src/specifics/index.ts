@@ -330,13 +330,7 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVari
 		return value / (1 + effectiveResists / 100);
 	},
 	[VariableType.adaptive](value, meta, self, damageTarget) {
-		const { attackDamage, abilityPower } = self.stats.value.bonus;
-		return GLOBAL_MODIFY_VARIABLE_FNS[attackDamage === abilityPower ? (self.stats.value.meta.adaptiveForceStat === 'attackDamage' ? 'physical' : 'magic') : attackDamage > abilityPower ? 'physical' : 'magic']!(
-			value,
-			meta,
-			self,
-			damageTarget,
-		);
+		return GLOBAL_MODIFY_VARIABLE_FNS[self.stats.value.meta.adaptiveDamageType]!(value, meta, self, damageTarget);
 	},
 };
 

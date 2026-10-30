@@ -103,6 +103,7 @@ export interface IStatsCalculationResult {
 	effect: IChampionStats;
 	total: IChampionStats;
 	meta: {
+		adaptiveDamageType: VariableType;
 		adaptiveForceStat: IChampionStatName;
 		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
 	};

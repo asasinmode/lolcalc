@@ -2,16 +2,17 @@ import type { TMiscData } from '@lolcalc/data';
 import { CONSTS, MISC } from '@lolcalc/data';
 import { ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS, ITEM_TO_CHAMPION_STATS, MULTIPLICATIVE_CHAMPION_STATS } from '@lolcalc/data/meta.ts';
 import type { IChampionId, IItem, IItemStat } from '@lolcalc/data/types';
-import type {
-	IAdaptiveForceStatRv,
-	IChampionStatName,
-	IChampionStats,
-	IMultiplicativeChampionStatName,
-	IStatsCalculationDebuffs,
-	IStatsCalculationEffectVars,
-	IStatsCalculationMiscDebug,
-	IStatsCalculationResult,
-	IStatsCalculationVariables,
+import {
+	VariableType,
+	type IAdaptiveForceStatRv,
+	type IChampionStatName,
+	type IChampionStats,
+	type IMultiplicativeChampionStatName,
+	type IStatsCalculationDebuffs,
+	type IStatsCalculationEffectVars,
+	type IStatsCalculationMiscDebug,
+	type IStatsCalculationResult,
+	type IStatsCalculationVariables,
 } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { cooldownReductionPercentageFromHaste } from '../specifics/champion/shared.ts';
@@ -505,6 +506,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	return {
 		meta: {
+			adaptiveDamageType:
+				totalStats.attackDamage === totalStats.abilityPower ? (adaptiveForceMeta[1] ? VariableType.magic : VariableType.physical) : totalStats.attackDamage > totalStats.abilityPower ? VariableType.physical : VariableType.magic,
 			adaptiveForceStat: adaptiveForceMeta[0],
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},

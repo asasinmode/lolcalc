@@ -83,6 +83,8 @@ export interface IVariableMeta<T = any> {
 }
 
 export interface IVariableModifyMeta {
+	/** the original type of the variable, useful for when a function is used for multiple variable types */
+	type: VariableType;
 	critMultiplier?: number;
 	/** additional damage from base value from crit multiplier */
 	critAdditionalDamage?: number;
