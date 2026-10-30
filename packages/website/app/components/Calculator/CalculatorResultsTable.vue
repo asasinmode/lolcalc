@@ -1651,10 +1651,17 @@ defineExpose({
 								}"
 							/>
 							<div v-if="section.isCustomValue">
-								<label :for="`value-${row.id}`">value</label>
-								<input :id="`value-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).value" type="number" min="0" step="any" required @input="updateCustomValueRowValue(rowIndex, $event)" />
-								<label :for="`type-${row.id}`">type</label>
-								<select :id="`type-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).type" @change="updateCustomValueRowType(rowIndex, $event)">
+								<input
+									:id="`value-${row.id}`"
+									:value="(row as IDamageResultTableSectionCustomValueRow).value"
+									type="number"
+									min="0"
+									step="any"
+									aria-labelledby="lbl-result-custom-v-value"
+									required
+									@input="updateCustomValueRowValue(rowIndex, $event)"
+								/>
+								<select :id="`type-${row.id}`" :value="(row as IDamageResultTableSectionCustomValueRow).type" aria-labelledby="lbl-result-custom-v-select" @change="updateCustomValueRowType(rowIndex, $event)">
 									<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
 										{{ name }}
 									</option>
@@ -1711,19 +1718,21 @@ defineExpose({
 						</td>
 					</tr>
 					<tr v-if="section.isCustomValue" id="results-new-custom-v-row">
-						<td :colspan="maxCols" :data-type="newCustomValueRowType">
+						<td>
+							<button class="pretend-ui-btn" @click="submitCustomValueRow">add</button>
+						</td>
+						<th :data-type="newCustomValueRowType">
 							<form @submit.prevent="submitCustomValueRow">
-								<label for="result-custom-v-value">value</label>
+								<label id="lbl-result-custom-v-value" for="result-custom-v-value">value</label>
 								<input id="result-custom-v-value" v-model="newCustomValueRowValue" type="number" min="0" step="any" required />
-								<label for="results-custom-v-select">type</label>
+								<label id="lbl-result-custom-v-select" for="results-custom-v-select">type</label>
 								<select id="results-custom-v-select" v-model="newCustomValueRowType">
 									<option v-for="(name, type) in variableTypeOptionNames" :value="type" :key="type">
 										{{ name }}
 									</option>
 								</select>
-								<button class="pretend-ui-btn" type="submit">add</button>
 							</form>
-						</td>
+						</th>
 					</tr>
 					<tr v-else-if="section.id === ResultSectionId.CustomTotal && isRestoringCustomTotalRows" class="info-row">
 						<td :colspan="maxCols">loading...</td>
@@ -2210,11 +2219,13 @@ defineExpose({
 					}
 
 					> * {
-						--at-apply: 'py-1 b-y b-transparent';
+						--row-py: var(--spacing);
+						--row-th-ps: var(--spacing);
+						--at-apply: 'py-[--row-py] b-y b-transparent';
 					}
 
 					> th {
-						--at-apply: 'hyphens-auto wrap-anywhere sticky inset-s-0 ps-1 z-2 bg-inherit';
+						--at-apply: 'hyphens-auto wrap-anywhere sticky inset-s-0 ps-[--row-th-ps] z-2 bg-inherit';
 						anchor-scope: --parent;
 
 						&[colspan] {
@@ -2233,7 +2244,8 @@ defineExpose({
 					}
 
 					> td {
-						--at-apply: 'px-3';
+						--ctl-col-px: calc(3 * var(--spacing));
+						--at-apply: 'px-[--ctl-col-px]';
 
 						&:first-child {
 							> label {
@@ -2273,6 +2285,8 @@ defineExpose({
 
 				&#results-body-a-cV {
 					> tr {
+						--ctl-btn-gap: calc(2 * var(--spacing));
+
 						input:not([type='checkbox']),
 						select {
 							--at-apply: 'ps-1.5 pe-1 leading-7 block-[--manipulate-btn-size] bg-black b b-op-70';
@@ -2293,16 +2307,12 @@ defineExpose({
 									--at-apply: 'flex items-center inline-full';
 
 									> button {
-										--at-apply: 'shrink-0 size-[--manipulate-btn-size] ms-2 grid place-items-center -my-0.5';
+										--at-apply: 'shrink-0 size-[--manipulate-btn-size] ms-[--ctl-btn-gap] grid place-items-center -my-0.5';
 
 										> .icon {
 											--at-apply: 'size-[--manipulate-icon-size]';
 										}
 									}
-								}
-
-								label {
-									--at-apply: 'sr-only';
 								}
 
 								input,
@@ -2313,16 +2323,12 @@ defineExpose({
 						}
 
 						&:last-child {
-							> td {
-								padding-inline-start: calc(var(--table-ps) + var(--ps) + var(--spacing));
+							button {
+								--at-apply: 'leading-7 block-[--manipulate-btn-size] px-2 absolute inset-be-[--row-py] inset-s-[calc(var(--table-ps)*0.5+50%+1px)] -translate-x-1/2';
 							}
 
 							form {
-								--at-apply: 'grid grid-rows-[auto_1fr] grid-cols-[auto_max-content_minmax(0,1fr)] grid-flow-col';
-
-								button {
-									--at-apply: 'row-span-full self-end leading-7 block-[--manipulate-btn-size] inline-max px-2 ms-2';
-								}
+								--at-apply: 'relative grid grid-rows-[auto_1fr] grid-cols-[auto_minmax(0,1fr)] grid-flow-col inline-[calc(100%)]';
 
 								label {
 									--at-apply: 'text-start';
