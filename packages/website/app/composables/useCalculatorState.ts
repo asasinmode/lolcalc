@@ -79,18 +79,18 @@ export function initCalculatorState(): ICalculatorState {
 					}),
 				),
 			),
-			getCellValue(_section, rowId, source, _target) {
+			getCellValue(_section, row, source, _target) {
 				if (!source) {
 					return;
 				}
 
-				if (rowId === 'eqValue') {
+				if (row.id === 'eqValue') {
 					const numberValue = source.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0);
 					return { numberValue, value: numberValue };
 				}
 
-				if (rowId === 'hpRegen' || rowId === 'manaRegen') {
-					const numberValue = roundNumber(source.stats.value.total[rowId], 2);
+				if (row.id === 'hpRegen' || row.id === 'manaRegen') {
+					const numberValue = roundNumber(source.stats.value.total[row.id], 2);
 					return {
 						value: numberValue,
 						numberValue,
@@ -98,8 +98,8 @@ export function initCalculatorState(): ICalculatorState {
 				}
 
 				return {
-					numberValue: source.stats.value.total[rowId as IChampionStatName],
-					value: `${source.computed.formattedStatTotals.value[rowId as IChampionStatName]}${CHAMPION_STAT_META[rowId as IChampionStatName].isPercentage ? '%' : ''}`,
+					numberValue: source.stats.value.total[row.id as IChampionStatName],
+					value: `${source.computed.formattedStatTotals.value[row.id as IChampionStatName]}${CHAMPION_STAT_META[row.id as IChampionStatName].isPercentage ? '%' : ''}`,
 				};
 			},
 			hoverTooltipData: shallowRef(),
@@ -616,7 +616,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				if (value !== undefined && !Number.isNaN(rawValue) && value > 0) {
 					const id = crypto.randomUUID();
 					customValueRows.value.push({ id, name: id, type: ALL_VARIABLE_TYPES[typeIndex]!, value });
-					resultsTable.value.computeCustomValueRow(id);
+					resultsTable.value.computeCustomValueRow(customValueRows.value.at(-1)!);
 				}
 			}
 		}

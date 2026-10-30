@@ -26,7 +26,7 @@ export interface IDamageResultTableSection {
 	/** expected to be undefined only when loading */
 	getCellValue?: (
 		section: IDamageResultTableSection,
-		rowId: string,
+		row: IDamageResultTableSectionRow,
 		source?: DamageSource,
 		target?: DamageTarget,
 	) =>

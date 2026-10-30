@@ -265,18 +265,18 @@ function addComputedSection(sectionId: string) {
 function computeSection(section: IDamageResultTableSection): IComputedSection {
 	return {
 		sectionId: section.id,
-		rows: new Map(toValue(section.rows)?.map((row) => [row.id, computeSectionRow(section, row.id)])),
+		rows: new Map(toValue(section.rows)?.map((row) => [row.id, computeSectionRow(section, row)])),
 	};
 }
 
-function computeSectionRow(section: IDamageResultTableSection, rowId: string): IComputedSectionRow {
+function computeSectionRow(section: IDamageResultTableSection, row: IDamageResultTableSectionRow): IComputedSectionRow {
 	return {
-		rowId,
-		columns: new Map(resultColumns.value.map((column) => [column.id, computeSectionRowColumn(section, rowId, column)])),
+		rowId: row.id,
+		columns: new Map(resultColumns.value.map((column) => [column.id, computeSectionRowColumn(section, row, column)])),
 	};
 }
 
-function computeSectionRowColumn(section: IDamageResultTableSection, rowId: string, column: IDamageResultTableColumn): IComputedSectionRowColumn {
+function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSectionRow, column: IDamageResultTableColumn): IComputedSectionRowColumn {
 	const source = column[flipResults.value ? '_computedTarget' : '_computedSource'];
 	const target = column[flipResults.value ? '_computedSource' : '_computedTarget'];
 	const rv: IComputedSectionRowColumn = {
@@ -301,7 +301,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, rowId: stri
 
 		const sum =
 			computedCustomTotalRows.value.slice(1).reduce((acc, curr) => {
-				if (curr.id === rowId) {
+				if (curr.id === row.id) {
 					return acc;
 				}
 
@@ -314,7 +314,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, rowId: stri
 		rv.numberValue = sum;
 		rv.value = roundNumber(sum);
 	} else {
-		const cellValue = section.getCellValue?.(section, rowId, source, target);
+		const cellValue = section.getCellValue?.(section, row, source, target);
 		if (cellValue) {
 			({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
 			rv.isIrrelevant = false;
@@ -340,7 +340,7 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 		const resultSection = resultSections.value.find((rSection) => rSection.id === section.sectionId)!;
 		for (const row of section.rows.values()) {
 			const resultRow = toValue(resultSection.rows).find((rRow) => rRow.id === row.rowId)!;
-			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow.id, column));
+			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow, column));
 		}
 	}
 }
@@ -404,32 +404,32 @@ function preventDoubleClickSelect(event: MouseEvent) {
 	event.detail > 1 && event.preventDefault();
 }
 
-const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, row, source, _target) => {
 	const computedItem = source?.computed.items.value.find((item) => item?.item!.id === (section.abilityId as IItemAbilityId).id);
-	return gameVariablesCellValue(rowId, computedItem?.variables);
+	return gameVariablesCellValue(row.id, computedItem?.variables);
 };
 
-const dragonVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+const dragonVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, row, source, _target) => {
 	if (source?.computed.dragonSoulAbility.value?.dragon === (section.abilityId as IDragonAbilityId).id) {
-		return gameVariablesCellValue(rowId, source.computed.dragonSoulAbility.value.variables);
+		return gameVariablesCellValue(row.id, source.computed.dragonSoulAbility.value.variables);
 	}
 };
 
-const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, row, source, _target) => {
 	if (source) {
 		const { gameAbilityId } = (section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
 		const computedDescription = source.computed.abilities.value[gameAbilityId.abilityKey!][gameAbilityId.abilityVariantIndex!];
-		return gameVariablesCellValue(rowId, computedDescription?.variables);
+		return gameVariablesCellValue(row.id, computedDescription?.variables);
 	}
 };
 
-const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+const effectVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, row, source, _target) => {
 	/* accessing refs here directly because they have already been `toValue`d somewhere, not sure when */
 	const computedEffect = source?.computed.effects.value.find((effect) => effect.abilityId.id === section.abilityId.id);
 	if (computedEffect && !computedEffect.isActive) {
 		return;
 	}
-	const rv = gameVariablesCellValue(rowId, computedEffect?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
+	const rv = gameVariablesCellValue(row.id, computedEffect?.resultVariables as UnwrapRef<IComputedAppliedEffect['resultVariables']>);
 	/* other variable's values are rounded by `replaceGameVariables` but these are gotten raw from IEffectSpecifics.variables.calulate() so round them here */
 	if (typeof rv?.numberValue === 'number') {
 		rv.value = `${roundNumber(rv.numberValue)}${rv.meta?.resultsIsPercentage ? '%' : ''}`;
@@ -736,7 +736,7 @@ function recalculateAllColumns() {
 				computedResults.value
 					.get(section.id)!
 					.rows.get(row.id)!
-					.columns.set(column.id, computeSectionRowColumn(section, row.id, column));
+					.columns.set(column.id, computeSectionRowColumn(section, row, column));
 			}
 		}
 	}
@@ -753,7 +753,7 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 				computedResults.value
 					.get(section.id)!
 					.rows.get(row.id)!
-					.columns.set(column.id, computeSectionRowColumn(section, row.id, column));
+					.columns.set(column.id, computeSectionRowColumn(section, row, column));
 			}
 		}
 	}
@@ -1187,7 +1187,7 @@ function onCustomTotalRowsChange() {
 function recomputeCustomTotalRows() {
 	if (customTotalSectionTotalRow.value) {
 		for (const column of resultColumns.value) {
-			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value.id, column));
+			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value, column));
 		}
 		calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 	}
@@ -1257,31 +1257,31 @@ const newCustomValueRowValue = ref<number>(0);
 function submitCustomValueRow() {
 	const id = crypto.randomUUID();
 	customValueRows.value.push({ id, name: id, type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
-	customValueComputedSection.rows.set(id, computeSectionRow(customValueSection, id));
+	customValueComputedSection.rows.set(id, computeSectionRow(customValueSection, customValueRows.value.at(-1)!));
 
 	newCustomValueRowType.value = VariableType.physical;
 	newCustomValueRowValue.value = 0;
 	debouncedSaveState();
 }
 
-function computeCustomValueRow(rowId: string) {
-	customValueComputedSection.rows.set(rowId, computeSectionRow(customValueSection, rowId));
+function computeCustomValueRow(row: IDamageResultTableSectionRow) {
+	customValueComputedSection.rows.set(row.id, computeSectionRow(customValueSection, row));
 }
 
-function onCustomValueRowChange(rowId: string) {
-	recomputeCustomValueRow(rowId);
+function onCustomValueRowChange(row: IDamageResultTableSectionRow) {
+	recomputeCustomValueRow(row);
 	debouncedSaveState();
 }
 
-function recomputeCustomValueRow(rowId: string) {
-	const computedRow = customValueComputedSection?.rows.get(rowId);
+function recomputeCustomValueRow(row: IDamageResultTableSectionRow) {
+	const computedRow = customValueComputedSection?.rows.get(row.id);
 	if (computedRow) {
 		for (const column of resultColumns.value) {
-			computedRow.columns.set(column.id, computeSectionRowColumn(customValueSection, rowId, column));
+			computedRow.columns.set(column.id, computeSectionRowColumn(customValueSection, row, column));
 		}
 		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
 	} else {
-		console.warn('custom value row not found for recomputing', rowId);
+		console.warn('custom value row not found for recomputing', row.id);
 	}
 }
 
@@ -1294,7 +1294,7 @@ function updateCustomValueRowValue(rowIndex: number, event: Event) {
 	if (row) {
 		currentCustomValueInputRowRef = row;
 		customValueOnInput(event);
-		onCustomValueRowChange(row.id);
+		onCustomValueRowChange(row);
 	}
 }
 
@@ -1302,7 +1302,7 @@ function updateCustomValueRowType(rowIndex: number, event: Event) {
 	const row = customValueRows.value[rowIndex];
 	if (row) {
 		row.type = (event.target as HTMLInputElement).value as VariableType;
-		onCustomValueRowChange(row.id);
+		onCustomValueRowChange(row);
 	}
 }
 
