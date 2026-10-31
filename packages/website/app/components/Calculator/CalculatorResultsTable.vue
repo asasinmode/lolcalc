@@ -266,7 +266,11 @@ const customValueComputedSection = computedResults.value.get(ResultSectionId.Cus
 		addComputedColumn(column);
 		addComputedColumnSources(column);
 	}
-	restoreSavedCustomTotalRows.value && Promise.all(hydrateResultSectionPromises).then(restoreSavedCustomTotalRows.value);
+	restoreSavedCustomTotalRows.value &&
+		Promise.all(hydrateResultSectionPromises).then(() => {
+			restoreSavedCustomTotalRows.value?.();
+			recomputeCustomTotal();
+		});
 	for (const cValueRow of customValueRows.value) {
 		computeCustomValueRow(cValueRow);
 	}
@@ -1206,14 +1210,14 @@ function addColumnItems(columnIndex: number, isSource: boolean) {
 }
 
 function onCustomTotalRowsChange() {
-	recomputeCustomTotalRows();
+	recomputeCustomTotal();
 	if (!expandedSections.value.includes(customTotalSection.id) && customTotalRowIds.value.length) {
 		expandedSections.value.push(customTotalSection.id);
 	}
 	debouncedSaveState();
 }
 
-function recomputeCustomTotalRows() {
+function recomputeCustomTotal() {
 	if (customTotalSectionTotalRow) {
 		for (const column of resultColumns) {
 			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column));
@@ -1310,7 +1314,7 @@ function recomputeCustomValueRow(row: IDamageResultTableSectionRow) {
 		}
 		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
 		if (customTotalRowIds.value.includes(`${ResultSectionId.CustomValue}_${row.id}`)) {
-			recomputeCustomTotalRows();
+			recomputeCustomTotal();
 		}
 	} else {
 		console.warn('custom value row not found for recomputing', row.id);
@@ -1352,6 +1356,7 @@ function removeCustomValueRow(rowIndex: number) {
 const anyColumnsLoading = computed(() => resultColumns.some((column) => column.source.value?.listedChampion.value && column.source.value.listedChampion.value.id !== column.source.value.champion.value?.id));
 
 defineExpose({
+	recomputeCustomTotal,
 	hydrateResultSection,
 	computeCustomValueRow,
 	addComputedColumn,

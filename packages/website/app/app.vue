@@ -103,6 +103,7 @@ onMounted(() => {
 	callOnce(() => {
 		restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
 		const table = (page.value?.pageRef as InstanceType<typeof PageIndex> | undefined)?.resultsTable;
+		/* make sure this is in sync with results table, both need to do the same restoration operation */
 		if (table) {
 			const hydrateSectionPromises: Promise<void>[] = [];
 			for (const section of state.resultSections) {
@@ -112,7 +113,11 @@ onMounted(() => {
 				table.addComputedColumn(column);
 				table.addComputedColumnSources(column);
 			}
-			state.restoreSavedCustomTotalRows.value && Promise.all(hydrateSectionPromises).then(state.restoreSavedCustomTotalRows.value);
+			state.restoreSavedCustomTotalRows.value &&
+				Promise.all(hydrateSectionPromises).then(() => {
+					state.restoreSavedCustomTotalRows.value?.();
+					table?.recomputeCustomTotal();
+				});
 			for (const cValueRow of state.customValueRows.value) {
 				table.computeCustomValueRow(cValueRow);
 			}
