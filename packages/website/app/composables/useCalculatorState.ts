@@ -437,9 +437,9 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 	function restoreState(
 		/** as of `nuxt@4.6.3` `route.fullPath` that has to be read in `app.vue`'s `onMounted` due to https://github.com/nuxt/nuxt/issues/34651#issuecomment-6542510559 */
 		params: URLSearchParams,
-	) {
+	): [restoreSavedCustomTotalRows?: () => void] {
 		if (!import.meta.client) {
-			return;
+			return [];
 		}
 
 		const version = params.get('v');
@@ -448,7 +448,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 			resultColumns[0]!.source = damageSources.value[0];
 			resultColumns[0]!.target = damageTargets.value[0];
-			return;
+			return [];
 		}
 
 		const savedSources = params.getAll('src');
@@ -543,8 +543,6 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			// resultsTable.value.addComputedColumnSources(resultColumns.value[0]!);
 		}
 
-		const restoredSectionPromises: Promise<any>[] = [];
-
 		const savedSections = params.getAll('tblSct');
 		let currentSectionIndex = 0;
 		for (const section of savedSections) {
@@ -590,12 +588,12 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			}
 		}
 
-		const sectionsRestoredPromise = Promise.all(restoredSectionPromises);
+		let restoreSavedCustomTotalRows: (() => void) | undefined;
 
 		const savedCustomTotalRows = params.get('tblCTtl');
 		if (savedCustomTotalRows?.length) {
 			isRestoringCustomTotalRows.value = true;
-			sectionsRestoredPromise.then(() => {
+			restoreSavedCustomTotalRows = () => {
 				for (const totalRow of savedCustomTotalRows.split('_')) {
 					const [rawSectionIndex, rawRowIndex] = totalRow.split('-');
 					const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
@@ -612,7 +610,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 					}
 				}
 				isRestoringCustomTotalRows.value = false;
-			});
+			};
 		}
 
 		const savedCustomValueRows = params.get('tblCV');
@@ -630,6 +628,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				}
 			}
 		}
+
+		return [restoreSavedCustomTotalRows];
 	}
 
 	return { saveState, debouncedSaveState, restoreState, isStateTooLargeForQuery };

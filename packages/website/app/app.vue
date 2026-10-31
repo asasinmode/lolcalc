@@ -101,12 +101,15 @@ let observer: IntersectionObserver | undefined;
 
 onMounted(() => {
 	callOnce(() => {
-		restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
+		const [restoreSavedCustomTotalSections] = restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
 		const table = (page.value?.pageRef as InstanceType<typeof PageIndex> | undefined)?.resultsTable;
 		if (table) {
+			const hydrateSectionPromises: Promise<void>[] = [];
 			for (const section of state.resultSections) {
-				!toValue(section.name) && table.hydrateResultSection(section);
+				!toValue(section.name) && hydrateSectionPromises.push(table.hydrateResultSection(section));
 			}
+
+			restoreSavedCustomTotalSections && Promise.all(hydrateSectionPromises).then(restoreSavedCustomTotalSections);
 		}
 	});
 
