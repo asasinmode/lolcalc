@@ -546,9 +546,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		let currentSectionIndex = 0;
 		for (const section of savedSections) {
 			const [id, isExpanded] = section.split('_');
-			if (!id) {
-				continue;
-			}
+			if (!id) continue;
 
 			/* `all` (permanent) sections start with 'a-' */
 			if (id.startsWith('a-')) {

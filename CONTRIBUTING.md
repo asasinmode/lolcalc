@@ -1,4 +1,4 @@
-# Contributing to lolcalc
+# contributing to lolcalc
 
 If you're considering contributing to the project or want to run it locally, read this document. Make sure to familiarize yourself with the project's [license](LICENSE).
 

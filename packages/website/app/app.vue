@@ -101,7 +101,23 @@ let observer: IntersectionObserver | undefined;
 
 onMounted(() => {
 	callOnce(() => {
-		restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
+		let params: URLSearchParams;
+		const storageState = window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY);
+		if (storageState) {
+			params = new URLSearchParams(storageState);
+		} else {
+			params = new URLSearchParams();
+			for (const [key, value] of Object.entries(route.query)) {
+				if (Array.isArray(value)) {
+					for (const v of value) {
+						v && params.append(key, v.toString());
+					}
+				} else if (value) {
+					params.set(key, value.toString());
+				}
+			}
+		}
+		restoreState(params);
 		const table = (page.value?.pageRef as InstanceType<typeof PageIndex> | undefined)?.resultsTable;
 		/* make sure this is in sync with results table, both need to do the same restoration operation */
 		if (table) {
