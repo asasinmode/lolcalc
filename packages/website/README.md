@@ -89,7 +89,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] move add section to the top
   - [x] effect sections with actual calculated values
   - [ ] add option to remove stats/basic attack sections if more feedback
-  - [ ] custom total hide add checkbox until user has seen custom total at least once. Then, when add is added, add the section if it's not already present
+  - [ ] custom total hide add checkbox until user has seen custom total at least once. Then, when a row is added, add the section if it's not already present
   - [x] custom value section, choose type, input any value. Useful for something like redemption from another character on briar
   - [x] custom total rows source ability icon & hover tooltip on it
   - [x] warning next to section if its champion is not fully implemented

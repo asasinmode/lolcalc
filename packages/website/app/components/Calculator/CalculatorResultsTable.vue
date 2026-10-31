@@ -239,7 +239,7 @@ interface IComputedSectionRowColumn {
 }
 
 const customTotalSection = resultSections.find((section) => section.isCustomTotal)!;
-const customTotalSectionTotalRow = computed(() => toValue(customTotalSection.rows)[0]);
+const customTotalSectionTotalRow = toValue(customTotalSection.rows)[0]!;
 const customValueSection = resultSections.find((section) => section.isCustomValue)!;
 
 const computedResults = ref<Map<string, IComputedSection>>(new Map());
@@ -736,6 +736,7 @@ onBeforeUnmount(() => {
 	}
 });
 
+/** `rowSectionId` overrides `sectionId`, expected to be used for custom total rows since they just point to other rows for their values */
 function sectionRowCells(sectionId: string, rowId: string, rowSectionId?: string) {
 	return resultColumns.map((column) => {
 		return {
@@ -1213,9 +1214,9 @@ function onCustomTotalRowsChange() {
 }
 
 function recomputeCustomTotalRows() {
-	if (customTotalSectionTotalRow.value) {
+	if (customTotalSectionTotalRow) {
 		for (const column of resultColumns) {
-			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value, column));
+			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column));
 		}
 		calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
 	}
@@ -1308,6 +1309,9 @@ function recomputeCustomValueRow(row: IDamageResultTableSectionRow) {
 			computedRow.columns.set(column.id, computeSectionRowColumn(customValueSection, row, column));
 		}
 		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
+		if (customTotalRowIds.value.includes(`${ResultSectionId.CustomValue}_${row.id}`)) {
+			recomputeCustomTotalRows();
+		}
 	} else {
 		console.warn('custom value row not found for recomputing', row.id);
 	}
@@ -1337,6 +1341,8 @@ function updateCustomValueRowType(rowIndex: number, event: Event) {
 function removeCustomValueRow(rowIndex: number) {
 	const row = customValueRows.value[rowIndex];
 	if (row) {
+		const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
+		~cTotalIndex && customTotalRowIds.value.splice(cTotalIndex, 1);
 		customValueRows.value.splice(rowIndex, 1);
 		customValueComputedSection.rows.delete(row.id);
 		debouncedSaveState();
@@ -1764,6 +1770,7 @@ defineExpose({
 								</select>
 							</form>
 						</th>
+						<td :colspan="resultColumns.length" />
 					</tr>
 					<tr v-else-if="section.id === ResultSectionId.CustomTotal && restoreSavedCustomTotalRows" class="info-row">
 						<td :colspan="maxCols">loading...</td>
