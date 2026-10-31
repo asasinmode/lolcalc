@@ -1103,7 +1103,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
 function sectionHasTooltip(section: IDamageResultTableSection) {
-	return section.hoverTooltipData;
+	return toValue(section.hoverTooltipData);
 }
 
 let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
@@ -1596,12 +1596,12 @@ defineExpose({
 								<span v-html="toValue(section.image) ? `${toValue(section.name)}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(section)">
 									<article v-if="section.abilityId.type === AbilityType.item" popover="hint" class="hover-tooltip champion-item" :data-expanded="isTooltipExpanded || undefined">
-										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
+										<LolItemDescription v-bind="toValue(section.hoverTooltipData) as any" hover-tooltip source="Inventory" />
 									</article>
-									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="section.hoverTooltipData as any" />
-									<LolEffectHoverTooltip v-else-if="section.abilityId.type === AbilityType.effect" v-bind="section.hoverTooltipData as any" />
-									<LolDragonHoverTooltip v-else-if="section.abilityId.type === AbilityType.dragon" v-bind="section.hoverTooltipData as any" />
-									<article v-else-if="typeof section.hoverTooltipData === 'string'" popover="hint" class="hover-tooltip custom game-description info-tooltip" v-html="section.hoverTooltipData" />
+									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="toValue(section.hoverTooltipData) as any" />
+									<LolEffectHoverTooltip v-else-if="section.abilityId.type === AbilityType.effect" v-bind="toValue(section.hoverTooltipData) as any" />
+									<LolDragonHoverTooltip v-else-if="section.abilityId.type === AbilityType.dragon" v-bind="toValue(section.hoverTooltipData) as any" />
+									<article v-else-if="typeof toValue(section.hoverTooltipData) === 'string'" popover="hint" class="hover-tooltip custom game-description info-tooltip" v-html="toValue(section.hoverTooltipData)" />
 								</template>
 								<template v-if="section.selectOptions?.length">
 									<label :for="`results-header-select-${section.id}`">
