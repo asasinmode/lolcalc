@@ -108,8 +108,10 @@ onMounted(() => {
 			for (const section of state.resultSections) {
 				!toValue(section.name) && hydrateSectionPromises.push(table.hydrateResultSection(section));
 			}
-
 			restoreSavedCustomTotalSections && Promise.all(hydrateSectionPromises).then(restoreSavedCustomTotalSections);
+			for (const cValueRow of state.customValueRows.value) {
+				table.computeCustomValueRow(cValueRow);
+			}
 		}
 	});
 

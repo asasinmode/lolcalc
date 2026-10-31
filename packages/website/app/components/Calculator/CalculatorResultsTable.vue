@@ -1330,9 +1330,6 @@ function removeCustomValueRow(rowIndex: number) {
 }
 
 defineExpose({
-	// addResultsColumn,
-	// addComputedColumnSources,
-	// addResultsSection,
 	hydrateResultSection,
 	computeCustomValueRow,
 });

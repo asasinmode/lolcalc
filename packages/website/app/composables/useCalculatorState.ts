@@ -624,7 +624,6 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				if (value !== undefined && !Number.isNaN(rawValue) && value > 0) {
 					const id = crypto.randomUUID();
 					customValueRows.value.push({ id, name: id, type: ALL_VARIABLE_TYPES[typeIndex]!, value });
-					// resultsTable.value.computeCustomValueRow(customValueRows.value.at(-1)!);
 				}
 			}
 		}
