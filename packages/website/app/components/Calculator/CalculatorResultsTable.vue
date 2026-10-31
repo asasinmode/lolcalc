@@ -1685,7 +1685,13 @@ defineExpose({
 							</div>
 							<template v-else>
 								<span v-if="row.isUnknown">unknown</span>
-								{{ row.name }}
+								<template v-if="(row as IDamageResultTableSectionCustomValueRow).type">
+									<span :data-type="(row as IDamageResultTableSectionCustomValueRow).type">{{ (row as IDamageResultTableSectionCustomValueRow).value }}</span>
+									<span :data-type="(row as IDamageResultTableSectionCustomValueRow).type">{{ variableTypeOptionNames[(row as IDamageResultTableSectionCustomValueRow).type] }}</span>
+								</template>
+								<template v-else>
+									{{ row.name }}
+								</template>
 								<span v-if="row.isCustom" :aria-describedby="`${section.id}-${row.id}-tooltip-custom`" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs(undefined, true)">
 									<img src="/logo_dark.webp" alt="lolcalc logo" width="192" height="192" />
 								</span>
@@ -2250,8 +2256,20 @@ defineExpose({
 							--ms: calc(0.5 * (var(--ps) + var(--size)));
 						}
 
-						> span:not([aria-describedby]) {
+						> span:not([aria-describedby], [data-type]) {
 							--at-apply: 'sr-only';
+						}
+
+						> span[data-type] {
+							--at-apply: 'text-[--type-clr]';
+
+							&:first-of-type {
+								--at-apply: 'font-600 bg-black px-1 py-0.5 -my-0.5 rounded-sm';
+							}
+
+							&:not(:first-of-type) {
+								--at-apply: 'ms-[0.33ch]';
+							}
 						}
 					}
 
@@ -2301,7 +2319,7 @@ defineExpose({
 
 						input:not([type='checkbox']),
 						select {
-							--at-apply: 'ps-1.5 pe-1 leading-7 block-[--manipulate-btn-size] bg-black b b-op-70';
+							--at-apply: 'ps-1.5 pe-1 leading-7 block-[--manipulate-btn-size] bg-black b b-op-70 b-[--type-clr]';
 						}
 
 						input:not([type='checkbox']) {
@@ -2344,51 +2362,6 @@ defineExpose({
 
 								label {
 									--at-apply: 'text-start';
-								}
-							}
-						}
-
-						> * {
-							&[data-type='physical'] {
-								input,
-								select {
-									--at-apply: 'b-orange-600';
-								}
-							}
-
-							&[data-type='magic'] {
-								input,
-								select {
-									--at-apply: 'b-cyan';
-								}
-							}
-
-							&[data-type='adaptive'] {
-								input,
-								select {
-									/* 26.21 taken from infernal soul tooltip, it has <font color="..."> */
-									--at-apply: 'b-[#48c4b7]';
-								}
-							}
-
-							&[data-type='true'] {
-								input,
-								select {
-									--at-apply: 'b-cyan-50';
-								}
-							}
-
-							&[data-type='shield'] {
-								input,
-								select {
-									--at-apply: 'b-sky-400';
-								}
-							}
-
-							&[data-type='heal'] {
-								input,
-								select {
-									--at-apply: 'b-green-300';
 								}
 							}
 						}

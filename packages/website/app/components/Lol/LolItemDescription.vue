@@ -629,5 +629,30 @@ defineExpose({ header });
 			--at-apply: 'col-span-full text-end leading-5';
 		}
 	}
+
+	*[data-type='physical'] {
+		--type-clr: theme('colors.orange.600');
+	}
+
+	*[data-type='magic'] {
+		--type-clr: theme('colors.cyan.400');
+	}
+
+	*[data-type='adaptive'] {
+		/* 26.21 taken from infernal soul tooltip, it has <font color="..."> */
+		--type-clr: #48c4b7;
+	}
+
+	*[data-type='true'] {
+		--type-clr: theme('colors.cyan.50');
+	}
+
+	*[data-type='shield'] {
+		--type-clr: theme('colors.sky.400');
+	}
+
+	*[data-type='heal'] {
+		--type-clr: theme('colors.green.300');
+	}
 }
 </style>
