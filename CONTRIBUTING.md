@@ -14,7 +14,7 @@ Currently the project has a clear roadmap for planned features. It can be found 
 
 Most bug fixes are welcome, however not everything is a bug a fix is wanted for. An example would be an animation that doesn't work on some browsers. If it's caused by the browser not having implemented an api the animation uses, it's not considered a bug in this project.
 
-If the code produces a different value the game shows (and it doesn't full under [known discrepancies](https://asasinmode.github.io/lolcalc/about#known-discrepancies)), it should be addressed.
+If the code produces a value different from what the game shows (and it doesn't fall under [known discrepancies](https://asasinmode.github.io/lolcalc/about#known-discrepancies)), it should be addressed. Please open an issue, making sure to provide in-game screenshots/a video of the discrepancy. Calculation issues reported without them will be ignored.
 
 ### clankers and slop
 
