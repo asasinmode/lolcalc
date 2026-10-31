@@ -109,18 +109,18 @@ onMounted(() => {
 			for (const section of state.resultSections) {
 				!toValue(section.name) && hydrateSectionPromises.push(table.hydrateResultSection(section));
 			}
+			for (const cValueRow of state.customValueRows.value) {
+				table.computeCustomValueRow(cValueRow);
+			}
 			for (const column of state.resultColumns) {
 				table.addComputedColumn(column);
-				table.addComputedColumnSources(column);
+				table.recalculateColumn(column);
 			}
 			state.restoreSavedCustomTotalRows.value &&
 				Promise.all(hydrateSectionPromises).then(() => {
 					state.restoreSavedCustomTotalRows.value?.();
 					table?.recomputeCustomTotal();
 				});
-			for (const cValueRow of state.customValueRows.value) {
-				table.computeCustomValueRow(cValueRow);
-			}
 		}
 	});
 

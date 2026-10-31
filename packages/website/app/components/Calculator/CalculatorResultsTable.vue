@@ -262,18 +262,18 @@ const customValueComputedSection = computedResults.value.get(ResultSectionId.Cus
 	for (const section of resultSections) {
 		!toValue(section.name) && hydrateResultSectionPromises.push(hydrateResultSection(section));
 	}
+	for (const cValueRow of customValueRows.value) {
+		computeCustomValueRow(cValueRow);
+	}
 	for (const column of resultColumns) {
 		addComputedColumn(column);
-		addComputedColumnSources(column);
+		recalculateColumn(column);
 	}
 	restoreSavedCustomTotalRows.value &&
 		Promise.all(hydrateResultSectionPromises).then(() => {
 			restoreSavedCustomTotalRows.value?.();
 			recomputeCustomTotal();
 		});
-	for (const cValueRow of customValueRows.value) {
-		computeCustomValueRow(cValueRow);
-	}
 }
 
 function addComputedSection(sectionId: string) {
@@ -1364,7 +1364,7 @@ defineExpose({
 	hydrateResultSection,
 	computeCustomValueRow,
 	addComputedColumn,
-	addComputedColumnSources,
+	recalculateColumn,
 });
 </script>
 
