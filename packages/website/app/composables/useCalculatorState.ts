@@ -37,17 +37,18 @@ export interface ICalculatorState {
 	expandedSections: Ref<string[]>;
 	/** custom total row ids formatted like `${sectionId}_${rowId}` */
 	customTotalRowIds: Ref<string[]>;
-	isRestoringCustomTotalRows: Ref<boolean>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
 	/** the same ref `resultSections` custom value section uses */
 	customValueRows: Ref<IDamageResultTableSectionCustomValueRow[]>;
+	/** custom total rows must be restored after saved sections have been hydrated, because they reference them and some might be invalid. Restore function is stored here and called either in app onMounted restore or result's table setup */
+	restoreSavedCustomTotalRows: ShallowRef<(() => void) | undefined>;
 }
 
 export function initCalculatorState(): ICalculatorState {
 	/* expected to have DamageSources added in `restoreState`, shallowRefs because otherwise ref properties inside of classes get messed up */
 	const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
-	const resultColumns = shallowReactive<IDamageResultTableColumn[]>([{ id: useId() }]);
+	const resultColumns = shallowReactive<IDamageResultTableColumn[]>([{ id: useId(), source: shallowRef(), target: shallowRef() }]);
 
 	const customValueRows = ref<IDamageResultTableSectionCustomValueRow[]>([]);
 	const customTotalRowIds = ref<string[]>([]);
@@ -220,9 +221,9 @@ export function initCalculatorState(): ICalculatorState {
 		resultsTableFlip: ref(false),
 		expandedSections: ref<string[]>(resultSections.filter((section) => section.id !== ResultSectionId.Stats).map((section) => section.id)),
 		customTotalRowIds,
-		isRestoringCustomTotalRows: ref(false),
 		computedCustomTotalRows,
 		customValueRows,
+		restoreSavedCustomTotalRows: shallowRef(),
 	};
 
 	provide('calculatorState', state);
@@ -235,7 +236,7 @@ export function useCalculatorState(): ICalculatorState {
 }
 
 export function useManageCalculatorState(state = useCalculatorState()) {
-	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows, customValueRows } = state;
+	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customValueRows } = state;
 	const isStateTooLargeForQuery = ref(false);
 	const debounceTimeout = useState<ReturnType<typeof setTimeout> | undefined>('saveStateDebounce');
 
@@ -320,42 +321,42 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		const savedDragonsSoulAbilities = new Set<IDragonName>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
-			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
-			const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
+			const columnSourceIndex = column.source.value ? damageSources.value.indexOf(column.source.value) : -1;
+			const columnTargetIndex = column.target.value ? damageTargets.value.indexOf(column.target.value) : -1;
 			if (~columnSourceIndex || ~columnTargetIndex) {
-				column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
-				column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
-				if (column.source) {
-					for (const item of column.source.items.value) {
+				column.source.value?.champion.value?.id && savedChampionIds.add(column.source.value.champion.value!.id);
+				column.target.value?.champion.value?.id && savedChampionIds.add(column.target.value.champion.value!.id);
+				if (column.source.value) {
+					for (const item of column.source.value.items.value) {
 						item && savedItemIds.add(item.id);
 					}
-					for (const effect of column.source.appliedEffects.value) {
+					for (const effect of column.source.value.appliedEffects.value) {
 						savedEffectObjectNames.add(effect.abilityId.id);
 					}
-					for (const effectEntry of column.source.effectsAppliedToTarget.value) {
+					for (const effectEntry of column.source.value.effectsAppliedToTarget.value) {
 						savedEffectObjectNames.add(effectEntry[0].id);
 					}
-					column.source.dragonSoul.value && savedDragonsSoulAbilities.add(column.source.dragonSoul.value);
+					column.source.value.dragonSoul.value && savedDragonsSoulAbilities.add(column.source.value.dragonSoul.value);
 				}
-				if (column.target) {
-					for (const item of column.target.items.value) {
+				if (column.target.value) {
+					for (const item of column.target.value.items.value) {
 						item && savedItemIds.add(item.id);
 					}
-					for (const effect of column.target.appliedEffects.value) {
+					for (const effect of column.target.value.appliedEffects.value) {
 						savedEffectObjectNames.add(effect.abilityId.id);
 					}
-					column.target.dragonSoul.value && savedDragonsSoulAbilities.add(column.target.dragonSoul.value);
+					column.target.value.dragonSoul.value && savedDragonsSoulAbilities.add(column.target.value.dragonSoul.value);
 				}
 			}
 			return [columnSourceIndex, columnTargetIndex];
 		}
 
 		const saveColumnsToQuery =
-			resultColumns.slice(1).some((col) => col.source || col.target) ||
+			resultColumns.slice(1).some((col) => col.source.value || col.target.value) ||
 			damageSources.value.length > 1 ||
 			damageTargets.value.length > 1 ||
-			resultColumns[0]!.source !== damageSources.value[0] ||
-			resultColumns[0]!.target !== damageTargets.value[0];
+			resultColumns[0]!.source.value !== damageSources.value[0] ||
+			resultColumns[0]!.target.value !== damageTargets.value[0];
 		for (const column of resultColumns) {
 			const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
@@ -437,18 +438,18 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 	function restoreState(
 		/** as of `nuxt@4.6.3` `route.fullPath` that has to be read in `app.vue`'s `onMounted` due to https://github.com/nuxt/nuxt/issues/34651#issuecomment-6542510559 */
 		params: URLSearchParams,
-	): [restoreSavedCustomTotalRows?: () => void] {
+	): void {
 		if (!import.meta.client) {
-			return [];
+			return;
 		}
 
 		const version = params.get('v');
 		if (version !== STATE_VERSION) {
 			damageSources.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
-			resultColumns[0]!.source = damageSources.value[0];
-			resultColumns[0]!.target = damageTargets.value[0];
-			return [];
+			resultColumns[0]!.source.value = damageSources.value[0];
+			resultColumns[0]!.target.value = damageTargets.value[0];
+			return;
 		}
 
 		const savedSources = params.getAll('src');
@@ -529,18 +530,16 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			if (source || target) {
 				noColumnsRestored = false;
-				// i && resultsTable.value.addResultsColumn();
+				i && resultColumns.push({ id: crypto.randomUUID(), source: shallowRef(), target: shallowRef() });
 				const column = resultColumns.at(-1)!;
-				column.source = source;
-				column.target = target;
-				// resultsTable.value.addComputedColumnSources(column);
+				column.source.value = source;
+				column.target.value = target;
 			}
 		}
 
 		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
-			resultColumns[0]!.source = damageSources.value[0];
-			resultColumns[0]!.target = damageTargets.value[0];
-			// resultsTable.value.addComputedColumnSources(resultColumns.value[0]!);
+			resultColumns[0]!.source.value = damageSources.value[0];
+			resultColumns[0]!.target.value = damageTargets.value[0];
 		}
 
 		const savedSections = params.getAll('tblSct');
@@ -588,12 +587,9 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			}
 		}
 
-		let restoreSavedCustomTotalRows: (() => void) | undefined;
-
 		const savedCustomTotalRows = params.get('tblCTtl');
 		if (savedCustomTotalRows?.length) {
-			isRestoringCustomTotalRows.value = true;
-			restoreSavedCustomTotalRows = () => {
+			restoreSavedCustomTotalRows.value = () => {
 				for (const totalRow of savedCustomTotalRows.split('_')) {
 					const [rawSectionIndex, rawRowIndex] = totalRow.split('-');
 					const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
@@ -609,7 +605,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 						}
 					}
 				}
-				isRestoringCustomTotalRows.value = false;
+				restoreSavedCustomTotalRows.value = undefined;
 			};
 		}
 
@@ -627,8 +623,6 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				}
 			}
 		}
-
-		return [restoreSavedCustomTotalRows];
 	}
 
 	return { saveState, debouncedSaveState, restoreState, isStateTooLargeForQuery };

@@ -51,8 +51,8 @@ export interface IDamageResultTableSection {
 
 export interface IDamageResultTableColumn {
 	id: string;
-	source?: DamageSource;
-	target?: DamageSource;
+	source: ShallowRef<DamageSource | undefined>;
+	target: ShallowRef<DamageSource | undefined>;
 	/**
 	 * column's `target` but with effects applied by source (usually steming from items, like Serpent's Fang's "apply Shield Reave on target")
 	 * it's supposed to be made by cloning the target in CalculatorResultsTable's `recalculateColumn`, then adding all effects got from `@lolcalc/core/specifics/effects`' `effectsAppliedBy(column.target)`

@@ -33,7 +33,7 @@ defineProps<{
 	showResults: boolean;
 }>();
 
-const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, isRestoringCustomTotalRows, customValueRows } = useCalculatorState();
+const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customValueRows } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -51,15 +51,15 @@ const sourceOptions = computed(() => columnOptions(damageSources.value));
 const targetOptions = computed(() => columnOptions(damageTargets.value));
 
 function setColumnChampion(column: IDamageResultTableColumn, sources: DamageSource[], damageSourceId?: string) {
-	const oldDamageSourceId = column[sources === damageSources.value ? 'source' : 'target']?.id;
+	const oldDamageSourceId = column[sources === damageSources.value ? 'source' : 'target'].value?.id;
 	oldDamageSourceId && highlightedDamageSources.remove(oldDamageSourceId);
 
 	const property = sources === damageSources.value ? 'source' : 'target';
 
-	column[property] = damageSourceId ? sources.find((damageSource) => damageSource.id === damageSourceId) : undefined;
+	column[property].value = damageSourceId ? sources.find((damageSource) => damageSource.id === damageSourceId) : undefined;
 	recalculateColumn(column);
 
-	column[property] && highlightedDamageSources.add(column[property].id);
+	column[property].value && highlightedDamageSources.add(column[property].value.id);
 	debouncedSaveState();
 }
 
@@ -252,15 +252,25 @@ computedResults.value = new Map<string, IComputedSection>(
 	).concat(resultSections.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
 );
 
-for (const section of resultSections) {
-	if (!section.name) {
-		hydrateResultSection(section);
-	}
-}
-
 const customTotalComputedSection = computedResults.value.get(ResultSectionId.CustomTotal)!;
 const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('cTtl-total')!;
 const customValueComputedSection = computedResults.value.get(ResultSectionId.CustomValue)!;
+
+{
+	/* restoring state, basically what app.vue does onMounted but it can do so only when it's being mounted on the index page. If page is entered from somewhere else and there's state, it will be restored but the component needs to update itself on navigation to it */
+	const hydrateResultSectionPromises: Promise<void>[] = [];
+	for (const section of resultSections) {
+		!toValue(section.name) && hydrateResultSectionPromises.push(hydrateResultSection(section));
+	}
+	for (const column of resultColumns) {
+		addComputedColumn(column);
+		addComputedColumnSources(column);
+	}
+	restoreSavedCustomTotalRows.value && Promise.all(hydrateResultSectionPromises).then(restoreSavedCustomTotalRows.value);
+	for (const cValueRow of customValueRows.value) {
+		computeCustomValueRow(cValueRow);
+	}
+}
 
 function addComputedSection(sectionId: string) {
 	const section = computeSection(resultSections.find((section) => section.id === sectionId)!);
@@ -335,6 +345,8 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 function addResultsColumn() {
 	const column: IDamageResultTableColumn = {
 		id: crypto.randomUUID(),
+		source: shallowRef(),
+		target: shallowRef(),
 	};
 	resultColumns.push(column);
 	addComputedColumn(column);
@@ -696,8 +708,8 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 
 		for (let i = 0; i < resultColumns.length; i++) {
 			const column = resultColumns[i]!;
-			if (column[columnProperty]?.id === id) {
-				column[columnProperty] = undefined;
+			if (column[columnProperty].value?.id === id) {
+				column[columnProperty].value = undefined;
 				recalculateColumn(column);
 			}
 		}
@@ -709,7 +721,7 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 			source.id,
 			watch(source.getWatchable(), () => {
 				debouncedSaveState();
-				const columns = resultColumns.filter((column) => column.source?.id === source.id || column.target?.id === source.id);
+				const columns = resultColumns.filter((column) => column.source.value?.id === source.id || column.target.value?.id === source.id);
 				for (const column of columns) {
 					recalculateColumn(column);
 				}
@@ -738,8 +750,8 @@ function sectionRowCells(sectionId: string, rowId: string, rowSectionId?: string
 
 function columnDamageSourcesColorStyles(column: Pick<IDamageResultTableColumn, 'source' | 'target'>) {
 	return {
-		'--col-damage-source-clr': column.source?.color,
-		'--col-damage-target-clr': column.target?.color,
+		'--col-damage-source-clr': column.source.value?.color,
+		'--col-damage-target-clr': column.target.value?.color,
 	};
 }
 
@@ -779,19 +791,19 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 }
 
 function addComputedColumnSources(column: IDamageResultTableColumn) {
-	if (column.source) {
-		column._computedSource = column.source.clone({}, true);
-		column._computedSource.champion.value = column.source.champion.value;
+	if (column.source.value) {
+		column._computedSource = column.source.value.clone({}, true);
+		column._computedSource.champion.value = column.source.value.champion.value;
 	} else {
 		column._computedSource = undefined;
 	}
 
-	if (column.target) {
-		column._computedTarget = column.target.clone({}, true);
-		column._computedTarget.champion.value = column.target.champion.value;
-		if (column.source) {
-			applyEffectsFromTo(column.source, column._computedTarget);
-			column._computedTarget.calculationDamageTarget.value = column.source;
+	if (column.target.value) {
+		column._computedTarget = column.target.value.clone({}, true);
+		column._computedTarget.champion.value = column.target.value.champion.value;
+		if (column.source.value) {
+			applyEffectsFromTo(column.source.value, column._computedTarget);
+			column._computedTarget.calculationDamageTarget.value = column.source.value;
 			column._computedSource!.calculationDamageTarget.value = column._computedTarget;
 		}
 	} else {
@@ -842,20 +854,20 @@ const cleanableColumnsSections = computed<[[index: number, column: IDamageResult
 		if (section.abilityId.type === 'all') {
 			return false;
 		} else if (section.abilityId.type === AbilityType.item) {
-			return !resultColumns.some((column) => column.source?.items.value.some((item) => item?.id === section.abilityId.id) || column.target?.items.value.some((item) => item?.id === section.abilityId.id));
+			return !resultColumns.some((column) => column.source.value?.items.value.some((item) => item?.id === section.abilityId.id) || column.target.value?.items.value.some((item) => item?.id === section.abilityId.id));
 		} else if (section.abilityId.type === AbilityType.champion) {
-			return !resultColumns.some((column) => column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id);
+			return !resultColumns.some((column) => column.source.value?.listedChampion.value?.id === section.abilityId.id || column.target.value?.listedChampion.value?.id === section.abilityId.id);
 		} else if (section.abilityId.type === AbilityType.effect) {
 			return !resultColumns.some(
 				(column) =>
-					column.source?.appliedEffects.value.some((effect) => effect.abilityId.id === section.abilityId.id) ||
-					column.source?.effectsAppliedToTarget.value.some((effectEntry) => effectEntry[0].id === section.abilityId.id) ||
+					column.source.value?.appliedEffects.value.some((effect) => effect.abilityId.id === section.abilityId.id) ||
+					column.source.value?.effectsAppliedToTarget.value.some((effectEntry) => effectEntry[0].id === section.abilityId.id) ||
 					column._computedTarget?.appliedEffects.value.some((effect) => effect.abilityId.id === section.abilityId.id),
 			);
 		}
 
 		/* this could consider dragon stacks too but atm only souls have abilities that can be added to results */
-		return !resultColumns.some((column) => column.source?.dragonSoul.value === section.abilityId.id || column._computedTarget?.dragonSoul.value === section.abilityId.id);
+		return !resultColumns.some((column) => column.source.value?.dragonSoul.value === section.abilityId.id || column._computedTarget?.dragonSoul.value === section.abilityId.id);
 	});
 
 	return [columns, sections];
@@ -888,14 +900,14 @@ function cleanupUnused() {
 
 function highlightColumnSources(column: IDamageResultTableColumn) {
 	highlightedColumnId.value = column.id;
-	column.source && highlightedDamageSources.add(column.source.id);
-	column.target && highlightedDamageSources.add(column.target.id);
+	column.source.value && highlightedDamageSources.add(column.source.value.id);
+	column.target.value && highlightedDamageSources.add(column.target.value.id);
 }
 
 function lowlightColumnSources(column: IDamageResultTableColumn) {
 	highlightedColumnId.value = undefined;
-	column.source && highlightedDamageSources.remove(column.source.id);
-	column.target && highlightedDamageSources.remove(column.target.id);
+	column.source.value && highlightedDamageSources.remove(column.source.value.id);
+	column.target.value && highlightedDamageSources.remove(column.target.value.id);
 }
 
 function highlightColumnIdSources(id: string) {
@@ -909,7 +921,9 @@ function lowlightColumnIdSources(id: string) {
 }
 
 const highlightedColumns = computed(() =>
-	resultColumns.map((column) => (highlightedColumnId.value ? column.id === highlightedColumnId.value : (column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)))),
+	resultColumns.map((column) =>
+		highlightedColumnId.value ? column.id === highlightedColumnId.value : (column.source.value && highlightedDamageSources.has(column.source.value.id)) || (column.target.value && highlightedDamageSources.has(column.target.value.id)),
+	),
 );
 
 function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
@@ -1139,8 +1153,8 @@ interface IColumnAddableOption {
 	itemOptionsIndexes: number[];
 }
 
-const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() => resultColumns.map((column) => columnAddableOption(column.source)));
-const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() => resultColumns.map((column) => columnAddableOption(column.target)));
+const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() => resultColumns.map((column) => columnAddableOption(column.source.value)));
+const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() => resultColumns.map((column) => columnAddableOption(column.target.value)));
 
 function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption {
 	const rv: IColumnAddableOption = {
@@ -1245,7 +1259,7 @@ let thumbnailTooltipPopoverEl: HTMLElement | null = null;
 const { bind: bindThumbnailTriggerAttrs, bindPopover: bindThumbnailPopoverAttrs } = useHoverTooltip<{ index: number; isTarget?: boolean }>({
 	el: () => thumbnailTooltipPopoverEl,
 	beforeShow({ index, isTarget }, trigger) {
-		const damageSource = resultColumns[index]![isTarget ? 'target' : 'source'];
+		const damageSource = resultColumns[index]![isTarget ? 'target' : 'source'].value;
 		if (!damageSource) return false;
 		const popover = trigger.parentElement?.lastElementChild;
 		if (popover) {
@@ -1329,20 +1343,19 @@ function removeCustomValueRow(rowIndex: number) {
 	}
 }
 
+const anyColumnsLoading = computed(() => resultColumns.some((column) => column.source.value?.listedChampion.value && column.source.value.listedChampion.value.id !== column.source.value.champion.value?.id));
+
 defineExpose({
 	hydrateResultSection,
 	computeCustomValueRow,
+	addComputedColumn,
+	addComputedColumnSources,
 });
 </script>
 
 <template>
 	<ClientOnly>
-		<table
-			id="results-table"
-			:inert="!showResults"
-			:aria-busy="resultColumns.some((column) => column.source?.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id)"
-			:data-flip-results="flipResults || undefined"
-		>
+		<table id="results-table" :inert="!showResults" :aria-busy="anyColumnsLoading" :data-flip-results="flipResults || undefined">
 			<caption>
 				comparison table
 			</caption>
@@ -1356,9 +1369,9 @@ defineExpose({
 					</th>
 					<th v-for="column in resultColumns" :key="column.id" scope="col" :width="`${colW.result}px`">
 						<span>
-							{{ (column.source && sourceOptions.find((option) => option[0] === column.source!.id)?.[1]) || 'undefined source' }}
+							{{ (toValue(column.source) && sourceOptions.find((option) => option[0] === toValue(column.source)!.id)?.[1]) || 'undefined source' }}
 							vs
-							{{ (column.target && targetOptions.find((option) => option[0] === column.target!.id)?.[1]) || 'undefined target' }}
+							{{ (toValue(column.target) && targetOptions.find((option) => option[0] === toValue(column.target)!.id)?.[1]) || 'undefined target' }}
 						</span>
 					</th>
 				</tr>
@@ -1413,7 +1426,7 @@ defineExpose({
 						<div>
 							<VSelect
 								:id="`results-table-column-source-${index}`"
-								:model-value="resultColumns[index]!.source?.id"
+								:model-value="toValue(resultColumns[index]!.source)?.id"
 								label="column's damage source"
 								:options="sourceOptions"
 								clearable
@@ -1421,11 +1434,11 @@ defineExpose({
 								@update:model-value="setColumnChampion(column, damageSources, $event)"
 							>
 								<img
-									v-if="column.source?.listedChampion.value"
-									:src="championImage(column.source.listedChampion.value!.image, column.source.listedChampion.value!.id)"
+									v-if="toValue(column.source)?.listedChampion.value"
+									:src="championImage(toValue(column.source)!.listedChampion.value!.image, toValue(column.source)!.listedChampion.value!.id)"
 									loading="lazy"
-									:width="championImageSize(column.source.listedChampion.value!.id)"
-									:height="championImageSize(column.source.listedChampion.value!.id)"
+									:width="championImageSize(toValue(column.source)!.listedChampion.value!.id)"
+									:height="championImageSize(toValue(column.source)!.listedChampion.value!.id)"
 									style="--focus-brightness: 1.2"
 									aria-hidden="true"
 								/>
@@ -1439,7 +1452,7 @@ defineExpose({
 							<span>vs</span>
 							<VSelect
 								:id="`results-table-column-target-${index}`"
-								:model-value="resultColumns[index]!.target?.id"
+								:model-value="toValue(resultColumns[index]!.target)?.id"
 								label="column's damage target"
 								:options="targetOptions"
 								clearable
@@ -1447,11 +1460,11 @@ defineExpose({
 								@update:model-value="setColumnChampion(column, damageTargets, $event)"
 							>
 								<img
-									v-if="column.target?.listedChampion.value"
-									:src="championImage(column.target.listedChampion.value!.image, column.target.listedChampion.value!.id)"
+									v-if="toValue(column.target)?.listedChampion.value"
+									:src="championImage(toValue(column.target)!.listedChampion.value!.image, toValue(column.target)!.listedChampion.value!.id)"
 									loading="lazy"
-									:width="championImageSize(column.target.listedChampion.value!.id)"
-									:height="championImageSize(column.target.listedChampion.value!.id)"
+									:width="championImageSize(toValue(column.target)!.listedChampion.value!.id)"
+									:height="championImageSize(toValue(column.target)!.listedChampion.value!.id)"
 									style="--focus-brightness: 1.2"
 									aria-hidden="true"
 								/>
@@ -1641,7 +1654,7 @@ defineExpose({
 					<tr v-if="!section.image" class="info-row">
 						<td :colspan="maxCols">loading...</td>
 					</tr>
-					<tr v-else-if="!isRestoringCustomTotalRows && !section.isCustomValue && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
+					<tr v-else-if="!restoreSavedCustomTotalRows && !section.isCustomValue && (section.isCustomTotal ? computedCustomTotalRows.length < 2 : !toValue(section.rows)?.length)" class="info-row">
 						<td :colspan="maxCols">
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
@@ -1752,7 +1765,7 @@ defineExpose({
 							</form>
 						</th>
 					</tr>
-					<tr v-else-if="section.id === ResultSectionId.CustomTotal && isRestoringCustomTotalRows" class="info-row">
+					<tr v-else-if="section.id === ResultSectionId.CustomTotal && restoreSavedCustomTotalRows" class="info-row">
 						<td :colspan="maxCols">loading...</td>
 					</tr>
 				</tbody>

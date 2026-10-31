@@ -101,14 +101,18 @@ let observer: IntersectionObserver | undefined;
 
 onMounted(() => {
 	callOnce(() => {
-		const [restoreSavedCustomTotalSections] = restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
+		restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
 		const table = (page.value?.pageRef as InstanceType<typeof PageIndex> | undefined)?.resultsTable;
 		if (table) {
 			const hydrateSectionPromises: Promise<void>[] = [];
 			for (const section of state.resultSections) {
 				!toValue(section.name) && hydrateSectionPromises.push(table.hydrateResultSection(section));
 			}
-			restoreSavedCustomTotalSections && Promise.all(hydrateSectionPromises).then(restoreSavedCustomTotalSections);
+			for (const column of state.resultColumns) {
+				table.addComputedColumn(column);
+				table.addComputedColumnSources(column);
+			}
+			state.restoreSavedCustomTotalRows.value && Promise.all(hydrateSectionPromises).then(state.restoreSavedCustomTotalRows.value);
 			for (const cValueRow of state.customValueRows.value) {
 				table.computeCustomValueRow(cValueRow);
 			}
