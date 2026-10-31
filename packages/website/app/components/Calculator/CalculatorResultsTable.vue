@@ -673,6 +673,10 @@ function removeResultsSection(index: number) {
 	if (section.isCustomTotal) {
 		customTotalRowIds.value.length = 0;
 	} else if (section.isCustomValue) {
+		for (const row of customValueRows.value) {
+			const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
+			~cTotalIndex && customTotalRowIds.value.splice(cTotalIndex, 1);
+		}
 		customValueRows.value.length = 0;
 		computedResults.value.get(section.id)?.rows.clear();
 	} else {
