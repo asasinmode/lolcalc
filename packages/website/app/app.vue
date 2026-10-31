@@ -3,9 +3,11 @@ import { imgUrl, PATCH_VERSION } from '@lolcalc/data';
 import { version as rawPackageVersion } from '~~/package.json';
 import { acquireClickEater } from '~/composables/useClickEater';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
+import type PageIndex from '~/pages/index.vue';
 
 const runtimeConfig = useRuntimeConfig();
-const { saveState, isStateTooLargeForQuery } = useManageCalculatorState(initCalculatorState());
+const state = initCalculatorState();
+const { saveState, restoreState, isStateTooLargeForQuery } = useManageCalculatorState(state);
 const { vSemver } = PATCH_VERSION;
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { reportAnIssue } = useReportIssueDialog();
@@ -91,10 +93,23 @@ function hideSharePopover() {
 
 const header = useTemplateRef('header');
 const menuBtn = useTemplateRef('menuBtn');
+const page = useTemplateRef('page');
+
+const route = useRoute();
 
 let observer: IntersectionObserver | undefined;
 
 onMounted(() => {
+	callOnce(() => {
+		restoreState(new URLSearchParams(window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || (route.query as Record<string, string>)));
+		const table = (page.value?.pageRef as InstanceType<typeof PageIndex> | undefined)?.resultsTable;
+		if (table) {
+			for (const section of state.resultSections) {
+				!toValue(section.name) && table.hydrateResultSection(section);
+			}
+		}
+	});
+
 	observer = new IntersectionObserver(
 		([entry]) => {
 			if (entry!.isIntersecting) {
@@ -209,7 +224,7 @@ function closeClickEaterOnResize() {
 			</nav>
 		</div>
 	</header>
-	<NuxtPage />
+	<NuxtPage ref="page" />
 	<footer>
 		<ul>
 			<li>

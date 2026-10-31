@@ -2,15 +2,14 @@ import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
 import type { IGameImageData } from '@lolcalc/core/misc';
+import { IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion';
 import type { IVariableModifyMeta } from '@lolcalc/core/variables/game.js';
 import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
 import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, ALL_VARIABLE_TYPES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.js';
-import type { ShallowRef } from 'vue';
-import type { ComponentExposed } from 'vue-component-type-helpers';
-import type { CalculatorResultsTable } from '#components';
+import type { ShallowRef, ShallowReactive } from 'vue';
 import type { ICustomTotalSectionRow, IDamageResultTableSectionCustomValueRow, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const { vMinor } = PATCH_VERSION;
@@ -32,8 +31,8 @@ export interface ICalculatorState {
 	 * also has actual `DamageSource`s for some calculations like milio passive
 	 */
 	sourcesTargetsRef: [[sourceIds: ComputedRef<string[]>, sources: ComputedRef<DamageSource[]>], [targetIds: ComputedRef<string[]>, targets: ComputedRef<DamageSource[]>]];
-	resultColumns: ShallowRef<IDamageResultTableColumn[]>;
-	resultSections: ShallowRef<IDamageResultTableSection[]>;
+	resultColumns: ShallowReactive<IDamageResultTableColumn[]>;
+	resultSections: ShallowReactive<IDamageResultTableSection[]>;
 	resultsTableFlip: Ref<boolean>;
 	expandedSections: Ref<string[]>;
 	/** custom total row ids formatted like `${sectionId}_${rowId}` */
@@ -48,37 +47,35 @@ export function initCalculatorState(): ICalculatorState {
 	/* expected to have DamageSources added in `restoreState`, shallowRefs because otherwise ref properties inside of classes get messed up */
 	const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
-	const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+	const resultColumns = shallowReactive<IDamageResultTableColumn[]>([{ id: useId() }]);
 
 	const customValueRows = ref<IDamageResultTableSectionCustomValueRow[]>([]);
 	const customTotalRowIds = ref<string[]>([]);
 
-	const resultSections = ref<IDamageResultTableSection[]>([
+	const resultSections = shallowReactive<IDamageResultTableSection[]>([
 		{
 			id: ResultSectionId.Stats,
 			abilityId: { type: 'all', id: 'stats' },
 			name: 'stats',
 			isPermanent: true,
-			image: shallowRef([`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32]),
-			rows: shallowRef(
-				[
-					{
-						id: 'eqValue',
-						name: 'Inventory Value',
-						image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
-					},
-				].concat(
-					ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
-						const icon = STAT_ICON[statName as IChampionStatName];
-						const image: IGameImageData = typeof icon === 'string' ? [`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`, 20] : icon;
+			image: [`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32],
+			rows: [
+				{
+					id: 'eqValue',
+					name: 'Inventory Value',
+					image: [ICON_GOLD.src, ICON_GOLD.width, ICON_GOLD.height] as Extract<IGameImageData, any[]>,
+				},
+			].concat(
+				ALL_CHAMPION_STATS_ENTRIES.map(([statName, statMeta]) => {
+					const icon = STAT_ICON[statName as IChampionStatName];
+					const image: IGameImageData = typeof icon === 'string' ? [`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`, 20] : icon;
 
-						return {
-							id: statName as string,
-							name: statMeta.name,
-							image,
-						};
-					}),
-				),
+					return {
+						id: statName as string,
+						name: statMeta.name,
+						image,
+					};
+				}),
 			),
 			getCellValue(_section, row, source, _target) {
 				if (!source) {
@@ -103,15 +100,14 @@ export function initCalculatorState(): ICalculatorState {
 					value: `${source.computed.formattedStatTotals.value[row.id as IChampionStatName]}${CHAMPION_STAT_META[row.id as IChampionStatName].isPercentage ? '%' : ''}`,
 				};
 			},
-			hoverTooltipData: shallowRef(),
 		},
 		{
 			id: ResultSectionId.BasicAttack,
 			abilityId: { type: 'all', id: 'basicAttack' },
 			name: 'basic attack',
 			isPermanent: true,
-			image: shallowRef([imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32]),
-			rows: shallowRef([
+			image: [imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32],
+			rows: [
 				{
 					name: 'total',
 					id: 'total',
@@ -132,7 +128,7 @@ export function initCalculatorState(): ICalculatorState {
 					name: 'DPS',
 					id: 'dps',
 				},
-			]),
+			],
 			getCellValue() {
 				return { value: 'TODO' };
 			},
@@ -152,18 +148,12 @@ export function initCalculatorState(): ICalculatorState {
 			isPermanent: true,
 			isCustomTotal: true,
 			clearable: computed(() => customTotalRowIds.value.length),
-			image: shallowRef([imgUrl('game/assets/ux/ruby/db_mode_statuseffecticon_doom.png'), 64]),
-			rows: shallowRef([
-				{
-					id: 'cTtl-total',
-					name: 'total',
-				},
-			]),
+			image: [imgUrl('game/assets/ux/ruby/db_mode_statuseffecticon_doom.png'), 64],
+			rows: [{ id: 'cTtl-total', name: 'total' }],
 			getCellValue() {
 				console.warn("results section custom total 'getCellValue' called, should be handled manually");
 				return { value: 0, numberValue: 0 };
 			},
-			hoverTooltipData: shallowRef(),
 		},
 		{
 			id: ResultSectionId.CustomValue,
@@ -172,7 +162,7 @@ export function initCalculatorState(): ICalculatorState {
 			isPermanent: true,
 			isCustomValue: true,
 			clearable: computed(() => customValueRows.value.length),
-			image: shallowRef([imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32]),
+			image: [imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32],
 			rows: customValueRows,
 			getCellValue(_section, row, source) {
 				const { value: baseValue = 0, type } = row as IDamageResultTableSectionCustomValueRow;
@@ -191,9 +181,9 @@ export function initCalculatorState(): ICalculatorState {
 `,
 			),
 		},
-	]) as unknown as ShallowRef<IDamageResultTableSection[]>;
+	]);
 
-	const customTotalSection = resultSections.value.find((section) => section.isCustomTotal)!;
+	const customTotalSection = resultSections.find((section) => section.isCustomTotal)!;
 
 	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 		/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
@@ -201,7 +191,7 @@ export function initCalculatorState(): ICalculatorState {
 			customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
 				const [sectionId, rowId] = combinedId.split('_');
 
-				const section = resultSections.value.find((section) => section.id === sectionId)!;
+				const section = resultSections.find((section) => section.id === sectionId)!;
 				const rowIndex = toValue(section.rows).findIndex((row) => row.id === rowId)!;
 				const row = toValue(section.rows)[rowIndex]!;
 
@@ -228,7 +218,7 @@ export function initCalculatorState(): ICalculatorState {
 		resultColumns,
 		resultSections,
 		resultsTableFlip: ref(false),
-		expandedSections: ref<string[]>(resultSections.value.filter((section) => section.id !== ResultSectionId.Stats).map((section) => section.id)),
+		expandedSections: ref<string[]>(resultSections.filter((section) => section.id !== ResultSectionId.Stats).map((section) => section.id)),
 		customTotalRowIds,
 		isRestoringCustomTotalRows: ref(false),
 		computedCustomTotalRows,
@@ -361,12 +351,12 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		}
 
 		const saveColumnsToQuery =
-			resultColumns.value.slice(1).some((col) => col.source || col.target) ||
+			resultColumns.slice(1).some((col) => col.source || col.target) ||
 			damageSources.value.length > 1 ||
 			damageTargets.value.length > 1 ||
-			resultColumns.value[0]!.source !== damageSources.value[0] ||
-			resultColumns.value[0]!.target !== damageTargets.value[0];
-		for (const column of resultColumns.value) {
+			resultColumns[0]!.source !== damageSources.value[0] ||
+			resultColumns[0]!.target !== damageTargets.value[0];
+		for (const column of resultColumns) {
 			const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
 			if (saveColumnsToQuery) {
@@ -382,7 +372,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		}
 
 		const keptSections =
-			resultSections.value.filter(
+			resultSections.filter(
 				(section) =>
 					section.abilityId.type === 'all' ||
 					(section.abilityId.type === AbilityType.item
@@ -444,20 +434,20 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		return wholeState.length === 3 ? ['', ''] : [wholeState, queryState];
 	}
 
-	function restoreState(resultsTable: Ref<ComponentExposed<typeof CalculatorResultsTable>>) {
+	function restoreState(
+		/** as of `nuxt@4.6.3` `route.fullPath` that has to be read in `app.vue`'s `onMounted` due to https://github.com/nuxt/nuxt/issues/34651#issuecomment-6542510559 */
+		params: URLSearchParams,
+	) {
 		if (!import.meta.client) {
 			return;
 		}
-
-		const stateString: string | undefined = window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || window?.location.search;
-		const params = new URLSearchParams(stateString);
 
 		const version = params.get('v');
 		if (version !== STATE_VERSION) {
 			damageSources.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
-			resultColumns.value[0]!.source = damageSources.value[0];
-			resultColumns.value[0]!.target = damageTargets.value[0];
+			resultColumns[0]!.source = damageSources.value[0];
+			resultColumns[0]!.target = damageTargets.value[0];
 			return;
 		}
 
@@ -539,18 +529,18 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			if (source || target) {
 				noColumnsRestored = false;
-				i && resultsTable.value.addResultsColumn();
-				const column = resultColumns.value.at(-1)!;
+				// i && resultsTable.value.addResultsColumn();
+				const column = resultColumns.at(-1)!;
 				column.source = source;
 				column.target = target;
-				resultsTable.value.addComputedColumnSources(column);
+				// resultsTable.value.addComputedColumnSources(column);
 			}
 		}
 
 		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
-			resultColumns.value[0]!.source = damageSources.value[0];
-			resultColumns.value[0]!.target = damageTargets.value[0];
-			resultsTable.value.addComputedColumnSources(resultColumns.value[0]!);
+			resultColumns[0]!.source = damageSources.value[0];
+			resultColumns[0]!.target = damageTargets.value[0];
+			// resultsTable.value.addComputedColumnSources(resultColumns.value[0]!);
 		}
 
 		const restoredSectionPromises: Promise<any>[] = [];
@@ -565,10 +555,10 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			/* `all` (permanent) sections start with 'a-' */
 			if (id.startsWith('a-')) {
-				const sectionIndex = resultSections.value.findIndex((section) => section.id === id);
+				const sectionIndex = resultSections.findIndex((section) => section.id === id);
 				if (~sectionIndex) {
 					if (sectionIndex !== currentSectionIndex) {
-						resultSections.value.splice(currentSectionIndex, 0, resultSections.value.splice(sectionIndex, 1)[0]!);
+						resultSections.splice(currentSectionIndex, 0, resultSections.splice(sectionIndex, 1)[0]!);
 					}
 					const expandedIndex = expandedSections.value.indexOf(id);
 					if (isExpanded) {
@@ -583,7 +573,19 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			const abilityId = GameAbilityId.parse(id);
 			if (abilityId) {
-				restoredSectionPromises.push(resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded, currentSectionIndex));
+				/* name and image expected to be filled in results table with `hydrateResultSection` that's supposed to be called after `restoreState` is, currently done in `app.vue`'s `onMounted` */
+				const section = {
+					id,
+					abilityId,
+					notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
+					name: shallowRef(),
+					image: shallowRef(),
+					rows: shallowRef([]),
+					hoverTooltipData: shallowRef(),
+				} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
+
+				resultSections.splice(currentSectionIndex, 0, section);
+				isExpanded && expandedSections.value.push(section.id);
 				currentSectionIndex += 1;
 			}
 		}
@@ -599,7 +601,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 					const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
 					const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
 					if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
-						const section = resultSections.value[sectionIndex];
+						const section = resultSections[sectionIndex];
 						if (section && section.id !== ResultSectionId.Stats && section.id !== ResultSectionId.CustomTotal) {
 							const row = section && toValue(section.rows)[rowIndex];
 							if (row) {
@@ -624,7 +626,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				if (value !== undefined && !Number.isNaN(rawValue) && value > 0) {
 					const id = crypto.randomUUID();
 					customValueRows.value.push({ id, name: id, type: ALL_VARIABLE_TYPES[typeIndex]!, value });
-					resultsTable.value.computeCustomValueRow(customValueRows.value.at(-1)!);
+					// resultsTable.value.computeCustomValueRow(customValueRows.value.at(-1)!);
 				}
 			}
 		}

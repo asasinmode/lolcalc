@@ -87,6 +87,7 @@ export class GameAbilityId {
 		return `${typeIndex}-${id.id}`;
 	}
 
+	/** `undefined` when the ability couldn't be parsed, like when a nonexistent champion key is used */
 	static parse(value: string): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {

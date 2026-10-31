@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import type { ShallowRef } from 'vue';
-import type { ComponentExposed } from 'vue-component-type-helpers';
 import type { CalculatorResultsTable } from '#components';
 
 const { damageSources } = useCalculatorState();
-
-const resultsTable = useTemplateRef('resultsTable');
-
-const { saveState, restoreState } = useManageCalculatorState();
+const { saveState } = useManageCalculatorState();
 
 const showResults = ref(damageSources.value.some((source) => source.anythingFilled.value));
 if (!showResults.value) {
@@ -29,15 +24,15 @@ function saveStateOnVisibilitychange() {
 
 onMounted(() => {
 	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
-
-	callOnce(() => {
-		restoreState(resultsTable as ShallowRef<ComponentExposed<typeof CalculatorResultsTable>>);
-	});
 });
 
 onBeforeUnmount(() => {
 	document.removeEventListener('visibilitychange', saveStateOnVisibilitychange);
 });
+
+const resultsTable = useTemplateRef('resultsTable');
+
+defineExpose({ resultsTable });
 </script>
 
 <template>

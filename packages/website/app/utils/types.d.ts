@@ -20,9 +20,9 @@ export interface IDamageResultTableSection {
 	/* remove will be erase instead */
 	clearable?: ComputedRef<boolean | number | undefined>;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
-	name: string;
+	name?: MaybeRef<string | undefined>;
 	/** technically should always be present but it can be undefined while async stuff is resolving */
-	image: ShallowRef<IGameImageData | undefined>;
+	image: MaybeRef<IGameImageData | undefined>;
 	/** expected to be undefined only when loading */
 	getCellValue?: (
 		section: IDamageResultTableSection,
@@ -45,8 +45,8 @@ export interface IDamageResultTableSection {
 	selectValue?: string;
 	/** use with selectOptions */
 	selectLabel?: string;
-	hoverTooltipData: ShallowRef<string | IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps | Pick<IDragonHoverTooltipProps, 'precomputedDescription'> | undefined>;
-	rows: ShallowRef<IDamageResultTableSectionRow[]>;
+	hoverTooltipData?: ShallowRef<string | IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'> | IEffectHoverTooltipProps | Pick<IDragonHoverTooltipProps, 'precomputedDescription'> | undefined>;
+	rows: MaybeRef<IDamageResultTableSectionRow[]>;
 }
 
 export interface IDamageResultTableColumn {

@@ -2,7 +2,6 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
 	devtools: { enabled: true },
 	experimental: {
-		// chatgpt look into it, will/do i still need it with typescript 7?
 		typescriptPlugin: true,
 		early404: true,
 	},

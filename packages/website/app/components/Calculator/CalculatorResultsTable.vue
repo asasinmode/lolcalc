@@ -188,28 +188,28 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		type: option.type,
 		optionId: option.optionId,
 		optionName: option.optionName,
-		abilities: option.abilities.filter((ability) => !resultSections.value.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: option.abilities.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	}));
 
 	options.push({
 		optionId: 'items',
 		optionName: 'items',
 		type: 'item',
-		abilities: damageSectionItemAbilities.value.filter((ability) => !resultSections.value.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: damageSectionItemAbilities.value.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	});
 
 	options.push({
 		optionId: 'dragons',
 		optionName: 'dragons',
 		type: 'dragon',
-		abilities: damageSectionDragonAbilities.value.filter((ability) => !resultSections.value.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: damageSectionDragonAbilities.value.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	});
 
 	options.push({
 		optionId: 'effects',
 		optionName: 'effects',
 		type: 'effect',
-		abilities: damageSectionEffectAbilities.value.filter((ability) => !resultSections.value.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: damageSectionEffectAbilities.value.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	});
 
 	return options.filter((option) => option.abilities.length);
@@ -238,9 +238,9 @@ interface IComputedSectionRowColumn {
 	comparisonMap: Record<string, number>;
 }
 
-const customTotalSection = resultSections.value.find((section) => section.isCustomTotal)!;
+const customTotalSection = resultSections.find((section) => section.isCustomTotal)!;
 const customTotalSectionTotalRow = computed(() => toValue(customTotalSection.rows)[0]);
-const customValueSection = resultSections.value.find((section) => section.isCustomValue)!;
+const customValueSection = resultSections.find((section) => section.isCustomValue)!;
 
 const computedResults = ref<Map<string, IComputedSection>>(new Map());
 computedResults.value = new Map<string, IComputedSection>(
@@ -249,15 +249,21 @@ computedResults.value = new Map<string, IComputedSection>(
 			[customTotalSection.id, computeSection(customTotalSection)],
 			[customValueSection.id, computeSection(customValueSection)],
 		] as [string, IComputedSection][]
-	).concat(resultSections.value.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
+	).concat(resultSections.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
 );
+
+for (const section of resultSections) {
+	if (!section.name) {
+		hydrateResultSection(section);
+	}
+}
 
 const customTotalComputedSection = computedResults.value.get(ResultSectionId.CustomTotal)!;
 const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('cTtl-total')!;
 const customValueComputedSection = computedResults.value.get(ResultSectionId.CustomValue)!;
 
 function addComputedSection(sectionId: string) {
-	const section = computeSection(resultSections.value.find((section) => section.id === sectionId)!);
+	const section = computeSection(resultSections.find((section) => section.id === sectionId)!);
 	calculateComputedSectionComparisonMaps(section);
 	computedResults.value.set(sectionId, section);
 }
@@ -272,7 +278,7 @@ function computeSection(section: IDamageResultTableSection): IComputedSection {
 function computeSectionRow(section: IDamageResultTableSection, row: IDamageResultTableSectionRow): IComputedSectionRow {
 	return {
 		rowId: row.id,
-		columns: new Map(resultColumns.value.map((column) => [column.id, computeSectionRowColumn(section, row, column)])),
+		columns: new Map(resultColumns.map((column) => [column.id, computeSectionRowColumn(section, row, column)])),
 	};
 }
 
@@ -330,14 +336,14 @@ function addResultsColumn() {
 	const column: IDamageResultTableColumn = {
 		id: crypto.randomUUID(),
 	};
-	resultColumns.value.push(column);
+	resultColumns.push(column);
 	addComputedColumn(column);
 	debouncedSaveState();
 }
 
 function addComputedColumn(column: IDamageResultTableColumn) {
 	for (const section of computedResults.value.values()) {
-		const resultSection = resultSections.value.find((rSection) => rSection.id === section.sectionId)!;
+		const resultSection = resultSections.find((rSection) => rSection.id === section.sectionId)!;
 		for (const row of section.rows.values()) {
 			const resultRow = toValue(resultSection.rows).find((rRow) => rRow.id === row.rowId)!;
 			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow, column));
@@ -348,7 +354,7 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 function startRemovingColumn(event: MouseEvent, index: number) {
 	const removeButton = (event.target as HTMLElement).closest('button');
 	const undoRemoveButton = removeButton?.nextElementSibling?.nextElementSibling as HTMLButtonElement | undefined;
-	if (!undoRemoveButton || !(resultColumns.value[index]?.source || resultColumns.value[index]?.target)) {
+	if (!undoRemoveButton || !(resultColumns[index]?.source || resultColumns[index]?.target)) {
 		removeResultsColumn(index);
 		return;
 	}
@@ -381,7 +387,7 @@ function startRemovingColumn(event: MouseEvent, index: number) {
 }
 
 function removeResultsColumn(index: number) {
-	const [column] = resultColumns.value.splice(index, 1);
+	const [column] = resultColumns.splice(index, 1);
 	for (const section of computedResults.value.values()) {
 		for (const row of section.rows.values()) {
 			row.columns.delete(column!.id);
@@ -417,7 +423,7 @@ const dragonVariableCellValue: IDamageResultTableSection['getCellValue'] = (sect
 
 const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, row, source, _target) => {
 	if (source) {
-		const { gameAbilityId } = (section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
+		const { gameAbilityId } = toValue(section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
 		const computedDescription = source.computed.abilities.value[gameAbilityId.abilityKey!][gameAbilityId.abilityVariantIndex!];
 		return gameVariablesCellValue(row.id, computedDescription?.variables);
 	}
@@ -491,33 +497,42 @@ function submitResultsSection(event: SubmitEvent) {
 
 /** to be used for removing a section that was eagerly added but during full resolve turned out to be incorrect */
 function removeBeingAddedSection(section: IDamageResultTableSection) {
-	const index = resultSections.value.indexOf(section);
-	~index && resultSections.value.splice(index, 1);
+	const index = resultSections.indexOf(section);
+	~index && resultSections.splice(index, 1);
 	const expandedIndex = expandedSections.value.indexOf(section.id);
 	~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
-	triggerRef(resultSections);
 }
 
-async function addResultsSection(abilityId: IGameAbilityId, name?: string, expand = true, spliceAt = 0) {
+async function addResultsSection(abilityId: IGameAbilityId, name: string, expand = true, spliceAt = 0) {
 	const id = GameAbilityId.stringify(abilityId);
-	if (resultSections.value.some((section) => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
+	if (resultSections.some((section) => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
 		return;
 	}
 
 	const section = {
 		id,
-		/* if empty, it's set when underlying ability is resolved but put it here to avoid recomputing if adding from options (it's empty when restoring) */
-		name: name!,
+		name,
 		abilityId,
-		/* expected to be filled by async stuff below */
+		notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
 		image: shallowRef(),
 		rows: shallowRef([]),
 		hoverTooltipData: shallowRef(),
-		notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
-	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
+	} satisfies Omit<IDamageResultTableSection, 'getCellValue'>;
 
-	resultSections.value.splice(spliceAt, 0, section);
+	resultSections.splice(spliceAt, 0, section);
 	expand && expandedSections.value.push(section.id);
+
+	hydrateResultSection(section);
+}
+
+async function hydrateResultSection(section: IDamageResultTableSection) {
+	const { abilityId } = section;
+	if (abilityId.type === 'all') return;
+
+	let name = toValue(section.name),
+		image: IGameImageData | undefined,
+		rows: IDamageResultTableSectionRow[],
+		hoverTooltipData: any;
 
 	if (abilityId.type === AbilityType.champion) {
 		const champion = await useChampion(abilityId.id);
@@ -539,11 +554,11 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 			},
 		});
 
-		section.name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
-		section.image.value = [abilityImage(precomputedDescription.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
-		section.rows.value = await getAbilitySectionRows(precomputedDescription);
+		name ??= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
+		image = [abilityImage(precomputedDescription.image, champion.id, `${flipResults.value ? 'target' : 'source'}s`), abilityImageSize(champion.id)];
+		rows = await getAbilitySectionRows(precomputedDescription);
+		hoverTooltipData = { precomputedDescription };
 		section.getCellValue = abilityVariableCellValue;
-		section.hoverTooltipData.value = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.item) {
 		const item = ITEMS[abilityId.id]!;
 
@@ -552,11 +567,11 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 			overrideVariables: specificKnownVariables((ITEM_SPECIFICS as IHypotheticalItemSpecifics)[abilityId.id as keyof IHypotheticalItemSpecifics]?.variables),
 		})!;
 
-		section.name ??= item.name;
-		section.image.value = [imgUrl(`img/item/${item.image}`, true), 64];
-		section.rows.value = await getAbilitySectionRows(precomputedDescription);
+		name ??= item.name;
+		image = [imgUrl(`img/item/${item.image}`, true), 64];
+		rows = await getAbilitySectionRows(precomputedDescription);
+		hoverTooltipData = { precomputedDescription };
 		section.getCellValue = itemVariableCellValue;
-		section.hoverTooltipData.value = { precomputedDescription };
 	} else if (abilityId.type === AbilityType.dragon) {
 		if (!INTERESTING_SOULS_DRAGONS.includes(abilityId.id)) {
 			removeBeingAddedSection(section);
@@ -567,11 +582,11 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 			replaceWithName: true,
 			overrideVariables: specificKnownVariables((DRAGON_SPECIFICS as IHypotheticalDragonSpecifics)[abilityId.id]?.[abilityId.subtype]?.variables),
 		});
-		section.name ??= `${abilityId.id} Soul`;
-		section.image.value = await gameAbilityImage(abilityId);
-		section.rows.value = await getAbilitySectionRows(precomputedDescription);
+		name ??= `${abilityId.id} Soul`;
+		image = await gameAbilityImage(abilityId);
+		rows = await getAbilitySectionRows(precomputedDescription);
+		hoverTooltipData = { precomputedDescription };
 		section.getCellValue = dragonVariableCellValue;
-		section.hoverTooltipData.value = { precomputedDescription };
 	} else {
 		const effectSpecific = (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[abilityId.id]!;
 		if (!effectSpecific.variables) {
@@ -579,9 +594,9 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 			return;
 		}
 
-		section.name ??= effectSpecific.label;
-		section.image.value = await gameAbilityImage(abilityId);
-		section.rows.value = await getAbilitySectionRows({
+		name = effectSpecific.label;
+		image = await gameAbilityImage(abilityId);
+		rows = await getAbilitySectionRows({
 			variables: new Map(
 				Object.entries(effectSpecific.variables.known!).map(([variableName, variableValue]) => {
 					return [
@@ -597,15 +612,18 @@ async function addResultsSection(abilityId: IGameAbilityId, name?: string, expan
 			),
 			unknownVariables: [],
 		});
+		hoverTooltipData = { abilityId };
 		section.getCellValue = effectVariableCellValue;
-		section.hoverTooltipData.value = { abilityId };
 	}
 
+	if (name && isRef(section.name)) {
+		section.name.value = name;
+	}
+	(section.image as Ref).value = image;
+	(section.rows as Ref).value = rows;
+	(section.hoverTooltipData as Ref).value = hoverTooltipData;
+
 	addComputedSection(section.id);
-	triggerRef(resultSections);
-	triggerRef(section.image);
-	triggerRef(section.rows);
-	triggerRef(section.hoverTooltipData);
 }
 
 async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameVariablesRV, 'variables' | 'unknownVariables'>): Promise<UnwrapRef<IDamageResultTableSection['rows']>> {
@@ -635,14 +653,14 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 }
 
 function removeResultsSection(index: number) {
-	const section = resultSections.value[index]!;
+	const section = resultSections[index]!;
 	if (section.isCustomTotal) {
 		customTotalRowIds.value.length = 0;
 	} else if (section.isCustomValue) {
 		customValueRows.value.length = 0;
 		computedResults.value.get(section.id)?.rows.clear();
 	} else {
-		const [section] = resultSections.value.splice(index, 1);
+		const [section] = resultSections.splice(index, 1);
 		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
 			if (customTotalRowIds.value[i]!.startsWith(section!.id)) {
 				customTotalRowIds.value.splice(i, 1);
@@ -676,8 +694,8 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 		damageSourceWatchers.get(id)?.();
 		damageSourceWatchers.delete(id);
 
-		for (let i = 0; i < resultColumns.value.length; i++) {
-			const column = resultColumns.value[i]!;
+		for (let i = 0; i < resultColumns.length; i++) {
+			const column = resultColumns[i]!;
 			if (column[columnProperty]?.id === id) {
 				column[columnProperty] = undefined;
 				recalculateColumn(column);
@@ -691,7 +709,7 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 			source.id,
 			watch(source.getWatchable(), () => {
 				debouncedSaveState();
-				const columns = resultColumns.value.filter((column) => column.source?.id === source.id || column.target?.id === source.id);
+				const columns = resultColumns.filter((column) => column.source?.id === source.id || column.target?.id === source.id);
 				for (const column of columns) {
 					recalculateColumn(column);
 				}
@@ -707,7 +725,7 @@ onBeforeUnmount(() => {
 });
 
 function sectionRowCells(sectionId: string, rowId: string, rowSectionId?: string) {
-	return resultColumns.value.map((column) => {
+	return resultColumns.map((column) => {
 		return {
 			key: `${sectionId}-${rowId}-${column.id}`,
 			computedColumn: computedResults.value
@@ -725,13 +743,13 @@ function columnDamageSourcesColorStyles(column: Pick<IDamageResultTableColumn, '
 	};
 }
 
-const columnDamageSourceColors = computed(() => resultColumns.value.map((column) => columnDamageSourcesColorStyles(column)));
+const columnDamageSourceColors = computed(() => resultColumns.map((column) => columnDamageSourcesColorStyles(column)));
 
 function recalculateAllColumns() {
 	/* for now it's only called when `flipResults` is flipped */
 	debouncedSaveState();
-	for (const column of resultColumns.value) {
-		for (const section of resultSections.value) {
+	for (const column of resultColumns) {
+		for (const section of resultSections) {
 			for (const row of toValue(section.rows)) {
 				computedResults.value
 					.get(section.id)!
@@ -746,7 +764,7 @@ function recalculateAllColumns() {
 function recalculateColumn(column: IDamageResultTableColumn) {
 	addComputedColumnSources(column);
 
-	for (const section of resultSections.value) {
+	for (const section of resultSections) {
 		const rows = toValue(section.rows);
 		if (rows) {
 			for (const row of rows) {
@@ -817,20 +835,18 @@ function calculateComputedRowComparisonMap(row: IComputedSectionRow, sectionId: 
 }
 
 const cleanableColumnsSections = computed<[[index: number, column: IDamageResultTableColumn][], [index: number, section: IDamageResultTableSection][]]>(() => {
-	const anyColumnFilled = resultColumns.value.some((column) => column.source || column.target);
-	const columns = (resultColumns.value.map((column, index) => [index, column]) as [number, IDamageResultTableColumn][]).filter(
-		([index, column]) => (anyColumnFilled || index !== resultColumns.value.length - 1) && !column.source && !column.target,
-	);
+	const anyColumnFilled = resultColumns.some((column) => column.source || column.target);
+	const columns = (resultColumns.map((column, index) => [index, column]) as [number, IDamageResultTableColumn][]).filter(([index, column]) => (anyColumnFilled || index !== resultColumns.length - 1) && !column.source && !column.target);
 
-	const sections = (resultSections.value.map((section, index) => [index, section]) as [number, IDamageResultTableSection][]).filter(([, section]) => {
+	const sections = (resultSections.map((section, index) => [index, section]) as [number, IDamageResultTableSection][]).filter(([, section]) => {
 		if (section.abilityId.type === 'all') {
 			return false;
 		} else if (section.abilityId.type === AbilityType.item) {
-			return !resultColumns.value.some((column) => column.source?.items.value.some((item) => item?.id === section.abilityId.id) || column.target?.items.value.some((item) => item?.id === section.abilityId.id));
+			return !resultColumns.some((column) => column.source?.items.value.some((item) => item?.id === section.abilityId.id) || column.target?.items.value.some((item) => item?.id === section.abilityId.id));
 		} else if (section.abilityId.type === AbilityType.champion) {
-			return !resultColumns.value.some((column) => column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id);
+			return !resultColumns.some((column) => column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id);
 		} else if (section.abilityId.type === AbilityType.effect) {
-			return !resultColumns.value.some(
+			return !resultColumns.some(
 				(column) =>
 					column.source?.appliedEffects.value.some((effect) => effect.abilityId.id === section.abilityId.id) ||
 					column.source?.effectsAppliedToTarget.value.some((effectEntry) => effectEntry[0].id === section.abilityId.id) ||
@@ -839,7 +855,7 @@ const cleanableColumnsSections = computed<[[index: number, column: IDamageResult
 		}
 
 		/* this could consider dragon stacks too but atm only souls have abilities that can be added to results */
-		return !resultColumns.value.some((column) => column.source?.dragonSoul.value === section.abilityId.id || column._computedTarget?.dragonSoul.value === section.abilityId.id);
+		return !resultColumns.some((column) => column.source?.dragonSoul.value === section.abilityId.id || column._computedTarget?.dragonSoul.value === section.abilityId.id);
 	});
 
 	return [columns, sections];
@@ -853,13 +869,13 @@ function cleanupUnused() {
 				row.columns.delete(column.id);
 			}
 		}
-		resultColumns.value.splice(columnIndex, 1);
+		resultColumns.splice(columnIndex, 1);
 	}
 
 	for (let i = cleanableColumnsSections.value[1].length - 1; i >= 0; i--) {
 		const [sectionIndex, section] = cleanableColumnsSections.value[1][i]!;
 		computedResults.value.delete(section.id);
-		resultSections.value.splice(sectionIndex, 1);
+		resultSections.splice(sectionIndex, 1);
 
 		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
 			const [sectionId] = customTotalRowIds.value[i]!.split('_');
@@ -883,31 +899,29 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 }
 
 function highlightColumnIdSources(id: string) {
-	const column = resultColumns.value.find((column) => column.id === id);
+	const column = resultColumns.find((column) => column.id === id);
 	column && highlightColumnSources(column);
 }
 
 function lowlightColumnIdSources(id: string) {
-	const column = resultColumns.value.find((column) => column.id === id);
+	const column = resultColumns.find((column) => column.id === id);
 	column && lowlightColumnSources(column);
 }
 
 const highlightedColumns = computed(() =>
-	resultColumns.value.map((column) =>
-		highlightedColumnId.value ? column.id === highlightedColumnId.value : (column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)),
-	),
+	resultColumns.map((column) => (highlightedColumnId.value ? column.id === highlightedColumnId.value : (column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)))),
 );
 
 function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 	const column: IDamageResultTableColumn = copy
 		? {
 				id: crypto.randomUUID(),
-				source: resultColumns.value[fromIndex]!.source,
-				target: resultColumns.value[fromIndex]!.target,
+				source: resultColumns[fromIndex]!.source,
+				target: resultColumns[fromIndex]!.target,
 			}
-		: resultColumns.value.splice(fromIndex, 1)[0]!;
+		: resultColumns.splice(fromIndex, 1)[0]!;
 
-	resultColumns.value.splice(toIndex, 0, column);
+	resultColumns.splice(toIndex, 0, column);
 	copy && addComputedColumn(column);
 	debouncedSaveState();
 }
@@ -959,18 +973,18 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	if (globalKeyModifiers.value.alt) {
 		const column: IDamageResultTableColumn = {
 			id: crypto.randomUUID(),
-			source: resultColumns.value[fromIndex]!.source,
-			target: resultColumns.value[fromIndex]!.target,
+			source: resultColumns[fromIndex]!.source,
+			target: resultColumns[fromIndex]!.target,
 		};
-		resultColumns.value.splice(toIndex, 0, column);
+		resultColumns.splice(toIndex, 0, column);
 		addComputedColumn(column);
 		return;
 	}
 
-	const [column] = resultColumns.value.splice(fromIndex, 1);
+	const [column] = resultColumns.splice(fromIndex, 1);
 	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
-	resultColumns.value.splice(adjustedIndex, 0, column!);
+	resultColumns.splice(adjustedIndex, 0, column!);
 	debouncedSaveState();
 }
 
@@ -1003,8 +1017,8 @@ function getDropTargetIndex(event: DragEvent, index: number, fromIndex: number |
 }
 
 function moveResultSection(fromIndex: number, toIndex: number) {
-	const [section] = resultSections.value.splice(fromIndex, 1);
-	resultSections.value.splice(toIndex, 0, section!);
+	const [section] = resultSections.splice(fromIndex, 1);
+	resultSections.splice(toIndex, 0, section!);
 	debouncedSaveState();
 }
 
@@ -1053,10 +1067,10 @@ function onResultSectionDrop(event: DragEvent, index: number, isHeader?: boolean
 
 	sectionDraggedFromIndex = undefined;
 
-	const [section] = resultSections.value.splice(fromIndex, 1);
+	const [section] = resultSections.splice(fromIndex, 1);
 	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
-	resultSections.value.splice(adjustedIndex, 0, section!);
+	resultSections.splice(adjustedIndex, 0, section!);
 	debouncedSaveState();
 }
 
@@ -1125,8 +1139,8 @@ interface IColumnAddableOption {
 	itemOptionsIndexes: number[];
 }
 
-const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() => resultColumns.value.map((column) => columnAddableOption(column.source)));
-const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() => resultColumns.value.map((column) => columnAddableOption(column.target)));
+const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() => resultColumns.map((column) => columnAddableOption(column.source)));
+const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() => resultColumns.map((column) => columnAddableOption(column.target)));
 
 function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption {
 	const rv: IColumnAddableOption = {
@@ -1186,7 +1200,7 @@ function onCustomTotalRowsChange() {
 
 function recomputeCustomTotalRows() {
 	if (customTotalSectionTotalRow.value) {
-		for (const column of resultColumns.value) {
+		for (const column of resultColumns) {
 			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow.value, column));
 		}
 		calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
@@ -1213,7 +1227,7 @@ onBeforeUnmount(() => {
 
 const colW = computed(() => {
 	const growUpToCols = 4;
-	const n = growUpToCols - Math.min(resultColumns.value.length, growUpToCols);
+	const n = growUpToCols - Math.min(resultColumns.length, growUpToCols);
 
 	return {
 		/* + padding left */
@@ -1223,7 +1237,7 @@ const colW = computed(() => {
 	};
 });
 
-const maxCols = computed(() => 2 + resultColumns.value.length);
+const maxCols = computed(() => 2 + resultColumns.length);
 
 const { updateThumbnail } = useDamageSourceThumbnail();
 let thumbnailTooltipPopoverEl: HTMLElement | null = null;
@@ -1231,7 +1245,7 @@ let thumbnailTooltipPopoverEl: HTMLElement | null = null;
 const { bind: bindThumbnailTriggerAttrs, bindPopover: bindThumbnailPopoverAttrs } = useHoverTooltip<{ index: number; isTarget?: boolean }>({
 	el: () => thumbnailTooltipPopoverEl,
 	beforeShow({ index, isTarget }, trigger) {
-		const damageSource = resultColumns.value[index]![isTarget ? 'target' : 'source'];
+		const damageSource = resultColumns[index]![isTarget ? 'target' : 'source'];
 		if (!damageSource) return false;
 		const popover = trigger.parentElement?.lastElementChild;
 		if (popover) {
@@ -1276,7 +1290,7 @@ function onCustomValueRowChange(row: IDamageResultTableSectionRow) {
 function recomputeCustomValueRow(row: IDamageResultTableSectionRow) {
 	const computedRow = customValueComputedSection?.rows.get(row.id);
 	if (computedRow) {
-		for (const column of resultColumns.value) {
+		for (const column of resultColumns) {
 			computedRow.columns.set(column.id, computeSectionRowColumn(customValueSection, row, column));
 		}
 		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
@@ -1316,9 +1330,10 @@ function removeCustomValueRow(rowIndex: number) {
 }
 
 defineExpose({
-	addResultsColumn,
-	addComputedColumnSources,
-	addResultsSection,
+	// addResultsColumn,
+	// addComputedColumnSources,
+	// addResultsSection,
+	hydrateResultSection,
 	computeCustomValueRow,
 });
 </script>
@@ -1580,8 +1595,8 @@ defineExpose({
 						</td>
 						<th :id="`results-header-${section.id}`" scope="colgroup" :colspan="1 + resultColumns.length">
 							<div v-bind="sectionHasTooltip(section) ? bindSectionHoverTooltip({ section }) : undefined">
-								<img v-bind="section.image && gameImageAttrs(section.image as unknown as IGameImageData, 24)" aria-hidden="true" />
-								<span v-html="section.image ? `${section.name}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
+								<img v-bind="toValue(section.image) && gameImageAttrs(toValue(section.image)!, 24)" aria-hidden="true" />
+								<span v-html="toValue(section.image) ? `${toValue(section.name)}${section.abilityId.type === AbilityType.effect ? ' effect' : ''}` : 'loading...'" />
 								<template v-if="sectionHasTooltip(section)">
 									<article v-if="section.abilityId.type === AbilityType.item" popover="hint" class="hover-tooltip champion-item" :data-expanded="isTooltipExpanded || undefined">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
@@ -1589,7 +1604,7 @@ defineExpose({
 									<LolChampionAbilityHoverTooltip v-else-if="section.abilityId.type === AbilityType.champion" v-bind="section.hoverTooltipData as any" />
 									<LolEffectHoverTooltip v-else-if="section.abilityId.type === AbilityType.effect" v-bind="section.hoverTooltipData as any" />
 									<LolDragonHoverTooltip v-else-if="section.abilityId.type === AbilityType.dragon" v-bind="section.hoverTooltipData as any" />
-									<article v-else-if="typeof toValue(section.hoverTooltipData) === 'string'" popover="hint" class="hover-tooltip custom game-description info-tooltip" v-html="section.hoverTooltipData" />
+									<article v-else-if="typeof section.hoverTooltipData === 'string'" popover="hint" class="hover-tooltip custom game-description info-tooltip" v-html="section.hoverTooltipData" />
 								</template>
 								<template v-if="section.selectOptions?.length">
 									<label :for="`results-header-select-${section.id}`">
@@ -2109,7 +2124,7 @@ defineExpose({
 
 							> span,
 							> select {
-								--at-apply: 'text-lg font-500';
+								--at-apply: 'text-lg font-500 align-middle';
 							}
 
 							> span {
