@@ -173,7 +173,7 @@ export interface IVariableValueResult<T = IConcreteVariableValue | [IConcreteVar
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
-	allValues?: number[];
+	allValues?: number[] | null;
 	meta?: IVariableMeta;
 	/**
 	 * usually when value was calculated in some way and might have floating points that should be rounded in description

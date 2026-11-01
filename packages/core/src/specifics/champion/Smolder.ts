@@ -1,4 +1,3 @@
-import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type ISmolder from '@lolcalc/data/files/champion/Smolder.json';
 import { VariableType } from '@lolcalc/shared';
 import type { IChampionSpecific } from '../champion.ts';
