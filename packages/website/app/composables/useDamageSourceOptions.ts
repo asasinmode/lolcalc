@@ -12,7 +12,7 @@ export function useDamageSourceOptions() {
 	const { damageSources, damageTargets } = useCalculatorState();
 
 	return {
-		sourceOptions: computed(() => transformToOptions(damageSources.value)),
-		targetOptions: computed(() => transformToOptions(damageTargets.value)),
+		sourceOptions: computed(() => transformToOptions(damageSources)),
+		targetOptions: computed(() => transformToOptions(damageTargets)),
 	};
 }

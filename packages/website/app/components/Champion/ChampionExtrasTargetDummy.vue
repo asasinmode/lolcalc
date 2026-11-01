@@ -86,7 +86,7 @@ function copyFrom(event: SubmitEvent) {
 		stats = 'baseOnLevel';
 	}
 
-	const source = damageSources.value.find((source) => source.id === copyFromId) ?? damageTargets.value.find((source) => source.id === copyFromId);
+	const source = damageSources.find((source) => source.id === copyFromId) ?? damageTargets.find((source) => source.id === copyFromId);
 	if (!source) {
 		console.warn(`no damage source with id ${copyFromId} found`);
 		return;

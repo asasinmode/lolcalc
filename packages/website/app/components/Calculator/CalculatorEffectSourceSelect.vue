@@ -37,12 +37,12 @@ const { updateThumbnail } = useDamageSourceThumbnail();
 
 const selectedText = computed(() => {
 	if (value.value && !value.value?.listedChampion.value) {
-		let index = damageSources.value.indexOf(value.value);
+		let index = damageSources.indexOf(value.value);
 		if (~index) {
 			return `s${index + 1}`;
 		}
 
-		index = damageTargets.value.indexOf(value.value);
+		index = damageTargets.indexOf(value.value);
 		if (~index) {
 			return `t${index + 1}`;
 		}
@@ -53,13 +53,13 @@ const selectedText = computed(() => {
 });
 
 function updateThumbnailHideTooltip(id?: string) {
-	const damageSource = id ? (damageSources.value.find((source) => source.id === id) ?? damageTargets.value.find((target) => target.id === id)) : undefined;
+	const damageSource = id ? (damageSources.find((source) => source.id === id) ?? damageTargets.find((target) => target.id === id)) : undefined;
 	if (id && !damageSource) {
 		console.warn(
 			'[CalculatorEffectSourceSelect] failed to update model value, unknown damage source id',
 			id,
-			damageSources.value.map((s) => s.id),
-			damageTargets.value.map((t) => t.id),
+			damageSources.map((s) => s.id),
+			damageTargets.map((t) => t.id),
 			value.value,
 		);
 	}

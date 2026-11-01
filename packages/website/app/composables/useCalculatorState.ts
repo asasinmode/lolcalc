@@ -24,8 +24,8 @@ export const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
 
 export interface ICalculatorState {
-	damageSources: ShallowRef<DamageSource[]>;
-	damageTargets: ShallowRef<DamageSource[]>;
+	damageSources: ShallowReactive<DamageSource[]>;
+	damageTargets: ShallowReactive<DamageSource[]>;
 	/**
 	 * map of **filled** sources/targets ids for restoring/saving DamageSource.appliedEffects state
 	 * also has actual `DamageSource`s for some calculations like milio passive
@@ -46,8 +46,8 @@ export interface ICalculatorState {
 
 export function initCalculatorState(): ICalculatorState {
 	/* expected to have DamageSources added in `restoreState`, shallowRefs because otherwise ref properties inside of classes get messed up */
-	const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
-	const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
+	const damageSources = shallowReactive<DamageSource[]>([]);
+	const damageTargets = shallowReactive<DamageSource[]>([]);
 	const resultColumns = shallowReactive<IDamageResultTableColumn[]>([{ id: useId(), source: shallowRef(), target: shallowRef() }]);
 
 	const customValueRows = ref<IDamageResultTableSectionCustomValueRow[]>([]);
@@ -213,8 +213,8 @@ export function initCalculatorState(): ICalculatorState {
 		damageSources,
 		damageTargets,
 		sourcesTargetsRef: [
-			[computed(() => damageSources.value.filter((source) => source.anythingFilled.value).map((source) => source.id)), computed(() => damageSources.value.filter((source) => source.anythingFilled.value))],
-			[computed(() => damageTargets.value.filter((target) => target.anythingFilled.value).map((target) => target.id)), computed(() => damageTargets.value.filter((target) => target.anythingFilled.value))],
+			[computed(() => damageSources.filter((source) => source.anythingFilled.value).map((source) => source.id)), computed(() => damageSources.filter((source) => source.anythingFilled.value))],
+			[computed(() => damageTargets.filter((target) => target.anythingFilled.value).map((target) => target.id)), computed(() => damageTargets.filter((target) => target.anythingFilled.value))],
 		],
 		resultColumns,
 		resultSections,
@@ -263,8 +263,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 	const damageSourcesState = computed<[state: string, sourceIndex: number][]>(() => {
 		const rv: [string, number][] = [];
-		for (let i = 0; i < damageSources.value.length; i++) {
-			const damageSource = damageSources.value[i]!;
+		for (let i = 0; i < damageSources.length; i++) {
+			const damageSource = damageSources[i]!;
 			if (damageSource.anythingFilled.value) {
 				const params = new URLSearchParams();
 				params.append('src', (damageSource.stringifiedData as unknown as Ref<string>).value);
@@ -276,8 +276,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 	const damageTargetsState = computed<[state: string, sourceIndex: number][]>(() => {
 		const rv: [string, number][] = [];
-		for (let i = 0; i < damageTargets.value.length; i++) {
-			const damageSource = damageTargets.value[i]!;
+		for (let i = 0; i < damageTargets.length; i++) {
+			const damageSource = damageTargets[i]!;
 			if (damageSource.anythingFilled.value) {
 				const params = new URLSearchParams();
 				params.append('tgt', (damageSource.stringifiedData as unknown as Ref<string>).value);
@@ -321,8 +321,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		const savedDragonsSoulAbilities = new Set<IDragonName>();
 
 		function savedUsedResultColumnIds(column: IDamageResultTableColumn): [sourceIndex: number, targetIndex: number] {
-			const columnSourceIndex = column.source.value ? damageSources.value.indexOf(column.source.value) : -1;
-			const columnTargetIndex = column.target.value ? damageTargets.value.indexOf(column.target.value) : -1;
+			const columnSourceIndex = column.source.value ? damageSources.indexOf(column.source.value) : -1;
+			const columnTargetIndex = column.target.value ? damageTargets.indexOf(column.target.value) : -1;
 			if (~columnSourceIndex || ~columnTargetIndex) {
 				column.source.value?.champion.value?.id && savedChampionIds.add(column.source.value.champion.value!.id);
 				column.target.value?.champion.value?.id && savedChampionIds.add(column.target.value.champion.value!.id);
@@ -353,10 +353,10 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 		const saveColumnsToQuery =
 			resultColumns.slice(1).some((col) => col.source.value || col.target.value) ||
-			damageSources.value.length > 1 ||
-			damageTargets.value.length > 1 ||
-			resultColumns[0]!.source.value !== damageSources.value[0] ||
-			resultColumns[0]!.target.value !== damageTargets.value[0];
+			damageSources.length > 1 ||
+			damageTargets.length > 1 ||
+			resultColumns[0]!.source.value !== damageSources[0] ||
+			resultColumns[0]!.target.value !== damageTargets[0];
 		for (const column of resultColumns) {
 			const [columnSourceIndex, columnTargetIndex] = savedUsedResultColumnIds(column);
 
@@ -445,32 +445,32 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 		const version = params.get('v');
 		if (version !== STATE_VERSION) {
-			damageSources.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
-			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
-			resultColumns[0]!.source.value = damageSources.value[0];
-			resultColumns[0]!.target.value = damageTargets.value[0];
+			damageSources.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
+			damageTargets.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
+			resultColumns[0]!.source.value = damageSources[0];
+			resultColumns[0]!.target.value = damageTargets[0];
 			return;
 		}
 
 		const savedSources = params.getAll('src');
 		if (savedSources.length) {
 			for (const data of savedSources) {
-				damageSources.value.push(DamageSource.fromStringifiedData(data, sourcesTargetsRef));
+				damageSources.push(DamageSource.fromStringifiedData(data, sourcesTargetsRef));
 			}
 		} else {
-			damageSources.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
+			damageSources.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 		}
 
 		const savedTargets = params.getAll('tgt');
 		if (savedTargets.length) {
 			for (const data of savedTargets) {
-				damageTargets.value.push(DamageSource.fromStringifiedData(data, sourcesTargetsRef));
+				damageTargets.push(DamageSource.fromStringifiedData(data, sourcesTargetsRef));
 			}
 		} else {
-			damageTargets.value.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
+			damageTargets.push(new DamageSource(undefined, undefined, undefined, sourcesTargetsRef));
 		}
 
-		for (const source of damageSources.value) {
+		for (const source of damageSources) {
 			if (source.fromStringifiedEffectSources?.length) {
 				for (let i = 0; i < source.appliedEffects.value.length; i++) {
 					const stringifiedEffectSource = source.fromStringifiedEffectSources[i];
@@ -478,14 +478,14 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 						const group = stringifiedEffectSource[0] === 's' ? damageSources : damageTargets;
 						const index = Number.parseInt(stringifiedEffectSource.slice(1));
 						if (!Number.isNaN(index)) {
-							source.appliedEffects.value[i]!.source.value = group.value[index];
+							source.appliedEffects.value[i]!.source.value = group[index];
 						}
 					}
 				}
 				source.fromStringifiedEffectSources = undefined;
 			}
 		}
-		for (const target of damageTargets.value) {
+		for (const target of damageTargets) {
 			if (target.fromStringifiedEffectSources?.length) {
 				for (let i = 0; i < target.appliedEffects.value.length; i++) {
 					const stringifiedEffectSource = target.fromStringifiedEffectSources[i];
@@ -493,7 +493,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 						const group = stringifiedEffectSource[0] === 's' ? damageSources : damageTargets;
 						const index = Number.parseInt(stringifiedEffectSource.slice(1));
 						if (!Number.isNaN(index)) {
-							target.appliedEffects.value[i]!.source.value = group.value[index];
+							target.appliedEffects.value[i]!.source.value = group[index];
 						}
 					}
 				}
@@ -525,8 +525,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				targetIndex = undefined;
 			}
 
-			const source = sourceIndex !== undefined ? damageSources.value[sourceIndex] : undefined;
-			const target = targetIndex !== undefined ? damageTargets.value[targetIndex] : undefined;
+			const source = sourceIndex !== undefined ? damageSources[sourceIndex] : undefined;
+			const target = targetIndex !== undefined ? damageTargets[targetIndex] : undefined;
 
 			if (source || target) {
 				noColumnsRestored = false;
@@ -537,9 +537,9 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			}
 		}
 
-		if (noColumnsRestored && damageSources.value.length === 1 && damageTargets.value.length === 1) {
-			resultColumns[0]!.source.value = damageSources.value[0];
-			resultColumns[0]!.target.value = damageTargets.value[0];
+		if (noColumnsRestored && damageSources.length === 1 && damageTargets.length === 1) {
+			resultColumns[0]!.source.value = damageSources[0];
+			resultColumns[0]!.target.value = damageTargets[0];
 		}
 
 		const savedSections = params.getAll('tblSct');

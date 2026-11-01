@@ -47,14 +47,14 @@ const highlightedColumnId = ref<string>();
 function columnOptions(from: DamageSource[]): [string, string][] {
 	return from.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name || '<empty>'}`]);
 }
-const sourceOptions = computed(() => columnOptions(damageSources.value));
-const targetOptions = computed(() => columnOptions(damageTargets.value));
+const sourceOptions = computed(() => columnOptions(damageSources));
+const targetOptions = computed(() => columnOptions(damageTargets));
 
 function setColumnChampion(column: IDamageResultTableColumn, sources: DamageSource[], damageSourceId?: string) {
-	const oldDamageSourceId = column[sources === damageSources.value ? 'source' : 'target'].value?.id;
+	const oldDamageSourceId = column[sources === damageSources ? 'source' : 'target'].value?.id;
 	oldDamageSourceId && highlightedDamageSources.remove(oldDamageSourceId);
 
-	const property = sources === damageSources.value ? 'source' : 'target';
+	const property = sources === damageSources ? 'source' : 'target';
 
 	column[property].value = damageSourceId ? sources.find((damageSource) => damageSource.id === damageSourceId) : undefined;
 	recalculateColumn(column);
@@ -77,8 +77,8 @@ interface IDamageSectionOption {
 const uniqueDamageSourceChampions = computed<Set<IChampion>>(
 	() =>
 		new Set(
-			damageSources.value
-				.concat(damageTargets.value)
+			damageSources
+				.concat(damageTargets)
 				.filter((source) => source.champion.value && source.listedChampion.value?.id === source.champion.value.id && source.champion.value.id !== 'TargetDummy')
 				.map((source) => source.champion.value!),
 		),
@@ -122,8 +122,8 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 
 const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
 	const itemIds = new Set(
-		damageSources.value
-			.concat(damageTargets.value)
+		damageSources
+			.concat(damageTargets)
 			.flatMap((damageSource) => damageSource.computed.items.value.map((item, index) => (item?.hasAnyInterestingVariables || item?.unknownVariables.length ? damageSource.items.value[index]!.id : undefined)))
 			.filter(Boolean),
 	);
@@ -140,13 +140,13 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 
 const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
 	const dragons: IDragonName[] = [];
-	for (const damageSource of damageSources.value) {
+	for (const damageSource of damageSources) {
 		const { value } = damageSource.dragonSoul;
 		if (value && INTERESTING_SOULS_DRAGONS.includes(value) && !dragons.includes(value)) {
 			dragons.push(value);
 		}
 	}
-	for (const damageSource of damageTargets.value) {
+	for (const damageSource of damageTargets) {
 		const { value } = damageSource.dragonSoul;
 		if (value && INTERESTING_SOULS_DRAGONS.includes(value) && !dragons.includes(value)) {
 			dragons.push(value);
@@ -163,13 +163,13 @@ const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>
 
 const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
 	const effectObjectNames = new Set(
-		damageSources.value
+		damageSources
 			.flatMap((damageSource) =>
 				damageSource.computed.effects.value
 					.map((effect) => effect.resultVariables && effect.abilityId.id)
 					.concat(damageSource.effectsAppliedToTarget.value.map(([effectAbilityId, effectSpecific]) => effectSpecific.variables && effectAbilityId.id)),
 			)
-			.concat(damageTargets.value.flatMap((damageSource) => damageSource.computed.effects.value.map((effect) => effect.resultVariables && effect.abilityId.id)))
+			.concat(damageTargets.flatMap((damageSource) => damageSource.computed.effects.value.map((effect) => effect.resultVariables && effect.abilityId.id)))
 			.filter(Boolean),
 	);
 
@@ -694,13 +694,13 @@ function removeResultsSection(index: number) {
 const damageSourceWatchers = new Map<string, WatchHandle>();
 
 watch(
-	() => damageSources.value.map((source) => source.id),
-	(newV, oldV) => handleSourceUpdate(damageSources.value, newV, oldV),
+	() => damageSources.map((source) => source.id),
+	(newV, oldV) => handleSourceUpdate(damageSources, newV, oldV),
 	{ immediate: true },
 );
 watch(
-	() => damageTargets.value.map((source) => source.id),
-	(newV, oldV) => handleSourceUpdate(damageTargets.value, newV, oldV),
+	() => damageTargets.map((source) => source.id),
+	(newV, oldV) => handleSourceUpdate(damageTargets, newV, oldV),
 	{ immediate: true },
 );
 
@@ -708,7 +708,7 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 	debouncedSaveState();
 	const addedIds = currIds.filter((id) => !prevIds.includes(id));
 	const removedIds = prevIds.filter((id) => !currIds.includes(id));
-	const columnProperty = target === damageSources.value ? 'source' : 'target';
+	const columnProperty = target === damageSources ? 'source' : 'target';
 
 	for (const id of removedIds) {
 		damageSourceWatchers.get(id)?.();

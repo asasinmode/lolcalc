@@ -124,14 +124,14 @@ function getListDropTargetIndex(target: DamageSource[], fromIndex: number, sourc
 
 function remove(index: number, target: DamageSource[]) {
 	const [damageSource] = target.splice(index, 1);
-	for (const source of damageSources.value) {
+	for (const source of damageSources) {
 		for (const effect of source.appliedEffects.value) {
 			if (effect.source.value === damageSource) {
 				effect.source.value = undefined;
 			}
 		}
 	}
-	for (const source of damageTargets.value) {
+	for (const source of damageTargets) {
 		for (const effect of source.appliedEffects.value) {
 			if (effect.source.value === damageSource) {
 				effect.source.value = undefined;
@@ -153,7 +153,7 @@ function add(target: DamageSource[]) {
 function duplicate(index: number, target: DamageSource[], shift: boolean) {
 	const newItem = target[index]!.clone();
 	if (shift) {
-		const into = target === damageSources.value ? damageTargets.value : damageSources.value;
+		const into = target === damageSources ? damageTargets : damageSources;
 		if (into.length > 1 || into[0]?.anythingFilled.value) {
 			into.push(newItem);
 		} else {
@@ -165,7 +165,7 @@ function duplicate(index: number, target: DamageSource[], shift: boolean) {
 }
 
 function changeGroup(index: number, target: DamageSource[], alt: boolean) {
-	const into = target === damageSources.value ? damageTargets.value : damageSources.value;
+	const into = target === damageSources ? damageTargets : damageSources;
 	let newItem: DamageSource;
 	if (alt) {
 		newItem = target[index]!.clone();
@@ -242,7 +242,7 @@ function onItemDrop(event: DragEvent, target: DamageSource, slotIndex?: number) 
 	itemDragData = undefined;
 }
 
-const expandOnMounted = computed(() => damageSources.value.length === 1 && damageTargets.value.length === 1);
+const expandOnMounted = computed(() => damageSources.length === 1 && damageTargets.length === 1);
 
 const mirrorLayout = ref(false);
 

@@ -4,10 +4,10 @@ import type { CalculatorResultsTable } from '#components';
 const { damageSources } = useCalculatorState();
 const { saveState } = useManageCalculatorState();
 
-const showResults = ref(damageSources.value.some((source) => source.anythingFilled.value));
+const showResults = ref(damageSources.some((source) => source.anythingFilled.value));
 if (!showResults.value) {
 	const unwatchShowResults = watch(
-		() => damageSources.value.some((source) => source.anythingFilled.value),
+		() => damageSources.some((source) => source.anythingFilled.value),
 		(anythingFilled) => {
 			if (anythingFilled) {
 				unwatchShowResults();
