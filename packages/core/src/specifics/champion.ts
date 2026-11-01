@@ -437,7 +437,7 @@ export type IChampionAbilityVariantSpecific<Id extends IChampionId | undefined =
 	modifyVariantData?: (abilityVariant: IChampionAbilityVariant) => void;
 };
 
-interface IChampionAbilityVariantDataOverrides {
+export interface IChampionAbilityVariantDataOverrides {
 	isImmobilizing?: boolean;
 }
 

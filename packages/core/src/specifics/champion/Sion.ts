@@ -1,8 +1,19 @@
-import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type ISion from '@lolcalc/data/files/champion/Sion.json';
 import { VariableType } from '@lolcalc/shared';
-import type { IChampionSpecific } from '../champion.ts';
+import type { IChampionAbilitySpecific, IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
+
+const deathPassiveCommonAttrs: IChampionAbilitySpecific<'Sion'> = {
+	additionalVariantsObjectNames: ['SionPassiveSpeed'],
+	modifyVariantData(abilityVariant) {
+		if (abilityVariant.objectName === 'SionPassiveSpeed') {
+			abilityVariant.effectAmount = undefined;
+			abilityVariant.cooldownTime = undefined;
+		}
+	},
+};
 
 export default {
 	setupData(self) {
@@ -11,7 +22,6 @@ export default {
 		};
 	},
 	passive: {
-		additionalVariantsObjectNames: ['SionPassiveSpeed'],
 		variables: defineChampionVariables<'Sion', typeof ISion, 'passive'>()({
 			known: {
 				MaxHPDamage: [],
@@ -45,7 +55,11 @@ export default {
 			uninteresting: ['Lifesteal', 'PercentMaxHP', 'NonChampCap', 'StructureMod'],
 		}),
 	},
+	q: {
+		...deathPassiveCommonAttrs,
+	},
 	w: {
+		...deathPassiveCommonAttrs,
 		variables: defineChampionVariables<'Sion', typeof ISion, 'w'>()({
 			known: {
 				f1: [],
@@ -102,5 +116,11 @@ export default {
 				championPassiveStats.hp = self.internalData.value.wStacks;
 			},
 		},
+	},
+	e: {
+		...deathPassiveCommonAttrs,
+	},
+	r: {
+		...deathPassiveCommonAttrs,
 	},
 } satisfies IChampionSpecific<'Sion'>;

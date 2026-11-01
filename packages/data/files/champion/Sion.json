@@ -105,6 +105,13 @@
 					},
 					"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000],
 					"isImmobilizing": true
+				},
+				{
+					"name": "Death Surge",
+					"objectName": "SionPassiveSpeed",
+					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
+					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
 		},
@@ -196,6 +203,13 @@
 						"8": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"castRange": [500, 500, 500, 500, 500, 500, 500]
+				},
+				{
+					"name": "Death Surge",
+					"objectName": "SionPassiveSpeed",
+					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
+					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
 		},
@@ -256,6 +270,13 @@
 						"6": [4, 4, 4, 4, 4, 4, 4],
 						"7": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					}
+				},
+				{
+					"name": "Death Surge",
+					"objectName": "SionPassiveSpeed",
+					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
+					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
 		},
@@ -326,6 +347,13 @@
 						}
 					},
 					"isImmobilizing": true
+				},
+				{
+					"name": "Death Surge",
+					"objectName": "SionPassiveSpeed",
+					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
+					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
 		},
@@ -344,22 +372,6 @@
 						"PercentMaxHP": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"NonChampCap": [75, 75, 75, 75, 75, 75, 75],
 						"StructureMod": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
-					}
-				},
-				{
-					"name": "Death Surge",
-					"objectName": "SionPassiveSpeed",
-					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
-					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
-					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
-					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds.",
-					"effectAmount": {
-						"0": [50, 100, 150, 200, 250, 300, 350],
-						"1": [10, 30, 50, 70, 90, 110, 130],
-						"2": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
-						"3": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-						"4": [2, 2, 2, 2, 2, 2, 2],
-						"5": [8, 8, 8, 8, 8, 8, 8]
 					}
 				}
 			]
