@@ -33,6 +33,7 @@ export function calculateSourceDamageOuputVars(self: DamageSource): IDamageOutpu
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// ldr & custom variable from it
 	// champion passives - ashe, akshan, braum, corki, graves, irelia, jinx, locke, orianna, tahm kench, volibear, warwick
+	// sion passive
 	// amumu passive
 	// jhin passive
 	// senna passive

@@ -11,6 +11,7 @@ export default {
 		};
 	},
 	passive: {
+		additionalVariantsObjectNames: ['SionPassiveSpeed'],
 		variables: defineChampionVariables<'Sion', typeof ISion, 'passive'>()({
 			known: {
 				MaxHPDamage: [],
