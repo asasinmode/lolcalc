@@ -4325,6 +4325,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 			{
+				/* 26.21.1 verified on aery to crit */
 				type: [VariableType.adaptive],
 				handler(value, meta, self) {
 					if (self.stats.value.meta.adaptiveDamageType === VariableType.magic && self.damageOutputVars.value.shadowflameCrit) {
