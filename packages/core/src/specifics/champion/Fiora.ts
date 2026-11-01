@@ -11,6 +11,8 @@ const passiveBonusMS: IDeriveProgressFn = (progress, self) => {
 	const bonusMS = championAbilityVariableValue('PercentMS', {
 		abilityKey: 'r',
 		abilityVariant: self.champion.value!.abilities.r.variants[0]!,
+		abilityLevel: self.abilityLevels.value.r,
+		forceAbilityLevel: true,
 		damageSource: self,
 	});
 

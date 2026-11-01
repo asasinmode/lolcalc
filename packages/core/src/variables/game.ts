@@ -1,6 +1,6 @@
 import { CONSTS, STAT_ICON } from '@lolcalc/data';
 import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
-import type { IChampionAbilityKey, IChampionStatName, IStatsCalculationResult, VariableType } from '@lolcalc/shared';
+import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationResult, VariableType } from '@lolcalc/shared';
 import { CHAMPION_LEVEL } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
 import type { DamageSource } from '../DamageSource.ts';
@@ -277,10 +277,12 @@ export interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	abilityKey: IChampionAbilityKey;
 	dynamicVariables?: IDynamicVariables;
 	/**
-	 * will be `?? 1`, if `damageSource` is passed, will use `.abilityLevels.value[abilityKey]`
+	 * if `damageSource` is passed, will use `.abilityLevels.value[abilityKey]`. If not `passive` and `forceAbilityLevel: true`, will be `|| 0`
 	 * @note passive that uses other ability's variable passes `0` as ability level
 	 */
 	abilityLevel?: number;
+	/** keeps passed ability level, useful for when getting a variable for passive but from another ability, passive can use `0` but other abilities are `|| 0` without this */
+	forceAbilityLevel?: boolean;
 	/**
 	 * ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive
 	 * if `damageSource` is passed, will use `.allAbilityVariants.value`
@@ -304,7 +306,12 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		isRanged,
 		returnActualName,
 	} = params;
-	const abilityLevel = params.abilityKey === 'passive' ? 1 : (params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey]) || 1;
+	let abilityLevel: number | undefined = params.abilityLevel;
+	if (!params.forceAbilityLevel) {
+		abilityLevel = params.abilityKey === 'passive' ? 1 : (params.abilityLevel ?? params.damageSource?.abilityLevels?.value[params.abilityKey]) || 1;
+	} else if (params.abilityKey === 'passive') {
+		abilityLevel ??= 1;
+	}
 	const rv: IVariableValueResult = {
 		calculatesFrom: [],
 	};
@@ -331,7 +338,8 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 				abilityVariant: otherAbilityVariant[0],
 				dynamicVariables,
 				abilityKey,
-				abilityLevel: abilityKey === 'passive' || otherAbilityVariant[1] === 'passive' ? 0 : damageSource?.abilityLevels.value[otherAbilityVariant[1]] || 1,
+				abilityLevel: damageSource?.abilityLevels.value[otherAbilityVariant[1] as INonPassiveAbilityKey] ?? abilityLevel,
+				forceAbilityLevel: abilityKey === 'passive' || otherAbilityVariant[1] === 'passive',
 				allAbilitiesVariants,
 				damageSource,
 				returnActualName: true,
@@ -1284,7 +1292,7 @@ export const VARIABLE_CALCULATION_FNS = {
 				if (dataValue.length === 2) {
 					console.warn('[StatByNamedDataValueCalculationPart] suspiciously melee/ranged looking value having abilityLevel applied to it', { dataValue, statValue }, variable);
 				}
-				dataValue = dataValue[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel || 1];
+				dataValue = dataValue[(meta.variableValueParams as IChampionAbilityVariableParams).abilityLevel ?? 1];
 			}
 
 			if (statValue !== undefined) {
