@@ -85,7 +85,7 @@ defineExpose({ el });
 		>
 			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="isTooltipExpanded" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
 			<dl v-show="isTooltipExpanded && computedDescription?.abilityLevelVars" class="game-description">
-				<template v-for="{ name, values, isNameUnknown } in computedDescription?.abilityLevelVars" :key="name">
+				<template v-for="( { name, values, isNameUnknown } , i) in computedDescription?.abilityLevelVars" :key="`${i}-${name}`">
 					<dt :class="{ unknown: isNameUnknown }" v-html="name" />
 					<dd :class="{ unknown: !values?.length }">
 						[
