@@ -104,8 +104,9 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						 * some champions like `Elise` have additional variants saved. These are expected to be used only for resolving the variables in the main variants (first 2)
 						 * only Aphelios has more variants that are expected to be actually shown
 						 * hwei on the other hand saves all his qwe variants but only for variables, their tooltips are empty and all interesting vars seem to be present in root qwe, so skip others
+						 * sion has 1 ability when he's dead that grants him move speed and it's duplicated on QWER but not meant to be shown in results
 						 */
-						.slice(0, championId === 'Aphelios' ? undefined : championId === 'Hwei' ? 1 : 2)
+						.slice(0, championId === 'Aphelios' ? undefined : championId === 'Hwei' || championId === 'Sion' ? 1 : 2)
 						.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
 							const { replaced: nameReplaced } = replaceStringtableVariables(variant.name ?? ability.variants[0]!.name!, champion.stringtable);
 

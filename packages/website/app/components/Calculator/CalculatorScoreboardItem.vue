@@ -614,7 +614,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					stat: 'abilityHaste',
 				},
 			],
-			bottomText: `Equivalent to reducing your Ability cooldowns by <span class="total">${Math.round(cooldownReductionPercentageFromHaste(props.value.stats.value.total.abilityHaste))}</span>%`,
+			bottomText: `Equivalent to reducing your Ability cooldowns by <span class="${props.value.stats.value.bonus.abilityHaste > 0 ? 'total' : 'base'}">${Math.round(cooldownReductionPercentageFromHaste(props.value.stats.value.total.abilityHaste))}</span>%`,
 		},
 		{
 			name: CHAMPION_STAT_META.critChance.name,
@@ -654,7 +654,8 @@ function updateComputedStats(stats: IChampionStat[]) {
 
 			displayedValue.push(`${formattedTotal}${CHAMPION_STAT_META[value.stat].isPercentage ? '%' : ''}`);
 			value.rawBonus = props.value.stats.value.bonus[value.stat];
-			value.bonus = formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
+			/* this value is displayed for most stats except attack speed so it's fine to modify it for attack speed to properly detect if it's bonus even when crippled */
+			value.bonus = value.stat === 'attackSpeed' ? props.value.stats.value.variables.preCrippleBonusAS : formatChampionStatValue(value.stat, props.value.stats.value.bonus[value.stat]);
 
 			const baseValue = props.value.stats.value[value.stat === 'bonusAttackSpeedPercent' ? 'base' : 'baseOnLevel'][value.stat];
 			if (championStat.iconTextureKey === 'armor' || championStat.iconTextureKey === 'magicResist' || baseValue) {
@@ -1172,7 +1173,8 @@ defineExpose({ el });
 					<dl>
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name ?? CHAMPION_STAT_META[statValue.stat].name }}:</dt>
-							<dd :class="{ 'has-bonus': statValue.bonus }">
+							<!-- 26.21 bonus as percent seems to always be green, even if not modfiied? -->
+							<dd :class="{ 'has-bonus': statValue.stat === 'bonusAttackSpeedPercent' || statValue.bonus }">
 								<span class="total">{{ value.computed.formattedStatTotals.value[statValue.stat] }}</span
 								>{{ CHAMPION_STAT_META[statValue.stat].isPercentage ? '%' : '' }}
 								<template v-if="'base' in statValue && !(statValue.stat === 'attackSpeed' || statValue.stat === 'attackSpeedRatio')">

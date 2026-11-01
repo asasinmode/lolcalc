@@ -123,7 +123,6 @@ export default {
 				championPassiveStats.hp = self.internalData.value.wStacks;
 
 				const { q, w, e } = self.abilityVariantsIndexes.value;
-
 				if (q & w & e) {
 					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
 
@@ -136,6 +135,19 @@ export default {
 				}
 			},
 		},
-		// set as to 1.75, not affected by cripple
+		onTotalPreMultipliers: {
+			handler(self, { totalPreMultipliersStats, bonusStats }, { debuffs, calculatedVariables }) {
+				const { q, w, e } = self.abilityVariantsIndexes.value;
+				if (q & w & e) {
+					/* doesn't seem to be in a variable */
+					totalPreMultipliersStats.attackSpeed = 1.75;
+					/* set a bonus so that it's styled as having some, the game shows it being changed */
+					calculatedVariables.preCrippleBonusAS = 0.00001;
+					bonusStats.bonusAttackSpeedPercent = 0.00001;
+					/* 26.21 as tested to not change */
+					debuffs.totalCrippledAttackSpeed = 0;
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Sion'>;

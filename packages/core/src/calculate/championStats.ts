@@ -64,6 +64,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalBonusPercentMoveSpeed: 0,
 		totalMultiplicativeMoveSpeed: 0,
 		movespeedSoftCapPenalty: 0,
+		preCrippleBonusAS: 0,
 		attackSpeedCap: CONSTS.baseAttackSpeedCap,
 		midQuestMultiplier: source.roleQuest.value === 'mid' ? (MISC as TMiscData).roleQuests.mid.dataValues.BonusADAP : 0,
 		bloodmailRetributionExcludedAd: 0,
@@ -362,6 +363,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		/* attack speed cripple */
 		debuffs.cripple = 1 - debuffs.cripple;
 		debuffs.totalCrippledAttackSpeed = totalPreMultipliersStats.attackSpeed * debuffs.cripple;
+		calculatedVariables.preCrippleBonusAS = bonusStats.attackSpeed;
 		totalPreMultipliersStats.attackSpeed -= debuffs.totalCrippledAttackSpeed;
 		bonusStats.attackSpeed = Math.max(0, bonusStats.attackSpeed - debuffs.totalCrippledAttackSpeed);
 	}

@@ -136,6 +136,8 @@ export interface IStatsCalculationVariables {
 	attackSpeedCap: number;
 	/** https://wiki.leagueoflegends.com/en-us/Tenacity#Stacking */
 	tenacityBucketB: number;
+	/** total bonus attack speed pre multipliers. It's possibly the same as permanent bonus attack speed, which kai'sa and xin zhao use, but for now just a quick set before crippling so stats tooltip `hasBonus` can be properly detected */
+	preCrippleBonusAS: number;
 	/**
 	 * ad that's not supposed to be multiplied by overlord's retribution. Currently
 	 * - Rammus' passive infernal bonus. If Rammus' passive gives 100 ad and he has 1 infernal, it will be `3`
