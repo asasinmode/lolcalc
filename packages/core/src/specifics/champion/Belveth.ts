@@ -325,6 +325,7 @@ export default {
 				calculatedVariables.belvethDevourBonusHP = maxHP.value;
 
 				// TODO maybe will be useful for bloodmail retribution calc
+				// check adaptive force test, possibly belveth ult form hp -> riftmaker -> rabadon, would need same treatment as bloodmail
 				// const baseHPValue = maxHP.calculatesFrom?.[0]?.value as number ?? 0;
 				// const hpADScaling = maxHP.calculatesFrom?.[1]?.value as number ?? 0;
 				// const hpAPScaling = maxHP.calculatesFrom?.[2]?.value as number ?? 0;

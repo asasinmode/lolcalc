@@ -236,7 +236,7 @@ test('extended equals', async (t) => {
 
 		const senna = await setupDamageSource(fixture, 'Senna');
 		const sennaPassive = extendedChampionAbilityDescription(senna, 'tooltip', 'r');
-		assertMetaSuffix('TotalShield', "<const>120</const> <scaleap>+ 50%%i:scaleap%</scaleap> <span font color='#0bf7de'>+ 150%%i:sennaScalingIcon%</span>", sennaPassive);
+		assertMetaSuffix('TotalShield', "<const>120</const> <scaleap>+ 50%%i:scaleap%</scaleap> <font color='#0bf7de'>+ 150%%i:sennaScalingIcon%</font>", sennaPassive);
 	});
 });
 

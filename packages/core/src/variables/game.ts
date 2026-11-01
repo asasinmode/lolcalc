@@ -1353,7 +1353,7 @@ export const VARIABLE_CALCULATION_FNS = {
 			],
 		};
 	},
-	/** same as `ByCharLevelInterpolationCalculationPart` but with the keys hashed and variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
+	/** same as `ByCharLevelInterpolationCalculationPart` but with the variables needing resolving, not being directly in `mStartValue` and `mEndValue` */
 	'{ee18a47b}'(variable: IGameVariablesByType['{ee18a47b}'], whole, meta) {
 		meta.accessedVariables?.add(variable.StartDataValue);
 		const minResult = meta.variableValueFn(variable.StartDataValue, meta.variableValueParams);
@@ -1453,12 +1453,12 @@ export const VARIABLE_CALCULATION_FNS = {
 
 		if (typeof multiplier === 'number') {
 			if (statValue !== undefined) {
-				// TODO not sure if that's a good approach, it's to exclude crit damage from adding onto calculatesFrom multiplier. For now only Ashe passive - in game it shows `100% + 100% %i:crit%` and multiplier here is `1.3`, which is correct for calculations, but not for what the game shows, since the `0.3` is from the crit damage multiplier and takes effect only when infinity edge is present. When other crit scaling variables are calculated, check if all works
 				return {
 					value: statValue.value * multiplier,
 					roundReplaced: true,
 					calculatesFrom: [
 						{
+							/* unsure if that's a good approach, it's to exclude crit damage from adding onto calculatesFrom multiplier. For now only Ashe passive - in game it shows `100% + 100% %i:crit%` and multiplier here is `1.3`, which is correct for calculations, but not for what the game shows, since the `0.3` is from the crit damage multiplier and takes effect only when infinity edge is present. When other crit scaling variables are calculated, check if all works */
 							value: multiplier * (statValue.stat === 'critChance' ? 100 : 1),
 							isPercentage: true,
 							stat: statValue.stat as ICalculatesFromPart['stat'],
@@ -1869,9 +1869,11 @@ function resolveMStatWithFormula(
 		/*
 		 * some vars use crit damage multiplier as a value multiplier which would make them show up as `0` in result tooltips, which do not pass a damage source = multiplier is 0
 		 * this does mean that the extended equals for a variable (what it scales with) will be different between scoreboard item hover and results hover but it shouldn't matter too much, as long as they shown value in column is correct
+		 * forgot why but this below was added at some point and used instead of just `value`. can't find exactly what it was for and it broke ashe passive extended equals
+		 * value: targetStat === 'critDamageMultiplier' ? value || 2 : value,
 		 */
 		return {
-			value: targetStat === 'critDamageMultiplier' ? value || 2 : value,
+			value,
 			stat: targetStat,
 			type: statsKey,
 		};
