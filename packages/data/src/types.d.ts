@@ -94,10 +94,10 @@ export interface IChampionAbilityVariant {
 	/** first variant should always have a name (`updateData` errors if it doesn't) but other variants may not */
 	name?: string;
 	image: string | string[];
-	mana?: number[];
+	mana?: number[] | null;
 	dataKey: string;
 	objectName: string;
-	cooldownTime?: number[];
+	cooldownTime?: number[] | null;
 	tooltip?: string;
 	/** tooltip shown when holding shift */
 	tooltipExtended?: string;

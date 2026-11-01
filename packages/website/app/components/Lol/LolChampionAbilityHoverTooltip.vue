@@ -68,13 +68,13 @@ defineExpose({ el });
 					: `${abilityKey === 'passive' || (computedDescription!.gameAbilityId.id === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey?.toUpperCase()}] `} ${computedDescription?.name}`
 			"
 		/>
-		<span v-show="!computedIsLoading" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
+		<span v-show="!computedIsLoading && computedDescription?.cooldown !== null" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
 			<template v-if="abilityKey !== 'passive'">
 				{{ computedDescription?.cooldown ? `${computedDescription.cooldown}s` : 'unknown' }}
 				<img :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`" width="20" height="20" aria-hidden="true" />
 			</template>
 		</span>
-		<span v-show="!computedIsLoading">
+		<span v-show="!computedIsLoading && computedDescription?.cost !== null">
 			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${computedDescription.partype}` : 'No Cost' }}
 		</span>
 		<div v-show="!computedIsLoading" class="game-description" v-html="(isTooltipExpanded && computedDescription?.tooltipExtended) || computedDescription?.tooltip" />
@@ -85,7 +85,7 @@ defineExpose({ el });
 		>
 			<div v-if="computedDescription?.tooltipExtendedBelowLine" v-show="isTooltipExpanded" class="game-description" v-html="computedDescription.tooltipExtendedBelowLine" />
 			<dl v-show="isTooltipExpanded && computedDescription?.abilityLevelVars" class="game-description">
-				<template v-for="( { name, values, isNameUnknown } , i) in computedDescription?.abilityLevelVars" :key="`${i}-${name}`">
+				<template v-for="({ name, values, isNameUnknown }, i) in computedDescription?.abilityLevelVars" :key="`${i}-${name}`">
 					<dt :class="{ unknown: isNameUnknown }" v-html="name" />
 					<dd :class="{ unknown: !values?.length }">
 						[

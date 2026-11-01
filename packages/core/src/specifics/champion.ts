@@ -422,7 +422,7 @@ export interface IChampionAbilitySpecific<Id extends IChampionId | undefined = u
 	omittedVariantObjectNames?: string[];
 	/** for when an ability variant has multiple images and they should dynamically change */
 	abilityImgVariantIndex?: IAbilityImgIndexGetter<any, Id>;
-	calculateCd?: (baseCd: number | undefined, cdr: number, abilityVariant: IChampionAbilityVariant, abilityLevel: number | undefined, self?: DamageSource) => number;
+	calculateCd?: (baseCd: number | undefined | null, cdr: number, abilityVariant: IChampionAbilityVariant, abilityLevel: number | undefined, self?: DamageSource) => number;
 	[key: string]: any;
 	/**
 	 * ability's variant specific

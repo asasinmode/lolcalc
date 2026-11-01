@@ -111,6 +111,8 @@
 					"objectName": "SionPassiveSpeed",
 					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
 					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"mana": null,
+					"cooldownTime": null,
 					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
@@ -209,6 +211,8 @@
 					"objectName": "SionPassiveSpeed",
 					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
 					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"mana": null,
+					"cooldownTime": null,
 					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
@@ -276,6 +280,8 @@
 					"objectName": "SionPassiveSpeed",
 					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
 					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"mana": null,
+					"cooldownTime": null,
 					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]
@@ -353,6 +359,8 @@
 					"objectName": "SionPassiveSpeed",
 					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
 					"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+					"mana": null,
+					"cooldownTime": null,
 					"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
 				}
 			]

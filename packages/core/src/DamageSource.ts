@@ -1716,8 +1716,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 	// TODO detect unknown cost/cooldown
 	let anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
 
-	const cooldown = variant.cooldownTime?.[abilityLevel ?? 1];
-	const cost = variant.mana?.[abilityLevel ?? 1];
+	const cooldown = variant.cooldownTime === null ? null : variant.cooldownTime?.[abilityLevel ?? 1];
+	const cost = variant.mana === null ? null : variant.mana?.[abilityLevel ?? 1];
 	const lastExtendedVariableIndex = ability.maxLevel + 1;
 
 	let abilityLevelVars: IComputedAbilityDescription['abilityLevelVars'] | undefined = variant.abilityLevelVars?.map((variable) => {
@@ -1817,7 +1817,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		image = variant.image[0]!;
 	}
 
-	const reducedCd = abilitySpecific?.calculateCd?.(cooldown, cdr, variant, abilityLevel, damageSource) ?? (cooldown !== undefined ? cooldown * cdr : cooldown);
+	const reducedCd = abilitySpecific?.calculateCd?.(cooldown, cdr, variant, abilityLevel, damageSource) ?? (cooldown !== undefined && cooldown !== null ? cooldown * cdr : cooldown);
 
 	return {
 		gameAbilityId,
@@ -2357,8 +2357,10 @@ export interface IComputedAbilityDescription {
 	tooltipExtended: string;
 	tooltipExtendedBelowLine: string;
 	anyUnknownVariables: number;
-	cooldown?: number;
-	cost?: number;
+	/** if `null`, cd element won't be shown in the hover tooltip */
+	cooldown?: number | null;
+	/** if `null`, cost element won't be shown in the hover tooltip */
+	cost?: number | null;
 	partype?: string;
 	abilityLevel?: number;
 	/** from `IChampionAbilityVariant.abilityLevelVars` */

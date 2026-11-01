@@ -10,7 +10,8 @@ const deathPassiveCommonAttrs: IChampionAbilitySpecific<'Sion'> = {
 	modifyVariantData(abilityVariant) {
 		if (abilityVariant.objectName === 'SionPassiveSpeed') {
 			abilityVariant.effectAmount = undefined;
-			abilityVariant.cooldownTime = undefined;
+			abilityVariant.cooldownTime = null;
+			abilityVariant.mana = null;
 		}
 	},
 };
@@ -110,17 +111,31 @@ export default {
 			uninteresting: ['HPPerKill', 'HPPerChampKill', 'DetonateRecastCooldown', 'MaxHPDamageRatio'],
 		}),
 	},
-	calculateHooks: {
-		onChampionPassive: {
-			handler(self, { championPassiveStats }) {
-				championPassiveStats.hp = self.internalData.value.wStacks;
-			},
-		},
-	},
 	e: {
 		...deathPassiveCommonAttrs,
 	},
 	r: {
 		...deathPassiveCommonAttrs,
+	},
+	calculateHooks: {
+		onChampionPassive: {
+			handler(self, { championPassiveStats }) {
+				championPassiveStats.hp = self.internalData.value.wStacks;
+
+				const { q, w, e } = self.abilityVariantsIndexes.value;
+
+				if (q & w & e) {
+					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
+
+					const ls = championAbilityVariableValue('Lifesteal', passiveParams);
+					if (typeof ls.value === 'number') {
+						championPassiveStats.lifeSteal = ls.value;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS sion] failed to calculate passive lifesteal');
+					}
+				}
+			},
+		},
+		// set as to 1.75, not affected by cripple
 	},
 } satisfies IChampionSpecific<'Sion'>;
