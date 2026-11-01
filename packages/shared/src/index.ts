@@ -103,6 +103,10 @@ export interface IStatsCalculationResult {
 	effect: IChampionStats;
 	total: IChampionStats;
 	meta: {
+		/**
+		 * `magic` or `physical` based on adaptive force stat
+		 * the [wiki](https://wiki.leagueoflegends.com/en-us/Adaptive_force#Adaptive_damage) seems to not explicitly say that it uses the same mechanism as adaptive force (which checks ad vs ap difference at an early point in the calculations), and just generally says greater bonus ad means adaptive is physical. I tested it on `26.21.1` for veigar and with long sword (10ad) and 11 passive stacks (11ap) aery (adaptive damage) was dealing physical, so just assuming it uses the adaptive force stat. Might be proven wrong when more things are tested later
+		 */
 		adaptiveDamageType: VariableType;
 		adaptiveForceStat: IChampionStatName;
 		adaptiveForceStatVariable: IAdaptiveForceStatRv[1];

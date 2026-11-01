@@ -506,15 +506,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	return {
 		meta: {
-			adaptiveDamageType:
-				bonusStats.attackDamage === totalStats.abilityPower
-					? /* per [wiki](https://wiki.leagueoflegends.com/en-us/Adaptive_force#Adaptive_damage) and assuming it would be total bonus ad, when the runes have to calculate theirs earlier in the calculations, hence not using `adaptiveForceMeta`. Have to verify with the game */
-						champion?.id && ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS.includes(champion.id)
-						? VariableType.physical
-						: VariableType.magic
-					: bonusStats.attackDamage > totalStats.abilityPower
-						? VariableType.physical
-						: VariableType.magic,
+			adaptiveDamageType: adaptiveForceMeta[1] ? 'magic' : 'physical',
 			adaptiveForceStat: adaptiveForceMeta[0],
 			adaptiveForceStatVariable: adaptiveForceMeta[1],
 		},
