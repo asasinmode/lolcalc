@@ -264,7 +264,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Shyvana', 'passive', 0), 'passiveStacks', 'Scalemail stacks'),
 	},
 	Sion: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Sion', 'w', 0), 'wStacks', 'Soul Furnace stacks'),
+		extras: [
+			progressExtra(GameAbilityId.build(AbilityType.champion, 'Sion', 'q', 1), 'passiveMSProgress', 'Death Surge move speed', CHAMPION_SPECIFICS.Sion.passive.bonusMS, {
+				inactive: CHAMPION_SPECIFICS.Sion.passive.deathSurgeComponentInactive,
+			}),
+			numberExtra(GameAbilityId.build(AbilityType.champion, 'Sion', 'w', 0), 'wStacks', 'Soul Furnace stacks'),
+		],
 	},
 	Singed: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.passive.maxStacks),

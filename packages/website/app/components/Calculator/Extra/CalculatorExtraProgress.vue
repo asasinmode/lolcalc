@@ -12,6 +12,7 @@ const props = withDefaults(
 		derivedSymbolSuffix?: string;
 		max?: number;
 		tooltipTriggerAttrs?: any;
+		inactive?: boolean;
 	}>(),
 	{
 		max: 100,
@@ -46,7 +47,7 @@ const derivedValue = computed(() => {
 </script>
 
 <template>
-	<article class="calc-extra-progress">
+	<article class="calc-extra-progress" :data-inactive="inactive || undefined">
 		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<label :for="`xtrprgr-${idSuffix}`">
 			{{ label }}

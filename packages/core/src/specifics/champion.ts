@@ -512,7 +512,7 @@ export interface IChampionInternalDataMap {
 	Senna: { passiveStacks: number; passiveStealTargetMS: number };
 	Seraphine: { passiveStacks: number };
 	Shyvana: { passiveStacks: number };
-	Sion: { wStacks: number };
+	Sion: { passiveMSProgress: number; wStacks: number };
 	Singed: { passiveStacks: number };
 	Sivir: { passiveMSProgress: number };
 	Smolder: { passiveStacks: number };

@@ -1,8 +1,11 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type ISion from '@lolcalc/data/files/champion/Sion.json';
 import { VariableType } from '@lolcalc/shared';
+import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionAbilitySpecific, IChampionSpecific } from '../champion.ts';
+import type { IDeriveProgressFn, IExtraInactiveFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 const deathPassiveCommonAttrs: IChampionAbilitySpecific<'Sion'> = {
@@ -16,13 +19,24 @@ const deathPassiveCommonAttrs: IChampionAbilitySpecific<'Sion'> = {
 	},
 };
 
+const passiveBonusMS: IDeriveProgressFn = (progress) => {
+	/* doesn't seem to be in a variable */
+	return 0.67 * progress;
+};
+
 export default {
 	setupData(self) {
 		return {
+			passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
 			wStacks: Math.max(0, Math.round(self.internalData.value.wStacks ?? 0)),
 		};
 	},
 	passive: {
+		deathSurgeComponentInactive: ((self) => {
+			const { q, w, e } = self.abilityVariantsIndexes.value;
+			return !(q & w & e);
+		}) satisfies IExtraInactiveFn,
+		bonusMS: passiveBonusMS,
 		variables: defineChampionVariables<'Sion', typeof ISion, 'passive'>()({
 			known: {
 				MaxHPDamage: [],
@@ -119,14 +133,16 @@ export default {
 	},
 	calculateHooks: {
 		onChampionPassive: {
-			handler(self, { championPassiveStats }) {
+			handler(self, { championPassiveStats }, { calculatedVariables }) {
 				championPassiveStats.hp = self.internalData.value.wStacks;
 
 				const { q, w, e } = self.abilityVariantsIndexes.value;
 				if (q & w & e) {
-					const passiveParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! };
+					const bonusMS = passiveBonusMS(self.internalData.value.passiveMSProgress, {} as DamageSource);
+					calculatedVariables.sionPassiveBonusMS = bonusMS;
+					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.sionPassiveBonusMS / 100;
 
-					const ls = championAbilityVariableValue('Lifesteal', passiveParams);
+					const ls = championAbilityVariableValue('Lifesteal', { abilityKey: 'passive', abilityVariant: self.champion.value!.abilities.passive.variants[0]! });
 					if (typeof ls.value === 'number') {
 						championPassiveStats.lifeSteal = ls.value;
 					} else {

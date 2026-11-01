@@ -131,12 +131,14 @@ export function progressExtra<T extends IGameAbilityId>(
 		derivedSymbolSuffix = '%',
 		onUpdate,
 		max,
+		inactive,
 	}: {
 		effectControlsProps?: IEffectControlsProps<any>;
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		derivedSymbolSuffix?: string;
 		max?: number;
 		onUpdate?: IExtraOnValueUpdate;
+		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps>(
@@ -170,7 +172,7 @@ export function progressExtra<T extends IGameAbilityId>(
 
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
 
-			const isInactive = computed(() => (!isEffect && effectControlsProps && !effectControlModel?.value ? '' : undefined));
+			const isInactive = computed(() => inactive?.(props.damageSource) || (!isEffect && effectControlsProps && !effectControlModel?.value ? true : undefined));
 
 			return () =>
 				h(
@@ -185,7 +187,7 @@ export function progressExtra<T extends IGameAbilityId>(
 						derivedSymbolSuffix,
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
-						'data-inactive': isInactive.value,
+						inactive: isInactive.value,
 					},
 					effectControlsProps
 						? {

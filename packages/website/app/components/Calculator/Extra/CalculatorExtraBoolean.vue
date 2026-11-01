@@ -43,7 +43,7 @@ const value = defineModel<number>();
 }
 
 @layer overrides {
-	.calc-extra-boolean[data-inactive='true'] > label {
+	:is(.calc-extra-boolean, .calc-extra-progress)[data-inactive='true'] > label {
 		--at-apply: 'text-neutral-400';
 	}
 }
