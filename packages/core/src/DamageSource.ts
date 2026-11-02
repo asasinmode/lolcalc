@@ -2617,6 +2617,18 @@ export interface ICalculateChampionStatsHookSource<Id extends IChampionId | unde
 			},
 		) => void
 	>;
+	/** currently last, healing mults happen after `postTotal` hooks. As of 26.21 only Sion uses it */
+	postHealMults?: ICalculateChampionStatsHook<
+		(
+			self: DamageSource<Id>,
+			args: {
+				totalStats: IStatsCalculationResult['total'];
+				bonusStats: IStatsCalculationResult['bonus'];
+				baseOnLevelStats: IStatsCalculationResult['baseOnLevel'];
+				totalMultipliersStats: IStatsCalculationResult['totalMultipliers'];
+			},
+		) => void
+	>;
 }
 
 type ICalculateStatsGroupedHooks = {

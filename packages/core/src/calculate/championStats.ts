@@ -505,6 +505,12 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		totalStats.omnivamp += omnivampMultValue;
 	}
 
+	if (source.calculateStatsHooks.all.value.postHealMults) {
+		for (const hook of source.calculateStatsHooks.all.value.postHealMults) {
+			hook(source, { totalStats, baseOnLevelStats, totalMultipliersStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+		}
+	}
+
 	return {
 		meta: {
 			adaptiveDamageType: adaptiveForceMeta[1] ? 'magic' : 'physical',

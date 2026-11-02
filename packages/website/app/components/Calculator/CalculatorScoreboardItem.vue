@@ -2320,7 +2320,7 @@ defineExpose({ el });
 
 				.info-tooltip-trigger.warning {
 					--size: calc(5 * var(--spacing));
-					--at-apply: 'absolute -inset-e-[calc(var(--abilities-gap)+0.5*var(--shapeshift-btn-size))] inset-bs-[calc(-0.5*var(--size)+0.5*var(--ability-size))] translate-x-[calc(50%-var(--fluid-f320-6-0-t400))] ms-0 z-1 size-[--size]';
+					--at-apply: 'absolute -inset-e-[calc(var(--abilities-gap)+0.5*var(--shapeshift-btn-size))] inset-bs-[calc(-0.5*var(--size)+0.5*var(--ability-size))] translate-x-[calc(50%-var(--fluid-f320-6-0-t400))] ms-0 z-1 size-[--size] before:hidden';
 				}
 
 				&:has(> .shapeshift) .info-tooltip-trigger.warning {
