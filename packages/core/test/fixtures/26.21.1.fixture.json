@@ -1,0 +1,277 @@
+{
+	"version": "26.21.1",
+	"champions": {
+		"Sion": {
+			"partype": "Mana",
+			"stats": {
+				"hp": 655,
+				"hpperlevel": 95,
+				"mp": 400,
+				"mpperlevel": 52,
+				"movespeed": 345,
+				"armor": 36,
+				"armorperlevel": 4.2,
+				"spellblock": 32,
+				"spellblockperlevel": 2.05,
+				"attackrange": 175,
+				"hpregen": 9,
+				"hpregenperlevel": 0.8,
+				"mpregen": 8,
+				"mpregenperlevel": 0.6,
+				"crit": 0,
+				"critperlevel": 0,
+				"attackdamage": 68,
+				"attackdamageperlevel": 4,
+				"attackspeedperlevel": 1.3,
+				"attackspeed": 0.679,
+				"attackspeedratio": 0.679
+			},
+			"abilities": {
+				"passive": {
+					"maxLevel": 0,
+					"variants": [
+						{
+							"name": "Glory in Death",
+							"objectName": "SionPassive",
+							"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassive",
+							"image": "assets/characters/sion/hud/icons2d/sion_passive1.png",
+							"tooltip": "{{Spell_SionPassive_Tooltip}}",
+							"tooltipExtended": "{{Spell_SionPassive_Tooltip}}<br><br><rules>Max @NonChampCap@ bonus damage against non-champions.<br>Sion deals @StructureMod*100@% damage to structures while in this form.</rules>",
+							"dataValues": {
+								"Lifesteal": [1, 1, 1, 1, 1, 1, 1],
+								"PercentMaxHP": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+								"NonChampCap": [75, 75, 75, 75, 75, 75, 75],
+								"StructureMod": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+							}
+						}
+					]
+				},
+				"q": {
+					"maxLevel": 5,
+					"variants": [
+						{
+							"name": "Decimating Smash",
+							"objectName": "SionQ",
+							"dataKey": "Characters/Sion/Spells/SionQAbility/SionQ",
+							"image": "assets/characters/sion/hud/icons2d/sion_q.png",
+							"mana": [45, 45, 45, 45, 45, 45],
+							"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
+							"tooltip": "<charge>Begin Charging</charge>: Sion charges a heavy blow for up to 2 seconds.<br><br><release>Release</release>: Sion slams his axe down, briefly <status>Slowing</status> and dealing between <physicalDamage>@MinDamageTotal@ and @MaxDamageTotal@ physical damage</physicalDamage> based on charge time. If Sion charged for at least 1 second, enemies are <status>Knocked Up</status> and <status>Stunned</status> for between @BaseStunTime@ and 2.25 seconds based on charge time.",
+							"tooltipExtendedBelowLine": "<rules>Deals @MonsterRatio@% damage to jungle monsters and @MinionRatio@% damage to minions.</rules>",
+							"abilityLevelVars": [
+								{
+									"name": "LowDamage",
+									"nameOverride": "spell_listtype_minimumdamage"
+								},
+								{
+									"name": "HighDamage",
+									"nameOverride": "spell_listtype_maximumdamage"
+								},
+								{
+									"name": "ADRatioMin",
+									"nameOverride": "spelllisttype_attackdamageratio"
+								},
+								{
+									"name": "ADRatioMax",
+									"nameOverride": "spelllisttype_attackdamageratio"
+								}
+							],
+							"dataValues": {
+								"ADRatioMin": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+								"ADRatioMax": [0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7],
+								"LowDamage": [15, 30, 45, 60, 75, 90, 105],
+								"HighDamage": [25, 90, 155, 220, 285, 350, 415],
+								"MinionRatio": [60, 60, 60, 60, 60, 60, 60],
+								"MonsterRatio": [165, 165, 165, 165, 165, 165, 165],
+								"BaseStunTime": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+								"SlowAmount": [-0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8]
+							},
+							"spellCalculations": {
+								"MinDamageTotal": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mDataValue": "LowDamage",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mDataValue": "ADRatioMin",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								},
+								"MaxDamageTotal": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "HighDamage",
+											"__type": "NamedDataValueCalculationPart"
+										},
+										{
+											"mStat": 2,
+											"mDataValue": "ADRatioMax",
+											"__type": "StatByNamedDataValueCalculationPart"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"4": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+								"6": [7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5],
+								"7": [60, 60, 60, 60, 60, 60, 60],
+								"8": [150, 150, 150, 150, 150, 150, 150],
+								"9": [-0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8]
+							},
+							"castRange": [10000, 10000, 10000, 10000, 10000, 10000, 10000],
+							"isImmobilizing": true
+						},
+						{
+							"name": "Death Surge",
+							"objectName": "SionPassiveSpeed",
+							"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassiveSpeed",
+							"image": "assets/characters/sion/hud/icons2d/sion_passive2.png",
+							"mana": null,
+							"cooldownTime": null,
+							"tooltip": "Sion gains <speed>67% Move Speed</speed> decaying over 2.5 seconds."
+						}
+					]
+				}
+			}
+		}
+	},
+	"items": {
+		"1006": {
+			"searchString": "rejuvenationbead;healthregen",
+			"stats": {
+				"PercentBaseHPRegenMod": 1
+			}
+		},
+		"1054": {
+			"searchString": "doransshield;dshield;health;healthregen;healtheveryseconds",
+			"stats": {
+				"FlatHPPoolMod": 110,
+				"FlatHPRegenMod": 0.8
+			},
+			"dataValues": {
+				"RegenDuration": 8,
+				"BonusDamageToMinions": 5,
+				"MaxRegenAmount": 40,
+				"RangeRegenMult": 0.66,
+				"MaxRangeRegenAmount": 30
+			},
+			"stringCalculations": {
+				"MeleeRangeSplitRegen": {
+					"MeleeResult": "@MaxRegenAmount@",
+					"RangedResult": "@MaxRangeRegenAmount@",
+					"DefaultResult": "@MaxRegenAmount@"
+				}
+			},
+			"itemCalculations": {
+				"{592c02e8}": {
+					"DamageType": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusDamageToMinions",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": [8, 5, 45, 0.66]
+		},
+		"3065": {
+			"searchString": "spiritvisage;sv;health;magicresist;healthregen;cooldownreduction;abilityhaste",
+			"stats": {
+				"FlatSpellBlockMod": 50,
+				"FlatHPPoolMod": 400,
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
+			},
+			"dataValues": {
+				"HealingIncrease": 0.25,
+				"ShieldIncrease": 0.25
+			}
+		},
+		"3168": {
+			"searchString": "immortalpath;lifesteal;spellvamp;boots;movespeed",
+			"stats": {
+				"FlatMovementSpeedMod": 45,
+				"PercentOmnivampMod": 0.04
+			},
+			"dataValues": {
+				"OmnivampOnTakedown": 0.006,
+				"MaxStacks": 10,
+				"DamageMod": 0.04,
+				"HealingMod": 0.12
+			}
+		}
+	},
+	"runes": {
+		"shards": {
+			"offensive": {
+				"adaptive": {
+					"id": 5008,
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"attackspeed": {
+					"id": 5005,
+					"effectAmount": {
+						"StatGain": 10
+					}
+				},
+				"cdrscaling": {
+					"id": 5007,
+					"effectAmount": {
+						"HasteGain": 8
+					}
+				}
+			},
+			"flex": {
+				"adaptive": {
+					"id": 5008,
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"movementspeed": {
+					"id": 5010,
+					"effectAmount": {
+						"StatGain1": 2.5
+					}
+				},
+				"healthscaling": {
+					"id": 5001,
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
+			},
+			"defensive": {
+				"health": {
+					"id": 5011,
+					"effectAmount": {
+						"StatGain": 65
+					}
+				},
+				"tenacity": {
+					"id": 5013,
+					"effectAmount": {
+						"StatGain": 15
+					}
+				},
+				"healthscaling": {
+					"id": 5001,
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
+			}
+		}
+	}
+}

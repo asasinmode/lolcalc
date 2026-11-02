@@ -507,7 +507,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (source.calculateStatsHooks.all.value.postHealMults) {
 		for (const hook of source.calculateStatsHooks.all.value.postHealMults) {
-			hook(source, { totalStats, baseOnLevelStats, totalMultipliersStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
+			hook(source, { totalStats, baseOnLevelStats, totalMultipliersStats, bonusStats }, { calculatedVariables, debuffs, effectVars, miscDebug });
 		}
 	}
 

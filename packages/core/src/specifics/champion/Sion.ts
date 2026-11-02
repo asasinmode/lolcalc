@@ -165,5 +165,21 @@ export default {
 				}
 			},
 		},
+		postHealMults: {
+			handler(self, { totalStats, totalMultipliersStats, baseOnLevelStats, bonusStats }) {
+				const { q, w, e } = self.abilityVariantsIndexes.value;
+				if (q & w & e) {
+					const originalBase = baseOnLevelStats.hpRegen;
+					const originalBonus = bonusStats.hpRegen;
+					totalStats.hpRegen = totalMultipliersStats.hpRegen;
+
+					/** as of 26.21 the values in game seem to fill up with the new health regen up to their original values */
+					let remainingNewRegen = totalStats.hpRegen;
+					baseOnLevelStats.hpRegen = Math.min(originalBase, remainingNewRegen);
+					remainingNewRegen -= baseOnLevelStats.hpRegen;
+					bonusStats.hpRegen = Math.min(originalBonus, remainingNewRegen);
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Sion'>;
