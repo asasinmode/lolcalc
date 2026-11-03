@@ -2311,6 +2311,10 @@ function championAbilityVariant(
 		(abilityOrVariantSpecific as IChampionAbilitySpecific)!.modifyVariantData!(variant, championData, variantData);
 	}
 
+	if (mSpellTags?.includes('Trait_PassiveSlot')) {
+		variant.isPassive = true;
+	}
+
 	return [variant, maxLevel];
 }
 

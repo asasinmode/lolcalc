@@ -216,7 +216,8 @@
 							"__type": "GameCalculationModified"
 						}
 					},
-					"castRange": [680, 680, 680, 680, 680, 680, 680]
+					"castRange": [680, 680, 680, 680, 680, 680, 680],
+					"isPassive": true
 				}
 			]
 		},

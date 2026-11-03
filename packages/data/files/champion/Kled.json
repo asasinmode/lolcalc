@@ -239,7 +239,8 @@
 							"mDisplayAsPercent": true,
 							"mPrecision": 2
 						}
-					}
+					},
+					"isPassive": true
 				}
 			]
 		},

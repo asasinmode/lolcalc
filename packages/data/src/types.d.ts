@@ -119,6 +119,11 @@ export interface IChampionAbilityVariant {
 	castRange?: number[];
 	maxAmmo?: number[];
 	isImmobilizing?: boolean;
+	/**
+	 * like Vi W, Teemo E, Vayne W. Means a `passive` text will be shown in the ability's hover tooltip in place of cost
+	 * 26.21 vi shows "no cooldown". Teemo, TF, Vayne show nothing in the cooldown spot, Zoe shows cd and also "no cost" instead of "passive"
+	 * */
+	isPassive?: boolean;
 }
 
 type IDataShards = (typeof IRuneData)['data']['shards'];

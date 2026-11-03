@@ -210,7 +210,8 @@
 								}
 							]
 						}
-					}
+					},
+					"isPassive": true
 				},
 				{
 					"name": "Wallop / Hyper",
