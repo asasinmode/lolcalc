@@ -2149,7 +2149,7 @@ defineExpose({
 
 					> th {
 						--at-apply: 'relative';
-						anchor-scope: --results-section-name;
+						anchor-scope: --results-section-name, --parent;
 
 						> div {
 							--at-apply: 'sticky inset-s-0 ps-3 inline-fit';
