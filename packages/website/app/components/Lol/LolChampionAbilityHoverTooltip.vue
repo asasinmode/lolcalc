@@ -48,6 +48,24 @@ const anyExtendedInfo = computed(
 
 const computedIsLoading = computed(() => isLoading.value || !computedDescription.value);
 
+const isPassiveNonPassiveAbility = computed(() => !computedDescription.value?.cooldown && computedDescription.value?.variant.isPassive);
+
+const hasCD = computed(() => !isPassiveNonPassiveAbility.value && computedDescription.value?.cooldown !== null);
+
+const hasCost = computed(() => computedDescription.value?.cost !== null);
+const costText = computed((): string | undefined => {
+	if (abilityKey.value === 'passive') {
+		return;
+	} else if (isPassiveNonPassiveAbility.value) {
+		/* check `IChampionAbilityVariant.isPassive`. Some abilities are passive, like Kled W, but when they have CD, default 'No Cost' is shown */
+		return 'Passive';
+	} else if (computedDescription.value?.cost) {
+		return `${computedDescription.value.cost} ${computedDescription.value.partype}`;
+	} else {
+		return 'No Cost';
+	}
+});
+
 defineExpose({ el });
 </script>
 
@@ -68,14 +86,14 @@ defineExpose({ el });
 					: `${abilityKey === 'passive' || (computedDescription!.gameAbilityId.id === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey?.toUpperCase()}] `} ${computedDescription?.name}`
 			"
 		/>
-		<span v-show="!computedIsLoading && computedDescription?.cooldown !== null" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
+		<span v-if="hasCD" v-show="!computedIsLoading" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
 			<template v-if="abilityKey !== 'passive'">
 				{{ computedDescription?.cooldown ? `${computedDescription.cooldown}s` : 'unknown' }}
 				<img :src="`https://raw.communitydragon.org/${vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`" width="20" height="20" aria-hidden="true" />
 			</template>
 		</span>
-		<span v-show="!computedIsLoading && computedDescription?.cost !== null">
-			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${computedDescription.partype}` : 'No Cost' }}
+		<span v-if="hasCost" v-show="!computedIsLoading" :class="{ passive: costText === 'Passive' }">
+			{{ costText }}
 		</span>
 		<div v-show="!computedIsLoading" class="game-description" v-html="(isTooltipExpanded && computedDescription?.tooltipExtended) || computedDescription?.tooltip" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
@@ -174,12 +192,20 @@ defineExpose({ el });
 		> span {
 			--at-apply: 'text-end text-lg';
 
-			&:first-of-type {
+			&:first-of-type:not(.passive) {
 				--at-apply: 'flex gap-[0.5ch] justify-end items-center text-yellow-100';
+			}
+
+			&:first-of-type.passive {
+				--at-apply: 'row-span-2 pbs-[--text-lg-lineHeight]';
 			}
 
 			&:nth-of-type(2) {
 				--at-apply: 'self-start';
+			}
+
+			&.passive {
+				--at-apply: 'text-white';
 			}
 		}
 
