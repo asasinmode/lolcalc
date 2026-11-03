@@ -532,6 +532,7 @@ export interface IChampionInternalDataMap {
 	Varus: { passiveVariantActive: number };
 	Vayne: { isPassiveMSActive: number };
 	Veigar: { passiveStacks: number };
+	Vi: { isWASActive: number; applyWPen: number };
 	Viktor: { passiveAbilityUpgradesMask: number };
 	Volibear: { passiveStacks: number };
 	XinZhao: { isEASActive: number };
