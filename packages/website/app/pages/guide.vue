@@ -124,6 +124,11 @@ const exampleSpellCrit = useSimpleDescription(
 				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
 				builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a>
 			</dd>
+			<dt>There's an ability that slows, but it doesn't have a thing I can click</dt>
+			<dd>
+				There are a lot of slows in the game and they vary only be strength and duration. A few common ones have a dedicated element for applying them - mostly items and champion passives. Adding all would be too much work (for now).
+				<strong>Arbitrary value slows can be applied in the <i>effects dialog</i>.</strong>
+			</dd>
 			<dt>How can I delete the last results column?</dt>
 			<dd>It's a puzzle</dd>
 			<dt>Why are there stun/slow duration and values in the results table? They don't change</dt>
@@ -131,3 +136,17 @@ const exampleSpellCrit = useSimpleDescription(
 		</dl>
 	</main>
 </template>
+
+<style>
+@layer page {
+	#guide {
+		> dl {
+			> dd {
+				> strong {
+					--at-apply: 'font-500 text-white';
+				}
+			}
+		}
+	}
+}
+</style>
