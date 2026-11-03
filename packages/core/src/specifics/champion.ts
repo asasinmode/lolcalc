@@ -484,6 +484,7 @@ export interface IChampionInternalDataMap {
 	LeeSin: { hasPassiveStack: number };
 	Lissandra: { applyZombieSlow: number };
 	Locke: { rStacks: number };
+	Lucian: { isWMSActive: number };
 	Malphite: { isPassiveActive: number };
 	Milio: { passiveAllySourceId: string; _passiveAllyAD: ComputedRef<number> };
 	Mordekaiser: { isPassiveMSActive: number };
