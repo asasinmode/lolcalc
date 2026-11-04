@@ -333,6 +333,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Veigar: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},
+	Vi: {
+		extras: [booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0), 'isWASActive', '3 hit attack speed', false), booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0), 'applyWPen', 'armor reduction')],
+	},
 	Viktor: {
 		extras: ChampionExtrasViktor,
 	},

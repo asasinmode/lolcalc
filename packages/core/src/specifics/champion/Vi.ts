@@ -100,4 +100,23 @@ export default {
 			uninteresting: ['RStunDuration'],
 		}),
 	},
+	calculateHooks: {
+		onChampionPassive: {
+			handler(self, { championPassiveStats }) {
+				if (self.internalData.value.isWASActive) {
+					const attackSpeed = championAbilityVariableValue('AttackSpeed', {
+						abilityKey: 'w',
+						abilityVariant: self.champion.value!.abilities.w.variants[0]!,
+						allAbilitiesVariants: self.allAbilityVariants.value,
+						abilityLevel: self.abilityLevels.value.w,
+					});
+					if (typeof attackSpeed.value === 'number') {
+						championPassiveStats.bonusAttackSpeedPercent = attackSpeed.value * 0.01;
+					} else {
+						console.warn('[CHAMPION_SPECIFICS vi] failed to calculate w attack speed', attackSpeed);
+					}
+				}
+			},
+		},
+	},
 } satisfies IChampionSpecific<'Vi'>;
