@@ -506,10 +506,10 @@ export const EFFECT_SPECIFICS = {
 				calculate(self) {
 					return {
 						Shred: {
-							value: self.stats.value.debuffs.percentageMRShred ?? 0,
+							value: self.stats.value.miscDebug.bloodlettersCurseCarveShred ?? 0,
 						},
 						MagicResistShredded: {
-							value: self.stats.value.debuffs.shreddedMR ?? 0,
+							value: self.stats.value.effectVars.bloodlettersMRReduced ?? 0,
 						},
 					};
 				},
@@ -526,12 +526,24 @@ export const EFFECT_SPECIFICS = {
 			}),
 			calculateHooks: {
 				postInit: {
-					handler(self, _stats, { debuffs }) {
+					handler(self, _stats, { debuffs, miscDebug }) {
 						const effect = self.getEffect(EffectObjectName.bloodletterVileDecay)?.[0];
 						if (effect) {
-							debuffs.percentageMRShred += effect.data.value[0] * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
+							miscDebug.bloodlettersCurseCarveShred = effect.data.value[0] * ITEMS_BY_NAME.bloodlettersCurse?.dataValues.ShredPerStack;
+							miscDebug.totalAdditiveMRShred += miscDebug.bloodlettersCurseCarveShred;
+							debuffs.percentageMRShred = addMultiplicative(debuffs.percentageMRShred, miscDebug.bloodlettersCurseCarveShred);
 						}
 					},
+				},
+				postTotal: {
+					handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
+						if (Number.isNaN(miscDebug.bloodlettersCurseCarveShred)) {
+							effectVars.bloodlettersMRReduced = Number.NaN;
+						} else {
+							effectVars.bloodlettersMRReduced = (debuffs.shreddedMR * miscDebug.bloodlettersCurseCarveShred!) / (miscDebug.totalAdditiveMRShred || 1);
+						}
+					},
+					priority: HOOK_PRIORITIES.postTotal.recordKeeping,
 				},
 			},
 		}),

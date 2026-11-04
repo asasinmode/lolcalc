@@ -372,6 +372,7 @@ export interface IStatsCalculationDebuffs {
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
 	totalAdditiveArmorShred: number;
+	totalAdditiveMRShred: number;
 	totalAdditiveCripple: number;
 	/** bonus hp riftmaker's passive is based on */
 	riftmakerBonusHp?: number;
@@ -386,6 +387,7 @@ export interface IStatsCalculationMiscDebug {
 	zeriExcessAS?: number;
 	zeriExcessASPercent?: number;
 	blackCleaverCarveShred?: number;
+	bloodlettersCurseCarveShred?: number;
 	viWArmorReductionPercent?: number;
 }
 
@@ -436,6 +438,8 @@ export interface IStatsCalculationEffectVars extends Pick<
 	lissandraPSlow?: number;
 	/** armor reduced by Black Cleaver's carve */
 	blackCleaverArmorReduced?: number;
+	/** mr reduced by Bloodletter's vile decay */
+	bloodlettersMRReduced?: number;
 	/** armor reduced by Vi's W effect */
 	viWArmorReduced?: number;
 }
