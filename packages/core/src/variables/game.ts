@@ -387,13 +387,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		if (typeof rv.value === 'number') {
 			rv.value *= cdr;
 		}
-		if (rv.allValues) {
-			for (let i = 0; i < rv.allValues.length; i++) {
-				if (typeof rv.allValues[i] === 'number') {
-					rv.allValues[i]! *= cdr;
-				}
-			}
-		}
+		rv.allValues &&= rv.allValues.map((v) => (typeof v === 'number' ? v * cdr : v));
 	}
 
 	if (rv.value) {
