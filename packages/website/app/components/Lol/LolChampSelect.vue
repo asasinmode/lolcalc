@@ -4,15 +4,9 @@ import type { IChampionId, IListedChampion } from '@lolcalc/data/types';
 import type { IChampionRole } from '@lolcalc/shared/types';
 
 const value = defineModel<IListedChampion>();
-const selectedChampion = shallowRef<IListedChampion | undefined>();
+const selectedChampionId = shallowRef<IChampionId>();
 
-watch(
-	value,
-	(c) => {
-		selectedChampion.value = c;
-	},
-	{ immediate: true },
-);
+watch(value, (c) => (selectedChampionId.value = c?.id), { immediate: true });
 
 const { vMinor } = PATCH_VERSION;
 const { championImage, championImageSize } = CHAMPION_IMAGES;
@@ -24,7 +18,13 @@ const ALL_ROLES: [IChampionRole, string][] = [
 	['bot', 'bottom'],
 	['support', 'utility'],
 ];
-const ALL_CHAMPIONS = Object.values(CHAMPIONS);
+const ALL_CHAMPIONS = Object.values(CHAMPIONS).map((champion) => ({
+	id: champion.id,
+	name: champion.name,
+	image: champion.image,
+	roles: champion.roles,
+	searchString: champion.name.replaceAll(/['. ]/g, '').toLowerCase(),
+}));
 
 const vDialog = useTemplateRef('vDialog');
 const search = ref('');
@@ -33,27 +33,37 @@ const selectedRole = ref<IChampionRole>();
 const championImages = Object.fromEntries(Object.entries(CHAMPIONS).map(([id, { image }]) => [id, [championImage(image, id as IChampionId), championImageSize(id as IChampionId)]])) as Record<IChampionId, [url: string, dimensions: number]>;
 
 const computedChampions = computed(() => {
-	const splitSearch = search.value
-		.toLocaleLowerCase()
+	const searchVal = search.value.toLocaleLowerCase();
+	const splitSearch = searchVal
 		.replaceAll(/[^a-z]/g, '')
 		.split(' ')
 		.filter((v) => v);
 
-	const searchFiltered = search.value ? ALL_CHAMPIONS.filter((champion) => splitSearch.every((word) => champion.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word))) : ALL_CHAMPIONS;
+	const searchFiltered = search.value ? ALL_CHAMPIONS.filter((champion) => splitSearch.every((word) => champion.searchString.includes(word))) : ALL_CHAMPIONS;
+	const roleFiltered = selectedRole.value ? searchFiltered.filter((champion) => champion.roles[selectedRole.value!]) : searchFiltered;
 
-	return selectedRole.value ? searchFiltered.filter((champion) => champion.roles[selectedRole.value!]) : searchFiltered;
+	if (!searchVal) return roleFiltered;
+
+	const query = searchVal.replaceAll(/[^a-z]/g, '');
+	return roleFiltered.sort((a, b) => {
+		const aStarts = a.searchString.startsWith(query);
+		const bStarts = b.searchString.startsWith(query);
+		if (aStarts && !bStarts) return -1;
+		if (!aStarts && bStarts) return 1;
+		return 0;
+	});
 });
 
 function closeCleanup() {
 	search.value = '';
-	value.value = selectedChampion.value;
+	value.value = selectedChampionId.value && CHAMPIONS[selectedChampionId.value];
 }
 
 const longestName = ALL_CHAMPIONS.reduce((lName, champ) => (champ.name.length > lName.length ? champ.name : lName), '');
 
 function selectFirstChamp() {
 	if (computedChampions.value[0]) {
-		selectedChampion.value = computedChampions.value[0];
+		selectedChampionId.value = computedChampions.value[0].id;
 		vDialog.value?.close();
 	}
 }
@@ -106,8 +116,8 @@ defineExpose({
 			</VButtonRadiogroup>
 		</header>
 		<ul :data-longest-name="longestName">
-			<li v-for="champion in computedChampions" :key="champion.id" :class="{ selected: selectedChampion === champion }">
-				<button @click="(selectedChampion = champion) && vDialog?.close()">
+			<li v-for="champion in computedChampions" :key="champion.id" :class="{ selected: selectedChampionId === champion.id }">
+				<button @click="(selectedChampionId = champion.id) && vDialog?.close()">
 					<img
 						:title="champion.name"
 						:src="championImages[champion.id][0]"
