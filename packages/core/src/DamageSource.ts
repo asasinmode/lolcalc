@@ -1180,7 +1180,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	championSpecific = computed(() => this.champion.value && ((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id] as any)) as ComputedRef<IChampionSpecific>;
 
-	abilityVariantsCD = computed(
+	abilityVariantsCDR = computed(
 		(): Record<INonPassiveAbilityKey, (number | undefined)[]> =>
 			Object.fromEntries(
 				(['q', 'w', 'e', 'r'] as INonPassiveAbilityKey[]).map((abilityKey) => {
@@ -1686,8 +1686,8 @@ function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 	}
 }
 
-function allChampionAbilitiesVariants(champion?: IChampion): [IChampionAbilityVariant, IChampionAbilityKey][] {
-	return champion ? Object.entries(champion.abilities).flatMap(([abilityKey, ability]) => ability.variants.map((variant) => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey])) : [];
+function allChampionAbilitiesVariants(champion?: IChampion): [IChampionAbilityVariant, IChampionAbilityKey, variantIndex: number][] {
+	return champion ? Object.entries(champion.abilities).flatMap(([abilityKey, ability]) => ability.variants.map((variant, i) => [variant, abilityKey, i] as [IChampionAbilityVariant, IChampionAbilityKey, variantIndex: number])) : [];
 }
 
 export function computeAbilityDescription(champion: IChampion, gameAbilityId: IChampionAbilityId, damageSource?: DamageSource, replaceOptions?: IReplaceGameVariablesOptions, abilityLevel?: number): IComputedAbilityDescription {
@@ -1798,7 +1798,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		};
 	});
 
-	const cdr = gameAbilityId.abilityKey === 'passive' ? 1 : (damageSource?.abilityVariantsCD.value[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex] ?? 1);
+	const cdr = gameAbilityId.abilityKey === 'passive' ? 1 : (damageSource?.abilityVariantsCDR.value[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex] ?? 1);
 
 	const abilitySpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[gameAbilityId.abilityKey];
 

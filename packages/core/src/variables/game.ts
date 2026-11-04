@@ -287,7 +287,7 @@ export interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	 * ALL champion's abilities variants, not just the target ability. Descriptions can reference other spells like Caitlyn passive
 	 * if `damageSource` is passed, will use `.allAbilityVariants.value`
 	 */
-	allAbilitiesVariants?: [IChampionAbilityVariant, IChampionAbilityKey][];
+	allAbilitiesVariants?: [IChampionAbilityVariant, IChampionAbilityKey, variantIndex: number][];
 	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
 	returnActualName?: boolean;
 	/** for when an ability variant tries to resolve an unknown variable by using other, same ability (like q[0], q[1]) variant to avoid rechecking visited variants/infinitely looping if a variable was unknown in all variants */
@@ -299,7 +299,6 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		abilityVariant,
 		dynamicVariables = overrideDynamicVariables ?? {},
 		abilityKey,
-		/* optional damageSource properties chains here because calculate hooks often pass partial damage source with only what's needed for calculation */
 		/* optional damageSource properties chains here because calculate hooks often pass partial damage source with only what's needed for calculation */
 		allAbilitiesVariants = params.damageSource?.allAbilityVariants?.value ?? [],
 		damageSource,
@@ -359,12 +358,14 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		rv.meta = dynamicVariables.meta[variable];
 	}
 
+	let applyCD = false;
+
 	if (variableName === 'AbilityResourceName') {
 		rv.value = damageSource?.champion.value?.partype ?? 'Mana';
 	} else if (variableName === 'AmmoRechargeTime') {
-		// TODO apply cdr
 		rv.value = abilityVariant.ammoRechargeTime?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.ammoRechargeTime;
+		applyCD = true;
 	} else if (variableName === 'MaxAmmo') {
 		rv.value = abilityVariant.maxAmmo?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.maxAmmo;
@@ -377,6 +378,22 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	} else if (variableName === 'Cooldown') {
 		rv.value = abilityVariant.cooldownTime?.[abilityLevel ?? 1];
 		rv.allValues = abilityVariant.cooldownTime;
+		applyCD = true;
+	}
+
+	if (applyCD) {
+		const variantIndex = allAbilitiesVariants.find((variant) => variant[0].objectName === abilityVariant.objectName)?.[2] ?? 0;
+		const cdr = abilityKey === 'passive' ? 1 : (damageSource?.abilityVariantsCDR.value[abilityKey][variantIndex] ?? 1);
+		if (typeof rv.value === 'number') {
+			rv.value *= cdr;
+		}
+		if (rv.allValues) {
+			for (let i = 0; i < rv.allValues.length; i++) {
+				if (typeof rv.allValues[i] === 'number') {
+					rv.allValues[i]! *= cdr;
+				}
+			}
+		}
 	}
 
 	if (rv.value) {
