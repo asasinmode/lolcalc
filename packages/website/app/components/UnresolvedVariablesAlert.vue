@@ -1,8 +1,10 @@
-<script setup vapor lang="ts"></script>
+<script setup vapor lang="ts">
+const { reportAnIssue } = useReportIssueDialog();
+</script>
 
 <template>
 	<p class="alert warning">
-		Some variables weren't resolved correctly. Please <a href="#">TODO report this issue</a>
+		Some variables weren't resolved correctly. Please <button @click="reportAnIssue">report this issue</button>
 		<Icon class="i-ph:warning-light" />
 	</p>
 </template>
@@ -12,8 +14,8 @@
 	.alert {
 		--at-apply: 'b relative w-fit rounded-md py-2 ps-2 text-wrap of-hidden';
 
-		a {
-			--at-apply: 'inline font-600';
+		button {
+			--at-apply: 'font-600';
 		}
 
 		&::after {
