@@ -1068,6 +1068,53 @@ export const EFFECT_SPECIFICS = {
 			} as DamageSource);
 		},
 	},
+	[EffectObjectName.viWDentingBlows]: {
+		...defineEffectSpecific<[dentingBlows: number]>({
+			setupData(data) {
+				return [clamp(0, data?.[0] ?? 0, 1)];
+			},
+			setupDataFromInternalData(damageSource) {
+				return [(damageSource.internalData.value as IInternalDataOf<'Vi'>).applyWPen];
+			},
+			variables: defineVariables({
+				known: {
+					ArmorReduced: [],
+				},
+				calculate(self) {
+					return {
+						ArmorReduced: {
+							value: self.stats.value.effectVars.viWArmorReduced ?? 0,
+						},
+					};
+				},
+				meta: {
+					ArmorReduced: {
+						isCustom: true,
+					},
+				},
+			}),
+			calculateHooks: {
+				postInit: {
+					handler(self, { bonusStats }, { effectVars }) {
+						const effect = self.getEffect(EffectObjectName.nunuPCallOfFreljord)?.[0];
+						if (effect?.champion.value?.id === 'Vi') {
+							const reducePercent = CHAMPION_SPECIFICS.Vi.w.calculateArmorReduction(effect.champion.value as IChampion);
+							if (Number.isNaN(reducePercent)) {
+								effectVars.viWArmorReduced = Number.NaN;
+								return;
+							}
+							console.log('reducing by', reducePercent);
+						}
+						// effectVars.rellPResistsStealPercent = stealPercent;
+						// effectVars.rellPArmorStolen = stolenArmor;
+						// effectVars.rellPMRStolen = stolenMR;
+						// bonusStats.armor -= effectVars.rellPArmorStolen;
+						// bonusStats.magicResist -= effectVars.rellPMRStolen;
+					},
+				},
+			},
+		}),
+	},
 	[EffectObjectName.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100), Math.max(0, data?.[1] ?? 0)];
@@ -1343,6 +1390,9 @@ export const CUSTOM_EFFECTS: Partial<
 	/* champion passives */
 	[EffectObjectName.ashePFrostShot]: {
 		championSpellObjectName: 'AshePassiveSlow',
+	},
+	[EffectObjectName.viWDentingBlows]: {
+		championSpellObjectName: 'ViWMarker',
 	},
 	[EffectObjectName.apheliosGravitumSlow]: {
 		championSpellObjectName: 'ApheliosGravitumDebuff',

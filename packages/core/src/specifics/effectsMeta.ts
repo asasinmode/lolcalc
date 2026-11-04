@@ -174,6 +174,10 @@ export const EFFECTS_META: Record<
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0),
 		label: 'Break the Mold stacks',
 	},
+	[EffectObjectName.viWDentingBlows]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0),
+		label: 'Denting Blows',
+	},
 	[EffectObjectName.namiPSurgingTides]: {
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
 		label: 'Surging Tides',

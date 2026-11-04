@@ -1,5 +1,6 @@
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IVi from '@lolcalc/data/files/champion/Vi.json';
+import type { IChampion } from '@lolcalc/data/types.js';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
@@ -36,6 +37,16 @@ export default {
 		}),
 	},
 	w: {
+		calculateArmorReduction(champion: IChampion): number {
+			const rv = championAbilityVariableValue('ShredAmount', { abilityKey: 'w', abilityVariant: champion.abilities.w.variants[0]! });
+
+			if (typeof rv.value === 'number') {
+				return rv.value;
+			} else {
+				console.warn('[CHAMPION_SPECIFICS vi] failed to calculate W armor reduce percent', rv);
+				return Number.NaN;
+			}
+		},
 		variables: defineChampionVariables<'Vi', typeof IVi, 'w'>()({
 			known: {
 				AdditionalPercentDamage: [],
@@ -60,7 +71,7 @@ export default {
 						value: AdditionalPercentDamage,
 					},
 					ArmorRemoved: {
-						value: 'TODO',
+						value: (self.internalData.value.applyWPen && target?.stats.value.effectVars.viWArmorReduced) ?? 0,
 					},
 				};
 			},
