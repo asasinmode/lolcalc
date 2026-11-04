@@ -400,3 +400,9 @@
 		}
 	}
 }
+
+@layer overrides {
+	.unknown {
+		--at-apply: 'text-[--unknown-clr]';
+	}
+}

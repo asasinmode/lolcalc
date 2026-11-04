@@ -2262,10 +2262,6 @@ defineExpose({
 						}
 					}
 
-					&.unknown {
-						--at-apply: 'text-[--unknown-clr]';
-					}
-
 					> * {
 						--row-py: var(--spacing);
 						--row-th-ps: var(--spacing);
@@ -2323,10 +2319,6 @@ defineExpose({
 
 						&.irrelevant {
 							--at-apply: 'text-neutral-500';
-						}
-
-						&.unknown {
-							--at-apply: 'text-[--unknown-clr]';
 						}
 
 						&:not(.irrelevant) > span {

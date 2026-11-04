@@ -142,7 +142,7 @@ const UnknownComponent = defineComponent(
 		console.warn('[CalculatorEffectsDialog] unknown effect component', props.abilityId);
 		return () => h('article', { class: 'unknown' }, [h('span', 'unknown'), h('span', props.abilityId.id)]);
 	},
-	{ props: ['abilityId'] },
+	{ props: ['abilityId', 'damageSource', 'idSuffix', 'tooltipTriggerAttrs'] },
 );
 
 const effectComponents = computed(() => {

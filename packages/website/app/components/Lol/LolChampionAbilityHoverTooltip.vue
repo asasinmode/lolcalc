@@ -223,7 +223,6 @@ defineExpose({ el });
 
 		> span.unknown,
 		> footer > dl > :where(dt, dd).unknown {
-			color: var(--unknown-clr);
 			font-weight: 700;
 		}
 
