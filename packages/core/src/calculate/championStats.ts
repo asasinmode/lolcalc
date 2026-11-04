@@ -88,7 +88,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		flatMSSlow: [],
 		appliedSlow: 0,
 		appliedFlatSlow: 0,
-		percentageArmorShred: 0,
+		percentageArmorShred: 1,
 		flatArmorShred: 0,
 		shreddedArmor: 0,
 		percentageMRShred: 0,
@@ -98,6 +98,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const effectVars: IStatsCalculationEffectVars = {};
 	const miscDebug: IStatsCalculationMiscDebug = {
 		totalAdditiveCripple: 0,
+		totalAdditiveArmorShred: 0,
 	};
 
 	const baseStats = structuredClone(initialStats);
@@ -441,7 +442,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	{
 		/* shred calc */
-		const totalMultipliersArmorShred = Math.max(0, totalStats.armor - debuffs.flatArmorShred) * debuffs.percentageArmorShred;
+		const totalMultipliersArmorShred = Math.max(0, totalStats.armor - debuffs.flatArmorShred) * (1 - debuffs.percentageArmorShred);
 		debuffs.shreddedArmor = totalMultipliersArmorShred;
 		totalStats.armor = totalStats.armor - totalMultipliersArmorShred;
 		bonusStats.armor = Math.max(0, bonusStats.armor * (1 - debuffs.percentageArmorShred));

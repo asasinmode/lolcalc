@@ -1069,12 +1069,13 @@ export const ITEM_SPECIFICS = {
 				ArmorShredded: [],
 			},
 			calculate(self, target): { Shred: IVariableValueResult; ArmorShredded: IVariableValueResult } {
+				const Shred = self.effectsOntoTargetVars.value.blackCleaverCarveShred ?? 0;
 				return {
 					Shred: {
-						value: self.effectsOntoTargetVars.value.blackCleaverCarveShred ?? 0,
+						value: Shred,
 					},
 					ArmorShredded: {
-						value: ((self.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve && target?.stats.value.debuffs.shreddedArmor) ?? 0,
+						value: target && (self.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).carve ? (target.stats.value.debuffs.shreddedArmor * Shred) / (target.stats.value.miscDebug.totalAdditiveArmorShred || 1) : 0,
 					},
 				};
 			},
@@ -1095,9 +1096,10 @@ export const ITEM_SPECIFICS = {
 		},
 		calculateHooks: {
 			preItemTotal: {
-				handler(self, { itemPassivesStats }, { calculatedVariables }) {
+				handler(self, { itemPassivesStats }, { calculatedVariables, miscDebug }) {
 					if ((self.internalItemData.value as IInternalItemDataOf<'blackCleaver'>).fervor) {
 						calculatedVariables.blackCleaverMoveSpeed = ITEMS_BY_NAME.blackCleaver?.dataValues.MoveSpeedBonus;
+						miscDebug.totalAdditiveArmorShred += calculatedVariables.blackCleaverMoveSpeed;
 						itemPassivesStats.moveSpeed += calculatedVariables.blackCleaverMoveSpeed;
 					}
 				},

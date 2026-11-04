@@ -41,7 +41,7 @@ export default {
 			const rv = championAbilityVariableValue('ShredAmount', { abilityKey: 'w', abilityVariant: champion.abilities.w.variants[0]! });
 
 			if (typeof rv.value === 'number') {
-				return rv.value;
+				return rv.value * 0.01;
 			} else {
 				console.warn('[CHAMPION_SPECIFICS vi] failed to calculate W armor reduce percent', rv);
 				return Number.NaN;
@@ -94,7 +94,6 @@ export default {
 				TotalDamageTooltip: {
 					type: VariableType.physical,
 				},
-				// TODO treat AmmoRechargeTime as cd, apply haste here and in ability level vars
 			},
 		}),
 	},

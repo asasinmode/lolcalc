@@ -371,6 +371,7 @@ export interface IStatsCalculationDebuffs {
 
 /** any other debug data for calculateStats, like bonus hp the riftmaker calculates void infusion from */
 export interface IStatsCalculationMiscDebug {
+	totalAdditiveArmorShred: number;
 	totalAdditiveCripple: number;
 	/** bonus hp riftmaker's passive is based on */
 	riftmakerBonusHp?: number;
@@ -384,6 +385,8 @@ export interface IStatsCalculationMiscDebug {
 	swiftmarchTotalMs?: number;
 	zeriExcessAS?: number;
 	zeriExcessASPercent?: number;
+	blackCleaverCarveShred?: number;
+	viWArmorReductionPercent?: number;
 }
 
 /** variables of effects applied onto the damage target */
@@ -408,14 +411,12 @@ export interface IEffectOntoTargetVars {
 	rellPArmorStolen?: number;
 	/** magic resist stolen from rell passive effect */
 	rellPMRStolen?: number;
-	/** armor reduced by Vi's W effect */
-	viWArmorReduced?: number;
 }
 
 /** all of the variables from currently applied effects */
 export interface IStatsCalculationEffectVars extends Pick<
 	IEffectOntoTargetVars,
-	'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent' | 'rellPArmorStolen' | 'rellPMRStolen' | 'viWArmorReduced' | 'apheliosGravitumSlow'
+	'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent' | 'rellPArmorStolen' | 'rellPMRStolen' | 'apheliosGravitumSlow'
 > {
 	lolcalcPercentSlow?: number;
 	botrkSlow?: number;
@@ -433,6 +434,10 @@ export interface IStatsCalculationEffectVars extends Pick<
 	nasusWASReduced?: number;
 	/** ms slow % from Lissandra passive */
 	lissandraPSlow?: number;
+	/** armor reduced by Black Cleaver's carve */
+	blackCleaverArmorReduced?: number;
+	/** armor reduced by Vi's W effect */
+	viWArmorReduced?: number;
 }
 
 export interface IDamageOutputVars {

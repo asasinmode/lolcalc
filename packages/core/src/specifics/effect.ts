@@ -558,10 +558,10 @@ export const EFFECT_SPECIFICS = {
 			calculate(self) {
 				return {
 					Shred: {
-						value: self.stats.value.debuffs.percentageArmorShred ?? 0,
+						value: self.stats.value.miscDebug.blackCleaverCarveShred ?? 0,
 					},
 					ArmorShredded: {
-						value: self.stats.value.debuffs.shreddedArmor ?? 0,
+						value: self.stats.value.effectVars.blackCleaverArmorReduced ?? 0,
 					},
 				};
 			},
@@ -578,12 +578,24 @@ export const EFFECT_SPECIFICS = {
 		}),
 		calculateHooks: {
 			postInit: {
-				handler(self, _stats, { debuffs }) {
+				handler(self, _stats, { debuffs, miscDebug }) {
 					const effect = self.getEffect(EffectObjectName.blackCleaverCarve)?.[0];
 					if (effect) {
-						debuffs.percentageArmorShred += effect.data.value[0] * ITEMS_BY_NAME.blackCleaver?.dataValues.ShredPerStack;
+						miscDebug.blackCleaverCarveShred = effect.data.value[0] * ITEMS_BY_NAME.blackCleaver?.dataValues.ShredPerStack;
+						miscDebug.totalAdditiveArmorShred += miscDebug.blackCleaverCarveShred;
+						debuffs.percentageArmorShred = addMultiplicative(debuffs.percentageArmorShred, miscDebug.blackCleaverCarveShred);
 					}
 				},
+			},
+			postTotal: {
+				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
+					if (Number.isNaN(miscDebug.blackCleaverCarveShred)) {
+						effectVars.blackCleaverArmorReduced = Number.NaN;
+					} else {
+						effectVars.blackCleaverArmorReduced = (debuffs.shreddedArmor * miscDebug.blackCleaverCarveShred!) / (miscDebug.totalAdditiveArmorShred || 1);
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
 			},
 		},
 	}),
@@ -1068,53 +1080,55 @@ export const EFFECT_SPECIFICS = {
 			} as DamageSource);
 		},
 	},
-	[EffectObjectName.viWDentingBlows]: {
-		...defineEffectSpecific<[dentingBlows: number]>({
-			setupData(data) {
-				return [clamp(0, data?.[0] ?? 0, 1)];
+	[EffectObjectName.viWDentingBlows]: defineEffectSpecific<[dentingBlows: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		setupDataFromInternalData(damageSource) {
+			return [(damageSource.internalData.value as IInternalDataOf<'Vi'>).applyWPen];
+		},
+		variables: defineVariables({
+			known: {
+				ArmorReduced: [],
 			},
-			setupDataFromInternalData(damageSource) {
-				return [(damageSource.internalData.value as IInternalDataOf<'Vi'>).applyWPen];
-			},
-			variables: defineVariables({
-				known: {
-					ArmorReduced: [],
-				},
-				calculate(self) {
-					return {
-						ArmorReduced: {
-							value: self.stats.value.effectVars.viWArmorReduced ?? 0,
-						},
-					};
-				},
-				meta: {
+			calculate(self) {
+				return {
 					ArmorReduced: {
-						isCustom: true,
+						value: self.stats.value.effectVars.viWArmorReduced ?? 0,
 					},
-				},
-			}),
-			calculateHooks: {
-				postInit: {
-					handler(self, { bonusStats }, { effectVars }) {
-						const effect = self.getEffect(EffectObjectName.nunuPCallOfFreljord)?.[0];
-						if (effect?.champion.value?.id === 'Vi') {
-							const reducePercent = CHAMPION_SPECIFICS.Vi.w.calculateArmorReduction(effect.champion.value as IChampion);
-							if (Number.isNaN(reducePercent)) {
-								effectVars.viWArmorReduced = Number.NaN;
-								return;
-							}
-							console.log('reducing by', reducePercent);
-						}
-						// effectVars.rellPResistsStealPercent = stealPercent;
-						// effectVars.rellPArmorStolen = stolenArmor;
-						// effectVars.rellPMRStolen = stolenMR;
-						// bonusStats.armor -= effectVars.rellPArmorStolen;
-						// bonusStats.magicResist -= effectVars.rellPMRStolen;
-					},
+				};
+			},
+			meta: {
+				ArmorReduced: {
+					isCustom: true,
 				},
 			},
 		}),
-	},
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { miscDebug, debuffs }) {
+					const effect = self.getEffect(EffectObjectName.viWDentingBlows)?.[0];
+					if (effect?.champion.value?.id === 'Vi') {
+						miscDebug.viWArmorReductionPercent = CHAMPION_SPECIFICS.Vi.w.calculateArmorReduction(effect.champion.value as IChampion);
+						if (!Number.isNaN(miscDebug.viWArmorReductionPercent)) {
+							debuffs.percentageArmorShred = addMultiplicative(debuffs.percentageArmorShred, miscDebug.viWArmorReductionPercent);
+							miscDebug.totalAdditiveArmorShred += miscDebug.viWArmorReductionPercent;
+						}
+					}
+				},
+			},
+			postTotal: {
+				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
+					if (Number.isNaN(miscDebug.viWArmorReductionPercent)) {
+						effectVars.viWArmorReduced = Number.NaN;
+					} else {
+						effectVars.viWArmorReduced = (debuffs.shreddedArmor * miscDebug.viWArmorReductionPercent!) / (miscDebug.totalAdditiveArmorShred || 1);
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
+			},
+		},
+	}),
 	[EffectObjectName.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100), Math.max(0, data?.[1] ?? 0)];
