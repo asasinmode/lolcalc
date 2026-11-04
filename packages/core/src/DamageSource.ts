@@ -1180,6 +1180,35 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	championSpecific = computed(() => this.champion.value && ((CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id] as any)) as ComputedRef<IChampionSpecific>;
 
+	abilityVariantsCD = computed(
+		(): Record<INonPassiveAbilityKey, (number | undefined)[]> =>
+			Object.fromEntries(
+				(['q', 'w', 'e', 'r'] as INonPassiveAbilityKey[]).map((abilityKey) => {
+					if (!this.champion.value) {
+						return [abilityKey, []];
+					}
+
+					const variants = this.champion.value.abilities[abilityKey].variants;
+					return [
+						abilityKey,
+						variants.map((variant) => {
+							let additionalHaste = 0;
+							if (variant.isImmobilizing) {
+								additionalHaste += this.stats.value.total.immobilizingHaste;
+							}
+							/* udyr's basic ability haste (at least from shojin) works for all abilities */
+							if (abilityKey !== 'r' || this.champion.value!.id === 'Udyr') {
+								additionalHaste += this.stats.value.total.basicHaste;
+							} else {
+								additionalHaste += this.stats.value.total.ultimateHaste;
+							}
+							return 1 - cooldownReductionPercentageFromHaste(this.stats.value.total.abilityHaste + additionalHaste) / 100;
+						}),
+					];
+				}),
+			) as Record<INonPassiveAbilityKey, (number | undefined)[]>,
+	);
+
 	computed: IDamageSourceComputed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
 		formattedStatTotals: computed((): UnwrapRef<IDamageSourceComputed['formattedStatTotals']> => {
@@ -1713,12 +1742,16 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		}
 	}
 
-	// TODO detect unknown cost/cooldown
-	let anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
+	let anyUnknownVariables: boolean | number =
+		nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBLUnknownSV.size || tooltipExtendedBLUnknownV.length;
 
 	const cooldown = variant.cooldownTime === null ? null : variant.cooldownTime?.[abilityLevel ?? 1];
 	const cost = variant.mana === null ? null : variant.mana?.[abilityLevel ?? 1];
 	const lastExtendedVariableIndex = ability.maxLevel + 1;
+
+	if (cooldown === undefined) {
+		anyUnknownVariables ||= gameAbilityId.abilityKey !== 'passive';
+	}
 
 	let abilityLevelVars: IComputedAbilityDescription['abilityLevelVars'] | undefined = variant.abilityLevelVars?.map((variable) => {
 		if (damageSource?.isResultsCopy) return { name: '' };
@@ -1765,20 +1798,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		};
 	});
 
-	let additionalHaste = 0;
-	let cdr = 1;
-	if (damageSource) {
-		if (variant.isImmobilizing) {
-			additionalHaste += damageSource.stats.value.total.immobilizingHaste;
-		}
-		/* udyr's basic ability haste (at least from shojin) works for all abilities */
-		if (gameAbilityId.abilityKey !== 'r' || champion.id === 'Udyr') {
-			additionalHaste += damageSource.stats.value.total.basicHaste;
-		} else {
-			additionalHaste += damageSource.stats.value.total.ultimateHaste;
-		}
-		cdr = 1 - cooldownReductionPercentageFromHaste(damageSource.stats.value.total.abilityHaste + additionalHaste) / 100;
-	}
+	const cdr = gameAbilityId.abilityKey === 'passive' ? 1 : (damageSource?.abilityVariantsCD.value[gameAbilityId.abilityKey][gameAbilityId.abilityVariantIndex] ?? 1);
 
 	const abilitySpecific = (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[champion.id]?.[gameAbilityId.abilityKey];
 
@@ -1802,6 +1822,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		}
 	}
 
+	const reducedCd = abilitySpecific?.calculateCd?.(cooldown, cdr, variant, abilityLevel, damageSource) ?? (cooldown !== undefined && cooldown !== null ? cooldown * cdr : cooldown);
+
 	let isDisabled: boolean | number | undefined;
 	if (damageSource && abilitySpecific?.isDisabled) {
 		isDisabled = abilitySpecific.isDisabled(damageSource);
@@ -1816,8 +1838,6 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 	} else {
 		image = variant.image[0]!;
 	}
-
-	const reducedCd = abilitySpecific?.calculateCd?.(cooldown, cdr, variant, abilityLevel, damageSource) ?? (cooldown !== undefined && cooldown !== null ? cooldown * cdr : cooldown);
 
 	return {
 		gameAbilityId,
