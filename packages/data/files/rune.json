@@ -1,5 +1,5 @@
 {
-	"version": "16.21.1",
+	"version": "16.22.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -927,10 +927,10 @@
 								"TicksPerSecond": 2,
 								"APRatioTT": 2.5,
 								"ADRatioTT": 7,
-								"Level18DamageTOOLTIP": 12,
-								"__renamedVariables": {
-									"{2156e250}": "Level18DamageTOOLTIP"
-								}
+								"Level18DamageTOOLTIP": 12
+							},
+							"__renamedVariables": {
+								"{2156e250}": "Level18DamageTOOLTIP"
 							}
 						}
 					},
@@ -1048,13 +1048,13 @@
 								"OOCTimer": 0,
 								"{89367404}": 0.1,
 								"dotduration": 1,
-								"__renamedVariables": {
-									"DotDuration": "dotduration",
-									"DamageMax": "damagemax",
-									"Damage": "damage"
-								},
 								"damagemax": 40,
 								"damage": 20
+							},
+							"__renamedVariables": {
+								"DotDuration": "dotduration",
+								"DamageMax": "damagemax",
+								"Damage": "damage"
 							}
 						},
 						"Waterwalking": {
@@ -1489,10 +1489,10 @@
 							"effectAmount": {
 								"HealShieldPower": 0.05,
 								"ExtraAmp": 10,
-								"HealthCutoff": 40,
-								"__renamedVariables": {
-									"HealthCutOff": "HealthCutoff"
-								}
+								"HealthCutoff": 40
+							},
+							"__renamedVariables": {
+								"HealthCutOff": "HealthCutoff"
 							}
 						},
 						"Unflinching": {
@@ -1787,13 +1787,13 @@
 							"dataKey": "Perks/Styles/Inspiration/JackOfAllTrades",
 							"effectAmount": {
 								"HasteperStack": 1,
-								"__renamedVariables": {
-									"HastePerStack": "HasteperStack",
-									"{55d14eea}": "Adaptive10",
-									"{1b48f5ea}": "Adaptive5"
-								},
 								"Adaptive10": 20,
 								"Adaptive5": 8
+							},
+							"__renamedVariables": {
+								"HastePerStack": "HasteperStack",
+								"{55d14eea}": "Adaptive10",
+								"{1b48f5ea}": "Adaptive5"
 							}
 						}
 					}

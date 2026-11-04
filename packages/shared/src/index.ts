@@ -408,10 +408,15 @@ export interface IEffectOntoTargetVars {
 	rellPArmorStolen?: number;
 	/** magic resist stolen from rell passive effect */
 	rellPMRStolen?: number;
+	/** armor reduced by Vi's W effect */
+	viWArmorReduced?: number;
 }
 
 /** all of the variables from currently applied effects */
-export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars, 'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent' | 'apheliosGravitumSlow'> {
+export interface IStatsCalculationEffectVars extends Pick<
+	IEffectOntoTargetVars,
+	'hextechSoulSlow' | 'nasusWSlow' | 'nasusWCripple' | 'ashePSlow' | 'rellPResistsStealPercent' | 'rellPArmorStolen' | 'rellPMRStolen' | 'viWArmorReduced' | 'apheliosGravitumSlow'
+> {
 	lolcalcPercentSlow?: number;
 	botrkSlow?: number;
 	rylaiSlow?: number;
@@ -426,10 +431,6 @@ export interface IStatsCalculationEffectVars extends Pick<IEffectOntoTargetVars,
 	namiPassiveBonusMS?: number;
 	/** attack speed value reduced by nasus' passive */
 	nasusWASReduced?: number;
-	/** armor stolen from rell passive effect */
-	rellPArmorStolen?: number;
-	/** magic resist stolen from rell passive effect */
-	rellPMRStolen?: number;
 	/** ms slow % from Lissandra passive */
 	lissandraPSlow?: number;
 }
@@ -822,6 +823,7 @@ export const EffectObjectName = {
 	nunuPCallOfFreljord: 'localcNunuPassive',
 	ornnPLivingForge: 'lolcalcOrnnPassive',
 	rellPBreakMold: 'RellP_Debuff',
+	viWDentingBlows: 'ViWMarker',
 	namiPSurgingTides: 'NamiPassiveTT',
 	nasusWWither: 'NasusW',
 	lissandraPIcebornSubjugation: 'lolcalcLissandraPassive',

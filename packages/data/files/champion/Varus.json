@@ -49,7 +49,7 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamageMin": [5, 50, 95, 140, 185, 230, 275],
+						"BaseDamageMin": [0, 50, 100, 150, 200, 250, 300],
 						"tADRatioMin": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
 						"MaxChannelAmp": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
 						"FalloffPercent": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
@@ -94,7 +94,6 @@
 					},
 					"castRange": [925, 925, 925, 925, 925, 925, 925],
 					"__renamedVariables": {
-						"{0508ccce}": "MaxChannelAmp",
 						"{b3ef3984}": "TotalDamageMin"
 					}
 				}
@@ -341,10 +340,10 @@
 						"PassiveASMinion": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"PassiveASRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"PassiveASRatioMinion": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
-						"AStoADMinion": [11, 11, 11, 11, 11, 11, 11],
-						"AStoAPMinion": [11, 11, 11, 11, 11, 11, 11],
-						"AStoADChampion": [33, 33, 33, 33, 33, 33, 33],
-						"AStoAPChampion": [33, 33, 33, 33, 33, 33, 33],
+						"AStoADMinion": [14, 14, 14, 14, 14, 14, 14],
+						"AStoAPMinion": [14, 14, 14, 14, 14, 14, 14],
+						"AStoADChampion": [42, 42, 42, 42, 42, 42, 42],
+						"AStoAPChampion": [42, 42, 42, 42, 42, 42, 42],
 						"NewASCap": [3.33, 3.33, 3.33, 3.33, 3.33, 3.33, 3.33]
 					},
 					"spellCalculations": {

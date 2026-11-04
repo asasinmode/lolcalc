@@ -186,7 +186,7 @@
 					"image": "assets/characters/aurora/hud/icons2d/aurorar.png",
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 120, 100, 13, 10, 10],
-					"tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Slows</status> enemies hit by @SlowPercent*-100@% for 2 seconds.<br><br>The area of convergence stays active for @AreaDuration@ seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> for @RBuffDuration@ seconds, allowing her to jump from one edge of the area to another.<br><br>Enemies attempting to enter or leave the area are <status>Slowed</status> by @ExitSlowPercent*-100@% for @StunDuration@ seconds.<br><br>Aurora can <recast>Recast</recast> this Ability to end the effect early.",
+					"tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Slows</status> enemies hit by @SlowPercent*-100@% for 2 seconds.<br><br>The area of convergence stays active for @AreaDuration@ seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> for @AreaDuration@ seconds, allowing her to jump from one edge of the area to another.<br><br>Enemies attempting to enter or leave the area are <status>Slowed</status> by @ExitSlowPercent*-100@% for @StunDuration@ seconds.<br><br>Aurora can <recast>Recast</recast> this Ability to end the effect early.",
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
@@ -203,7 +203,6 @@
 						"ExitBaseDamage": [0, 50, 100, 150, 200, 250, 300],
 						"ExitSlowPercent": [-0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5],
 						"AreaDuration": [2.5, 3, 3.5, 4, 4.5, 5, 5.5],
-						"RBuffDuration": [2.75, 3.5, 4.25, 5, 5.75, 6.5, 7.25],
 						"AoESize": [700, 700, 700, 700, 700, 700, 700],
 						"StunDuration": [1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75],
 						"MSMultiplier": [2, 2, 2, 2, 2, 2, 2],

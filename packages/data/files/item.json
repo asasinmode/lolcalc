@@ -1,5 +1,5 @@
 {
-	"version": "16.21.1",
+	"version": "16.22.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -817,7 +817,7 @@
 				"marksman": true
 			},
 			"stats": {
-				"FlatPhysicalDamageMod": 8,
+				"FlatPhysicalDamageMod": 7,
 				"PercentAttackSpeedMod": 0.15,
 				"PercentOmnivampMod": 0.015
 			},
@@ -1105,11 +1105,11 @@
 			},
 			"stats": {
 				"FlatHPPoolMod": 550,
-				"FlatPhysicalDamageMod": 30
+				"FlatPhysicalDamageMod": 40
 			},
 			"dataValues": {
 				"HPToADPercentage": 0.025,
-				"MissingHealthAD": 0.12,
+				"MissingHealthAD": 0.1,
 				"MissingHealthThreshold": 0.7
 			},
 			"itemCalculations": {
@@ -1265,7 +1265,7 @@
 					]
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
 				"{434396e0}": "MonsterAP",
 				"{afd69c5a}": "MonsterDPS",
 				"{9adc0c64}": "MinionDPS"
@@ -1488,10 +1488,6 @@
 						}
 					]
 				},
-				"__renamedVariables": {
-					"{87892572}": "HasteFromADRanged",
-					"{e4d9f16b}": "HasteFromADMelee"
-				},
 				"HasteFromADMelee": {
 					"mFormulaParts": [
 						{
@@ -1513,6 +1509,10 @@
 					"RangedResult": "@HasteFromADRanged@",
 					"DefaultResult": "@HasteFromADMelee@"
 				}
+			},
+			"__renamedVariables": {
+				"{87892572}": "HasteFromADRanged",
+				"{e4d9f16b}": "HasteFromADMelee"
 			}
 		},
 		"2520": {
@@ -1585,7 +1585,7 @@
 					}
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
 				"{a99340ef}": "RangeModifier",
 				"{d62bdfef}": "AbilityDamageRangeMod"
 			}
@@ -1742,7 +1742,7 @@
 					}
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
 				"{eb8d750f}": "MeleeAuraAttackSpeed",
 				"{ca6deae2}": "RangedAttackSpeedMultiplier"
 			}
@@ -2275,7 +2275,7 @@
 					}
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
 				"{52d90ad0}": "CritPerStackMelee",
 				"{1eea3407}": "StackRangedMultiplier"
 			}
@@ -5040,7 +5040,7 @@
 					}
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
 				"{74ac7847}": "BaseOOCMS"
 			}
 		},
@@ -7710,10 +7710,10 @@
 							"__type": "NumberCalculationPart"
 						}
 					]
-				},
-				"__renamedVariables": {
-					"MoveSpeedAmount": "MovespeedAmount"
 				}
+			},
+			"__renamedVariables": {
+				"MoveSpeedAmount": "MovespeedAmount"
 			}
 		},
 		"4630": {
@@ -8119,10 +8119,10 @@
 						"mDataValue": "RangedHealMod",
 						"__type": "NamedDataValueCalculationPart"
 					}
-				},
-				"__renamedVariables": {
-					"{01099b16}": "HealADSplit"
 				}
+			},
+			"__renamedVariables": {
+				"{01099b16}": "HealADSplit"
 			}
 		},
 		"6616": {
@@ -9018,12 +9018,10 @@
 						"mDataValue": "RangedShieldMult",
 						"__type": "NamedDataValueCalculationPart"
 					}
-				},
-				"__renamedVariables": {
-					"{d02ea590}": "ShieldSplit"
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
+				"{d02ea590}": "ShieldSplit",
 				"{b1f09313}": "MeleePercMaxHP",
 				"{e367e801}": "MeleeBonusADShieldRatio",
 				"{51df2a01}": "RangedShieldMult",
@@ -9216,6 +9214,7 @@
 					]
 				},
 				"BaseADBonus": {
+					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
 							"mDataValue": "BaseADBonusMelee",
@@ -9228,6 +9227,7 @@
 					}
 				},
 				"ADPerStatue": {
+					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
 							"mDataValue": "ADPerStatueMelee",
@@ -9238,12 +9238,10 @@
 						"mDataValue": "ADPerStatueRangedMult",
 						"__type": "NamedDataValueCalculationPart"
 					}
-				},
-				"__renamedVariables": {
-					"{619bce2f}": "ADPerStatue"
 				}
 			},
-			"__replacedVariables": {
+			"__renamedVariables": {
+				"{619bce2f}": "ADPerStatue",
 				"{6c8d1758}": "BaseADBonusMelee",
 				"{e7b48421}": "ADPerStatueMelee",
 				"{4325747e}": "ADPerStatueRangedMult",

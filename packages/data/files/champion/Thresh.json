@@ -20,7 +20,7 @@
 		"mpregenperlevel": 0.8,
 		"crit": 0,
 		"critperlevel": 0,
-		"attackdamage": 56,
+		"attackdamage": 54,
 		"attackdamageperlevel": 2.2,
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.625,
@@ -249,14 +249,13 @@
 						"ThreshRWallThickness": [30, 30, 30, 30, 30, 30, 30],
 						"ThreshRWallLength": [470.228, 470.228, 470.228, 470.228, 470.228, 470.228, 470.228],
 						"APRatio": [1, 1, 1, 1, 1, 1, 1],
-						"Damage": [0, 250, 400, 550, 175, 175, 0],
+						"Damage": [50, 200, 350, 500, 650, 800, 950],
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"SlowAmount": [99, 99, 99, 99, 99, 99, 99],
 						"WallDuration": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mDataValue": "Damage",
@@ -270,7 +269,6 @@
 						}
 					},
 					"effectAmount": {
-						"0": [0, 250, 400, 550, 175, 175, 0],
 						"1": [2, 2, 2, 2, 2, 2, 2],
 						"2": [99, 99, 99, 99, 99, 99, 99],
 						"3": [4, 4, 4, 4, 4, 4, 4]

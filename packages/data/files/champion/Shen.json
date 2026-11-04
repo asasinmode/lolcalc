@@ -72,7 +72,7 @@
 						"SlowPercent": [25, 25, 30, 35, 40, 45, 50],
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"EnhancedPercentDamage": [4.5, 5, 5.5, 6, 6.5, 7, 7.5],
-						"MinionDamageCap": [75, 100, 125, 150, 175, 200, 225],
+						"MinionDamageCap": [100, 120, 140, 160, 180, 200, 220],
 						"AttackBuffDuration": [8, 8, 8, 8, 8, 8, 8],
 						"SteroidAS": [50, 50, 50, 50, 50, 50, 50],
 						"SteroidDuration": [75, 75, 75, 75, 75, 75, 75]

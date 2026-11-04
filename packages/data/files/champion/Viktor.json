@@ -5,7 +5,7 @@
 	"partype": "Mana",
 	"stats": {
 		"hp": 600,
-		"hpperlevel": 100,
+		"hpperlevel": 105,
 		"mp": 405,
 		"mpperlevel": 45,
 		"movespeed": 330,
@@ -288,7 +288,7 @@
 						"EnhancedSlowDuration": [2, 2, 2, 2, 2, 2, 2],
 						"MaxGrowths": [6, 6, 6, 6, 6, 6, 6],
 						"SubsequentBurstAPRaio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
-						"InitialBurstAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"InitialBurstAPRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"Tooltip_DurationExtension": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {

@@ -37,7 +37,7 @@
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
-					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @ReducedDamagePercent@% less damage to all enemies after the first.",
+					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies it passes through and nearby enemies at the destination.<br><br>Damage is reduced to <magicDamage>@ReducedDamage@ magic damage</magicDamage> for enemies after the first hit.",
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
@@ -46,11 +46,10 @@
 					],
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
-						"ReducedDamagePercent": [30, 30, 30, 30, 30, 30, 30],
-						"MinimumDamagePercent": [70, 70, 70, 70, 70, 70, 70]
+						"ReducedDamagePercent": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
-						"TotalDamageTooltip": {
+						"TotalDamage": {
 							"mFormulaParts": [
 								{
 									"mDataValue": "BaseDamage",
@@ -62,20 +61,13 @@
 								}
 							]
 						},
-						"MinimumDamageTooltip": {
+						"ReducedDamage": {
 							"mMultiplier": {
-								"mPart1": {
-									"mNumber": 0.01,
-									"__type": "NumberCalculationPart"
-								},
-								"mPart2": {
-									"mDataValue": "MinimumDamagePercent",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								"__type": "ProductOfSubPartsCalculationPart"
+								"mDataValue": "ReducedDamagePercent",
+								"__type": "NamedDataValueCalculationPart"
 							},
 							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamageTooltip",
+							"mModifiedGameCalculation": "TotalDamage",
 							"__type": "GameCalculationModified"
 						}
 					},

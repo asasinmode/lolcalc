@@ -67,14 +67,14 @@
 						"BleedInterval": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"RecastWindow": [4, 4, 4, 4, 4, 4, 4],
 						"RecastLockout": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
-						"BaseHealSecondCast": [30, 45, 60, 75, 90, 105, 120],
+						"BaseHealSecondCast": [40, 55, 70, 85, 100, 115, 130],
 						"BleedDuration": [5, 5, 5, 5, 5, 5, 5],
 						"ExecuteMultiplier": [2, 2, 2, 2, 2, 2, 2],
 						"MinionMod": [1, 1, 1, 1, 1, 1, 1],
 						"FirstCastBonusADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"SecondCastBonusADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
 						"BleedBonusADRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
-						"HealBonusADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"HealBonusADRatio": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45],
 						"SecondCastMaxADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
@@ -194,7 +194,7 @@
 						"MoveSpeedAmount": [0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325],
 						"MoveSpeedDuration": [5, 5, 5, 5, 5, 5, 5],
 						"PackmateSpawnRateIncrease": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"NaafiriADPercentBoost": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"NaafiriADPercentBoost": [0.22, 0.22, 0.22, 0.22, 0.22, 0.22, 0.22],
 						"UntargetableDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {

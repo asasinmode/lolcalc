@@ -4,13 +4,13 @@
 	"name": "Mel",
 	"partype": "Mana",
 	"stats": {
-		"hp": 630,
-		"hpperlevel": 99,
-		"mp": 480,
-		"mpperlevel": 28,
+		"hp": 590,
+		"hpperlevel": 107,
+		"mp": 455,
+		"mpperlevel": 38,
 		"movespeed": 330,
 		"armor": 21,
-		"armorperlevel": 5.2,
+		"armorperlevel": 5.4,
 		"spellblock": 30,
 		"spellblockperlevel": 1.3,
 		"attackrange": 550,
@@ -20,9 +20,9 @@
 		"mpregenperlevel": 0.9,
 		"crit": 0,
 		"critperlevel": 0,
-		"attackdamage": 54,
+		"attackdamage": 52,
 		"attackdamageperlevel": 3.3,
-		"attackspeedperlevel": 2.5,
+		"attackspeedperlevel": 2.75,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
 	},
@@ -31,125 +31,143 @@
 			"maxLevel": 5,
 			"variants": [
 				{
-					"name": "Radiant Volley",
+					"name": "Radiant Barrage",
 					"objectName": "MelQ",
 					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ",
 					"image": "assets/characters/mel/hud/icons2d/mel_q.png",
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
-					"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total.",
-					"tooltipExtendedBelowLine": "",
+					"tooltip": "Mel unleashes a barrage of @Count@ missiles that explode at the target location. The first time an enemy is struck, they take <magicDamage>@InitialDamage@ magic damage</magicDamage>, with subsequent hits dealing <magicDamage>@SubsequentDamage@ magic damage</magicDamage> each, for a maximum of <magicDamage>@TotalDamageTT@ magic damage</magicDamage>.<br><br>If the volley hits an enemy champion at least once, this ability's cooldown is reduced by @CDRefundChampHit@ seconds.",
 					"abilityLevelVars": [
 						{
-							"name": "InitialDamage",
-							"nameOverride": "spell_listtype_initialdamage"
+							"name": "BaseDamageSubsequent",
+							"nameOverride": "spell_listtype_subsequentdamage"
 						},
 						{
-							"name": "ExplosionDamage",
-							"nameOverride": "spell_listtype_explosiondamage"
+							"name": "Count",
+							"nameOverride": "spell_listtype_missilecount"
 						},
 						{
-							"name": "ExplosionCount",
-							"nameOverride": "spell_listtype_explosioncount"
-						},
-						{
-							"name": "Cost",
-							"nameOverride": "spell_listtype_manacost"
+							"name": "Cost"
 						}
 					],
 					"dataValues": {
-						"ExplosionDamage": [3, 5, 7, 9, 11, 13, 15],
-						"ExplosionCount": [5, 6, 7, 8, 9, 10, 11],
-						"Spread": [25, 25, 25, 25, 25, 25, 25],
-						"ExplosionRadius": [200, 200, 200, 200, 200, 200, 200],
-						"ChannelDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"MinionMod": [1, 1, 1, 1, 1, 1, 1],
-						"InitialDamage": [35, 60, 85, 110, 135, 160, 185]
+						"Count": [5, 6, 7, 8, 9, 10, 11],
+						"BaseDamageInitial": [60, 60, 60, 60, 60, 60, 60],
+						"BaseDamageSubsequent": [0, 5, 10, 15, 20, 25, 30],
+						"APRatioInitial": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"APRatioSubsuquent": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"Radius": [200, 200, 200, 200, 200, 200, 200],
+						"PostCastTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
-						"TotalExplosionDamage": {
+						"InitialDamage": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "ExplosionDamage",
+									"mDataValue": "BaseDamageInitial",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatioInitial",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
-						"AllDamageHit": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mSpellCalculationKey": "InitialExplosionDamage",
-									"__type": "{f3cbe7b2}"
-								},
-								{
-									"mPart1": {
-										"mSpellCalculationKey": "TotalExplosionDamage",
-										"__type": "{f3cbe7b2}"
-									},
-									"mPart2": {
-										"mSubparts": [
-											{
-												"mDataValue": "ExplosionCount",
-												"__type": "NamedDataValueCalculationPart"
-											},
-											{
-												"mNumber": -1,
-												"__type": "NumberCalculationPart"
-											}
-										],
-										"__type": "SumOfSubPartsCalculationPart"
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								}
-							]
-						},
-						"MonsterModTooltip": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"tooltipOnly": true,
+						"TotalDamageTT": {
 							"mFormulaParts": [
 								{
 									"mSubparts": [
 										{
-											"mNumber": 1,
-											"__type": "NumberCalculationPart"
+											"mDataValue": "BaseDamageInitial",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mPart1": {
-												"mNumber": -1,
-												"__type": "NumberCalculationPart"
+												"mSubparts": [
+													{
+														"mDataValue": "Count",
+														"__type": "NamedDataValueCalculationPart"
+													},
+													{
+														"mNumber": -1,
+														"__type": "NumberCalculationPart"
+													}
+												],
+												"__type": "SumOfSubPartsCalculationPart"
 											},
 											"mPart2": {
-												"mDataValue": "MinionMod",
+												"mDataValue": "BaseDamageSubsequent",
 												"__type": "NamedDataValueCalculationPart"
 											},
 											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									],
 									"__type": "SumOfSubPartsCalculationPart"
+								},
+								{
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mDataValue": "APRatioInitial",
+												"__type": "NamedDataValueCalculationPart"
+											},
+											{
+												"mPart1": {
+													"mSubparts": [
+														{
+															"mDataValue": "Count",
+															"__type": "NamedDataValueCalculationPart"
+														},
+														{
+															"mNumber": -1,
+															"__type": "NumberCalculationPart"
+														}
+													],
+													"__type": "SumOfSubPartsCalculationPart"
+												},
+												"mPart2": {
+													"mDataValue": "APRatioSubsuquent",
+													"__type": "NamedDataValueCalculationPart"
+												},
+												"__type": "ProductOfSubPartsCalculationPart"
+											}
+										],
+										"__type": "SumOfSubPartsCalculationPart"
+									},
+									"__type": "StatBySubPartCalculationPart"
 								}
-							],
-							"mDisplayAsPercent": true
+							]
 						},
-						"InitialExplosionDamage": {
+						"CDRefundChampHit": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "InitialDamage",
+									"mStartValue": 0.5,
+									"mEndValue": 1,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						},
+						"SubsequentDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageSubsequent",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.55,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatioSubsuquent",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						}
 					},
-					"castRange": [950, 950, 950, 950, 950, 950, 950]
+					"castRange": [950, 950, 950, 950, 950, 950, 950],
+					"__renamedVariables": {
+						"{b7b202ec}": "CDRefundChampHit",
+						"Count": "COUNT",
+						"{1baafc99}": "SubsequentDamage",
+						"COUNT": "Count"
+					}
 				}
 			]
 		},
@@ -163,59 +181,91 @@
 					"image": "assets/characters/mel/hud/icons2d/mel_w.png",
 					"mana": [80, 60, 40, 20, 0, 0],
 					"cooldownTime": [38, 38, 35, 33, 29, 26, 26],
-					"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>.",
-					"tooltipExtendedBelowLine": "<rules>Reflected projectile damage is calculated using the original caster's attributes before damage adjustments and magic penetration.<br><physicalDamage>Physical damage</physicalDamage> is reduced by @PhysDamageMod*100@% when converted to magic damage.<br>Does not apply item effects from the original caster.<br>Projectiles targeting each enemy in an area are destroyed instead of reflected.</rules>",
+					"tooltip": "Mel unleashes a refraction nova that destroys enemy projectiles it collides with, retaliating for <magicDamage>@InitialDamage@ magic damage</magicDamage>. Subsequent retaliations against the same enemy deal <magicDamage>@SubsequentDamage@ magic damage</magicDamage> instead.<br><br>The nova also grants <shield>@TotalShield@ Shield</shield> and <speed>@TotalMS@ Move Speed</speed> for @BuffDuration@s to Mel and her allies.",
+					"tooltipExtendedBelowLine": "<rules>Cannot retaliate more than @MaxRetaliation@ times against each individual enemy</rules>",
 					"abilityLevelVars": [
-						{
-							"name": "BaseDamagePercent",
-							"nameOverride": "spell_melw_reflecteddamage"
-						},
-						{
-							"name": "BaseShieldAmount",
-							"nameOverride": "spell_listtype_shield"
-						},
 						{
 							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
+						},
+						{
+							"name": "BaseShield",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"name": "BaseDamageInitial",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"name": "BaseDamageSubsequent",
+							"nameOverride": "spell_listtype_subsequentdamage"
 						}
 					],
 					"dataValues": {
 						"Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
-						"ShieldRadius": [175, 175, 175, 175, 175, 175, 175],
-						"BaseDamagePercent": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
-						"MoveSpeed": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
-						"PhysDamageMod": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-						"BaseShieldAmount": [50, 80, 110, 140, 170, 200, 230],
-						"MoveSpeedDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
+						"BuffDuration": [2, 2, 2, 2, 2, 2, 2],
+						"Radius": [400, 400, 400, 400, 400, 400, 400],
+						"BaseShield": [20, 50, 80, 110, 140, 170, 200],
+						"BaseDamageInitial": [30, 35, 40, 45, 50, 55, 60],
+						"BaseDamageSubsequent": [0, 5, 10, 15, 20, 25, 30],
+						"MaxRetaliation": [7, 7, 7, 7, 7, 7, 7]
 					},
 					"spellCalculations": {
-						"DamagePercent": {
+						"TotalShield": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "BaseDamagePercent",
+									"mDataValue": "BaseShield",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.0005,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalMS": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.1,
+									"mEndValue": 0.3,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.0004,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
 							"mDisplayAsPercent": true
 						},
-						"ShieldAmount": {
+						"InitialDamage": {
 							"mFormulaParts": [
 								{
-									"mDataValue": "BaseShieldAmount",
+									"mDataValue": "BaseDamageInitial",
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.7,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"SubsequentDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageSubsequent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
 						}
 					},
-					"castRange": [250, 250, 250, 250, 250, 250, 250]
+					"castRange": [250, 250, 250, 250, 250, 250, 250],
+					"__renamedVariables": {
+						"{1baafc99}": "SubsequentDamage"
+					}
 				}
 			]
 		},
@@ -229,8 +279,8 @@
 					"image": "assets/characters/mel/hud/icons2d/mel_e.png",
 					"mana": [50, 60, 70, 80, 90, 90],
 					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
-					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
-					"tooltipExtendedBelowLine": "<rules>The Slow and damage-over-time effects linger on enemies for a short duration after they've left the area created by the orb.<br>Deals @MinionModTooltip@ reduced damage when used against minions.</rules>",
+					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDurationMin@ to @RootDurationMax@ seconds (based on distance travelled) and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
+					"tooltipExtendedBelowLine": "<rules>The Slow and damage-over-time effects linger on enemies for a short duration after they've left the area created by the orb.<br><br>Deals @MinionModTooltip@ reduced damage when used against minions.</rules>",
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamage",
@@ -243,14 +293,23 @@
 						{
 							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
+						},
+						{
+							"name": "AreaSlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"name": "RootDurationMax",
+							"nameOverride": "spell_listtype_rootdurationmax"
 						}
 					],
 					"dataValues": {
-						"RootDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"RootDurationMin": [0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05],
+						"RootDurationMax": [1.45, 1.6, 1.75, 1.9, 2.05, 2.2, 2.35],
 						"BaseDamage": [15, 60, 105, 150, 195, 240, 285],
 						"BaseAreaDamage": [4, 16, 28, 40, 52, 64, 76],
 						"AreaAPRatio": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
-						"AreaSlowAmount": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"AreaSlowAmount": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
 						"AreaSlowDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"MinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"MaxAreaRadius": [230, 230, 230, 230, 230, 230, 230],
@@ -349,10 +408,10 @@
 					"dataValues": {
 						"BasePassiveStackDamage": [2, 3, 4, 5, 6, 7, 8],
 						"BasePassiveFlatDamage": [50, 60, 70, 80, 90, 100, 110],
-						"MinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"BaseUltStackDamage": [1, 4, 7, 10, 13, 16, 19],
 						"BaseUltFlatDamage": [50, 125, 200, 275, 350, 425, 500],
-						"DisintegrateDelay": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+						"DisintegrateDelay": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"FlatMinionMod": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55]
 					},
 					"spellCalculations": {
 						"PassiveStackDamage": {
@@ -402,34 +461,6 @@
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
-						},
-						"MinionModTooltip": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mSubparts": [
-										{
-											"mNumber": 1,
-											"__type": "NumberCalculationPart"
-										},
-										{
-											"mPart1": {
-												"mNumber": -1,
-												"__type": "NumberCalculationPart"
-											},
-											"mPart2": {
-												"mDataValue": "MinionMod",
-												"__type": "NamedDataValueCalculationPart"
-											},
-											"__type": "ProductOfSubPartsCalculationPart"
-										}
-									],
-									"__type": "SumOfSubPartsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
 						}
 					}
 				}
@@ -444,7 +475,7 @@
 					"dataKey": "Characters/Mel/Spells/MelPassiveAbility/MelPassive",
 					"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
 					"tooltip": "{{Spell_MelPassive_Tooltip}}",
-					"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:MinionModTooltip@ reduced damage with the first stack when used against minions.</rules>",
+					"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:FlatMinionMod*100@% damage with the first stack when used against minions.</rules>",
 					"dataValues": {
 						"OverwhelmDuration": [5, 5, 5, 5, 5, 5, 5],
 						"BonusAttackDuration": [5, 5, 5, 5, 5, 5, 5],
@@ -455,7 +486,7 @@
 						"PassiveBonusMissileDamage": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 8,
+									"mStartValue": 4,
 									"mEndValue": 30,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
@@ -471,14 +502,15 @@
 		}
 	},
 	"stringtable": {
-		"spell_listtype_initialdamage": "Initial Damage",
-		"spell_listtype_explosiondamage": "Explosion Damage",
-		"spell_listtype_explosioncount": "Explosion Count",
+		"spell_listtype_subsequentdamage": "Subsequent Damage",
+		"spell_listtype_missilecount": "Missile Count",
 		"spell_listtype_manacost": "Mana Cost",
-		"spell_melw_reflecteddamage": "Reflected Damage",
-		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_initialdamage": "Initial Damage",
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_rootdurationmax": "Max Root Duration",
 		"spell_melr_ultflatdamage": "<spellName>Golden Eclipse</spellName> Flat Damage",
 		"spell_melr_ultstackdamage": "<spellName>Golden Eclipse</spellName> Stack Damage",
 		"spell_melrunleash_passiveflatdamage": "<keywordMajor>Overwhelm</keywordMajor> Flat Damage",

@@ -224,6 +224,10 @@
 						{
 							"name": "BaseDamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"name": "DamageAPRatioTT",
+							"nameOverride": "spell_listtype_apratio"
 						}
 					],
 					"dataValues": {
@@ -239,14 +243,15 @@
 						"StartingGravity": [150, 150, 150, 150, 150, 150, 150],
 						"NonChampGravity": [300, 300, 300, 300, 300, 300, 300],
 						"Duration": [5, 5, 5, 5, 5, 5, 5],
-						"BaseDamagePerSecond": [5, 10, 15, 20, 25, 30, 35],
-						"DamageperSecondAPRatio": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
+						"BaseDamagePerSecond": [4, 10, 16, 22, 28, 34, 40],
+						"DamageperSecondAPRatio": [0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17],
 						"BaseExecutionThreshold": [5, 5, 5, 5, 5, 5, 5],
 						"ExecutionGrowthPerBreakpoint": [0.026, 0.026, 0.026, 0.026, 0.026, 0.026, 0.026],
 						"OuterRadiusAreaPerStack": [900, 900, 900, 900, 900, 900, 900],
 						"InnerRadiusAreaPerStack": [180, 180, 180, 180, 180, 180, 180],
 						"PI": [3.14159, 3.14159, 3.14159, 3.14159, 3.14159, 3.14159, 3.14159],
-						"InversePI": [0.31831, 0.31831, 0.31831, 0.31831, 0.31831, 0.31831, 0.31831]
+						"InversePI": [0.31831, 0.31831, 0.31831, 0.31831, 0.31831, 0.31831, 0.31831],
+						"DamageAPRatioTT": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85]
 					},
 					"spellCalculations": {
 						"DamagePerSecond": {
@@ -575,6 +580,7 @@
 		"spell_aurelionsolq_maxchannelduration": "Maximum Channel Duration",
 		"spell_aurelionsolq_name": "Breath of Light",
 		"spell_aurelionsolw_truedamagebonus": "Percent Bonus Magic Damage",
+		"spell_listtype_apratio": "Total AP Ratio",
 		"spell_aurelionsolr1_name": "Falling Star",
 		"spell_aurelionsolr2_name": "The Skies Descend",
 		"spell_listtype_damage": "Damage",
