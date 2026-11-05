@@ -38,27 +38,25 @@ export interface ICalculatorState {
 	/** custom total row ids formatted like `${sectionId}_${rowId}` */
 	customTotalRowIds: Ref<string[]>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
-	/** the same ref `resultSections` custom value section uses */
-	customValueRows: Ref<IDamageResultTableSectionCustomValueRow[]>;
 	/** custom total rows must be restored after saved sections have been hydrated, because they reference them and some might be invalid. Restore function is stored here and called either in app onMounted restore or result's table setup */
 	restoreSavedCustomTotalRows: ShallowRef<(() => void) | undefined>;
+	customSections: Record<'stats' | 'basicAttack' | 'customTotal' | 'customValue', IDamageResultTableSection>;
 }
 
 export function initCalculatorState(): ICalculatorState {
-	/* expected to have DamageSources added in `restoreState`, shallowRefs because otherwise ref properties inside of classes get messed up */
 	const damageSources = shallowReactive<DamageSource[]>([]);
 	const damageTargets = shallowReactive<DamageSource[]>([]);
 	const resultColumns = shallowReactive<IDamageResultTableColumn[]>([{ id: useId(), source: shallowRef(), target: shallowRef() }]);
+	const resultSections = shallowReactive<IDamageResultTableSection[]>([]);
 
 	const customValueRows = ref<IDamageResultTableSectionCustomValueRow[]>([]);
 	const customTotalRowIds = ref<string[]>([]);
 
-	const resultSections = shallowReactive<IDamageResultTableSection[]>([
-		{
+	const customSections: ICalculatorState['customSections'] = {
+		stats: {
 			id: ResultSectionId.Stats,
 			abilityId: { type: 'all', id: 'stats' },
 			name: 'stats',
-			isPermanent: true,
 			image: [`https://raw.communitydragon.org/${vMinor}/game/assets/ux/deathrecap/itemdamage.png`, 32],
 			rows: [
 				{
@@ -102,11 +100,10 @@ export function initCalculatorState(): ICalculatorState {
 				};
 			},
 		},
-		{
+		basicAttack: {
 			id: ResultSectionId.BasicAttack,
 			abilityId: { type: 'all', id: 'basicAttack' },
 			name: 'basic attack',
-			isPermanent: true,
 			image: [imgUrl('game/assets/ux/deathrecap/autoattack.png'), 32],
 			rows: [
 				{
@@ -142,11 +139,10 @@ export function initCalculatorState(): ICalculatorState {
 			selectLabel: 'attack type',
 			hoverTooltipData: useSimpleDescription('results-basic-attack', `TODO aa hover tooltip<br> <rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
 		},
-		{
+		customTotal: {
 			id: ResultSectionId.CustomTotal,
 			abilityId: { type: 'all', id: 'customTotal' },
 			name: 'custom total',
-			isPermanent: true,
 			isCustomTotal: true,
 			clearable: computed(() => customTotalRowIds.value.length),
 			image: [imgUrl('game/assets/ux/ruby/db_mode_statuseffecticon_doom.png'), 64],
@@ -156,11 +152,10 @@ export function initCalculatorState(): ICalculatorState {
 				return { value: 0, numberValue: 0 };
 			},
 		},
-		{
+		customValue: {
 			id: ResultSectionId.CustomValue,
 			abilityId: { type: 'all', id: 'customValue' },
 			name: 'custom value',
-			isPermanent: true,
 			isCustomValue: true,
 			clearable: computed(() => customValueRows.value.length),
 			image: [imgUrl('game/assets/ux/deathrecap/unknowndamage.png'), 32],
@@ -182,13 +177,11 @@ export function initCalculatorState(): ICalculatorState {
 `,
 			),
 		},
-	]);
-
-	const customTotalSection = resultSections.find((section) => section.isCustomTotal)!;
+	};
 
 	const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
-		/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
-		const rows: ICustomTotalSectionRow[] = ((toValue(customTotalSection.rows) as ICustomTotalSectionRow[]) ?? []).concat(
+		/** `customSections.customTotal.rows` is expected contain only the `total` row which doesn't have `sectionId` but it's not expected to be used */
+		const rows: ICustomTotalSectionRow[] = ((toValue(customSections.customTotal.rows) as ICustomTotalSectionRow[]) ?? []).concat(
 			customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
 				const [sectionId, rowId] = combinedId.split('_');
 
@@ -219,11 +212,11 @@ export function initCalculatorState(): ICalculatorState {
 		resultColumns,
 		resultSections,
 		resultsTableFlip: ref(false),
-		expandedSections: ref<string[]>(resultSections.filter((section) => section.id !== ResultSectionId.Stats).map((section) => section.id)),
+		expandedSections: ref<string[]>([]),
 		customTotalRowIds,
 		computedCustomTotalRows,
-		customValueRows,
 		restoreSavedCustomTotalRows: shallowRef(),
+		customSections,
 	};
 
 	provide('calculatorState', state);
@@ -236,7 +229,7 @@ export function useCalculatorState(): ICalculatorState {
 }
 
 export function useManageCalculatorState(state = useCalculatorState()) {
-	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customValueRows } = state;
+	const { damageSources, damageTargets, sourcesTargetsRef, resultColumns, resultSections, resultsTableFlip, expandedSections, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customSections } = state;
 	const isStateTooLargeForQuery = ref(false);
 	const debounceTimeout = useState<ReturnType<typeof setTimeout> | undefined>('saveStateDebounce');
 
@@ -385,13 +378,12 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 								: savedDragonsSoulAbilities.has(section.abilityId.id)),
 			) ?? [];
 		const savedSectionIds: string[] = [];
-		const isSectionsChanged = keptSections.length;
 
-		if (isSectionsChanged) {
+		if (keptSections.length) {
 			for (const section of keptSections) {
 				savedSectionIds.push(section.id);
 
-				if (isSectionsChanged) {
+				if (keptSections.length) {
 					const params = new URLSearchParams();
 					params.append('tblSct', `${section.id}_${expandedSections.value.includes(section.id) ? 1 : ''}`);
 					const str = params.toString();
@@ -422,7 +414,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				}
 			}
 
-			const saveableCustomValueRows = customValueRows.value?.filter((row) => row.value);
+			const saveableCustomValueRows = (customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value?.filter((row) => row.value);
 			if (saveableCustomValueRows.length) {
 				const str = `tblCV=${saveableCustomValueRows.map((v) => `${ALL_VARIABLE_TYPES.indexOf(v.type)}_${v.value ?? 0}`).join('-')}`;
 				wholeState += `&${str}`;
@@ -435,10 +427,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		return wholeState.length === 3 ? ['', ''] : [wholeState, queryState];
 	}
 
-	function restoreState(
-		/** as of `nuxt@4.6.3` `route.fullPath` that has to be read in `app.vue`'s `onMounted` due to https://github.com/nuxt/nuxt/issues/34651#issuecomment-6542510559 */
-		params: URLSearchParams,
-	): void {
+	function restoreState(params: URLSearchParams): void {
 		if (!import.meta.client) {
 			return;
 		}
@@ -548,19 +537,14 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 			const [id, isExpanded] = section.split('_');
 			if (!id) continue;
 
-			/* `all` (permanent) sections start with 'a-' */
+			/* `all` (custom) sections start with 'a-' */
 			if (id.startsWith('a-')) {
-				const sectionIndex = resultSections.findIndex((section) => section.id === id);
-				if (~sectionIndex) {
-					if (sectionIndex !== currentSectionIndex) {
-						resultSections.splice(currentSectionIndex, 0, resultSections.splice(sectionIndex, 1)[0]!);
-					}
-					const expandedIndex = expandedSections.value.indexOf(id);
-					if (isExpanded) {
-						expandedIndex === -1 && expandedSections.value.push(id);
-					} else {
-						~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
-					}
+				const section = id === ResultSectionId.Stats ? customSections.stats : id === ResultSectionId.BasicAttack ? customSections.basicAttack : id === ResultSectionId.CustomTotal ? customSections.customTotal : customSections.customValue;
+				if (section) {
+					resultSections.splice(currentSectionIndex, 0, section);
+					!expandedSections.value.includes(id) && expandedSections.value.push(id);
+				} else {
+					console.warn('[useCalculatorState restoreState] skipping unknown custom section id', id);
 				}
 				currentSectionIndex += 1;
 				continue;
@@ -617,7 +601,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				const value = rawValue === undefined ? undefined : Number.parseFloat(rawValue);
 				if (value !== undefined && !Number.isNaN(rawValue) && value > 0) {
 					const id = crypto.randomUUID();
-					customValueRows.value.push({ id, name: id, type: ALL_VARIABLE_TYPES[typeIndex]!, value });
+					(customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.push({ id, name: id, type: ALL_VARIABLE_TYPES[typeIndex]!, value });
 				}
 			}
 		}
