@@ -4,6 +4,7 @@ import { version as rawPackageVersion } from '~~/package.json';
 import { acquireClickEater } from '~/composables/useClickEater';
 import { _setupGlobalKeyModifiers } from '~/composables/useGlobalKeyModifiers';
 import type PageIndex from '~/pages/index.vue';
+import type { IDamageResultTableSectionCustomValueRow } from './utils/types';
 
 const runtimeConfig = useRuntimeConfig();
 const state = initCalculatorState();
@@ -125,7 +126,7 @@ onMounted(() => {
 			for (const section of state.resultSections) {
 				!toValue(section.name) && hydrateSectionPromises.push(table.hydrateResultSection(section));
 			}
-			for (const cValueRow of state.customValueRows.value) {
+			for (const cValueRow of (state.customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value) {
 				table.computeCustomValueRow(cValueRow);
 			}
 			for (const column of state.resultColumns) {
