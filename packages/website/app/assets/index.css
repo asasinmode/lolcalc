@@ -98,6 +98,27 @@
 	label > input[type='checkbox'] {
 		vertical-align: -0.0625em;
 	}
+
+	.rotating-glow {
+		--at-apply: 'relative';
+		--glow-clr: theme('colors.yellow.100');
+
+		&::after {
+			--at-apply: 'content-empty absolute z-2 inset-bs-0 inset-s-0 size-0.5 rounded-1/2 bg-[--glow-clr] pointer-events-none';
+			box-shadow:
+				0 0 3px 1px var(--glow-clr),
+				0 0 6px 2px var(--glow-clr);
+			offset-path: inset(0%);
+			offset-distance: 0%;
+			animation: glow-orbit var(--glow-duration, 1.75s) linear infinite;
+		}
+	}
+
+	@keyframes glow-orbit {
+		to {
+			offset-distance: 100%;
+		}
+	}
 }
 
 @layer components {

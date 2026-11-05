@@ -1432,7 +1432,7 @@ defineExpose({
 										</option>
 									</optgroup>
 								</select>
-								<button class="pretend-ui-btn" type="submit" :disabled="!damageSectionOptions.length">add</button>
+								<button class="pretend-ui-btn" :class="{ 'rotating-glow': showResults && !resultSections.length }" type="submit" :disabled="!damageSectionOptions.length">add</button>
 							</form>
 						</div>
 					</td>
@@ -1800,9 +1800,9 @@ defineExpose({
 					</tr>
 				</tbody>
 			</template>
-			<tfoot>
+			<tfoot v-show="!resultSections.length">
 				<tr>
-					<td colspan="-1" />
+					<td :colspan="maxCols"><span>Add sections you'd like to see results for</span></td>
 				</tr>
 			</tfoot>
 		</table>
@@ -1867,7 +1867,7 @@ defineExpose({
 				<tbody hidden />
 				<tfoot>
 					<tr>
-						<td colspan="-1" />
+						<td colspan="2"><span>Add sections you'd like to see results for</span></td>
 					</tr>
 				</tfoot>
 			</table>
@@ -1965,7 +1965,7 @@ defineExpose({
 						}
 
 						> button {
-							--at-apply: 'w-fit px-2 h-[--manipulate-btn-size]';
+							--at-apply: 'relative w-max px-2 h-[--manipulate-btn-size]';
 						}
 					}
 				}
@@ -2449,7 +2449,17 @@ defineExpose({
 
 		> tfoot {
 			> tr > td {
-				--at-apply: 'pb-[--header-row-pt]';
+				--at-apply: 'py-[--vfluid-12-20] text-neutral-300 font-500 text-start px-[--table-ps]';
+
+				@media (width >= 520px) {
+					& {
+						--at-apply: 'text-center';
+					}
+				}
+
+				> span {
+					--at-apply: 'block max-inline-140';
+				}
 			}
 		}
 	}
