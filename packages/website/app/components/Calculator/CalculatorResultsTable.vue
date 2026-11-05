@@ -25,7 +25,7 @@ import { roundNumber } from '@lolcalc/shared/utils';
 /* `toValue` and `ResultSectionId` imported manually, despite Nuxt autoimporting them, because when app is built they seem to not be available in the template. Started happening on vue@3.6-rc.13 and nuxt@4.6.0 */
 import { toValue } from 'vue';
 import type { UnwrapRef, WatchHandle } from 'vue';
-import { ResultSectionId } from '~/composables/useCalculatorState';
+import { ResultSectionId, customSectionFromId } from '~/composables/useCalculatorState';
 import { gameImageAttrs } from '~/utils/image';
 import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow, IDamageResultTableSectionCustomValueRow } from '~/utils/types';
 
@@ -33,7 +33,7 @@ defineProps<{
 	showResults: boolean;
 }>();
 
-const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customValueRows } = useCalculatorState();
+const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customSections } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -63,13 +63,13 @@ function setColumnChampion(column: IDamageResultTableColumn, sources: DamageSour
 	debouncedSaveState();
 }
 
-interface IDamageSectionOption {
-	type: TAbilityType;
+interface IDamageSectionOption<AbilityId extends IGameAbilityId | ResultSectionId = IGameAbilityId | ResultSectionId> {
+	type: TAbilityType | 'all';
 	/** champion or item id */
 	optionId: string;
 	optionName: string;
 	abilities: {
-		id: IGameAbilityId;
+		id: AbilityId;
 		name: string;
 	}[];
 }
@@ -83,10 +83,10 @@ const uniqueDamageSourceChampions = computed<Set<IChampion>>(
 				.map((source) => source.champion.value!),
 		),
 );
-const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>((): IDamageSectionOption[] =>
+const damageSectionChampionAbilityOptions = computed<IDamageSectionOption<IGameAbilityId>[]>((): IDamageSectionOption<IGameAbilityId>[] =>
 	uniqueDamageSourceChampions.value
 		.values()
-		.map((champion): IDamageSectionOption => {
+		.map((champion): IDamageSectionOption<IGameAbilityId> => {
 			const championId = champion.id;
 			let abilityEntries = Object.entries(champion.abilities);
 
@@ -98,7 +98,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 				type: AbilityType.champion,
 				optionId: championId,
 				optionName: champion.name,
-				abilities: abilityEntries.flatMap(([abilityKey, ability]): IDamageSectionOption['abilities'] =>
+				abilities: abilityEntries.flatMap(([abilityKey, ability]): IDamageSectionOption<IGameAbilityId>['abilities'] =>
 					ability.variants
 						/*
 						 * some champions like `Elise` have additional variants saved. These are expected to be used only for resolving the variables in the main variants (first 2)
@@ -107,7 +107,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						 * sion has 1 ability when he's dead that grants him move speed and it's duplicated on QWER but not meant to be shown in results
 						 */
 						.slice(0, championId === 'Aphelios' ? undefined : championId === 'Hwei' || championId === 'Sion' ? 1 : 2)
-						.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
+						.map((variant, abilityVariantIndex): IDamageSectionOption<IGameAbilityId>['abilities'][number] => {
 							const { replaced: nameReplaced } = replaceStringtableVariables(variant.name ?? ability.variants[0]!.name!, champion.stringtable);
 
 							return {
@@ -116,12 +116,12 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 							};
 						}),
 				),
-			} satisfies IDamageSectionOption;
+			} satisfies IDamageSectionOption<IGameAbilityId>;
 		})
 		.toArray(),
 );
 
-const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
+const damageSectionItemAbilities = computed<IDamageSectionOption<IGameAbilityId>['abilities']>((): IDamageSectionOption<IGameAbilityId>['abilities'] => {
 	const itemIds = new Set(
 		damageSources
 			.concat(damageTargets)
@@ -131,7 +131,7 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 
 	return itemIds
 		.values()
-		.map((itemId): IDamageSectionOption['abilities'][number] => ({
+		.map((itemId): IDamageSectionOption<IGameAbilityId>['abilities'][number] => ({
 			name: ITEMS[itemId!]!.name,
 			id: GameAbilityId.build(AbilityType.item, itemId!),
 		}))
@@ -139,7 +139,7 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 		.sort((a, b) => a.name.localeCompare(b.name));
 });
 
-const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
+const damageSectionDragonAbilities = computed<IDamageSectionOption<IGameAbilityId>['abilities']>((): IDamageSectionOption<IGameAbilityId>['abilities'] => {
 	const dragons: IDragonName[] = [];
 	for (const damageSource of damageSources) {
 		const { value } = damageSource.dragonSoul;
@@ -155,14 +155,14 @@ const damageSectionDragonAbilities = computed<IDamageSectionOption['abilities']>
 	}
 
 	return dragons
-		.map((dragon): IDamageSectionOption['abilities'][number] => ({
+		.map((dragon): IDamageSectionOption<IGameAbilityId>['abilities'][number] => ({
 			name: `${dragon} Soul`,
 			id: GameAbilityId.build(AbilityType.dragon, dragon, 'soul'),
 		}))
 		.sort((a, b) => a.name.localeCompare(b.name));
 });
 
-const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
+const damageSectionEffectAbilities = computed<IDamageSectionOption<IGameAbilityId>['abilities']>((): IDamageSectionOption<IGameAbilityId>['abilities'] => {
 	const effectObjectNames = new Set(
 		damageSources
 			.flatMap((damageSource) =>
@@ -176,7 +176,7 @@ const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>
 
 	return effectObjectNames
 		.values()
-		.map((effectObjectName): IDamageSectionOption['abilities'][number] => ({
+		.map((effectObjectName): IDamageSectionOption<IGameAbilityId>['abilities'][number] => ({
 			name: (EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effectObjectName!]!.label,
 			id: GameAbilityId.build(AbilityType.effect, effectObjectName!),
 		}))
@@ -184,36 +184,52 @@ const damageSectionEffectAbilities = computed<IDamageSectionOption['abilities']>
 		.sort((a, b) => a.name.localeCompare(b.name));
 });
 
+const damageSectionCustomSectionAbilities = computed<IDamageSectionOption<ResultSectionId>['abilities']>((): IDamageSectionOption<ResultSectionId>['abilities'] => {
+	return Object.values(ResultSectionId)
+		.filter((id) => !resultSections.some((section) => section.id === id))
+		.map((id): IDamageSectionOption<ResultSectionId>['abilities'][number] => ({
+			id,
+			name: customSectionFromId(id, customSections)!.name as string,
+		}));
+});
+
 const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 	const options: IDamageSectionOption[] = damageSectionChampionAbilityOptions.value.map((option): IDamageSectionOption => ({
 		type: option.type,
 		optionId: option.optionId,
 		optionName: option.optionName,
-		abilities: option.abilities.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: option.abilities!.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	}));
 
 	options.push({
 		optionId: 'items',
 		optionName: 'items',
 		type: 'item',
-		abilities: damageSectionItemAbilities.value.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: damageSectionItemAbilities.value!.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	});
 
 	options.push({
 		optionId: 'dragons',
 		optionName: 'dragons',
 		type: 'dragon',
-		abilities: damageSectionDragonAbilities.value.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: damageSectionDragonAbilities.value!.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	});
 
 	options.push({
 		optionId: 'effects',
 		optionName: 'effects',
 		type: 'effect',
-		abilities: damageSectionEffectAbilities.value.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
+		abilities: damageSectionEffectAbilities.value!.filter((ability) => !resultSections.some((section) => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id))),
 	});
 
-	return options.filter((option) => option.abilities.length);
+	options.push({
+		optionId: 'custom',
+		optionName: 'custom',
+		type: 'all',
+		abilities: damageSectionCustomSectionAbilities.value,
+	});
+
+	return options.filter((option) => option.abilities!.length);
 });
 
 function championAbilitySectionName(championName: string, abilityKey: IChampionAbilityKey, abilityName: string) {
@@ -239,23 +255,8 @@ interface IComputedSectionRowColumn {
 	comparisonMap: Record<string, number>;
 }
 
-const customTotalSection = resultSections.find((section) => section.isCustomTotal)!;
-const customTotalSectionTotalRow = toValue(customTotalSection.rows)[0]!;
-const customValueSection = resultSections.find((section) => section.isCustomValue)!;
-
 const computedResults = ref<Map<string, IComputedSection>>(new Map());
-computedResults.value = new Map<string, IComputedSection>(
-	(
-		[
-			[customTotalSection.id, computeSection(customTotalSection)],
-			[customValueSection.id, computeSection(customValueSection)],
-		] as [string, IComputedSection][]
-	).concat(resultSections.map((section) => [section.id, computeSection(section)] as [string, IComputedSection])),
-);
-
-const customTotalComputedSection = computedResults.value.get(ResultSectionId.CustomTotal)!;
-const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('cTtl-total')!;
-const customValueComputedSection = computedResults.value.get(ResultSectionId.CustomValue)!;
+computedResults.value = new Map<string, IComputedSection>(resultSections.map((section) => [section.id, computeSection(section)] as [string, IComputedSection]));
 
 {
 	/* restoring state, basically what app.vue does onMounted but it can do so only when it's being mounted on the index page. If page is entered from somewhere else and there's state, it will be restored but the component needs to update itself on navigation to it */
@@ -263,7 +264,7 @@ const customValueComputedSection = computedResults.value.get(ResultSectionId.Cus
 	for (const section of resultSections) {
 		!toValue(section.name) && hydrateResultSectionPromises.push(hydrateResultSection(section));
 	}
-	for (const cValueRow of customValueRows.value) {
+	for (const cValueRow of (customSections.customValue.rows as Ref<IDamageResultTableSectionRow[]>).value) {
 		computeCustomValueRow(cValueRow);
 	}
 	for (const column of resultColumns) {
@@ -520,25 +521,30 @@ function removeBeingAddedSection(section: IDamageResultTableSection) {
 	~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
 }
 
-async function addResultsSection(abilityId: IGameAbilityId, name: string, expand = true, spliceAt = 0) {
-	const id = GameAbilityId.stringify(abilityId);
-	if (resultSections.some((section) => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
-		return;
-	}
+function addResultsSection(abilityId: IGameAbilityId | ResultSectionId, name: string, expand = true, spliceAt = 0) {
+	let section: IDamageResultTableSection;
 
-	const section = {
-		id,
-		name,
-		abilityId,
-		notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
-		image: shallowRef(),
-		rows: shallowRef([]),
-		hoverTooltipData: shallowRef(),
-	} satisfies Omit<IDamageResultTableSection, 'getCellValue'>;
+	if (typeof abilityId === 'string') {
+		const customSection = customSectionFromId(abilityId, customSections);
+		if (!customSection) return;
+		section = customSection;
+	} else {
+		const id = GameAbilityId.stringify(abilityId);
+		if (resultSections.some((section) => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) return;
+
+		section = {
+			id,
+			name,
+			abilityId,
+			notImplemented: abilityId.type === AbilityType.champion && abilityId.abilityKey !== 'passive' && !IMPLEMENTED_CHAMPION_IDS.includes(abilityId.id),
+			image: shallowRef(),
+			rows: shallowRef([]),
+			hoverTooltipData: shallowRef(),
+		};
+	}
 
 	resultSections.splice(spliceAt, 0, section);
 	expand && expandedSections.value.push(section.id);
-
 	hydrateResultSection(section);
 }
 
@@ -669,18 +675,26 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 	return rows;
 }
 
-function removeResultsSection(index: number) {
+function removeResultsSection(index: number, event?: PointerEvent) {
 	const section = resultSections[index]!;
+	let remove = true;
+
 	if (section.isCustomTotal) {
+		remove = event?.shiftKey || !customTotalRowIds.value.length;
 		customTotalRowIds.value.length = 0;
 	} else if (section.isCustomValue) {
-		for (const row of customValueRows.value) {
+		const rows = section.rows as Ref<IDamageResultTableSectionRow[]>;
+		remove = event?.shiftKey || !rows.value.length;
+
+		for (const row of rows.value) {
 			const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
 			~cTotalIndex && customTotalRowIds.value.splice(cTotalIndex, 1);
 		}
-		customValueRows.value.length = 0;
+		rows.value.length = 0;
 		computedResults.value.get(section.id)?.rows.clear();
-	} else {
+	}
+
+	if (remove) {
 		const [section] = resultSections.splice(index, 1);
 		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
 			if (customTotalRowIds.value[i]!.startsWith(section!.id)) {
@@ -689,6 +703,7 @@ function removeResultsSection(index: number) {
 		}
 		computedResults.value.delete(section!.id);
 	}
+
 	debouncedSaveState();
 }
 
@@ -862,7 +877,7 @@ const cleanableColumnsSections = computed<[[index: number, column: IDamageResult
 
 	const sections = (resultSections.map((section, index) => [index, section]) as [number, IDamageResultTableSection][]).filter(([, section]) => {
 		if (section.abilityId.type === 'all') {
-			return false;
+			return toValue(section.rows).length;
 		} else if (section.abilityId.type === AbilityType.item) {
 			return !resultColumns.some((column) => column.source.value?.items.value.some((item) => item?.id === section.abilityId.id) || column.target.value?.items.value.some((item) => item?.id === section.abilityId.id));
 		} else if (section.abilityId.type === AbilityType.champion) {
@@ -895,16 +910,8 @@ function cleanupUnused() {
 	}
 
 	for (let i = cleanableColumnsSections.value[1].length - 1; i >= 0; i--) {
-		const [sectionIndex, section] = cleanableColumnsSections.value[1][i]!;
-		computedResults.value.delete(section.id);
-		resultSections.splice(sectionIndex, 1);
-
-		for (let i = customTotalRowIds.value.length - 1; i >= 0; i--) {
-			const [sectionId] = customTotalRowIds.value[i]!.split('_');
-			if (sectionId === section.id) {
-				customTotalRowIds.value.splice(i, 1);
-			}
-		}
+		const [sectionIndex] = cleanableColumnsSections.value[1][i]!;
+		removeResultsSection(sectionIndex);
 	}
 }
 
@@ -1181,7 +1188,9 @@ function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption 
 
 	const itemOptions = damageSectionOptions.value.findLast((option) => option.type === 'item');
 	rv.itemOptionsIndexes =
-		damageSource && itemOptions ? (damageSource!.items.value.map((item) => (item ? itemOptions.abilities.findIndex((ability) => ability.id.id === item.id) : undefined)).filter((index) => index !== undefined && ~index) as number[]) : [];
+		damageSource && itemOptions
+			? (damageSource!.items.value.map((item) => (item ? itemOptions.abilities.findIndex((ability) => (ability.id as IGameAbilityId).id === item.id) : undefined)).filter((index) => index !== undefined && ~index) as number[])
+			: [];
 
 	return rv;
 }
@@ -1216,19 +1225,20 @@ function addColumnItems(columnIndex: number, isSource: boolean) {
 
 function onCustomTotalRowsChange() {
 	recomputeCustomTotal();
-	if (!expandedSections.value.includes(customTotalSection.id) && customTotalRowIds.value.length) {
-		expandedSections.value.push(customTotalSection.id);
+	if (!expandedSections.value.includes(ResultSectionId.CustomTotal) && customTotalRowIds.value.length) {
+		expandedSections.value.push(ResultSectionId.CustomTotal);
 	}
 	debouncedSaveState();
 }
 
+const computedCustomTotalSectionTotalRow = computed(() => computedResults.value.get(ResultSectionId.CustomTotal)?.rows.get('cTtl-total'));
+
 function recomputeCustomTotal() {
-	if (customTotalSectionTotalRow) {
-		for (const column of resultColumns) {
-			customTotalComputedSectionTotalRow.columns.set(column.id, computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column));
-		}
-		calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow, ResultSectionId.CustomTotal);
+	if (!computedCustomTotalSectionTotalRow.value) return;
+	for (const column of resultColumns) {
+		computedCustomTotalSectionTotalRow.value.columns.set(column.id, computeSectionRowColumn(customSections.customTotal, (customSections.customTotal.rows as IDamageResultTableSectionRow[])[0]!, column));
 	}
+	calculateComputedRowComparisonMap(computedCustomTotalSectionTotalRow.value, ResultSectionId.CustomTotal);
 }
 
 const controlButtonSize = ref(28);
@@ -1292,10 +1302,13 @@ const variableTypeOptionNames: Partial<Record<VariableType, string>> = {
 const newCustomValueRowType = ref<VariableType>(VariableType.physical);
 const newCustomValueRowValue = ref<number>(0);
 
+const computedCustomValueSection = computed(() => computedResults.value.get(ResultSectionId.CustomValue));
+
 function submitCustomValueRow() {
+	if (!computedCustomValueSection.value) return;
 	const id = crypto.randomUUID();
-	customValueRows.value.push({ id, name: id, type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
-	customValueComputedSection.rows.set(id, computeSectionRow(customValueSection, customValueRows.value.at(-1)!));
+	(customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.push({ id, name: id, type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
+	computedCustomValueSection.value.rows.set(id, computeSectionRow(customSections.customValue, (customSections.customTotal.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.at(-1)!));
 
 	newCustomValueRowType.value = VariableType.physical;
 	newCustomValueRowValue.value = 0;
@@ -1303,7 +1316,7 @@ function submitCustomValueRow() {
 }
 
 function computeCustomValueRow(row: IDamageResultTableSectionRow) {
-	customValueComputedSection.rows.set(row.id, computeSectionRow(customValueSection, row));
+	computedCustomValueSection.value?.rows.set(row.id, computeSectionRow(customSections.customValue, row));
 }
 
 function onCustomValueRowChange(row: IDamageResultTableSectionRow) {
@@ -1312,10 +1325,10 @@ function onCustomValueRowChange(row: IDamageResultTableSectionRow) {
 }
 
 function recomputeCustomValueRow(row: IDamageResultTableSectionRow) {
-	const computedRow = customValueComputedSection?.rows.get(row.id);
+	const computedRow = computedCustomValueSection.value?.rows.get(row.id);
 	if (computedRow) {
 		for (const column of resultColumns) {
-			computedRow.columns.set(column.id, computeSectionRowColumn(customValueSection, row, column));
+			computedRow.columns.set(column.id, computeSectionRowColumn(customSections.customValue, row, column));
 		}
 		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
 		if (customTotalRowIds.value.includes(`${ResultSectionId.CustomValue}_${row.id}`)) {
@@ -1331,7 +1344,7 @@ const customValueOnInput = useNumberInput(() => [currentCustomValueInputRowRef, 
 
 function updateCustomValueRowValue(rowIndex: number, event: Event) {
 	(event as any).composing = false;
-	const row = customValueRows.value[rowIndex];
+	const row = (customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value[rowIndex];
 	if (row) {
 		currentCustomValueInputRowRef = row;
 		customValueOnInput(event);
@@ -1340,7 +1353,7 @@ function updateCustomValueRowValue(rowIndex: number, event: Event) {
 }
 
 function updateCustomValueRowType(rowIndex: number, event: Event) {
-	const row = customValueRows.value[rowIndex];
+	const row = (customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value[rowIndex];
 	if (row) {
 		row.type = (event.target as HTMLInputElement).value as VariableType;
 		onCustomValueRowChange(row);
@@ -1348,12 +1361,12 @@ function updateCustomValueRowType(rowIndex: number, event: Event) {
 }
 
 function removeCustomValueRow(rowIndex: number) {
-	const row = customValueRows.value[rowIndex];
+	const row = (customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value[rowIndex];
 	if (row) {
 		const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
 		~cTotalIndex && customTotalRowIds.value.splice(cTotalIndex, 1);
-		customValueRows.value.splice(rowIndex, 1);
-		customValueComputedSection.rows.delete(row.id);
+		(customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.splice(rowIndex, 1);
+		computedCustomValueSection.value?.rows.delete(row.id);
 		debouncedSaveState();
 	}
 }
@@ -1414,7 +1427,7 @@ defineExpose({
 								<select id="results-table-row-new-section-ability" name="sectionOptionIndex" required :disabled="!damageSectionOptions.length">
 									<option v-if="!damageSectionOptions.length">no options left</option>
 									<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="option.optionName">
-										<option v-for="(ability, abilityIndex) in option.abilities" :key="GameAbilityId.stringify(ability.id)" :value="`${optionIndex}-${abilityIndex}`">
+										<option v-for="(ability, abilityIndex) in option.abilities" :key="typeof ability.id === 'string' ? ability.id : GameAbilityId.stringify(ability.id)" :value="`${optionIndex}-${abilityIndex}`">
 											{{ ability.name }}
 										</option>
 									</optgroup>
@@ -1601,7 +1614,7 @@ defineExpose({
 								<span>move down</span>
 								<Icon class="i-ph:arrow-down" />
 							</button>
-							<button class="pretend-ui-btn remove" :title="toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove'" @dblclick.stop="" @click.stop="removeResultsSection(index)">
+							<button class="pretend-ui-btn remove" :title="toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove'" @dblclick.stop="" @click.stop="removeResultsSection(index, $event)">
 								<span>{{ toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove' }}</span>
 								<Icon :class="toValue(section.clearable) ? 'i-ph:eraser' : 'i-ph:trash'" />
 							</button>

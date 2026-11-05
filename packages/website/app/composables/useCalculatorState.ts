@@ -20,6 +20,7 @@ export const ResultSectionId = {
 	CustomTotal: 'a-cTtl',
 	CustomValue: 'a-cV',
 } as const;
+export type ResultSectionId = (typeof ResultSectionId)[keyof typeof ResultSectionId];
 export const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
 const STATE_VERSION = '1';
 
@@ -41,6 +42,10 @@ export interface ICalculatorState {
 	/** custom total rows must be restored after saved sections have been hydrated, because they reference them and some might be invalid. Restore function is stored here and called either in app onMounted restore or result's table setup */
 	restoreSavedCustomTotalRows: ShallowRef<(() => void) | undefined>;
 	customSections: Record<'stats' | 'basicAttack' | 'customTotal' | 'customValue', IDamageResultTableSection>;
+}
+
+export function customSectionFromId(id: string, customSections: ICalculatorState['customSections']): IDamageResultTableSection | undefined {
+	return id === ResultSectionId.Stats ? customSections.stats : id === ResultSectionId.BasicAttack ? customSections.basicAttack : id === ResultSectionId.CustomTotal ? customSections.customTotal : customSections.customValue;
 }
 
 export function initCalculatorState(): ICalculatorState {
@@ -539,7 +544,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 
 			/* `all` (custom) sections start with 'a-' */
 			if (id.startsWith('a-')) {
-				const section = id === ResultSectionId.Stats ? customSections.stats : id === ResultSectionId.BasicAttack ? customSections.basicAttack : id === ResultSectionId.CustomTotal ? customSections.customTotal : customSections.customValue;
+				const section = customSectionFromId(id, customSections);
 				if (section) {
 					resultSections.splice(currentSectionIndex, 0, section);
 					!expandedSections.value.includes(id) && expandedSections.value.push(id);
