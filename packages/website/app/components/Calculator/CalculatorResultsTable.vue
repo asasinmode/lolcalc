@@ -681,16 +681,16 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 	return rows;
 }
 
-function removeResultsSection(index: number, event?: PointerEvent) {
+function removeResultsSection(index: number, force = false) {
 	const section = resultSections[index]!;
 	let remove = true;
 
 	if (section.isCustomTotal) {
-		remove = event?.shiftKey || !customTotalRowIds.value.length;
+		remove = force || !customTotalRowIds.value.length;
 		customTotalRowIds.value.length = 0;
 	} else if (section.isCustomValue) {
 		const rows = section.rows as Ref<IDamageResultTableSectionRow[]>;
-		remove = event?.shiftKey || !rows.value.length;
+		remove = force || !rows.value.length;
 
 		for (const row of rows.value) {
 			const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
@@ -883,7 +883,9 @@ const cleanableColumnsSections = computed<[[index: number, column: IDamageResult
 
 	const sections = (resultSections.map((section, index) => [index, section]) as [number, IDamageResultTableSection][]).filter(([, section]) => {
 		if (section.abilityId.type === 'all') {
-			return toValue(section.rows).length;
+			return section.id === ResultSectionId.CustomTotal
+				? !customTotalRowIds.value.length
+				: !toValue(section.rows).length || (section.id === ResultSectionId.CustomValue && (section.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.some((row) => !row.value));
 		} else if (section.abilityId.type === AbilityType.item) {
 			return !resultColumns.some((column) => column.source.value?.items.value.some((item) => item?.id === section.abilityId.id) || column.target.value?.items.value.some((item) => item?.id === section.abilityId.id));
 		} else if (section.abilityId.type === AbilityType.champion) {
@@ -916,8 +918,25 @@ function cleanupUnused() {
 	}
 
 	for (let i = cleanableColumnsSections.value[1].length - 1; i >= 0; i--) {
-		const [sectionIndex] = cleanableColumnsSections.value[1][i]!;
-		removeResultsSection(sectionIndex);
+		const [sectionIndex, section] = cleanableColumnsSections.value[1][i]!;
+		let removeSection = true;
+		if (section.id === ResultSectionId.CustomValue) {
+			const rows = section.rows as Ref<IDamageResultTableSectionCustomValueRow[]>;
+			for (let i = rows.value.length - 1; i >= 0; i--) {
+				const row = rows.value[i]!;
+				if (row.value) {
+					removeSection = false;
+					continue;
+				}
+				const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
+				if (~cTotalIndex) {
+					customTotalRowIds.value.splice(cTotalIndex, 1);
+				}
+				rows.value.splice(i, 1);
+				computedCustomValueSection.value?.rows.delete(row.id);
+			}
+		}
+		removeSection && removeResultsSection(sectionIndex, true);
 	}
 }
 
@@ -1236,8 +1255,6 @@ function onCustomTotalRowsChange() {
 	}
 	debouncedSaveState();
 }
-
-const computedCustomTotalSectionTotalRow = computed(() => computedResults.value.get(ResultSectionId.CustomTotal)?.rows.get('cTtl-total'));
 
 function recomputeCustomTotal() {
 	if (!computedCustomTotalSectionTotalRow.value) return;
@@ -1618,7 +1635,7 @@ defineExpose({
 								<span>move down</span>
 								<Icon class="i-ph:arrow-down" />
 							</button>
-							<button class="pretend-ui-btn remove" :title="toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove'" @dblclick.stop="" @click.stop="removeResultsSection(index, $event)">
+							<button class="pretend-ui-btn remove" :title="toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove'" @dblclick.stop="" @click.stop="removeResultsSection(index, $event.shiftKey)">
 								<span>{{ toValue(section.clearable) ? 'clear, shift+click to remove' : 'remove' }}</span>
 								<Icon :class="toValue(section.clearable) ? 'i-ph:eraser' : 'i-ph:trash'" />
 							</button>
