@@ -547,7 +547,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				const section = customSectionFromId(id, customSections);
 				if (section) {
 					resultSections.splice(currentSectionIndex, 0, section);
-					!expandedSections.value.includes(id) && expandedSections.value.push(id);
+					isExpanded && expandedSections.value.push(id);
 				} else {
 					console.warn('[useCalculatorState restoreState] skipping unknown custom section id', id);
 				}
