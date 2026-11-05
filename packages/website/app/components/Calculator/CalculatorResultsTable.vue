@@ -550,7 +550,10 @@ function addResultsSection(abilityId: IGameAbilityId | ResultSectionId, name: st
 
 async function hydrateResultSection(section: IDamageResultTableSection) {
 	const { abilityId } = section;
-	if (abilityId.type === 'all') return;
+	if (abilityId.type === 'all') {
+		addComputedSection(section.id);
+		return;
+	}
 
 	let name = toValue(section.name),
 		image: IGameImageData | undefined,
@@ -1800,9 +1803,9 @@ defineExpose({
 					</tr>
 				</tbody>
 			</template>
-			<tfoot v-show="!resultSections.length">
+			<tfoot>
 				<tr>
-					<td :colspan="maxCols"><span>Add sections you'd like to see results for</span></td>
+					<td :colspan="maxCols" :class="{ empty: !resultSections.length }"><span>Add sections you'd like to see results for</span></td>
 				</tr>
 			</tfoot>
 		</table>
@@ -2449,7 +2452,11 @@ defineExpose({
 
 		> tfoot {
 			> tr > td {
-				--at-apply: 'py-[--vfluid-12-20] text-neutral-300 font-500 text-start px-[--table-ps]';
+				--at-apply: 'pb-[--header-row-pt] text-neutral-300 font-500 text-start px-[--table-ps]';
+
+				&.empty {
+					--at-apply: 'py-[--vfluid-12-20]';
+				}
 
 				@media (width >= 520px) {
 					& {
@@ -2459,6 +2466,10 @@ defineExpose({
 
 				> span {
 					--at-apply: 'block max-inline-140';
+				}
+
+				&:not(.empty) > span {
+					--at-apply: 'hidden';
 				}
 			}
 		}
