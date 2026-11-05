@@ -124,7 +124,7 @@ onMounted(() => {
 		if (table) {
 			const hydrateSectionPromises: Promise<void>[] = [];
 			for (const section of state.resultSections) {
-				!toValue(section.name) && hydrateSectionPromises.push(table.hydrateResultSection(section));
+				hydrateSectionPromises.push(table.hydrateResultSection(section));
 			}
 			for (const cValueRow of (state.customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value) {
 				table.computeCustomValueRow(cValueRow);

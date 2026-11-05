@@ -258,11 +258,14 @@ interface IComputedSectionRowColumn {
 const computedResults = ref<Map<string, IComputedSection>>(new Map());
 computedResults.value = new Map<string, IComputedSection>(resultSections.map((section) => [section.id, computeSection(section)] as [string, IComputedSection]));
 
+const computedCustomTotalSectionTotalRow = computed(() => computedResults.value.get(ResultSectionId.CustomTotal)?.rows.get('cTtl-total'));
+const computedCustomValueSection = computed(() => computedResults.value.get(ResultSectionId.CustomValue));
+
 {
 	/* restoring state, basically what app.vue does onMounted but it can do so only when it's being mounted on the index page. If page is entered from somewhere else and there's state, it will be restored but the component needs to update itself on navigation to it */
 	const hydrateResultSectionPromises: Promise<void>[] = [];
 	for (const section of resultSections) {
-		!toValue(section.name) && hydrateResultSectionPromises.push(hydrateResultSection(section));
+		hydrateResultSectionPromises.push(hydrateResultSection(section));
 	}
 	for (const cValueRow of (customSections.customValue.rows as Ref<IDamageResultTableSectionRow[]>).value) {
 		computeCustomValueRow(cValueRow);
@@ -1305,13 +1308,11 @@ const variableTypeOptionNames: Partial<Record<VariableType, string>> = {
 const newCustomValueRowType = ref<VariableType>(VariableType.physical);
 const newCustomValueRowValue = ref<number>(0);
 
-const computedCustomValueSection = computed(() => computedResults.value.get(ResultSectionId.CustomValue));
-
 function submitCustomValueRow() {
 	if (!computedCustomValueSection.value) return;
 	const id = crypto.randomUUID();
 	(customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.push({ id, name: id, type: newCustomValueRowType.value, value: newCustomValueRowValue.value });
-	computedCustomValueSection.value.rows.set(id, computeSectionRow(customSections.customValue, (customSections.customTotal.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.at(-1)!));
+	computedCustomValueSection.value.rows.set(id, computeSectionRow(customSections.customValue, (customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.at(-1)!));
 
 	newCustomValueRowType.value = VariableType.physical;
 	newCustomValueRowValue.value = 0;
