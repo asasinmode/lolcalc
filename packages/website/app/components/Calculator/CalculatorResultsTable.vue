@@ -686,7 +686,15 @@ async function getAbilitySectionRows({ variables, unknownVariables }: Pick<IRepl
 		})),
 	);
 
-	rows.sort((a, _b) => (a.isCustom ? 1 : 0));
+	rows.sort((a, b) => Number(a.isCustom) - Number(b.isCustom));
+	const nonCustoms = [];
+	const customs = [];
+	for (const row of rows) {
+		if (row.isCustom) customs.push(row);
+		else nonCustoms.push(row);
+	}
+	rows.length = 0;
+	rows.push(...nonCustoms, ...customs);
 
 	return rows;
 }
