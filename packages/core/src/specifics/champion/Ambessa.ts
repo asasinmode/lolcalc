@@ -125,7 +125,6 @@ export default {
 	},
 	r: {
 		variables: defineChampionVariables<'Ambessa', typeof IAmbessa, 'r'>()({
-			// TODO fix calc_omnivamp, has extended equals
 			meta: {
 				Calc_Damage: {
 					type: VariableType.physical,

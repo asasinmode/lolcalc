@@ -94,7 +94,7 @@ export interface IVariableModifyMeta {
  *     In `updateData` script these are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
  * - the return value of `ISpecificDynamicVariables.calculate`'s return value when actually calculating and using the values
  */
-export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting'> {
+export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting' | 'abilityLevelVarMap'> {
 	values?: Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
 }
 
@@ -1856,6 +1856,7 @@ const MSTAT_TO_NAMED_STAT = {
 	9: 'critDamageMultiplier',
 	10: 'abilityHaste',
 	12: 'hp',
+	18: 'lifeSteal',
 	29: 'lethality',
 } satisfies Record<number, IChampionStatName>;
 

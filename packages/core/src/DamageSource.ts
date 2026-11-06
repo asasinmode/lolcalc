@@ -1261,8 +1261,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		dragonSoulAbility: computed(() => this.dragonSoul.value && computeDragonAbilityDescription(this.dragonSoul.value, 'soul', this, true)),
 		effects: ref([]),
 		variables: computed((): UnwrapRef<IDamageSourceComputed['variables']> => {
-			const championSpecific = this.champion.value && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value.id];
-			const championDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, championSpecific?.variables);
+			const championDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, this.championSpecific.value?.variables);
 
 			return {
 				items: Object.fromEntries(
@@ -1285,13 +1284,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 							/* test fixtures might not have all abilities filled so check against it */
 							this.champion.value?.abilities[abilityKey]
 								? this.champion.value!.abilities[abilityKey].variants.map((_, variantIndex): IDynamicVariables => {
-										const abilitySpecific = championSpecific?.[abilityKey];
+										const abilitySpecific = this.championSpecific.value?.[abilityKey];
 										const abilityDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.variables);
 										const specificDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.[variantIndex]?.variables);
 
 										return {
 											values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values, specificDynamicVariables?.values, this.abilityDynamicVariablesOverride?.[abilityKey]),
 											meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.meta, specificDynamicVariables?.meta),
+											abilityLevelVarMap: abilitySpecific?.variables?.abilityLevelVarMap,
 										};
 									})
 								: [],
@@ -2193,7 +2193,7 @@ export function computeDragonAbilityDescription(dragon: IDragonName, type: 'stac
 	const allAbilitiesVariants = [
 		[MISC.dragons[dragon].stack, 'passive'],
 		[MISC.dragons[dragon].soul, 'passive'],
-	] as UnwrapRef<DamageSource['allAbilityVariants']>;
+	] as unknown as UnwrapRef<DamageSource['allAbilityVariants']>;
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
 
@@ -2376,7 +2376,7 @@ export interface IComputedAbilityDescription {
 	/** will be empty if there are no extended variables in normal `tooltip` and the game data itself doesn't have it/is identical to normal `tooltip` */
 	tooltipExtended: string;
 	tooltipExtendedBelowLine: string;
-	anyUnknownVariables: number;
+	anyUnknownVariables: boolean | number;
 	/** if `null`, cd element won't be shown in the hover tooltip */
 	cooldown?: number | null;
 	/** if `null`, cost element won't be shown in the hover tooltip */

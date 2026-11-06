@@ -240,6 +240,11 @@ export interface ISpecificVariables<DetectedVariables extends string = string, T
 	 */
 	// TODO 'Cooldown' to be resolved in future features
 	uninteresting?: NoInfer<DetectedVariables | T | 'Cooldown'>[];
+	/**
+	 * map of variable names used in the description to their possible abilityLevelVars entries' names
+	 * for example, in the description Ambessa uses `Calc_Omnivamp` but in the ability level vars there's `{ "name": "Omnivamp", "nameOverride": "spell_listtype_healing" }`. Declaring `abilityLevelVarMap: { Omnivamp_Calc: 'Omnivamp' }` would make it so the variable's displayed name is taken from that `nameOverride`
+	 */
+	abilityLevelVarMap?: NoInfer<Partial<Record<DetectedVariables, DetectedVariables>>>;
 }
 
 export interface IDefineVariablesConfig<Id extends IChampionId | undefined = IChampionId | undefined, U extends IGameVariableType = IGameVariableType, DetectedVariables extends string = string> {
