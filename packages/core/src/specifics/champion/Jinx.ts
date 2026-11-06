@@ -2,6 +2,7 @@ import { championAbilityVariableValue, type IGameVariableValueParameters } from 
 import type IJinx from '@lolcalc/data/files/champion/Jinx.json';
 import { formatImagePath } from '@lolcalc/data/meta.ts';
 import type { IChampion } from '@lolcalc/data/types.js';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn, IAbilityImgIndexGetter } from '../index.ts';
@@ -98,8 +99,79 @@ export default {
 					resultsMultiplier: 100,
 					resultsIsPercentage: true,
 				},
+				RocketDamage: {
+					type: VariableType.physical,
+				},
 			},
 			uninteresting: ['RocketASPDPenalty', 'MinigunAttackSpeedDuration', 'MinigunAttackSpeedStacks'],
+		}),
+	},
+	w: {
+		variables: defineChampionVariables<'Jinx', typeof IJinx, 'w'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.physical,
+				},
+				SlowPercent: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+		}),
+	},
+	e: {
+		variables: defineChampionVariables<'Jinx', typeof IJinx, 'e'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+				RootDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+			uninteresting: ['GrenadeDuration'],
+		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Jinx', typeof IJinx, 'r'>()({
+			known: {
+				CalculatedPercentDamage: [],
+			},
+			calculate(self, target) {
+				let CalculatedPercentDamage = Number.NaN;
+
+				const percentDamage = championAbilityVariableValue('PercentDamage', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.r.variants[0]!, damageSource: self });
+				if (typeof percentDamage.value === 'number') {
+					CalculatedPercentDamage = percentDamage.value * 0.01 * (target ? (target.stats.value.total.hp ?? 0) - Math.min(target.stats.value.total.hp, target.currentHealth.value) : 0);
+				} else {
+					console.warn('[CHAMPION_SPECIFICS jinx] failed to calculate r percent damage', percentDamage);
+				}
+
+				return {
+					CalculatedPercentDamage: {
+						value: CalculatedPercentDamage,
+					},
+				};
+			},
+			meta: {
+				DamageFloor: {
+					type: VariableType.physical,
+				},
+				DamageMax: {
+					type: VariableType.physical,
+				},
+				PercentDamage: {
+					displayedName: 'MissingHPPercent',
+				},
+				CalculatedPercentDamage: {
+					isCustom: true,
+					displayedName: 'PercentDamage',
+					type: VariableType.physical,
+				},
+			},
+			uninteresting: ['AoEDamageMult', 'MonsterExecuteMax'],
 		}),
 	},
 	calculateHooks: {
@@ -145,6 +217,7 @@ export default {
 					if (typeof maxAS.value === 'number') {
 						const firstStackAS = maxAS.value / 2;
 						championPassiveStats.bonusAttackSpeedPercent = (championPassiveStats.bonusAttackSpeedPercent ?? 0) + (firstStackAS + firstStackAS * 0.5 * (qBuff - 1)) * 0.01;
+						calculatedVariables.jinxQAS = championPassiveStats.bonusAttackSpeedPercent;
 					} else {
 						console.warn('[CHAMPION_SPECIFICS jinx] failed to calculate q as', maxAS);
 					}

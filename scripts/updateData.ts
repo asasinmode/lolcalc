@@ -1,4 +1,3 @@
-// TODO 26.22 data seems partial, run in few days
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';

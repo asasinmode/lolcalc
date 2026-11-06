@@ -41,7 +41,7 @@ export function calculateSourceDamageOuputVars(self: DamageSource): IDamageOutpu
 	// fizz passive
 	// elise spider form aa
 	// amumu E, can be marked as fully implemented then
-	// ekko W
+	// ekko W, Jinx Q
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 	const rv: IDamageOutputVars = {};
 
