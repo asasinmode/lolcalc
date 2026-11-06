@@ -506,7 +506,7 @@ export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = 
 	},
 	percentArmorPen: {
 		name: 'Percentage Armor Penetration',
-		decimal: 2,
+		decimal: 1,
 		isPercentage: true,
 	},
 	flatMagicPen: {
@@ -514,7 +514,7 @@ export const CHAMPION_STAT_META: Record<IChampionStatName, IChampionStatMeta> = 
 	},
 	percentMagicPen: {
 		name: 'Percentage Magic Penetration',
-		decimal: 2,
+		decimal: 1,
 		isPercentage: true,
 	},
 	lifeSteal: {
