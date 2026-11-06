@@ -1260,6 +1260,9 @@ function addColumnItems(columnIndex: number, isSource: boolean) {
 
 function onCustomTotalRowsChange() {
 	recomputeCustomTotal();
+	if (!resultSections.some((section) => section === customSections.customTotal)) {
+		addResultsSection(ResultSectionId.CustomTotal, customSections.customTotal.name as string, true);
+	}
 	if (!expandedSections.value.includes(ResultSectionId.CustomTotal) && customTotalRowIds.value.length) {
 		expandedSections.value.push(ResultSectionId.CustomTotal);
 	}
