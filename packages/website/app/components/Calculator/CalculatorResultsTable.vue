@@ -44,6 +44,12 @@ const { isTooltipExpanded } = useTooltipState();
 
 const highlightedColumnId = ref<string>();
 
+const seenCustomTotalSection = ref(false);
+
+onMounted(() => {
+	seenCustomTotalSection.value = localStorage.getItem('lolcalc-seen-results-custom-total') === 'true';
+});
+
 function columnOptions(from: DamageSource[]): [string, string][] {
 	return from.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name || '<empty>'}`]);
 }
@@ -529,6 +535,10 @@ function addResultsSection(abilityId: IGameAbilityId | ResultSectionId, name: st
 
 	if (typeof abilityId === 'string') {
 		const customSection = customSectionFromId(abilityId, customSections);
+		if (abilityId === ResultSectionId.CustomTotal) {
+			seenCustomTotalSection.value ||= true;
+			localStorage.setItem('lolcalc-seen-results-custom-total', 'true');
+		}
 		if (!customSection) return;
 		section = customSection;
 	} else {
@@ -1711,7 +1721,7 @@ defineExpose({
 					</tr>
 					<tr v-for="(row, rowIndex) in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : toValue(section.rows)" :key="`${section.id}_${row.id}`" :class="{ unknown: row.isUnknown }">
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
-							<label>
+							<label v-if="seenCustomTotalSection">
 								<span>include in custom total</span>
 								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @change="onCustomTotalRowsChange" />
 							</label>
