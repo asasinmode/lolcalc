@@ -1761,18 +1761,18 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		anyUnknownVariables ||= gameAbilityId.abilityKey !== 'passive';
 	}
 
-	let abilityLevelVars: IComputedAbilityDescription['abilityLevelVars'] | undefined = variant.abilityLevelVars?.map((variable) => {
+	let abilityLevelVars: IComputedAbilityDescription['abilityLevelVars'] | undefined = variant.abilityLevelVars?.map((levelVar) => {
 		if (damageSource?.isResultsCopy) return { name: '' };
 
 		let isNameUnknown = false;
 		let name;
-		if (variable.nameOverride) {
-			name = champion.stringtable[variable.nameOverride];
+		if (levelVar.nameOverride) {
+			name = champion.stringtable[levelVar.nameOverride];
 			if (!name) {
 				isNameUnknown = true;
 			}
 		}
-		name ??= variable.name;
+		name ??= levelVar.name;
 
 		const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(name, champion.stringtable, replaceOptions?.overrideVariables ?? dynamicVariables);
 		const { replaced: variableReplaced, unknownVariables } = replaceGameVariables(stringtableReplaced, 'championAbility', {
@@ -1786,23 +1786,39 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		name = variableReplaced;
 		anyUnknownVariables ||= unknownStringtableVariables.size || unknownVariables.length;
 
+		let values = tooltipVariablesAV.get(name) ?? tooltipExtendedVariablesAV.get(name);
+
+		if (!values) {
+			const resolvedVar = championAbilityVariableValue(
+				levelVar.name,
+				{
+					abilityVariant: variant,
+					allAbilitiesVariants: damageSource?.allAbilityVariants.value,
+					abilityKey: gameAbilityId.abilityKey,
+					abilityLevel,
+					damageSource,
+				},
+				replaceOptions?.overrideVariables,
+			);
+
+			if (resolvedVar.allValues?.every((value) => typeof value === 'string')) {
+				values = resolvedVar.allValues as string[];
+			} else if (resolvedVar.allValues?.every((value) => typeof value === 'number')) {
+				values = resolvedVar.allValues as number[];
+				if (!resolvedVar.multiplier && levelVar.multiplier) {
+					values = values.map((value) => (value as number) * levelVar.multiplier!);
+				}
+				if (!resolvedVar.isPercentage && levelVar.isPercentage) {
+					values = values.map((value) => `${value}%`);
+				}
+			} else if (resolvedVar.allValues) {
+				console.warn("[DamageSource computeAbilityDescription] resolved level variable but some of its values aren't numbers", levelVar, resolvedVar);
+			}
+		}
+
 		return {
 			name,
-			values: (
-				tooltipVariablesAV.get(name) ??
-				tooltipExtendedVariablesAV.get(name) ??
-				championAbilityVariableValue(
-					variable.name,
-					{
-						abilityVariant: variant,
-						allAbilitiesVariants: damageSource?.allAbilityVariants.value,
-						abilityKey: gameAbilityId.abilityKey,
-						abilityLevel,
-						damageSource,
-					},
-					replaceOptions?.overrideVariables,
-				).allValues
-			)?.slice(1, lastExtendedVariableIndex),
+			values: values?.slice(1, lastExtendedVariableIndex),
 			isNameUnknown,
 		};
 	});

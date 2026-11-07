@@ -653,19 +653,6 @@ export function replaceGameVariables(
 		const tagWrapEnd = replaceWithName ? '</var>' : '';
 		const nameReplacement = meta?.displayedName ?? actualVariableName ?? variableName;
 
-		if (allValues) {
-			variablesAllValues.set(
-				actualVariableName ?? variableName,
-				allValues.map((value) => {
-					let parsedValue: string | number = roundNumber(value * multiplier);
-					if (multiplier !== 1) {
-						parsedValue = `${parsedValue}%`;
-					}
-					return parsedValue;
-				}),
-			);
-		}
-
 		if (typeof variable !== 'string' && (Array.isArray(variable) ? variable.some((v) => typeof v !== 'number' || Number.isNaN(v)) : typeof variable !== 'number' || Number.isNaN(variable))) {
 			variable = Array.isArray(variable) ? (variable.map((v) => (typeof v !== 'number' || Number.isNaN(v) ? undefined : v)) as typeof variable) : undefined;
 		}
@@ -677,6 +664,19 @@ export function replaceGameVariables(
 			multiplier = meta.multiplier;
 		} else if (variableMultiplier) {
 			multiplier = variableMultiplier;
+		}
+
+		if (allValues) {
+			variablesAllValues.set(
+				actualVariableName ?? variableName,
+				allValues.map((value) => {
+					let parsedValue: string | number = roundNumber(value * multiplier);
+					if (multiplier !== 1) {
+						parsedValue = `${parsedValue}%`;
+					}
+					return parsedValue;
+				}),
+			);
 		}
 
 		roundReplaced = typeof roundReplaced === 'number' ? roundReplaced : roundReplaced ? 0 : undefined;
