@@ -1291,7 +1291,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 										return {
 											values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values, specificDynamicVariables?.values, this.abilityDynamicVariablesOverride?.[abilityKey]),
 											meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.meta, specificDynamicVariables?.meta),
-											abilityLevelVarMap: abilitySpecific?.variables?.abilityLevelVarMap,
 										};
 									})
 								: [],

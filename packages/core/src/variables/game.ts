@@ -94,7 +94,7 @@ export interface IVariableModifyMeta {
  *     In `updateData` script these are used only for supressing warning for unknown variables that are actually calculated by `dynamicVariables`
  * - the return value of `ISpecificDynamicVariables.calculate`'s return value when actually calculating and using the values
  */
-export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting' | 'abilityLevelVarMap'> {
+export interface IDynamicVariables extends Pick<ISpecificVariables, 'meta' | 'uninteresting'> {
 	values?: Record<string, IVariableValueResult | [IVariableValueResult, IVariableValueResult]>;
 }
 
@@ -357,7 +357,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	}
 
 	if (champion) {
-		const abilityLevelVar = abilityVariant.abilityLevelVars?.find((levelVar) => levelVar.name === (dynamicVariables.abilityLevelVarMap?.[rv.actualVariableName ?? variableName] ?? rv.actualVariableName ?? variableName));
+		const abilityLevelVar = abilityVariant.abilityLevelVars?.find((levelVar) => levelVar.name === (rv.actualVariableName ?? variableName));
 		if (abilityLevelVar?.nameOverride) {
 			rv.actualVariableName = champion.stringtable[abilityLevelVar.nameOverride];
 		}

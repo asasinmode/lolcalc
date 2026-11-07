@@ -590,7 +590,6 @@ async function hydrateResultSection(section: IDamageResultTableSection) {
 				values: Object.assign(championVariables?.values ?? {}, abilityVariables?.values),
 				meta: Object.assign(championVariables?.meta ?? {}, abilityVariables?.meta),
 				uninteresting: (championVariables?.uninteresting ?? []).concat(abilityVariables?.uninteresting),
-				abilityLevelVarMap: abilityVariables?.abilityLevelVarMap,
 			},
 		});
 

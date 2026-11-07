@@ -134,10 +134,6 @@ export default {
 				},
 			},
 			uninteresting: ['Omnivamp_MonsterMod', 'Omnivamp_MinionMod', 'Suppress_Duration'],
-			abilityLevelVarMap: {
-				Calc_Omnivamp: 'Omnivamp',
-				Calc_Damage: 'Damage',
-			},
 		}),
 	},
 	calculateHooks: {
