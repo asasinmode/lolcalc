@@ -946,7 +946,7 @@ function cleanupUnused() {
 					removeSection = false;
 					continue;
 				}
-				const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
+				const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}*${row.id}`);
 				if (~cTotalIndex) {
 					customTotalRowIds.value.splice(cTotalIndex, 1);
 				}
@@ -1267,10 +1267,10 @@ function addColumnItems(columnIndex: number, isSource: boolean) {
 }
 
 function onCustomTotalRowsChange() {
-	recomputeCustomTotal();
 	if (!resultSections.some((section) => section === customSections.customTotal)) {
 		addResultsSection(ResultSectionId.CustomTotal, customSections.customTotal.name as string, true);
 	}
+	recomputeCustomTotal();
 	if (!expandedSections.value.includes(ResultSectionId.CustomTotal) && customTotalRowIds.value.length) {
 		expandedSections.value.push(ResultSectionId.CustomTotal);
 	}
@@ -1373,7 +1373,7 @@ function recomputeCustomValueRow(row: IDamageResultTableSectionRow) {
 			computedRow.columns.set(column.id, computeSectionRowColumn(customSections.customValue, row, column));
 		}
 		calculateComputedRowComparisonMap(computedRow, ResultSectionId.CustomValue);
-		if (customTotalRowIds.value.includes(`${ResultSectionId.CustomValue}_${row.id}`)) {
+		if (customTotalRowIds.value.includes(`${ResultSectionId.CustomValue}*${row.id}`)) {
 			recomputeCustomTotal();
 		}
 	} else {
@@ -1405,7 +1405,7 @@ function updateCustomValueRowType(rowIndex: number, event: Event) {
 function removeCustomValueRow(rowIndex: number) {
 	const row = (customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value[rowIndex];
 	if (row) {
-		const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
+		const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}*${row.id}`);
 		~cTotalIndex && customTotalRowIds.value.splice(cTotalIndex, 1);
 		(customSections.customValue.rows as Ref<IDamageResultTableSectionCustomValueRow[]>).value.splice(rowIndex, 1);
 		computedCustomValueSection.value?.rows.delete(row.id);
@@ -1734,7 +1734,7 @@ defineExpose({
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label v-if="seenCustomTotalSection">
 								<span>include in custom total</span>
-								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}_${row.id}`" @change="onCustomTotalRowsChange" />
+								<input v-model="customTotalRowIds" type="checkbox" title="include in custom total" :value="`${section.id}*${row.id}`" @change="onCustomTotalRowsChange" />
 							</label>
 						</td>
 						<th scope="row" :colspan="section.isCustomTotal || section.id === ResultSectionId.Stats ? 2 : undefined" headers="results-table-header-variable" :data-type="(row as IDamageResultTableSectionCustomValueRow).type">

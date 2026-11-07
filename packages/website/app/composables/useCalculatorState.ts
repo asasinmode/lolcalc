@@ -188,7 +188,7 @@ export function initCalculatorState(): ICalculatorState {
 		/** `customSections.customTotal.rows` is expected contain only the `total` row which doesn't have `sectionId` but it's not expected to be used */
 		const rows: ICustomTotalSectionRow[] = ((toValue(customSections.customTotal.rows) as ICustomTotalSectionRow[]) ?? []).concat(
 			customTotalRowIds.value.map((combinedId): ICustomTotalSectionRow => {
-				const [sectionId, rowId] = combinedId.split('_');
+				const [sectionId, rowId] = combinedId.split('*');
 
 				const section = resultSections.find((section) => section.id === sectionId)!;
 				const rowIndex = toValue(section.rows).findIndex((row) => row.id === rowId)!;
@@ -411,7 +411,8 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 				}
 
 				if (value.length) {
-					const str = `tblCTtl=${value.join('_')}`;
+					/** using `*` as separator because some champions (Ambessa) already use '_' in variable names */
+					const str = `tblCTtl=${value.join('*')}`;
 					wholeState += `&${str}`;
 					if (queryState.length + str.length < MAX_QUERY_STATE_STRING_LENGTH) {
 						queryState += `&${str}`;
