@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "bADRatio",
-							"nameOverride": "spell_listtype_bonusadratio"
+							"nameOverride": "spell_listtype_bonusadratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -139,11 +141,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "AttackTwoPercentTAD",
-							"nameOverride": "spell_listtype_criticalstrikedamage"
+							"nameOverride": "spell_listtype_criticalstrikedamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ASPercent",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -172,7 +178,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "PercentMS",
-							"nameOverride": "spell_listtype_fioraduelistmovementspeed"
+							"nameOverride": "spell_listtype_fioraduelistmovementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "HealPerSecond",

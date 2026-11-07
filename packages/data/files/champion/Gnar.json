@@ -50,11 +50,15 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MegaSlowAmount",
-							"nameOverride": "spell_gnarq_megaq_slowlevelup"
+							"nameOverride": "spell_gnarq_megaq_slowlevelup",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -165,7 +169,9 @@
 						},
 						{
 							"name": "MiniPercentHPDamage",
-							"nameOverride": "spell_listtype_gnarwhyperpercentdamage"
+							"nameOverride": "spell_listtype_gnarwhyperpercentdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MegaBaseDamage",
@@ -248,7 +254,9 @@
 						},
 						{
 							"name": "MinibAS",
-							"nameOverride": "spell_listtype_statbonusattackspeed"
+							"nameOverride": "spell_listtype_statbonusattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -329,7 +337,8 @@
 						},
 						{
 							"name": "RHyperMovementSpeedPercent",
-							"nameOverride": "spell_listtype_gnarrhypemovementspeed"
+							"nameOverride": "spell_listtype_gnarrhypemovementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -47,7 +47,9 @@
 						},
 						{
 							"name": "Slow",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -184,7 +186,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "DamagePerc",
-							"nameOverride": "spell_listtype_jaycedamagepershot"
+							"nameOverride": "spell_listtype_jaycedamagepershot",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -230,7 +234,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "PercHPDamage",
-							"nameOverride": "spell_listtype_maxhealthpercent"
+							"nameOverride": "spell_listtype_maxhealthpercent",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MonsterCap",
@@ -270,7 +276,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MovementSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

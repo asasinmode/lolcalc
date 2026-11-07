@@ -314,7 +314,9 @@
 						},
 						{
 							"name": "ExecutionThreshold",
-							"nameOverride": "listtype_execute"
+							"nameOverride": "listtype_execute",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

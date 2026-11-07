@@ -202,7 +202,8 @@
 						},
 						{
 							"name": "HastePercent",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "StunDuration",

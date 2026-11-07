@@ -248,7 +248,9 @@
 						},
 						{
 							"name": "BonusAS",
-							"nameOverride": "spell_listtype_nidaleeprimalsurgeattackspeed"
+							"nameOverride": "spell_listtype_nidaleeprimalsurgeattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",
@@ -328,7 +330,9 @@
 						},
 						{
 							"name": "TakedownDamageAmp",
-							"nameOverride": "spell_aspectofthecougar_takedowndamageamp"
+							"nameOverride": "spell_aspectofthecougar_takedowndamageamp",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "PounceDamage",

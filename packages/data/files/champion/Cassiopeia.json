@@ -45,7 +45,8 @@
 						},
 						{
 							"name": "Effect3Amount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -102,7 +103,8 @@
 						},
 						{
 							"name": "Effect2Amount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -156,7 +158,9 @@
 						},
 						{
 							"name": "HealRatio",
-							"nameOverride": "spell_cassiopeiae_healratio"
+							"nameOverride": "spell_cassiopeiae_healratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

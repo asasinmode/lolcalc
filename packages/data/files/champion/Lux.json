@@ -139,7 +139,8 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_movementslow"
+							"nameOverride": "spell_listtype_movementslow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

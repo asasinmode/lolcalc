@@ -215,7 +215,9 @@
 						},
 						{
 							"name": "RPercentPenBuff",
-							"nameOverride": "spell_annier_percpen"
+							"nameOverride": "spell_annier_percpen",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

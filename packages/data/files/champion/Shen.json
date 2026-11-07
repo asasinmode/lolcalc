@@ -42,15 +42,18 @@
 					"abilityLevelVars": [
 						{
 							"name": "BasePercentDamage",
-							"nameOverride": "spell_listtype_shenqbasepercentdamage"
+							"nameOverride": "spell_listtype_shenqbasepercentdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "EnhancedPercentDamage",
-							"nameOverride": "spell_listtype_shenqenhancedpercentdamage"
+							"nameOverride": "spell_listtype_shenqenhancedpercentdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -276,7 +279,8 @@
 						},
 						{
 							"name": "BaseShieldAmount",
-							"nameOverride": "spell_listtype_maximumshield"
+							"nameOverride": "spell_listtype_maximumshield",
+							"multiplier": 1.600000023841858
 						}
 					],
 					"dataValues": {

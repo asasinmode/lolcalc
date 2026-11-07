@@ -145,7 +145,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "PassiveADRatio",
-							"nameOverride": "spell_listtype_passivedamage"
+							"nameOverride": "spell_listtype_passivedamage",
+							"isPercentage": true
 						},
 						{
 							"name": "ActiveBaseDamage",
@@ -153,7 +154,8 @@
 						},
 						{
 							"name": "ActiveSlowPercentage",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

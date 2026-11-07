@@ -45,7 +45,9 @@
 						},
 						{
 							"name": "tADRatio",
-							"nameOverride": "spell_listtype_totaladratio"
+							"nameOverride": "spell_listtype_totaladratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

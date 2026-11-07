@@ -124,7 +124,9 @@
 						},
 						{
 							"name": "MovespeedSlow",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -222,7 +224,9 @@
 						},
 						{
 							"name": "MoveSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

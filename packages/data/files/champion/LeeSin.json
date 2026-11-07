@@ -49,7 +49,8 @@
 						},
 						{
 							"name": "Q2BaseDamage",
-							"nameOverride": "spell_listtype_leesinresonatingstrikemaximumbasedamage"
+							"nameOverride": "spell_listtype_leesinresonatingstrikemaximumbasedamage",
+							"multiplier": 2
 						}
 					],
 					"dataValues": {
@@ -126,7 +127,8 @@
 						},
 						{
 							"name": "LifestealAndSpellVamp",
-							"nameOverride": "spell_listtype_leesinwlifesteal"
+							"nameOverride": "spell_listtype_leesinwlifesteal",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -175,7 +177,8 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_leesineslow"
+							"nameOverride": "spell_listtype_leesineslow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -221,7 +224,8 @@
 						},
 						{
 							"name": "PercentHPCarryThrough",
-							"nameOverride": "spell_listtype_leesinrdamage"
+							"nameOverride": "spell_listtype_leesinrdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

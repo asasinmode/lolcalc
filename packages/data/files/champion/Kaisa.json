@@ -302,11 +302,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "Effect1Amount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Effect5Amount",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"spellCalculations": {
@@ -396,7 +400,9 @@
 						},
 						{
 							"name": "RTotalADRatio",
-							"nameOverride": "spelllisttype_attackdamageratio"
+							"nameOverride": "spelllisttype_attackdamageratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

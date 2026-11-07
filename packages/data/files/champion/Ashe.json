@@ -42,11 +42,14 @@
 					"abilityLevelVars": [
 						{
 							"name": "BonusAS",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "DamagePerStrike",
-							"nameOverride": "spell_listtype_asheflurryattackdamageratio"
+							"nameOverride": "spell_listtype_asheflurryattackdamageratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

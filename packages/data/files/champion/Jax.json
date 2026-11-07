@@ -224,7 +224,8 @@
 						},
 						{
 							"name": "BaseResists",
-							"nameOverride": "spell_jaxrapexform_basemr"
+							"nameOverride": "spell_jaxrapexform_basemr",
+							"multiplier": 0.6000000238418579
 						},
 						{
 							"name": "ResistsPerExtraTarget",
@@ -232,7 +233,8 @@
 						},
 						{
 							"name": "ResistsPerExtraTarget",
-							"nameOverride": "spell_jaxrapexform_bonusmr"
+							"nameOverride": "spell_jaxrapexform_bonusmr",
+							"multiplier": 0.6000000238418579
 						}
 					],
 					"dataValues": {

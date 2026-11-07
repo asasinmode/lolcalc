@@ -45,7 +45,8 @@
 						},
 						{
 							"name": "MovementSpeedAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",
@@ -222,7 +223,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "OverloadDamageBonus",
-							"nameOverride": "spell_listtype_ryzeoverloaddamageincrease"
+							"nameOverride": "spell_listtype_ryzeoverloaddamageincrease",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

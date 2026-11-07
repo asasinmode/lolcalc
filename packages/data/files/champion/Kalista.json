@@ -83,7 +83,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AmmoRechargeTooltip",
@@ -136,11 +138,15 @@
 						},
 						{
 							"name": "AdditionalADRatio",
-							"nameOverride": "spell_kalistaexpungewrapper_ratioperstack"
+							"nameOverride": "spell_kalistaexpungewrapper_ratioperstack",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_movementspeedslow"
+							"nameOverride": "spell_listtype_movementspeedslow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ManaRefund",

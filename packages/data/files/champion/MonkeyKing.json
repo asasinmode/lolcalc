@@ -45,7 +45,9 @@
 						},
 						{
 							"name": "ArmorShredPercent",
-							"nameOverride": "spell_listtype_armorreductionpercent"
+							"nameOverride": "spell_listtype_armorreductionpercent",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AttackRangeBonus",
@@ -112,7 +114,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "CloneDamageMod",
-							"nameOverride": "spell_monkeykingdecoy_clonedamage"
+							"nameOverride": "spell_monkeykingdecoy_clonedamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -148,7 +152,9 @@
 						},
 						{
 							"name": "AttackSpeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -206,7 +212,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "BasePercentMaxHPDmgPerSec",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"multiplier": 200,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

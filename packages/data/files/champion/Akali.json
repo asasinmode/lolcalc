@@ -104,7 +104,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "MovementSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "BaseDuration",
@@ -258,7 +259,8 @@
 						},
 						{
 							"name": "R2BaseDamage",
-							"nameOverride": "spell_listtype_maximumdamage"
+							"nameOverride": "spell_listtype_maximumdamage",
+							"multiplier": 3
 						}
 					],
 					"dataValues": {

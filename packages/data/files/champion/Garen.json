@@ -92,7 +92,9 @@
 						},
 						{
 							"name": "DRPercent",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -156,7 +158,9 @@
 						},
 						{
 							"name": "ADRatioPerTick",
-							"nameOverride": "spell_garene_adratioperspin"
+							"nameOverride": "spell_garene_adratioperspin",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -249,7 +253,9 @@
 						},
 						{
 							"name": "ExecuteDamage",
-							"nameOverride": "spell_listtype_percentmissinghealthdamage"
+							"nameOverride": "spell_listtype_percentmissinghealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -99,7 +99,9 @@
 						},
 						{
 							"name": "MoveSpeed_Base",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

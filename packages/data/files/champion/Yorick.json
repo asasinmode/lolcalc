@@ -46,7 +46,8 @@
 						},
 						{
 							"name": "MissingHealthRatio",
-							"nameOverride": "spell_listtype_healing"
+							"nameOverride": "spell_listtype_healing",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -137,18 +138,23 @@
 					"abilityLevelVars": [
 						{
 							"name": "ArmorShred",
-							"nameOverride": "spell_listtype_armorreductionpercent"
+							"nameOverride": "spell_listtype_armorreductionpercent",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "HasteAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
 						},
 						{
 							"name": "HealthDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -240,7 +246,8 @@
 						},
 						{
 							"name": "RMarkDamagePercent",
-							"nameOverride": "spell_listtype_yorickmarkdamage"
+							"nameOverride": "spell_listtype_yorickmarkdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "RGhoulNumbers",

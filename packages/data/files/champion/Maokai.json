@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "BasePercentHealth",
-							"nameOverride": "game_effect_description_percenthppoolmod"
+							"nameOverride": "game_effect_description_percenthppoolmod",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BonusMonsterDamage",
@@ -304,7 +306,9 @@
 						},
 						{
 							"name": "MoveHaste",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -42,11 +42,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "AttackSpeedBase",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MaxHPOnHitBase",
-							"nameOverride": "spell_listtype_percentmaxhealthdamage"
+							"nameOverride": "spell_listtype_percentmaxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BaseDamage",
@@ -54,7 +58,9 @@
 						},
 						{
 							"name": "OnHitBonusHPRatio",
-							"nameOverride": "spell_udyrq_onhit_bonushpratio"
+							"nameOverride": "spell_udyrq_onhit_bonushpratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -316,11 +322,15 @@
 						},
 						{
 							"name": "ShieldPercentHealth",
-							"nameOverride": "spell_listtype_percenthealthshieldratio"
+							"nameOverride": "spell_listtype_percenthealthshieldratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "LifeSteal",
-							"nameOverride": "spell_listtype_lifesteal"
+							"nameOverride": "spell_listtype_lifesteal",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -484,7 +494,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "BaseMoveSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ICD",
@@ -589,7 +601,9 @@
 						},
 						{
 							"name": "SlowPotency",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

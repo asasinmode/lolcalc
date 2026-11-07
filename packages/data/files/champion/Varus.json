@@ -117,11 +117,15 @@
 						},
 						{
 							"name": "BasePercentHPPerStack",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "WQHealthDamage",
-							"nameOverride": "spell_listtype_missinghealthdamage"
+							"nameOverride": "spell_listtype_missinghealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -233,7 +237,9 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

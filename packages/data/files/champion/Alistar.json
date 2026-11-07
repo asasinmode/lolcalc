@@ -213,7 +213,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "RDamageReduction",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

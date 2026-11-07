@@ -122,11 +122,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "SpeedAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "SpeedAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

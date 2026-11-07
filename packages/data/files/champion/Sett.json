@@ -45,7 +45,8 @@
 						},
 						{
 							"name": "MaxHealthTADRatioTOOLTIP",
-							"nameOverride": "spell_listtype_percenthpper100ad"
+							"nameOverride": "spell_listtype_percenthpper100ad",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -275,7 +276,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_settr_maxhealthdamage"
+							"nameOverride": "spell_settr_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BaseDamage",

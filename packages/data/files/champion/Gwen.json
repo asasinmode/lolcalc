@@ -200,7 +200,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "BaseAttackSpeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "CDRefund",
@@ -268,7 +269,9 @@
 						},
 						{
 							"name": "InitialSlow",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

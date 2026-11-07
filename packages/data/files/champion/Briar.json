@@ -45,7 +45,9 @@
 						},
 						{
 							"name": "ShredPercent",
-							"nameOverride": "spell_listtype_armorandmagicresistshred"
+							"nameOverride": "spell_listtype_armorandmagicresistshred",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -95,15 +97,21 @@
 					"abilityLevelVars": [
 						{
 							"name": "BerserkAS",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BerserkMS",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AoEAttackDamagePercent",
-							"nameOverride": "spell_briarw_areadamage"
+							"nameOverride": "spell_briarw_areadamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AttackBonusDamage",
@@ -111,7 +119,9 @@
 						},
 						{
 							"name": "AttackHealPercent",
-							"nameOverride": "spell_listtype_healing"
+							"nameOverride": "spell_listtype_healing",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -203,7 +213,9 @@
 						},
 						{
 							"name": "HealHPPercent",
-							"nameOverride": "spell_briare_healratio"
+							"nameOverride": "spell_briare_healratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -293,11 +305,15 @@
 						},
 						{
 							"name": "LifestealPercent",
-							"nameOverride": "spell_listtype_lifesteal"
+							"nameOverride": "spell_listtype_lifesteal",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ExtraMoveSpeedPercent",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -41,7 +41,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "TentacleDamageAmp",
-							"nameOverride": "spell_listtype_illaoiqslambonus"
+							"nameOverride": "spell_listtype_illaoiqslambonus",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -127,7 +129,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "HealthPercentDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "WMinDamage",
@@ -198,7 +201,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamageTransferPercent",
-							"nameOverride": "spell_listtype_illaoidamageecho"
+							"nameOverride": "spell_listtype_illaoidamageecho",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

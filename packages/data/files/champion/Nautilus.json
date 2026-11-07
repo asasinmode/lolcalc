@@ -99,7 +99,9 @@
 						},
 						{
 							"name": "ShieldHealthRatio",
-							"nameOverride": "spell_listtype_percentmaxhealth"
+							"nameOverride": "spell_listtype_percentmaxhealth",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -166,7 +168,9 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

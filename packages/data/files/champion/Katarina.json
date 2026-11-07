@@ -84,7 +84,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "MovespeedAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -226,7 +227,9 @@
 						},
 						{
 							"name": "OnHitRatio",
-							"nameOverride": "spell_katarinar_onhitdamageratio"
+							"nameOverride": "spell_katarinar_onhitdamageratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

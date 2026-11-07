@@ -168,7 +168,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "game_effect_description_percenthppoolmod"
+							"nameOverride": "game_effect_description_percenthppoolmod",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -374,7 +376,9 @@
 						},
 						{
 							"name": "ArmorPenetration",
-							"nameOverride": "spell_listtype_armorpenetration"
+							"nameOverride": "spell_listtype_armorpenetration",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

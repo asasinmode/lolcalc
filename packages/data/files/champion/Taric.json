@@ -133,11 +133,14 @@
 					"abilityLevelVars": [
 						{
 							"name": "ArmorBonusPercentage",
-							"nameOverride": "spell_listtype_taricpassivearmor"
+							"nameOverride": "spell_listtype_taricpassivearmor",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ShieldHPRatio",
-							"nameOverride": "spell_listtype_taricshieldratio"
+							"nameOverride": "spell_listtype_taricshieldratio",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

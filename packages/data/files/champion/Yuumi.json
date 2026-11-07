@@ -49,7 +49,8 @@
 						},
 						{
 							"name": "EmpoweredSlowAmount",
-							"nameOverride": "spell_yuumiq_empoweredslowamount"
+							"nameOverride": "spell_yuumiq_empoweredslowamount",
+							"isPercentage": true
 						},
 						{
 							"name": "OnHitBase",
@@ -138,7 +139,9 @@
 						},
 						{
 							"name": "HealAndShieldPower",
-							"nameOverride": "spell_yuumiw_healshield"
+							"nameOverride": "spell_yuumiw_healshield",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -213,7 +216,8 @@
 						},
 						{
 							"name": "AttackSpeedAmount",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "ManaRestore",

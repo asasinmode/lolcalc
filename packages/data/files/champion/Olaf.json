@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MonsterDamage",
@@ -114,7 +116,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "Attackspeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BaseShield",
@@ -290,7 +294,8 @@
 						},
 						{
 							"name": "Haste",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100
 						}
 					],
 					"dataValues": {

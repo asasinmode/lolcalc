@@ -115,7 +115,9 @@
 						},
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_yonew_maxhealthdamage"
+							"nameOverride": "spell_yonew_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -232,7 +234,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "DeathmarkPercent",
-							"nameOverride": "spell_yonee_repeatdamage"
+							"nameOverride": "spell_yonee_repeatdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

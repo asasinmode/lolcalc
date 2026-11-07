@@ -50,7 +50,9 @@
 						},
 						{
 							"name": "PercentHealthHealing",
-							"nameOverride": "spell_tahmkenchq_missinghealthhealing"
+							"nameOverride": "spell_tahmkenchq_missinghealthhealing",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -108,7 +110,9 @@
 						},
 						{
 							"name": "ChampRefund",
-							"nameOverride": "spell_tahmkenchw_levelupcooldownrefund"
+							"nameOverride": "spell_tahmkenchw_levelupcooldownrefund",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -153,11 +157,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "GreyHealthRatio",
-							"nameOverride": "spell_tahmkenche_levelupthickskinratio"
+							"nameOverride": "spell_tahmkenche_levelupthickskinratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "GreyHealthRatioEnhanced",
-							"nameOverride": "spell_tahmkenche_levelupthickskinratioenhanced"
+							"nameOverride": "spell_tahmkenche_levelupthickskinratioenhanced",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -163,11 +163,15 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "APRatio",
-							"nameOverride": "spell_listtype_apratio"
+							"nameOverride": "spell_listtype_apratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

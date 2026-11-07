@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_listtype_currenthealthdamage"
+							"nameOverride": "spell_listtype_currenthealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -102,11 +104,13 @@
 						},
 						{
 							"name": "PercentForTooltip",
-							"nameOverride": "spell_listtype_missinghealthdamage"
+							"nameOverride": "spell_listtype_missinghealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "VampPercentage",
-							"nameOverride": "spell_fiddlesticksw_vamp"
+							"nameOverride": "spell_fiddlesticksw_vamp",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -159,7 +163,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",

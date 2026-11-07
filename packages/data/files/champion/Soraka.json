@@ -49,7 +49,9 @@
 						},
 						{
 							"name": "MoveSpeedHaste",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -120,7 +122,9 @@
 						},
 						{
 							"name": "PercentHealthCostRefund",
-							"nameOverride": "spell_sorakaw_healthcostrefund"
+							"nameOverride": "spell_sorakaw_healthcostrefund",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

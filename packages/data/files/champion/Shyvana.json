@@ -303,7 +303,9 @@
 						},
 						{
 							"name": "DamageAPRatio",
-							"nameOverride": "spell_listtype_apratio"
+							"nameOverride": "spell_listtype_apratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -459,7 +461,9 @@
 						},
 						{
 							"name": "SizeScaling",
-							"nameOverride": "spell_shyvana_listtype_dragonformsize"
+							"nameOverride": "spell_shyvana_listtype_dragonformsize",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BonusAttackRange",

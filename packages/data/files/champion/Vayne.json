@@ -41,7 +41,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "TotalADRatio",
-							"nameOverride": "spell_vayneq_ratio"
+							"nameOverride": "spell_vayneq_ratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -81,7 +83,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxHealthRatio",
-							"nameOverride": "spell_vaynew_percentdamage"
+							"nameOverride": "spell_vaynew_percentdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "DamageFloor",
@@ -189,7 +193,8 @@
 						},
 						{
 							"name": "TumbleCDReduction",
-							"nameOverride": "spell_vayner_tumblecdr"
+							"nameOverride": "spell_vayner_tumblecdr",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

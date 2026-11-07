@@ -140,7 +140,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "TrueDamageBonus",
-							"nameOverride": "spell_aurelionsolw_truedamagebonus"
+							"nameOverride": "spell_aurelionsolw_truedamagebonus",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -227,7 +229,9 @@
 						},
 						{
 							"name": "DamageAPRatioTT",
-							"nameOverride": "spell_listtype_apratio"
+							"nameOverride": "spell_listtype_apratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -403,11 +407,13 @@
 						},
 						{
 							"name": "BaseDamage",
-							"nameOverride": "spell_listtype_empowereddamage"
+							"nameOverride": "spell_listtype_empowereddamage",
+							"multiplier": 1.25
 						},
 						{
 							"name": "BaseDamage",
-							"nameOverride": "spell_aurelionsolr_shockwavedamage"
+							"nameOverride": "spell_aurelionsolr_shockwavedamage",
+							"multiplier": 0.8999999761581421
 						}
 					],
 					"dataValues": {

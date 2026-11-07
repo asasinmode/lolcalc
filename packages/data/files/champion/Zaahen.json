@@ -50,11 +50,15 @@
 						},
 						{
 							"name": "HealPercent",
-							"nameOverride": "spell_listtype_healpercentofdamagedealt"
+							"nameOverride": "spell_listtype_healpercentofdamagedealt",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "QCoeff",
-							"nameOverride": "spell_listtype_bonusadratio"
+							"nameOverride": "spell_listtype_bonusadratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -187,7 +191,9 @@
 						},
 						{
 							"name": "PercentHPDamage",
-							"nameOverride": "spell_listtype_percenthealthdamage"
+							"nameOverride": "spell_listtype_percenthealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -247,7 +253,9 @@
 						},
 						{
 							"name": "ArmorPen",
-							"nameOverride": "spell_listtype_armorpenetration"
+							"nameOverride": "spell_listtype_armorpenetration",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

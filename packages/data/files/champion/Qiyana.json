@@ -171,11 +171,15 @@
 						},
 						{
 							"name": "PassiveMS",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AttackSpeed",
-							"nameOverride": "spell_listtype_statbonusattackspeed"
+							"nameOverride": "spell_listtype_statbonusattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

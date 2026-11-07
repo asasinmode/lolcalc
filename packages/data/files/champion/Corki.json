@@ -166,7 +166,8 @@
 						},
 						{
 							"name": "ShredMax",
-							"nameOverride": "spell_listtype_corkidefensereduction"
+							"nameOverride": "spell_listtype_corkidefensereduction",
+							"multiplier": -1
 						},
 						{
 							"name": "Cost"

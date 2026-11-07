@@ -106,11 +106,14 @@
 					"abilityLevelVars": [
 						{
 							"name": "TotalBaseDamage",
-							"nameOverride": "spell_listtype_totaldamage"
+							"nameOverride": "spell_listtype_totaldamage",
+							"multiplier": 3
 						},
 						{
 							"name": "MoveSpeedMod",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MoveSpeedDuration",
@@ -177,7 +180,9 @@
 						},
 						{
 							"name": "CooldownRefresh",
-							"nameOverride": "spell_listtype_ecooldownrefresh"
+							"nameOverride": "spell_listtype_ecooldownrefresh",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

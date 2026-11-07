@@ -252,7 +252,8 @@
 						},
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_listtype_malzaharnullzonedamage"
+							"nameOverride": "spell_listtype_malzaharnullzonedamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

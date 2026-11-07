@@ -46,7 +46,8 @@
 						},
 						{
 							"name": "MoveSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "BonusTrailAD",
@@ -103,7 +104,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "ActiveAS",
-							"nameOverride": "spell_listtype_statbonusattackspeed"
+							"nameOverride": "spell_listtype_statbonusattackspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

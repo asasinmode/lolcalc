@@ -174,7 +174,8 @@
 						},
 						{
 							"name": "BaseSlow",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

@@ -153,7 +153,9 @@
 						},
 						{
 							"name": "BaseMaxHealthDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

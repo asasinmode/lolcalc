@@ -267,7 +267,9 @@
 						},
 						{
 							"name": "DamageReduction",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -379,11 +381,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "RASBonus",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "RMSBonus",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -191,11 +191,13 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "SlowPercentEmpoweredTT",
-							"nameOverride": "spell_listtype_aniviachilledslowamount"
+							"nameOverride": "spell_listtype_aniviachilledslowamount",
+							"isPercentage": true
 						},
 						{
 							"name": "ManaCostPerSecond",

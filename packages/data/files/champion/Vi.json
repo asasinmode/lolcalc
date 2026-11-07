@@ -46,7 +46,8 @@
 						},
 						{
 							"name": "MinDamage",
-							"nameOverride": "spell_listtype_maximumdamage"
+							"nameOverride": "spell_listtype_maximumdamage",
+							"multiplier": 2.5
 						},
 						{
 							"name": "Cost"
@@ -115,11 +116,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "AttackSpeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

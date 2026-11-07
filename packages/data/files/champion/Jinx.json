@@ -49,7 +49,8 @@
 						},
 						{
 							"name": "MinigunAttackSpeedMax",
-							"nameOverride": "spell_listtype_jinxminiguntotalattackspeed"
+							"nameOverride": "spell_listtype_jinxminiguntotalattackspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -96,7 +97,8 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -194,7 +196,8 @@
 						},
 						{
 							"name": "PercentDamage",
-							"nameOverride": "spell_listtype_percentmissinghealthdamage"
+							"nameOverride": "spell_listtype_percentmissinghealthdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "ADRatio",
-							"nameOverride": "spell_listtype_bonusadratio"
+							"nameOverride": "spell_listtype_bonusadratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -118,11 +120,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "AttackSpeedBonus",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MovespeedAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -210,7 +216,9 @@
 						},
 						{
 							"name": "MovementSpeedMod",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BaseCost",

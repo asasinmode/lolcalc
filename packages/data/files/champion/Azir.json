@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "APRatio",
-							"nameOverride": "spell_listtype_apratio"
+							"nameOverride": "spell_listtype_apratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

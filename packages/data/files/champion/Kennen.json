@@ -84,7 +84,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "bADRatio",
-							"nameOverride": "spell_listtype_bonusadratio"
+							"nameOverride": "spell_listtype_bonusadratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BaseOnHitDamage",
@@ -188,7 +190,9 @@
 						},
 						{
 							"name": "TotalAS",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

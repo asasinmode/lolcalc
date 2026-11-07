@@ -41,11 +41,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "TADRatio",
-							"nameOverride": "spell_listtype_totaladratio"
+							"nameOverride": "spell_listtype_totaladratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MSBonus",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -121,7 +125,9 @@
 						},
 						{
 							"name": "OuterConeMaxHPDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -199,7 +205,9 @@
 						},
 						{
 							"name": "ASBuff",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -250,7 +258,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "RPercentCurrentHPDamage",
-							"nameOverride": "spell_listtype_camillecurrenthealthdamage"
+							"nameOverride": "spell_listtype_camillecurrenthealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "RDuration",

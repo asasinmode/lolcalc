@@ -48,7 +48,8 @@
 						},
 						{
 							"name": "SpeedSteal",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -99,7 +100,9 @@
 						},
 						{
 							"name": "BonusArmorPassive",
-							"nameOverride": "spell_listtype_armor"
+							"nameOverride": "spell_listtype_armor",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ThunderclapBaseDamage",
@@ -208,7 +211,8 @@
 						},
 						{
 							"name": "ASReduction",
-							"nameOverride": "spell_listtype_attackspeedreduction"
+							"nameOverride": "spell_listtype_attackspeedreduction",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

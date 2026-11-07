@@ -42,7 +42,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "UnburrowedADRatio",
-							"nameOverride": "spell_listtype_reksaiqratio"
+							"nameOverride": "spell_listtype_reksaiqratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BurrowedBaseDamage",
@@ -217,7 +219,8 @@
 						},
 						{
 							"name": "BaseDamage",
-							"nameOverride": "spell_listtype_empowereddamage"
+							"nameOverride": "spell_listtype_empowereddamage",
+							"multiplier": 1.2000000476837158
 						},
 						{
 							"name": "DashCooldown",
@@ -329,7 +332,8 @@
 						},
 						{
 							"name": "PercentHealthDamage",
-							"nameOverride": "spell_listtype_percenthealthdamage"
+							"nameOverride": "spell_listtype_percenthealthdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

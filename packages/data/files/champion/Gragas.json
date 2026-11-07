@@ -109,7 +109,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamageReduction",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"isPercentage": true
 						},
 						{
 							"name": "BaseDamage",

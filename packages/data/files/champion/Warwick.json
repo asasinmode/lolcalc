@@ -42,11 +42,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "LifestealPercent",
-							"nameOverride": "spell_listtype_healing"
+							"nameOverride": "spell_listtype_healing",
+							"isPercentage": true
 						},
 						{
 							"name": "TargetPercentHPDamage",
-							"nameOverride": "spell_listtype_percenthealthdamage"
+							"nameOverride": "spell_listtype_percenthealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -98,11 +100,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "PassiveMSBonus",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "PassiveASBonus",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -137,7 +141,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "DRAmount",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

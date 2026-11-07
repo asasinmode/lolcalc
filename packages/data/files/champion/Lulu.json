@@ -109,7 +109,9 @@
 						},
 						{
 							"name": "ASBonus",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "CCDuration",
@@ -241,7 +243,8 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

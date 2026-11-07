@@ -161,7 +161,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MoveSpeedPercent",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -245,7 +247,8 @@
 						},
 						{
 							"name": "DamagePerTick",
-							"nameOverride": "spell_listtype_damageovertime"
+							"nameOverride": "spell_listtype_damageovertime",
+							"multiplier": 4
 						}
 					],
 					"dataValues": {

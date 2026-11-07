@@ -87,11 +87,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "MoveSpeedMod",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AttackSpeedMod",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -193,7 +197,9 @@
 						},
 						{
 							"name": "PassiveAPRatio",
-							"nameOverride": "spell_staticfield_passiveapratio_levelup"
+							"nameOverride": "spell_staticfield_passiveapratio_levelup",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ActiveBaseDamage",

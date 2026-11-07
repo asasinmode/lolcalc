@@ -45,7 +45,9 @@
 						},
 						{
 							"name": "APRatio",
-							"nameOverride": "spell_listtype_apratio"
+							"nameOverride": "spell_listtype_apratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -105,7 +107,9 @@
 						},
 						{
 							"name": "TurretDestroyPercent",
-							"nameOverride": "spell_ziggsw_towerdestructionthreshold"
+							"nameOverride": "spell_ziggsw_towerdestructionthreshold",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -162,11 +166,15 @@
 						},
 						{
 							"name": "APRatioPerMine",
-							"nameOverride": "spell_listtype_apratio"
+							"nameOverride": "spell_listtype_apratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Slow",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -236,7 +244,8 @@
 						},
 						{
 							"name": "BaseDamage",
-							"nameOverride": "spell_listtype_damage"
+							"nameOverride": "spell_listtype_damage",
+							"multiplier": 0.6499999761581421
 						}
 					],
 					"dataValues": {

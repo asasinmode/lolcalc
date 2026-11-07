@@ -140,7 +140,8 @@
 						},
 						{
 							"name": "PercentHealthDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "ModifiedMonsterCap",
@@ -148,7 +149,8 @@
 						},
 						{
 							"name": "SlowAmountPercentage",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -50,11 +50,15 @@
 						},
 						{
 							"name": "ADRatioMin",
-							"nameOverride": "spelllisttype_attackdamageratio"
+							"nameOverride": "spelllisttype_attackdamageratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ADRatioMax",
-							"nameOverride": "spelllisttype_attackdamageratio"
+							"nameOverride": "spelllisttype_attackdamageratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -141,7 +145,9 @@
 						},
 						{
 							"name": "ShieldPercentHealthTooltip",
-							"nameOverride": "spell_listtype_maxhealthshieldratio"
+							"nameOverride": "spell_listtype_maxhealthshieldratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",
@@ -235,7 +241,8 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -308,7 +315,8 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

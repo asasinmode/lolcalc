@@ -111,6 +111,8 @@ export interface IChampionAbilityVariant {
 		 * like `QBaseDamage` -> `spell_listtype_damage` -> `Damage`
 		 */
 		nameOverride?: string;
+		isPercentage?: boolean;
+		multiplier?: number;
 	}[];
 	dataValues?: any;
 	spellCalculations?: any;

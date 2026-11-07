@@ -46,11 +46,14 @@
 						},
 						{
 							"name": "HealthDamagePercent",
-							"nameOverride": "spell_listtype_percentmaxhealth"
+							"nameOverride": "spell_listtype_percentmaxhealth",
+							"isPercentage": true
 						},
 						{
 							"name": "BaseMoveSpeedMod",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

@@ -45,7 +45,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",
@@ -112,7 +114,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "RangePctIncrease",
-							"nameOverride": "spell_listtype_range"
+							"nameOverride": "spell_listtype_range",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "TotalHealingOverTime",
@@ -179,7 +183,9 @@
 						},
 						{
 							"name": "MoveSpeedAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",

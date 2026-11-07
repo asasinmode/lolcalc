@@ -855,9 +855,9 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 			const stackAbility = miscData!.data.dragons[name as IDragonName].stack as IChampionAbilityVariant;
 			const soulAbility = miscData!.data.dragons[name as IDragonName].soul as IChampionAbilityVariant;
 			const allSpells = [
-				[stackAbility, 'passive'],
-				[soulAbility, 'passive'],
-			] as [IChampionAbilityVariant, IChampionAbilityKey][];
+				[stackAbility, 'passive', 0],
+				[soulAbility, 'passive', 0],
+			] as [IChampionAbilityVariant, IChampionAbilityKey, number][];
 
 			const {
 				mBuff: { mDescription: stackDescriptionKey },
@@ -880,7 +880,7 @@ if (!miscData || miscData?.version !== latestVersion || !textData.data.roleQuest
 						abilityKey: 'passive',
 						abilityVariant: stackAbility,
 						allAbilitiesVariants: allSpells,
-					},
+					} satisfies IGameVariableValueParameters['championAbility'],
 				},
 			});
 			/* hextech soul has text only for both melee | ranged split but everywhere else I try to display appropriate melee/ranged/both so alter it to make that possible */
@@ -2266,10 +2266,11 @@ function championAbilityVariant(
 						console.warn(`${debugPrefix} ability level variable no type`, variable);
 					}
 
-					// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
 					return {
 						name: type.replace('%d', typeIndex),
 						nameOverride: variable.nameOverride?.toLowerCase(),
+						multiplier: variable.multiplier,
+						isPercentage: variable.Style === 1 || undefined,
 					};
 				})
 			: undefined,
@@ -2378,7 +2379,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [IChampionAbilityKey, IChampionAbility['variants']][];
 
-	const allVariants = abilitiesWithVariants.flatMap(([abilityKey, variants]) => variants.map((variant) => [variant, abilityKey] as [IChampionAbilityVariant, IChampionAbilityKey]));
+	const allVariants = abilitiesWithVariants.flatMap(([abilityKey, variants]) => variants.map((variant, variantIndex) => [variant, abilityKey, variantIndex] as [IChampionAbilityVariant, IChampionAbilityKey, number]));
 
 	for (const [abilityKey, variants] of abilitiesWithVariants) {
 		for (let i = 0; i < variants.length; i++) {

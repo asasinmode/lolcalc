@@ -95,7 +95,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -131,7 +132,8 @@
 						},
 						{
 							"name": "MaxHPDamage",
-							"nameOverride": "spell_listtype_maxhealthdamage"
+							"nameOverride": "spell_listtype_maxhealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "RootDuration",

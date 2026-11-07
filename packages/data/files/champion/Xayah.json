@@ -105,7 +105,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "WAttackSpeedAmount",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

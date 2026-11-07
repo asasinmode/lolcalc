@@ -2202,9 +2202,9 @@ export function computeDragonAbilityDescription(dragon: IDragonName, type: 'stac
 	const string = TEXT.dragons[dragon][type];
 	const isStack = type === 'stack';
 	const allAbilitiesVariants = [
-		[MISC.dragons[dragon].stack, 'passive'],
-		[MISC.dragons[dragon].soul, 'passive'],
-	] as unknown as UnwrapRef<DamageSource['allAbilityVariants']>;
+		[MISC.dragons[dragon].stack, 'passive', 0],
+		[MISC.dragons[dragon].soul, 'passive', 0],
+	] as UnwrapRef<DamageSource['allAbilityVariants']>;
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceStringtableVariables(string);
 

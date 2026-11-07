@@ -159,7 +159,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -224,7 +226,8 @@
 						},
 						{
 							"name": "DaisyAS",
-							"nameOverride": "spell_listtype_ivernrbonusattackspeed"
+							"nameOverride": "spell_listtype_ivernrbonusattackspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

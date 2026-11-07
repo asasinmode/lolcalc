@@ -135,7 +135,9 @@
 						},
 						{
 							"name": "MoveSpeedMod",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -182,7 +184,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "RDamageAmp",
-							"nameOverride": "spell_zedr_detonationdamage"
+							"nameOverride": "spell_zedr_detonationdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

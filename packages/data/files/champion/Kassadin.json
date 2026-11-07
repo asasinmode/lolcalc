@@ -109,11 +109,13 @@
 						},
 						{
 							"name": "MissingManaRatio",
-							"nameOverride": "spell_listtype_kassadinbasemanarestore"
+							"nameOverride": "spell_listtype_kassadinbasemanarestore",
+							"isPercentage": true
 						},
 						{
 							"name": "ChampionMissingManaRatio",
-							"nameOverride": "spell_listtype_kassadinchampionmanarestore"
+							"nameOverride": "spell_listtype_kassadinchampionmanarestore",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -177,7 +179,8 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

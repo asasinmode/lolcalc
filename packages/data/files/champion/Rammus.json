@@ -45,7 +45,8 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -126,11 +127,15 @@
 						},
 						{
 							"name": "BonusArmorPercent",
-							"nameOverride": "spell_listtype_percentarmorbonus"
+							"nameOverride": "spell_listtype_percentarmorbonus",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BonusMRPercent",
-							"nameOverride": "spell_listtype_percentmagicresistbonus"
+							"nameOverride": "spell_listtype_percentmagicresistbonus",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -308,7 +313,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_tremors2_slowamount"
+							"nameOverride": "spell_tremors2_slowamount",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

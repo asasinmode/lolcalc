@@ -46,7 +46,8 @@
 						},
 						{
 							"name": "Tooltip_QQBonusDamage",
-							"nameOverride": "spell_hweiq_qqrankup2"
+							"nameOverride": "spell_hweiq_qqrankup2",
+							"isPercentage": true
 						},
 						{
 							"name": "Tooltip_QWBaseDamage",
@@ -54,7 +55,9 @@
 						},
 						{
 							"name": "Tooltip_QWBonusDamageMult",
-							"nameOverride": "spell_hweiq_qwrankup2"
+							"nameOverride": "spell_hweiq_qwrankup2",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Tooltip_QEBaseDamage",
@@ -280,7 +283,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "Tooltip_WQBaseMoveSpeed",
-							"nameOverride": "spell_hweiw_wqrankup1"
+							"nameOverride": "spell_hweiw_wqrankup1",
+							"isPercentage": true
 						},
 						{
 							"name": "Tooltip_WQAreaDuration",
@@ -296,7 +300,8 @@
 						},
 						{
 							"name": "Tooltip_WEOnHitManaRestore",
-							"nameOverride": "spell_hweiw_werankup2"
+							"nameOverride": "spell_hweiw_werankup2",
+							"multiplier": 3
 						},
 						{
 							"name": "Cost",
@@ -548,7 +553,8 @@
 						},
 						{
 							"name": "Tooltip_EESlowAmount",
-							"nameOverride": "spell_hweie_eerankup2"
+							"nameOverride": "spell_hweie_eerankup2",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",

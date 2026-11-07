@@ -45,7 +45,9 @@
 						},
 						{
 							"name": "QTotalADRatio",
-							"nameOverride": "spell_listtype_totaladscalar"
+							"nameOverride": "spell_listtype_totaladscalar",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -145,7 +147,9 @@
 						},
 						{
 							"name": "WSlowPercentage",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -237,15 +241,21 @@
 					"abilityLevelVars": [
 						{
 							"name": "RTotalADAmp",
-							"nameOverride": "spell_aatroxr_totaladlevelup"
+							"nameOverride": "spell_aatroxr_totaladlevelup",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "RHealingAmp",
-							"nameOverride": "spell_listtype_healingincrease"
+							"nameOverride": "spell_listtype_healingincrease",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "RMovementSpeedBonus",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

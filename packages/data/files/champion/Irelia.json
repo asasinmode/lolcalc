@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "HealTADCoefficient",
-							"nameOverride": "spell_ireliaq_healadratio"
+							"nameOverride": "spell_ireliaq_healadratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

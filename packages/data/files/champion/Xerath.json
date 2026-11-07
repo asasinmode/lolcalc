@@ -112,7 +112,9 @@
 						},
 						{
 							"name": "SweetSpotSlowAmount",
-							"nameOverride": "spell_listtype_maxslow"
+							"nameOverride": "spell_listtype_maxslow",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

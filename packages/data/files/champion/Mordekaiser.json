@@ -44,7 +44,9 @@
 						},
 						{
 							"name": "IsolationScalar",
-							"nameOverride": "spell_mordekaiserq_isolation"
+							"nameOverride": "spell_mordekaiserq_isolation",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -113,7 +115,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "HealingPercent",
-							"nameOverride": "spell_mordekaiserw_damageconversion"
+							"nameOverride": "spell_mordekaiserw_damageconversion",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -175,7 +179,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MagicPen",
-							"nameOverride": "spell_mordekaisere_penetration"
+							"nameOverride": "spell_mordekaisere_penetration",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Damage",

@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "BaseARShred",
-							"nameOverride": "spell_listtype_armorreduction"
+							"nameOverride": "spell_listtype_armorreduction",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -99,7 +101,9 @@
 						},
 						{
 							"name": "BaseSlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -159,11 +163,15 @@
 						},
 						{
 							"name": "PermanentAttackSpeed",
-							"nameOverride": "spell_listtype_passiveattackspeed"
+							"nameOverride": "spell_listtype_passiveattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BaseAuraAS",
-							"nameOverride": "spell_listtype_activeattackspeed"
+							"nameOverride": "spell_listtype_activeattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

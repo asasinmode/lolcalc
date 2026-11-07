@@ -159,11 +159,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "RicochetAttackSpeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BounceADRatio",
-							"nameOverride": "spell_listtype_totaladratio"
+							"nameOverride": "spell_listtype_totaladratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -238,7 +242,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "HealRatio",
-							"nameOverride": "spell_listtype_totaladratio"
+							"nameOverride": "spell_listtype_totaladratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -285,7 +291,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxMS",
-							"nameOverride": "spell_listtype_movementspeedmax"
+							"nameOverride": "spell_listtype_movementspeedmax",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "UltDuration",

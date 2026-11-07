@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "ADScaling",
-							"nameOverride": "spelllisttype_attackdamageratio"
+							"nameOverride": "spelllisttype_attackdamageratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BonusAD",
@@ -54,7 +56,8 @@
 						},
 						{
 							"name": "SappedAD",
-							"nameOverride": "spell_trundletrollsmash_sappedad"
+							"nameOverride": "spell_trundletrollsmash_sappedad",
+							"multiplier": -1
 						}
 					],
 					"dataValues": {
@@ -102,11 +105,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "MSBonus",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ASBonus",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -133,7 +140,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -176,7 +184,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "PercentHPDamage",
-							"nameOverride": "spell_listtype_trundlehealthdrain"
+							"nameOverride": "spell_listtype_trundlehealthdrain",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

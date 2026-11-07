@@ -49,7 +49,9 @@
 						},
 						{
 							"name": "bADDetonationRatio",
-							"nameOverride": "spell_listtype_gravesdetonationadratio"
+							"nameOverride": "spell_listtype_gravesdetonationadratio",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -163,7 +165,8 @@
 						},
 						{
 							"name": "ArmorPerStack",
-							"nameOverride": "spell_gravese_magicresist"
+							"nameOverride": "spell_gravese_magicresist",
+							"multiplier": 0.5
 						}
 					],
 					"dataValues": {

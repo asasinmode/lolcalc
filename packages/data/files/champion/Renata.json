@@ -86,11 +86,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "BonusAttackSpeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						},
 						{
 							"name": "BonusMoveSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

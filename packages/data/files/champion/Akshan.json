@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "SecondaryTargetDamage",
-							"nameOverride": "spell_akshanq_miniondamagemod"
+							"nameOverride": "spell_akshanq_miniondamagemod",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

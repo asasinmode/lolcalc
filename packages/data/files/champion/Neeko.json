@@ -112,11 +112,13 @@
 						},
 						{
 							"name": "Haste",
-							"nameOverride": "spell_neekow_haste"
+							"nameOverride": "spell_neekow_haste",
+							"isPercentage": true
 						},
 						{
 							"name": "PassiveHaste",
-							"nameOverride": "spell_listtype_passivemovementspeed"
+							"nameOverride": "spell_listtype_passivemovementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

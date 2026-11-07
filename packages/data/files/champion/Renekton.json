@@ -166,11 +166,13 @@
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamagePerHit",
-							"nameOverride": "spell_listtype_damage"
+							"nameOverride": "spell_listtype_damage",
+							"multiplier": 2
 						},
 						{
 							"name": "BaseDamagePerHit",
-							"nameOverride": "spell_listtype_empowereddamage"
+							"nameOverride": "spell_listtype_empowereddamage",
+							"multiplier": 3
 						}
 					],
 					"dataValues": {
@@ -239,7 +241,8 @@
 						},
 						{
 							"name": "EnragedArmorShred",
-							"nameOverride": "spell_listtype_armorreductionpercent"
+							"nameOverride": "spell_listtype_armorreductionpercent",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

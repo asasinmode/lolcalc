@@ -104,7 +104,8 @@
 						},
 						{
 							"name": "Effect2Amount",
-							"nameOverride": "spell_listtype_twistedfatewredslow"
+							"nameOverride": "spell_listtype_twistedfatewredslow",
+							"isPercentage": true
 						},
 						{
 							"name": "Effect5Amount",
@@ -337,7 +338,8 @@
 						},
 						{
 							"name": "AttackSpeedBonus",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

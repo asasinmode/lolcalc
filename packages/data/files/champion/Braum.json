@@ -195,7 +195,8 @@
 						},
 						{
 							"name": "ShieldFacingDRAmount",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -237,7 +238,8 @@
 						},
 						{
 							"name": "MoveSpeedMod",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

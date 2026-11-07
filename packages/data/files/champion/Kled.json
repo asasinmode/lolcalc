@@ -46,11 +46,14 @@
 						},
 						{
 							"name": "FirstHitBaseDamage",
-							"nameOverride": "spell_listtype_kledqripdamage"
+							"nameOverride": "spell_listtype_kledqripdamage",
+							"multiplier": 2
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -199,7 +202,8 @@
 						},
 						{
 							"name": "4HitMaxHealthDamage",
-							"nameOverride": "spell_listtype_percentagedamage"
+							"nameOverride": "spell_listtype_percentagedamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -304,7 +308,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "PercentHPBase",
-							"nameOverride": "spell_listtype_maximumdamage"
+							"nameOverride": "spell_listtype_maximumdamage",
+							"multiplier": 3,
+							"isPercentage": true
 						},
 						{
 							"name": "ShieldCapBase",

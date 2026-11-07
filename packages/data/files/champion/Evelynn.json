@@ -126,7 +126,9 @@
 						},
 						{
 							"name": "MRShred",
-							"nameOverride": "spell_listtype_magicresistshred"
+							"nameOverride": "spell_listtype_magicresistshred",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MonsterDamage",
@@ -204,7 +206,9 @@
 						},
 						{
 							"name": "SpeedAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -293,7 +297,8 @@
 						},
 						{
 							"name": "BaseDamage",
-							"nameOverride": "spell_listtype_evelynnempowereddamage"
+							"nameOverride": "spell_listtype_evelynnempowereddamage",
+							"multiplier": 2.4000000953674316
 						}
 					],
 					"dataValues": {

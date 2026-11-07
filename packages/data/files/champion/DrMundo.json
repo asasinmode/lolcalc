@@ -41,7 +41,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "CurrentHealthDamage",
-							"nameOverride": "spell_drmundoq_listtype_currenthealthdamage"
+							"nameOverride": "spell_drmundoq_listtype_currenthealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MinimumDamage",
@@ -190,7 +192,8 @@
 						},
 						{
 							"name": "HealthToADRatio",
-							"nameOverride": "spell_drmundor_listtype_healthintoattackdamage"
+							"nameOverride": "spell_drmundor_listtype_healthintoattackdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -265,15 +268,21 @@
 					"abilityLevelVars": [
 						{
 							"name": "MissingHealthHeal",
-							"nameOverride": "spell_listtype_bonushealth"
+							"nameOverride": "spell_listtype_bonushealth",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "SpeedBoostAmount",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MaxHealthHoT",
-							"nameOverride": "spell_listtype_maxhealthpercent"
+							"nameOverride": "spell_listtype_maxhealthpercent",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

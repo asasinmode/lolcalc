@@ -138,11 +138,14 @@
 					"abilityLevelVars": [
 						{
 							"name": "ADReduction",
-							"nameOverride": "spell_listtype_physicaldamagereduction"
+							"nameOverride": "spell_listtype_physicaldamagereduction",
+							"multiplier": -1
 						},
 						{
 							"name": "SlowPotency",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": -100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

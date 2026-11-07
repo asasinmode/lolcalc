@@ -103,11 +103,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "PassiveMoveSpeedBonus",
-							"nameOverride": "spell_teemow_passivemovespeed"
+							"nameOverride": "spell_teemow_passivemovespeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ActiveMoveSpeedBonus",
-							"nameOverride": "spell_teemow_activemovespeed"
+							"nameOverride": "spell_teemow_activemovespeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -239,7 +243,8 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "CastRange",

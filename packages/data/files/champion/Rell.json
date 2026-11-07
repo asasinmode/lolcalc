@@ -189,7 +189,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "PercentHealthDamage",
-							"nameOverride": "spell_listtype_damage"
+							"nameOverride": "spell_listtype_damage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -246,7 +248,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "BaseDamagePerSecond",
-							"nameOverride": "spell_listtype_damage"
+							"nameOverride": "spell_listtype_damage",
+							"multiplier": 2
 						}
 					],
 					"dataValues": {

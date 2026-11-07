@@ -229,7 +229,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_movementslow"
+							"nameOverride": "spell_listtype_movementslow",
+							"multiplier": -100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost",

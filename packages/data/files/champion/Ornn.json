@@ -92,15 +92,18 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxPercentHPPerTickTooltip",
-							"nameOverride": "spell_listtype_percenthealthdamage"
+							"nameOverride": "spell_listtype_percenthealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "MinimumDamagePerTick",
-							"nameOverride": "spell_listtype_minimumdamage"
+							"nameOverride": "spell_listtype_minimumdamage",
+							"multiplier": 5
 						},
 						{
 							"name": "MonsterDamagePerTickCap",
-							"nameOverride": "spell_listtype_maximumdamage"
+							"nameOverride": "spell_listtype_maximumdamage",
+							"multiplier": 5
 						},
 						{
 							"name": "Cost"

@@ -45,7 +45,8 @@
 						},
 						{
 							"name": "PercentHealthOnHit",
-							"nameOverride": "spell_listtype_currenthealthdamage"
+							"nameOverride": "spell_listtype_currenthealthdamage",
+							"isPercentage": true
 						},
 						{
 							"name": "MinDamageOnHit",
@@ -251,11 +252,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "MoveSpeed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "AttackSpeed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -299,7 +304,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxHealthDamage",
-							"nameOverride": "spell_listtype_missinghealthdamage"
+							"nameOverride": "spell_listtype_missinghealthdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

@@ -45,7 +45,8 @@
 						},
 						{
 							"name": "TotalADRatio",
-							"nameOverride": "spell_listtype_totaladscalar"
+							"nameOverride": "spell_listtype_totaladscalar",
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -120,7 +121,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "ADRatio",
-							"nameOverride": "spell_listtype_totaladscalar"
+							"nameOverride": "spell_listtype_totaladscalar",
+							"multiplier": 100
 						}
 					],
 					"dataValues": {

@@ -170,11 +170,14 @@
 						},
 						{
 							"name": "SlowPercent",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"isPercentage": true
 						},
 						{
 							"name": "MSPercent",
-							"nameOverride": "spell_listtype_passivemovementspeed"
+							"nameOverride": "spell_listtype_passivemovementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"

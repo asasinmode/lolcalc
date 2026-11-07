@@ -222,11 +222,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "PassiveAttackSpeed",
-							"nameOverride": "spell_listtype_elisewpassiveattackspeed"
+							"nameOverride": "spell_listtype_elisewpassiveattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "ActiveAttackSpeed",
-							"nameOverride": "spell_listtype_activeattackspeed"
+							"nameOverride": "spell_listtype_activeattackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -264,7 +268,8 @@
 						},
 						{
 							"name": "RappelDamageAmp",
-							"nameOverride": "spell_elisehumane_dmgheal"
+							"nameOverride": "spell_elisehumane_dmgheal",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

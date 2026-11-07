@@ -125,7 +125,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "MaxSlowTooltipOnly",
-							"nameOverride": "spell_listtype_maxslow"
+							"nameOverride": "spell_listtype_maxslow",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -161,7 +162,9 @@
 						},
 						{
 							"name": "ArmorShredPercent",
-							"nameOverride": "spell_listtype_armorreductionpercent"
+							"nameOverride": "spell_listtype_armorreductionpercent",
+							"multiplier": -100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -236,7 +239,9 @@
 						},
 						{
 							"name": "AOEDamagePercent",
-							"nameOverride": "spell_listtype_maxhealthpercent"
+							"nameOverride": "spell_listtype_maxhealthpercent",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "InitialResistGain",

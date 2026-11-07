@@ -122,15 +122,21 @@
 					"abilityLevelVars": [
 						{
 							"name": "PassiveShieldHealthRatio",
-							"nameOverride": "spell_listtype_shieldhealthratio"
+							"nameOverride": "spell_listtype_shieldhealthratio",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "DamageReductionBase",
-							"nameOverride": "spell_listtype_magicdamagereduction"
+							"nameOverride": "spell_listtype_magicdamagereduction",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "DamageReductionBase",
-							"nameOverride": "spell_listtype_physicaldamagereduction"
+							"nameOverride": "spell_listtype_physicaldamagereduction",
+							"multiplier": 50,
+							"isPercentage": true
 						},
 						{
 							"name": "MaximumWBaseDamage",

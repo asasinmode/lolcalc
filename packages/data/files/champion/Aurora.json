@@ -119,7 +119,8 @@
 						},
 						{
 							"name": "MoveSpeedBonus",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

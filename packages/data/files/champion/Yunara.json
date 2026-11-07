@@ -47,7 +47,9 @@
 						},
 						{
 							"name": "Attack_Speed",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Damage",
@@ -160,7 +162,8 @@
 						},
 						{
 							"name": "Damage",
-							"nameOverride": "spell_listtype_damagepersecond"
+							"nameOverride": "spell_listtype_damagepersecond",
+							"multiplier": 0.6000000238418579
 						}
 					],
 					"dataValues": {
@@ -264,11 +267,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "Move_Speed",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Move_Speed",
-							"nameOverride": "spell_listtype_movementspeedmax"
+							"nameOverride": "spell_listtype_movementspeedmax",
+							"multiplier": 150,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

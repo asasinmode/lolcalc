@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "Damage_1_Percent",
-							"nameOverride": "spell_ambessaq_rankup_cunningsweep_maxhealthdamage"
+							"nameOverride": "spell_ambessaq_rankup_cunningsweep_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Damage_2_Base",
@@ -54,7 +56,9 @@
 						},
 						{
 							"name": "Damage_1_Percent",
-							"nameOverride": "spell_ambessaq_rankup_sunderingslam_maxhealthdamage"
+							"nameOverride": "spell_ambessaq_rankup_sunderingslam_maxhealthdamage",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -334,11 +338,15 @@
 					"abilityLevelVars": [
 						{
 							"name": "Armor_Penetration",
-							"nameOverride": "spell_listtype_armorpenetration"
+							"nameOverride": "spell_listtype_armorpenetration",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Omnivamp",
-							"nameOverride": "spell_listtype_healing"
+							"nameOverride": "spell_listtype_healing",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Damage",

@@ -46,7 +46,9 @@
 						},
 						{
 							"name": "MinSpeed",
-							"nameOverride": "spell_volibearq_rankup_speed"
+							"nameOverride": "spell_volibearq_rankup_speed",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -151,7 +153,9 @@
 						},
 						{
 							"name": "HealPercent",
-							"nameOverride": "spell_volibearw_rankup_percentheal"
+							"nameOverride": "spell_volibearw_rankup_percentheal",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "Cost"
@@ -239,7 +243,9 @@
 						},
 						{
 							"name": "PercentDamage",
-							"nameOverride": "spell_listtype_percentagedamage"
+							"nameOverride": "spell_listtype_percentagedamage",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "MonsterDamageCapBase",

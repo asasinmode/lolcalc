@@ -197,7 +197,9 @@
 						},
 						{
 							"name": "SlowAmount",
-							"nameOverride": "spell_listtype_slow"
+							"nameOverride": "spell_listtype_slow",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -242,11 +244,13 @@
 						},
 						{
 							"name": "SmallDamage",
-							"nameOverride": "spell_fizzr_mediumfishdamage"
+							"nameOverride": "spell_fizzr_mediumfishdamage",
+							"multiplier": 1.25
 						},
 						{
 							"name": "SmallDamage",
-							"nameOverride": "spell_fizzr_largefishdamage"
+							"nameOverride": "spell_fizzr_largefishdamage",
+							"multiplier": 1.5
 						}
 					],
 					"dataValues": {

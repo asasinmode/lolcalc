@@ -41,7 +41,9 @@
 					"abilityLevelVars": [
 						{
 							"name": "PranceBonusPerStack",
-							"nameOverride": "spell_listtype_movementspeed"
+							"nameOverride": "spell_listtype_movementspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "FlatDamageBase",

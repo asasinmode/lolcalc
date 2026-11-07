@@ -95,7 +95,8 @@
 					"abilityLevelVars": [
 						{
 							"name": "HealthDamage",
-							"nameOverride": "spell_listtype_percenthealthdamage"
+							"nameOverride": "spell_listtype_percenthealthdamage",
+							"isPercentage": true
 						}
 					],
 					"dataValues": {

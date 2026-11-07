@@ -159,11 +159,15 @@
 						},
 						{
 							"name": "DRPercent",
-							"nameOverride": "spell_listtype_damagereduction"
+							"nameOverride": "spell_listtype_damagereduction",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BonusLifeSteal",
-							"nameOverride": "spell_listtype_lifesteal"
+							"nameOverride": "spell_listtype_lifesteal",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
@@ -264,7 +268,9 @@
 						},
 						{
 							"name": "TotalASMod",
-							"nameOverride": "spell_listtype_attackspeed"
+							"nameOverride": "spell_listtype_attackspeed",
+							"multiplier": 100,
+							"isPercentage": true
 						},
 						{
 							"name": "BonusAARange",
@@ -272,7 +278,9 @@
 						},
 						{
 							"name": "VoidlingHPScale",
-							"nameOverride": "spell_belvethr_voidremorahealth"
+							"nameOverride": "spell_belvethr_voidremorahealth",
+							"multiplier": 100,
+							"isPercentage": true
 						}
 					],
 					"dataValues": {
