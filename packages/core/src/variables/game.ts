@@ -1,5 +1,5 @@
 import { CONSTS, STAT_ICON } from '@lolcalc/data';
-import type { IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
+import type { IChampion, IChampionAbilityVariant, IItem, IItemStat, IRune } from '@lolcalc/data/types';
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey, IStatsCalculationResult, VariableType } from '@lolcalc/shared';
 import { CHAMPION_LEVEL } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.ts';
@@ -292,6 +292,8 @@ export interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	returnActualName?: boolean;
 	/** for when an ability variant tries to resolve an unknown variable by using other, same ability (like q[0], q[1]) variant to avoid rechecking visited variants/infinitely looping if a variable was unknown in all variants */
 	checkedVariablesVariants?: Map<string, IChampionAbilityVariant[]>;
+	/** champion to be used for extracting variables. Normally taken from DamageSource but results table doesn't pass it, instead having just champion  */
+	champion?: IChampion;
 }
 
 export function championAbilityVariableValue(variable: string, params: IChampionAbilityVariableParams, overrideDynamicVariables?: IDynamicVariables): IVariableValueResult {
@@ -304,6 +306,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		damageSource,
 		isRanged,
 		returnActualName,
+		champion = params.damageSource?.champion?.value,
 	} = params;
 	let abilityLevel: number | undefined = params.abilityLevel;
 	if (!params.forceAbilityLevel) {
@@ -351,6 +354,13 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	const [variableName, ...dotPath] = variable.split('.') as [string, ...string[]];
 	if (dotPath.length) {
 		rv.actualVariableName = variableName;
+	}
+
+	if (champion) {
+		const abilityLevelVar = abilityVariant.abilityLevelVars?.find((levelVar) => levelVar.name === (dynamicVariables.abilityLevelVarMap?.[rv.actualVariableName ?? variableName] ?? rv.actualVariableName ?? variableName));
+		if (abilityLevelVar?.nameOverride) {
+			rv.actualVariableName = champion.stringtable[abilityLevelVar.nameOverride];
+		}
 	}
 
 	rv.isUninteresting = dynamicVariables.uninteresting?.includes(variableName!);
@@ -645,7 +655,7 @@ export function replaceGameVariables(
 
 		if (allValues) {
 			variablesAllValues.set(
-				actualVariableName || variableName,
+				actualVariableName ?? variableName,
 				allValues.map((value) => {
 					let parsedValue: string | number = roundNumber(value * multiplier);
 					if (multiplier !== 1) {

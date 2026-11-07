@@ -1710,7 +1710,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		variablesAllValues: tooltipVariablesAV,
 		variables: tooltipVariables,
 		anyExtendedVariables: tooltipAnyExtendedVariables,
-	} = abilityVariantText(allVariants, variant.tooltip || '<unknown>UNKNOWN</unknown>', gameAbilityId.abilityKey, variant, dynamicVariables, abilityLevel, champion.stringtable, damageSource, replaceOptions);
+	} = abilityVariantText(allVariants, variant.tooltip || '<unknown>UNKNOWN</unknown>', gameAbilityId.abilityKey, variant, dynamicVariables, abilityLevel, champion.stringtable, damageSource, replaceOptions, champion);
 	const {
 		replaced: tooltipExtendedReplaced,
 		unknownSV: tooltipExtendedUnknownSV,
@@ -1718,17 +1718,25 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		variablesAllValues: tooltipExtendedVariablesAV,
 		variables: tooltipExtendedVariables,
 		anyExtendedVariables: tooltipExtendedAnyExtendedVariables,
-	} = abilityVariantText(allVariants, variant.tooltipExtended ?? (tooltipAnyExtendedVariables ? variant.tooltip : '') ?? '', gameAbilityId.abilityKey, variant, dynamicVariables, abilityLevel, champion.stringtable, damageSource, {
-		...replaceOptions,
-		isExtended: true,
-	});
+	} = abilityVariantText(
+		allVariants,
+		variant.tooltipExtended ?? (tooltipAnyExtendedVariables ? variant.tooltip : '') ?? '',
+		gameAbilityId.abilityKey,
+		variant,
+		dynamicVariables,
+		abilityLevel,
+		champion.stringtable,
+		damageSource,
+		{ ...replaceOptions, isExtended: true },
+		champion,
+	);
 	const {
 		replaced: tooltipExtendedBLReplaced,
 		unknownSV: tooltipExtendedBLUnknownSV,
 		unknownV: tooltipExtendedBLUnknownV,
 		variables: tooltipExtendedBLVariables,
 		anyExtendedVariables: tooltipExtendedBLAnyExtendedVariables,
-	} = abilityVariantText(allVariants, variant.tooltipExtendedBelowLine || '', gameAbilityId.abilityKey, variant, dynamicVariables, abilityLevel, champion.stringtable, damageSource, { ...replaceOptions, isExtended: true });
+	} = abilityVariantText(allVariants, variant.tooltipExtendedBelowLine || '', gameAbilityId.abilityKey, variant, dynamicVariables, abilityLevel, champion.stringtable, damageSource, { ...replaceOptions, isExtended: true }, champion);
 
 	mergeMaps(variables, tooltipVariables);
 	mergeMaps(variables, tooltipExtendedVariables);
@@ -1773,6 +1781,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 			allAbilitiesVariants: allVariants,
 			damageSource,
 			dynamicVariables,
+			champion,
 		});
 		name = variableReplaced;
 		anyUnknownVariables ||= unknownStringtableVariables.size || unknownVariables.length;
@@ -1780,8 +1789,8 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		return {
 			name,
 			values: (
-				tooltipVariablesAV.get(variable.name) ??
-				tooltipExtendedVariablesAV.get(variable.name) ??
+				tooltipVariablesAV.get(name) ??
+				tooltipExtendedVariablesAV.get(name) ??
 				championAbilityVariableValue(
 					variable.name,
 					{
@@ -1871,6 +1880,7 @@ function abilityVariantText(
 	stringtable?: Record<string, string>,
 	damageSource?: DamageSource,
 	replaceOptions?: IReplaceGameVariablesOptions,
+	champion?: IChampion,
 ): {
 	replaced: string;
 	unknownSV: IReplaceStringtableVariablesRV['unknownStringtableVariables'];
@@ -1891,6 +1901,7 @@ function abilityVariantText(
 			abilityLevel,
 			allAbilitiesVariants,
 			damageSource,
+			champion,
 		},
 		damageSource?.modifyVariableFunctions.value,
 		replaceOptions,

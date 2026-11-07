@@ -170,7 +170,7 @@ export interface IVariableValueResult<T = IConcreteVariableValue | [IConcreteVar
 	 * if `1`, same as `true` except the target is ranged
 	 */
 	isMeleeRanged?: true | 0 | 1;
-	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
+	/** the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
 	actualVariableName?: string;
 	/** all values the variable lists, like champion Q levels 0-6 */
 	allValues?: number[] | null;
@@ -299,6 +299,7 @@ export function specificKnownVariables(config?: ISpecificVariables<any, any, any
 			values: config.default,
 			meta: config.meta,
 			uninteresting: config.uninteresting,
+			abilityLevelVarMap: config.abilityLevelVarMap,
 		}
 	);
 }
