@@ -19,6 +19,7 @@ import type { IChampionId, IDragonName, IItem, IRunePathName, IRuneShardSlotName
 import type { IChampionAbilityKey, IChampionStatName, INonPassiveAbilityKey } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, CHAMPION_STAT_META } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
+import { roundNumber } from '@lolcalc/shared/utils.ts';
 import { toValue } from 'vue';
 import type { IScoreboardItemChampionAbilityTooltipShowData } from '@/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
@@ -983,6 +984,9 @@ function manipulateFromSelect(manipulateOption: string | undefined) {
 
 const { bindTrigger: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
 
+const hpRegenPerSec = computed(() => roundNumber(props.value.stats.value.total.hpRegen / 5, 1));
+const abilityResourceRegenPerSec = computed(() => roundNumber(props.value.stats.value.total.manaRegen / 5, 1));
+
 defineExpose({ el });
 </script>
 
@@ -1302,6 +1306,7 @@ defineExpose({ el });
 						<label :for="`${idSuffix}-current-ability-health`"> health </label>
 						<input :id="`${idSuffix}-current-ability-health`" :value="Math.round(healthDragValueRef)" min="0" :max="value.maxHealth.value" type="number" @input="updateChampionHealth" />
 						<span>/ {{ value.maxHealth.value }}</span>
+						<span>+{{ hpRegenPerSec }} <span>per second</span></span>
 					</template>
 				</div>
 				<ChampionKledHpBar v-else :value :id-suffix :update-champion-health :health-resource-slider-events />
@@ -1319,6 +1324,7 @@ defineExpose({ el });
 						</label>
 						<input :id="`${idSuffix}-current-ability-resource`" :value="Math.round(abilityResourceDragValueRef)" min="0" :max="value.maxAbilityResource.value" type="number" @input="updateChampionAbilityResource" />
 						<span>/ {{ value.maxAbilityResource.value }}</span>
+						<span>+{{ abilityResourceRegenPerSec }} <span>per second</span></span>
 					</template>
 				</div>
 			</section>
@@ -2449,6 +2455,21 @@ defineExpose({ el });
 
 					> span {
 						--at-apply: 'z-1 pointer-events-none select-none';
+
+						&:last-of-type {
+							--at-apply: 'absolute inset-e-1 font-500 inset-bs-1/2 -translate-y-1/2 text-xs invisible';
+
+							> span {
+								--at-apply: 'sr-only';
+							}
+						}
+					}
+
+					&:hover,
+					&:focus-within {
+						> span:last-of-type {
+							--at-apply: 'visible';
+						}
 					}
 
 					> input {
