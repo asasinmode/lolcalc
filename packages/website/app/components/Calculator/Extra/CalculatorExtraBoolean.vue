@@ -6,7 +6,6 @@ defineProps<{
 	idSuffix: string;
 	imgSrc: IGameImageData;
 	label: string;
-	labelPrefixApply?: boolean;
 	tooltip?: string;
 	inactive?: boolean;
 	tooltipTriggerAttrs?: any;
@@ -20,7 +19,7 @@ const value = defineModel<number>();
 		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<input :id="`xtrbln-${idSuffix}`" v-model="value" type="checkbox" :true-value="1" :false-value="0" />
 		<label :for="`xtrbln-${idSuffix}`">
-			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}
+			{{ label }}
 			<InfoTooltip id-prefix="xtrbln" :id-suffix :tooltip />
 		</label>
 		<slot />

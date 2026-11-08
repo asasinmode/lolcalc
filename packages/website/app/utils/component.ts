@@ -81,6 +81,8 @@ export function numberExtra<T extends IGameAbilityId>(
 
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId) : props.tooltipTriggerAttrs;
 
+			const computedLabel = computeLabel(label, abilityId);
+
 			return () =>
 				h(
 					CalculatorExtraNumber,
@@ -88,7 +90,7 @@ export function numberExtra<T extends IGameAbilityId>(
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 						imgSrc: toValue(imgSrc),
-						label,
+						label: computedLabel,
 						min,
 						max: toValue(localMax),
 						step: toValue(localStep),
@@ -174,6 +176,8 @@ export function progressExtra<T extends IGameAbilityId>(
 
 			const isInactive = computed(() => inactive?.(props.damageSource) || (!isEffect && effectControlsProps && !effectControlModel?.value ? true : undefined));
 
+			const computedLabel = computeLabel(label, abilityId);
+
 			return () =>
 				h(
 					CalculatorExtraProgress,
@@ -181,7 +185,7 @@ export function progressExtra<T extends IGameAbilityId>(
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 						imgSrc: toValue(imgSrc),
-						label,
+						label: computedLabel,
 						max,
 						deriveValue,
 						derivedSymbolSuffix,
@@ -246,6 +250,12 @@ export function booleanExtra<T extends IGameAbilityId>(
 
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
 
+			let computedLabel =
+				abilityId.type === AbilityType.champion ? `[${abilityId.abilityKey === 'passive' ? 'P' : abilityId.abilityKey.toUpperCase()}]${labelPrefixApply ? ' apply' : ''} ${label}` : `${labelPrefixApply ? 'apply ' : ''}${label}`;
+			if (labelAppendOnTarget) {
+				computedLabel = `${label} on target`;
+			}
+
 			return () =>
 				h(
 					CalculatorExtraBoolean,
@@ -253,10 +263,9 @@ export function booleanExtra<T extends IGameAbilityId>(
 						modelValue: computedValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 						imgSrc: toValue(imgSrc),
-						labelPrefixApply,
 						tooltip,
 						inactive: isInactive && isInactive.value,
-						label: labelAppendOnTarget ? `${label} on target` : label,
+						label: computedLabel,
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 					},
@@ -301,6 +310,8 @@ export function enumExtra<T extends IGameAbilityId>(
 
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
 
+			const computedLabel = computeLabel(label, abilityId);
+
 			return () =>
 				h(
 					CalculatorExtraEnum,
@@ -308,7 +319,7 @@ export function enumExtra<T extends IGameAbilityId>(
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
 						imgSrc: toValue(imgSrc),
-						label,
+						label: computedLabel,
 						options: toValue(options),
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
@@ -411,4 +422,8 @@ type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 
 export function ExtraLoading() {
 	return h('article', { class: 'loading', 'aria-busy': 'true' }, 'loading...');
+}
+
+function computeLabel(label: string, abilityId: IGameAbilityId) {
+	return abilityId.type === AbilityType.champion ? `[${abilityId.abilityKey === 'passive' ? 'P' : abilityId.abilityKey.toUpperCase()}] ${label}` : label;
 }
