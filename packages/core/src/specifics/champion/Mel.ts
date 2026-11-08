@@ -19,26 +19,26 @@ export default {
 				},
 			},
 			/* minion mod is from R */
-			uninteresting: ['MinionModTooltip' as any, 'PassiveBonusMissiles', 'MaxPassiveBonusMissiles', 'OverwhelmDuration'],
+			uninteresting: ['FlatMinionMod' as any, 'PassiveBonusMissiles', 'MaxPassiveBonusMissiles', 'OverwhelmDuration'],
 		}),
 	},
 	q: {
 		variables: defineChampionVariables<'Mel', typeof IMel, 'q'>()({
 			meta: {
-				InitialExplosionDamage: {
+				InitialDamage: {
 					type: VariableType.magic,
 				},
-				TotalExplosionDamage: {
+				SubsequentDamage: {
 					type: VariableType.magic,
 				},
-				AllDamageHit: {
+				TotalDamageTT: {
 					type: VariableType.magic,
 					scalesWithStatIcon: undefined,
 					/* on patch 26.19 different from what the game shows `= (60 const + (0.55 %i:ap%) + 29.5 const)` but I think it's better */
 					extendedEquals(variableValueParams) {
-						const projectiles = championAbilityVariableValue('ExplosionCount', variableValueParams);
-						const base = championAbilityVariableValue('InitialExplosionDamage', variableValueParams);
-						const followup = championAbilityVariableValue('TotalExplosionDamage', variableValueParams);
+						const projectiles = championAbilityVariableValue('Count', variableValueParams);
+						const base = championAbilityVariableValue('InitialDamage', variableValueParams);
+						const followup = championAbilityVariableValue('SubsequentDamage', variableValueParams);
 						const projectilesCount = (projectiles.value as number) - 1;
 
 						const constPart = (base.calculatesFrom?.[0]?.value as number) + (followup.calculatesFrom?.[0]?.value as number) * projectilesCount;
@@ -48,7 +48,63 @@ export default {
 					},
 				},
 			},
-			uninteresting: ['ExplosionCount'],
+			uninteresting: [],
+		}),
+	},
+	w: {
+		variables: defineChampionVariables<'Mel', typeof IMel, 'w'>()({
+			meta: {
+				InitialDamage: {
+					type: VariableType.magic,
+				},
+				SubsequentDamage: {
+					type: VariableType.magic,
+				},
+				TotalShield: {
+					type: VariableType.shield,
+				},
+			},
+			uninteresting: ['BuffDuration', 'MaxRetaliation'],
+		}),
+	},
+	e: {
+		variables: defineChampionVariables<'Mel', typeof IMel, 'e'>()({
+			meta: {
+				RootDurationMin: {
+					type: VariableType.affectedByTenacity,
+				},
+				RootDurationMax: {
+					type: VariableType.affectedByTenacity,
+				},
+				Damage: {
+					type: VariableType.magic,
+				},
+				Slow: {
+					type: VariableType.affectedBySlowResist,
+				},
+				AreaDamagePerSecond: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['MinionModTooltip'],
+		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Mel', typeof IMel, 'r'>()({
+			meta: {
+				PassiveFlatDamage: {
+					type: VariableType.magic,
+				},
+				PassiveStackDamage: {
+					type: VariableType.magic,
+				},
+				UltFlatDamage: {
+					type: VariableType.magic,
+				},
+				UltStackDamage: {
+					type: VariableType.magic,
+				},
+			},
 		}),
 	},
 } satisfies IChampionSpecific<'Mel'>;
