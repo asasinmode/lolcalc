@@ -1786,7 +1786,6 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		anyUnknownVariables ||= unknownStringtableVariables.size || unknownVariables.length;
 
 		let values = tooltipVariablesAV.get(name) ?? tooltipExtendedVariablesAV.get(name);
-
 		if (!values) {
 			const resolvedVar = championAbilityVariableValue(
 				levelVar.name,
@@ -1804,15 +1803,17 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 				values = resolvedVar.allValues as string[];
 			} else if (resolvedVar.allValues?.every((value) => typeof value === 'number')) {
 				values = resolvedVar.allValues as number[];
-				if (!resolvedVar.multiplier && levelVar.multiplier) {
+				if (levelVar.multiplier && !resolvedVar.multiplier) {
 					values = values.map((value) => (value as number) * levelVar.multiplier!);
 				}
-				if (!resolvedVar.isPercentage && levelVar.isPercentage) {
+				if (levelVar.isPercentage && !resolvedVar.isPercentage) {
 					values = values.map((value) => `${value}%`);
 				}
 			} else if (resolvedVar.allValues) {
 				console.warn("[DamageSource computeAbilityDescription] resolved level variable but some of its values aren't numbers", levelVar, resolvedVar);
 			}
+		} else if (levelVar.isPercentage && values.some((value) => typeof value !== 'string')) {
+			values = values.map((value) => `${value}%`);
 		}
 
 		return {
