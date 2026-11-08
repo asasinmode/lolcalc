@@ -42,6 +42,7 @@ useSeoMeta({
 	description,
 	ogTitle: title,
 	ogDescription: description,
+	ogSiteName: 'lolcalc',
 	ogUrl: 'https://asasinmode.github.io/lolcalc',
 	ogType: 'website',
 	ogImage: 'https://asasinmode.github.io/lolcalc/og_image.jpg',
