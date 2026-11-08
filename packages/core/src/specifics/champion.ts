@@ -178,7 +178,7 @@ import Zoe from './champion/Zoe.ts';
 import Zyra from './champion/Zyra.ts';
 import type { IEffectControlsProps, ISpecificVariables, IAbilityImgIndexGetter } from './index';
 
-export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu', 'Lucian', 'Vi', 'Ekko', 'Jinx', 'Caitlyn', 'Ambessa', 'Kaisa', 'Heimerdinger', 'Viktor', 'Singed'];
+export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu', 'Lucian', 'Vi', 'Ekko', 'Jinx', 'Caitlyn', 'Ambessa', 'Kaisa', 'Heimerdinger', 'Viktor', 'Singed', 'Warwick'];
 IMPLEMENTED_CHAMPION_IDS.sort((a, b) => CHAMPIONS[a].name.localeCompare(CHAMPIONS[b].name));
 
 /** specific champions' helpers, utils and calculations */
@@ -535,6 +535,7 @@ export interface IChampionInternalDataMap {
 	Vi: { isWASActive: number; applyWPen: number };
 	Viktor: { passiveAbilityUpgradesMask: number };
 	Volibear: { passiveStacks: number };
+	Warwick: { wVariantActive: number; isEActive: number };
 	XinZhao: { isEASActive: number };
 	Zaahen: { passiveStacks: number };
 	Zeri: { rActive: number; rStacks: number };

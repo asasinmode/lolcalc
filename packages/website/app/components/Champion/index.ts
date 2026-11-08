@@ -348,6 +348,17 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	XinZhao: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'XinZhao', 'e', 0), 'isEASActive', 'is active', false),
 	},
+	Warwick: {
+		extras: [
+			enumExtra(
+				GameAbilityId.build(AbilityType.champion, 'Warwick', 'w', 0),
+				'wVariantActive',
+				'[W] apply Blood Hunt',
+				Object.entries(CHAMPION_SPECIFICS.Warwick.w.options).map(([key, value]) => [value, key]),
+			),
+			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Warwick', 'e', 0), 'isEActive', '[E] active', false, undefined, 'TODO not implemented yet'),
+		],
+	},
 	MonkeyKing: {
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.passive.maxStacks),
 	},

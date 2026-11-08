@@ -103,15 +103,6 @@ export const MODIFY_VARIABLE_PRIORITIES = {
 	items: Record<string, number>;
 };
 
-// for getting specific ability's specific, maybe will be useful
-// ? T['id'] extends keyof TChampionSpecifics
-// 	? T['abilityKey'] extends keyof TChampionSpecifics[T['id']]
-// 		? T['abilityVariantIndex'] extends keyof TChampionSpecifics[T['id']][T['abilityKey']]
-// 			? TChampionSpecifics[T['id']][T['abilityKey']][T['abilityVariantIndex']]
-// 			: never
-// 		: never
-// 	: never
-
 export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampionAbilityId
 	? T['id'] extends keyof TChampionSpecifics
 		? TChampionSpecifics[T['id']]
@@ -361,3 +352,7 @@ export interface IExtraInactiveFn {
 }
 
 export type IAbilityImgIndexGetter<V, Id extends IChampionId | undefined = undefined> = [getValue: (self: DamageSource<Id>) => V, getIndex: (value: V) => number];
+
+export function applyModifyVarFns(value: number, damageSource: DamageSource, type: VariableType, modifyMeta: IVariableModifyMeta = {}): number {
+	return damageSource.modifyVariableFunctions.value[type]?.reduce((acc, modify) => modify(acc, modifyMeta) as number, value) ?? value;
+}

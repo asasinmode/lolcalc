@@ -71,13 +71,13 @@ export default {
 			calculate(self, target) {
 				let TotalDamage = Number.NaN;
 
-				const wParams: IGameVariableValueParameters['championAbility'] = {
+				const eParams: IGameVariableValueParameters['championAbility'] = {
 					abilityKey: 'e',
 					abilityVariant: self.champion.value!.abilities.e.variants[0]!,
 					damageSource: self,
 				};
-				const baseDamage = championAbilityVariableValue('BaseDamage', wParams);
-				const damagePercent = championAbilityVariableValue('MaxHPDamage', wParams);
+				const baseDamage = championAbilityVariableValue('BaseDamage', eParams);
+				const damagePercent = championAbilityVariableValue('MaxHPDamage', eParams);
 				if (typeof baseDamage.value === 'number' && typeof damagePercent.value === 'number') {
 					TotalDamage = baseDamage.value + damagePercent.value * 0.01 * (target?.stats.value.total.hp ?? 0);
 				} else {
