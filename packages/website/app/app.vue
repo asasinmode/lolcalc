@@ -34,9 +34,22 @@ useHead({
 	],
 	meta: [{ name: 'robots', content: 'noindex, nofollow' }],
 });
+
+const title = 'lolcalc - Damage Calculator for League of Legends';
+const description = "Accurate champion stats calculation, damage and build comparison and game data browsing. View any champion's or item's stats and description. Check the difference between and optimize builds.";
 useSeoMeta({
-	title: 'lolcalc - Damage Calculator for League of Legends',
-	description: 'Accurate champion stats calculation, damage and build comparison and more',
+	title,
+	description,
+	ogTitle: title,
+	ogDescription: description,
+	ogUrl: 'https://asasinmode.github.io/lolcalc',
+	ogType: 'website',
+	ogImage: 'https://asasinmode.github.io/lolcalc/og_image.jpg',
+	ogImageWidth: 1200,
+	ogImageHeight: 630,
+	ogImageType: 'image/jpeg',
+	ogImageAlt:
+		'a thumbnail with heading: Build comparison, game data, All in one place. Paragraph below: Accurate champion damage for any combination of items, runes and effects; Check builds and theorycraft with ease. Link to the website "lolcalc.app". 3 images on the right side of the website\'s UI - 2 of configuration scoreboard and 1 of the results table',
 });
 
 _setupGlobalKeyModifiers();
