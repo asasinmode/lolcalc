@@ -2798,7 +2798,7 @@ defineExpose({ el });
 			}
 
 			> label {
-				--at-apply: 'text-neutral-200';
+				--at-apply: 'text-neutral-200 leading-[0.9] pb-[0.2em] -mb-[0.2em]';
 			}
 
 			> label + button,
@@ -2822,6 +2822,10 @@ defineExpose({ el });
 
 			> label:has(+ .effect-ctl) {
 				--at-apply: 'me-[calc(2*var(--ctl-btn-size))]';
+			}
+
+			> label:has(+ .effect-ctl.no-apply) {
+				--at-apply: 'me-[--ctl-btn-size]';
 			}
 
 			&[data-inactive] {

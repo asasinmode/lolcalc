@@ -45,7 +45,7 @@ const value = defineModel<number>();
 		--at-apply: 'grid grid-cols-[max-content_minmax(0,1fr)_auto_min-content] grid-rows-2 relative';
 
 		> label {
-			--at-apply: 'col-span-3 self-center of-hidden leading-none pb-[0.2em] -mb-[0.2em]';
+			--at-apply: 'col-span-3 self-center of-hidden';
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 2;

@@ -34,16 +34,18 @@ const value = defineModel<number>();
 		> input {
 			--at-apply: 'mt-px';
 		}
-
-		> label {
-			--at-apply: 'ps-[0.5ch] leading-[1.1]';
-		}
 	}
 }
 
 @layer overrides {
 	:is(.calc-extra-boolean, .calc-extra-progress)[data-inactive='true'] > label {
 		--at-apply: 'text-neutral-400';
+	}
+
+	.calc-extra-boolean {
+		> label {
+			--at-apply: 'ps-[0.5ch] pbe-0 mbe-0 leading-none';
+		}
 	}
 }
 </style>
