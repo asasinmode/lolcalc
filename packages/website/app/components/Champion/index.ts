@@ -275,7 +275,10 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Singed: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.passive.maxStacks),
+		extras: [
+			numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.passive.maxStacks),
+			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'r', 0), 'isRActive', 'Insanity Potion'),
+		],
 	},
 	Sivir: {
 		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Sivir', 'passive', 0), 'passiveMSProgress', 'Fleet of Foot move speed', CHAMPION_SPECIFICS.Sivir.passive.bonusMS, { derivedSymbolSuffix: '' }),

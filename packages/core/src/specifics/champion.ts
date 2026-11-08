@@ -178,7 +178,7 @@ import Zoe from './champion/Zoe.ts';
 import Zyra from './champion/Zyra.ts';
 import type { IEffectControlsProps, ISpecificVariables, IAbilityImgIndexGetter } from './index';
 
-export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu', 'Lucian', 'Vi', 'Ekko', 'Jinx', 'Caitlyn', 'Ambessa', 'Kaisa', 'Heimerdinger', 'Viktor'];
+export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu', 'Lucian', 'Vi', 'Ekko', 'Jinx', 'Caitlyn', 'Ambessa', 'Kaisa', 'Heimerdinger', 'Viktor', 'Singed'];
 IMPLEMENTED_CHAMPION_IDS.sort((a, b) => CHAMPIONS[a].name.localeCompare(CHAMPIONS[b].name));
 
 /** specific champions' helpers, utils and calculations */
@@ -514,7 +514,7 @@ export interface IChampionInternalDataMap {
 	Seraphine: { passiveStacks: number };
 	Shyvana: { passiveStacks: number };
 	Sion: { passiveMSProgress: number; wStacks: number };
-	Singed: { passiveStacks: number };
+	Singed: { passiveStacks: number; isRActive: number };
 	Sivir: { passiveMSProgress: number };
 	Smolder: { passiveStacks: number };
 	Sona: { passiveStacks: number };
