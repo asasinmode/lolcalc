@@ -495,7 +495,7 @@ export interface IChampionInternalDataMap {
 		 * passive MS needs total AP. Snapshot it on extra component `calculate/recalculate` press, then use it in calculation
 		 * basically lets you do something like: apply passive -> you gain stats -> apply passive again with the stats you have from the previous application
 		 */
-		passiveMSTotalAp?: number;
+		passiveMSTotalAP?: number;
 	};
 	MonkeyKing: { passiveStacks: number };
 	Nasus: { wProgress: number };

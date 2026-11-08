@@ -10,36 +10,33 @@ const emit = defineEmits<{
 const value = defineModel<boolean | number>({ required: false });
 const clicks = ref(0);
 
-function refresh() {
-	clicks.value += 1;
-	emit('refresh');
-}
-
 let popoverEl: HTMLElement | undefined;
 
-const { bind: bindTooltipAttrs } = useHoverTooltip({
+const { bind: bindTooltipAttrs, show: showPopover } = useHoverTooltip({
 	el: () => popoverEl,
 	beforeShow(_, trigger) {
-		const popover = trigger.lastElementChild as HTMLElement | null;
-		if (popover) {
-			popoverEl = popover;
-			return true;
-		}
+		popoverEl = trigger.closest('.effect-ctl')?.lastElementChild as HTMLElement | undefined;
 	},
 	onHide() {
 		popoverEl = undefined;
 	},
 });
+
+function refresh(event: MouseEvent) {
+	clicks.value += 1;
+	emit('refresh');
+	showPopover(event);
+}
 </script>
 
 <template>
-	<div class="effect-ctl" :class="{ 'no-apply': noApply }" v-bind="bindTooltipAttrs()">
-		<button class="pretend-ui-btn" @click="refresh">
+	<div class="effect-ctl" :class="{ 'no-apply': noApply }">
+		<button class="pretend-ui-btn" @click="refresh" v-bind="bindTooltipAttrs()">
 			<span>refresh</span>
 			<Icon class="i-ph:arrow-clockwise-bold" :style="`--clicks: ${clicks}`" />
 		</button>
 		<slot>
-			<label v-if="!noApply" :for="`effect-ctl-tgl-${idSuffix}`" class="pretend-ui-btn">
+			<label v-if="!noApply" :for="`effect-ctl-tgl-${idSuffix}`" class="pretend-ui-btn" @click="showPopover" v-bind="bindTooltipAttrs()">
 				<input :id="`effect-ctl-tgl-${idSuffix}`" v-model="value" type="checkbox" />
 				<span>apply</span>
 			</label>
@@ -90,6 +87,10 @@ const { bind: bindTooltipAttrs } = useHoverTooltip({
 
 			> * {
 				--at-apply: 'sr-only';
+			}
+
+			&:has(> input:focus-visible) {
+				--at-apply: 'outline-auto';
 			}
 		}
 

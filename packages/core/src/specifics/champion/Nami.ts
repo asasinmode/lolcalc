@@ -29,7 +29,7 @@ export default {
 	setupData(self) {
 		return {
 			passiveMSProgress: clamp(0, Math.round(self.internalData.value.passiveMSProgress ?? 0), 100),
-			passiveMSTotalAp: self.internalData.value.passiveMSTotalAp !== undefined ? Math.max(0, self.internalData.value.passiveMSTotalAp) : undefined,
+			passiveMSTotalAP: self.internalData.value.passiveMSTotalAP !== undefined ? Math.max(0, self.internalData.value.passiveMSTotalAP) : undefined,
 		};
 	},
 	passive: {
@@ -37,25 +37,25 @@ export default {
 			model: (self) =>
 				computed({
 					get() {
-						return self.internalData.value.passiveMSTotalAp !== undefined;
+						return self.internalData.value.passiveMSTotalAP !== undefined;
 					},
 					set(value) {
 						if (value) {
-							self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
+							self.internalData.value.passiveMSTotalAP = self.stats.value.total.abilityPower;
 							const effect = self.getEffect(EffectObjectName.namiPSurgingTides)?.[0];
 							if (effect) {
 								effect.data.value[0] = 0;
 							}
 						} else {
-							self.internalData.value.passiveMSTotalAp = undefined;
+							self.internalData.value.passiveMSTotalAP = undefined;
 						}
 					},
 				}),
 			refresh(self) {
-				self.internalData.value.passiveMSTotalAp = self.stats.value.total.abilityPower;
+				self.internalData.value.passiveMSTotalAP = self.stats.value.total.abilityPower;
 			},
 			currentlySnapshot(_effectData, self) {
-				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(self.internalData.value.passiveMSTotalAp ?? 0, 3)}</scaleap>`;
+				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(self.internalData.value.passiveMSTotalAP ?? 0, 3)}</scaleap>`;
 			},
 		},
 		derivedMS: ((progress, self) => {
@@ -84,12 +84,12 @@ export default {
 	calculateHooks: {
 		onChampionPassive: {
 			handler(self, { championPassiveStats }) {
-				const { passiveMSProgress, passiveMSTotalAp } = self.internalData.value;
-				if (passiveMSTotalAp === undefined) {
+				const { passiveMSProgress, passiveMSTotalAP } = self.internalData.value;
+				if (passiveMSTotalAP === undefined) {
 					return;
 				}
 
-				const bonusMS = passiveCalculateMS(self.champion.value!, passiveMSProgress, passiveMSTotalAp);
+				const bonusMS = passiveCalculateMS(self.champion.value!, passiveMSProgress, passiveMSTotalAP);
 
 				if (!Number.isNaN(bonusMS)) {
 					championPassiveStats.moveSpeed = bonusMS;
