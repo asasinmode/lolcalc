@@ -55,7 +55,7 @@ export default {
 				self.internalData.value.passiveMSTotalAP = self.stats.value.total.abilityPower;
 			},
 			currentlySnapshot(_effectData, self) {
-				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${roundNumber(self.internalData.value.passiveMSTotalAP ?? 0, 3)}</scaleap>`;
+				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${self.stats.value.championPassive.moveSpeed !== undefined ? roundNumber(self.internalData.value.passiveMSTotalAP ?? 0, 3) : self.stats.value.total.abilityPower}</scaleap>`;
 			},
 		},
 		derivedMS: ((progress, self) => {
