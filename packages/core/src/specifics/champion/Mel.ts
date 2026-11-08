@@ -1,10 +1,20 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { calculatesFromPartExtendedEquals, championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
+import { STAT_ICON } from '@lolcalc/data';
 import type IMel from '@lolcalc/data/files/champion/Mel.json';
 import { VariableType } from '@lolcalc/shared';
+import { roundNumber } from '@lolcalc/shared/utils.ts';
+import { computed } from 'vue';
 import type { IChampionSpecific } from '../champion.ts';
+import type { IEffectControlsProps } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
+	setupData(self) {
+		return {
+			wMSTotalAP: self.internalData.value.wMSTotalAP !== undefined ? Math.max(0, self.internalData.value.wMSTotalAP) : undefined,
+		};
+	},
 	passive: {
 		variables: defineChampionVariables<'Mel', typeof IMel, 'passive'>()({
 			meta: {
@@ -52,6 +62,27 @@ export default {
 		}),
 	},
 	w: {
+		extraControls: {
+			model: (self) =>
+				computed({
+					get() {
+						return self.internalData.value.wMSTotalAP === undefined ? 0 : 1;
+					},
+					set(value) {
+						if (value) {
+							self.internalData.value.wMSTotalAP = self.stats.value.total.abilityPower;
+						} else {
+							self.internalData.value.wMSTotalAP = undefined;
+						}
+					},
+				}),
+			refresh(self) {
+				self.internalData.value.wMSTotalAP = self.stats.value.total.abilityPower;
+			},
+			currentlySnapshot(_effectData, self) {
+				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${self.stats.value.championPassive.moveSpeed === undefined ? self.stats.value.total.abilityPower : roundNumber(self.internalData.value.wMSTotalAP ?? 0, 3)}</scaleap>`;
+			},
+		} satisfies IEffectControlsProps<[], 'Mel'>,
 		variables: defineChampionVariables<'Mel', typeof IMel, 'w'>()({
 			meta: {
 				InitialDamage: {
@@ -106,5 +137,26 @@ export default {
 				},
 			},
 		}),
+	},
+	calculateHooks: {
+		onChampionPassive: {
+			handler(self, _stats, { calculatedVariables }) {
+				const { wMSTotalAP } = self.internalData.value;
+				if (wMSTotalAP === undefined) return;
+
+				const ms = championAbilityVariableValue('TotalMS', {
+					abilityKey: 'w',
+					abilityVariant: self.champion.value!.abilities.w.variants[0]!,
+					allAbilitiesVariants: self.allAbilityVariants.value,
+					abilityLevel: self.abilityLevels.value.w,
+					damageSource: { level: { value: self.level.value }, stats: { value: { total: { abilityPower: wMSTotalAP } } } } as DamageSource,
+				});
+				if (typeof ms.value === 'number') {
+					calculatedVariables.totalBonusPercentMoveSpeed += ms.value;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS mel] failed to calculate W ms', ms);
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Mel'>;

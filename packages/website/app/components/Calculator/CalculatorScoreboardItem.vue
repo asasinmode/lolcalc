@@ -2821,11 +2821,11 @@ defineExpose({ el });
 			}
 
 			> label:has(+ .effect-ctl) {
-				--at-apply: 'me-[calc(2*var(--ctl-btn-size))]';
+				--at-apply: 'me-[calc(2*var(--ctl-btn-size))] pe-[0.25em]';
 			}
 
 			> label:has(+ .effect-ctl.no-apply) {
-				--at-apply: 'me-[--ctl-btn-size]';
+				--at-apply: 'me-[--ctl-btn-size] pe-[0.25em]';
 			}
 
 			&[data-inactive] {

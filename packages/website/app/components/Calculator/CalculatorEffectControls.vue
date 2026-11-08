@@ -44,7 +44,7 @@ function refresh(event: MouseEvent) {
 		<div popover="hint" class="hover-tooltip">
 			<p class="snapshot game-description" v-html="snapshotText" />
 			<p>
-				applying this effects uses the stats at the moment of application<br />
+				applying this effect uses the stats at the moment of application<br />
 				to recalculate the effect (like applying it again with the stats gained from it), use the
 				<button tabindex="-1" class="pretend-ui-btn" @click="refresh" :style="`--clicks: ${clicks}`"><span>refresh</span><Icon class="i-ph:arrow-clockwise-bold" /></button>
 				button

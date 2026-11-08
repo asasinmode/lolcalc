@@ -189,6 +189,11 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Malphite: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Malphite', 'passive', 0), 'isPassiveActive', 'Granite Shield (used for W calc)'),
 	},
+	Mel: {
+		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Mel', 'w', 0), 'wMSTotalAP', 'Rebuttal move speed', true, undefined, undefined, {
+			effectControlsProps: CHAMPION_SPECIFICS.Mel.w.extraControls,
+		}),
+	},
 	Milio: {
 		extras: ChampionExtrasMilio,
 	},
