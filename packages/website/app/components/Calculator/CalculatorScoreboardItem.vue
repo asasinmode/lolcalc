@@ -166,6 +166,7 @@ function undoRemove() {
 	undoRemoveButton.value!.style.display = 'none';
 	(undoRemoveButton.value!.nextElementSibling as HTMLElement).style.display = 'none';
 	(undoRemoveButton.value!.nextElementSibling as HTMLButtonElement)?.focus();
+	manipulateValue.value = 'undefined';
 }
 
 function removeAndFocusNext() {
