@@ -204,6 +204,9 @@ let currentTooltipAnchor: HTMLElement | undefined;
 const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 	el: runeDescriptionTooltip,
 	onShow(rune, event) {
+		if (currentTooltipAnchor) {
+			currentTooltipAnchor.style = '';
+		}
 		currentTooltipAnchor = event.currentTarget as HTMLElement;
 		currentTooltipAnchor.style = 'anchor-name: --rune-dialog-tooltip-anchor';
 		hoveredRune.value =
@@ -215,11 +218,6 @@ const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 						rune: rune.rune,
 					}
 				: { title: rune.title, description: rune.tooltip, rune: rune.rune };
-	},
-	onHide() {
-		if (currentTooltipAnchor) {
-			currentTooltipAnchor.style = '';
-		}
 	},
 });
 
