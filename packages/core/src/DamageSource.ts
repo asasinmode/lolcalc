@@ -1804,16 +1804,26 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 			} else if (resolvedVar.allValues?.every((value) => typeof value === 'number')) {
 				values = resolvedVar.allValues as number[];
 				if (levelVar.multiplier && !resolvedVar.multiplier) {
-					values = values.map((value) => (value as number) * levelVar.multiplier!);
+					values = values.map((value) => roundNumber((value as number) * levelVar.multiplier!));
 				}
 				if (levelVar.isPercentage && !resolvedVar.isPercentage) {
-					values = values.map((value) => `${value}%`);
+					values = values.map((value) => {
+						if (typeof value === 'number') {
+							value = roundNumber(value);
+						}
+						return `${value}%`;
+					});
 				}
 			} else if (resolvedVar.allValues) {
 				console.warn("[DamageSource computeAbilityDescription] resolved level variable but some of its values aren't numbers", levelVar, resolvedVar);
 			}
 		} else if (levelVar.isPercentage && values.some((value) => typeof value !== 'string')) {
-			values = values.map((value) => `${value}%`);
+			values = values.map((value) => {
+				if (typeof value === 'number') {
+					value = roundNumber(value);
+				}
+				return `${value}%`;
+			});
 		}
 
 		return {
