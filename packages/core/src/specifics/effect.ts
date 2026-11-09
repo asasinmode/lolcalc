@@ -1610,7 +1610,7 @@ export function applyEffectsFromTo(source: DamageSource, target: DamageSource): 
 			champion = source.champion.value;
 		}
 
-		effectData && target.addEffect(effectAbilityId, effectData as any, true, source, champion, true);
+		effectData && (effectSpecific.isActive ?? defaultEffectIsActive)(effectData) && target.addEffect(effectAbilityId, effectData as any, true, source, champion, true);
 	}
 	return target;
 }
