@@ -391,6 +391,7 @@ export interface IStatsCalculationMiscDebug {
 	blackCleaverCarveShred?: number;
 	bloodlettersCurseCarveShred?: number;
 	viWArmorReductionPercent?: number;
+	JayceRResistsReductionPercent?: number;
 }
 
 /** variables of effects applied onto the damage target */
@@ -444,6 +445,10 @@ export interface IStatsCalculationEffectVars extends Pick<
 	bloodlettersMRReduced?: number;
 	/** armor reduced by Vi's W effect */
 	viWArmorReduced?: number;
+	/** armor reduced by Jayce's R effect */
+	JayceRShreddedArmor?: number;
+	/** mr reduced by Jayce's R effect */
+	JayceRShreddedMR?: number;
 }
 
 export interface IDamageOutputVars {
@@ -835,6 +840,7 @@ export const EffectObjectName = {
 	ornnPLivingForge: 'lolcalcOrnnPassive',
 	rellPBreakMold: 'RellP_Debuff',
 	viWDentingBlows: 'ViWMarker',
+	jayceRResistShred: 'JaycePassiveShred',
 	namiPSurgingTides: 'NamiPassiveTT',
 	nasusWWither: 'NasusW',
 	lissandraPIcebornSubjugation: 'lolcalcLissandraPassive',

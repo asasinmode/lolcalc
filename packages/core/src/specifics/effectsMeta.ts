@@ -178,6 +178,10 @@ export const EFFECTS_META: Record<
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0),
 		label: 'Denting Blows',
 	},
+	[EffectObjectName.jayceRResistShred]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Jayce', 'r', 0),
+		label: 'Mercury Cannon',
+	},
 	[EffectObjectName.namiPSurgingTides]: {
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0),
 		label: 'Surging Tides',

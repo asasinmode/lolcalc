@@ -1141,6 +1141,66 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
+	[EffectObjectName.jayceRResistShred]: defineEffectSpecific<[mercuryCannon: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		setupDataFromInternalData(damageSource) {
+			return [(damageSource.internalData.value as IInternalDataOf<'Jayce'>).applyRShred];
+		},
+		variables: defineVariables({
+			known: {
+				ShreddedArmor: [],
+				ShreddedMR: [],
+			},
+			calculate(self) {
+				return {
+					ShreddedArmor: {
+						value: self.stats.value.effectVars.JayceRShreddedArmor ?? 0,
+					},
+					ShreddedMR: {
+						value: self.stats.value.effectVars.JayceRShreddedMR ?? 0,
+					},
+				};
+			},
+			meta: {
+				ShreddedArmor: {
+					isCustom: true,
+				},
+				ShreddedMR: {
+					isCustom: true,
+				},
+			},
+		}),
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { miscDebug, debuffs }) {
+					const effect = self.getEffect(EffectObjectName.jayceRResistShred)?.[0];
+					if (effect?.champion.value?.id === 'Jayce') {
+						miscDebug.JayceRResistsReductionPercent = CHAMPION_SPECIFICS.Jayce.r.calculateResistsShred(effect.champion.value as IChampion, effect.source.value?.level.value ?? 1);
+						if (!Number.isNaN(miscDebug.JayceRResistsReductionPercent)) {
+							debuffs.percentageArmorShred = addMultiplicative(debuffs.percentageArmorShred, miscDebug.JayceRResistsReductionPercent);
+							debuffs.percentageMRShred = addMultiplicative(debuffs.percentageMRShred, miscDebug.JayceRResistsReductionPercent);
+							miscDebug.totalAdditiveArmorShred += miscDebug.JayceRResistsReductionPercent;
+							miscDebug.totalAdditiveMRShred += miscDebug.JayceRResistsReductionPercent;
+						}
+					}
+				},
+			},
+			postTotal: {
+				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
+					if (Number.isNaN(miscDebug.JayceRResistsReductionPercent)) {
+						effectVars.JayceRShreddedArmor = Number.NaN;
+						effectVars.JayceRShreddedMR = Number.NaN;
+					} else {
+						effectVars.JayceRShreddedArmor = (debuffs.shreddedArmor * miscDebug.JayceRResistsReductionPercent!) / (miscDebug.totalAdditiveArmorShred || 1);
+						effectVars.JayceRShreddedMR = (debuffs.shreddedMR * miscDebug.JayceRResistsReductionPercent!) / (miscDebug.totalAdditiveMRShred || 1);
+					}
+				},
+				priority: HOOK_PRIORITIES.postTotal.recordKeeping,
+			},
+		},
+	}),
 	[EffectObjectName.namiPSurgingTides]: defineEffectSpecific<[surgingTides: number, totalAP?: number]>({
 		setupData(data) {
 			return [clamp(0, data?.[0] ?? 0, 100), Math.max(0, data?.[1] ?? 0)];
@@ -1419,6 +1479,9 @@ export const CUSTOM_EFFECTS: Partial<
 	},
 	[EffectObjectName.viWDentingBlows]: {
 		championSpellObjectName: 'ViWMarker',
+	},
+	[EffectObjectName.jayceRResistShred]: {
+		championSpellObjectName: 'JaycePassiveShred',
 	},
 	[EffectObjectName.apheliosGravitumSlow]: {
 		championSpellObjectName: 'ApheliosGravitumDebuff',

@@ -111,6 +111,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: [
 			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after form swap)', false),
 			progressExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'e', 1), 'eMSProgress', 'Acceleration Gate MS', CHAMPION_SPECIFICS.Jayce.e.derivedMS),
+			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'r', 0), 'applyRShred', 'resists shred', true, true),
 		],
 	},
 	Jhin: {

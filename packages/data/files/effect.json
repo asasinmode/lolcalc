@@ -263,6 +263,11 @@
 			"objectName": "ViWMarker",
 			"description": "Vi's punches dent her target's Armor."
 		},
+		"JaycePassiveShred": {
+			"dataKey": "JaycePassiveShred",
+			"objectName": "JaycePassiveShred",
+			"description": "This unit has reduced Armor and Magic Resist."
+		},
 		"NamiPassiveTT": {
 			"dataKey": "NamiPassiveTT",
 			"objectName": "NamiPassivett",

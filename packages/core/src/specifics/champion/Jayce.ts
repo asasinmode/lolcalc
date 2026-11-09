@@ -30,6 +30,7 @@ export default {
 		return {
 			isPassiveMSActive: clamp(0, Math.round(self.internalData.value.isPassiveMSActive ?? 0), 1),
 			eMSProgress: clamp(0, Math.round(self.internalData.value.eMSProgress ?? 0), 100),
+			applyRShred: clamp(0, Math.round(self.internalData.value.applyRShred ?? 0), 1),
 		};
 	},
 	passive: {
@@ -122,14 +123,32 @@ export default {
 		}),
 	},
 	r: {
+		calculateResistsShred(champion: IChampion, level: number): number {
+			const rv = championAbilityVariableValue('RangedFormShred', { abilityKey: 'r', abilityVariant: champion.abilities.r.variants[0]!, damageSource: { level: { value: level } } as DamageSource });
+
+			if (typeof rv.value === 'number') {
+				return rv.value;
+			} else {
+				console.warn('[CHAMPION_SPECIFICS jayce] failed to calculate R resists reduce percent', rv);
+				return Number.NaN;
+			}
+		},
 		variables: defineChampionVariables<'Jayce', typeof IJayce, 'r'>()({
 			known: {
 				BonusResists: [],
+				ShreddedMR: [],
+				ShreddedArmor: [],
 			},
-			calculate(self) {
+			calculate(self, target) {
 				return {
 					BonusResists: {
 						value: self.stats.value.championPassive.armor ?? 0,
+					},
+					ShreddedMR: {
+						value: (self.internalData.value.applyRShred && target?.stats.value.effectVars.JayceRShreddedMR) ?? 0,
+					},
+					ShreddedArmor: {
+						value: (self.internalData.value.applyRShred && target?.stats.value.effectVars.JayceRShreddedArmor) ?? 0,
 					},
 				};
 			},
@@ -140,6 +159,12 @@ export default {
 				BonusResists: {
 					isCustom: true,
 					additionalInfo: "This is the actual resists value that Jayce's R grants. The displayed <var>Resists</var> ignores some AD when actually calculating the value",
+				},
+				ShreddedMR: {
+					isCustom: true,
+				},
+				ShreddedArmor: {
+					isCustom: true,
 				},
 			},
 			uninteresting: [],
