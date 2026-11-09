@@ -1153,8 +1153,8 @@ export const EFFECT_SPECIFICS = {
 			return self?.stats.value.effectVars.namiPassiveBonusMS ?? 0;
 		},
 		onValueUpdate(value, self) {
-			if (value && (self.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAp !== undefined) {
-				(self.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAp = undefined;
+			if (value && (self.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAP !== undefined) {
+				(self.internalData.value as IInternalDataOf<'Nami'>).passiveMSTotalAP = undefined;
 			}
 		},
 		progressComponentSymbol: '',
@@ -1198,8 +1198,8 @@ export const EFFECT_SPECIFICS = {
 					if (effect?.champion.value?.id === 'Nami') {
 						const [progress, totalAP] = effect.data.value;
 						effectVars.namiPassiveBonusMS = CHAMPION_SPECIFICS.Nami.passive.calculateMS(effect.champion.value as IChampion, progress, totalAP ?? 0);
-						const { passiveMSTotalAp } = self.internalData.value as IInternalDataOf<'Nami'>;
-						if (passiveMSTotalAp === undefined) {
+						const { passiveMSTotalAP } = self.internalData.value as IInternalDataOf<'Nami'>;
+						if (passiveMSTotalAP === undefined) {
 							effectStats.moveSpeed += effectVars.namiPassiveBonusMS;
 						}
 					}
