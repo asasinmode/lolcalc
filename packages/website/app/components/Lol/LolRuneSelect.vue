@@ -207,7 +207,7 @@ const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 		if (currentTooltipAnchor) {
 			currentTooltipAnchor.style = '';
 		}
-		currentTooltipAnchor = event.currentTarget as HTMLElement;
+		currentTooltipAnchor = (event.currentTarget ?? event.target) as HTMLElement;
 		currentTooltipAnchor.style = 'anchor-name: --rune-dialog-tooltip-anchor';
 		hoveredRune.value =
 			'tooltipLong' in rune
