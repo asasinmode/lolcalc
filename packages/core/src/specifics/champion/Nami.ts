@@ -58,9 +58,7 @@ export default {
 				return `calculating using: <scaleap>%i:${STAT_ICON.abilityPower}% ${self.stats.value.championPassive.moveSpeed === undefined ? self.stats.value.total.abilityPower : roundNumber(self.internalData.value.passiveMSTotalAP ?? 0, 3)}</scaleap>`;
 			},
 		},
-		derivedMS: ((progress, self) => {
-			return self?.stats.value.championPassive.moveSpeed ?? passiveCalculateMS(self.champion.value!, progress, self.stats.value.total.abilityPower);
-		}) satisfies IDeriveProgressFn,
+		derivedMS: ((progress, self) => self?.stats.value.championPassive.moveSpeed ?? passiveCalculateMS(self.champion.value!, progress, self.stats.value.total.abilityPower)) satisfies IDeriveProgressFn,
 		calculateMS: passiveCalculateMS,
 		variables: defineChampionVariables<'Nami', typeof INami, 'passive'>()({
 			known: {

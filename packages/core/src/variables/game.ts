@@ -289,7 +289,7 @@ export interface IChampionAbilityVariableParams extends IBaseVariableParams {
 	 */
 	allAbilitiesVariants?: [IChampionAbilityVariant, IChampionAbilityKey, variantIndex: number][];
 	/** used for returning the name of the variable when it's taken from another spell, like `Spell.SRX_DragonSoulBuffMountain:TotalShield` should be `TotalShield` */
-	returnActualName?: boolean;
+	sourceVariableName?: string;
 	/** for when an ability variant tries to resolve an unknown variable by using other, same ability (like q[0], q[1]) variant to avoid rechecking visited variants/infinitely looping if a variable was unknown in all variants */
 	checkedVariablesVariants?: Map<string, IChampionAbilityVariant[]>;
 	/** champion to be used for extracting variables. Normally taken from DamageSource but results table doesn't pass it, instead having just champion  */
@@ -305,7 +305,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		allAbilitiesVariants = params.damageSource?.allAbilityVariants?.value ?? [],
 		damageSource,
 		isRanged,
-		returnActualName,
+		sourceVariableName,
 		champion = params.damageSource?.champion?.value,
 	} = params;
 	let abilityLevel: number | undefined = params.abilityLevel;
@@ -344,7 +344,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 				forceAbilityLevel: abilityKey === 'passive' || otherAbilityVariant[1] === 'passive',
 				allAbilitiesVariants,
 				damageSource,
-				returnActualName: true,
+				sourceVariableName: variable,
 			});
 		} else {
 			console.warn(`[championAbilityVariableValue] variant referenced in ${variable} not found`);
@@ -363,9 +363,14 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		}
 	}
 
-	rv.isUninteresting = dynamicVariables.uninteresting?.includes(variableName!);
+	/** should get `JayceToTheSkies:Damage` from `spell.JayceToTheSkies:Damage`. useful for `dynamicVariables` since some spells (like Jayce Q) will end up having multiple `Damage` variables and this lets specific ones be targeted */
+	const fallbackDynamicVName = sourceVariableName?.slice(sourceVariableName.indexOf('.') + 1);
+
+	rv.isUninteresting = dynamicVariables.uninteresting?.includes(variableName!) ?? (fallbackDynamicVName ? dynamicVariables.uninteresting?.includes(fallbackDynamicVName) : undefined);
 	if (dynamicVariables.meta?.[variable]) {
 		rv.meta = dynamicVariables.meta[variable];
+	} else if (fallbackDynamicVName && dynamicVariables.meta?.[fallbackDynamicVName]) {
+		rv.meta = dynamicVariables.meta[fallbackDynamicVName];
 	}
 
 	let applyCD = false;
@@ -406,10 +411,12 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 
 	let resolveArrayValueToAbilityLevel = true;
 
-	if (dynamicVariables.values?.[variable] !== undefined) {
+	const dynamicValue = dynamicVariables.values?.[variable] ?? (fallbackDynamicVName ? dynamicVariables.values?.[fallbackDynamicVName] : undefined);
+
+	if (dynamicValue !== undefined) {
 		rv.roundReplaced = true;
 		rv.isDynamic = true;
-		resolveDynamicValue(params.abilityVariant.objectName, variable, dynamicVariables.values[variable], rv, isRanged);
+		resolveDynamicValue(params.abilityVariant.objectName, variable, dynamicValue, rv, isRanged);
 		resolveArrayValueToAbilityLevel = Array.isArray(rv.value) && rv.value.length !== 2;
 	} else if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
 		const index = Number(variableName!.slice(6, -6));
@@ -530,7 +537,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 					checkedVariablesVariants: params.checkedVariablesVariants,
 					accessedVariables: params.accessedVariables,
 					isRanged: params.isRanged,
-					returnActualName: params.returnActualName,
+					sourceVariableName: params.sourceVariableName,
 				});
 			}
 		}
@@ -545,7 +552,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 		rv.value *= multiplier;
 	}
 
-	if (returnActualName && !rv.actualVariableName) {
+	if (sourceVariableName && !rv.actualVariableName) {
 		rv.actualVariableName = variable;
 	}
 
