@@ -311,6 +311,8 @@ export interface IStatsCalculationVariables {
 	fioraPassiveBonusMS?: number;
 	/** bonus ms from Sion's passive (ability use when dead) */
 	sionPassiveBonusMS?: number;
+	/** bonus ms % from Jayce's passive */
+	jayceEBonusMS?: number;
 	/** ap gained from Vladimir's passive */
 	vladimirPassiveAp?: number;
 	/** hp gained from Vladimir's passive */

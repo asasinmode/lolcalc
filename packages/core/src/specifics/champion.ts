@@ -466,7 +466,7 @@ export interface IChampionInternalDataMap {
 	Heimerdinger: { isPassiveMSActive: number };
 	Irelia: { passiveStacks: number };
 	Jax: { passiveStacks: number };
-	Jayce: { isPassiveMSActive: number };
+	Jayce: { isPassiveMSActive: number; eMSProgress: number };
 	Jhin: { isPassiveMSActive: number };
 	Jinx: { passiveStacks: number; passiveMSProgress: number; qBuff: number };
 	Kaisa: { passiveStacksOnTarget: number; eBuff: number };

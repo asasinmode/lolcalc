@@ -53,7 +53,7 @@ export default {
 	},
 	calculateHooks: {
 		preShred: {
-			handler(self, { totalStats, championPassiveStats, baseOnLevelStats, totalPreMultipliersStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStatMultipliers, totalMultipliersStats, dragonStats }, { calculatedVariables }) {
+			handler(self, { totalStats, championPassiveStats, bonusStats, itemPassivesStats, itemTotalStats, dragonStatMultipliers, totalMultipliersStats, dragonStats }, { calculatedVariables }) {
 				if (!self.internalData.value.isPassiveActive) {
 					return;
 				}

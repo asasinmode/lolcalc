@@ -1286,11 +1286,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 								? this.champion.value!.abilities[abilityKey].variants.map((_, variantIndex): IDynamicVariables => {
 										const abilitySpecific = this.championSpecific.value?.[abilityKey];
 										const abilityDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.variables);
-										const specificDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.[variantIndex]?.variables);
+										const variantDynamicVariables = calculateDynamicVariables(this, this.calculationDamageTarget.value, abilitySpecific?.[variantIndex]?.variables);
 
 										return {
-											values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values, specificDynamicVariables?.values, this.abilityDynamicVariablesOverride?.[abilityKey]),
-											meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.meta, specificDynamicVariables?.meta),
+											values: Object.assign({ ...championDynamicVariables?.values }, abilityDynamicVariables?.values, variantDynamicVariables?.values, this.abilityDynamicVariablesOverride?.[abilityKey]),
+											meta: Object.assign({ ...championDynamicVariables?.meta }, abilityDynamicVariables?.meta, variantDynamicVariables?.meta),
 										};
 									})
 								: [],
