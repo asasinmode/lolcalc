@@ -502,6 +502,10 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 						--at-apply: 'ms-[--children-offset-x,0px]';
 					}
 
+					> h3:first-of-type {
+						--at-apply: 'ps-[--children-offset-x,0px]';
+					}
+
 					&.displaying-targets {
 						> ul:first-of-type,
 						> h3:first-of-type {
@@ -511,6 +515,14 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 						> ul:last-of-type,
 						> h3:last-of-type {
 							--at-apply: '-ms-[--children-offset-x,0px]';
+						}
+
+						> h3:first-of-type {
+							--at-apply: 'ps-0';
+						}
+
+						> h3:last-of-type {
+							--at-apply: 'pe-[--children-offset-x,0px]';
 						}
 					}
 
