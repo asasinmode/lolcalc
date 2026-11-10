@@ -846,6 +846,12 @@ defineExpose({
 			inset-block-start: auto;
 			inset-block-end: calc(anchor(start) + var(--tooltip-offset-y));
 
+			@media (width < 760px) {
+				& {
+					--at-apply: 'b-1';
+				}
+			}
+
 			h4 {
 				--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
 			}
