@@ -42,13 +42,15 @@ onBeforeUnmount(() => {
 const resultsTable = useTemplateRef('resultsTable');
 const tutorialEl = useTemplateRef('theTutorial');
 
-function resetTutorial(event?: MouseEvent) {
-	if (event && !tutorialEl.value) {
-		showTutorial.value = true;
-	} else if (tutorialEl.value) {
-		(tutorialEl.value as unknown as ComponentExposed<typeof TheTutorial>).reset();
-	}
-}
+const resetTutorial = import.meta.dev
+	? () => {
+			if (!tutorialEl.value) {
+				showTutorial.value = true;
+			} else if (tutorialEl.value) {
+				(tutorialEl.value as unknown as ComponentExposed<typeof TheTutorial>).reset();
+			}
+		}
+	: undefined;
 
 defineExpose({ resultsTable });
 </script>
@@ -56,7 +58,9 @@ defineExpose({ resultsTable });
 <template>
 	<main id="index">
 		<LazyTheTutorial v-if="showTutorial" ref="theTutorial" />
-		<button id="tmp-reset-tutorial" class="pretend-ui-btn" @click="resetTutorial">TMP</button>
+		<DevOnly>
+			<button id="tmp-reset-tutorial" class="pretend-ui-btn" @click="resetTutorial">TMP</button>
+		</DevOnly>
 		<CalculatorScoreboard />
 		<section id="results">
 			<h2 id="results-header">results</h2>
@@ -100,7 +104,7 @@ defineExpose({ resultsTable });
 		}
 
 		#tmp-reset-tutorial {
-			--at-apply: 'absolute px-2 block-[--manipulate-btn-size] inset-e-0 inset-be-0 translate-y-full z-100';
+			--at-apply: 'absolute px-2 block-[--manipulate-btn-size] inset-s-1/2 inset-bs-0 -translate-x-1/2 z-100';
 		}
 	}
 }
