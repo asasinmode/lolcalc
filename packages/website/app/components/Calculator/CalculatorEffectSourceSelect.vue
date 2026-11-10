@@ -18,17 +18,9 @@ function formatSourceOptions(sources: DamageSource[]): [string, string][] {
 
 const hoverTooltipEl = useTemplateRef('hoverTooltip');
 
-function showTooltip(event: MouseEvent) {
-	hoverTooltipEl.value?.showPopover();
-	(event.target as HTMLElement)?.addEventListener('mouseleave', hideTooltip, {
-		passive: true,
-		once: true,
-	});
-}
-
-function hideTooltip() {
-	hoverTooltipEl.value?.hidePopover();
-}
+const { bind: bindTooltipTriggerAttrs, hide: hideTooltip } = useHoverTooltip({
+	el: hoverTooltipEl,
+});
 
 const showInvalid = computed(() => value.value && props.invalidMessage);
 
@@ -88,7 +80,7 @@ onMounted(() => {
 			targets: formatSourceOptions(damageTargets),
 		}"
 		:style="value?.listedChampion.value ? `--selected-src-img: url(${championImage(value?.listedChampion.value.image, value?.listedChampion.value.id)})` : undefined"
-		@label-mouseenter="showTooltip"
+		:tooltip-trigger-attrs="bindTooltipTriggerAttrs()"
 		@update:model-value="updateThumbnailHideTooltip"
 	>
 		<template #post>
@@ -157,7 +149,7 @@ onMounted(() => {
 		}
 
 		> [popover] {
-			--at-apply: 'pointer-events-none shadow-lg';
+			--at-apply: 'shadow-lg';
 			position-anchor: --effect-src-select;
 			inset-block-start: calc(anchor(end) - 1px);
 			justify-self: anchor-center;

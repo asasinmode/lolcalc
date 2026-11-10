@@ -269,8 +269,6 @@ export function booleanExtra<T extends IGameAbilityId>(
 				computedLabel = `${label} on target`;
 			}
 
-			selectEffectSourceProps && console.log('boolean thing?', abilityId, selectEffectSourceProps);
-
 			return () =>
 				h(
 					CalculatorExtraBoolean,
