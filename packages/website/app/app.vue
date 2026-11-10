@@ -184,6 +184,15 @@ function toggleClickEater(event: ToggleEvent) {
 function closeClickEaterOnResize() {
 	window.innerWidth >= 680 && pageNav.value && releaseClickEater(pageNav.value);
 }
+
+const appWarningIcon = useTemplateRef('warningIcon');
+const { bindTrigger: bindWarningTriggerAttrs, bindPopover: bindWarningPopoverAttrs } = useInfoTooltip();
+
+onMounted(() => {
+	if (!(CSS.supports('field-sizing', 'content') && CSS.supports('position-anchor', '--anchor-name') && CSS.supports('at-rule(@position-try)')) && appWarningIcon.value) {
+		appWarningIcon.value.style = 'display: grid';
+	}
+});
 </script>
 
 <template>
@@ -267,6 +276,13 @@ function closeClickEaterOnResize() {
 					</li>
 				</ul>
 			</nav>
+			<span ref="warningIcon" id="app-warning-icon" aria-describedby="app-warning-popover" tabindex="0" v-bind="bindWarningTriggerAttrs(undefined, true)">
+				<span>warning</span>
+				<Icon class="i-ph:warning-light" />
+			</span>
+			<p id="app-warning-popover" popover="hint" class="hover-tooltip custom" v-bind="bindWarningPopoverAttrs()">
+				Your browser is outdated or is missing some features used by <strong>lolcalc</strong>. Update it or use a different one to make sure everything works correctly
+			</p>
 		</div>
 	</header>
 	<NuxtPage ref="page" />
@@ -317,6 +333,7 @@ function closeClickEaterOnResize() {
 		--header-logo-size: calc(10 * var(--spacing));
 		--header-py: calc(2.5 * var(--spacing));
 		--menu-btn-bs: calc(2.75 * var(--spacing));
+		--menu-btn-size: calc(10 * var(--spacing));
 	}
 
 	#__nuxt {
@@ -350,7 +367,7 @@ function closeClickEaterOnResize() {
 
 		#menu-btn,
 		#menu-close-btn {
-			--at-apply: 'p-2 size-10';
+			--at-apply: 'p-2 size-[--menu-btn-size]';
 
 			> span {
 				&:nth-child(1) {
@@ -393,17 +410,13 @@ function closeClickEaterOnResize() {
 				--at-apply: 'flex items-center relative';
 				grid-column: content-start / content-end;
 
-				@media (width >= 680px) {
-					--at-apply: 'justify-between';
-				}
-
 				> nav {
-					--at-apply: 'fixed of-x-hidden of-y-auto z-10 grow flex-col items-end inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
+					--at-apply: 'fixed of-x-hidden of-y-auto z-10 flex-col items-end inset-bs-0 inset-e-0 max-inline-[80vw] min-inline-60 gap-3';
 					--nav-px: calc(var(--size-page-px) + 2 * var(--spacing));
 
 					@media (width >= 680px) {
 						& {
-							--at-apply: 'flex static py-0 pe-0 bg-transparent flex-row justify-end items-center ms-auto';
+							--at-apply: 'flex static py-0 pe-0 bg-transparent flex-row justify-end items-center order-4 inline-max min-inline-0';
 						}
 					}
 
@@ -509,6 +522,12 @@ function closeClickEaterOnResize() {
 				> h1 {
 					--at-apply: 'relative flex';
 
+					@media (width >= 680px) {
+						& {
+							--at-apply: 'order-1';
+						}
+					}
+
 					> span:first-child {
 						--at-apply: 'order-2 text-3xl leading-none font-700 tracking-wide ms-[0.6rem]';
 					}
@@ -533,9 +552,47 @@ function closeClickEaterOnResize() {
 				#by-asasinmode {
 					--at-apply: 'flex text-neutral-400 leading-[--text-3xl-fontSize] align-bottom me-2 ms-[0.75ch] items-center gap-[0.5ch]';
 
+					@media (width >= 680px) {
+						& {
+							--at-apply: 'order-2 me-auto';
+						}
+					}
+
 					img {
 						--at-apply: 'inline-block rounded-full size-8';
 					}
+				}
+
+				#app-warning-icon {
+					--at-apply: 'relative grid place-items-center rounded-full b b-amber-600 bg-amber-400 p-0.75 ms-auto me-[calc(1.5*var(--spacing)+var(--menu-btn-size))] hidden';
+					anchor-name: --app-warning-icon;
+
+					@media (width >= 680px) {
+						& {
+							--at-apply: 'ms-0 me-[--fluid-f680-12-20] order-3';
+						}
+					}
+
+					&:before {
+						--at-apply: 'content-empty absolute block-2 inset-be-0 inset-x-0 translate-y-full';
+					}
+
+					.icon {
+						--at-apply: 'text-amber-950';
+					}
+
+					> span {
+						&:first-child {
+							--at-apply: 'sr-only';
+						}
+					}
+				}
+
+				#app-warning-popover {
+					--at-apply: 'pointer-events-auto';
+					--tooltip-max-w: calc(72 * var(--spacing));
+					--tooltip-offset-y: calc(1.75 * var(--spacing));
+					position-anchor: --app-warning-icon;
 				}
 			}
 		}
@@ -596,6 +653,12 @@ function closeClickEaterOnResize() {
 				--at-apply: 'absolute end-0 inset-be-0 font-mono text-sm font-600 text-neutral-700';
 			}
 		}
+	}
+}
+
+@layer overrides {
+	#app-warning-popover {
+		--at-apply: 'pointer-events-auto';
 	}
 }
 </style>
