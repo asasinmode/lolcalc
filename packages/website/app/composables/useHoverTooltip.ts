@@ -348,7 +348,7 @@ export function useHoverTooltip<TData = void>({ el, beforeShow, onShow, onHide }
 export function useInfoTooltip() {
 	let popoverEl: HTMLElement | undefined;
 
-	const { bind, bindPopover } = useHoverTooltip({
+	return useHoverTooltip({
 		el: () => popoverEl,
 		beforeShow(_, trigger, event) {
 			const popover = trigger.nextElementSibling as HTMLElement | null;
@@ -359,6 +359,4 @@ export function useInfoTooltip() {
 			return true;
 		},
 	});
-
-	return { bindTrigger: bind, bindPopover };
 }

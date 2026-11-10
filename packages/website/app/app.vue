@@ -186,11 +186,12 @@ function closeClickEaterOnResize() {
 }
 
 const appWarningIcon = useTemplateRef('warningIcon');
-const { bindTrigger: bindWarningTriggerAttrs, bindPopover: bindWarningPopoverAttrs } = useInfoTooltip();
+const { bind: bindWarningTriggerAttrs, bindPopover: bindWarningPopoverAttrs, show: showWarningPopover } = useInfoTooltip();
 
 onMounted(() => {
 	if (!(CSS.supports('field-sizing', 'content') && CSS.supports('position-anchor', '--anchor-name') && CSS.supports('at-rule(@position-try)')) && appWarningIcon.value) {
 		appWarningIcon.value.style = 'display: grid';
+		showWarningPopover({ currentTarget: appWarningIcon.value } as unknown as Event);
 	}
 });
 </script>

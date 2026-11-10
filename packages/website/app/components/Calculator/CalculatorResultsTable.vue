@@ -38,7 +38,7 @@ const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
-const { bindTrigger: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
+const { bind: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
 const { vMinor } = PATCH_VERSION;
 const { isTooltipExpanded } = useTooltipState();
 

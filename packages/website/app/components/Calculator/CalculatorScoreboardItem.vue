@@ -983,7 +983,7 @@ function manipulateFromSelect(manipulateOption: string | undefined) {
 	nextTick(() => (manipulateValue.value = undefined));
 }
 
-const { bindTrigger: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
+const { bind: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInfoTooltip();
 
 const hpRegenPerSec = computed(() => roundNumber(props.value.stats.value.total.hpRegen / 5, 1));
 const abilityResourceRegenPerSec = computed(() => roundNumber(props.value.stats.value.total.manaRegen / 5, 1));

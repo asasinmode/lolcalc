@@ -12,12 +12,12 @@ if (props.tooltip) {
 	simpleDescriptionFormatting(props.tooltip).then((value) => (computedTooltip.value = value));
 }
 
-const { bindTrigger, bindPopover } = useInfoTooltip();
+const { bind, bindPopover } = useInfoTooltip();
 </script>
 
 <template>
 	<template v-if="tooltip">
-		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" v-bind="bindTrigger(undefined, true)">
+		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" v-bind="bind(undefined, true)">
 			<slot name="trigger">
 				<span>additional info</span>
 			</slot>
