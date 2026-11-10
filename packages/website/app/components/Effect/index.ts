@@ -31,7 +31,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 							onUpdate: effectSpecific.onValueUpdate,
 							effectControlsProps: effectSpecific.effectControls,
 						})
-					: booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate });
+					: booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate, selectEffectSourceProps: effectSpecific.sourceControls });
 	}
 }
 

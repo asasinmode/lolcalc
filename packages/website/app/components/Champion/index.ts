@@ -407,7 +407,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 							effectControlsProps: effectSpecific.effectControls,
 							selectEffectSourceProps: effectSpecific.sourceControls,
 						})
-					: booleanExtra(abilityId, 0, label, false);
+					: booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate, selectEffectSourceProps: effectSpecific.sourceControls });
 	}
 }
 

@@ -1148,6 +1148,16 @@ export const EFFECT_SPECIFICS = {
 		setupDataFromInternalData(damageSource) {
 			return [(damageSource.internalData.value as IInternalDataOf<'Jayce'>).applyRShred];
 		},
+		watch(effect) {
+			return effect.source.value?.level.value;
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== ('Jayce' satisfies IChampionId)) {
+					return "it's not Jayce";
+				}
+			},
+		},
 		variables: defineVariables({
 			known: {
 				ShreddedArmor: [],

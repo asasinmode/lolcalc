@@ -225,10 +225,12 @@ export function booleanExtra<T extends IGameAbilityId>(
 	{
 		onUpdate,
 		effectControlsProps,
+		selectEffectSourceProps,
 		inactive,
 	}: {
 		onUpdate?: IExtraOnValueUpdate;
 		effectControlsProps?: IEffectControlsProps<any>;
+		selectEffectSourceProps?: ISelectEffectSourceProps;
 		inactive?: IExtraInactiveFn;
 	} = {},
 ) {
@@ -246,6 +248,17 @@ export function booleanExtra<T extends IGameAbilityId>(
 			}
 			const effectControlSnapshot = computed(() => replaceGameIcons(effectControlsProps?.currentlySnapshot(appliedEffect?.value?.data.value, props.damageSource) ?? '', undefined, true));
 
+			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
+			function updateEffectSource(value?: DamageSource) {
+				if (appliedEffect) {
+					!appliedEffect.value && updateValue(0);
+					appliedEffect.value!.source.value = value;
+					effectControlRefresh(true);
+				} else {
+					console.error("[utils/component progress] tried to update effect source but appliedEffect computed isn't present", abilityId, property);
+				}
+			}
+
 			const computedValue = computed(() => effectControlModel?.value ?? modelValue.value);
 
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
@@ -255,6 +268,8 @@ export function booleanExtra<T extends IGameAbilityId>(
 			if (labelAppendOnTarget) {
 				computedLabel = `${label} on target`;
 			}
+
+			selectEffectSourceProps && console.log('boolean thing?', abilityId, selectEffectSourceProps);
 
 			return () =>
 				h(
@@ -271,9 +286,20 @@ export function booleanExtra<T extends IGameAbilityId>(
 					},
 					effectControlsProps
 						? {
-								default: () => createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, true, effectControlSnapshot.value),
+								default: () => [
+									createEffectControls(props.idSuffix, effectControlModel?.value, updateValue, effectControlRefresh, ctx.slots, true, effectControlSnapshot.value),
+									selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+								],
 							}
-						: ctx.slots,
+						: {
+								default: () => {
+									const defaultSlots = ctx.slots.default?.();
+									return [
+										...(Array.isArray(defaultSlots) ? defaultSlots : [defaultSlots]),
+										selectEffectSourceInvalidMessage && createSelectEffectSource(props.idSuffix, appliedEffect?.value?.source.value, updateEffectSource, selectEffectSourceInvalidMessage),
+									];
+								},
+							},
 				);
 		},
 		{ props: ['damageSource', 'idSuffix', 'abilityId', 'tooltipTriggerAttrs', 'overrideDamageSource'] },
