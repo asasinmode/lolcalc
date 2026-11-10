@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { CalculatorResultsTable } from '#components';
+import type { ComponentExposed } from 'vue-component-type-helpers';
+import type { TheTutorial } from '#components';
 
 const { damageSources } = useCalculatorState();
 const { saveState } = useManageCalculatorState();
@@ -22,8 +23,16 @@ function saveStateOnVisibilitychange() {
 	document.hidden && saveState();
 }
 
+const showTutorial = ref(false);
+const tutorialChangedAt = new Date(2026, 11, 10);
+
 onMounted(() => {
 	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
+
+	const tutorialFinishedAt = localStorage.getItem('lolcalc-tutorial-finished-at');
+	if (!tutorialFinishedAt || new Date(tutorialFinishedAt) > tutorialChangedAt) {
+		showTutorial.value = true;
+	}
 });
 
 onBeforeUnmount(() => {
@@ -31,12 +40,23 @@ onBeforeUnmount(() => {
 });
 
 const resultsTable = useTemplateRef('resultsTable');
+const tutorialEl = useTemplateRef('theTutorial');
+
+function resetTutorial(event?: MouseEvent) {
+	if (event && !tutorialEl.value) {
+		showTutorial.value = true;
+	} else if (tutorialEl.value) {
+		(tutorialEl.value as unknown as ComponentExposed<typeof TheTutorial>).reset();
+	}
+}
 
 defineExpose({ resultsTable });
 </script>
 
 <template>
 	<main id="index">
+		<LazyTheTutorial v-if="showTutorial" ref="theTutorial" />
+		<button id="tmp-reset-tutorial" class="pretend-ui-btn" @click="resetTutorial">TMP</button>
 		<CalculatorScoreboard />
 		<section id="results">
 			<h2 id="results-header">results</h2>
@@ -77,6 +97,10 @@ defineExpose({ resultsTable });
 					paint-order: stroke fill;
 				}
 			}
+		}
+
+		#tmp-reset-tutorial {
+			--at-apply: 'absolute px-2 block-[--manipulate-btn-size] inset-e-0 inset-be-0 translate-y-full z-100';
 		}
 	}
 }
