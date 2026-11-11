@@ -111,8 +111,8 @@ const exampleSpellCrit = useSimpleDescription(
 					to="/?v=1&src=8_1_4645_0__000_841_2_0000_00000_______&src=8_1_4645-3031_0__000_841_2_0000_00000_______&tgt=-1_1__0___1000_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1__0___97_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___1350_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___199_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tblCol=1-0&tblCol=1-1&tblCol=1-2&tblCol=1-3&tblSct=0-8-1-0_1&tblSct=a-stats_&tblSct=a-ba_1&tblSct=a-cTtl_1"
 					target="_blank"
 				>
-					spell crit</NuxtLink
-				>
+					spell crit
+				</NuxtLink>
 				- <span class="game-description" v-html="exampleSpellCrit" />
 			</li>
 		</ul>
@@ -122,7 +122,7 @@ const exampleSpellCrit = useSimpleDescription(
 			<dt>How can I save multiple configurations?</dt>
 			<dd>
 				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
-				builtin way of managing multiple configuration is planned, see <a href="#TODO">roadmap</a>
+				builtin way of managing multiple configuration is planned, see <NuxtLink to="/about#roadmap">roadmap</NuxtLink>
 			</dd>
 			<dt>There's an ability that slows, but it doesn't have a thing I can click</dt>
 			<dd>

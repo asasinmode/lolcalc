@@ -41,6 +41,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 				<li><NuxtLink to="#known-discrepancies">known calculation discrepancies</NuxtLink></li>
 				<li><NuxtLink to="#implemented-champions">fully implemented champions</NuxtLink></li>
 				<li><NuxtLink to="#support">support</NuxtLink></li>
+				<li><NuxtLink to="#roadmap">roadmap</NuxtLink></li>
 				<li><NuxtLink to="#acknowledgements">acknowledgements</NuxtLink></li>
 				<li><NuxtLink to="#misc">misc</NuxtLink></li>
 			</ul>
@@ -57,7 +58,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<TextPageHeading id="does-it-work" text="does it work?" />
 		<p>
 			While it's impossible for me to check all 172+ champions with every item/rune/dragon/quest/buff/debuff combination, I tried my best to make it work and
-			<NuxtLink to="/guide#examples"> here are some examples of it </NuxtLink>. If you encounter a configuration that's not calculated correctly (<a href="#known-discrepancies">known discrepancies</a>), please
+			<NuxtLink to="/guide#examples"> here are some examples of it </NuxtLink>. If you encounter a configuration that's not calculated correctly (<NuxtLink href="#known-discrepancies">known discrepancies</NuxtLink>), please
 			<button class="link-like" @click="reportAnIssue">report it</button>
 		</p>
 		<p class="alert info">
@@ -65,7 +66,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<Icon class="i-ph:info" />
 		</p>
 		<p class="game-description" v-html="nonPassiveAbilitiesDisclaimer" />
-		<p>For when these and other features will be implemented, check <a href="#TODO">the roadmap</a>.</p>
+		<p>For when these and other features will be implemented, check <NuxtLink href="#roadmap">the roadmap</NuxtLink>.</p>
 
 		<TextPageHeading id="known-discrepancies" text="known calculation discrepancies" />
 		<ul>
@@ -97,6 +98,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		</p>
 		<p>If you have any questions, feel free to contact me through the platforms listed at the bottom of this page.</p>
 
+		<TextPageHeading id="roadmap" text="roadmap" />
+		<p>TODO</p>
+
 		<TextPageHeading id="acknowledgements" text="acknowledgements" />
 		<p>
 			This project would not exist without
@@ -115,13 +119,13 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<dd>
 				The current <span class="code-like">alpha</span> version will end when the <strong>stats</strong> and <strong>basic attack damage</strong> of all champions and their <u>passives</u> (not QWER) are calculated properly with any
 				items/rune shards/dragons/role quests and their effects combination. For more details, check
-				<a href="#TODO">the roadmap</a>
+				<NuxtLink to="#roadmap">the roadmap</NuxtLink>
 			</dd>
 			<dt>ads and paywalling</dt>
 			<dd>
 				I will try my best to keep the calculator and all of its features free (+ it's
 				<a href="https://github.com/asasinmode/lolcalc" target="_blank">open source</a>). That said, hosting costs money and maintaining it takes a lot of my time and effort. Please consider
-				<a href="#support">supporting the project</a>
+				<NuxtLink to="#support">supporting the project</NuxtLink>
 			</dd>
 		</dl>
 	</main>
