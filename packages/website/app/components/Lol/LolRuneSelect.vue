@@ -244,14 +244,15 @@ defineExpose({
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
-			<label for="scoreboard-enable-unimplemented-ui" aria-describedby="unimplemented-ui-tooltip" v-bind="bindUnimplementedTriggerAttrs()">
+			<label for="scoreboard-enable-unimplemented-ui" aria-describedby="unimplemented-ui-tooltip">
 				<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox" />
 				enable rune paths UI
+				<Icon class="i-ph:question-fill" tabindex="0" v-bind="bindUnimplementedTriggerAttrs(undefined, true)" />
+				<p id="unimplemented-ui-tooltip" popover="hint" class="hover-tooltip custom game-description" v-bind="bindUnimplementedPopoverAttrs()">
+					this will make rune paths interactable. They still won't be calculated and most likely have some <span class="unknown">unknown</span> text.<br />
+					Check the <NuxtLink to="/about#roadmap" target="_blank">roadmap</NuxtLink> for when they will be implemented
+				</p>
 			</label>
-			<p id="unimplemented-ui-tooltip" popover="hint" class="hover-tooltip custom game-description" v-bind="bindUnimplementedPopoverAttrs()">
-				this will make rune paths interactable. They still won't be calculated and most likely have some <span class="unknown">unknown</span> text.<br />
-				Check the <NuxtLink to="/about#roadmap" target="_blank">roadmap</NuxtLink> for when they will be implemented
-			</p>
 		</header>
 		<ComingSoonCover style="grid-area: primary" feature="Primary path" />
 		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
@@ -454,7 +455,11 @@ defineExpose({
 
 			> label[for='scoreboard-enable-unimplemented-ui'] {
 				--at-apply: 'basis-full';
-				anchor-name: --unimplemented-ui-input;
+
+				> span {
+					--at-apply: 'inline-block align-[-5px] size-5 text-blue-400';
+					anchor-name: --unimplemented-ui-input;
+				}
 
 				@media (width >= 760px) {
 					& {
@@ -466,6 +471,7 @@ defineExpose({
 			#unimplemented-ui-tooltip {
 				position-anchor: --unimplemented-ui-input;
 				--tooltip-max-w: calc(70 * var(--spacing));
+				--tooltip-offset-y: calc(1 * var(--spacing));
 			}
 		}
 
