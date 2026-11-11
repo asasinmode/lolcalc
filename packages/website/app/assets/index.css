@@ -298,6 +298,12 @@
 		justify-self: center;
 	}
 
+	/* for scoreboard items tooltip from extra component. Needs a different offset to align with the bottom border of extra components */
+	@position-try --scoreboard-extra-tooltip-flip-block {
+		inset-block-end: auto;
+		inset-block-start: calc(anchor(end) - 1px);
+	}
+
 	/* for results sections. They have different top/bottom paddings and look off if are just flip block */
 	@position-try --results-header-flip-block {
 		inset-block-end: auto;
