@@ -2007,7 +2007,7 @@ defineExpose({
 						}
 
 						> button {
-							--at-apply: 'relative w-max px-2 h-[--manipulate-btn-size]';
+							--at-apply: 'relative inline-max px-2 block-[--manipulate-btn-size]';
 						}
 					}
 				}

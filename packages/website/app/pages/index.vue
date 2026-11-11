@@ -104,7 +104,7 @@ defineExpose({ resultsTable });
 		}
 
 		#tmp-reset-tutorial {
-			--at-apply: 'absolute px-2 block-[--manipulate-btn-size] inset-s-1/2 inset-bs-0 -translate-x-1/2 z-100';
+			--at-apply: 'absolute px-2 block-[--manipulate-btn-size] inset-s-1/2 inset-bs-12 -translate-x-1/2 z-98';
 		}
 	}
 }

@@ -1113,7 +1113,7 @@ defineExpose({ el });
 				<span>restore</span>
 			</button>
 			<span class="restore-text" style="display: none" aria-hidden="true">restore</span>
-			<button :title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`" class="pretend-ui-btn clear-remove" :disabled="removeButtonAttrs.disabled" @click="removeButtonAttrs.emit">
+			<button :title="`${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}${removeButtonAttrs.subtext ?? ''}`" class="pretend-ui-btn remove clear-remove" :disabled="removeButtonAttrs.disabled" @click="removeButtonAttrs.emit">
 				<span>
 					{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }}) </span>
 				</span>
