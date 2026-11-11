@@ -391,7 +391,10 @@
 			--tooltip-max-w: calc(120 * var(--spacing));
 			--tooltip-offset-y: var(--spacing) * 1.75;
 		}
+	}
 
+	.info-tooltip,
+	.hover-tooltip.custom {
 		a {
 			--at-apply: 'text-blue-400 hoverable:underline';
 

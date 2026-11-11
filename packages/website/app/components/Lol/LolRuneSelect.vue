@@ -223,6 +223,8 @@ const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 
 const configurationInvalid = computed(() => value.value && (enableUnimplementedUi.value ? runesInvalid(value.value) : runeShardsInvalid(value.value.shards)));
 
+const { bind: bindUnimplementedTriggerAttrs, bindPopover: bindUnimplementedPopoverAttrs } = useInfoTooltip();
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -242,6 +244,14 @@ defineExpose({
 					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
+			<label for="scoreboard-enable-unimplemented-ui" aria-describedby="unimplemented-ui-tooltip" v-bind="bindUnimplementedTriggerAttrs()">
+				<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox" />
+				enable rune paths UI
+			</label>
+			<p id="unimplemented-ui-tooltip" popover="hint" class="hover-tooltip custom game-description" v-bind="bindUnimplementedPopoverAttrs()">
+				this will make rune paths interactable. They still won't be calculated and most likely have some <span class="unknown">unknown</span> text.<br />
+				Check the <NuxtLink to="/about#roadmap" target="_blank">roadmap</NuxtLink> for when they will be implemented
+			</p>
 		</header>
 		<ComingSoonCover style="grid-area: primary" feature="Primary path" />
 		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
@@ -381,19 +391,31 @@ defineExpose({
 
 		> header {
 			/* z-index higher than comingsooncover of 50 */
-			--at-apply: 'pbe-[--fluid-f420-12-8-t760] pbs-[--fluid-8-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-51 inline-full';
+			--at-apply: 'pbe-[--fluid-f420-12-8-t760] pbs-[--fluid-8-20-t810] pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-51 inline-full flex-wrap';
 			grid-area: header;
 
 			> h1 {
-				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg';
+				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg me-auto';
+
+				@media (width >= 760px) {
+					& {
+						--at-apply: 'order-1';
+					}
+				}
 			}
 
-			> p {
+			> p[aria-live] {
 				--at-apply: 'sr-only';
 			}
 
 			> form {
-				--at-apply: 'ms-auto flex gap-2';
+				--at-apply: 'flex gap-2';
+
+				@media (width >= 760px) {
+					& {
+						--at-apply: 'order-3';
+					}
+				}
 
 				> button {
 					--at-apply: 'grid place-items-center h-7';
@@ -428,6 +450,22 @@ defineExpose({
 						}
 					}
 				}
+			}
+
+			> label[for='scoreboard-enable-unimplemented-ui'] {
+				--at-apply: 'basis-full';
+				anchor-name: --unimplemented-ui-input;
+
+				@media (width >= 760px) {
+					& {
+						--at-apply: 'basis-auto order-2 me-4';
+					}
+				}
+			}
+
+			#unimplemented-ui-tooltip {
+				position-anchor: --unimplemented-ui-input;
+				--tooltip-max-w: calc(70 * var(--spacing));
 			}
 		}
 

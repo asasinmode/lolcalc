@@ -10,7 +10,6 @@ const runtimeConfig = useRuntimeConfig();
 const state = initCalculatorState();
 const { saveState, restoreState, isStateTooLargeForQuery } = useManageCalculatorState(state);
 const { vSemver } = PATCH_VERSION;
-const enableUnimplementedUi = useEnableUnimplementedUi();
 const { reportAnIssue } = useReportIssueDialog();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
@@ -313,10 +312,6 @@ onMounted(() => {
 			policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.
 		</p>
 		<p>v{{ appVersion }}</p>
-		<label for="scoreboard-enable-unimplemented-ui">
-			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox" />
-			enable unimplemented ui
-		</label>
 	</footer>
 	<ClientOnly>
 		<ReportIssueDialog />
