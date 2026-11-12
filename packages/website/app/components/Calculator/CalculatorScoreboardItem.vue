@@ -220,6 +220,13 @@ onMounted(() => {
 	emit('mounted');
 });
 
+function onDetailsToggle(event: ToggleEvent) {
+	isExpanded.value = event.newState === 'open';
+	if (isExpanded.value) {
+		tutorialEvent('damageSourceExpanded', { damageSource: props.value.id }, props.value.listedChampion.value?.id);
+	}
+}
+
 const headerEl = useTemplateRef('header');
 const effectsEl = useTemplateRef('effects');
 const effectsListEl = useTemplateRef('effectsList');
@@ -988,6 +995,22 @@ const { bind: bindInfoTriggerAttrs, bindPopover: bindInfoPopoverAttrs } = useInf
 const hpRegenPerSec = computed(() => roundNumber(props.value.stats.value.total.hpRegen / 5, 1));
 const abilityResourceRegenPerSec = computed(() => roundNumber(props.value.stats.value.total.manaRegen / 5, 1));
 
+function openChampSelect() {
+	tutorialEvent('champSelectOpened', { damageSource: props.value.id });
+	selectChampion(props.value.listedChampion).then(() => tutorialEvent('champSelectClosed', { damageSource: props.value.id }, props.value.listedChampion.value?.id));
+}
+
+function openItemShop() {
+	tutorialEvent('itemShopOpened', { damageSource: props.value.id });
+	selectItems(props.value).then(() => tutorialEvent('itemShopClosed', { damageSource: props.value.id }));
+}
+
+const levelSelectTriggerAttrs = {
+	onFocus() {
+		tutorialEvent('sourceLevelSelectFocused', { damageSource: props.value.id });
+	},
+};
+
 defineExpose({ el });
 </script>
 
@@ -1021,19 +1044,19 @@ defineExpose({ el });
 				@click="changeGroup"
 				@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 			>
-				<span
-					>move to {{ otherGroup }} <span>(alt+click to duplicate to {{ otherGroup }})</span></span
-				>
+				<span>
+					move to {{ otherGroup }} <span>(alt+click to duplicate to {{ otherGroup }})</span>
+				</span>
 				<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 			</button>
 			<button :title="`duplicate, shift+click to duplicate into ${otherGroup}`" class="pretend-ui-btn duplicate" :disabled="changeGroupDisabled" draggable="true" @click="duplicate" @dragstart="$emit('dragstart', $event, true)">
-				<span
-					>duplicate<span>(shift+click to duplicate into {{ otherGroup }})</span></span
-				>
+				<span>
+					duplicate<span>(shift+click to duplicate into {{ otherGroup }})</span>
+				</span>
 				<Icon class="i-ph:copy" />
 			</button>
 			<div class="select-champion">
-				<button title="select champion" @click="selectChampion(value.listedChampion)" @dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)">
+				<button title="select champion" @click="openChampSelect" @dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)">
 					<span>
 						{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
 					</span>
@@ -1047,6 +1070,7 @@ defineExpose({ el });
 					class="select-champion-level"
 					:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, `&nbsp;${i + 1}&nbsp;`])"
 					@update:model-value="value.level.value = Number.parseInt($event!)"
+					:tooltip-trigger-attrs="levelSelectTriggerAttrs"
 				>
 					<span>{{ value.level.value }}</span>
 				</VSelect>
@@ -1067,14 +1091,14 @@ defineExpose({ el });
 					<span :style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`" aria-hidden="true" class="secondary-path-icon" />
 				</template>
 			</button>
-			<button class="select-items other-ui-btn" @click="selectItems(value)">
+			<button class="select-items other-ui-btn" @click="openItemShop">
 				items
 				<img v-bind="ICON_GOLD" aria-hidden="true" loading="lazy" />
 			</button>
 			<ul
 				:data-role-quest="value.roleQuest.value"
 				class="items"
-				@click="selectItems(value)"
+				@click="openItemShop"
 				@dragenter="$emit('itemListDragenter', $event)"
 				@dragover="$emit('itemListDragover', $event)"
 				@dragleave="$emit('itemListDragleave', $event)"
@@ -1136,7 +1160,7 @@ defineExpose({ el });
 				<Icon class="i-ph:caret-down size-5" />
 			</button>
 		</div>
-		<details :id="`${idSuffix}-details`" ref="details" :class="{ empty: !value.champion.value }" :aria-busy="value.isLoading.value" @toggle="isExpanded = $event.newState === 'open'">
+		<details :id="`${idSuffix}-details`" ref="details" :class="{ empty: !value.champion.value }" :aria-busy="value.isLoading.value" @toggle="onDetailsToggle">
 			<summary>details</summary>
 			<h4 class="loading-header">loading...</h4>
 			<section class="runes" :inert="value.isLoading.value" @click="selectRunes(value.runes)">

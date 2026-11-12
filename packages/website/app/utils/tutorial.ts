@@ -15,16 +15,19 @@ export type ITutorialStepId = keyof typeof tutorialStepKinds;
 
 export const TUTORIAL_STEP_IDS = Object.keys(tutorialStepKinds) as ITutorialStepId[];
 
+/** map of event to its data */
 export interface TutorialEvents {
 	itemShopOpened: void;
 	itemShopClosed: void;
 	champSelectOpened: void;
+	damageSourceExpanded: IChampionId | undefined;
 	champSelectClosed: IChampionId | undefined;
-	sourceLevelSelectFocused: FocusEvent;
+	sourceLevelSelectFocused: void;
+	// TODO add eventing in scoreboard item
 	extraComponentInteracted: void;
 }
 
-export type TutorialEventArgs<K extends keyof TutorialEvents> = TutorialEvents[K] extends void ? [] : [payload: TutorialEvents[K]];
+export type TutorialEventArgs<K extends keyof TutorialEvents> = TutorialEvents[K] extends void ? [] : [data: TutorialEvents[K]];
 
 const STORAGE_KEY = 'lolcalc-tutorial';
 const TUTORIAL_STATE_VERSION = 1;
@@ -78,7 +81,7 @@ export function isTutorialStepId(value: unknown): value is ITutorialStepId {
 }
 
 export interface ITutorialSink {
-	onEvent(name: keyof TutorialEvents, payload: unknown): void;
+	onEvent(name: keyof TutorialEvents, eventSourceIds: ITutorialEventSourceIds, payload: unknown): void;
 	forceShow(id: ITutorialStepId): void;
 	/** reload after state changed, as if freshly mounted */
 	reload(): void;
@@ -88,7 +91,7 @@ export interface ITutorialSink {
 export const tutorialRequest = shallowRef<false | { force?: ITutorialStepId }>(false);
 
 let sink: ITutorialSink | undefined;
-const buffer = new Map<keyof TutorialEvents, unknown>();
+const buffer = new Map<keyof TutorialEvents, [ITutorialEventSourceIds, unknown][]>();
 
 export function requestTutorial(options: { force?: ITutorialStepId } = {}) {
 	if (options.force) {
@@ -101,18 +104,30 @@ export function requestTutorial(options: { force?: ITutorialStepId } = {}) {
 /** TheTutorial attaches and detaches itself on mounted/unmounted */
 export function attachTutorialSink(newSink: ITutorialSink): () => void {
 	sink = newSink;
-	for (const [name, payload] of buffer) newSink.onEvent(name, payload);
+	for (const [name, storedCallArgs] of buffer) {
+		for (const args of storedCallArgs) {
+			newSink.onEvent(name, args[0], args[1]);
+		}
+	}
 	buffer.clear();
 	return () => {
 		if (sink === newSink) sink = undefined;
 	};
 }
 
-export function tutorialEvent<K extends keyof TutorialEvents>(name: K, ...args: TutorialEventArgs<K>): void {
+/** the interacted with element that caused the event, used for positioning the tutorial popup next to it */
+export interface ITutorialEventSourceIds {
+	damageSource?: string;
+	resultColumn?: string;
+	resultSection?: string;
+}
+
+export function tutorialEvent<K extends keyof TutorialEvents>(name: K, sourceIds: ITutorialEventSourceIds, ...args: TutorialEventArgs<K>): void {
 	if (sink) {
-		sink.onEvent(name, args[0]);
-	} else if (tutorialRequest.value) {
-		buffer.set(name, args[0]);
+		sink.onEvent(name, sourceIds, args[0]);
+	} else {
+		const bufferedArgs = buffer.getOrInsert(name, []);
+		bufferedArgs.push([sourceIds, args[0]]);
 	}
 }
 

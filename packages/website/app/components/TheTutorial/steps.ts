@@ -1,8 +1,5 @@
+import { CHAMPION_COMPONENTS } from '~/components/Champion/index.ts';
 import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
-
-export interface ITutorialContext {
-	state: ReturnType<typeof useCalculatorState>;
-}
 
 // TODO simplify, maybe an array or just string/function checking if event is the wanted one would be more efficient
 type ITutorialStepTriggers = {
@@ -14,7 +11,7 @@ export interface ITutorialStepDef {
 	/** will be v-htmled into a `div.game-description` of TheTutorial */
 	text?: string;
 	/** element the tutorial should call `showPopover({ source })` with. If `undefined`, step is skipped with warning */
-	anchor?: <T extends keyof TutorialEvents>(event?: T, data?: TutorialEvents[T], ctx?: ITutorialContext) => HTMLElement | undefined | null;
+	anchor?: <T extends keyof TutorialEvents>(sourceIds?: ITutorialEventSourceIds, event?: T, data?: TutorialEvents[T]) => Element | undefined | null;
 	/** element that receives `rotating-glow`, defaults to the anchor */
 	glow?: (anchor: Element) => Element;
 	/** id of an element the tutorial should move to be a child of (like when the step is inside a dialog) */
@@ -72,11 +69,13 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'configuring passives',
 		text: 'Some champions, items or effects are configurable through elements that will be shown here when applicable',
 		// TODO should do it in last interacted with damage source
-		anchor: () => document.querySelector('.extras'),
+		anchor: () => document.querySelector('.extras')?.firstElementChild,
 		showOn: {
+			damageSourceExpanded(championId) {
+				return championId ? championId in CHAMPION_COMPONENTS : false;
+			},
 			champSelectClosed(championId) {
-				console.log('TODO check if has extra', championId);
-				return false;
+				return championId ? championId in CHAMPION_COMPONENTS : false;
 			},
 		},
 		completeOn: {

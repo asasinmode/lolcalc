@@ -1,7 +1,7 @@
 <script setup vapor lang="ts">
 import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
 import { TUTORIAL_STEP_IDS, attachTutorialSink, saveTutorialState, tutorialRequest, tutorialStepKinds, useTutorialState } from '~/utils/tutorial';
-import type { ITutorialContext, ITutorialStepDef } from './steps';
+import type { ITutorialStepDef } from './steps';
 import { tutorialSteps } from './steps';
 
 const GLOW_CLASS = 'rotating-glow';
@@ -10,10 +10,10 @@ const FOCUSABLE = 'button, a[href], input, select, textarea, [tabindex]:not([tab
 interface IEventCause {
 	name: keyof TutorialEvents;
 	data: unknown;
+	eventSourceIds: ITutorialEventSourceIds;
 }
 
 const tutorialState = useTutorialState();
-const ctx: ITutorialContext = { state: useCalculatorState() };
 const el = useTemplateRef<HTMLElement>('el');
 
 const currentStepId = shallowRef<ITutorialStepId>();
@@ -37,38 +37,36 @@ function isDone(id: ITutorialStepId) {
 	return tutorialState.steps[id] === 1;
 }
 
-/** guided steps only for users who picked the full tutorial */
-function isActive(id: ITutorialStepId) {
-	return !isDone(id) && (tutorialStepKinds[id] || tutorialState.guided);
-}
-
-function onEvent(name: keyof TutorialEvents, data: unknown) {
-	const cause: IEventCause = { name, data };
+function onEvent(name: keyof TutorialEvents, eventSourceIds: ITutorialEventSourceIds, data: unknown) {
+	const cause: IEventCause = { name, data, eventSourceIds };
 	lastEvent = cause;
 	for (const id of TUTORIAL_STEP_IDS) {
-		if (!isActive(id)) continue;
+		if (isDone(id)) continue;
 		const def = tutorialSteps[id];
-		const isGeneral = tutorialStepKinds[id];
-
-		/* guided steps can be completed whether or not they were on screen; general ones only once triggered */
-		if ((!isGeneral || pending.has(id)) && callStepEventCb(def.completeOn, name, data)) {
+		if (callStepEventCb(def.completeOn, name, data)) {
 			completeStep(id);
 			continue;
 		}
-		if (isGeneral) {
-			const shown = callStepEventCb(def.showOn, name, data);
-			if (shown) pending.set(id, cause);
-			else if (shown === false) pending.delete(id);
+
+		if (tutorialStepKinds[id] || tutorialState.guided) {
+			const show = callStepEventCb(def.showOn, name, data);
+			const isPending = pending.has(id);
+			if (show) {
+				!isPending && pending.set(id, cause);
+			} else if (!isPending && show === false) {
+				pending.delete(id);
+			}
 		}
 	}
 	scheduleEvaluate();
 }
 
-/** `undefined` = this step doesn't care about the event, otherwise whether it matched */
+/** if `undefined`, event was not found in `triggers` (is ignored) */
 function callStepEventCb(triggers: ITutorialStepDef['showOn'], name: keyof TutorialEvents, data: unknown): boolean | undefined {
 	const trigger = triggers?.[name];
-	if (trigger === undefined) return undefined;
-	return trigger === true || (trigger as (data: unknown) => boolean)(data);
+	if (trigger) {
+		return trigger === true || (trigger as (data: unknown) => boolean)(data);
+	}
 }
 
 function completeStep(id: ITutorialStepId, focus = false) {
@@ -106,19 +104,16 @@ function reload() {
 
 function scheduleEvaluate(focus = false) {
 	focusNext ||= focus;
-	if (raf) return;
-	/* delay for browser to display dialogs/whatever else */
-	raf = requestAnimationFrame(() => {
+	raf ||= requestAnimationFrame(() => {
 		raf = 0;
-		const shouldFocus = focusNext;
+		evaluate(focusNext);
 		focusNext = false;
-		evaluate(shouldFocus);
 	});
 }
 
 interface IPickedStep {
 	id: ITutorialStepId;
-	anchor?: HTMLElement | null;
+	anchor?: Element | null;
 	targetParent?: HTMLElement | null;
 	tier: number;
 }
@@ -131,7 +126,7 @@ function evaluate(focus: boolean) {
 	let best: IPickedStep | undefined;
 
 	for (const id of order) {
-		if (!forcedId && (!isActive(id) || (tutorialStepKinds[id] && !pending.has(id)))) {
+		if (!forcedId && (isDone(id) || (tutorialStepKinds[id] && !pending.has(id)))) {
 			continue;
 		}
 
@@ -143,7 +138,7 @@ function evaluate(focus: boolean) {
 		let anchor: IPickedStep['anchor'];
 		if (def.anchor) {
 			const cause = pending.get(id) ?? lastEvent;
-			anchor = def.anchor(cause?.name, cause?.data as TutorialEvents[keyof TutorialEvents], ctx);
+			anchor = def.anchor(cause?.eventSourceIds, cause?.name, cause?.data as TutorialEvents[keyof TutorialEvents]);
 			if (!anchor?.isConnected || !anchor.checkVisibility()) {
 				console.warn(`[TheTutorial evaluate] anchor for "${id}" not found, skipping`);
 				continue;
@@ -152,7 +147,9 @@ function evaluate(focus: boolean) {
 
 		/* greeting > steps inside a dialog > guided chain > general */
 		const tier = id === 'greeting' ? 0 : def.within ? 1 : !tutorialStepKinds[id] ? 2 : 3;
-		if (!best || tier < best.tier) best = { id, anchor, targetParent, tier };
+		if (!best || tier < best.tier) {
+			best = { id, anchor, targetParent, tier };
+		}
 	}
 
 	if (!best) {
