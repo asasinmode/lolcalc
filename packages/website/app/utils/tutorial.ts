@@ -1,18 +1,19 @@
 import type { IChampionId } from '@lolcalc/data/types.ts';
 import { shallowRef } from 'vue';
 
+/** map of step id to step kind, where `0` means guided, `1` means general */
 export const tutorialStepKinds = {
-	greeting: 'general',
-	openChampSelect: 'guided',
-	changeChampionLevel: 'guided',
-	openItemShop: 'guided',
-	itemShopFunctionality: 'general',
-	viewExtraComponent: 'general',
-} as const satisfies Record<string, 'general' | 'guided'>;
+	greeting: 0,
+	openChampSelect: 1,
+	changeChampionLevel: 1,
+	openItemShop: 1,
+	itemShopFunctionality: 0,
+	viewExtraComponent: 1,
+} as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
 
-const TUTORIAL_STEP_IDS = Object.keys(tutorialStepKinds) as ITutorialStepId[];
+export const TUTORIAL_STEP_IDS = Object.keys(tutorialStepKinds) as ITutorialStepId[];
 
 export interface TutorialEvents {
 	itemShopOpened: void;

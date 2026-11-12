@@ -1664,6 +1664,7 @@ defineExpose({ el });
 			--at-apply: 'grid-center ms-[--ms] me-[--me] relative self-center';
 			--ms: calc(3 * var(--spacing));
 			--me: calc(2 * var(--spacing));
+			--glow-offset-path: inset(0% round 50%);
 			grid-area: select-champion;
 
 			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {

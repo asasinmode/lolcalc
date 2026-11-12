@@ -108,7 +108,7 @@
 			box-shadow:
 				0 0 3px 1px var(--glow-clr),
 				0 0 6px 2px var(--glow-clr);
-			offset-path: inset(0%);
+			offset-path: var(--glow-offset-path, inset(0%));
 			offset-distance: 0%;
 			animation: glow-orbit var(--glow-duration, 1.75s) linear infinite;
 		}

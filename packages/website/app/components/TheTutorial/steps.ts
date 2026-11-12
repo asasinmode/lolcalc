@@ -31,7 +31,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	openChampSelect: {
 		title: 'select a champion',
-		text: 'To start with, open champ select and choose a champion',
+		text: 'Open champ select and choose a champion',
 		// TODO should also handle small screen switching between sources/targets & mirror layout
 		anchor: () => document.querySelector('.select-champion'),
 		completeOn: {
