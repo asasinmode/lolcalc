@@ -30,11 +30,11 @@ export interface TutorialEvents {
 export type TutorialEventArgs<K extends keyof TutorialEvents> = TutorialEvents[K] extends void ? [] : [data: TutorialEvents[K]];
 
 const STORAGE_KEY = 'lolcalc-tutorial';
-const TUTORIAL_STATE_VERSION = 1;
+const TUTORIAL_STATE_VERSION = '1';
 const state: ITutorialState = { v: TUTORIAL_STATE_VERSION, guided: false, steps: {} };
 
 export interface ITutorialState {
-	v: 1;
+	v: string;
 	guided: boolean;
 	/** map of step completion, `1` means it's been done/ok-ed */
 	steps: Partial<Record<ITutorialStepId, 1 | 0>>;
@@ -46,15 +46,27 @@ export function initTutorialState(): ITutorialState {
 	state.steps = {};
 	if (!import.meta.client) return state;
 	try {
-		const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
-		if (parsed?.v !== TUTORIAL_STATE_VERSION) {
-			return state;
+		const rawState = localStorage.getItem(STORAGE_KEY);
+		let guided = false;
+		const steps: ITutorialState['steps'] = {};
+		if (rawState) {
+			for (const entry of rawState.split(';')) {
+				const [name, value] = entry.split('=');
+				if (name === 'v') {
+					if (value !== TUTORIAL_STATE_VERSION) {
+						return state;
+					}
+				} else if (name === 'guided') {
+					guided = value === 'true';
+				} else if (name === 'steps') {
+					for (let i = 0; i < TUTORIAL_STEP_IDS.length; i++) {
+						steps[TUTORIAL_STEP_IDS[i]!] = value?.[i] === '1' ? 1 : 0;
+					}
+				}
+			}
 		}
-		state.guided = parsed.guided === true;
-		for (const id of TUTORIAL_STEP_IDS) {
-			const value = parsed.steps?.[id];
-			if (value === 0 || value === 1) state.steps[id] = value;
-		}
+		state.guided = guided;
+		state.steps = steps;
 	} catch {}
 	return state;
 }
@@ -66,7 +78,7 @@ export function useTutorialState(): ITutorialState {
 export function saveTutorialState() {
 	if (import.meta.client) {
 		try {
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+			localStorage.setItem(STORAGE_KEY, `v=${state.v};guided=${state.guided};steps=${TUTORIAL_STEP_IDS.map((id) => state.steps[id] ?? 0).join('')}`);
 		} catch {}
 	}
 }
