@@ -28,7 +28,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	openChampSelect: {
 		title: 'select a champion',
-		text: 'Open champ select and choose a champion',
+		text: 'open champ select and choose a champion',
 		// TODO should also handle small screen switching between sources/targets & mirror layout
 		anchor: () => document.querySelector('.select-champion'),
 		completeOn: {
@@ -38,7 +38,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	changeChampionLevel: {
 		title: 'champion level',
-		text: "Champion's level can be changed here",
+		text: 'can be changed here',
 		// TODO should do it in last interacted with damage source
 		anchor: () => document.querySelector('.select-champion-level'),
 		completeOn: {
@@ -47,7 +47,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	openItemShop: {
 		title: 'items',
-		text: 'To buy items, open the item shop',
+		text: 'to buy items, open the item shop',
 		// TODO should do it in last interacted with damage source
 		anchor: () => document.querySelector('.select-items'),
 		completeOn: {
@@ -56,7 +56,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	itemShopFunctionality: {
 		title: 'item shop',
-		text: "The item shop functions the same way the game's does. Right or double click/tap to buy items, right click in the to sell. ",
+		text: "functions the same way the game's does. Right or double click/tap to buy items, right click in the inventory to sell.",
 		within: 'dialog-item-shop',
 		showOn: {
 			itemShopOpened: true,
@@ -67,7 +67,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	viewExtraComponent: {
 		title: 'configuring passives',
-		text: 'Some champions, items or effects are configurable through elements that will be shown here when applicable',
+		text: 'some champions, items or effects are configurable through elements that will be shown here when applicable',
 		// TODO should do it in last interacted with damage source
 		anchor: () => document.querySelector('.extras')?.firstElementChild,
 		showOn: {

@@ -259,39 +259,47 @@ onBeforeUnmount(() => {
 		}
 
 		> h1 {
-			--at-apply: 'text-white font-600 col-span-full mbe-1 text-center text-xl';
+			--at-apply: 'text-white font-600';
 		}
 
-		&:not([data-current-step='greeting']) > h1 {
-			--at-apply: 'text-lg leading-6';
+		&[data-current-step='greeting'] {
+			--at-apply: 'grid-cols-2';
+
+			> h1 {
+				--at-apply: 'col-span-full mbe-1 text-xl text-center';
+			}
+		}
+
+		&:not([data-current-step='greeting']) {
+			--at-apply: 'grid-cols-[minmax(0,1fr)_max-content]';
+
+			> h1 {
+				--at-apply: 'text-lg leading-none self-center text-start';
+			}
 		}
 
 		> p {
 			--at-apply: 'mbe-3 col-span-full text-neutral-200 text-center text-lg';
-
-			> kbd {
-				--at-apply: 'font-inherit';
-			}
 		}
 
-		> div {
-			--at-apply: 'col-span-full';
-		}
-
-		> footer {
-			--at-apply: 'col-span-full mbs-0 b-0 pbs-0 text-center';
+		> .game-description {
+			--at-apply: 'col-span-full b-0 pbs-1';
 		}
 
 		> .pretend-ui-btn {
 			--at-apply: 'inline-12 text-center text-lg block-8';
 		}
 
+		> footer {
+			--at-apply: 'col-span-full mbs-3 b-0 pbs-0 text-center';
+		}
+
 		#tutorial-yes {
-			--at-apply: 'justify-self-end hoverable:bg-green-500 mbe-3';
+			--at-apply: 'justify-self-end hoverable:bg-green-500';
 		}
 
 		#tutorial-ok {
-			--at-apply: 'block justify-self-end px-2.5 mbs-2.5 col-span-full text-base';
+			--at-apply: 'block inline-max block-[--manipulate-btn-size] px-2.5 text-base row-start-1 col-start-2';
 		}
 	}
 }
