@@ -39,7 +39,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			GameAbilityId.build(AbilityType.champion, 'Amumu', 'passive', 0),
 			'applyPassive',
 			'Cursed Touch',
-			undefined,
+			true,
 			true,
 			"Used in the basic attack damage results. Abilities' values do not factor it in. (TODO - not implemented yet)",
 		),

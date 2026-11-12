@@ -266,7 +266,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 			let computedLabel =
 				abilityId.type === AbilityType.champion ? `[${abilityId.abilityKey === 'passive' ? 'P' : abilityId.abilityKey.toUpperCase()}]${labelPrefixApply ? ' apply' : ''} ${label}` : `${labelPrefixApply ? 'apply ' : ''}${label}`;
 			if (labelAppendOnTarget) {
-				computedLabel = `${label} on target`;
+				computedLabel = `${computedLabel} on target`;
 			}
 
 			return () =>
