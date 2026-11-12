@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { ComponentExposed } from 'vue-component-type-helpers';
-import type { TheTutorial } from '#components';
+import { tutorialRequest, resetTutorialStep } from '~/utils/tutorial';
 
 const { damageSources } = useCalculatorState();
 const { saveState } = useManageCalculatorState();
@@ -23,16 +22,8 @@ function saveStateOnVisibilitychange() {
 	document.hidden && saveState();
 }
 
-const showTutorial = ref(false);
-const tutorialChangedAt = new Date(2026, 11, 10);
-
 onMounted(() => {
 	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
-
-	const tutorialFinishedAt = localStorage.getItem('lolcalc-tutorial-finished-at');
-	if (!tutorialFinishedAt || new Date(tutorialFinishedAt) > tutorialChangedAt) {
-		showTutorial.value = true;
-	}
 });
 
 onBeforeUnmount(() => {
@@ -40,26 +31,15 @@ onBeforeUnmount(() => {
 });
 
 const resultsTable = useTemplateRef('resultsTable');
-const tutorialEl = useTemplateRef('theTutorial');
-
-const resetTutorial = import.meta.dev
-	? () => {
-			if (!tutorialEl.value) {
-				showTutorial.value = true;
-			} else if (tutorialEl.value) {
-				(tutorialEl.value as unknown as ComponentExposed<typeof TheTutorial>).reset();
-			}
-		}
-	: undefined;
 
 defineExpose({ resultsTable });
 </script>
 
 <template>
 	<main id="index">
-		<LazyTheTutorial v-if="showTutorial" ref="theTutorial" />
+		<LazyTheTutorial v-if="tutorialRequest" />
 		<DevOnly>
-			<button id="tmp-reset-tutorial" class="pretend-ui-btn" @click="resetTutorial">TMP</button>
+			<button id="tmp-reset-tutorial" class="pretend-ui-btn" @click="resetTutorialStep('all')">TMP</button>
 		</DevOnly>
 		<CalculatorScoreboard />
 		<section id="results">

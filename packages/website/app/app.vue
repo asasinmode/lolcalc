@@ -109,11 +109,24 @@ const header = useTemplateRef('header');
 const menuBtn = useTemplateRef('menuBtn');
 const page = useTemplateRef('page');
 
+const router = useRouter();
 const route = useRoute();
 
 let observer: IntersectionObserver | undefined;
 
 onMounted(() => {
+	/* tutorial state */
+	{
+		initTutorialState();
+		const { ttl: tutorialStep, ...routeQuery } = route.query;
+		if (tutorialStep) {
+			router.replace({ query: routeQuery });
+		}
+		const load = () => (isTutorialStepId(tutorialStep) ? requestTutorial({ force: tutorialStep }) : shouldLoadTutorial() && requestTutorial());
+		'requestIdleCallback' in window ? requestIdleCallback(load, { timeout: 2000 }) : setTimeout(load, 1);
+	}
+
+	/* calculator state */
 	callOnce(() => {
 		let params: URLSearchParams;
 		const storageState = window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY);
