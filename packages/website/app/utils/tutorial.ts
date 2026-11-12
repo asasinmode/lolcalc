@@ -3,11 +3,11 @@ import { shallowRef } from 'vue';
 
 /** map of step id to step kind, where `0` means guided, `1` means general */
 export const tutorialStepKinds = {
-	greeting: 0,
-	openChampSelect: 1,
-	changeChampionLevel: 1,
-	openItemShop: 1,
-	itemShopFunctionality: 0,
+	greeting: 1,
+	openChampSelect: 0,
+	changeChampionLevel: 0,
+	openItemShop: 0,
+	itemShopFunctionality: 1,
 	viewExtraComponent: 1,
 } as const satisfies Record<string, number>;
 
@@ -70,7 +70,7 @@ export function saveTutorialState() {
 
 /** executed on index page's mounted */
 export function shouldLoadTutorial(): boolean {
-	return TUTORIAL_STEP_IDS.some((id) => !state.steps[id]);
+	return TUTORIAL_STEP_IDS.some((id) => !state.steps[id] && (tutorialStepKinds[id] || state.guided));
 }
 
 export function isTutorialStepId(value: unknown): value is ITutorialStepId {
@@ -123,5 +123,6 @@ export function resetTutorialStep(id: ITutorialStepId | 'all') {
 	} else {
 		state.steps[id] = undefined;
 	}
+	saveTutorialState();
 	sink ? sink.reload() : requestTutorial();
 }
