@@ -271,7 +271,7 @@ onBeforeUnmount(() => {
 		}
 
 		&:not([data-current-step='greeting']) {
-			--at-apply: 'grid-cols-[minmax(0,1fr)_max-content]';
+			--at-apply: 'grid-cols-[minmax(0,1fr)_max-content] gap-x-6';
 
 			> h1 {
 				--at-apply: 'text-lg leading-none self-center text-start';
