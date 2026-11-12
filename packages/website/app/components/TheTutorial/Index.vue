@@ -235,19 +235,18 @@ onBeforeUnmount(() => {
 	<article id="tutorial-popover" ref="el" popover="manual" class="hover-tooltip custom" :class="{ 'rotating-glow': isGreeting }" :data-current-step="currentStepId" @keydown="onKeydown">
 		<h1>{{ step?.title }}</h1>
 		<template v-if="isGreeting">
-			<p><strong>lolcalc</strong> can be daunting at first. Want an interactive tutorial?</p>
+			<p><strong>lolcalc</strong> can be daunting at first. want an interactive tutorial?</p>
 			<button id="tutorial-yes" class="pretend-ui-btn" @click="selectTutorialMode(true)">yes</button>
 			<button class="pretend-ui-btn remove" @click="selectTutorialMode(false)">no</button>
-			<p>If you feel lost or something's unclear, visit the <NuxtLink to="/guide">guide page</NuxtLink></p>
-			<footer>
-				<p class="touch-only">long press something to show a tooltip (if it has one)</p>
-				<p>for most tooltips, press <kbd>[K]</kbd> when it's visible to pin it</p>
-			</footer>
+			<footer>If you feel lost or something's unclear, visit the <NuxtLink to="/guide">guide page</NuxtLink></footer>
 		</template>
 		<template v-else>
 			<div v-html="step?.text" class="game-description" />
 			<button id="tutorial-ok" class="pretend-ui-btn" @click="ackCurrentStep">ok</button>
 		</template>
+		<!-- TODO show these somewhere -->
+		<!-- <p class="touch-only">long press something to show a tooltip (if it has one)</p> -->
+		<!-- <p class="alert">for most tooltips, press <kbd>[K]</kbd> when it's visible to pin it</p> -->
 	</article>
 </template>
 
@@ -255,7 +254,7 @@ onBeforeUnmount(() => {
 @layer components {
 	#tutorial-popover {
 		--at-apply: 'grid-cols-2 auto-rows-min gap-x-3 z-99 shadow-lg';
-		--tooltip-max-w: calc(120 * var(--spacing));
+		--tooltip-max-w: calc(124 * var(--spacing));
 		--glow-duration: 3s;
 
 		&:popover-open {
@@ -270,21 +269,24 @@ onBeforeUnmount(() => {
 			--at-apply: 'text-lg leading-6';
 		}
 
-		> p,
-		> div {
-			--at-apply: 'col-span-full text-neutral-200';
+		> p {
+			--at-apply: 'mbe-3 col-span-full text-neutral-200 text-center text-lg';
+
+			> kbd {
+				--at-apply: 'font-inherit';
+			}
 		}
 
-		> p {
-			--at-apply: 'mbe-3';
+		> div {
+			--at-apply: 'col-span-full';
 		}
 
 		> footer {
-			--at-apply: 'col-span-full text-end mt-0';
+			--at-apply: 'col-span-full mbs-0 b-0 pbs-0 text-center';
 		}
 
 		> .pretend-ui-btn {
-			--at-apply: 'px-2 block-[--manipulate-btn-size] inline-max';
+			--at-apply: 'inline-12 text-center text-lg block-8';
 		}
 
 		#tutorial-yes {
@@ -292,7 +294,7 @@ onBeforeUnmount(() => {
 		}
 
 		#tutorial-ok {
-			--at-apply: 'block justify-self-end px-2.5 mbs-2.5 col-span-full';
+			--at-apply: 'block justify-self-end px-2.5 mbs-2.5 col-span-full text-base';
 		}
 	}
 }

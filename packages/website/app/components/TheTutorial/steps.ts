@@ -27,7 +27,7 @@ export interface ITutorialStepDef {
 
 export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	greeting: {
-		title: 'first time?',
+		title: 'welcome',
 	},
 	openChampSelect: {
 		title: 'select a champion',
