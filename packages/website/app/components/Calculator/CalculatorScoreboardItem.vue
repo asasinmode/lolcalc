@@ -225,6 +225,8 @@ function onDetailsToggle(event: ToggleEvent) {
 	isExpanded.value = event.newState === 'open';
 	if (isExpanded.value) {
 		tutorialEvent('damageSourceExpanded', { damageSource: props.value.id }, props.value.listedChampion.value?.id);
+	} else {
+		tutorialEvent('damageSourceAdjusted', { damageSource: undefined });
 	}
 }
 

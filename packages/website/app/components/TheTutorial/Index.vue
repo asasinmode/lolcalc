@@ -21,6 +21,7 @@ let lastInteractedIds: ITutorialEventSourceIds = {};
 /** <main id="index"> */
 let originalParent: ParentNode | null = null;
 let highlightedEl: Element | undefined;
+let currentAnchor: HTMLElement | null | undefined;
 let raf = 0;
 let focusNext = false;
 
@@ -31,9 +32,9 @@ function isDone(id: ITutorialStepId) {
 function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: any) {
 	const completeStepIds = TUTORIAL_EVENT_TO_STEP_IDS.completeOn[name];
 	if (completeStepIds?.length) {
-		if (eventSourceIds.damageSource) lastInteractedIds.damageSource = eventSourceIds.damageSource;
-		if (eventSourceIds.resultColumn) lastInteractedIds.resultColumn = eventSourceIds.resultColumn;
-		if (eventSourceIds.resultSection) lastInteractedIds.resultSection = eventSourceIds.resultSection;
+		if ('damageSource' in eventSourceIds) lastInteractedIds.damageSource = eventSourceIds.damageSource;
+		if ('resultColumn' in eventSourceIds) lastInteractedIds.resultColumn = eventSourceIds.resultColumn;
+		if ('resultSection' in eventSourceIds) lastInteractedIds.resultSection = eventSourceIds.resultSection;
 
 		let stepCompleted = false;
 		for (const stepId of completeStepIds) {
@@ -43,6 +44,10 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 			}
 		}
 		stepCompleted && saveTutorialState();
+	}
+
+	if (currentStepId.value && (['damageSourceAdjusted', 'damageSourceExpanded'] as ITutorialEvent[]).includes(name) && tutorialSteps[currentStepId.value].type === 'damageSource') {
+		repositionCurrentStep();
 	}
 
 	const showableStepIds = TUTORIAL_EVENT_TO_STEP_IDS.showOn[name]?.filter((stepId) => !isDone(stepId));
@@ -99,7 +104,7 @@ function scheduleUpdate(focus = false) {
 
 interface IPickedStep {
 	id: ITutorialStepId;
-	anchor?: Element | null;
+	anchor?: HTMLElement | null;
 	targetParent?: HTMLElement | null;
 }
 
@@ -155,14 +160,14 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 
 	queryTarget ??= document;
 	if (typeof stepDef.anchor === 'string') {
-		const targets = queryTarget.querySelectorAll(stepDef.anchor);
+		const targets = queryTarget.querySelectorAll<HTMLElement>(stepDef.anchor);
 		for (const target of targets) {
 			if (target.checkVisibility()) {
 				return target;
 			}
 		}
 	} else {
-		const targets = queryTarget.querySelectorAll(stepDef.anchor[0]);
+		const targets = queryTarget.querySelectorAll<HTMLElement>(stepDef.anchor[0]);
 		for (const target of targets) {
 			const refinedTarget = stepDef.anchor[1](target);
 			if (refinedTarget?.checkVisibility()) {
@@ -183,15 +188,16 @@ function show(pick: IPickedStep, focus: boolean) {
 
 	el.value.toggleAttribute('data-anchored', !!pick.anchor);
 	if (pick.anchor) {
-		highlightedEl = tutorialSteps[pick.id].glow?.(pick.anchor) ?? pick.anchor;
+		highlightedEl = pick.anchor;
 		highlightedEl.classList.add(GLOW_CLASS);
 	} else {
 		el.value.classList.add(GLOW_CLASS);
 	}
-	// TODO check if needs anchor-name management
 	el.value.showPopover((pick.anchor ? { source: pick.anchor } : pick.targetParent ? { source: pick.targetParent } : undefined) as ShowPopoverOptions | undefined);
+	currentAnchor = pick.anchor;
 
-	if (focus || pick.id === 'greeting') el.value.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
+	// TODO check scrolling
+	if (focus || pick.id === 'greeting' || pick.id === 'beforeYouStart') el.value.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
 }
 
 function hide() {
@@ -202,13 +208,32 @@ function hide() {
 	currentStepId.value = undefined;
 }
 
+function repositionCurrentStep() {
+	if (!currentStepId.value || currentAnchor?.checkVisibility()) return;
+
+	const stepDef = tutorialSteps[currentStepId.value];
+	const viableAnchor = findStepAnchor(stepDef);
+	if (viableAnchor === false) {
+		hide();
+		return;
+	}
+
+	/* preferrably would be done using position-anchor manipulation on current/viable anchors but I couldn't get it to work. Will have to be revisited, especially if it causes keyboard nav/screen reader issues */
+	if (viableAnchor && viableAnchor !== currentAnchor) {
+		el.value?.hidePopover();
+		el.value?.showPopover({ source: viableAnchor });
+	}
+}
+
 function reset() {
 	hide();
 	notDoneGuidedStepIds.clear();
 	pendingGeneralSteps.length = 0;
-	for (const id of TUTORIAL_STEP_IDS) {
-		if (!tutorialStepKinds[id] && !isDone(id)) {
-			notDoneGuidedStepIds.add(id);
+	if (tutorialState.guided) {
+		for (const id of TUTORIAL_STEP_IDS) {
+			if (!tutorialStepKinds[id] && !isDone(id)) {
+				notDoneGuidedStepIds.add(id);
+			}
 		}
 	}
 	if (!isDone('greeting')) pendingGeneralSteps.unshift('greeting');

@@ -11,10 +11,11 @@ export interface ITutorialStepDef {
 	type: 'global' | 'damageSource' | 'resultColumn' | 'resultSection';
 	/** will be v-htmled into a `div.game-description` of TheTutorial */
 	text?: string;
-	/** element the tutorial should call `showPopover({ source })` with. If tuple, will run the selector then refine function on each of its results, until it finds one that's `checkVisibility()` */
-	anchor?: string | [query: string, refine: (element: Element) => Element | undefined | null];
-	/** element that receives `rotating-glow`, defaults to the anchor */
-	glow?: (anchor: Element) => Element;
+	/**
+	 * element the tutorial should call `showPopover({ source })` with. If tuple, will run the selector then refine function on each of its results, until it finds one that's `checkVisibility()`
+	 * !IMPORTANT elements shouldn't have style attribute, it's used for anchor management
+	 */
+	anchor?: string | [query: string, refine: (element: HTMLElement) => HTMLElement | undefined | null];
 	/** id of an element the tutorial should move to be a child of (like when the step is inside a dialog) */
 	within?: string;
 	/** general steps: any of these will try to show the step when it returns `true` */
@@ -75,7 +76,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'configuring passives',
 		type: 'damageSource',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
-		anchor: ['.extras', (el) => el.firstElementChild],
+		anchor: ['.extras', (el) => el.firstElementChild as HTMLElement | null],
 		showOn: {
 			damageSourceExpanded(championId) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
@@ -103,7 +104,7 @@ export const TUTORIAL_EVENT_TO_STEP_IDS = {
 	),
 	showOn: Object.entries(tutorialSteps).reduce(
 		(acc, [currId, currDef]) => {
-			if (currDef.completeOn) {
+			if (currDef.showOn) {
 				for (const eventName in currDef.showOn) {
 					acc[eventName as ITutorialEvent] ??= [];
 					acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);

@@ -90,6 +90,7 @@ function onDrop(event: DragEvent, index: number, target: DamageSource[], isList 
 	}
 
 	dragging.value = undefined;
+	nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: newItem.id }));
 }
 
 function getDropTargetIndex(event: DragEvent, index: number, target: DamageSource[], fromIndex: number, source: DamageSource[]): [toIndex: number | undefined, fromIndex: number | undefined] {
@@ -144,6 +145,7 @@ function remove(index: number, target: DamageSource[]) {
 	for (const unwatch of damageSource!.internalData.value._watchHandles || []) {
 		unwatch();
 	}
+	nextTick(() => tutorialEvent('damageSourceAdjusted', {}));
 }
 
 function add(target: DamageSource[]) {
@@ -178,11 +180,18 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 	} else {
 		into[0] = newItem;
 	}
+	nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: newItem.id }));
 }
 
 function move(index: number, target: DamageSource[], toIndex: number, alt: boolean) {
 	const newItem = alt ? target[index]!.clone() : target.splice(index, 1)[0]!;
 	target.splice(toIndex, 0, newItem);
+	!alt && nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: newItem.id }));
+}
+
+function clearSource(source: DamageSource) {
+	source.clear();
+	nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: source.id }));
 }
 
 let itemDragData:
@@ -308,7 +317,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 					:data-drop-direction="dragDropTarget === damageSources ? (dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined) : undefined"
 					data-group="sources"
 					@mounted="isSourcesMounted = true"
-					@clear="value.clear()"
+					@clear="clearSource(value)"
 					@remove="remove(index, damageSources)"
 					@duplicate="duplicate(index, damageSources, $event)"
 					@change-group="changeGroup(index, damageSources, $event)"
@@ -348,7 +357,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 					data-group="targets"
 					is-right
 					@mounted="isTargetsMounted = true"
-					@clear="value.clear()"
+					@clear="clearSource(value)"
 					@remove="remove(index, damageTargets)"
 					@duplicate="duplicate(index, damageTargets, $event)"
 					@change-group="changeGroup(index, damageTargets, $event)"
