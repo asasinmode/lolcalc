@@ -19,7 +19,7 @@ const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.v
 
 <template>
 	<p class="expanded-ctl" @touchstart.stop.prevent="toggle">
-		<span class="kbd-only">
+		<span class="mouse-only">
 			{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>{{ kbd }}</kbd>
 		</span>
 		<span class="touch-only">Tap here</span>

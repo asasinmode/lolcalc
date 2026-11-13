@@ -67,7 +67,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	viewExtraComponent: {
 		title: 'configuring passives',
-		text: 'some champions, items or effects are configurable through elements that will be shown below the general configuration',
+		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
 		// TODO should do it in last interacted with damage source
 		anchor: () => document.querySelector('.extras')?.firstElementChild,
 		showOn: {

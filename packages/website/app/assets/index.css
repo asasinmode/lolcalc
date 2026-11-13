@@ -66,6 +66,7 @@
 	}
 
 	body {
+		display: flex;
 		font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
 		min-block-size: 100%;
 		background-color: var(--mauve-bg);
@@ -336,7 +337,7 @@
 	}
 
 	@media not ((hover: hover) and (pointer: fine)) {
-		.kbd-only {
+		.mouse-only {
 			--at-apply: 'hidden';
 		}
 

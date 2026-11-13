@@ -2798,6 +2798,7 @@ defineExpose({ el });
 			anchor-scope: --extra-container, --parent;
 			anchor-name: --extra-container;
 			--ctl-btn-size: var(--fluid-28-22-t600);
+			--glow-duration: 3s;
 
 			&.unknown,
 			&.loading {

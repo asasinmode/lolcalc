@@ -374,7 +374,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 <style>
 @layer components {
 	#scoreboard {
-		--at-apply: 'b-b b-neutral-500 mbs-[--fluid-8-20-t768] relative mx-auto';
+		--at-apply: 'b-b b-neutral-700 mbs-[--fluid-8-20-t768] relative mx-auto';
 		--extras-gap: calc(2 * var(--spacing));
 		--extra-cols: 3;
 		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
@@ -407,7 +407,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 			--at-apply: 'mbs-3 mx-auto gap-x-[--scoreboard-gap-x] max-inline-full inline-full grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-[repeat(2,minmax(0,var(--scoreboard-item-max-w)))] relative pb-2 justify-center';
 
 			&::after {
-				--at-apply: 'bg-neutral-500 w-px content-empty start-1/2 top-2 bottom-0 absolute -translate-x-1/2';
+				--at-apply: 'bg-neutral-700 w-px content-empty start-1/2 top-2 bottom-0 absolute -translate-x-1/2';
 			}
 
 			> h3 {
