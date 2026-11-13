@@ -206,7 +206,7 @@ function show(pick: IPickedStep, focus: boolean) {
 		popover.classList.add(GLOW_CLASS);
 	}
 	// TODO check if needs anchor-name management
-	popover.showPopover((pick.anchor ? { source: pick.anchor } : undefined) as ShowPopoverOptions | undefined);
+	popover.showPopover((pick.anchor ? { source: pick.anchor } : pick.targetParent ? { source: pick.targetParent } : undefined) as ShowPopoverOptions | undefined);
 
 	if (focus || pick.id === 'greeting') popover.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
 }
@@ -218,18 +218,6 @@ function hide() {
 	glowEl = undefined;
 	anchorEl = undefined;
 	currentStepId.value = undefined;
-}
-
-/** tab out of the popover's lands on the step's target instead of whatever follows the invoker. */
-function onKeydown(e: KeyboardEvent) {
-	if (e.key !== 'Tab' || e.shiftKey || !el.value || !anchorEl) return;
-	const items = [...el.value.querySelectorAll<HTMLElement>(FOCUSABLE)].filter((item) => item.checkVisibility());
-	if (items.at(-1) !== document.activeElement) return;
-	const target = anchorEl.matches(FOCUSABLE) ? (anchorEl as HTMLElement) : anchorEl.querySelector<HTMLElement>(FOCUSABLE);
-	if (target) {
-		e.preventDefault();
-		target.focus();
-	}
 }
 
 watch(tutorialRequest, (request) => {
@@ -253,7 +241,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<article id="tutorial-popover" ref="el" popover="manual" class="hover-tooltip custom" :class="{ 'rotating-glow': isGreeting }" :data-current-step="currentStepId" @keydown="onKeydown">
+	<article id="tutorial-popover" ref="el" popover="manual" class="hover-tooltip custom" :class="{ 'rotating-glow': isGreeting }" :data-current-step="currentStepId">
 		<h1>{{ step?.title }}</h1>
 		<template v-if="isGreeting">
 			<p><strong>lolcalc</strong> can be daunting at first. want an interactive tutorial?</p>
