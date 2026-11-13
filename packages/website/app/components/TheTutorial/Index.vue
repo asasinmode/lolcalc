@@ -20,10 +20,11 @@ const currentStepId = shallowRef<ITutorialStepId>();
 const step = computed(() => (currentStepId.value ? tutorialSteps[currentStepId.value] : undefined));
 const isGreeting = computed(() => currentStepId.value === 'greeting');
 
-/** general steps that were triggered and aren't done yet -> the event that triggered them (anchor gets it) */
+/** general steps that were triggered and aren't done yet to the event that triggered them */
 const pending = new Map<ITutorialStepId, IEventCause | undefined>();
 let lastEvent: IEventCause | undefined;
 let forcedId: ITutorialStepId | undefined;
+/** <main id="index"> */
 let homeParent: ParentNode | null = null;
 let anchorEl: Element | null | undefined;
 let glowEl: Element | undefined;
@@ -213,7 +214,7 @@ watch(tutorialRequest, (request) => {
 });
 
 onMounted(() => {
-	homeParent = el.value!.parentNode;
+	homeParent = document.getElementById('index');
 	reload();
 	const request = tutorialRequest.value;
 	if (request && request.force) forceShow(request.force);

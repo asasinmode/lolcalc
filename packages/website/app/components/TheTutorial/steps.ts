@@ -60,7 +60,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	},
 	itemShopFunctionality: {
 		title: 'item shop',
-		text: "functions the same way the game's does. Right or double click/tap to buy items, right click in the inventory panel to sell",
+		text: 'functions the same way the game\'s does. <span class="mouse-only">Right or double click items to buy them, right click in the inventory panel to sell</span><span class="touch-only">Double tap to buy items, select one in inventory then press "sell" button to sell</span>',
 		within: 'dialog-item-shop',
 		showOn: {
 			itemShopOpened: true,
@@ -73,7 +73,13 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'configuring passives',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
 		// TODO should do it in last interacted with damage source
-		anchor: () => document.querySelector('.extras')?.firstElementChild,
+		anchor: () => {
+			for (const el of document.querySelectorAll('.extras')) {
+				if (el.checkVisibility()) {
+					return el.firstElementChild;
+				}
+			}
+		},
 		showOn: {
 			damageSourceExpanded(championId) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
