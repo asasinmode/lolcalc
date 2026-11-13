@@ -27,6 +27,7 @@ import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
 import { ExtraLoading } from '~/utils/component';
 import { gameImageAttrs } from '~/utils/image';
+import { tutorialEvent } from '~/utils/tutorial';
 
 const props = defineProps<{
 	index: number;
@@ -1300,6 +1301,7 @@ defineExpose({ el });
 							value-key="level"
 							:clear-value="0"
 							@option-right-click="(event) => resetAbilityLevel(event, abilityKey)"
+							@focusin="tutorialEvent('abilityLevelFocused', { damageSource: value.id })"
 						>
 							<template #default="{ option }">
 								<span>{{ option.level }}</span>
@@ -1431,7 +1433,7 @@ defineExpose({ el });
 					/>
 				</section>
 			</div>
-			<section ref="extras" class="extras" :inert="value.isLoading.value">
+			<section ref="extras" class="extras" :inert="value.isLoading.value" @focusin="tutorialEvent('extraComponentFocused', { damageSource: value.id })">
 				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
 					<component :is :id-suffix :damage-source="value" :tooltip-trigger-attrs="extraBindChampionAbilityTooltipAttrs" />
 					<template #fallback>

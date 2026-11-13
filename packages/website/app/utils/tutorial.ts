@@ -9,6 +9,7 @@ export const tutorialStepKinds = {
 	changeChampionLevel: 0,
 	openItemShop: 0,
 	itemShopFunctionality: 1,
+	changeAbilityLevel: 0,
 	viewExtraComponent: 1,
 } as const satisfies Record<string, number>;
 
@@ -24,8 +25,8 @@ export interface TutorialEvents {
 	damageSourceExpanded: IChampionId | undefined;
 	champSelectClosed: IChampionId | undefined;
 	sourceLevelSelectFocused: void;
-	// TODO add eventing in scoreboard item
-	extraComponentInteracted: void;
+	abilityLevelFocused: void;
+	extraComponentFocused: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

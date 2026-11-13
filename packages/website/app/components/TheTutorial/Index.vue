@@ -132,14 +132,16 @@ function updatePopup(focus: boolean) {
 		}
 	}
 
-	show({ id: stepToDisplayId, targetParent, anchor: findStepAnchor(stepDef) }, focus);
+	const anchor = findStepAnchor(stepDef);
+	if (anchor !== false) show({ id: stepToDisplayId, targetParent, anchor }, focus);
 }
 
 let scoreboardEl: HTMLElement | null = null;
 let scoreboardSources: HTMLElement | null = null;
 let scoreboardTargets: HTMLElement | null = null;
 
-function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] {
+/** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
+function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
 	if (!stepDef.anchor) return;
 	let queryTarget: HTMLElement | Document | null = null;
 	if (stepDef.type === 'damageSource') {
@@ -168,7 +170,7 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] {
 			}
 		}
 	}
-	console.warn('[TheTutorial findStepAnchor] no viable anchor for', stepDef);
+	return false;
 }
 
 function show(pick: IPickedStep, focus: boolean) {

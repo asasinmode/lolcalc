@@ -64,6 +64,13 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		},
 		completeOn: ['itemShopClosed'],
 	},
+	changeAbilityLevel: {
+		title: 'ability levels',
+		type: 'damageSource',
+		text: 'can be changed with the dots below their icons',
+		anchor: '[data-ability] .v-button-radiogroup',
+		completeOn: ['abilityLevelFocused'],
+	},
 	viewExtraComponent: {
 		title: 'configuring passives',
 		type: 'damageSource',
@@ -77,7 +84,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
 			},
 		},
-		completeOn: ['extraComponentInteracted'],
+		completeOn: ['extraComponentFocused'],
 	},
 };
 
