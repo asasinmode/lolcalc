@@ -291,6 +291,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 		<div ref="listContainer" :class="{ 'displaying-targets': isDisplayingTargets }">
 			<h3>damage sources</h3>
 			<ul
+				id="scoreboard-sources"
 				@dragenter="onDragenter($event, damageSources.length - 1, damageSources, true)"
 				@dragover="onDragover($event, damageSources.length - 1, damageSources, true)"
 				@dragleave="onDragleave"
@@ -329,6 +330,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScro
 			</ul>
 			<h3>damage targets</h3>
 			<ul
+				id="scoreboard-targets"
 				@dragenter="onDragenter($event, damageTargets.length - 1, damageTargets, true)"
 				@dragover="onDragover($event, damageTargets.length - 1, damageTargets, true)"
 				@dragleave="onDragleave"

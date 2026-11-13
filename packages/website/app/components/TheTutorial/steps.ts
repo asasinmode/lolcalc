@@ -1,17 +1,18 @@
 import { CHAMPION_COMPONENTS } from '~/components/Champion/index.ts';
 import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
 
-// TODO simplify, maybe an array or just string/function checking if event is the wanted one would be more efficient
 type ITutorialStepTriggers = {
 	[K in ITutorialEvent]?: true | ((data: TutorialEvents[K]) => boolean);
 };
 
 export interface ITutorialStepDef {
 	title: string;
+	/** used for selecting el.querySelector targets, as well as updating the popup's position when a destructive event happens to something the type is associated with (like damage source moved = need to reposition tutorial) */
+	type: 'global' | 'damageSource' | 'resultColumn' | 'resultSection';
 	/** will be v-htmled into a `div.game-description` of TheTutorial */
 	text?: string;
-	/** element the tutorial should call `showPopover({ source })` with. If `undefined`, step is skipped with warning */
-	anchor?: <T extends ITutorialEvent>(sourceIds: ITutorialEventSourceIds, event?: T, data?: TutorialEvents[T]) => Element | undefined | null;
+	/** element the tutorial should call `showPopover({ source })` with. If tuple, will run the selector then refine function on each of its results, until it finds one that's `checkVisibility()` */
+	anchor?: string | [query: string, refine: (element: Element) => Element | undefined | null];
 	/** element that receives `rotating-glow`, defaults to the anchor */
 	glow?: (anchor: Element) => Element;
 	/** id of an element the tutorial should move to be a child of (like when the step is inside a dialog) */
@@ -19,67 +20,55 @@ export interface ITutorialStepDef {
 	/** general steps: any of these will try to show the step when it returns `true` */
 	showOn?: ITutorialStepTriggers;
 	/** these mark the step `done` when any of these returns `true` */
-	completeOn?: ITutorialStepTriggers;
+	completeOn?: ITutorialEvent[];
 }
 
 export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	greeting: {
 		title: 'welcome',
+		type: 'global',
 	},
 	beforeYouStart: {
 		title: 'before you start',
+		type: 'global',
 		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press <kbd>[K]</kbd> to pin a tooltip that's currently visible (not needed on phones)</li>",
 	},
 	openChampSelect: {
 		title: 'select a champion',
+		type: 'damageSource',
 		text: 'open champ select by clicking on the portrait',
-		anchor: ({ damageSource }) => damageSourceAnchor(damageSource).querySelector('.select-champion'),
-		completeOn: {
-			champSelectOpened: true,
-			champSelectClosed: true,
-		},
+		anchor: '.select-champion',
+		completeOn: ['champSelectClosed', 'champSelectOpened'],
 	},
 	changeChampionLevel: {
 		title: 'champion level',
+		type: 'damageSource',
 		text: 'can be changed by clicking the number next to their portrait',
-		anchor: ({ damageSource }) => damageSourceAnchor(damageSource).querySelector('.select-champion-level'),
-		completeOn: {
-			sourceLevelSelectFocused: true,
-		},
+		anchor: '.select-champion-level',
+		completeOn: ['sourceLevelSelectFocused'],
 	},
 	openItemShop: {
 		title: 'items',
+		type: 'damageSource',
 		text: 'to buy items, open the item shop with the "items" button or by clicking on the inventory next to it',
-		anchor: ({ damageSource }) => damageSourceAnchor(damageSource).querySelector('.select-items'),
-		completeOn: {
-			itemShopOpened: true,
-		},
+		anchor: '.select-items',
+		completeOn: ['itemShopOpened'],
 	},
 	itemShopFunctionality: {
 		title: 'item shop',
+		type: 'global',
 		text: 'functions the same way the game\'s does. <span class="mouse-only">Right or double click items to buy them, right click in the inventory panel to sell</span><span class="touch-only">Double tap to buy items, select one in inventory then press "sell" button to sell</span>',
 		within: 'dialog-item-shop',
 		showOn: {
 			itemShopOpened: true,
 		},
-		completeOn: {
-			itemShopClosed: true,
-		},
+		completeOn: ['itemShopClosed'],
 	},
 	viewExtraComponent: {
 		title: 'configuring passives',
+		type: 'damageSource',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
-		anchor: ({ damageSource }) => {
-			const lastDamageSourceExtras = (damageSource ? document.getElementById(`si-${damageSource}`) : null)?.querySelector('.extras');
-			if (lastDamageSourceExtras?.checkVisibility() && lastDamageSourceExtras.firstElementChild) {
-				return lastDamageSourceExtras.firstElementChild;
-			}
-			for (const el of document.querySelectorAll('.extras')) {
-				if (el.checkVisibility()) {
-					return el.firstElementChild;
-				}
-			}
-		},
+		anchor: ['.extras', (el) => el.firstElementChild],
 		showOn: {
 			damageSourceExpanded(championId) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
@@ -88,12 +77,44 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
 			},
 		},
-		completeOn: {
-			extraComponentInteracted: true,
-		},
+		completeOn: ['extraComponentInteracted'],
 	},
 };
 
-function damageSourceAnchor(damageSourceId?: string) {
-	return (damageSourceId ? document.getElementById(`si-${damageSourceId}`) : document) ?? document;
-}
+export const TUTORIAL_EVENT_TO_STEP_IDS = {
+	completeOn: Object.entries(tutorialSteps).reduce(
+		(acc, [currId, currDef]) => {
+			if (currDef.completeOn) {
+				for (const eventName of currDef.completeOn) {
+					acc[eventName] ??= [];
+					acc[eventName]!.push(currId as ITutorialStepId);
+				}
+			}
+			return acc;
+		},
+		{} as Partial<Record<ITutorialEvent, ITutorialStepId[]>>,
+	),
+	showOn: Object.entries(tutorialSteps).reduce(
+		(acc, [currId, currDef]) => {
+			if (currDef.completeOn) {
+				for (const eventName in currDef.showOn) {
+					acc[eventName as ITutorialEvent] ??= [];
+					acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);
+				}
+			}
+			return acc;
+		},
+		{} as Partial<Record<ITutorialEvent, ITutorialStepId[]>>,
+	),
+};
+
+/** used to decide which step should be shown when popover is available. The lower the number, the higher the priority */
+export const TUTORIAL_STEP_PRIORITIES = Object.fromEntries(
+	TUTORIAL_STEP_IDS.map((id) => {
+		if (id === 'greeting' || id === 'beforeYouStart') {
+			return [id, 0];
+		}
+		const def = tutorialSteps[id];
+		return [id, def.within ? 1 : !tutorialStepKinds[id] ? 2 : 3];
+	}),
+) as Record<ITutorialStepId, number>;

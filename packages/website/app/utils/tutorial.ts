@@ -97,7 +97,6 @@ export function isTutorialStepId(value: unknown): value is ITutorialStepId {
 
 export interface ITutorialSink {
 	onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, payload: unknown): void;
-	forceShow(id: ITutorialStepId): void;
 	/** reload after state changed, as if freshly mounted */
 	reload(): void;
 }

@@ -1,17 +1,11 @@
 <script setup vapor lang="ts">
-import type { ITutorialStepId, ITutorialEvent, TutorialEvents } from '~/utils/tutorial';
-import { TUTORIAL_STEP_IDS, attachTutorialSink, saveTutorialState, tutorialRequest, tutorialStepKinds, useTutorialState } from '~/utils/tutorial';
+import type { ITutorialStepId, ITutorialEvent } from '~/utils/tutorial';
+import { TUTORIAL_STEP_IDS, attachTutorialSink, saveTutorialState, tutorialStepKinds, useTutorialState } from '~/utils/tutorial';
 import type { ITutorialStepDef } from './steps';
-import { tutorialSteps } from './steps';
+import { tutorialSteps, TUTORIAL_EVENT_TO_STEP_IDS, TUTORIAL_STEP_PRIORITIES } from './steps';
 
 const GLOW_CLASS = 'rotating-glow';
 const FOCUSABLE = 'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
-interface IEventCause {
-	name: ITutorialEvent;
-	data: unknown;
-	eventSourceIds: ITutorialEventSourceIds;
-}
 
 const tutorialState = useTutorialState();
 const el = useTemplateRef<HTMLElement>('el');
@@ -20,90 +14,74 @@ const currentStepId = shallowRef<ITutorialStepId>();
 const step = computed(() => (currentStepId.value ? tutorialSteps[currentStepId.value] : undefined));
 const isGreeting = computed(() => currentStepId.value === 'greeting');
 
-/** general steps that were triggered and aren't done yet to the event that triggered them */
-const pending = new Map<ITutorialStepId, IEventCause | undefined>();
+const notDoneGuidedStepIds = new Set<ITutorialStepId>();
+/** general steps that are ready to be shown when tutorial is freed up */
+const pendingGeneralSteps: ITutorialStepId[] = [];
 let lastInteractedIds: ITutorialEventSourceIds = {};
-let forcedId: ITutorialStepId | undefined;
 /** <main id="index"> */
-let homeParent: ParentNode | null = null;
-let anchorEl: Element | null | undefined;
-let glowEl: Element | undefined;
+let originalParent: ParentNode | null = null;
+let highlightedEl: Element | undefined;
 let raf = 0;
 let focusNext = false;
-let detach: (() => void) | undefined;
 
 function isDone(id: ITutorialStepId) {
 	return tutorialState.steps[id] === 1;
 }
 
-const TUTORIAL_EVENT_TO_STEP_IDS = Object.entries(tutorialSteps).reduce(
-	(acc, [currId, currDef]) => {
-		if (currDef.completeOn) {
-			for (const eventName in currDef.completeOn) {
-				acc[eventName as ITutorialEvent] ??= [];
-				acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);
+function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: any) {
+	const completeStepIds = TUTORIAL_EVENT_TO_STEP_IDS.completeOn[name];
+	if (completeStepIds?.length) {
+		if (eventSourceIds.damageSource) lastInteractedIds.damageSource = eventSourceIds.damageSource;
+		if (eventSourceIds.resultColumn) lastInteractedIds.resultColumn = eventSourceIds.resultColumn;
+		if (eventSourceIds.resultSection) lastInteractedIds.resultSection = eventSourceIds.resultSection;
+
+		let stepCompleted = false;
+		for (const stepId of completeStepIds) {
+			if (!isDone(stepId)) {
+				completeStep(stepId);
+				stepCompleted = true;
 			}
 		}
-		if (currDef.showOn) {
-			for (const eventName in currDef.showOn) {
-				acc[eventName as ITutorialEvent] ??= [];
-				acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);
-			}
-		}
-		return acc;
-	},
-	{} as Partial<Record<ITutorialEvent, ITutorialStepId[]>>,
-);
-
-function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: unknown) {
-	const cause: IEventCause = { name, data, eventSourceIds };
-	const eventStepIds = TUTORIAL_EVENT_TO_STEP_IDS[name];
-	if (!eventStepIds?.length) return;
-
-	if (eventStepIds.some((id) => tutorialSteps[id].completeOn?.[name])) {
-		lastInteractedIds = { ...lastInteractedIds, ...eventSourceIds };
+		stepCompleted && saveTutorialState();
 	}
 
-	for (const id of eventStepIds) {
-		if (isDone(id)) continue;
-		const def = tutorialSteps[id];
-		if (callStepEventCb(def.completeOn, name, data)) {
-			completeStep(id);
-			continue;
-		}
+	const showableStepIds = TUTORIAL_EVENT_TO_STEP_IDS.showOn[name]?.filter((stepId) => !isDone(stepId));
+	if (!showableStepIds?.length) {
+		if (pendingGeneralSteps.length || (tutorialState.guided && notDoneGuidedStepIds.size)) scheduleUpdate();
+		return;
+	}
 
-		if (tutorialStepKinds[id] || tutorialState.guided) {
-			const show = callStepEventCb(def.showOn, name, data);
-			const isPending = pending.has(id);
+	for (const stepId of showableStepIds) {
+		if (tutorialStepKinds[stepId] || tutorialState.guided) {
+			const stepDef = tutorialSteps[stepId];
+			const pendingIndex = pendingGeneralSteps.indexOf(stepId);
+			const showOn = stepDef.showOn![name];
+			const show = typeof showOn === 'function' ? showOn(data) : showOn;
 			if (show) {
-				!isPending && pending.set(id, cause);
-			} else if (isPending && show === false) {
-				pending.delete(id);
+				pendingIndex === -1 && pendingGeneralSteps.push(stepId);
+			} else if (~pendingIndex && show === false) {
+				pendingGeneralSteps.splice(pendingIndex, 1);
 			}
 		}
 	}
-	scheduleEvaluate();
-}
-
-/** if `undefined`, event was not found in `triggers` (is ignored) */
-function callStepEventCb(triggers: ITutorialStepDef['showOn'], name: ITutorialEvent, data: unknown): boolean | undefined {
-	const trigger = triggers?.[name];
-	if (trigger) {
-		return trigger === true || (trigger as (data: unknown) => boolean)(data);
-	}
+	scheduleUpdate();
 }
 
 function completeStep(id: ITutorialStepId, focus = false) {
-	pending.delete(id);
+	notDoneGuidedStepIds.delete(id);
+	const pendingStepIndex = pendingGeneralSteps.indexOf(id);
+	~pendingStepIndex && pendingGeneralSteps.splice(pendingStepIndex, 1);
+	id === 'greeting' && pendingGeneralSteps.unshift('beforeYouStart');
 	tutorialState.steps[id] = 1;
-	saveTutorialState();
-	if (forcedId === id) forcedId = undefined;
 	currentStepId.value === id && hide();
-	scheduleEvaluate(focus);
+	scheduleUpdate(focus);
 }
 
 function ackCurrentStep() {
-	currentStepId.value && completeStep(currentStepId.value, true);
+	if (currentStepId.value) {
+		completeStep(currentStepId.value, true);
+		saveTutorialState();
+	}
 }
 
 function selectTutorialMode(isGuided: boolean) {
@@ -111,26 +89,11 @@ function selectTutorialMode(isGuided: boolean) {
 	ackCurrentStep();
 }
 
-/** for debug / link to a specific tutorial step (`?ttl=step id`): show regardless of mode and triggers */
-function forceShow(id: ITutorialStepId) {
-	forcedId = id;
-	scheduleEvaluate(true);
-}
-
-/** as if freshly mounted, after the state was changed from outside */
-function reload() {
-	hide();
-	pending.clear();
-	forcedId = undefined;
-	if (!isDone('greeting')) pending.set('greeting', undefined);
-	scheduleEvaluate();
-}
-
-function scheduleEvaluate(focus = false) {
+function scheduleUpdate(focus = false) {
 	focusNext ||= focus;
 	raf ||= requestAnimationFrame(() => {
 		raf = 0;
-		evaluate(focusNext);
+		updatePopup(focusNext);
 		focusNext = false;
 	});
 }
@@ -139,104 +102,135 @@ interface IPickedStep {
 	id: ITutorialStepId;
 	anchor?: Element | null;
 	targetParent?: HTMLElement | null;
-	tier: number;
 }
 
-function evaluate(focus: boolean) {
-	if (!el.value) return;
-	const modal = document.querySelector<HTMLDialogElement>('dialog:modal');
-	/** general (and oldest) first, then guided ones as declared */
-	const order = forcedId ? [forcedId] : [...new Set([...pending.keys(), ...TUTORIAL_STEP_IDS])];
-	let best: IPickedStep | undefined;
+function updatePopup(focus: boolean) {
+	const candidateIds = [...pendingGeneralSteps, ...notDoneGuidedStepIds.values()].filter((stepId) => !isDone(stepId));
+	let stepToDisplayId: ITutorialStepId | undefined = currentStepId.value;
+	let currentStepPriority = stepToDisplayId ? TUTORIAL_STEP_PRIORITIES[stepToDisplayId] : Number.POSITIVE_INFINITY;
 
-	for (const id of order) {
-		if (!forcedId && (isDone(id) || (id !== 'beforeYouStart' && tutorialStepKinds[id] && !pending.has(id)))) {
-			continue;
+	do {
+		const candidateId = candidateIds.shift()!;
+		const candidatePriority = TUTORIAL_STEP_PRIORITIES[candidateId];
+		if (candidatePriority < currentStepPriority) {
+			stepToDisplayId = candidateId;
+			currentStepPriority = candidatePriority;
 		}
+	} while (candidateIds.length);
+	if (!stepToDisplayId || stepToDisplayId === currentStepId.value) return;
 
-		const def = tutorialSteps[id];
-		const targetParent = def.within ? document.getElementById(def.within) : null;
-		if (def.within && !targetParent) continue;
-		if (modal ? !targetParent || !modal.contains(targetParent) : targetParent?.closest('dialog')) continue;
+	const stepDef = tutorialSteps[stepToDisplayId];
 
-		let anchor: IPickedStep['anchor'];
-		if (def.anchor) {
-			if (id === currentStepId.value && anchorEl?.isConnected && anchorEl.checkVisibility()) {
-				/* already displayed on an anchor, don't move on subsequent events */
-				anchor = anchorEl;
-			} else {
-				const cause = pending.get(id);
-				anchor = def.anchor(cause?.eventSourceIds ?? lastInteractedIds, cause?.name, cause?.data as TutorialEvents[ITutorialEvent]);
-			}
-			if (!anchor?.isConnected || !anchor.checkVisibility()) {
-				console.warn(`[TheTutorial evaluate] anchor for "${id}" not found, skipping`);
-				continue;
-			}
-		}
+	const openDialog = document.querySelector('dialog:modal');
+	if (openDialog && (!stepDef.within || stepDef.within !== openDialog.id)) return;
 
-		/* greeting & before you start > steps inside a dialog > guided chain > general */
-		const tier = id === 'greeting' || id === 'beforeYouStart' ? 0 : def.within ? 1 : !tutorialStepKinds[id] ? 2 : 3;
-		if (!best || tier < best.tier) {
-			best = { id, anchor, targetParent, tier };
+	let targetParent: IPickedStep['targetParent'];
+	if (stepDef.within) {
+		targetParent = document.getElementById(stepDef.within);
+		if (!targetParent) {
+			console.warn("[TheTutorial updatePopup] failed to find step's wanted parent", stepToDisplayId, stepDef);
+			return;
 		}
 	}
 
-	if (!best) {
-		hide();
-	} else if (currentStepId.value !== best.id || anchorEl !== best.anchor || !el.value.matches(':popover-open')) {
-		show(best, focus);
+	show({ id: stepToDisplayId, targetParent, anchor: findStepAnchor(stepDef) }, focus);
+}
+
+let scoreboardEl: HTMLElement | null = null;
+let scoreboardSources: HTMLElement | null = null;
+let scoreboardTargets: HTMLElement | null = null;
+
+function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] {
+	if (!stepDef.anchor) return;
+	let queryTarget: HTMLElement | Document | null = null;
+	if (stepDef.type === 'damageSource') {
+		// TODO needs to be updated when scoreboard's isDisplayingTarget or damage sources are moved/removed
+		queryTarget = lastInteractedIds.damageSource ? document.getElementById(`si-${lastInteractedIds.damageSource}`) : null;
+		queryTarget ??= scoreboardEl;
+	} else {
+		console.warn('TODO anchor of', stepDef);
+		return;
 	}
+
+	queryTarget ??= document;
+	if (typeof stepDef.anchor === 'string') {
+		const targets = queryTarget.querySelectorAll(stepDef.anchor);
+		for (const target of targets) {
+			if (target.checkVisibility()) {
+				return target;
+			}
+		}
+	} else {
+		const targets = queryTarget.querySelectorAll(stepDef.anchor[0]);
+		for (const target of targets) {
+			const refinedTarget = stepDef.anchor[1](target);
+			if (refinedTarget?.checkVisibility()) {
+				return refinedTarget;
+			}
+		}
+	}
+	console.warn('[TheTutorial findStepAnchor] no viable anchor for', stepDef);
 }
 
 function show(pick: IPickedStep, focus: boolean) {
 	hide();
 	currentStepId.value = pick.id;
-	const popover = el.value;
-	if (!popover) return;
+	if (!el.value) return;
 
-	const parent = pick.targetParent ?? homeParent;
-	if (parent && popover.parentNode !== parent) parent.appendChild(popover);
+	const parent = pick.targetParent ?? originalParent;
+	if (parent && el.value.parentNode !== parent) parent.appendChild(el.value);
 
-	popover.toggleAttribute('data-anchored', !!pick.anchor);
-	anchorEl = pick.anchor;
+	el.value.toggleAttribute('data-anchored', !!pick.anchor);
 	if (pick.anchor) {
-		glowEl = tutorialSteps[pick.id].glow?.(pick.anchor) ?? pick.anchor;
-		glowEl.classList.add(GLOW_CLASS);
+		highlightedEl = tutorialSteps[pick.id].glow?.(pick.anchor) ?? pick.anchor;
+		highlightedEl.classList.add(GLOW_CLASS);
 	} else {
-		popover.classList.add(GLOW_CLASS);
+		el.value.classList.add(GLOW_CLASS);
 	}
 	// TODO check if needs anchor-name management
-	popover.showPopover((pick.anchor ? { source: pick.anchor } : pick.targetParent ? { source: pick.targetParent } : undefined) as ShowPopoverOptions | undefined);
+	el.value.showPopover((pick.anchor ? { source: pick.anchor } : pick.targetParent ? { source: pick.targetParent } : undefined) as ShowPopoverOptions | undefined);
 
-	if (focus || pick.id === 'greeting') popover.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
+	if (focus || pick.id === 'greeting') el.value.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
 }
 
 function hide() {
 	el.value?.classList.remove(GLOW_CLASS);
 	if (el.value?.matches(':popover-open')) el.value.hidePopover();
-	glowEl?.classList.remove(GLOW_CLASS);
-	glowEl = undefined;
-	anchorEl = undefined;
+	highlightedEl?.classList.remove(GLOW_CLASS);
+	highlightedEl = undefined;
 	currentStepId.value = undefined;
 }
 
-watch(tutorialRequest, (request) => {
-	if (request && request.force) forceShow(request.force);
-});
+function reset() {
+	hide();
+	notDoneGuidedStepIds.clear();
+	pendingGeneralSteps.length = 0;
+	for (const id of TUTORIAL_STEP_IDS) {
+		if (!tutorialStepKinds[id] && !isDone(id)) {
+			notDoneGuidedStepIds.add(id);
+		}
+	}
+	if (!isDone('greeting')) pendingGeneralSteps.unshift('greeting');
+	if (!isDone('beforeYouStart')) pendingGeneralSteps.splice(pendingGeneralSteps[0] === 'greeting' ? 1 : 0, 0, 'beforeYouStart');
+	scheduleUpdate();
+}
+
+let detach: (() => void) | undefined;
 
 onMounted(() => {
-	homeParent = document.getElementById('index');
-	reload();
-	const request = tutorialRequest.value;
-	if (request && request.force) forceShow(request.force);
-	detach = attachTutorialSink({ onEvent, forceShow, reload });
+	originalParent = document.getElementById('index');
+	scoreboardEl = document.getElementById('scoreboard');
+	scoreboardSources = document.getElementById('scoreboard-sources');
+	scoreboardTargets = document.getElementById('scoreboard-targets');
+	reset();
+	detach = attachTutorialSink({ onEvent, reload: reset });
 });
 
 onBeforeUnmount(() => {
 	detach?.();
 	cancelAnimationFrame(raf);
 	hide();
-	if (el.value && homeParent && el.value.parentNode !== homeParent) homeParent.appendChild(el.value);
+	if (el.value && originalParent && el.value.parentNode !== originalParent) originalParent.appendChild(el.value);
 });
 </script>
 
