@@ -71,7 +71,6 @@ function completeStep(id: ITutorialStepId, focus = false) {
 	notDoneGuidedStepIds.delete(id);
 	const pendingStepIndex = pendingGeneralSteps.indexOf(id);
 	~pendingStepIndex && pendingGeneralSteps.splice(pendingStepIndex, 1);
-	id === 'greeting' && pendingGeneralSteps.unshift('beforeYouStart');
 	tutorialState.steps[id] = 1;
 	currentStepId.value === id && hide();
 	scheduleUpdate(focus);
