@@ -126,7 +126,7 @@ function evaluate(focus: boolean) {
 	let best: IPickedStep | undefined;
 
 	for (const id of order) {
-		if (!forcedId && (isDone(id) || (tutorialStepKinds[id] && !pending.has(id)))) {
+		if (!forcedId && (isDone(id) || (id !== 'beforeYouStart' && tutorialStepKinds[id] && !pending.has(id)))) {
 			continue;
 		}
 
@@ -145,8 +145,8 @@ function evaluate(focus: boolean) {
 			}
 		}
 
-		/* greeting > steps inside a dialog > guided chain > general */
-		const tier = id === 'greeting' ? 0 : def.within ? 1 : !tutorialStepKinds[id] ? 2 : 3;
+		/* greeting & before you start > steps inside a dialog > guided chain > general */
+		const tier = id === 'greeting' || id === 'beforeYouStart' ? 0 : def.within ? 1 : !tutorialStepKinds[id] ? 2 : 3;
 		if (!best || tier < best.tier) {
 			best = { id, anchor, targetParent, tier };
 		}
@@ -241,9 +241,6 @@ onBeforeUnmount(() => {
 			<div v-html="step?.text" class="game-description" />
 			<button id="tutorial-ok" class="pretend-ui-btn" @click="ackCurrentStep">ok</button>
 		</template>
-		<!-- TODO show these somewhere -->
-		<!-- <p class="touch-only">long press something to show a tooltip (if it has one)</p> -->
-		<!-- <p class="alert">for most tooltips, press <kbd>[K]</kbd> when it's visible to pin it</p> -->
 	</article>
 </template>
 
@@ -283,7 +280,15 @@ onBeforeUnmount(() => {
 		}
 
 		> .game-description {
-			--at-apply: 'col-span-full b-0 pbs-1';
+			--at-apply: 'col-span-full b-0 pbs-1 text-neutral-200';
+
+			kbd {
+				--at-apply: 'font-inherit';
+			}
+
+			> li {
+				--at-apply: 'mbs-0';
+			}
 		}
 
 		> .pretend-ui-btn {

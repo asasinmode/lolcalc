@@ -4,6 +4,7 @@ import { shallowRef } from 'vue';
 /** map of step id to step kind, where `0` means guided, `1` means general */
 export const tutorialStepKinds = {
 	greeting: 1,
+	beforeYouStart: 1,
 	openChampSelect: 0,
 	changeChampionLevel: 0,
 	openItemShop: 0,
