@@ -1,5 +1,5 @@
 <script setup vapor lang="ts">
-import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
+import type { ITutorialStepId, ITutorialEvent, TutorialEvents } from '~/utils/tutorial';
 import { TUTORIAL_STEP_IDS, attachTutorialSink, saveTutorialState, tutorialRequest, tutorialStepKinds, useTutorialState } from '~/utils/tutorial';
 import type { ITutorialStepDef } from './steps';
 import { tutorialSteps } from './steps';
@@ -8,7 +8,7 @@ const GLOW_CLASS = 'rotating-glow';
 const FOCUSABLE = 'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 interface IEventCause {
-	name: keyof TutorialEvents;
+	name: ITutorialEvent;
 	data: unknown;
 	eventSourceIds: ITutorialEventSourceIds;
 }
@@ -22,26 +22,49 @@ const isGreeting = computed(() => currentStepId.value === 'greeting');
 
 /** general steps that were triggered and aren't done yet to the event that triggered them */
 const pending = new Map<ITutorialStepId, IEventCause | undefined>();
-let lastEvent: IEventCause | undefined;
+let lastInteractedIds: ITutorialEventSourceIds = {};
 let forcedId: ITutorialStepId | undefined;
 /** <main id="index"> */
 let homeParent: ParentNode | null = null;
 let anchorEl: Element | null | undefined;
 let glowEl: Element | undefined;
-// let pollTimer: ReturnType<typeof setInterval> | undefined;
 let raf = 0;
 let focusNext = false;
-// let showToken = 0;
 let detach: (() => void) | undefined;
 
 function isDone(id: ITutorialStepId) {
 	return tutorialState.steps[id] === 1;
 }
 
-function onEvent(name: keyof TutorialEvents, eventSourceIds: ITutorialEventSourceIds, data: unknown) {
+const TUTORIAL_EVENT_TO_STEP_IDS = Object.entries(tutorialSteps).reduce(
+	(acc, [currId, currDef]) => {
+		if (currDef.completeOn) {
+			for (const eventName in currDef.completeOn) {
+				acc[eventName as ITutorialEvent] ??= [];
+				acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);
+			}
+		}
+		if (currDef.showOn) {
+			for (const eventName in currDef.showOn) {
+				acc[eventName as ITutorialEvent] ??= [];
+				acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);
+			}
+		}
+		return acc;
+	},
+	{} as Partial<Record<ITutorialEvent, ITutorialStepId[]>>,
+);
+
+function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: unknown) {
 	const cause: IEventCause = { name, data, eventSourceIds };
-	lastEvent = cause;
-	for (const id of TUTORIAL_STEP_IDS) {
+	const eventStepIds = TUTORIAL_EVENT_TO_STEP_IDS[name];
+	if (!eventStepIds?.length) return;
+
+	if (eventStepIds.some((id) => tutorialSteps[id].completeOn?.[name])) {
+		lastInteractedIds = { ...lastInteractedIds, ...eventSourceIds };
+	}
+
+	for (const id of eventStepIds) {
 		if (isDone(id)) continue;
 		const def = tutorialSteps[id];
 		if (callStepEventCb(def.completeOn, name, data)) {
@@ -54,7 +77,7 @@ function onEvent(name: keyof TutorialEvents, eventSourceIds: ITutorialEventSourc
 			const isPending = pending.has(id);
 			if (show) {
 				!isPending && pending.set(id, cause);
-			} else if (!isPending && show === false) {
+			} else if (isPending && show === false) {
 				pending.delete(id);
 			}
 		}
@@ -63,7 +86,7 @@ function onEvent(name: keyof TutorialEvents, eventSourceIds: ITutorialEventSourc
 }
 
 /** if `undefined`, event was not found in `triggers` (is ignored) */
-function callStepEventCb(triggers: ITutorialStepDef['showOn'], name: keyof TutorialEvents, data: unknown): boolean | undefined {
+function callStepEventCb(triggers: ITutorialStepDef['showOn'], name: ITutorialEvent, data: unknown): boolean | undefined {
 	const trigger = triggers?.[name];
 	if (trigger) {
 		return trigger === true || (trigger as (data: unknown) => boolean)(data);
@@ -138,8 +161,13 @@ function evaluate(focus: boolean) {
 
 		let anchor: IPickedStep['anchor'];
 		if (def.anchor) {
-			const cause = pending.get(id) ?? lastEvent;
-			anchor = def.anchor(cause?.eventSourceIds, cause?.name, cause?.data as TutorialEvents[keyof TutorialEvents]);
+			if (id === currentStepId.value && anchorEl?.isConnected && anchorEl.checkVisibility()) {
+				/* already displayed on an anchor, don't move on subsequent events */
+				anchor = anchorEl;
+			} else {
+				const cause = pending.get(id);
+				anchor = def.anchor(cause?.eventSourceIds ?? lastInteractedIds, cause?.name, cause?.data as TutorialEvents[ITutorialEvent]);
+			}
 			if (!anchor?.isConnected || !anchor.checkVisibility()) {
 				console.warn(`[TheTutorial evaluate] anchor for "${id}" not found, skipping`);
 				continue;
@@ -155,19 +183,16 @@ function evaluate(focus: boolean) {
 
 	if (!best) {
 		hide();
-	} else if (currentStepId.value !== best.id || anchorEl === best.anchor || !el.value.matches(':popover-open')) {
+	} else if (currentStepId.value !== best.id || anchorEl !== best.anchor || !el.value.matches(':popover-open')) {
 		show(best, focus);
 	}
 }
 
 function show(pick: IPickedStep, focus: boolean) {
 	hide();
-	// const token = showToken;
 	currentStepId.value = pick.id;
-	// await nextTick();
 	const popover = el.value;
 	if (!popover) return;
-	// if (token !== showToken || !popover) return;
 
 	const parent = pick.targetParent ?? homeParent;
 	if (parent && popover.parentNode !== parent) parent.appendChild(popover);
@@ -181,15 +206,10 @@ function show(pick: IPickedStep, focus: boolean) {
 	// TODO check if needs anchor-name management
 	popover.showPopover((pick.anchor ? { source: pick.anchor } : undefined) as ShowPopoverOptions | undefined);
 
-	// pollTimer = setInterval(() => scheduleEvaluate(), 500);
-
 	if (focus || pick.id === 'greeting') popover.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
 }
 
 function hide() {
-	// showToken++;
-	// clearInterval(pollTimer);
-	// pollTimer = undefined;
 	if (el.value?.matches(':popover-open')) el.value.hidePopover();
 	glowEl?.classList.remove(GLOW_CLASS);
 	glowEl = undefined;

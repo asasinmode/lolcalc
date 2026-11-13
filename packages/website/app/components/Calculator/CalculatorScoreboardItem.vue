@@ -1017,6 +1017,7 @@ defineExpose({ el });
 <template>
 	<li
 		ref="el"
+		:id="`si-${value.id}`"
 		:data-scoreboard-item="value.listedChampion.value?.id || ''"
 		:style="`--damage-source-clr: ${value.color};`"
 		:class="{ highlighted: highlightedDamageSources.has(value.id) }"

@@ -28,7 +28,9 @@ export interface TutorialEvents {
 	extraComponentInteracted: void;
 }
 
-export type TutorialEventArgs<K extends keyof TutorialEvents> = TutorialEvents[K] extends void ? [] : [data: TutorialEvents[K]];
+export type ITutorialEvent = keyof TutorialEvents;
+
+export type TutorialEventArgs<K extends ITutorialEvent> = TutorialEvents[K] extends void ? [] : [data: TutorialEvents[K]];
 
 const STORAGE_KEY = 'lolcalc-tutorial';
 const TUTORIAL_STATE_VERSION = '1';
@@ -94,7 +96,7 @@ export function isTutorialStepId(value: unknown): value is ITutorialStepId {
 }
 
 export interface ITutorialSink {
-	onEvent(name: keyof TutorialEvents, eventSourceIds: ITutorialEventSourceIds, payload: unknown): void;
+	onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, payload: unknown): void;
 	forceShow(id: ITutorialStepId): void;
 	/** reload after state changed, as if freshly mounted */
 	reload(): void;
@@ -104,7 +106,7 @@ export interface ITutorialSink {
 export const tutorialRequest = shallowRef<false | { force?: ITutorialStepId }>(false);
 
 let sink: ITutorialSink | undefined;
-const buffer = new Map<keyof TutorialEvents, [ITutorialEventSourceIds, unknown][]>();
+const buffer = new Map<ITutorialEvent, [ITutorialEventSourceIds, unknown][]>();
 
 export function requestTutorial(options: { force?: ITutorialStepId } = {}) {
 	if (options.force) {
@@ -135,7 +137,7 @@ export interface ITutorialEventSourceIds {
 	resultSection?: string;
 }
 
-export function tutorialEvent<K extends keyof TutorialEvents>(name: K, sourceIds: ITutorialEventSourceIds, ...args: TutorialEventArgs<K>): void {
+export function tutorialEvent<K extends ITutorialEvent>(name: K, sourceIds: ITutorialEventSourceIds, ...args: TutorialEventArgs<K>): void {
 	if (sink) {
 		sink.onEvent(name, sourceIds, args[0]);
 	} else {
