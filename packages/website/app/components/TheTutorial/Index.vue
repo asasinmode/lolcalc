@@ -202,6 +202,8 @@ function show(pick: IPickedStep, focus: boolean) {
 	if (pick.anchor) {
 		glowEl = tutorialSteps[pick.id].glow?.(pick.anchor) ?? pick.anchor;
 		glowEl.classList.add(GLOW_CLASS);
+	} else {
+		popover.classList.add(GLOW_CLASS);
 	}
 	// TODO check if needs anchor-name management
 	popover.showPopover((pick.anchor ? { source: pick.anchor } : undefined) as ShowPopoverOptions | undefined);
@@ -210,6 +212,7 @@ function show(pick: IPickedStep, focus: boolean) {
 }
 
 function hide() {
+	el.value?.classList.remove(GLOW_CLASS);
 	if (el.value?.matches(':popover-open')) el.value.hidePopover();
 	glowEl?.classList.remove(GLOW_CLASS);
 	glowEl = undefined;

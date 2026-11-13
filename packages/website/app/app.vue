@@ -117,12 +117,12 @@ let observer: IntersectionObserver | undefined;
 onMounted(() => {
 	/* tutorial state */
 	{
-		initTutorialState();
+		const tutorialState = initTutorialState();
 		const { ttl: tutorialStep, ...routeQuery } = route.query;
 		if (tutorialStep) {
 			router.replace({ query: routeQuery });
 		}
-		const load = () => (isTutorialStepId(tutorialStep) ? requestTutorial({ force: tutorialStep }) : shouldLoadTutorial() && requestTutorial());
+		const load = () => (isTutorialStepId(tutorialStep) ? requestTutorial({ force: tutorialStep }) : tutorialState.isActive && requestTutorial());
 		'requestIdleCallback' in window ? requestIdleCallback(load, { timeout: 2000 }) : setTimeout(load, 1);
 	}
 

@@ -34,13 +34,14 @@ export type TutorialEventArgs<K extends ITutorialEvent> = TutorialEvents[K] exte
 
 const STORAGE_KEY = 'lolcalc-tutorial';
 const TUTORIAL_STATE_VERSION = '1';
-const state: ITutorialState = { v: TUTORIAL_STATE_VERSION, guided: false, steps: {} };
+const state: ITutorialState = { v: TUTORIAL_STATE_VERSION, guided: false, steps: {}, isActive: false };
 
 export interface ITutorialState {
 	v: string;
 	guided: boolean;
 	/** map of step completion, `1` means it's been done/ok-ed */
 	steps: Partial<Record<ITutorialStepId, 1 | 0>>;
+	isActive: boolean;
 }
 
 export function initTutorialState(): ITutorialState {
@@ -71,6 +72,10 @@ export function initTutorialState(): ITutorialState {
 		state.guided = guided;
 		state.steps = steps;
 	} catch {}
+	const isActive = TUTORIAL_STEP_IDS.some((id) => !state.steps[id] && (tutorialStepKinds[id] || state.guided));
+	if (isActive) {
+		state.isActive = true;
+	}
 	return state;
 }
 
@@ -84,11 +89,6 @@ export function saveTutorialState() {
 			localStorage.setItem(STORAGE_KEY, `v=${state.v};guided=${state.guided};steps=${TUTORIAL_STEP_IDS.map((id) => state.steps[id] ?? 0).join('')}`);
 		} catch {}
 	}
-}
-
-/** executed on index page's mounted */
-export function shouldLoadTutorial(): boolean {
-	return TUTORIAL_STEP_IDS.some((id) => !state.steps[id] && (tutorialStepKinds[id] || state.guided));
 }
 
 export function isTutorialStepId(value: unknown): value is ITutorialStepId {
@@ -140,7 +140,7 @@ export interface ITutorialEventSourceIds {
 export function tutorialEvent<K extends ITutorialEvent>(name: K, sourceIds: ITutorialEventSourceIds, ...args: TutorialEventArgs<K>): void {
 	if (sink) {
 		sink.onEvent(name, sourceIds, args[0]);
-	} else {
+	} else if (state.isActive) {
 		const bufferedArgs = buffer.getOrInsert(name, []);
 		bufferedArgs.push([sourceIds, args[0]]);
 	}
