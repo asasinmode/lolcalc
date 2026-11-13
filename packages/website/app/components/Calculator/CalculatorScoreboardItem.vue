@@ -1807,6 +1807,7 @@ defineExpose({ el });
 		.select-items {
 			--at-apply: 'self-center relative ms-[--select-items-runes-gap]';
 			grid-area: select-items;
+			--glow-offset-path: inset(0% round calc(infinity * 1px));
 
 			@media (width < 512px) {
 				& {
