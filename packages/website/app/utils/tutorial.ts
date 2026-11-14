@@ -20,6 +20,7 @@ export const tutorialStepKinds = {
 	rightClickDragItems: 1,
 	applyEffect: 0,
 	viewEffectSourceControls: 1,
+	modifyEffectIcons: 1,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -46,9 +47,10 @@ export interface TutorialEvents {
 	dragonsFocused: void;
 	scoreboardItemsInteracted: void;
 	effectsDialogOpened: void;
-	effectsDialogClosed: void;
+	effectsDialogClosed: DamageSource;
 	effectDialogExtraEntered: EffectObjectName;
 	effectDialogSourceControlsFocused: void;
+	scoreboardEffectModified: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

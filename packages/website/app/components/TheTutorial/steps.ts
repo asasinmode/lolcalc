@@ -173,6 +173,22 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		},
 		completeOn: ['effectDialogSourceControlsFocused'],
 	},
+	modifyEffectIcons: {
+		title: 'modify effects',
+		type: 'damageSource',
+		text: "applied effects can be modified through their icons, displayed next to the stats panel. Left click an icon to increment the effect's value (like increase Black Cleaver stacks) or right click to decrement it <br><rules>Holding [<kbd>Ctrl</kbd>] while clicking changes the value by 10 instead of 1</rules>",
+		anchor: '.effects > ul',
+		pendingIf: (calculatorState) => calculatorState.damageSources.some((source) => source.appliedEffects.value.length) || calculatorState.damageTargets.some((source) => source.appliedEffects.value.length),
+		showOn: {
+			damageSourceExpanded([, damageSource]) {
+				return !!damageSource.appliedEffects.value.length;
+			},
+			effectsDialogClosed(damageSource) {
+				return !!damageSource.appliedEffects.value.length;
+			},
+		},
+		completeOn: ['scoreboardEffectModified'],
+	},
 };
 
 export const TUTORIAL_EVENT_TO_STEP_IDS = {

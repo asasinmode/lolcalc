@@ -931,6 +931,9 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	} else {
 		effect.data.value[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data.value[0] + by) : effect.data.value[0] + by);
 	}
+
+	tutorialEvent('scoreboardEffectModified', { damageSource: props.value.id });
+
 	nextTick(() => {
 		if (!effect.data.value[0] && hoveredEffect.value?.abilityId.id === effect.abilityId.id) {
 			hideEffectTooltip();
@@ -1018,7 +1021,7 @@ function openRuneSelect() {
 
 function openEffectsDialog() {
 	tutorialEvent('effectsDialogOpened', { damageSource: props.value.id });
-	selectEffects(props.value).then(() => tutorialEvent('effectsDialogClosed', { damageSource: props.value.id }));
+	selectEffects(props.value).then(() => tutorialEvent('effectsDialogClosed', { damageSource: props.value.id }, props.value));
 }
 
 const levelSelectTriggerAttrs = {
