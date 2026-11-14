@@ -398,6 +398,7 @@
 	}
 
 	.info-tooltip,
+	.info-tooltip-trigger + [popover],
 	.hover-tooltip.custom {
 		a {
 			--at-apply: 'text-blue-400 hoverable:underline';
