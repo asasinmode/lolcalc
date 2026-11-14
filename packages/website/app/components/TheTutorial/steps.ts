@@ -41,6 +41,21 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		anchor: '.select-champion',
 		completeOn: ['champSelectClosed', 'champSelectOpened'],
 	},
+	viewExtraComponent: {
+		title: 'configuring passives',
+		type: 'damageSource',
+		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
+		anchor: '.extras > :first-child',
+		showOn: {
+			damageSourceExpanded(championId) {
+				return championId ? championId in CHAMPION_COMPONENTS : false;
+			},
+			damageSourceChampionLoaded(championId) {
+				return championId in CHAMPION_COMPONENTS;
+			},
+		},
+		completeOn: ['extraComponentFocused'],
+	},
 	changeChampionLevel: {
 		title: 'champion level',
 		type: 'damageSource',
@@ -87,20 +102,37 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		},
 		completeOn: ['abilityLevelFocused'],
 	},
-	viewExtraComponent: {
-		title: 'configuring passives',
+	changeHPAbilityResource: {
+		title: 'current health and mana',
 		type: 'damageSource',
-		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
-		anchor: '.extras > :first-child',
+		text: 'can be changed either directly in the inputs or by clicking on the bar itself',
+		anchor: '.health-ability-resource',
 		showOn: {
-			damageSourceExpanded(championId) {
-				return championId ? championId in CHAMPION_COMPONENTS : false;
+			itemShopClosed(damageSource) {
+				return !!(damageSource.stats.value.total.hp || damageSource.stats.value.total.mana);
 			},
-			damageSourceChampionLoaded(championId) {
-				return championId in CHAMPION_COMPONENTS;
+			damageSourceChampionLoaded(currentChampionId) {
+				return !!currentChampionId;
+			},
+			damageSourceExpanded(championId) {
+				return !!championId;
 			},
 		},
-		completeOn: ['extraComponentFocused'],
+		completeOn: ['hpAbilityResourceBarsInteracted'],
+	},
+	viewRoleQuests: {
+		title: 'role quest',
+		type: 'damageSource',
+		text: 'can be set below HP and mana bars',
+		anchor: '.role-quest > .v-select',
+		completeOn: ['roleQuestFocused'],
+	},
+	viewDragons: {
+		title: 'dragons',
+		type: 'damageSource',
+		text: 'stacks and soul can be changed next to role quest',
+		anchor: '.dragons',
+		completeOn: ['dragonsFocused'],
 	},
 };
 

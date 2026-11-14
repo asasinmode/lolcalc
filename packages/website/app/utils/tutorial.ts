@@ -1,3 +1,4 @@
+import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IChampionId } from '@lolcalc/data/types.ts';
 import { shallowRef } from 'vue';
 
@@ -12,6 +13,9 @@ export const tutorialStepKinds = {
 	itemShopFunctionality: 1,
 	changeAbilityLevel: 0,
 	viewExtraComponent: 1,
+	changeHPAbilityResource: 0,
+	viewRoleQuests: 0,
+	viewDragons: 0,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -21,7 +25,7 @@ export const TUTORIAL_STEP_IDS = Object.keys(tutorialStepKinds) as ITutorialStep
 /** map of event to its data */
 export interface TutorialEvents {
 	itemShopOpened: void;
-	itemShopClosed: void;
+	itemShopClosed: DamageSource;
 	champSelectOpened: void;
 	damageSourceExpanded: IChampionId | undefined;
 	/** collapsed, moved or destroyed. Used for updating currently displayed step's position */
@@ -33,6 +37,9 @@ export interface TutorialEvents {
 	runeSelectOpened: void;
 	/** emitted when damage source loads a champion and it's the same one that's `DamageSource.listedChampion` has */
 	damageSourceChampionLoaded: IChampionId;
+	hpAbilityResourceBarsInteracted: void;
+	roleQuestFocused: void;
+	dragonsFocused: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

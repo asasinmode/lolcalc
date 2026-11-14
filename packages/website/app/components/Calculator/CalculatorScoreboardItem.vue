@@ -707,6 +707,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: MaybeRefOrGetter<n
 		if (!toValue(max) || event.button !== 0 || event.target !== element.value) {
 			return;
 		}
+		tutorialEvent('hpAbilityResourceBarsInteracted', { damageSource: props.value.id });
 		document.addEventListener('mousemove', onMousemove);
 		document.addEventListener('mouseup', onMouseup);
 		updateValue(event.clientX);
@@ -1005,7 +1006,7 @@ function openChampSelect() {
 
 function openItemShop() {
 	tutorialEvent('itemShopOpened', { damageSource: props.value.id });
-	selectItems(props.value).then(() => tutorialEvent('itemShopClosed', { damageSource: props.value.id }));
+	selectItems(props.value).then(() => tutorialEvent('itemShopClosed', { damageSource: props.value.id }, props.value));
 }
 
 function openRuneSelect() {
@@ -1337,7 +1338,7 @@ defineExpose({ el });
 					:precomputed-description="hoveredAbilityKey && (hoveredAbilityDamageSource ?? value).computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
-			<section ref="healthAbilityResource" class="health-ability-resource" :inert="value.isLoading.value">
+			<section ref="healthAbilityResource" class="health-ability-resource" :inert="value.isLoading.value" @focusin="tutorialEvent('hpAbilityResourceBarsInteracted', { damageSource: value.id })">
 				<h4>health and ability resource</h4>
 				<div
 					v-if="value.listedChampion.value?.id !== 'Kled'"
