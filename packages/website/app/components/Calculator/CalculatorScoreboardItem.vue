@@ -1018,7 +1018,7 @@ function openItemShop() {
 
 function openRuneSelect() {
 	tutorialEvent('runeSelectOpened', { damageSource: props.value.id });
-	selectRunes(props.value.runes);
+	selectRunes(props.value.runes).then(() => tutorialEvent('runeSelectClosed', { damageSource: props.value.id }));
 }
 
 function openEffectsDialog() {

@@ -52,6 +52,8 @@ export interface TutorialEvents {
 	abilityLevelFocused: void;
 	extraComponentFocused: void;
 	runeSelectOpened: void;
+	/** doesn't trigger/complete any steps, but is needed so that tutorial resumes after the dialog is closed */
+	runeSelectClosed: void;
 	/** emitted when damage source loads a champion and it's the same one that's `DamageSource.listedChampion` has */
 	damageSourceChampionLoaded: IChampionId;
 	hpAbilityResourceBarsInteracted: void;
