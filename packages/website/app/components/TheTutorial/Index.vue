@@ -61,7 +61,7 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 			const stepDef = tutorialSteps[stepId];
 			const pendingIndex = pendingGeneralSteps.indexOf(stepId);
 			const showOn = stepDef.showOn![name];
-			const show = typeof showOn === 'function' ? showOn(data) : showOn;
+			const show = typeof showOn === 'function' ? showOn(data as never) : showOn;
 			if (show) {
 				pendingIndex === -1 && pendingGeneralSteps.push(stepId);
 			} else if (~pendingIndex && show === false) {
@@ -270,8 +270,10 @@ onBeforeUnmount(() => {
 		<h1>{{ step?.title }}</h1>
 		<template v-if="isGreeting">
 			<p><strong>lolcalc</strong> can be daunting at first. want an interactive tutorial?</p>
-			<button id="tutorial-yes" class="pretend-ui-btn" @click="selectTutorialMode(true)">yes</button>
-			<button class="pretend-ui-btn remove" @click="selectTutorialMode(false)">no</button>
+			<div>
+				<button class="pretend-ui-btn" @click="selectTutorialMode(true)">yes <i>(recommended)</i></button>
+				<button class="pretend-ui-btn remove" @click="selectTutorialMode(false)">no</button>
+			</div>
 			<footer>If you feel lost or something's unclear, visit the <NuxtLink to="/guide">guide page</NuxtLink></footer>
 		</template>
 		<template v-else>
@@ -284,7 +286,7 @@ onBeforeUnmount(() => {
 <style>
 @layer components {
 	#tutorial-popover {
-		--at-apply: 'grid-cols-2 auto-rows-min gap-x-3 z-99 shadow-lg';
+		--at-apply: 'auto-rows-min z-99 shadow-lg';
 		--tooltip-max-w: calc(124 * var(--spacing));
 		--glow-duration: 3s;
 
@@ -297,10 +299,24 @@ onBeforeUnmount(() => {
 		}
 
 		&[data-current-step='greeting'] {
-			--at-apply: 'grid-cols-2';
-
 			> h1 {
-				--at-apply: 'col-span-full mbe-1 text-xl text-center';
+				--at-apply: 'mbe-1 text-xl text-center';
+			}
+
+			> div {
+				--at-apply: 'flex justify-center gap-x-3';
+
+				> .pretend-ui-btn {
+					--at-apply: 'min-inline-12 inline-fit px-3 text-center text-lg block-8';
+
+					&:first-of-type {
+						--at-apply: 'hoverable:bg-green-500';
+					}
+				}
+			}
+
+			> footer {
+				--at-apply: 'mbs-3 b-0 pbs-0 text-center';
 			}
 		}
 
@@ -313,7 +329,7 @@ onBeforeUnmount(() => {
 		}
 
 		> p {
-			--at-apply: 'mbe-3 col-span-full text-neutral-200 text-center text-lg';
+			--at-apply: 'mbe-3 text-neutral-200 text-center text-lg';
 		}
 
 		> .game-description {
@@ -328,20 +344,8 @@ onBeforeUnmount(() => {
 			}
 		}
 
-		> .pretend-ui-btn {
-			--at-apply: 'inline-12 text-center text-lg block-8';
-		}
-
-		> footer {
-			--at-apply: 'col-span-full mbs-3 b-0 pbs-0 text-center';
-		}
-
-		#tutorial-yes {
-			--at-apply: 'justify-self-end hoverable:bg-green-500';
-		}
-
 		#tutorial-ok {
-			--at-apply: 'block inline-max block-[--manipulate-btn-size] px-2.5 text-base row-start-1 col-start-2';
+			--at-apply: 'inline-max block-[--manipulate-btn-size] px-2.5 text-base row-start-1 col-start-2';
 		}
 	}
 }

@@ -1798,6 +1798,7 @@ defineExpose({ el });
 			--at-apply: 'rounded-full grid-center size-[--select-runes-size] relative self-center';
 			--secondary-path-icon-size: calc(3 * var(--spacing));
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
+			--glow-offset-path: inset(0% round 50%);
 			grid-area: select-runes;
 
 			@media (width < 512px) {
@@ -2492,6 +2493,7 @@ defineExpose({ el });
 				.current-health > div,
 				.current-ability-resource {
 					--at-apply: 'relative col-span-full bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
+					--glow-duration: 3s;
 
 					&:before {
 						--at-apply: 'content-empty block absolute z-0 inset-0 origin-left bg-[--fill-bg] scale-x-[var(--fill-percentage,0)]';

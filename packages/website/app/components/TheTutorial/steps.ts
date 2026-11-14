@@ -91,7 +91,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'configuring passives',
 		type: 'damageSource',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
-		anchor: ['.extras', (el) => el.firstElementChild as HTMLElement | null],
+		anchor: '.extras > :first-child',
 		showOn: {
 			damageSourceExpanded(championId) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;

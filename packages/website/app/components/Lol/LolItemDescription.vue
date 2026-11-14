@@ -518,7 +518,7 @@ defineExpose({ header });
 		}
 
 		rules {
-			--at-apply: 'text-neutral-500';
+			--at-apply: 'text-neutral-400';
 		}
 
 		const {
