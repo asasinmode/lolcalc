@@ -11,7 +11,7 @@ defineExpose({
 		<div><img class="primary-path-keystone" /><span class="secondary-path" /></div>
 		<ul>
 			<li v-for="i in 7" :key="i" :style="i === 7 ? 'display: none' : undefined">
-				<img />
+				<img width="64" height="64" />
 			</li>
 		</ul>
 	</div>

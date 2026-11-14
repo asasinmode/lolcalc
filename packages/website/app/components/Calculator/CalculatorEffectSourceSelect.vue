@@ -1,6 +1,7 @@
 <script setup vapor lang="ts">
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { CHAMPION_IMAGES } from '@lolcalc/data';
+import { tutorialEvent } from '~/utils/tutorial';
 
 const props = defineProps<{
 	idSuffix: string;
@@ -82,6 +83,7 @@ onMounted(() => {
 		:style="value?.listedChampion.value ? `--selected-src-img: url(${championImage(value?.listedChampion.value.image, value?.listedChampion.value.id)})` : undefined"
 		:tooltip-trigger-attrs="bindTooltipTriggerAttrs()"
 		@update:model-value="updateThumbnailHideTooltip"
+		@focusin="tutorialEvent('effectDialogSourceControlsFocused', {})"
 	>
 		<template #post>
 			<div v-show="showInvalid" class="invalid-indicator">
@@ -107,6 +109,7 @@ onMounted(() => {
 		--at-apply: 'absolute start-[--p] inset-bs-[--p] z-1 size-[--fluid-28-22-t600] b b-[--ui-btn-border-clr]';
 		--hover-brightness: var(--champion-hover-brightness);
 		--bg-size: 100%;
+		--glow-duration: 1.5s;
 		anchor-scope: --effect-src-select;
 		anchor-name: --effect-src-select;
 

@@ -1,5 +1,6 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IChampionId } from '@lolcalc/data/types.ts';
+import type { EffectObjectName } from '@lolcalc/shared';
 import { shallowRef } from 'vue';
 
 /** map of step id to step kind, where `0` means guided, `1` means general */
@@ -17,6 +18,8 @@ export const tutorialStepKinds = {
 	viewRoleQuests: 0,
 	viewDragons: 0,
 	rightClickDragItems: 1,
+	applyEffect: 0,
+	viewEffectSourceControls: 1,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -42,6 +45,10 @@ export interface TutorialEvents {
 	roleQuestFocused: void;
 	dragonsFocused: void;
 	scoreboardItemsInteracted: void;
+	effectsDialogOpened: void;
+	effectsDialogClosed: void;
+	effectDialogExtraEntered: EffectObjectName;
+	effectDialogSourceControlsFocused: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;
@@ -150,6 +157,8 @@ export interface ITutorialEventSourceIds {
 	damageSource?: string;
 	resultColumn?: string;
 	resultSection?: string;
+	/** effect object name of the effect's dialog interacted component */
+	effectId?: string;
 }
 
 export function tutorialEvent<K extends ITutorialEvent>(name: K, sourceIds: ITutorialEventSourceIds, ...args: TutorialEventArgs<K>): void {

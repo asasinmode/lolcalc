@@ -30,13 +30,19 @@ function isDone(id: ITutorialStepId) {
 	return tutorialState.steps[id] === 1;
 }
 
+const repositionEvents: Partial<Record<ITutorialStepDef['type'], ITutorialEvent[]>> = {
+	damageSource: ['damageSourceAdjusted', 'damageSourceExpanded'],
+	effectsDialog: ['effectsDialogClosed', 'effectsDialogOpened'],
+};
+
 function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: any) {
+	if ('damageSource' in eventSourceIds) lastInteractedIds.damageSource = eventSourceIds.damageSource;
+	if ('resultColumn' in eventSourceIds) lastInteractedIds.resultColumn = eventSourceIds.resultColumn;
+	if ('resultSection' in eventSourceIds) lastInteractedIds.resultSection = eventSourceIds.resultSection;
+	if ('effectId' in eventSourceIds) lastInteractedIds.effectId = eventSourceIds.effectId;
+
 	const completeStepIds = TUTORIAL_EVENT_TO_STEP_IDS.completeOn[name];
 	if (completeStepIds?.length) {
-		if ('damageSource' in eventSourceIds) lastInteractedIds.damageSource = eventSourceIds.damageSource;
-		if ('resultColumn' in eventSourceIds) lastInteractedIds.resultColumn = eventSourceIds.resultColumn;
-		if ('resultSection' in eventSourceIds) lastInteractedIds.resultSection = eventSourceIds.resultSection;
-
 		let stepCompleted = false;
 		for (const stepId of completeStepIds) {
 			if (!isDone(stepId)) {
@@ -47,7 +53,7 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 		stepCompleted && saveTutorialState();
 	}
 
-	if (currentStepId.value && (['damageSourceAdjusted', 'damageSourceExpanded'] as ITutorialEvent[]).includes(name) && tutorialSteps[currentStepId.value].type === 'damageSource') {
+	if (currentStepId.value && repositionEvents[tutorialSteps[currentStepId.value].type]?.includes(name)) {
 		repositionCurrentStep();
 	}
 
@@ -149,15 +155,19 @@ function updatePopup(focus: boolean) {
 let scoreboardEl: HTMLElement | null = null;
 let scoreboardSources: HTMLElement | null = null;
 let scoreboardTargets: HTMLElement | null = null;
+let effectsDialog: HTMLElement | null = null;
 
 /** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
 function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
 	if (!stepDef.anchor) return;
-	let queryTarget: HTMLElement | Document | null = null;
+	let queryTarget: HTMLElement | Document | null | undefined;
 	if (stepDef.type === 'damageSource') {
 		// TODO needs to be updated when scoreboard's isDisplayingTarget or damage sources are moved/removed
 		queryTarget = lastInteractedIds.damageSource ? document.getElementById(`si-${lastInteractedIds.damageSource}`) : null;
 		queryTarget ??= scoreboardEl;
+	} else if (stepDef.type === 'effectsDialog') {
+		if (!lastInteractedIds.effectId) return false;
+		queryTarget = effectsDialog?.querySelector(`[data-ability-id="${lastInteractedIds.effectId}"]`)?.parentElement;
 	} else {
 		console.warn('TODO anchor of', stepDef);
 		return;
@@ -208,6 +218,7 @@ function show(pick: IPickedStep, focus: boolean) {
 function hide() {
 	el.value?.classList.remove(GLOW_CLASS);
 	if (el.value?.matches(':popover-open')) el.value.hidePopover();
+	if (el.value && el.value?.parentNode !== originalParent) originalParent?.prepend(el.value);
 	highlightedEl?.classList.remove(GLOW_CLASS);
 	highlightedEl = undefined;
 	currentStepId.value = undefined;
@@ -253,6 +264,7 @@ onMounted(() => {
 	scoreboardEl = document.getElementById('scoreboard');
 	scoreboardSources = document.getElementById('scoreboard-sources');
 	scoreboardTargets = document.getElementById('scoreboard-targets');
+	effectsDialog = document.getElementById('dialog-effects');
 	reset();
 	detach = attachTutorialSink({ onEvent, reload: reset });
 });
@@ -352,13 +364,14 @@ onBeforeUnmount(() => {
 
 @layer overrides {
 	#tutorial-popover {
-		--at-apply: 'absolute pointer-events-auto of-visible';
-		position-area: block-end span-inline-end;
+		--at-apply: 'pointer-events-auto of-visible';
+		position-anchor: auto;
+		inset-block-start: auto;
+		inset-block-end: calc(anchor(start) + var(--spacing));
 		position-try-fallbacks:
 			flip-block,
 			flip-inline,
 			flip-block flip-inline;
-		position-visibility: anchors-visible;
 
 		/* &[data-anchored] { */
 		/* 	inset: auto; */

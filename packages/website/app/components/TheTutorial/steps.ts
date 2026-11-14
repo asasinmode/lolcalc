@@ -1,3 +1,5 @@
+import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect.ts';
+import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect.ts';
 import { CHAMPION_COMPONENTS } from '~/components/Champion/index.ts';
 import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
 
@@ -8,13 +10,10 @@ type ITutorialStepTriggers = {
 export interface ITutorialStepDef {
 	title: string;
 	/** used for selecting el.querySelector targets, as well as updating the popup's position when a destructive event happens to something the type is associated with (like damage source moved = need to reposition tutorial) */
-	type: 'global' | 'damageSource' | 'resultColumn' | 'resultSection';
+	type: 'global' | 'damageSource' | 'resultColumn' | 'resultSection' | 'effectsDialog';
 	/** will be v-htmled into a `div.game-description` of TheTutorial */
 	text?: string;
-	/**
-	 * element the tutorial should call `showPopover({ source })` with. If tuple, will run the selector then refine function on each of its results, until it finds one that's `checkVisibility()`
-	 * !IMPORTANT elements shouldn't have style attribute, it's used for anchor management
-	 */
+	/** element the tutorial should call `showPopover({ source })` with. If tuple, will run the selector then refine function on each of its results, until it finds one that's `checkVisibility()` */
 	anchor?: string | [query: string, refine: (element: HTMLElement) => HTMLElement | undefined | null];
 	/** id of an element the tutorial should move to be a child of (like when the step is inside a dialog) */
 	within?: string;
@@ -91,6 +90,19 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		},
 		completeOn: ['itemShopClosed'],
 	},
+	rightClickDragItems: {
+		title: 'manipulating items',
+		type: 'damageSource',
+		text: 'items can be sold by right clicking. You can also drag them between different <i>damage sources</i> (hold <kbd>[Alt]</kdb> while dragging to duplicate)',
+		anchor: ['.items', (itemsContainer) => itemsContainer.querySelector('button') && itemsContainer],
+		pendingIf: (state) => state.damageSources.some((source) => source.items.value.length) || state.damageTargets.some((source) => source.items.value.length),
+		showOn: {
+			itemShopClosed(damageSource) {
+				return !!damageSource.items.value.length;
+			},
+		},
+		completeOn: ['scoreboardItemsInteracted'],
+	},
 	changeAbilityLevel: {
 		title: 'ability levels',
 		type: 'damageSource',
@@ -138,18 +150,25 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		anchor: '.dragons',
 		completeOn: ['dragonsFocused'],
 	},
-	rightClickDragItems: {
-		title: 'manipulating items',
+	applyEffect: {
+		title: 'external effects',
 		type: 'damageSource',
-		text: 'items can be sold by right clicking. You can also drag them between different <i>damage sources</i> (hold <kbd>[Alt]</kdb> while dragging to duplicate)',
-		anchor: ['.items', (itemsContainer) => itemsContainer.querySelector('button') && itemsContainer],
-		pendingIf: (state) => state.damageSources.some((source) => source.items.value.length) || state.damageTargets.some((source) => source.items.value.length),
+		text: 'open the <i>effects dialog</i> by clicking the "effects" button to apply buffs or debuffs from external sources',
+		anchor: '.effects > .other-ui-btn',
+		completeOn: ['effectsDialogOpened'],
+	},
+	viewEffectSourceControls: {
+		title: 'effect source',
+		type: 'effectsDialog',
+		within: 'dialog-effects',
+		text: "some effects' strength depends on who's applying them. If applicable, the source of the effect can be selected by clicking on the champion icon in the corner of the effect's image",
+		anchor: '.effect-src-select',
 		showOn: {
-			itemShopClosed(damageSource) {
-				return !!damageSource.items.value.length;
+			effectDialogExtraEntered(effectObjectName) {
+				return !!(EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effectObjectName].sourceControls;
 			},
 		},
-		completeOn: ['scoreboardItemsInteracted'],
+		completeOn: ['effectDialogSourceControlsFocused'],
 	},
 };
 

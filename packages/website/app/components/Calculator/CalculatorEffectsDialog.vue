@@ -12,6 +12,7 @@ import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
 import { ExtraLoading } from '~/utils/component';
+import { tutorialEvent } from '~/utils/tutorial';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -285,8 +286,8 @@ defineExpose({
 				</button>
 			</form>
 			<div class="inline-search-label">
-				<input id="champ-select-search" v-model="search" type="text" :data-empty="!search" @keydown.enter="activateFirstSearchEffect" @input="hideEffectTooltipIfNotSearched" />
-				<label for="item-shop-search">
+				<input id="effects-search" v-model="search" type="text" :data-empty="!search" @keydown.enter="activateFirstSearchEffect" @input="hideEffectTooltipIfNotSearched" />
+				<label for="effects-search">
 					<Icon class="i-ph:magnifying-glass-bold" />
 					Search
 				</label>
@@ -307,6 +308,8 @@ defineExpose({
 						:data-ability-id="effect.abilityId.id"
 						id-suffix="effects-dialog-applied"
 						:tooltip-trigger-attrs="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
+						@mouseenter="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
+						@focusin="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
 					>
 						<button class="pretend-ui-btn remove" title="remove" @click="damageSource?.removeEffect(effect.abilityId.id)">
 							<span>remove</span>
@@ -331,6 +334,8 @@ defineExpose({
 							id-suffix="effects-dialog-all"
 							:data-ability-id="effect.abilityId.id"
 							:tooltip-trigger-attrs="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: false })"
+							@mouseenter="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
+							@focusin="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
 						/>
 						<template #fallback>
 							<ExtraLoading />

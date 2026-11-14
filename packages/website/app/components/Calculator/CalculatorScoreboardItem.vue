@@ -1016,6 +1016,11 @@ function openRuneSelect() {
 	selectRunes(props.value.runes);
 }
 
+function openEffectsDialog() {
+	tutorialEvent('effectsDialogOpened', { damageSource: props.value.id });
+	selectEffects(props.value).then(() => tutorialEvent('effectsDialogClosed', { damageSource: props.value.id }));
+}
+
 const levelSelectTriggerAttrs = {
 	onFocus() {
 		tutorialEvent('sourceLevelSelectFocused', { damageSource: props.value.id });
@@ -1241,7 +1246,7 @@ defineExpose({ el });
 			</section>
 			<section ref="effects" class="effects" :inert="value.isLoading.value" :style="`--effects-number: ${value.computed.effects.value.filter((effect) => effect.isActive).length}`">
 				<h4>effects</h4>
-				<button class="other-ui-btn" @click="selectEffects(value)">
+				<button class="other-ui-btn" @click="openEffectsDialog">
 					effects
 					<img v-bind="textureBgImageAttrs(UI.practiceTool.statusEffect, 24)" />
 				</button>
@@ -2298,6 +2303,7 @@ defineExpose({ el });
 
 				> button {
 					--at-apply: 'my-auto hoverable:z-2';
+					--glow-offset-path: inset(0% round calc(infinity * 1px));
 
 					@media (width < 460px) {
 						& {
