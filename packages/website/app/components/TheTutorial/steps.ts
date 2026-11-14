@@ -206,6 +206,33 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		},
 		completeOn: ['scoreboardItemDblclickToggled'],
 	},
+	addResultsSection: {
+		title: 'result sections',
+		type: 'global',
+		text: 'you can compare the numbers between different <i>damage sources</i> in the <i>results table</i>. Start by adding a <i>results section</i>',
+		anchor: '#add-section',
+		showOn: {
+			scoreboardItemButtonToggled: true,
+		},
+		completeOn: ['resultsSectionAdded'],
+	},
+	resultsSectionTooltip: {
+		title: 'result hover tooltips',
+		type: 'resultSection',
+		text: 'result sections have modified hover tooltips<span class="touch-only"> (long press section title to show them)</span>. Values that can be compared (like an ability\'s <magicdamage>magic damage</magicdamage>) have their names displayed instead and the values for each <i>column source</i> can be found below<br> <rules>The names of the <i>variables</i> are currently extracted from game data. Row names might not make what they are describing obvious. Reference where they are in the tooltip to make sense of them</rules>',
+		anchor: "th[scope='colgroup'] > [data-tooltip-trigger]",
+		pendingIf: (calculatorState) => !!calculatorState.resultSections.length,
+		showOn: {
+			resultsSectionAdded: true,
+		},
+	},
+	addResultsColumn: {
+		title: 'result columns',
+		type: 'resultColumn',
+		text: "multiple <i>damage sources</i> can be added for comparison. Press the \"add column\" button to add a new one, then click on champion image to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i><br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
+		anchor: '#add-column',
+		completeOn: ['resultsColumnAdded'],
+	},
 };
 
 export const TUTORIAL_EVENT_TO_STEP_IDS = {

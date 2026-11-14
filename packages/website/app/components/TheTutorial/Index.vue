@@ -33,6 +33,8 @@ function isDone(id: ITutorialStepId) {
 const repositionEvents: Partial<Record<ITutorialStepDef['type'], ITutorialEvent[]>> = {
 	damageSource: ['scoreboardItemExpanded', 'scoreboardItemCollapsed', 'scoreboardItemMoved', 'scoreboardItemRemoved'],
 	effectsDialog: ['effectsDialogClosed', 'effectsDialogOpened'],
+	resultSection: ['resultsSectionAdjusted', 'resultsSectionAdjusted'],
+	resultColumn: ['resultsColumnAdded', 'resultsColumnMoved', 'resultsColumnRemoved'],
 };
 
 function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: any) {
@@ -156,6 +158,7 @@ let scoreboardEl: HTMLElement | null = null;
 let scoreboardSources: HTMLElement | null = null;
 let scoreboardTargets: HTMLElement | null = null;
 let effectsDialog: HTMLElement | null = null;
+let resultsTable: HTMLElement | null = null;
 
 /** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
 function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
@@ -167,10 +170,17 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 		queryTarget ??= scoreboardEl;
 	} else if (stepDef.type === 'effectsDialog') {
 		if (!lastInteractedIds.effectId) return false;
-		queryTarget = effectsDialog?.querySelector(`[data-ability-id="${lastInteractedIds.effectId}"]`)?.parentElement;
-	} else {
-		console.warn('TODO anchor of', stepDef);
-		return;
+		queryTarget = effectsDialog?.querySelector(`[data-ability-id="${lastInteractedIds.effectId}"]`)?.parentElement ?? effectsDialog;
+	} else if (stepDef.type === 'resultColumn') {
+		if (lastInteractedIds.resultColumn) {
+			queryTarget = document.getElementById(`rc-${lastInteractedIds.resultColumn}`);
+		}
+		queryTarget ??= resultsTable;
+	} else if (stepDef.type === 'resultSection') {
+		if (lastInteractedIds.resultSection) {
+			queryTarget = document.getElementById(`results-header-row-${lastInteractedIds.resultSection}`);
+		}
+		queryTarget ??= resultsTable;
 	}
 
 	queryTarget ??= document;
@@ -224,6 +234,7 @@ function hide() {
 	currentStepId.value = undefined;
 }
 
+// TODO probably has to run on resize
 function repositionCurrentStep() {
 	if (!currentStepId.value || currentAnchor?.checkVisibility()) return;
 
@@ -265,6 +276,7 @@ onMounted(() => {
 	scoreboardSources = document.getElementById('scoreboard-sources');
 	scoreboardTargets = document.getElementById('scoreboard-targets');
 	effectsDialog = document.getElementById('dialog-effects');
+	resultsTable = document.getElementById('results-table');
 	reset();
 	detach = attachTutorialSink({ onEvent, reload: reset });
 });

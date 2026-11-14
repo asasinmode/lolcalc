@@ -23,6 +23,9 @@ export const tutorialStepKinds = {
 	modifyEffectIcons: 1,
 	manipulateScoreboardItem: 0,
 	doubleClickToggleDamageSource: 1,
+	addResultsSection: 0,
+	resultsSectionTooltip: 1,
+	addResultsColumn: 0,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -59,6 +62,12 @@ export interface TutorialEvents {
 	effectDialogExtraEntered: EffectObjectName;
 	effectDialogSourceControlsFocused: void;
 	scoreboardEffectModified: void;
+	resultsColumnAdded: void;
+	resultsColumnRemoved: void;
+	resultsColumnMoved: void;
+	resultsSectionAdded: void;
+	/** moved/removed */
+	resultsSectionAdjusted: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

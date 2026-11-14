@@ -366,6 +366,7 @@ function addResultsColumn() {
 	resultColumns.push(column);
 	addComputedColumn(column);
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsColumnAdded', { resultColumn: column.id }));
 }
 
 function addComputedColumn(column: IDamageResultTableColumn) {
@@ -421,6 +422,7 @@ function removeResultsColumn(index: number) {
 		}
 	}
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsColumnRemoved', {}));
 }
 
 function toggleResultsSection(sectionId: string) {
@@ -518,8 +520,9 @@ function submitResultsSection(event: SubmitEvent) {
 	const [rawOptionIndex, rawAbilityIndex] = value.split('-');
 	(event.target as HTMLFormElement).reset();
 	const ability = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!.abilities[Number.parseInt(rawAbilityIndex!)]!;
-	addResultsSection(ability.id, ability.name);
+	const section = addResultsSection(ability.id, ability.name);
 	debouncedSaveState();
+	section && nextTick(() => tutorialEvent('resultsSectionAdded', { resultSection: section.id }));
 }
 
 /** to be used for removing a section that was eagerly added but during full resolve turned out to be incorrect */
@@ -559,6 +562,7 @@ function addResultsSection(abilityId: IGameAbilityId | ResultSectionId, name: st
 	resultSections.splice(spliceAt, 0, section);
 	expand && expandedSections.value.push(section.id);
 	hydrateResultSection(section);
+	return section;
 }
 
 async function hydrateResultSection(section: IDamageResultTableSection) {
@@ -729,6 +733,7 @@ function removeResultsSection(index: number, force = false) {
 	}
 
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsSectionAdjusted', {}));
 }
 
 const damageSourceWatchers = new Map<string, WatchHandle>();
@@ -998,6 +1003,7 @@ function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 	resultColumns.splice(toIndex, 0, column);
 	copy && addComputedColumn(column);
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsColumnMoved', { resultColumn: column.id }));
 }
 
 const columnDragDropIndex = ref<number>();
@@ -1060,6 +1066,7 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 
 	resultColumns.splice(adjustedIndex, 0, column!);
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsColumnMoved', { resultColumn: column!.id }));
 }
 
 function endResultColumnDrag() {
@@ -1094,6 +1101,7 @@ function moveResultSection(fromIndex: number, toIndex: number) {
 	const [section] = resultSections.splice(fromIndex, 1);
 	resultSections.splice(toIndex, 0, section!);
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsSectionAdjusted', { resultSection: section!.id }));
 }
 
 const sectionDragDropIndex = ref<number>();
@@ -1146,6 +1154,7 @@ function onResultSectionDrop(event: DragEvent, index: number, isHeader?: boolean
 
 	resultSections.splice(adjustedIndex, 0, section!);
 	debouncedSaveState();
+	nextTick(() => tutorialEvent('resultsSectionAdjusted', { resultSection: section!.id }));
 }
 
 function endResultSectionDrag() {
@@ -1474,13 +1483,14 @@ defineExpose({
 										</option>
 									</optgroup>
 								</select>
-								<button class="pretend-ui-btn" :class="{ 'rotating-glow': showResults && !resultSections.length }" type="submit" :disabled="!damageSectionOptions.length">add</button>
+								<button id="add-section" class="pretend-ui-btn" :class="{ 'rotating-glow': showResults && !resultSections.length }" type="submit" :disabled="!damageSectionOptions.length">add</button>
 							</form>
 						</div>
 					</td>
 					<td
 						v-for="(column, index) in resultColumns"
 						:key="column.id"
+						:id="`rc-${column.id}`"
 						:width="`${colW.result}px`"
 						:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
 						:class="{ highlighted: highlightedColumns[index] }"
@@ -1546,7 +1556,7 @@ defineExpose({
 									</div>
 								</template>
 							</VSelect>
-							<button v-if="index === resultColumns.length - 1" class="pretend-ui-btn" @click="addResultsColumn()">add column</button>
+							<button v-if="index === resultColumns.length - 1" id="add-column" class="pretend-ui-btn" @click="addResultsColumn">add column</button>
 							<template v-if="index !== resultColumns.length - 1">
 								<button
 									title="move left, alt+click to duplicate to the left"
