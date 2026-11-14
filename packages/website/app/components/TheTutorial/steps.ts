@@ -32,7 +32,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	beforeYouStart: {
 		title: 'before you start',
 		type: 'global',
-		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press <kbd>[K]</kbd> to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's scale using <kbd>ctrl +/-</kbd> to find the best scale for you</li>",
+		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press <kbd>[K]</kbd> to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
 	},
 	openChampSelect: {
 		title: 'select a champion',
@@ -47,6 +47,13 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		text: 'can be changed by clicking the number next to their portrait',
 		anchor: '.select-champion-level',
 		completeOn: ['sourceLevelSelectFocused'],
+	},
+	openRunesDialog: {
+		title: 'runes',
+		type: 'damageSource',
+		text: 'open rune select by clicking on the runes icon<br> <rules>note that at the moment only rune shards are implemented</rules>',
+		anchor: '.select-runes',
+		completeOn: ['runeSelectOpened'],
 	},
 	openItemShop: {
 		title: 'items',
@@ -70,6 +77,14 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		type: 'damageSource',
 		text: 'can be changed with the dots below their icons',
 		anchor: '[data-ability] .v-button-radiogroup',
+		showOn: {
+			damageSourceChampionLoaded(currentChampionId) {
+				return !!currentChampionId;
+			},
+			damageSourceExpanded(championId) {
+				return !!championId;
+			},
+		},
 		completeOn: ['abilityLevelFocused'],
 	},
 	viewExtraComponent: {

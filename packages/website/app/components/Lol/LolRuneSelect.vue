@@ -470,7 +470,7 @@ defineExpose({
 
 			#unimplemented-ui-tooltip {
 				position-anchor: --unimplemented-ui-input;
-				--tooltip-max-w: calc(70 * var(--spacing));
+				--tooltip-max-w: calc(80 * var(--spacing));
 				--tooltip-offset-y: calc(1 * var(--spacing));
 			}
 		}

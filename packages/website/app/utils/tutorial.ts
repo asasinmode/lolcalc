@@ -7,6 +7,7 @@ export const tutorialStepKinds = {
 	beforeYouStart: 1,
 	openChampSelect: 0,
 	changeChampionLevel: 0,
+	openRunesDialog: 0,
 	openItemShop: 0,
 	itemShopFunctionality: 1,
 	changeAbilityLevel: 0,
@@ -29,6 +30,9 @@ export interface TutorialEvents {
 	sourceLevelSelectFocused: void;
 	abilityLevelFocused: void;
 	extraComponentFocused: void;
+	runeSelectOpened: void;
+	/** emitted when damage source loads a champion and it's the same one that's `DamageSource.listedChampion` has */
+	damageSourceChampionLoaded: IChampionId | undefined;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

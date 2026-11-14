@@ -1008,6 +1008,11 @@ function openItemShop() {
 	selectItems(props.value).then(() => tutorialEvent('itemShopClosed', { damageSource: props.value.id }));
 }
 
+function openRuneSelect() {
+	tutorialEvent('runeSelectOpened', { damageSource: props.value.id });
+	selectRunes(props.value.runes);
+}
+
 const levelSelectTriggerAttrs = {
 	onFocus() {
 		tutorialEvent('sourceLevelSelectFocused', { damageSource: props.value.id });
@@ -1079,7 +1084,7 @@ defineExpose({ el });
 					<span>{{ value.level.value }}</span>
 				</VSelect>
 			</div>
-			<button :title="areRunesInvalid ? 'runes (invalid)' : 'runes'" class="select-runes other-ui-btn" @click="selectRunes(value.runes)">
+			<button :title="areRunesInvalid ? 'runes (invalid)' : 'runes'" class="select-runes other-ui-btn" @click="openRuneSelect">
 				<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
 				<span v-show="areRunesInvalid" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5">
 					<span class="sr-only">(invalid)</span>
