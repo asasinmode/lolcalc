@@ -22,17 +22,21 @@ export interface ITutorialStepDef {
 	showOn?: ITutorialStepTriggers;
 	/** these mark the step `done` when any of these returns `true` */
 	completeOn?: ITutorialEvent[];
+	/** check for step (only general steps) to be marked as pending. Runs on tutorial mounted/reset */
+	pendingIf?: (calculatorState: ICalculatorState) => void;
 }
 
 export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	greeting: {
 		title: 'welcome',
 		type: 'global',
+		pendingIf: () => true,
 	},
 	beforeYouStart: {
 		title: 'before you start',
 		type: 'global',
 		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press <kbd>[K]</kbd> to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
+		pendingIf: () => true,
 	},
 	openChampSelect: {
 		title: 'select a champion',
@@ -133,6 +137,19 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		text: 'stacks and soul can be changed next to role quest',
 		anchor: '.dragons',
 		completeOn: ['dragonsFocused'],
+	},
+	rightClickDragItems: {
+		title: 'manipulating items',
+		type: 'damageSource',
+		text: 'items can be sold by right clicking. You can also drag them between different <i>damage sources</i> (hold <kbd>[Alt]</kdb> while dragging to duplicate)',
+		anchor: ['.items', (itemsContainer) => itemsContainer.querySelector('button') && itemsContainer],
+		pendingIf: (state) => state.damageSources.some((source) => source.items.value.length) || state.damageTargets.some((source) => source.items.value.length),
+		showOn: {
+			itemShopClosed(damageSource) {
+				return !!damageSource.items.value.length;
+			},
+		},
+		completeOn: ['scoreboardItemsInteracted'],
 	},
 };
 

@@ -16,6 +16,7 @@ export const tutorialStepKinds = {
 	changeHPAbilityResource: 0,
 	viewRoleQuests: 0,
 	viewDragons: 0,
+	rightClickDragItems: 1,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -40,6 +41,7 @@ export interface TutorialEvents {
 	hpAbilityResourceBarsInteracted: void;
 	roleQuestFocused: void;
 	dragonsFocused: void;
+	scoreboardItemsInteracted: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

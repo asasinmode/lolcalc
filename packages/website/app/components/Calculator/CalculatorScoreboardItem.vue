@@ -275,11 +275,13 @@ function removeItem(event: MouseEvent, index: number) {
 		} else {
 			hideItemTooltip();
 		}
+		tutorialEvent('scoreboardItemsInteracted', { damageSource: props.value.id });
 	}
 }
 
 function startItemDrag(event: DragEvent, index: number) {
 	itemHoverTooltip.value?.hidePopover();
+	tutorialEvent('scoreboardItemsInteracted', { damageSource: props.value.id });
 	emit('itemDragstart', event, index);
 }
 

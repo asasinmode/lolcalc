@@ -8,6 +8,7 @@ const GLOW_CLASS = 'rotating-glow';
 const FOCUSABLE = 'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 const tutorialState = useTutorialState();
+const calculatorState = useCalculatorState();
 const el = useTemplateRef<HTMLElement>('el');
 
 const currentStepId = shallowRef<ITutorialStepId>();
@@ -233,15 +234,15 @@ function reset() {
 	hide();
 	notDoneGuidedStepIds.clear();
 	pendingGeneralSteps.length = 0;
-	if (tutorialState.guided) {
-		for (const id of TUTORIAL_STEP_IDS) {
-			if (!tutorialStepKinds[id] && !isDone(id)) {
-				notDoneGuidedStepIds.add(id);
-			}
+	for (const id of TUTORIAL_STEP_IDS) {
+		if (isDone(id)) continue;
+
+		if (tutorialStepKinds[id]) {
+			tutorialSteps[id].pendingIf?.(calculatorState) && pendingGeneralSteps.push(id);
+		} else if (tutorialState.guided) {
+			notDoneGuidedStepIds.add(id);
 		}
 	}
-	if (!isDone('greeting')) pendingGeneralSteps.unshift('greeting');
-	if (!isDone('beforeYouStart')) pendingGeneralSteps.splice(pendingGeneralSteps[0] === 'greeting' ? 1 : 0, 0, 'beforeYouStart');
 	scheduleUpdate();
 }
 
