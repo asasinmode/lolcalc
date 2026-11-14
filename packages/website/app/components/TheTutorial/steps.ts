@@ -47,7 +47,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
 		anchor: '.extras > :first-child',
 		showOn: {
-			damageSourceExpanded(championId) {
+			damageSourceExpanded([championId]) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
 			},
 			damageSourceChampionLoaded(championId) {
@@ -114,8 +114,8 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			damageSourceChampionLoaded(currentChampionId) {
 				return !!currentChampionId;
 			},
-			damageSourceExpanded(championId) {
-				return !!championId;
+			damageSourceExpanded([championId, damageSource]) {
+				return !!(championId || damageSource.stats.value.total.hp || damageSource.stats.value.total.mana);
 			},
 		},
 		completeOn: ['hpAbilityResourceBarsInteracted'],

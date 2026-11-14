@@ -134,11 +134,14 @@ function updatePopup(focus: boolean) {
 			if (!modal && targetParent.closest('dialog')) continue;
 		}
 
-		const anchor = findStepAnchor(def);
-		if (anchor) {
-			show({ id, targetParent, anchor }, focus);
-			return;
+		let anchor: IPickedStep['anchor'];
+		if (def.anchor) {
+			const foundAnchor = findStepAnchor(def);
+			if (foundAnchor === false) continue;
+			anchor = foundAnchor;
 		}
+		show({ id, targetParent, anchor }, focus);
+		return;
 	}
 }
 

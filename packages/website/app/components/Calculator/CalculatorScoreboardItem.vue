@@ -224,7 +224,7 @@ onMounted(() => {
 function onDetailsToggle(event: ToggleEvent) {
 	isExpanded.value = event.newState === 'open';
 	if (isExpanded.value) {
-		tutorialEvent('damageSourceExpanded', { damageSource: props.value.id }, props.value.listedChampion.value?.id);
+		tutorialEvent('damageSourceExpanded', { damageSource: props.value.id }, [props.value.listedChampion.value?.id, props.value]);
 	} else {
 		tutorialEvent('damageSourceAdjusted', { damageSource: undefined });
 	}
@@ -2463,6 +2463,10 @@ defineExpose({ el });
 
 			.health-ability-resource {
 				--at-apply: 'ms-[--gap-x] grid grid-rows-subgrid grid-cols-1 gap-y-px translate-y-[0.5px] -mbs-px box-content';
+				--pbs: 3px;
+				--pbe: 0px;
+				--glow-duration: 3s;
+				--glow-offset-path: inset(var(--pbs) 0px var(--pbe) 0px);
 				grid-area: resources;
 
 				@media (width < 1680px) {
@@ -2473,7 +2477,9 @@ defineExpose({ el });
 
 				@media (width < 1680px) and ((width >= 1079px) or (width < 840px)) {
 					& {
-						--at-apply: 'pbs-1.5 pbe-2.75 ms-0 inline-full';
+						--at-apply: 'pbs-[--pbs] pbe-[--pbe] ms-0 inline-full';
+						--pbs: calc(1.5 * var(--spacing));
+						--pbe: calc(2.75 * var(--spacing));
 					}
 				}
 
@@ -2494,7 +2500,6 @@ defineExpose({ el });
 				.current-health > div,
 				.current-ability-resource {
 					--at-apply: 'relative col-span-full bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
-					--glow-duration: 3s;
 
 					&:before {
 						--at-apply: 'content-empty block absolute z-0 inset-0 origin-left bg-[--fill-bg] scale-x-[var(--fill-percentage,0)]';
@@ -2629,6 +2634,7 @@ defineExpose({ el });
 
 				> .v-select {
 					--at-apply: 'inline-max';
+					--glow-offset-path: inset(0% round 50%);
 
 					> select {
 						--at-apply: 'rounded-full size-8';
@@ -2681,6 +2687,7 @@ defineExpose({ el });
 			.dragons {
 				--at-apply: 'flex-center h-max relative items-center gap-[--gap]';
 				--gap: calc(2 * var(--spacing));
+				--glow-duration: 2.5s;
 				anchor-name: --scoreboard-item-dragons;
 
 				&::before {

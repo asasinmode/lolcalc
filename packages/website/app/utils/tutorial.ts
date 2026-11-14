@@ -27,7 +27,7 @@ export interface TutorialEvents {
 	itemShopOpened: void;
 	itemShopClosed: DamageSource;
 	champSelectOpened: void;
-	damageSourceExpanded: IChampionId | undefined;
+	damageSourceExpanded: [IChampionId | undefined, DamageSource];
 	/** collapsed, moved or destroyed. Used for updating currently displayed step's position */
 	damageSourceAdjusted: void;
 	champSelectClosed: IChampionId | undefined;
