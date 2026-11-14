@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO contents subsection links
 import { linkedFormattedItemImage } from '@lolcalc/core/misc';
 
 const exampleSpellCrit = useSimpleDescription(
@@ -122,17 +123,22 @@ const exampleSpellCrit = useSimpleDescription(
 			<dt>How can I save multiple configurations?</dt>
 			<dd>
 				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
-				builtin way of managing multiple configuration is planned, see <NuxtLink to="/about#roadmap">roadmap</NuxtLink>
+				built-in way of managing multiple configurations is planned, see the <NuxtLink to="/about#roadmap">roadmap</NuxtLink>.
 			</dd>
 			<dt>There's an ability that slows, but it doesn't have a thing I can click</dt>
 			<dd>
 				There are a lot of slows in the game and they vary only be strength and duration. A few common ones have a dedicated element for applying them - mostly items and champion passives. Adding all would be too much work (for now).
-				<strong>Arbitrary value slows can be applied in the <i>effects dialog</i>.</strong>
+				<strong>Arbitrary slows values can be applied in the <i>effects dialog</i>.</strong>
+			</dd>
+			<dt>Azir/Zeri/Xayah/others ability levels</dt>
+			<dd>
+				These and other champions start with a specific ability leveled on level 1, or cannot level an ability X until they leveled ability Y. As of right now, <strong>lolcalc</strong> doesn't implement these ability level restrictions and
+				adding them is not planned.
 			</dd>
 			<dt>How can I delete the last results column?</dt>
-			<dd>It's a puzzle</dd>
-			<dt>Why are there stun/slow duration and values in the results table? They don't change</dt>
-			<dd>They are affected by target's tenacity and slow resists</dd>
+			<dd>It's a puzzle.</dd>
+			<dt>Why are the stun/slow duration and values in the results table? They don't change</dt>
+			<dd>They are affected by target's tenacity and slow resists.</dd>
 		</dl>
 	</main>
 </template>
