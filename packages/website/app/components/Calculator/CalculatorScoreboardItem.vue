@@ -207,12 +207,14 @@ const removeButtonAttrs = computed(() =>
 const detailsContainer = useTemplateRef('details');
 const isExpanded = ref(false);
 
-function toggleExpanded() {
+/** `source` is `false` when button, `true` when double clicked. `undefined` when from anywhere else */
+function toggleExpanded(fromDblclick?: boolean) {
 	if (detailsContainer.value!.getAttribute('open') === null) {
 		detailsContainer.value!.setAttribute('open', '');
 	} else {
 		detailsContainer.value!.removeAttribute('open');
 	}
+	tutorialEvent(fromDblclick ? 'scoreboardItemDblclickToggled' : 'scoreboardItemButtonToggled', { damageSource: props.value.id });
 }
 
 onMounted(() => {
@@ -224,9 +226,9 @@ onMounted(() => {
 function onDetailsToggle(event: ToggleEvent) {
 	isExpanded.value = event.newState === 'open';
 	if (isExpanded.value) {
-		tutorialEvent('damageSourceExpanded', { damageSource: props.value.id }, [props.value.listedChampion.value?.id, props.value]);
+		tutorialEvent('scoreboardItemExpanded', { damageSource: props.value.id }, [props.value.listedChampion.value?.id, props.value]);
 	} else {
-		tutorialEvent('damageSourceAdjusted', { damageSource: undefined });
+		tutorialEvent('scoreboardItemCollapsed', { damageSource: undefined });
 	}
 }
 
@@ -241,7 +243,7 @@ const extrasEl = useTemplateRef('extras');
 
 function doubleClickToggle(event: MouseEvent) {
 	if ([event.currentTarget, headerEl.value, detailsContainer.value, effectsEl.value, effectsListEl.value, abiltiesEl.value, healthAbilityResourceEl.value, roleQuestEl.value, dragonsEl.value, extrasEl.value].includes(event.target)) {
-		toggleExpanded();
+		toggleExpanded(true);
 		event.preventDefault();
 	}
 }
@@ -1034,7 +1036,7 @@ watch(
 	props.value.champion,
 	(champion) => {
 		if (champion?.id && champion.id === props.value.listedChampion.value?.id) {
-			tutorialEvent('damageSourceChampionLoaded', { damageSource: props.value.id }, champion.id);
+			tutorialEvent('damageSourceChampionLoaded', {}, champion.id);
 		}
 	},
 	{ immediate: true },
@@ -1058,6 +1060,9 @@ defineExpose({ el });
 	>
 		<h3>{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}</h3>
 		<div ref="header" class="header">
+			<span aria-hidden="true" class="manipulate-mask not-si-manipulate-only">
+				<!-- used as an anchor for tutorial step -->
+			</span>
 			<button title="move up, alt+click to duplicate above" class="pretend-ui-btn move-up" :disabled="moveUpDisabled" draggable="true" @click="moveUp" @dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)">
 				<span>move up <span>(alt+click to duplicate above)</span></span>
 				<Icon class="i-ph:arrow-up" />
@@ -1185,7 +1190,7 @@ defineExpose({ el });
 					<Icon class="i-ph:dots-three-bold" />
 				</span>
 			</VSelect>
-			<button :title="isExpanded ? 'collapse' : 'expand'" class="pretend-ui-btn expand-collapse" :aria-controls="`${idSuffix}-details`" :aria-expanded="isExpanded" @click="toggleExpanded">
+			<button :title="isExpanded ? 'collapse' : 'expand'" class="pretend-ui-btn expand-collapse" :aria-controls="`${idSuffix}-details`" :aria-expanded="isExpanded" @click="toggleExpanded(false)">
 				<span>{{ isExpanded ? 'collapse' : 'expand' }}</span>
 				<Icon class="i-ph:caret-down size-5" />
 			</button>
@@ -1634,6 +1639,10 @@ defineExpose({ el });
 			grid-area: duplicate;
 		}
 
+		.manipulate-mask {
+			grid-area: move-up / move-up / duplicate / duplicate;
+		}
+
 		.move-up,
 		.move-group,
 		.clear-remove,
@@ -1708,6 +1717,7 @@ defineExpose({ el });
 				--at-apply: 'bg-cyan-900';
 			}
 
+			/* this query should be kept in sync with one found at the end of this <style> block */
 			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					--at-apply: 'grid';
@@ -3215,6 +3225,30 @@ defineExpose({ el });
 				.runes {
 					--at-apply: 'justify-self-center';
 				}
+			}
+		}
+	}
+}
+
+@layer page {
+	/* this class is used for a tutorial step's contents describing the manipulate buttons */
+	.si-manipulate-only {
+		--at-apply: 'hidden';
+
+		/* this query should be kept in sync with one for `.manipulate` in the styles above */
+		@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
+			& {
+				--at-apply: 'inline';
+			}
+		}
+	}
+
+	.not-si-manipulate-only {
+		--at-apply: 'hidden';
+
+		@media (width >= 1230px) or ((width < 1079px) and (width >= 594px)) {
+			& {
+				--at-apply: 'inline';
 			}
 		}
 	}

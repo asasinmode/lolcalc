@@ -21,6 +21,8 @@ export const tutorialStepKinds = {
 	applyEffect: 0,
 	viewEffectSourceControls: 1,
 	modifyEffectIcons: 1,
+	manipulateScoreboardItem: 0,
+	doubleClickToggleDamageSource: 1,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -32,9 +34,15 @@ export interface TutorialEvents {
 	itemShopOpened: void;
 	itemShopClosed: DamageSource;
 	champSelectOpened: void;
-	damageSourceExpanded: [IChampionId | undefined, DamageSource];
-	/** collapsed, moved or destroyed. Used for updating currently displayed step's position */
-	damageSourceAdjusted: void;
+	scoreboardItemExpanded: [IChampionId | undefined, DamageSource];
+	/* explicit scoreboard item toggle or any collapse, expanded can happen on mount automatically */
+	scoreboardItemButtonToggled: void;
+	scoreboardItemDblclickToggled: void;
+	scoreboardItemCollapsed: void;
+	/** removed or cleared */
+	scoreboardItemRemoved: void;
+	scoreboardItemMoved: void;
+	scoreboardItemDuplicated: void;
 	champSelectClosed: IChampionId | undefined;
 	sourceLevelSelectFocused: void;
 	abilityLevelFocused: void;

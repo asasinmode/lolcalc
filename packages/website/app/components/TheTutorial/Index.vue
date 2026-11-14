@@ -31,7 +31,7 @@ function isDone(id: ITutorialStepId) {
 }
 
 const repositionEvents: Partial<Record<ITutorialStepDef['type'], ITutorialEvent[]>> = {
-	damageSource: ['damageSourceAdjusted', 'damageSourceExpanded'],
+	damageSource: ['scoreboardItemExpanded', 'scoreboardItemCollapsed', 'scoreboardItemMoved', 'scoreboardItemRemoved'],
 	effectsDialog: ['effectsDialogClosed', 'effectsDialogOpened'],
 };
 

@@ -90,7 +90,7 @@ function onDrop(event: DragEvent, index: number, target: DamageSource[], isList 
 	}
 
 	dragging.value = undefined;
-	nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: newItem.id }));
+	nextTick(() => tutorialEvent('scoreboardItemMoved', { damageSource: newItem.id }));
 }
 
 function getDropTargetIndex(event: DragEvent, index: number, target: DamageSource[], fromIndex: number, source: DamageSource[]): [toIndex: number | undefined, fromIndex: number | undefined] {
@@ -145,7 +145,7 @@ function remove(index: number, target: DamageSource[]) {
 	for (const unwatch of damageSource!.internalData.value._watchHandles || []) {
 		unwatch();
 	}
-	nextTick(() => tutorialEvent('damageSourceAdjusted', {}));
+	nextTick(() => tutorialEvent('scoreboardItemRemoved', {}));
 }
 
 function add(target: DamageSource[]) {
@@ -153,6 +153,7 @@ function add(target: DamageSource[]) {
 }
 
 function duplicate(index: number, target: DamageSource[], shift: boolean) {
+	tutorialEvent('scoreboardItemDuplicated', { damageSource: target[index]!.id });
 	const newItem = target[index]!.clone();
 	if (shift) {
 		const into = target === damageSources ? damageTargets : damageSources;
@@ -180,18 +181,19 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 	} else {
 		into[0] = newItem;
 	}
-	nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: newItem.id }));
+	nextTick(() => tutorialEvent('scoreboardItemMoved', { damageSource: newItem.id }));
 }
 
 function move(index: number, target: DamageSource[], toIndex: number, alt: boolean) {
+	const targetId = target[index]!.id;
 	const newItem = alt ? target[index]!.clone() : target.splice(index, 1)[0]!;
 	target.splice(toIndex, 0, newItem);
-	!alt && nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: newItem.id }));
+	nextTick(() => (alt ? tutorialEvent('scoreboardItemDuplicated', { damageSource: targetId }) : tutorialEvent('scoreboardItemMoved', { damageSource: newItem.id })));
 }
 
 function clearSource(source: DamageSource) {
 	source.clear();
-	nextTick(() => tutorialEvent('damageSourceAdjusted', { damageSource: source.id }));
+	nextTick(() => tutorialEvent('scoreboardItemRemoved', { damageSource: source.id }));
 }
 
 let itemDragData:

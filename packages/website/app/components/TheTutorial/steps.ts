@@ -53,7 +53,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			calculatorState.damageSources.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS) ||
 			calculatorState.damageTargets.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS),
 		showOn: {
-			damageSourceExpanded([championId]) {
+			scoreboardItemExpanded([championId]) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
 			},
 			damageSourceChampionLoaded(championId) {
@@ -115,7 +115,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			damageSourceChampionLoaded(currentChampionId) {
 				return !!currentChampionId;
 			},
-			damageSourceExpanded(championId) {
+			scoreboardItemExpanded(championId) {
 				return !!championId;
 			},
 		},
@@ -133,7 +133,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			damageSourceChampionLoaded(currentChampionId) {
 				return !!currentChampionId;
 			},
-			damageSourceExpanded([championId, damageSource]) {
+			scoreboardItemExpanded([championId, damageSource]) {
 				return !!(championId || damageSource.stats.value.total.hp || damageSource.stats.value.total.mana);
 			},
 		},
@@ -180,7 +180,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		anchor: '.effects > ul',
 		pendingIf: (calculatorState) => calculatorState.damageSources.some((source) => source.appliedEffects.value.length) || calculatorState.damageTargets.some((source) => source.appliedEffects.value.length),
 		showOn: {
-			damageSourceExpanded([, damageSource]) {
+			scoreboardItemExpanded([, damageSource]) {
 				return !!damageSource.appliedEffects.value.length;
 			},
 			effectsDialogClosed(damageSource) {
@@ -188,6 +188,23 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			},
 		},
 		completeOn: ['scoreboardEffectModified'],
+	},
+	manipulateScoreboardItem: {
+		title: 'manipulate scoreboard item',
+		type: 'damageSource',
+		text: '<i>scoreboard items</i> can be moved around the scoreboard with the manipulate button<span class="not-si-manipulate-only">s</span> found on their side<span class="not-si-manipulate-only">. Some of them have alternative action when a key is held - hover over a button to see its description</span><span class="mouse-only">.<br><b>You can also move a <i>scoreboard item</i> by dragging the buttons or the champion image</b></span>',
+		anchor: '.manipulate-mask, .manipulate',
+		completeOn: ['scoreboardItemMoved', 'scoreboardItemDuplicated'],
+	},
+	doubleClickToggleDamageSource: {
+		title: 'toggle scoreboard item',
+		type: 'damageSource',
+		text: '<i>scoreboard items</i> can also be collapsed/expanded by double clicking their background. The same goes for <i>result sections</i>',
+		anchor: '.header',
+		showOn: {
+			scoreboardItemButtonToggled: true,
+		},
+		completeOn: ['scoreboardItemDblclickToggled'],
 	},
 };
 
