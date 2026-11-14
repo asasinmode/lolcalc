@@ -32,7 +32,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		pendingIf: () => true,
 	},
 	beforeYouStart: {
-		title: 'before you start',
+		title: "don't get skill issued",
 		type: 'global',
 		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press [<kbd>K</kbd>] to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
 		pendingIf: () => true,
