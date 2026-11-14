@@ -114,36 +114,32 @@ interface IPickedStep {
 }
 
 function updatePopup(focus: boolean) {
-	const candidateIds = [...pendingGeneralSteps, ...notDoneGuidedStepIds.values()].filter((stepId) => !isDone(stepId));
-	let stepToDisplayId: ITutorialStepId | undefined = currentStepId.value;
-	let currentStepPriority = stepToDisplayId ? TUTORIAL_STEP_PRIORITIES[stepToDisplayId] : Number.POSITIVE_INFINITY;
+	const currentPriority = currentStepId.value ? TUTORIAL_STEP_PRIORITIES[currentStepId.value] : Number.POSITIVE_INFINITY;
+	const candidateIds = [...pendingGeneralSteps, ...notDoneGuidedStepIds.values()].filter((id) => !isDone(id) && TUTORIAL_STEP_PRIORITIES[id] < currentPriority).sort((a, b) => TUTORIAL_STEP_PRIORITIES[a] - TUTORIAL_STEP_PRIORITIES[b]);
+	if (!candidateIds.length) return;
 
-	do {
-		const candidateId = candidateIds.shift()!;
-		const candidatePriority = TUTORIAL_STEP_PRIORITIES[candidateId];
-		if (candidatePriority < currentStepPriority) {
-			stepToDisplayId = candidateId;
-			currentStepPriority = candidatePriority;
+	const modal = document.querySelector('dialog:modal');
+	for (const id of candidateIds) {
+		const def = tutorialSteps[id];
+		if (modal && (!def.within || def.within !== modal.id)) continue;
+
+		let targetParent: IPickedStep['targetParent'];
+		if (def.within) {
+			targetParent = document.getElementById(def.within);
+			if (!targetParent) {
+				console.warn("[TheTutorial resolveStep] failed to find step's wanted parent", id, def);
+				continue;
+			}
+			/* step wants to be opened in a dialog that's currently closed, skip */
+			if (!modal && targetParent.closest('dialog')) continue;
 		}
-	} while (candidateIds.length);
-	if (!stepToDisplayId || stepToDisplayId === currentStepId.value) return;
 
-	const stepDef = tutorialSteps[stepToDisplayId];
-
-	const openDialog = document.querySelector('dialog:modal');
-	if (openDialog && (!stepDef.within || stepDef.within !== openDialog.id)) return;
-
-	let targetParent: IPickedStep['targetParent'];
-	if (stepDef.within) {
-		targetParent = document.getElementById(stepDef.within);
-		if (!targetParent) {
-			console.warn("[TheTutorial updatePopup] failed to find step's wanted parent", stepToDisplayId, stepDef);
+		const anchor = findStepAnchor(def);
+		if (anchor) {
+			show({ id, targetParent, anchor }, focus);
 			return;
 		}
 	}
-
-	const anchor = findStepAnchor(stepDef);
-	if (anchor !== false) show({ id: stepToDisplayId, targetParent, anchor }, focus);
 }
 
 let scoreboardEl: HTMLElement | null = null;
