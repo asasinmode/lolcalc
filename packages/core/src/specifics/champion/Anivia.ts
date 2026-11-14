@@ -1,6 +1,7 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IAnivia from '@lolcalc/data/files/champion/Anivia.json';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
@@ -10,6 +11,27 @@ export default {
 		return {
 			isEgg: clamp(0, Math.round(self.internalData.value.isEgg ?? 0), 1),
 		};
+	},
+	q: {
+		variables: defineChampionVariables<'Anivia', typeof IAnivia, 'q'>()({
+			meta: {
+				TotalPassthroughDamage: {
+					type: VariableType.magic,
+				},
+				TotalExplosionDamage: {
+					type: VariableType.magic,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				StunDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				SlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+			},
+		}),
 	},
 	w: {
 		dataOverrides: {

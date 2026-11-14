@@ -26,6 +26,7 @@ export const tutorialStepKinds = {
 	addResultsSection: 0,
 	resultsSectionTooltip: 1,
 	addResultsColumn: 0,
+	flipResults: 1,
 } as const satisfies Record<string, number>;
 
 export type ITutorialStepId = keyof typeof tutorialStepKinds;
@@ -68,6 +69,7 @@ export interface TutorialEvents {
 	resultsSectionAdded: void;
 	/** moved/removed */
 	resultsSectionAdjusted: void;
+	flipResultsEntered: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

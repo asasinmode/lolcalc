@@ -1459,8 +1459,8 @@ defineExpose({
 					<td :width="`${colW.controls + colW.header}px`" colspan="2">
 						<div>
 							<a href="#results-header-aa" class="skip-link"> skip column controls </a>
-							<label for="results-table-values-for">
-								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @change="recalculateAllColumns" />
+							<label for="results-table-values-for" @mouseenter="tutorialEvent('flipResultsEntered', {})">
+								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @change="recalculateAllColumns" @focus="tutorialEvent('flipResultsEntered', {})" />
 								flip target vs source
 							</label>
 							<button

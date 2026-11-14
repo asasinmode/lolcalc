@@ -66,11 +66,11 @@ const exampleSpellCrit = useSimpleDescription(
 
 		<TextPageHeading id="tutorials" text="tutorials" />
 		<details>
-			<summary><h3>"apply X on target" items</h3></summary>
+			<summary><h3 id="apply-x-on-target">"apply X on target" items or abilities</h3></summary>
 			<p>
-				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. Since the results allow you to toggle between displaying values for
-				<i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>damage target</i>, won't apply that effect onto the source, regardless
-				of if the results are flipped. TODO check/document if the same makes sense for resists (don't set calculationTarget on computedTarget in results)
+				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for
+				<i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i>, won't apply that effect onto the source,
+				regardless of if the results are flipped
 			</p>
 			<p>For example, both <b>Serpent's Fang</b> and <b>Frozen Heart</b> allow for applying its effect to the target. If you were to</p>
 			<ol>

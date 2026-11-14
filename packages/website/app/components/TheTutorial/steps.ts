@@ -219,7 +219,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	resultsSectionTooltip: {
 		title: 'result hover tooltips',
 		type: 'resultSection',
-		text: 'result sections have modified hover tooltips<span class="touch-only"> (long press section title to show them)</span>. Values that can be compared (like an ability\'s <magicdamage>magic damage</magicdamage>) have their names displayed instead and the values for each <i>column source</i> can be found below<br> <rules>The names of the <i>variables</i> are currently extracted from game data. Row names might not make what they are describing obvious. Reference where they are in the tooltip to make sense of them</rules>',
+		text: 'result sections have modified hover tooltips<span class="touch-only"> (long press section title to show them)</span>. Values that can be compared (like an ability\'s <magicdamage>magic damage</magicdamage>) have their names displayed instead and the values for each <i>column source</i> can be found below<br> <rules>The names of the <i>variables</i> are currently extracted from game data. Row names might not make what they are describing obvious, reference where they are in the tooltip to make sense of them</rules>',
 		anchor: "th[scope='colgroup'] > [data-tooltip-trigger]",
 		pendingIf: (calculatorState) => !!calculatorState.resultSections.length,
 		showOn: {
@@ -232,6 +232,15 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		text: "multiple <i>damage sources</i> can be added for comparison. Press the \"add column\" button to add a new one, then click on champion image to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i><br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
 		anchor: '#add-column',
 		completeOn: ['resultsColumnAdded'],
+	},
+	flipResults: {
+		title: 'flip results',
+		type: 'global',
+		text: 'values in <i>result columns</i> can be flipped when "flip target vs source" is checked. Instead of <i>column\'s source</i> hitting <i>column\'s target</i>, the other way around - target hitting source - will be shown.<br> <rules>note that this is not equivalent with swapping <i>scoreboard\'s</i> <i>sources</i> with the <i>targets</i>. The main difference is that anything that applies an effect onto the target won\'t do so (like Black Cleaver stacks or Frozen Heart effect).<br> <b>If you want to check the damage of X on Y, just put the X in <i>scoreboard sources</i> and Y in <i>scoreboard targets</i>.</b><br> Check the <a href="guide#apply-x-on-target" target="_blank">guide page</a> for a more detailed explanation</rules>',
+		anchor: "[for='results-table-values-for']",
+		showOn: {
+			flipResultsEntered: true,
+		},
 	},
 };
 
