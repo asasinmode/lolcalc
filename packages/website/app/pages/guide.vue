@@ -26,11 +26,11 @@ const exampleSpellCrit = useSimpleDescription(
 
 		<TextPageHeading id="qol-tipes" text="qol tips" />
 		<ul>
-			<li>pin a tooltip by pressing [K] when hovering over it</li>
+			<li>pin a tooltip by pressing [<kbd>K</kbd>] when hovering over it</li>
 			<li>scoreboard items can be expanded/collapsed by double clicking the background. The same works for result sections but you need to click on their headers</li>
 			<li>
-				in/decrement an effect's value from scoreboard by left/right clicking its icon. Holding [Ctrl] while doing so changes the value by 10 (when possible). Note that the text that's displayed on some effect icons might not always update
-				1:1 with the value
+				in/decrement an effect's value from scoreboard by left/right clicking its icon. Holding [<kbd>Ctrl</kbd>] while doing so changes the value by 10 (when possible). Note that the text that's displayed on some effect icons might not
+				always update 1:1 with the value
 			</li>
 			<li>drag scoreboard items by their champion images or manipulate buttons (the arrows for moving it)</li>
 			<li>items can be dragged between damage sources</li>

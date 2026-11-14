@@ -9,7 +9,7 @@ const props = withDefaults(
 	}>(),
 	{
 		toShow: 'more info',
-		kbd: '[Shift]',
+		kbd: 'Shift',
 	},
 );
 
@@ -20,7 +20,11 @@ const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.v
 <template>
 	<p class="expanded-ctl" @touchstart.stop.prevent="toggle">
 		<span class="mouse-only">
-			{{ isTooltipPinned ? 'Press' : 'Hold' }} <kbd>{{ kbd }}</kbd>
+			{{ isTooltipPinned ? 'Press' : 'Hold' }}
+			<template v-for="(key, i) in kbd.split(',')" :key>
+				[<kbd>{{ key }}</kbd
+				>]{{ i ? '' : 'or' }}
+			</template>
 		</span>
 		<span class="touch-only">Tap here</span>
 		to {{ isTooltipExpanded ? 'hide' : 'show' }} {{ toShow }}

@@ -99,6 +99,10 @@
 		vertical-align: -0.0625em;
 	}
 
+	kbd {
+		font: inherit;
+	}
+
 	.rotating-glow {
 		--at-apply: 'relative';
 		--glow-clr: theme('colors.yellow.100');
@@ -272,12 +276,6 @@
 		--footer-mt: calc(2 * var(--spacing));
 		overflow-y: auto;
 		overscroll-behavior: contain;
-
-		footer {
-			kbd {
-				--at-apply: 'font-inherit';
-			}
-		}
 
 		&[data-pinned]::backdrop {
 			/* maybe pointer events none */

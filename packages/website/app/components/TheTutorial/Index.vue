@@ -347,10 +347,6 @@ onBeforeUnmount(() => {
 		> .game-description {
 			--at-apply: 'col-span-full b-0 pbs-1 text-neutral-200';
 
-			kbd {
-				--at-apply: 'font-inherit';
-			}
-
 			> li {
 				--at-apply: 'mbs-0';
 			}

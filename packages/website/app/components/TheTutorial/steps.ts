@@ -34,7 +34,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	beforeYouStart: {
 		title: 'before you start',
 		type: 'global',
-		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press <kbd>[K]</kbd> to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
+		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press [<kbd>K</kbd>] to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
 		pendingIf: () => true,
 	},
 	openChampSelect: {
@@ -49,6 +49,9 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		type: 'damageSource',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
 		anchor: '.extras > :first-child',
+		pendingIf: (calculatorState) =>
+			calculatorState.damageSources.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS) ||
+			calculatorState.damageTargets.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS),
 		showOn: {
 			damageSourceExpanded([championId]) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
@@ -57,9 +60,6 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 				return championId in CHAMPION_COMPONENTS;
 			},
 		},
-		pendingIf: (calculatorState) =>
-			calculatorState.damageSources.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS) ||
-			calculatorState.damageTargets.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS),
 		completeOn: ['extraComponentFocused'],
 	},
 	changeChampionLevel: {
@@ -96,7 +96,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	rightClickDragItems: {
 		title: 'manipulating items',
 		type: 'damageSource',
-		text: 'items can be sold by right clicking. You can also drag them between different <i>damage sources</i> (hold <kbd>[Alt]</kdb> while dragging to duplicate)',
+		text: 'items can be sold by right clicking. You can also drag them between different <i>damage sources</i> (hold [<kbd>Alt</kdb>] while dragging to duplicate)',
 		anchor: ['.items', (itemsContainer) => itemsContainer.querySelector('button') && itemsContainer],
 		pendingIf: (state) => state.damageSources.some((source) => source.items.value.length) || state.damageTargets.some((source) => source.items.value.length),
 		showOn: {
