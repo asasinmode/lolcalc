@@ -57,6 +57,9 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 				return championId in CHAMPION_COMPONENTS;
 			},
 		},
+		pendingIf: (calculatorState) =>
+			calculatorState.damageSources.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS) ||
+			calculatorState.damageTargets.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS),
 		completeOn: ['extraComponentFocused'],
 	},
 	changeChampionLevel: {
@@ -83,7 +86,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	itemShopFunctionality: {
 		title: 'item shop',
 		type: 'global',
-		text: 'functions the same way the game\'s does. <span class="mouse-only">Right or double click items to buy them, right click in the inventory panel to sell</span><span class="touch-only">Double tap to buy items, select one in inventory then press "sell" button to sell</span>',
+		text: 'works the same way the game\'s does. <span class="mouse-only">Right or double click items to buy them, right click in the inventory panel to sell</span><span class="touch-only">Double tap to buy items, select one in inventory then press "sell" button to sell</span>',
 		within: 'dialog-item-shop',
 		showOn: {
 			itemShopOpened: true,
