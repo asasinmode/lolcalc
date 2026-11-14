@@ -32,7 +32,7 @@ export interface TutorialEvents {
 	extraComponentFocused: void;
 	runeSelectOpened: void;
 	/** emitted when damage source loads a champion and it's the same one that's `DamageSource.listedChampion` has */
-	damageSourceChampionLoaded: IChampionId | undefined;
+	damageSourceChampionLoaded: IChampionId;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

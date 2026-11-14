@@ -1019,6 +1019,16 @@ const levelSelectTriggerAttrs = {
 	},
 };
 
+watch(
+	props.value.champion,
+	(champion) => {
+		if (champion?.id && champion.id === props.value.listedChampion.value?.id) {
+			tutorialEvent('damageSourceChampionLoaded', { damageSource: props.value.id }, champion.id);
+		}
+	},
+	{ immediate: true },
+);
+
 defineExpose({ el });
 </script>
 

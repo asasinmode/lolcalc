@@ -96,8 +96,8 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			damageSourceExpanded(championId) {
 				return championId ? championId in CHAMPION_COMPONENTS : false;
 			},
-			champSelectClosed(championId) {
-				return championId ? championId in CHAMPION_COMPONENTS : false;
+			damageSourceChampionLoaded(championId) {
+				return championId in CHAMPION_COMPONENTS;
 			},
 		},
 		completeOn: ['extraComponentFocused'],
