@@ -132,8 +132,11 @@ const exampleSpellCrit = useSimpleDescription(
 			</dd>
 			<dt>Azir/Zeri/Xayah/others ability levels</dt>
 			<dd>
-				These and other champions start with a specific ability leveled on level 1, or cannot level an ability X until they leveled ability Y. As of right now, <strong>lolcalc</strong> doesn't implement these ability level restrictions and
-				adding them is not planned.
+				These and other champions start with a specific ability leveled on level 1, or cannot level an ability X until they leveled ability Y (<a
+					href="https://wiki.leagueoflegends.com/en-us/Champion_ability#Ranking_order_&_rules"
+					target="_blank"
+					>wiki</a
+				>). As of right now, <strong>lolcalc</strong> doesn't implement these ability level restrictions and adding them is not planned.
 			</dd>
 			<dt>How can I delete the last results column?</dt>
 			<dd>It's a puzzle.</dd>
