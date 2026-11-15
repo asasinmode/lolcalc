@@ -69,16 +69,16 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 				<span>{{ option.level }}</span>
 			</template>
 		</VButtonRadiogroup>
+		<span aria-hidden="true">ability levels</span>
 	</article>
 	<GravitumSlowComponent v-show="showGravitumComponent" v-bind="$props" :override-damage-source="gravitumDamageSource" class="extras-aphelios-gravitum-slow" />
-	{{ gravitumDamageSource.abilityDynamicVariablesOverride }}
 </template>
 
 <style>
 @layer overrides {
 	[data-scoreboard-item='Aphelios'] {
 		.extras-aphelios-ability-levels {
-			--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-[1fr_auto_1fr] gap-y-0.75';
+			--at-apply: 'grid grid-cols-[auto_max-content_minmax(0,1fr)] grid-rows-[1fr_auto_1fr] gap-y-0.75 relative grid-flow-col';
 
 			> img {
 				--at-apply: 'b-2 b-[--aphelios-ui-clr] rounded-1/2';
@@ -101,6 +101,11 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 				&:nth-of-type(1) {
 					--at-apply: 'self-end';
 				}
+			}
+
+			> span {
+				--at-apply: 'max-inline-11 self-center justify-self-center pointer-events-none font-500 text-neutral-400 leading-tight row-span-full -me-[--p] select-none';
+				word-spacing: 2rem;
 			}
 		}
 

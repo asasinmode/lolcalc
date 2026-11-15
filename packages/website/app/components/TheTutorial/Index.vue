@@ -59,7 +59,7 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 		repositionCurrentStep();
 	}
 
-	const showableStepIds = TUTORIAL_EVENT_TO_STEP_IDS.showOn[name]?.filter((stepId) => !isDone(stepId));
+	const showableStepIds = TUTORIAL_EVENT_TO_STEP_IDS.showOn[name]?.filter((stepId) => !isDone(stepId) && (tutorialStepKinds[stepId] || tutorialState.guided));
 	if (!showableStepIds?.length) {
 		if (pendingGeneralSteps.length || (tutorialState.guided && notDoneGuidedStepIds.size)) scheduleUpdate();
 		return;
