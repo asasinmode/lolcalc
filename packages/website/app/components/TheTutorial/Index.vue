@@ -124,7 +124,7 @@ interface IPickedStep {
 
 function updatePopup(focus: boolean) {
 	const currentPriority = currentStepId.value ? TUTORIAL_STEP_PRIORITIES[currentStepId.value] : Number.POSITIVE_INFINITY;
-	const candidateIds = [...pendingGeneralSteps, ...notDoneGuidedStepIds.values()].filter((id) => !isDone(id) && TUTORIAL_STEP_PRIORITIES[id] < currentPriority).sort((a, b) => TUTORIAL_STEP_PRIORITIES[a] - TUTORIAL_STEP_PRIORITIES[b]);
+	const candidateIds = [...notDoneGuidedStepIds.values(), ...pendingGeneralSteps].filter((id) => !isDone(id) && TUTORIAL_STEP_PRIORITIES[id] < currentPriority).sort((a, b) => TUTORIAL_STEP_PRIORITIES[a] - TUTORIAL_STEP_PRIORITIES[b]);
 	if (!candidateIds.length) return;
 
 	const modal = document.querySelector('dialog:modal');
@@ -172,10 +172,12 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 		if (!lastInteractedIds.effectId) return false;
 		queryTarget = effectsDialog?.querySelector(`[data-ability-id="${lastInteractedIds.effectId}"]`)?.parentElement ?? effectsDialog;
 	} else if (stepDef.type === 'resultColumn') {
-		if (lastInteractedIds.resultColumn) {
-			queryTarget = document.getElementById(`rc-${lastInteractedIds.resultColumn}`);
-		}
-		queryTarget ??= resultsTable;
+		/* should be the last interacted column but for now just table is fine */
+		queryTarget = resultsTable;
+		// if (lastInteractedIds.resultColumn) {
+		// 	queryTarget = document.getElementById(`rc-${lastInteractedIds.resultColumn}`);
+		// }
+		// queryTarget ??= resultsTable;
 	} else if (stepDef.type === 'resultSection') {
 		if (lastInteractedIds.resultSection) {
 			queryTarget = document.getElementById(`results-header-row-${lastInteractedIds.resultSection}`);
