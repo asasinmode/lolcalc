@@ -142,14 +142,14 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	viewRoleQuests: {
 		title: 'role quest',
 		type: 'damageSource',
-		text: 'can be set below HP and mana bars',
+		text: 'can be set below HP and mana bars<br> <rules>right click when quest is selected to clear</rules>',
 		anchor: '.role-quest > .v-select',
 		completeOn: ['roleQuestFocused'],
 	},
 	viewDragons: {
 		title: 'dragons',
 		type: 'damageSource',
-		text: 'stacks and soul can be changed next to role quest',
+		text: 'stacks and soul can be changed next to role quest<br> <rules>right click when a dragon is selected to clear</rules>',
 		anchor: '.dragons',
 		completeOn: ['dragonsFocused'],
 	},
@@ -236,7 +236,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	flipResults: {
 		title: 'flip results',
 		type: 'global',
-		text: 'values in <i>result columns</i> can be flipped when "flip target vs source" is checked. Instead of <i>column\'s source</i> hitting <i>column\'s target</i>, the other way around - target hitting source - will be shown.<br> <rules>note that this is not equivalent to swapping <i>scoreboard\'s</i> <i>sources</i> with the <i>targets</i>. The main difference is that anything that applies an effect onto the target won\'t do so (like Black Cleaver stacks or Frozen Heart effect).<br> <b>If you want to check the damage of X on Y, just put the X in <i>scoreboard sources</i> and Y in <i>scoreboard targets</i>.</b><br> Check the <a href="guide#apply-x-on-target" target="_blank">guide page</a> for a more detailed explanation</rules>',
+		text: 'when the <b>"flip target vs source"</b> is checked, values shown in the <i>result columns</i> are flipped. Instead of <i>column\'s source</i> hitting <i>column\'s target</i>, the other way around - target hitting source - is displayed.<br> <rules>note that this is not equivalent to swapping <i>scoreboard\'s</i> <i>sources</i> with the <i>targets</i>. The main difference is that anything that applies an effect onto the target won\'t do so (like Black Cleaver stacks or Frozen Heart effect).<br> <b>If you want to check the damage of X on Y, just put the X in <i>scoreboard sources</i> and Y in <i>scoreboard targets</i>.</b><br> Check the <a href="guide#apply-x-on-target" target="_blank">guide page</a> for a more detailed explanation</rules>',
 		anchor: "[for='results-table-values-for']",
 		showOn: {
 			flipResultsEntered: true,
