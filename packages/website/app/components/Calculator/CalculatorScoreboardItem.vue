@@ -1198,9 +1198,9 @@ defineExpose({ el });
 		<details :id="`${idSuffix}-details`" ref="details" :class="{ empty: !value.champion.value }" :aria-busy="value.isLoading.value" @toggle="onDetailsToggle">
 			<summary>details</summary>
 			<h4 class="loading-header">loading...</h4>
-			<section class="runes" :inert="value.isLoading.value" @click="selectRunes(value.runes)">
+			<section class="runes" :inert="value.isLoading.value">
 				<h4>runes</h4>
-				<dl>
+				<dl @click="openRuneSelect">
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
 						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
