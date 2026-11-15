@@ -231,7 +231,6 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		type: 'resultColumn',
 		text: "multiple <i>damage sources</i> can be added for comparison. Click on champion images to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i>. Press the <b>\"add column\"</b> button to add a new one<br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
 		anchor: 'thead > tr:nth-child(2) > td:nth-child(2) > :first-child',
-		completeOn: ['resultsColumnAdded'],
 	},
 	flipResults: {
 		title: 'flip results',
