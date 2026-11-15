@@ -10,6 +10,8 @@ const FOCUSABLE = 'button, a[href], input, select, textarea, [tabindex]:not([tab
 const tutorialState = useTutorialState();
 const calculatorState = useCalculatorState();
 const el = useTemplateRef<HTMLElement>('el');
+/* also used in <CalculatorScoreboard>, keep state key in sync. Needed to properly reposition tutorial when scoreboard's layout changes on small screens where only 1 group is visible */
+const scoreboardIsDisplayingTargets = useState<boolean>('scoreboardDisplayTargets', () => false);
 
 const currentStepId = shallowRef<ITutorialStepId>();
 const step = computed(() => (currentStepId.value ? tutorialSteps[currentStepId.value] : undefined));
@@ -31,7 +33,7 @@ function isDone(id: ITutorialStepId) {
 }
 
 const repositionEvents: Partial<Record<ITutorialStepDef['type'], ITutorialEvent[]>> = {
-	damageSource: ['scoreboardItemExpanded', 'scoreboardItemCollapsed', 'scoreboardItemMoved', 'scoreboardItemRemoved'],
+	damageSource: ['scoreboardItemExpanded', 'scoreboardItemCollapsed', 'scoreboardItemMoved', 'scoreboardLayoutChanged', 'scoreboardItemRemoved'],
 	effectsDialog: ['effectsDialogClosed', 'effectsDialogOpened'],
 	resultSection: ['resultsSectionAdjusted', 'resultsSectionAdjusted'],
 	resultColumn: ['resultsColumnAdded', 'resultsColumnMoved', 'resultsColumnRemoved'],
@@ -56,7 +58,7 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 	}
 
 	if (currentStepId.value && repositionEvents[tutorialSteps[currentStepId.value].type]?.includes(name)) {
-		repositionCurrentStep();
+		repositionCurrentStep(name === 'scoreboardLayoutChanged');
 	}
 
 	const showableStepIds = TUTORIAL_EVENT_TO_STEP_IDS.showOn[name]?.filter((stepId) => !isDone(stepId) && (tutorialStepKinds[stepId] || tutorialState.guided));
@@ -158,15 +160,29 @@ let scoreboardEl: HTMLElement | null = null;
 let scoreboardSources: HTMLElement | null = null;
 let scoreboardTargets: HTMLElement | null = null;
 let effectsDialog: HTMLElement | null = null;
+/* whether the scoreboard's layout is separated into 2 groups, one being off-screen. Needed for showing the tutorial where user can see it. Media query needs to be kept in sync with the <CalculatorScoreboard> */
+let scoreboardSeparateGroupLayoutMQ: MediaQueryList | undefined;
 
 /** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
 function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
 	if (!stepDef.anchor) return;
 	let queryTarget: HTMLElement | Document | null | undefined;
 	if (stepDef.type === 'damageSource') {
-		// TODO needs to be updated when scoreboard's isDisplayingTarget or damage sources are moved/removed
 		queryTarget = lastInteractedIds.damageSource ? document.getElementById(`si-${lastInteractedIds.damageSource}`) : null;
-		queryTarget ??= scoreboardEl;
+		if (scoreboardSeparateGroupLayoutMQ?.matches) {
+			const visibleGroup = scoreboardIsDisplayingTargets.value ? scoreboardTargets : scoreboardSources;
+			if (visibleGroup) {
+				if (!visibleGroup?.contains(queryTarget)) {
+					queryTarget = visibleGroup;
+				} else if (!queryTarget) {
+					queryTarget = visibleGroup;
+				}
+			} else {
+				console.warn('[TheTutorial findStepAnchor] damage sources group not found', { isDisplayingTargets: scoreboardIsDisplayingTargets, scoreboardSources, scoreboardTargets }, stepDef);
+			}
+		} else {
+			queryTarget ??= scoreboardEl;
+		}
 	} else if (stepDef.type === 'effectsDialog') {
 		if (!lastInteractedIds.effectId) return false;
 		queryTarget = effectsDialog?.querySelector(`[data-ability-id="${lastInteractedIds.effectId}"]`)?.parentElement ?? effectsDialog;
@@ -235,8 +251,8 @@ function hide() {
 }
 
 // TODO probably has to run on resize
-function repositionCurrentStep() {
-	if (!currentStepId.value || currentAnchor?.checkVisibility()) return;
+function repositionCurrentStep(force?: boolean) {
+	if (!currentStepId.value || (!force && currentAnchor?.checkVisibility())) return;
 
 	const stepDef = tutorialSteps[currentStepId.value];
 	const viableAnchor = findStepAnchor(stepDef);
@@ -247,8 +263,14 @@ function repositionCurrentStep() {
 
 	/* preferrably would be done using position-anchor manipulation on current/viable anchors but I couldn't get it to work. Will have to be revisited, especially if it causes keyboard nav/screen reader issues */
 	if (viableAnchor && viableAnchor !== currentAnchor) {
+		currentAnchor = viableAnchor;
 		el.value?.hidePopover();
 		el.value?.showPopover({ source: viableAnchor });
+		if (highlightedEl && highlightedEl !== viableAnchor) {
+			highlightedEl.classList.remove(GLOW_CLASS);
+			highlightedEl = viableAnchor;
+			highlightedEl.classList.add(GLOW_CLASS);
+		}
 	}
 }
 
@@ -277,6 +299,7 @@ function reset() {
 let detach: (() => void) | undefined;
 
 onMounted(() => {
+	scoreboardSeparateGroupLayoutMQ = window.matchMedia('(width < 1079px)');
 	reset();
 	detach = attachTutorialSink({ onEvent, reload: reset });
 });

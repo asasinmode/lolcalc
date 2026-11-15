@@ -265,14 +265,18 @@ function setLocalMirrorLayout(event: Event) {
 	localStorage.setItem('lolcalc-mirror-scoreboard-layout', (event.target as HTMLInputElement).checked.toString());
 }
 
-const isDisplayingTargets = ref(false);
+/* also used in <TheTutorial>, keep state key in sync */
+const isDisplayingTargets = useState<boolean>('scoreboardDisplayTargets', () => false);
 const listContainer = useTemplateRef('listContainer');
+
+/* media query needs to be kept in sync with the <TheTutorial>'s `scoreboardSeparateGroupLayoutMQ` */
+let separateGroupLayoutMQ: MediaQueryList | undefined;
 
 function updateSmallScreenScrollX() {
 	const el = listContainer.value;
 	if (!el) return;
 
-	if (window.matchMedia('(width < 1079px)').matches) {
+	if (separateGroupLayoutMQ?.matches) {
 		const gap = parseFloat(getComputedStyle(el).columnGap) ?? 0;
 		el.style.setProperty('--children-offset-x', `${(0.5 * (gap + el.clientWidth)).toFixed(4)}px`);
 	}
@@ -281,14 +285,24 @@ function updateSmallScreenScrollX() {
 function toggleDisplayedList() {
 	isDisplayingTargets.value = !isDisplayingTargets.value;
 	updateSmallScreenScrollX();
+	nextTick(() => tutorialEvent('scoreboardLayoutChanged', {}));
+}
+
+function notifyTutorialLayoutChanged() {
+	tutorialEvent('scoreboardLayoutChanged', {});
 }
 
 onMounted(() => {
 	window.addEventListener('resize', updateSmallScreenScrollX, { passive: true });
 	updateSmallScreenScrollX();
+	separateGroupLayoutMQ = window.matchMedia('(width < 1079px)');
+	separateGroupLayoutMQ.addEventListener('change', notifyTutorialLayoutChanged);
 });
 
-onBeforeUnmount(() => window.removeEventListener('resize', updateSmallScreenScrollX));
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateSmallScreenScrollX);
+	separateGroupLayoutMQ?.removeEventListener('change', notifyTutorialLayoutChanged);
+});
 </script>
 
 <template>

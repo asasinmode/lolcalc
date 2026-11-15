@@ -47,6 +47,8 @@ export interface TutorialEvents {
 	scoreboardItemRemoved: void;
 	scoreboardItemMoved: void;
 	scoreboardItemDuplicated: void;
+	/* when scoreboard's is displaying targets changes or it's applied due to screen resize */
+	scoreboardLayoutChanged: void;
 	champSelectClosed: IChampionId | undefined;
 	sourceLevelSelectFocused: void;
 	abilityLevelFocused: void;
