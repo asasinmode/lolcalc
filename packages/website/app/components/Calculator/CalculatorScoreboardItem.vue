@@ -214,7 +214,7 @@ function toggleExpanded(fromDblclick?: boolean) {
 	} else {
 		detailsContainer.value!.removeAttribute('open');
 	}
-	tutorialEvent(fromDblclick ? 'scoreboardItemDblclickToggled' : 'scoreboardItemButtonToggled', { damageSource: props.value.id });
+	fromDblclick !== undefined && tutorialEvent(fromDblclick ? 'scoreboardItemDblclickToggled' : 'scoreboardItemButtonToggled', { damageSource: props.value.id });
 }
 
 onMounted(() => {
