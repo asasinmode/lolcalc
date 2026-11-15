@@ -178,7 +178,7 @@ import Zoe from './champion/Zoe.ts';
 import Zyra from './champion/Zyra.ts';
 import type { IEffectControlsProps, ISpecificVariables, IAbilityImgIndexGetter } from './index';
 
-export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu', 'Lucian', 'Vi', 'Ekko', 'Jinx', 'Caitlyn', 'Ambessa', 'Kaisa', 'Heimerdinger', 'Viktor', 'Singed', 'Warwick', 'Mel', 'Jayce'];
+export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = ['Chogath', 'Vladimir', 'Zeri', 'Amumu', 'Lucian', 'Vi', 'Ekko', 'Jinx', 'Caitlyn', 'Ambessa', 'Kaisa', 'Heimerdinger', 'Viktor', 'Singed', 'Warwick', 'Mel', 'Jayce', 'Akali'];
 IMPLEMENTED_CHAMPION_IDS.sort((a, b) => CHAMPIONS[a].name.localeCompare(CHAMPIONS[b].name));
 
 /** specific champions' helpers, utils and calculations */
@@ -443,7 +443,7 @@ export interface IChampionAbilityVariantDataOverrides {
 
 export interface IChampionInternalDataMap {
 	TargetDummy: IChampionStats;
-	Akali: { isPassiveMSActive: number; passiveRangeSnapshot?: number };
+	Akali: { isPassiveMSActive: number; passiveRangeSnapshot?: number; wMSProgress: number };
 	Akshan: { passiveMSProgress: number };
 	Ambessa: { hasPassiveStack: number };
 	Amumu: { applyPassive: number };

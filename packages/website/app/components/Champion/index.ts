@@ -14,7 +14,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 	Akali: {
 		extras: [
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'MS active (towards/after crossing the ring)', false),
+			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'MS active (towards/after crossing the ring)'),
 			booleanExtra(
 				GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0),
 				'passiveRangeSnapshot',
@@ -26,6 +26,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 					effectControlsProps: CHAMPION_SPECIFICS.Akali.passive.extraControls,
 				},
 			),
+			progressExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'w', 0), 'wMSProgress', 'Twilight Shroud move speed (after cast)', CHAMPION_SPECIFICS.Akali.w.derivedMS),
 		],
 	},
 	Akshan: {
