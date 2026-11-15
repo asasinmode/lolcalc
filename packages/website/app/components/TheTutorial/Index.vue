@@ -158,7 +158,6 @@ let scoreboardEl: HTMLElement | null = null;
 let scoreboardSources: HTMLElement | null = null;
 let scoreboardTargets: HTMLElement | null = null;
 let effectsDialog: HTMLElement | null = null;
-let resultsTable: HTMLElement | null = null;
 
 /** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
 function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
@@ -172,8 +171,11 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 		if (!lastInteractedIds.effectId) return false;
 		queryTarget = effectsDialog?.querySelector(`[data-ability-id="${lastInteractedIds.effectId}"]`)?.parentElement ?? effectsDialog;
 	} else if (stepDef.type === 'resultColumn') {
-		/* should be the last interacted column but for now just table is fine */
-		queryTarget = resultsTable;
+		/*
+		 * should be the last interacted column but for now just table is fine - only 1 result columns tooltip and doesn't really matter where it's shown
+		 * !IMPORTANT results table is not "cached" in `reset` like other elements. For some reason it seems to be holding invalid element reference when pages are changed if it is
+		 */
+		queryTarget = document.getElementById('results-table');
 		// if (lastInteractedIds.resultColumn) {
 		// 	queryTarget = document.getElementById(`rc-${lastInteractedIds.resultColumn}`);
 		// }
@@ -182,7 +184,7 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 		if (lastInteractedIds.resultSection) {
 			queryTarget = document.getElementById(`results-header-row-${lastInteractedIds.resultSection}`);
 		}
-		queryTarget ??= resultsTable;
+		queryTarget ??= document.getElementById('results-table');
 	}
 
 	queryTarget ??= document;
@@ -255,6 +257,12 @@ function repositionCurrentStep() {
 }
 
 function reset() {
+	originalParent = document.getElementById('index');
+	scoreboardEl = document.getElementById('scoreboard');
+	scoreboardSources = document.getElementById('scoreboard-sources');
+	scoreboardTargets = document.getElementById('scoreboard-targets');
+	effectsDialog = document.getElementById('dialog-effects');
+
 	hide();
 	notDoneGuidedStepIds.clear();
 	pendingGeneralSteps.length = 0;
@@ -273,12 +281,6 @@ function reset() {
 let detach: (() => void) | undefined;
 
 onMounted(() => {
-	originalParent = document.getElementById('index');
-	scoreboardEl = document.getElementById('scoreboard');
-	scoreboardSources = document.getElementById('scoreboard-sources');
-	scoreboardTargets = document.getElementById('scoreboard-targets');
-	effectsDialog = document.getElementById('dialog-effects');
-	resultsTable = document.getElementById('results-table');
 	reset();
 	detach = attachTutorialSink({ onEvent, reload: reset });
 });
