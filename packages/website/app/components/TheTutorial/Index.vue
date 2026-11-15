@@ -364,6 +364,10 @@ onBeforeUnmount(() => {
 			> li {
 				--at-apply: 'mbs-0';
 			}
+
+			> b {
+				--at-apply: 'font-500 text-white';
+			}
 		}
 
 		#tutorial-ok {
@@ -386,11 +390,6 @@ onBeforeUnmount(() => {
 		/* &[data-anchored] { */
 		/* 	inset: auto; */
 		/* 	margin: 0.75rem; */
-		/* } */
-
-		/* &[data-docked]:not([data-anchored]) { */
-		/* 	inset: auto 1rem 1rem auto; */
-		/* 	margin: 0; */
 		/* } */
 	}
 }

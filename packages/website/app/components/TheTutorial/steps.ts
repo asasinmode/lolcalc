@@ -86,7 +86,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	itemShopFunctionality: {
 		title: 'item shop',
 		type: 'global',
-		text: 'works the same way the game\'s does. <span class="mouse-only">Right or double click items to buy them, right click in the inventory panel to sell</span><span class="touch-only">Double tap to buy items, select one in inventory then press "sell" button to sell</span>',
+		text: 'works the same way the game\'s does. <span class="mouse-only">Right or double click items to buy them, right click in the inventory panel to sell</span><span class="touch-only">Double tap to buy items, select one in inventory then press the <b>"sell"</b> button to sell</span>',
 		within: 'dialog-item-shop',
 		showOn: {
 			itemShopOpened: true,
@@ -229,7 +229,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	resultColumns: {
 		title: 'result columns',
 		type: 'resultColumn',
-		text: "multiple <i>damage sources</i> can be added for comparison. Press the \"add column\" button to add a new one. Click on champion images to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i><br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
+		text: "multiple <i>damage sources</i> can be added for comparison. Click on champion images to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i>. Press the <b>\"add column\"</b> button to add a new one<br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
 		anchor: 'thead > tr:nth-child(2) > td:nth-child(2) > :first-child',
 		completeOn: ['resultsColumnAdded'],
 	},
