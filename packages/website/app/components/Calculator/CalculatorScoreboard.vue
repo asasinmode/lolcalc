@@ -273,12 +273,9 @@ const listContainer = useTemplateRef('listContainer');
 let separateGroupLayoutMQ: MediaQueryList | undefined;
 
 function updateSmallScreenScrollX() {
-	const el = listContainer.value;
-	if (!el) return;
-
-	if (separateGroupLayoutMQ?.matches) {
-		const gap = parseFloat(getComputedStyle(el).columnGap) ?? 0;
-		el.style.setProperty('--children-offset-x', `${(0.5 * (gap + el.clientWidth)).toFixed(4)}px`);
+	if (listContainer.value && separateGroupLayoutMQ?.matches) {
+		const gap = parseFloat(getComputedStyle(listContainer.value).columnGap) ?? 0;
+		listContainer.value.style.setProperty('--children-offset-x', `${(0.5 * (gap + listContainer.value.clientWidth)).toFixed(4)}px`);
 	}
 }
 
@@ -294,9 +291,9 @@ function notifyTutorialLayoutChanged() {
 
 onMounted(() => {
 	window.addEventListener('resize', updateSmallScreenScrollX, { passive: true });
-	updateSmallScreenScrollX();
 	separateGroupLayoutMQ = window.matchMedia('(width < 1079px)');
 	separateGroupLayoutMQ.addEventListener('change', notifyTutorialLayoutChanged);
+	updateSmallScreenScrollX();
 });
 
 onBeforeUnmount(() => {
