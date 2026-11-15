@@ -413,6 +413,10 @@ onBeforeUnmount(() => {
 			--at-apply: 'inset-be-auto inset-bs-18 inset-x-0 fixed m-auto pbs-3 pbe-4 px-4 shadow-black';
 			--tooltip-max-w: calc(128 * var(--spacing));
 		}
+
+		&[data-current-step='itemShopFunctionality'] {
+			--at-apply: 'inset-0 fixed m-auto shadow-black';
+		}
 	}
 }
 </style>
