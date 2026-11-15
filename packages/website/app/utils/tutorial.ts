@@ -25,7 +25,7 @@ export const tutorialStepKinds = {
 	doubleClickToggleDamageSource: 1,
 	addResultsSection: 0,
 	resultsSectionTooltip: 1,
-	addResultsColumn: 0,
+	resultColumns: 0,
 	flipResults: 1,
 } as const satisfies Record<string, number>;
 
@@ -178,6 +178,7 @@ export function attachTutorialSink(newSink: ITutorialSink): () => void {
 /** the interacted with element that caused the event, used for positioning the tutorial popup next to it */
 export interface ITutorialEventSourceIds {
 	damageSource?: string;
+	/** currently unused */
 	resultColumn?: string;
 	resultSection?: string;
 	/** effect object name of the effect's dialog interacted component */

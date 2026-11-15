@@ -226,11 +226,11 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			resultsSectionAdded: true,
 		},
 	},
-	addResultsColumn: {
+	resultColumns: {
 		title: 'result columns',
 		type: 'resultColumn',
-		text: "multiple <i>damage sources</i> can be added for comparison. Press the \"add column\" button to add a new one, then click on champion image to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i><br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
-		anchor: '#add-column',
+		text: "multiple <i>damage sources</i> can be added for comparison. Press the \"add column\" button to add a new one. Click on champion images to select <i>column's source</i> and <i>target</i> from your configured <i>damage sources</i><br> <rules>The values displayed below should be interpreted as the <i>column's source</i> (left) hitting the <i>column's target</i> (right)</rules>",
+		anchor: 'thead > tr:nth-child(2) > td:nth-child(2) > :first-child',
 		completeOn: ['resultsColumnAdded'],
 	},
 	flipResults: {

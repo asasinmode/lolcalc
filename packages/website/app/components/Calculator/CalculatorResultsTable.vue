@@ -2048,6 +2048,7 @@ defineExpose({
 					grid-template-areas:
 						'move-left manipulate manipulate remove remove move-right'
 						'source source vs vs target target';
+					--glow-offset-path: inset(-4px 10px -4px 10px);
 
 					> .v-select {
 						--at-apply: 'size-[--header-champion-select-size]';
