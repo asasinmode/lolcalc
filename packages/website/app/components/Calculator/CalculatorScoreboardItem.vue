@@ -1398,7 +1398,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<div class="role-quest-dragons" :inert="value.isLoading.value">
-				<section ref="roleQuest" class="role-quest" data-text="role quest">
+				<section ref="roleQuest" class="role-quest" data-text="role quest" @focusin="tutorialEvent('roleQuestFocused', { damageSource: value.id })">
 					<h4>role quest</h4>
 					<VSelect
 						:id="`${idSuffix}-role-quest`"
@@ -1420,7 +1420,7 @@ defineExpose({ el });
 						<UnresolvedVariablesAlert v-show="roleQuestDescription?.anyUnknown" />
 					</article>
 				</section>
-				<section ref="dragons" class="dragons">
+				<section ref="dragons" class="dragons" @focusin="tutorialEvent('dragonsFocused', { damageSource: value.id })">
 					<h4>dragons</h4>
 					<VSelect
 						v-for="i in 4"
