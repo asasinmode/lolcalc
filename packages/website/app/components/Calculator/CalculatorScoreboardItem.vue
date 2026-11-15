@@ -218,7 +218,7 @@ function toggleExpanded(fromDblclick?: boolean) {
 }
 
 onMounted(() => {
-	props.expandOnMounted && toggleExpanded();
+	(props.expandOnMounted || !(props.index || props.canMoveDown)) && toggleExpanded();
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 	emit('mounted');
 });
