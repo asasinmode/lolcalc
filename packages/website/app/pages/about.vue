@@ -115,6 +115,12 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 
 		<TextPageHeading id="misc" text="misc" />
 		<dl>
+			<dt>league new dawn (next)</dt>
+			<dd>
+				As of writing this (<time datetime="2026-11-15">11.15.2026</time>), a <a href="https://youtu.be/vs3p3mNhRXo?si=7V1_qM-P3ocWsVYF" target="_blank">teaser for League of Legends: New Dawn</a>. From the looks of it, a lot of systems will
+				be updated/reworked. As details of what exactly is being changed come out, I will update <NuxtLink to="#roadmap">the roadmap</NuxtLink> to say which, and in what ways, parts of <strong>lolcalc</strong> are affected. Personally, man
+				that's a lot of work
+			</dd>
 			<dt>alpha/beta/release versions</dt>
 			<dd>
 				The current <span class="code-like">alpha</span> version will end when the <strong>stats</strong> and <strong>basic attack damage</strong> of all champions and their <u>passives</u> (not QWER) are calculated properly with any
