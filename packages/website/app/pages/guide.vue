@@ -8,7 +8,7 @@ const exampleSpellCrit = useSimpleDescription(
 );
 const example2026WorldsAkali = useSimpleDescription(
 	'guide-example-2026-worlds-akali',
-	`during his costream (<a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">gol.gg</a>) LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. Note that neither runes, nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)`,
+	`during his costream LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
 );
 </script>
 
@@ -110,6 +110,10 @@ const example2026WorldsAkali = useSimpleDescription(
 		</details>
 
 		<TextPageHeading id="examples" text="examples" />
+		<p>
+			Note that the links to the configurations will be for the current patch. The results shown may not be applicable to the situation they are for anymore. As of right now the only version to view <strong>lolcalc</strong> for a different
+			patch version is to run the source code yourself. Either an older version of it or having updated the underlying values.
+		</p>
 		<ul>
 			<li>
 				<NuxtLink
