@@ -71,7 +71,7 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 		</VButtonRadiogroup>
 		<span aria-hidden="true">ability levels</span>
 	</article>
-	<GravitumSlowComponent v-show="showGravitumComponent" v-bind="$props" :override-damage-source="gravitumDamageSource" class="extras-aphelios-gravitum-slow" />
+	<GravitumSlowComponent v-if="showGravitumComponent" v-bind="$props" :override-damage-source="gravitumDamageSource" class="extras-aphelios-gravitum-slow" />
 </template>
 
 <style>
