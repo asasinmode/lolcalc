@@ -101,7 +101,7 @@ function selectTutorialMode(isGuided: boolean) {
 	tutorialState.guided = isGuided;
 	if (isGuided) {
 		for (const id of TUTORIAL_STEP_IDS) {
-			!tutorialStepKinds[id] && notDoneGuidedStepIds.add(id);
+			!isDone(id) && !tutorialStepKinds[id] && notDoneGuidedStepIds.add(id);
 		}
 	}
 	ackCurrentStep();
