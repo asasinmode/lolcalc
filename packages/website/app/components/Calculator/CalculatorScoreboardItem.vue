@@ -916,14 +916,14 @@ const { bind: bindEffectTooltipAttrs, hide: hideEffectTooltip } = useHoverToolti
 	onHide: removeItemTooltipViewListeners,
 });
 
-function modifyEffectValue(effectIndex: number, by: 1 | -1) {
+function modifyEffectValue(effectIndex: number, by: 1 | -1, event: MouseEvent) {
 	const effect = props.value.appliedEffects.value[effectIndex]!;
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
 
 	const min = computedEffect.specific.minValue ?? 0;
 	const max = computedEffect.maxValue ?? 1;
 
-	if (globalKeyModifiers.value.ctrl) {
+	if (globalKeyModifiers.value.ctrl || event.ctrlKey || event.metaKey) {
 		if (globalKeyModifiers.value.shift) {
 			effect.data.value[0] = by < 0 ? /* this branch doesn't happen, right click + ctrl + shift is hijacked by the browser and the event doesn't fire, potential TODO */ min : max === undefined ? effect.data.value[0] + 100 : max;
 		} else {
@@ -1263,7 +1263,7 @@ defineExpose({ el });
 				<ul ref="effectsList">
 					<li v-for="[effect, effectIndex] in activeEffects" :key="effect.abilityId.id" v-bind="bindEffectTooltipAttrs(effect)">
 						<span>{{ effect.specific.label }}</span>
-						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)" @click.middle.prevent="recalculateEffect(effectIndex)">
+						<button @click="modifyEffectValue(effectIndex, 1, $event)" @click.right.prevent="modifyEffectValue(effectIndex, -1, $event)" @click.middle.prevent="recalculateEffect(effectIndex)">
 							<img v-show="effect.imgData" v-bind="gameImageAttrs(effect.imgData, 22)" loading="lazy" />
 							<span v-if="effect.specific.imgText" v-show="effect.imgText">
 								{{ effect.imgText }}
