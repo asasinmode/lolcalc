@@ -8,7 +8,7 @@ import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
-function calculatePassiveMS(champion: IChampion, progress: number, level: number, bonusAttackSpeedPercent: number): number {
+function calculatePassiveMS(progress: number, champion: IChampion, level: number, bonusAttackSpeedPercent: number): number {
 	const ms = championAbilityVariableValue('ASModdedMS', {
 		abilityKey: 'passive',
 		abilityVariant: champion.abilities.passive.variants[0]!,
@@ -46,7 +46,7 @@ export default {
 			uninteresting: ['HasteDuration', 'ShieldDuration', 'SecondAutoCritRatio'],
 		}),
 		derivedMS: ((progress, self): number => {
-			return self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(self.champion.value!, progress, self.level.value, self.stats.value.bonus.bonusAttackSpeedPercent);
+			return self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(progress, self.champion.value!, self.level.value, self.stats.value.bonus.bonusAttackSpeedPercent);
 		}) satisfies IDeriveProgressFn,
 		calculateSlow: calculatePassiveMS,
 	},
@@ -69,7 +69,7 @@ export default {
 		postBonus: {
 			handler(self, { championPassiveStats, bonusStats, totalPreMultipliersStats }) {
 				if (self.internalData.value.passiveMSProgress) {
-					championPassiveStats.moveSpeed = calculatePassiveMS(self.champion.value!, self.internalData.value.passiveMSProgress, self.level.value, bonusStats.bonusAttackSpeedPercent);
+					championPassiveStats.moveSpeed = calculatePassiveMS(self.internalData.value.passiveMSProgress, self.champion.value!, self.level.value, bonusStats.bonusAttackSpeedPercent);
 					bonusStats.moveSpeed += championPassiveStats.moveSpeed;
 					totalPreMultipliersStats.moveSpeed += championPassiveStats.moveSpeed;
 				}

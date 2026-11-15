@@ -87,7 +87,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Spell Force stacks', 0, CHAMPION_SPECIFICS.Ezreal.passive.maxStacks),
 	},
 	Fiora: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', "Duelist's Dance move speed", CHAMPION_SPECIFICS.Fiora.passive.bonusMS),
+		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', "Duelist's Dance move speed", CHAMPION_SPECIFICS.Fiora.passive.derivedMS),
 	},
 	Gangplank: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Gangplank', 'passive', 0), 'isPassiveMSActive', 'is MS active', false),

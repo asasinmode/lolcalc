@@ -1,19 +1,18 @@
-import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IFiora from '@lolcalc/data/files/champion/Fiora.json';
+import type { IChampion } from '@lolcalc/data/types.js';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
 import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
-const passiveBonusMS: IDeriveProgressFn = (progress, self) => {
+function calculatePassiveMS(progress: number, champion: IChampion, abilityLevel: number) {
 	const bonusMS = championAbilityVariableValue('PercentMS', {
 		abilityKey: 'r',
-		abilityVariant: self.champion.value!.abilities.r.variants[0]!,
-		abilityLevel: self.abilityLevels.value.r,
+		abilityVariant: champion.abilities.r.variants[0]!,
+		abilityLevel,
 		forceAbilityLevel: true,
-		damageSource: self,
 	});
 
 	if (typeof bonusMS.value === 'number') {
@@ -22,7 +21,7 @@ const passiveBonusMS: IDeriveProgressFn = (progress, self) => {
 
 	console.warn('[CHAMPION_SPECIFICS fiora] failed to calculate passive bonus MS', bonusMS);
 	return Number.NaN;
-};
+}
 
 export default {
 	setupData(self) {
@@ -31,7 +30,9 @@ export default {
 		};
 	},
 	passive: {
-		bonusMS: passiveBonusMS,
+		derivedMS: ((progress, self): number => {
+			return self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(progress, self.champion.value!, self.abilityLevels.value.r);
+		}) satisfies IDeriveProgressFn,
 		variables: defineChampionVariables<'Fiora', typeof IFiora, 'passive'>()({
 			known: {
 				VitalDamage: [],
@@ -75,10 +76,7 @@ export default {
 	calculateHooks: {
 		onChampionPassive: {
 			handler(self, _stats, { calculatedVariables }) {
-				const bonusMS = passiveBonusMS(self.internalData.value.passiveMSProgress, {
-					champion: self.champion,
-					abilityLevels: self.abilityLevels,
-				} as DamageSource);
+				const bonusMS = calculatePassiveMS(self.internalData.value.passiveMSProgress, self.champion.value!, self.abilityLevels.value.r);
 				if (!Number.isNaN(bonusMS)) {
 					calculatedVariables.fioraPassiveBonusMS = bonusMS;
 					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.fioraPassiveBonusMS / 100;
