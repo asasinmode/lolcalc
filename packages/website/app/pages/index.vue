@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { tutorialRequest, resetTutorialStep } from '~/utils/tutorial';
+import { tutorialRequest } from '~/utils/tutorial';
 
 const { damageSources } = useCalculatorState();
 const { saveState } = useManageCalculatorState();
@@ -38,9 +38,6 @@ defineExpose({ resultsTable });
 <template>
 	<main id="index">
 		<LazyTheTutorial v-if="tutorialRequest" />
-		<DevOnly>
-			<button id="tmp-reset-tutorial" class="pretend-ui-btn" @click="resetTutorialStep('all')">TMP</button>
-		</DevOnly>
 		<CalculatorScoreboard />
 		<section id="results">
 			<h2 id="results-header">results</h2>

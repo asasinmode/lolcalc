@@ -1498,7 +1498,6 @@ defineExpose({
 					<td
 						v-for="(column, index) in resultColumns"
 						:key="column.id"
-						:id="`rc-${column.id}`"
 						:width="`${colW.result}px`"
 						:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
 						:class="{ highlighted: highlightedColumns[index] }"

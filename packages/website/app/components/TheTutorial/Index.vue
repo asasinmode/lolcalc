@@ -176,10 +176,6 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 		 * !IMPORTANT results table is not "cached" in `reset` like other elements. For some reason it seems to be holding invalid element reference when pages are changed if it is
 		 */
 		queryTarget = document.getElementById('results-table');
-		// if (lastInteractedIds.resultColumn) {
-		// 	queryTarget = document.getElementById(`rc-${lastInteractedIds.resultColumn}`);
-		// }
-		// queryTarget ??= resultsTable;
 	} else if (stepDef.type === 'resultSection') {
 		if (lastInteractedIds.resultSection) {
 			queryTarget = document.getElementById(`results-header-row-${lastInteractedIds.resultSection}`);
