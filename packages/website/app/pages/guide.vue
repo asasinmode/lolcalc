@@ -49,28 +49,42 @@ const example2026WorldsAkali = useSimpleDescription(
 				the first section of the calculator where you can configure <i>damage sources</i> and
 				<i>damage targets</i>
 			</dd>
-			<dt>source / damage source</dt>
+			<dt>source (damage source)</dt>
 			<dd>the champion configured on the <b>left</b> side of the <i>configuration scoreboard</i></dd>
-			<dt>target / damage target</dt>
+			<dt>target (damage target)</dt>
 			<dd>the champion configured on the <b>right</b> side of the <i>configuration scoreboard</i></dd>
 			<dt>results table</dt>
 			<dd>the table found below the <i>configuration scoreboard</i> where you can see and compare most of the calculated values</dd>
-			<dt>results table column / results column</dt>
+			<dt>results table column (results column)</dt>
 			<dd>
 				the <i>results table</i> allows for adding multiple columns. Each of these can contain a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs (hitting)
 				<i>target</i>
 			</dd>
-			<dt>results table section / results section</dt>
+			<dt>results table section (results section)</dt>
+			<dd>
+				the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the <i>add section</i> form
+				in the top left corner of the table
+			</dd>
+			<dt>flip target vs source (flip results)</dt>
 			<dd>
 				the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the <i>add section</i> form
 				in the top left corner of the table
 			</dd>
 		</dl>
-		<p>Check out the TODO tutorial library and read on for some of the features described in-depth</p>
+		<p>Read the next section, <b>tutorials</b>, for more in-depth guide on how to use these</p>
 
 		<TextPageHeading id="tutorials" text="tutorials" />
-		<details>
-			<summary><h3 id="apply-x-on-target">"apply X on target" items or abilities</h3></summary>
+		<p>
+			Below you can find some step by step guides to doing things in <strong>lolcalc</strong>. Additionally, you can use the "reset tutorial" button to do <i>you-won't-guess-what</i> (will take effect when you visit the
+			<NuxtLink to="/">main page</NuxtLink>)
+		</p>
+		<button id="reset-tutorial" class="pretend-ui-btn remove">TODO reset tutorial</button>
+		<details id="apply-external-effect">
+			<summary><h3>applying external effects</h3></summary>
+			<p>Effects can be applied using the <button>effects</button> button</p>
+		</details>
+		<details id="apply-x-on-target">
+			<summary><h3>"apply X on target" items or abilities and "flip results"</h3></summary>
 			<p>
 				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for
 				<i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i>, won't apply that effect onto the source,
@@ -82,27 +96,28 @@ const example2026WorldsAkali = useSimpleDescription(
 				<li>configure a <i>damage target</i> with <b>Frozen Heart</b> and <b>Sterak's Gage</b> (so we can see reduced shield value), then similarly check <b>apply Winter's Caress</b></li>
 				<li>in the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <b>Serpent's Fang</b> and the <i>target</i> set to the one with <b>Frozen Heart</b> and <b>Sterak's Gage</b></li>
 				<li>use the <i>add section</i> form to add <b>Sterak's Gage</b></li>
-				<li>while the <i>flip results</i> is <strong>unchecked</strong>, the <b>ShieldSize</b> variable's value will be <span>n/a</span> as the results are being shown for our <i>damage source</i>, which only has <b>Serpent's Fang</b></li>
 				<li>
-					now <strong>check</strong> the <i>flip results</i> in the top left corner and the displayed <b>ShieldSize</b> value is the one <strong>reduced</strong> by the <i>damage target's</i> <b>Serpent's Fang</b>. If you go back to the
-					<i>configuration scoreboard</i> and uncheck the <b>apply Shield Reave on target</b> you should see the <b>ShieldSize</b> change to its base value
+					while the <i>flip results</i> is <u>unchecked</u>, the <span class="code-like">ShieldSize</span> variable's value will be <span class="code-like">n/a</span> as the results are being shown for our <i>damage source</i>, which only
+					has Serpent's Fang
 				</li>
 				<li>
-					finally, <strong>uncheck</strong> the <i>flip results</i> checkbox and find and expand the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row and the value there should be the same as the one in the
+					now <u>check</u> the <i>flip results</i> in the top left corner and the displayed <span class="code-like">ShieldSize</span> value is the one <strong>reduced</strong> by the <i>damage target's</i> <b>Serpent's Fang</b>. If you
+					scroll back up to the <i>configuration scoreboard</i> and uncheck the <b>apply Shield Reave on target</b> you should see the <span class="code-like">ShieldSize</span> change to its base value
+				</li>
+				<li>
+					finally, <u>uncheck</u> the <i>flip results</i> checkbox and find and expand the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row and the value there should be the same as the one in the
 					<i>stats panel</i> of our configured <i>damage source</i>, even though the <i>target</i> has <b>Frozen Heart</b> with its passive, <b>Winter's Caress</b> checked to apply
 				</li>
 			</ol>
 			<p>
-				Again, this is because <strong>items applying an effect work only in one direction</strong>. <i>Source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against. <i>Target's</i> effects
-				that affect <u>other champions</u> (have "apply ... to target"), not the <i>target</i> itself, take no effect when <i>flipping results</i>.
-				<br />
-				Effects that affect the <i>target</i> itself, like <b>Force of Nature's</b> passive, <b>Steadfast</b>, would grant its effect to the <i>target</i> when checked to apply.
+				Again, this is because <strong>applying an effect on target works only in one direction</strong>. <i>Source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against. <i>Target's</i> "apply
+				X to target" are ignored, even with <i>table results</i> are flipped.
 			</p>
-			<p>To see how you can apply <b>Winter's Caress</b> to a <i>damage source</i>, see <a>applying external effects</a>.</p>
-		</details>
-		<details>
-			<summary><h3>applying external effects</h3></summary>
-			<p>Effects can be applied using the <button>effects</button> button</p>
+			<p class="alert info">
+				<span id="tutorial-apply-x-takeaway">think of <i>flip target vs source</i> as a quick look into what the target looks like while being hit by the source.</span>
+				For example if your <i>source</i> applies <b>Winter's Caress</b>, flip results and check the <b>stats</b> section to see the <i>target's</i> reduced attack speed
+				<Icon class="i-ph:info" />
+			</p>
 		</details>
 		<details>
 			<summary><h3>Rell passive resist drain</h3></summary>
@@ -172,6 +187,14 @@ const example2026WorldsAkali = useSimpleDescription(
 					--at-apply: 'font-500 text-white';
 				}
 			}
+		}
+
+		#reset-tutorial {
+			--at-apply: 'inline-max mx-auto px-3.5';
+		}
+
+		#tutorial-apply-x-takeaway {
+			--at-apply: 'text-center block mbe-[0.33em] text-blue-100';
 		}
 	}
 }

@@ -27,6 +27,7 @@ import { toValue } from 'vue';
 import type { UnwrapRef, WatchHandle } from 'vue';
 import { ResultSectionId, customSectionFromId } from '~/composables/useCalculatorState';
 import { gameImageAttrs } from '~/utils/image';
+import { tutorialEvent } from '~/utils/tutorial';
 import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow, IDamageResultTableSectionCustomValueRow } from '~/utils/types';
 
 defineProps<{
@@ -1462,6 +1463,13 @@ defineExpose({
 							<label for="results-table-values-for" @mouseenter="tutorialEvent('flipResultsEntered', {})">
 								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @change="recalculateAllColumns" @focus="tutorialEvent('flipResultsEntered', {})" />
 								flip target vs source
+								<span aria-describedby="flip-results-info" tabindex="0" class="info-tooltip-trigger" v-bind="bindInfoTriggerAttrs(undefined, true)">
+									<span>important info</span>
+									<Icon class="i-ph:info-fill" />
+								</span>
+								<p id="flip-results-info" popover="hint" class="hover-tooltip" v-bind="bindInfoPopoverAttrs()">
+									this is not equivalent to swapping <i>scoreboard's</i> <i>sources</i> with the <i>targets</i>. See the <NuxtLink to="/guide#apply-x-on-target" target="_blank">guide page</NuxtLink> for a more detailed explanation
+								</p>
 							</label>
 							<button
 								id="results-remove-unused"
