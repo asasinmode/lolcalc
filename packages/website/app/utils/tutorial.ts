@@ -3,17 +3,17 @@ import type { IChampionId } from '@lolcalc/data/types.ts';
 import type { EffectObjectName } from '@lolcalc/shared';
 import { shallowRef } from 'vue';
 
-/** map of step id to step kind, where `0` means guided, `1` means general */
+/** map of step id to step kind, where `0` means guided, `1` means general. Also the order in which they will be shown */
 export const tutorialStepKinds = {
 	greeting: 1,
 	beforeYouStart: 1,
 	openChampSelect: 0,
+	viewExtraComponent: 1,
 	changeChampionLevel: 0,
 	openRunesDialog: 0,
 	openItemShop: 0,
 	itemShopFunctionality: 1,
 	changeAbilityLevel: 0,
-	viewExtraComponent: 1,
 	changeHPAbilityResource: 0,
 	viewRoleQuests: 0,
 	viewDragons: 0,

@@ -1042,6 +1042,8 @@ watch(
 	{ immediate: true },
 );
 
+const hpResourceBarTutorialViable = computed(() => props.value.maxAbilityResource.value || (props.value.anythingFilled.value && props.value.maxHealth.value !== 0));
+
 defineExpose({ el });
 </script>
 
@@ -1353,7 +1355,13 @@ defineExpose({ el });
 					:precomputed-description="hoveredAbilityKey && (hoveredAbilityDamageSource ?? value).computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
-			<section ref="healthAbilityResource" class="health-ability-resource" :inert="value.isLoading.value" @focusin="tutorialEvent('hpAbilityResourceBarsInteracted', { damageSource: value.id })">
+			<section
+				ref="healthAbilityResource"
+				class="health-ability-resource"
+				:data-tutorial-viable="hpResourceBarTutorialViable ? '' : undefined"
+				:inert="value.isLoading.value"
+				@focusin="tutorialEvent('hpAbilityResourceBarsInteracted', { damageSource: value.id })"
+			>
 				<h4>health and ability resource</h4>
 				<div
 					v-if="value.listedChampion.value?.id !== 'Kled'"

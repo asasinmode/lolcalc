@@ -125,7 +125,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'current health and mana',
 		type: 'damageSource',
 		text: 'can be changed either directly in the inputs or by clicking on the bar itself',
-		anchor: '.health-ability-resource',
+		anchor: '.health-ability-resource[data-tutorial-viable]',
 		showOn: {
 			itemShopClosed(damageSource) {
 				return !!(damageSource.stats.value.total.hp || damageSource.stats.value.total.mana);
