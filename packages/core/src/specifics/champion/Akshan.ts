@@ -31,6 +31,9 @@ export default {
 		};
 	},
 	passive: {
+		derivedMS: ((progress, self): number => {
+			return self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(progress, self.champion.value!, self.level.value, self.stats.value.bonus.bonusAttackSpeedPercent);
+		}) satisfies IDeriveProgressFn,
 		variables: defineChampionVariables<'Akshan', typeof IAkshan, 'passive'>()({
 			meta: {
 				SecondAutoDamage: {
@@ -45,10 +48,6 @@ export default {
 			},
 			uninteresting: ['HasteDuration', 'ShieldDuration', 'SecondAutoCritRatio'],
 		}),
-		derivedMS: ((progress, self): number => {
-			return self?.stats.value.championPassive.moveSpeed ?? calculatePassiveMS(progress, self.champion.value!, self.level.value, self.stats.value.bonus.bonusAttackSpeedPercent);
-		}) satisfies IDeriveProgressFn,
-		calculateSlow: calculatePassiveMS,
 	},
 	w: {
 		variables: defineChampionVariables<'Akshan', typeof IAkshan, 'w'>()({

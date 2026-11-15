@@ -13,6 +13,8 @@ const props = withDefaults(
 	},
 );
 
+const keys = props.kbd.split(',').filter(Boolean);
+
 const { isTooltipExpanded: stateIsExpanded } = useTooltipState();
 const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.value));
 </script>
@@ -21,9 +23,9 @@ const toggle = props.tapCb ?? (() => (stateIsExpanded.value = !stateIsExpanded.v
 	<p class="expanded-ctl" @touchstart.stop.prevent="toggle">
 		<span class="mouse-only">
 			{{ isTooltipPinned ? 'Press' : 'Hold' }}
-			<template v-for="(key, i) in kbd.split(',')" :key>
+			<template v-for="(key, i) in keys" :key>
 				[<kbd>{{ key }}</kbd
-				>]{{ i ? '' : 'or' }}
+				>]{{ i ? 'or' : '' }}
 			</template>
 		</span>
 		<span class="touch-only">Tap here</span>
