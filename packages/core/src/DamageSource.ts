@@ -1766,7 +1766,7 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 		let isNameUnknown = false;
 		let name;
 		if (levelVar.nameOverride) {
-			name = champion.stringtable[levelVar.nameOverride];
+			name = champion.stringtable[levelVar.nameOverride]?.replaceAll(':', '');
 			if (!name) {
 				isNameUnknown = true;
 			}

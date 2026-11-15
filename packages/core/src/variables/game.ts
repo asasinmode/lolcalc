@@ -359,7 +359,7 @@ export function championAbilityVariableValue(variable: string, params: IChampion
 	if (champion) {
 		const abilityLevelVar = abilityVariant.abilityLevelVars?.find((levelVar) => levelVar.name === (rv.actualVariableName ?? variableName));
 		if (abilityLevelVar?.nameOverride) {
-			rv.actualVariableName = champion.stringtable[abilityLevelVar.nameOverride];
+			rv.actualVariableName = champion.stringtable[abilityLevelVar.nameOverride]?.replaceAll(':', '');
 		}
 	}
 
