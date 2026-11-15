@@ -226,7 +226,7 @@ onMounted(() => {
 function onDetailsToggle(event: ToggleEvent) {
 	isExpanded.value = event.newState === 'open';
 	if (isExpanded.value) {
-		tutorialEvent('scoreboardItemExpanded', { damageSource: props.value.id }, [props.value.listedChampion.value?.id, props.value]);
+		tutorialEvent('scoreboardItemExpanded', {}, [props.value.listedChampion.value?.id, props.value]);
 	} else {
 		tutorialEvent('scoreboardItemCollapsed', { damageSource: undefined });
 	}

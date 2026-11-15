@@ -369,7 +369,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-rune-select {
-		--at-apply: 'px-[--fluid-8-20-t810] pbe-3 bg-[--cyan-bg] grid-cols-[auto_minmax(calc(3*var(--spacing)),calc(12*var(--spacing)))_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
+		--at-apply: 'px-[--fluid-8-20-t810] pbe-3 bg-[--cyan-bg] grid-cols-[auto_minmax(calc(3*var(--spacing)),calc(12*var(--spacing)))_auto] grid-rows-[min-content_min-content_max-content] shadow-lg b b-[--ui-btn-border-clr]';
 		grid-template-areas:
 			'header header header'
 			'primary gap secondary'
@@ -734,20 +734,13 @@ defineExpose({
 		}
 
 		#rune-select-secondary {
-			--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
 			--path-row-mb: var(--secondary-path-row-mb);
 			--slot-row-py: var(--secondary-slot-row-py);
 			--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb) + 1px);
 			--path-icon-clr: var(--slot-border-clr);
 
 			&:before {
-				--at-apply: 'inset-be-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
-			}
-
-			@media (width < 760px) {
-				&::before {
-					--at-apply: 'inset-be-[calc(var(--slot-row-height))]';
-				}
+				inset-block-end: calc(0.5 * (var(--secondary-slot-row-button-size) + 2 * var(--slot-row-py)));
 			}
 
 			[role='radiogroup'],
