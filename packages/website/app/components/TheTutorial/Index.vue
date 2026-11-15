@@ -27,6 +27,8 @@ let highlightedEl: Element | undefined;
 let currentAnchor: HTMLElement | null | undefined;
 let raf = 0;
 let focusNext = false;
+/** when guided tutorialing and "ok" was explicitly clicked */
+let scrollToAnchor = false;
 
 function isDone(id: ITutorialStepId) {
 	return tutorialState.steps[id] === 1;
@@ -92,7 +94,10 @@ function completeStep(id: ITutorialStepId, focus = false) {
 	scheduleUpdate(focus);
 }
 
-function ackCurrentStep() {
+function ackCurrentStep(fromOk?: boolean) {
+	if (fromOk) {
+		scrollToAnchor = true;
+	}
 	if (currentStepId.value) {
 		completeStep(currentStepId.value, true);
 		saveTutorialState();
@@ -231,14 +236,20 @@ function show(pick: IPickedStep, focus: boolean) {
 	if (pick.anchor) {
 		highlightedEl = pick.anchor;
 		highlightedEl.classList.add(GLOW_CLASS);
+		/* if is guided */
+		if (scrollToAnchor && !tutorialStepKinds[currentStepId.value]) {
+			pick.anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
 	} else {
 		el.value.classList.add(GLOW_CLASS);
 	}
+	scrollToAnchor = false;
 	el.value.showPopover((pick.anchor ? { source: pick.anchor } : pick.targetParent ? { source: pick.targetParent } : undefined) as ShowPopoverOptions | undefined);
 	currentAnchor = pick.anchor;
 
-	// TODO check scrolling
-	if (focus || pick.id === 'greeting' || pick.id === 'beforeYouStart') el.value.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
+	if (focus || pick.id === 'greeting' || pick.id === 'beforeYouStart') {
+		el.value.querySelector<HTMLElement>(FOCUSABLE)?.focus({ preventScroll: true });
+	}
 }
 
 function hide() {
@@ -293,6 +304,7 @@ function reset() {
 			notDoneGuidedStepIds.add(id);
 		}
 	}
+
 	scheduleUpdate();
 }
 
@@ -325,7 +337,7 @@ onBeforeUnmount(() => {
 		</template>
 		<template v-else>
 			<div v-html="step?.text" class="game-description" />
-			<button id="tutorial-ok" class="pretend-ui-btn" @click="ackCurrentStep">ok</button>
+			<button id="tutorial-ok" class="pretend-ui-btn" @click="ackCurrentStep(true)">ok</button>
 		</template>
 	</article>
 </template>
