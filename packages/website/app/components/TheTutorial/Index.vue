@@ -213,10 +213,6 @@ function show(pick: IPickedStep, focus: boolean) {
 	const parent = pick.targetParent ?? originalParent;
 	if (parent && el.value.parentNode !== parent) parent.appendChild(el.value);
 
-	if (currentStepId.value === 'greeting' || currentStepId.value === 'beforeYouStart') {
-		acquireClickEater(el.value, true);
-	}
-
 	el.value.toggleAttribute('data-anchored', !!pick.anchor);
 	if (pick.anchor) {
 		highlightedEl = pick.anchor;
@@ -232,10 +228,6 @@ function show(pick: IPickedStep, focus: boolean) {
 }
 
 function hide() {
-	if (currentStepId.value === 'greeting' || currentStepId.value === 'beforeYouStart') {
-		el.value && releaseClickEater(el.value);
-	}
-
 	el.value?.classList.remove(GLOW_CLASS);
 	if (el.value?.matches(':popover-open')) el.value.hidePopover();
 	if (el.value && el.value?.parentNode !== originalParent) originalParent?.prepend(el.value);
@@ -395,17 +387,10 @@ onBeforeUnmount(() => {
 			flip-inline,
 			flip-block flip-inline;
 
-		&:not([data-anchored]) {
-			--at-apply: 'inset-0 fixed m-auto pbs-3 pbe-4 px-4';
-			--tooltip-max-w: calc(128 * var(--spacing));
-		}
-
 		&[data-current-step='greeting'],
 		&[data-current-step='beforeYouStart'] {
-			&::backdrop {
-				--at-apply: 'bg-black/20';
-				backdrop-filter: blur(1px);
-			}
+			--at-apply: 'inset-be-auto inset-bs-18 inset-x-0 fixed m-auto pbs-3 pbe-4 px-4 shadow-black';
+			--tooltip-max-w: calc(128 * var(--spacing));
 		}
 	}
 }
