@@ -1,6 +1,26 @@
 <script setup lang="ts">
-// TODO contents subsection links
 import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
+// TODO contents subsection links
+import { resetTutorialStep } from '~/utils/tutorial';
+
+function resetTutorial(event: MouseEvent) {
+	const button = event.currentTarget as HTMLElement;
+	if (button.hasAttribute('data-clicked')) {
+		button.removeAttribute('data-clicked');
+	} else {
+		button.setAttribute('data-clicked', '');
+		button.addEventListener('mouseleave', clearResetTutorialButton);
+		button.addEventListener('blur', clearResetTutorialButton);
+		resetTutorialStep('all');
+	}
+}
+
+function clearResetTutorialButton(event: Event) {
+	const button = event.currentTarget as HTMLElement;
+	button.removeEventListener('mouseleave', clearResetTutorialButton);
+	button.removeEventListener('blur', clearResetTutorialButton);
+	button.removeAttribute('data-clicked');
+}
 
 const exampleSpellCrit = useSimpleDescription(
 	'guide-example-shadowflame-ie-randuin',
@@ -78,7 +98,10 @@ const example2026WorldsAkali = useSimpleDescription(
 			Below you can find some step by step guides to doing things in <strong>lolcalc</strong>. Additionally, you can use the "reset tutorial" button to do <i>you-won't-guess-what</i> (will take effect when you visit the
 			<NuxtLink to="/">main page</NuxtLink>)
 		</p>
-		<button id="reset-tutorial" class="pretend-ui-btn remove">TODO reset tutorial</button>
+		<button id="reset-tutorial" class="pretend-ui-btn remove" @click="resetTutorial" aria-live="polite">
+			<span>reset tutorial</span>
+			<span>reset done <Icon class="i-ph:check-bold" /></span>
+		</button>
 		<details id="apply-external-effect">
 			<summary><h3>applying external effects</h3></summary>
 			<p>Effects can be applied using the <button>effects</button> button</p>
@@ -140,6 +163,7 @@ const example2026WorldsAkali = useSimpleDescription(
 				- <span class="game-description" v-html="exampleSpellCrit" />
 			</li>
 			<li>
+				<!-- TODO opening this links throws error with custom total -->
 				<NuxtLink
 					to="/?v=1&src=84_18_3157-4645-3152-3135-3173-1082_0__000_3088_200_0000_00000___0*0*0_glory-2___2&src=84_18_3157-4645-3152-3089-3173-1082_0__000_3088_200_0000_00000___0*0*0_glory-2___2&tgt=887_20_3157-4633-2510-3111-1058_0___3532_1116_0000_00000_______0&tgt=56_17_6631-3026-3073-3155-3111_0___3254_825_0000_00000____sBShockwave-100___&tgt=4_18_3157-3100-3094-6657-2065-3173_0___2890_1796_0000_00000____eternity-10___2&tgt=804_18_3156-3033-6672-2523-3085-3008_0___2460_1040_0000_00000____slay-7___3&tgt=518_13_3152-3110-3158-1057-3067-3869_0___2499_1178_0000_00000_______4&tblCol=0-0&tblCol=1-0&tblCol=0-1&tblCol=1-1&tblCol=0-2&tblCol=1-2&tblCol=0-3&tblCol=1-3&tblCol=0-4&tblCol=1-4&tblSct=a-cTtl_1&tblSct=0-84-4-0_1&tblSct=0-84-1-0_1&tblSct=0-84-3-0_1&tblSct=0-84-0-0_1&tblCTtl=3-1*3-0*2-0*1-0*1-2*1-1*4-1"
 					target="_blank"
@@ -189,12 +213,36 @@ const example2026WorldsAkali = useSimpleDescription(
 			}
 		}
 
-		#reset-tutorial {
-			--at-apply: 'inline-max mx-auto px-3.5';
-		}
-
 		#tutorial-apply-x-takeaway {
 			--at-apply: 'text-center block mbe-[0.33em] text-blue-100';
+		}
+	}
+}
+
+@layer overrides {
+	#reset-tutorial {
+		--at-apply: 'inline-32 mx-auto text-center';
+
+		> span:last-child {
+			--at-apply: 'hidden';
+
+			> .icon {
+				--at-apply: 'align-[-3px] ms-[0.25ch]';
+			}
+		}
+
+		&[data-clicked] {
+			--at-apply: 'bg-green-950';
+
+			> span {
+				&:first-child {
+					--at-apply: 'hidden';
+				}
+
+				&:last-child {
+					--at-apply: 'inline';
+				}
+			}
 		}
 	}
 }
