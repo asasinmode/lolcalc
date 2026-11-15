@@ -1578,6 +1578,10 @@ defineExpose({ el });
 				'move-down	duplicate		select-champion	select-runes	select-items	items			expand';
 			grid-template-columns: repeat(5, max-content) minmax(0, 1fr) max-content;
 
+			&::after {
+				--glow-duration: 4s;
+			}
+
 			@media (width < 1230px) and ((width >= 1079px) or (width < 594px)) {
 				& {
 					grid-template-areas:
