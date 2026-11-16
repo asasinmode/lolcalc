@@ -1428,7 +1428,7 @@ export const EFFECT_SPECIFICS = {
 		calculateHooks: {
 			postInit: {
 				handler(self, { effectStats }, { calculatedVariables }) {
-					if ((self.internalData.value as IInternalDataOf<'Orianna'>).applyEResists) {
+					if (self.champion.value?.id === 'Orianna' && (self.internalData.value as IInternalDataOf<'Orianna'>).applyEResists) {
 						return;
 					}
 
