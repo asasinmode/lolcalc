@@ -132,7 +132,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		],
 	},
 	[ITEM_NAME_TO_ID.youmuu]: {
-		extras: [booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'haunt', 'Haunt'), await booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'wStep', 'Wraith Step')],
+		extras: [booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'haunt', 'Haunt'), booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.youmuu), 'wStep', 'Wraith Step')],
 	},
 	[ITEM_NAME_TO_ID.forceOfNature]: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.forceOfNature), 'steadfast', 'Steadfast'),
@@ -272,7 +272,8 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue = 0, maxValue = 1, enumOptions } = effectSpecific;
 
 		ITEM_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= enumOptions
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= {};
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects![effectObjectName] ??= enumOptions
 			? enumExtra(
 					abilityId,
 					0,
@@ -288,5 +289,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 for (const key in ITEM_COMPONENTS) {
 	const { extras, effects } = ITEM_COMPONENTS[key as keyof typeof ITEM_COMPONENTS]!;
 	extras && (Array.isArray(extras) ? extras.forEach((component) => markRaw(component)) : markRaw(extras));
-	effects && (Array.isArray(effects) ? effects.forEach((component) => markRaw(component)) : markRaw(effects));
+	for (const key in effects) {
+		markRaw(effects[key]!);
+	}
 }

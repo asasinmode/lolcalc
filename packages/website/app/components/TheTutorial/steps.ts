@@ -193,7 +193,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'effect source',
 		type: 'effectsDialog',
 		within: 'dialog-effects',
-		text: "some effects' strength depends on who's applying them. If applicable, the source of the effect can be selected by clicking on the champion icon in the corner of the effect's image",
+		text: "some effects' strength depends on who's applying them. If applicable, the source of the effect can be selected by clicking on the champion icon in the corner of the effect's image<br> <rules>right click to clear</rules>",
 		anchor: '.effect-src-select',
 		showOn: {
 			effectDialogExtraEntered(effectObjectName) {

@@ -146,23 +146,18 @@ const UnknownComponent = defineComponent(
 	{ props: ['abilityId', 'damageSource', 'idSuffix', 'tooltipTriggerAttrs'] },
 );
 
-const effectComponents = computed(() => {
-	const rv = new Map<EffectObjectName, Component | Component[]>();
-
-	for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
-		const component =
-			effectSpecific.sourceAbility.type === AbilityType.item
-				? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-				: effectSpecific.sourceAbility.type === AbilityType.champion
-					? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-					: effectSpecific.sourceAbility.type === AbilityType.dragon
-						? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects
-						: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
-		component && rv.set(effectObjectName, component);
-	}
-
-	return rv;
-});
+const effectComponents = new Map<EffectObjectName, Component | Component[]>();
+for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
+	const component =
+		effectSpecific.sourceAbility.type === AbilityType.item
+			? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects?.[effectObjectName]
+			: effectSpecific.sourceAbility.type === AbilityType.champion
+				? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects?.[effectObjectName]
+				: effectSpecific.sourceAbility.type === AbilityType.dragon
+					? DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]?.[effectSpecific.sourceAbility.subtype]?.effects?.[effectObjectName]
+					: EFFECT_COMPONENTS[effectObjectName];
+	component && effectComponents.set(effectObjectName, component);
+}
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 const hoveredEffectId = shallowRef<IEffectAbilityId>();

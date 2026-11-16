@@ -28,7 +28,8 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype] ??= {};
-		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects ??= enumOptions
+		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects ??= {};
+		DRAGON_COMPONENTS[effectSpecific.sourceAbility.id]![effectSpecific.sourceAbility.subtype]!.effects![effectObjectName] = enumOptions
 			? enumExtra(
 					abilityId,
 					0,
@@ -51,10 +52,18 @@ for (const key in DRAGON_COMPONENTS) {
 	const { stack, soul } = DRAGON_COMPONENTS[key as keyof typeof DRAGON_COMPONENTS]!;
 	if (stack) {
 		stack.extras && (Array.isArray(stack.extras) ? stack.extras.forEach((component) => markRaw(component)) : markRaw(stack.extras));
-		stack.effects && (Array.isArray(stack.effects) ? stack.effects.forEach((component) => markRaw(component)) : markRaw(stack.effects));
+		if (stack.effects) {
+			for (const key in stack.effects) {
+				markRaw(stack.effects[key]!);
+			}
+		}
 	}
 	if (soul) {
 		soul.extras && (Array.isArray(soul.extras) ? soul.extras.forEach((component) => markRaw(component)) : markRaw(soul.extras));
-		soul.effects && (Array.isArray(soul.effects) ? soul.effects.forEach((component) => markRaw(component)) : markRaw(soul.effects));
+		if (soul.effects) {
+			for (const key in soul.effects) {
+				markRaw(soul.effects[key]!);
+			}
+		}
 	}
 }

@@ -150,7 +150,7 @@ export interface IExtraComponentProps<BindData = unknown> {
 
 export interface ISpecificComponents {
 	extras?: Component | Component[];
-	effects?: Component | Component[];
+	effects?: Partial<Record<EffectObjectName, Component>>;
 }
 
 export interface IScoreboardItemChampionAbilityTooltipShowData {

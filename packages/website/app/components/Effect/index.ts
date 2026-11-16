@@ -2,17 +2,15 @@ import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect';
 import type { EffectObjectName } from '@lolcalc/shared';
 import { AbilityType } from '@lolcalc/shared';
-import type { ISpecificComponents } from '~/utils/types';
 
-export const EFFECT_COMPONENTS: Partial<Record<EffectObjectName, ISpecificComponents>> = {};
+export const EFFECT_COMPONENTS: Partial<Record<EffectObjectName, Component>> = {};
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === AbilityType.effect) {
 		const abilityId = GameAbilityId.build(AbilityType.effect, effectObjectName);
 		const { label, minValue, maxValue, enumOptions, deriveProgressValue } = effectSpecific;
 
-		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= enumOptions
+		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] = enumOptions
 			? enumExtra(
 					abilityId,
 					0,
@@ -36,7 +34,5 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 }
 
 for (const key in EFFECT_COMPONENTS) {
-	const { extras, effects } = EFFECT_COMPONENTS[key as keyof typeof EFFECT_COMPONENTS]!;
-	extras && (Array.isArray(extras) ? extras.forEach((component) => markRaw(component)) : markRaw(extras));
-	effects && (Array.isArray(effects) ? effects.forEach((component) => markRaw(component)) : markRaw(effects));
+	markRaw(EFFECT_COMPONENTS[key as keyof typeof EFFECT_COMPONENTS]!);
 }

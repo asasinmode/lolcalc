@@ -392,7 +392,8 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue = 0, maxValue = 1, enumOptions, deriveProgressValue } = effectSpecific;
 
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= enumOptions
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= {};
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects![effectObjectName] = enumOptions
 			? enumExtra(
 					abilityId,
 					0,
@@ -421,5 +422,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 for (const key in CHAMPION_COMPONENTS) {
 	const { extras, effects } = CHAMPION_COMPONENTS[key as keyof typeof CHAMPION_COMPONENTS]!;
 	extras && (Array.isArray(extras) ? extras.forEach((component) => markRaw(component)) : markRaw(extras));
-	effects && (Array.isArray(effects) ? effects.forEach((component) => markRaw(component)) : markRaw(effects));
+	for (const key in effects) {
+		markRaw(effects[key]!);
+	}
 }
