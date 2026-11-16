@@ -2891,6 +2891,10 @@ defineExpose({ el });
 
 			> label {
 				--at-apply: 'text-neutral-200 leading-[0.9] pb-[0.2em] -mb-[0.2em]';
+
+				> * {
+					--at-apply: 'leading-initial';
+				}
 			}
 
 			> label + button,
