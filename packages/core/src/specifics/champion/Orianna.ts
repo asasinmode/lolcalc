@@ -62,4 +62,51 @@ export default {
 			uninteresting: ['StackDuration'],
 		}),
 	},
+	q: {
+		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'q'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+				ReducedDamage: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
+	w: {
+		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'w'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+				Slow: {
+					type: VariableType.affectedBySlowResist,
+				},
+			},
+			uninteresting: ['FieldDuration', 'SlowAndHasteDuration'],
+		}),
+	},
+	e: {
+		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'e'>()({
+			meta: {
+				TotalDamageTooltip: {
+					type: VariableType.magic,
+				},
+				TotalShieldTooltip: {
+					type: VariableType.shield,
+				},
+			},
+			uninteresting: ['ShieldDuration'],
+		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'r'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
 } satisfies IChampionSpecific<'Orianna'>;
