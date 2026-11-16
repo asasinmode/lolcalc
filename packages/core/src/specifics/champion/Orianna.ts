@@ -46,7 +46,7 @@ export default {
 		return {
 			passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), passiveMaxStacks(self)),
 			wMSProgress: clamp(0, Math.round(self.internalData.value.wMSProgress ?? 0), 100),
-			applyEResists: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 1), 1),
+			applyEResists: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), 1),
 		};
 	},
 	passive: {

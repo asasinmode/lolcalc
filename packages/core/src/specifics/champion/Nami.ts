@@ -52,6 +52,10 @@ export default {
 					},
 				}),
 			refresh(self) {
+				const effect = self.getEffect(EffectObjectName.namiPSurgingTides)?.[0];
+				if (effect) {
+					effect.data.value[0] = 0;
+				}
 				self.internalData.value.passiveMSTotalAP = self.stats.value.total.abilityPower;
 			},
 			currentlySnapshot(_effectData, self) {
