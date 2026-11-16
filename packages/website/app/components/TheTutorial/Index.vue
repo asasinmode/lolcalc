@@ -30,6 +30,10 @@ let focusNext = false;
 /** when guided tutorialing and "ok" was explicitly clicked */
 let scrollToAnchor = false;
 
+/* whether the scoreboard's layout is separated into 2 groups, one being off-screen. Needed for showing the tutorial where user can see it. Media query needs to be kept in sync with the <CalculatorScoreboard> */
+let scoreboardSeparateGroupLayoutMQ: MediaQueryList | undefined;
+let touchOnlyMQ: MediaQueryList | undefined;
+
 function isDone(id: ITutorialStepId) {
 	return tutorialState.steps[id] === 1;
 }
@@ -131,7 +135,12 @@ interface IPickedStep {
 
 function updatePopup(focus: boolean) {
 	const currentPriority = currentStepId.value ? TUTORIAL_STEP_PRIORITIES[currentStepId.value] : Number.POSITIVE_INFINITY;
-	const candidateIds = [...notDoneGuidedStepIds.values(), ...pendingGeneralSteps].filter((id) => !isDone(id) && TUTORIAL_STEP_PRIORITIES[id] < currentPriority).sort((a, b) => TUTORIAL_STEP_PRIORITIES[a] - TUTORIAL_STEP_PRIORITIES[b]);
+	const candidateIds = [...notDoneGuidedStepIds.values(), ...pendingGeneralSteps]
+		.filter((id) => {
+			const stepDef = tutorialSteps[id];
+			return !isDone(id) && TUTORIAL_STEP_PRIORITIES[id] < currentPriority && (!stepDef.showableIf || stepDef.showableIf({ touchOnly: touchOnlyMQ?.matches, scoreboardGroupSeparateLayout: scoreboardSeparateGroupLayoutMQ?.matches }));
+		})
+		.sort((a, b) => TUTORIAL_STEP_PRIORITIES[a] - TUTORIAL_STEP_PRIORITIES[b]);
 	if (!candidateIds.length) return;
 
 	const modal = document.querySelector('dialog:modal');
@@ -165,8 +174,6 @@ let scoreboardEl: HTMLElement | null = null;
 let scoreboardSources: HTMLElement | null = null;
 let scoreboardTargets: HTMLElement | null = null;
 let effectsDialog: HTMLElement | null = null;
-/* whether the scoreboard's layout is separated into 2 groups, one being off-screen. Needed for showing the tutorial where user can see it. Media query needs to be kept in sync with the <CalculatorScoreboard> */
-let scoreboardSeparateGroupLayoutMQ: MediaQueryList | undefined;
 
 /** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
 function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
@@ -261,11 +268,17 @@ function hide() {
 	currentStepId.value = undefined;
 }
 
-// TODO probably has to run on resize
 function repositionCurrentStep(force?: boolean) {
-	if (!currentStepId.value || (!force && currentAnchor?.checkVisibility())) return;
+	if (!currentStepId.value) return;
 
 	const stepDef = tutorialSteps[currentStepId.value];
+	if (stepDef.showableIf && !stepDef.showableIf({ touchOnly: touchOnlyMQ?.matches, scoreboardGroupSeparateLayout: scoreboardSeparateGroupLayoutMQ?.matches })) {
+		hide();
+		return;
+	}
+
+	if (!force && currentAnchor?.checkVisibility()) return;
+
 	const viableAnchor = findStepAnchor(stepDef);
 	if (viableAnchor === false) {
 		hide();
@@ -308,15 +321,25 @@ function reset() {
 	scheduleUpdate();
 }
 
+/** calls `scheduleUpdate` without caring about args */
+function reevaluateTooltip() {
+	repositionCurrentStep();
+	updatePopup(false);
+}
+
 let detach: (() => void) | undefined;
 
 onMounted(() => {
+	/* theoretically scoreboardSeparateGroupLayoutMQ should also have a change event listener that updates the tooltip but it's handled in the scoreboard. It sends `scoreboardLayoutChanged` event */
 	scoreboardSeparateGroupLayoutMQ = window.matchMedia('(width < 1079px)');
+	touchOnlyMQ = window.matchMedia('not ((hover: hover) and (pointer: fine))');
+	touchOnlyMQ?.addEventListener('change', reevaluateTooltip);
 	reset();
 	detach = attachTutorialSink({ onEvent, reload: reset });
 });
 
 onBeforeUnmount(() => {
+	touchOnlyMQ?.removeEventListener('change', reevaluateTooltip);
 	detach?.();
 	cancelAnimationFrame(raf);
 	hide();
@@ -415,10 +438,7 @@ onBeforeUnmount(() => {
 		position-anchor: auto;
 		inset-block-start: auto;
 		inset-block-end: calc(anchor(start) + var(--spacing));
-		position-try-fallbacks:
-			flip-block,
-			flip-inline,
-			flip-block flip-inline;
+		position-try-fallbacks: flip-block;
 
 		&[data-current-step='greeting'],
 		&[data-current-step='beforeYouStart'] {

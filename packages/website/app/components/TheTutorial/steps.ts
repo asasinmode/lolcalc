@@ -23,6 +23,15 @@ export interface ITutorialStepDef {
 	completeOn?: ITutorialEvent[];
 	/** check for step (only general steps) to be marked as pending. Runs on tutorial mounted/reset */
 	pendingIf?: (calculatorState: ICalculatorState) => void;
+	/** custom check for if the step can be shown, like drag items step isn't applicable on devices that don't support it */
+	showableIf?: (showableState: IShowableState) => boolean;
+}
+
+interface IShowableState {
+	/** `not ((hover: hover) and (pointer: fine))` */
+	touchOnly?: boolean;
+	/** `(width < 1079px)` on smaller devices the scoreboard has only 1 group visible on screen */
+	scoreboardGroupSeparateLayout?: boolean;
 }
 
 export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
@@ -98,6 +107,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		type: 'damageSource',
 		text: 'items can be sold by right clicking. You can also drag them between different <i>damage sources</i> (hold [<kbd>Alt</kdb>] while dragging to duplicate)',
 		anchor: ['.items', (itemsContainer) => itemsContainer.querySelector('button') && itemsContainer],
+		showableIf: (showableState) => !showableState.touchOnly,
 		pendingIf: (state) => state.damageSources.some((source) => source.items.value.length) || state.damageTargets.some((source) => source.items.value.length),
 		showOn: {
 			itemShopClosed(damageSource) {
