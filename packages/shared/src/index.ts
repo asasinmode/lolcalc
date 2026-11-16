@@ -399,7 +399,7 @@ export interface IStatsCalculationMiscDebug {
 	blackCleaverCarveShred?: number;
 	bloodlettersCurseCarveShred?: number;
 	viWArmorReductionPercent?: number;
-	JayceRResistsReductionPercent?: number;
+	jayceRResistsReductionPercent?: number;
 }
 
 /** variables of effects applied onto the damage target */
@@ -454,9 +454,9 @@ export interface IStatsCalculationEffectVars extends Pick<
 	/** armor reduced by Vi's W effect */
 	viWArmorReduced?: number;
 	/** armor reduced by Jayce's R effect */
-	JayceRShreddedArmor?: number;
+	jayceRShreddedArmor?: number;
 	/** mr reduced by Jayce's R effect */
-	JayceRShreddedMR?: number;
+	jayceRShreddedMR?: number;
 }
 
 export interface IDamageOutputVars {

@@ -1166,10 +1166,10 @@ export const EFFECT_SPECIFICS = {
 			calculate(self) {
 				return {
 					ShreddedArmor: {
-						value: self.stats.value.effectVars.JayceRShreddedArmor ?? 0,
+						value: self.stats.value.effectVars.jayceRShreddedArmor ?? 0,
 					},
 					ShreddedMR: {
-						value: self.stats.value.effectVars.JayceRShreddedMR ?? 0,
+						value: self.stats.value.effectVars.jayceRShreddedMR ?? 0,
 					},
 				};
 			},
@@ -1187,24 +1187,24 @@ export const EFFECT_SPECIFICS = {
 				handler(self, _stats, { miscDebug, debuffs }) {
 					const effect = self.getEffect(EffectObjectName.jayceRResistShred)?.[0];
 					if (effect?.champion.value?.id === 'Jayce') {
-						miscDebug.JayceRResistsReductionPercent = CHAMPION_SPECIFICS.Jayce.r.calculateResistsShred(effect.champion.value as IChampion, effect.source.value?.level.value ?? 1);
-						if (!Number.isNaN(miscDebug.JayceRResistsReductionPercent)) {
-							debuffs.percentageArmorShred = addMultiplicative(debuffs.percentageArmorShred, miscDebug.JayceRResistsReductionPercent);
-							debuffs.percentageMRShred = addMultiplicative(debuffs.percentageMRShred, miscDebug.JayceRResistsReductionPercent);
-							miscDebug.totalAdditiveArmorShred += miscDebug.JayceRResistsReductionPercent;
-							miscDebug.totalAdditiveMRShred += miscDebug.JayceRResistsReductionPercent;
+						miscDebug.jayceRResistsReductionPercent = CHAMPION_SPECIFICS.Jayce.r.calculateResistsShred(effect.champion.value as IChampion, effect.source.value?.level.value ?? 1);
+						if (!Number.isNaN(miscDebug.jayceRResistsReductionPercent)) {
+							debuffs.percentageArmorShred = addMultiplicative(debuffs.percentageArmorShred, miscDebug.jayceRResistsReductionPercent);
+							debuffs.percentageMRShred = addMultiplicative(debuffs.percentageMRShred, miscDebug.jayceRResistsReductionPercent);
+							miscDebug.totalAdditiveArmorShred += miscDebug.jayceRResistsReductionPercent;
+							miscDebug.totalAdditiveMRShred += miscDebug.jayceRResistsReductionPercent;
 						}
 					}
 				},
 			},
 			postTotal: {
 				handler(_self, _stats, { effectVars, debuffs, miscDebug }) {
-					if (Number.isNaN(miscDebug.JayceRResistsReductionPercent)) {
-						effectVars.JayceRShreddedArmor = Number.NaN;
-						effectVars.JayceRShreddedMR = Number.NaN;
+					if (Number.isNaN(miscDebug.jayceRResistsReductionPercent)) {
+						effectVars.jayceRShreddedArmor = Number.NaN;
+						effectVars.jayceRShreddedMR = Number.NaN;
 					} else {
-						effectVars.JayceRShreddedArmor = (debuffs.shreddedArmor * miscDebug.JayceRResistsReductionPercent!) / (miscDebug.totalAdditiveArmorShred || 1);
-						effectVars.JayceRShreddedMR = (debuffs.shreddedMR * miscDebug.JayceRResistsReductionPercent!) / (miscDebug.totalAdditiveMRShred || 1);
+						effectVars.jayceRShreddedArmor = (debuffs.shreddedArmor * miscDebug.jayceRResistsReductionPercent!) / (miscDebug.totalAdditiveArmorShred || 1);
+						effectVars.jayceRShreddedMR = (debuffs.shreddedMR * miscDebug.jayceRResistsReductionPercent!) / (miscDebug.totalAdditiveMRShred || 1);
 					}
 				},
 				priority: HOOK_PRIORITIES.postTotal.recordKeeping,

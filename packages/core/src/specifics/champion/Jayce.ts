@@ -145,10 +145,10 @@ export default {
 						value: self.stats.value.championPassive.armor ?? 0,
 					},
 					ShreddedMR: {
-						value: (self.internalData.value.applyRShred && target?.stats.value.effectVars.JayceRShreddedMR) ?? 0,
+						value: (self.internalData.value.applyRShred && target?.stats.value.effectVars.jayceRShreddedMR) ?? 0,
 					},
 					ShreddedArmor: {
-						value: (self.internalData.value.applyRShred && target?.stats.value.effectVars.JayceRShreddedArmor) ?? 0,
+						value: (self.internalData.value.applyRShred && target?.stats.value.effectVars.jayceRShreddedArmor) ?? 0,
 					},
 				};
 			},
