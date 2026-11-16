@@ -19,12 +19,16 @@ export interface ITutorialStepDef {
 	within?: string;
 	/** general steps: any of these will try to show the step when it returns `true` */
 	showOn?: ITutorialStepTriggers;
-	/** these mark the step `done` when any of these returns `true` */
-	completeOn?: ITutorialEvent[];
+	/** these mark the step `done` when these are received */
+	completeOn?:
+		| ITutorialEvent[]
+		| Partial<{
+				[key in ITutorialEvent]: (data: TutorialEvents[key]) => boolean | undefined;
+		  }>;
 	/** check for step (only general steps) to be marked as pending. Runs on tutorial mounted/reset */
 	pendingIf?: (calculatorState: ICalculatorState) => void;
 	/** custom check for if the step can be shown, like drag items step isn't applicable on devices that don't support it */
-	showableIf?: (showableState: IShowableState) => boolean;
+	showableIf?: (showableState: IShowableState) => boolean | undefined;
 }
 
 interface IShowableState {
@@ -52,6 +56,21 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		text: 'open champ select by clicking on the portrait',
 		anchor: '.select-champion',
 		completeOn: ['champSelectClosed', 'champSelectOpened'],
+	},
+	swapScoreboardGroup: {
+		title: 'sources and targets',
+		type: 'global',
+		text: '<strong>lolcalc</strong> lets you configure both <i>damage sources</i> and <i>targets</i>. You can swap between them using the <b>"swap to [group]"</b> button<br> <rules>Source/target distinction is used in the <i>results table</i> at the bottom of the page</rules>',
+		anchor: '#swap-scoreboard-group',
+		showableIf: (showableState) => {
+			return showableState.scoreboardGroupSeparateLayout;
+		},
+		pendingIf: () => true,
+		completeOn: {
+			scoreboardLayoutChanged(withButtonPress) {
+				return withButtonPress;
+			},
+		},
 	},
 	viewExtraComponent: {
 		title: 'configuring passives',
@@ -257,9 +276,16 @@ export const TUTORIAL_EVENT_TO_STEP_IDS = {
 	completeOn: Object.entries(tutorialSteps).reduce(
 		(acc, [currId, currDef]) => {
 			if (currDef.completeOn) {
-				for (const eventName of currDef.completeOn) {
-					acc[eventName] ??= [];
-					acc[eventName]!.push(currId as ITutorialStepId);
+				if (Array.isArray(currDef.completeOn)) {
+					for (const eventName of currDef.completeOn) {
+						acc[eventName] ??= [];
+						acc[eventName]!.push(currId as ITutorialStepId);
+					}
+				} else {
+					for (const eventName in currDef.completeOn) {
+						acc[eventName as ITutorialEvent] ??= [];
+						acc[eventName as ITutorialEvent]!.push(currId as ITutorialStepId);
+					}
 				}
 			}
 			return acc;

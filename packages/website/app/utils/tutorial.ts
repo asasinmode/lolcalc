@@ -8,6 +8,7 @@ export const tutorialStepKinds = {
 	greeting: 1,
 	beforeYouStart: 1,
 	openChampSelect: 0,
+	swapScoreboardGroup: 1,
 	viewExtraComponent: 1,
 	changeChampionLevel: 0,
 	openRunesDialog: 0,
@@ -47,8 +48,8 @@ export interface TutorialEvents {
 	scoreboardItemRemoved: void;
 	scoreboardItemMoved: void;
 	scoreboardItemDuplicated: void;
-	/* when scoreboard's is displaying targets changes or it's applied due to screen resize */
-	scoreboardLayoutChanged: void;
+	/* when scoreboard's is displaying targets changes or it's applied due to screen resize. Value is whether the change happened automatically, due to resize, or explicitly with a button press - used for tutorial step completion */
+	scoreboardLayoutChanged: boolean;
 	champSelectClosed: IChampionId | undefined;
 	sourceLevelSelectFocused: void;
 	abilityLevelFocused: void;

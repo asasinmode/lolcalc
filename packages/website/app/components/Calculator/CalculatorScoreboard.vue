@@ -279,14 +279,14 @@ function updateSmallScreenScrollX() {
 	}
 }
 
-function toggleDisplayedList() {
+function swapToOtherGroup() {
 	isDisplayingTargets.value = !isDisplayingTargets.value;
 	updateSmallScreenScrollX();
-	nextTick(() => tutorialEvent('scoreboardLayoutChanged', {}));
+	nextTick(() => tutorialEvent('scoreboardLayoutChanged', {}, true));
 }
 
 function notifyTutorialLayoutChanged() {
-	tutorialEvent('scoreboardLayoutChanged', {});
+	tutorialEvent('scoreboardLayoutChanged', {}, false);
 }
 
 onMounted(() => {
@@ -305,7 +305,7 @@ onBeforeUnmount(() => {
 <template>
 	<section id="scoreboard" :class="{ mirrored: mirrorLayout }">
 		<h2>configuration scoreboard</h2>
-		<button class="switch-group pretend-ui-btn" @click="toggleDisplayedList">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
+		<button id="swap-scoreboard-group" class="switch-group pretend-ui-btn" @click="swapToOtherGroup">swap to {{ isDisplayingTargets ? 'sources' : 'targets' }}</button>
 		<label for="scoreboard-mirror-layout">
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @change="setLocalMirrorLayout" />
 			mirror layout

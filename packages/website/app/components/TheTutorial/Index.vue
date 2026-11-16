@@ -56,6 +56,8 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 		let stepCompleted = false;
 		for (const stepId of completeStepIds) {
 			if (!isDone(stepId)) {
+				const stepDef = tutorialSteps[stepId];
+				if (!Array.isArray(stepDef.completeOn) && !stepDef.completeOn![name]?.(data as never)) continue;
 				completeStep(stepId);
 				stepCompleted = true;
 			}
@@ -63,7 +65,8 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 		stepCompleted && saveTutorialState();
 	}
 
-	if (currentStepId.value && repositionEvents[tutorialSteps[currentStepId.value].type]?.includes(name)) {
+	/* special case here for swap scoreboard group - its type is `global` but needs to reposition when scoreboard layout changes */
+	if (currentStepId.value && (repositionEvents[tutorialSteps[currentStepId.value].type]?.includes(name) || (name === 'scoreboardLayoutChanged' && currentStepId.value === 'swapScoreboardGroup'))) {
 		repositionCurrentStep(name === 'scoreboardLayoutChanged');
 	}
 
