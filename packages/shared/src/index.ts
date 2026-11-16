@@ -457,6 +457,8 @@ export interface IStatsCalculationEffectVars extends Pick<
 	jayceRShreddedArmor?: number;
 	/** mr reduced by Jayce's R effect */
 	jayceRShreddedMR?: number;
+	/** bonus ms % from Orianna' w */
+	oriannaWBonusMS?: number;
 }
 
 export interface IDamageOutputVars {
@@ -853,6 +855,8 @@ export const EffectObjectName = {
 	namiPSurgingTides: 'NamiPassiveTT',
 	nasusWWither: 'NasusW',
 	lissandraPIcebornSubjugation: 'lolcalcLissandraPassive',
+	oriannaWMS: 'OrianaDissonanceAlly',
+	oriannaETheBall: 'OrianaGhost',
 	/* other */
 	ghost: 'summonerHaste',
 	cleanse: 'summonerCleanse',

@@ -190,4 +190,12 @@ export const EFFECTS_META: Record<
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0),
 		label: 'Wither',
 	},
+	[EffectObjectName.oriannaWMS]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Orianna', 'w', 0),
+		label: 'Static Push',
+	},
+	[EffectObjectName.oriannaETheBall]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Orianna', 'e', 0),
+		label: 'The Ball',
+	},
 };

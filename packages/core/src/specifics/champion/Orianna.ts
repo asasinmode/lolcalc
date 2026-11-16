@@ -109,6 +109,7 @@ export default {
 	},
 	w: {
 		derivedMS: ((progress, self) => self?.stats.value.variables.oriannaWBonusMS ?? calculateWMS(progress, self.champion.value!, self.abilityLevels.value.w)) satisfies IDeriveProgressFn,
+		calculateMS: calculateWMS,
 		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'w'>()({
 			known: {
 				BonusMS: [],
@@ -136,6 +137,7 @@ export default {
 		}),
 	},
 	e: {
+		calculateResists: calculateEBonusResists,
 		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'e'>()({
 			meta: {
 				TotalDamageTooltip: {

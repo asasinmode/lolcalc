@@ -278,6 +278,14 @@
 			"objectName": "NasusW",
 			"description": "This unit's Move and Attack Speeds are becoming increasingly slowed over time."
 		},
+		"OrianaDissonanceAlly": {
+			"description": "This unit's Move Speed is increased.",
+			"dataKey": "Characters/Orianna/Spells/OrianaDissonanceCommandAbility/OrianaDissonanceAlly"
+		},
+		"OrianaGhost": {
+			"description": "This champion is being watched over by the Ball, gaining additional defenses.",
+			"dataKey": "Characters/Orianna/Spells/OrianaGhost"
+		},
 		"lolcalc6694BitterCold": {
 			"description": "This unit is slowed.",
 			"dataKey": "lolcalc6694BitterCold"

@@ -1371,6 +1371,81 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
+	[EffectObjectName.oriannaWMS]: defineEffectSpecific<[msProgress: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 100)];
+		},
+		imgText(_data, self) {
+			const { oriannaWBonusMS } = self.stats.value.effectVars;
+			return oriannaWBonusMS ? `${Math.round(oriannaWBonusMS)}%` : 0;
+		},
+		deriveProgressValue: (_value, self) => {
+			return self?.stats.value.effectVars.oriannaWBonusMS ?? 0;
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== ('Orianna' satisfies IChampionId)) {
+					return "it's not Orianna";
+				}
+			},
+		},
+		watch(effect) {
+			return effect.source.value?.abilityLevels.value.w;
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, _stats, { calculatedVariables, effectVars }) {
+					if (self.champion.value?.id === 'Orianna' && (self.internalData.value as IInternalDataOf<'Orianna'>).wMSProgress) {
+						return;
+					}
+
+					const effect = self.getEffect(EffectObjectName.oriannaWMS)?.[0];
+					if (effect?.champion.value?.id === 'Orianna') {
+						const ms = CHAMPION_SPECIFICS.Orianna.w.calculateMS(effect.data.value[0], effect.champion.value as IChampion, effect.source.value?.abilityLevels.value.w ?? 1);
+						if (!Number.isNaN(ms)) {
+							calculatedVariables.totalBonusPercentMoveSpeed += ms * 0.01;
+							effectVars.oriannaWBonusMS = ms;
+						}
+					}
+				},
+			},
+		},
+	}),
+	[EffectObjectName.oriannaETheBall]: defineEffectSpecific<[applyEResists: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		sourceControls: {
+			invalidMessage: (source) => {
+				if (source.listedChampion.value?.id !== ('Orianna' satisfies IChampionId)) {
+					return "it's not Orianna";
+				}
+			},
+		},
+		watch(effect) {
+			return effect.source.value?.abilityLevels.value.e;
+		},
+		calculateHooks: {
+			postInit: {
+				handler(self, { effectStats }, { calculatedVariables }) {
+					if ((self.internalData.value as IInternalDataOf<'Orianna'>).applyEResists) {
+						return;
+					}
+
+					const effect = self.getEffect(EffectObjectName.oriannaETheBall)?.[0];
+					if (effect?.champion.value?.id === 'Orianna') {
+						const resists = CHAMPION_SPECIFICS.Orianna.e.calculateResists(effect.champion.value as IChampion, effect.source.value?.abilityLevels.value.e ?? 1);
+						if (!Number.isNaN(resists)) {
+							effectStats.armor += resists;
+							effectStats.magicResist += resists;
+							calculatedVariables.ignoredMountainArmor += resists;
+							calculatedVariables.ignoredMountainMR += resists;
+						}
+					}
+				},
+			},
+		},
+	}),
 } satisfies IHypotheticalEffectSpecifics;
 
 for (const [effectObjectName, effectSpecific] of Object.entries(EFFECT_SPECIFICS)) {
