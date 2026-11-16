@@ -233,6 +233,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 				tooltip: "in the <i>results table's</i> <b>basic attack</b> section, the damage is calculated for the number of stacks set here",
 			}),
 			progressExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'w', 0), 'wMSProgress', 'Dissonance field move speed', CHAMPION_SPECIFICS.Orianna.w.derivedMS),
+			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'e', 0), 'applyEResists', 'The Ball (bonus resists)'),
 		],
 	},
 	Ornn: {

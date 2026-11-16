@@ -27,12 +27,26 @@ function calculateWMS(progress: number, champion: IChampion, abilityLevel: numbe
 	return Number.NaN;
 }
 
+function calculateEBonusResists(champion: IChampion, abilityLevel: number) {
+	const resists = championAbilityVariableValue('DefenseBonus', {
+		abilityKey: 'e',
+		abilityVariant: champion.abilities.e.variants[0]!,
+		abilityLevel,
+	});
+	if (typeof resists.value === 'number') {
+		return resists.value;
+	} else {
+		console.warn('[CHAMPION_SPECIFICS orianna] failed to calculate E bonus resists', resists);
+		return Number.NaN;
+	}
+}
+
 export default {
 	setupData(self) {
 		return {
 			passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), passiveMaxStacks(self)),
 			wMSProgress: clamp(0, Math.round(self.internalData.value.wMSProgress ?? 0), 100),
-			applyEResists: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), 1),
+			applyEResists: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 1), 1),
 		};
 	},
 	passive: {
@@ -145,12 +159,22 @@ export default {
 	},
 	calculateHooks: {
 		onChampionPassive: {
-			handler(self, _stats, { calculatedVariables }) {
+			handler(self, { championPassiveStats }, { calculatedVariables }) {
 				if (self.internalData.value.wMSProgress) {
 					const ms = calculateWMS(self.internalData.value.wMSProgress, self.champion.value!, self.abilityLevels.value.w);
 					if (!Number.isNaN(ms)) {
 						calculatedVariables.oriannaWBonusMS = ms;
 						calculatedVariables.totalBonusPercentMoveSpeed += ms * 0.01;
+					}
+				}
+				if (self.abilityLevels.value.e && self.internalData.value.applyEResists) {
+					const resists = calculateEBonusResists(self.champion.value!, self.abilityLevels.value.e);
+					if (!Number.isNaN(resists)) {
+						championPassiveStats.armor = resists;
+						championPassiveStats.magicResist = resists;
+						/* 26.22 were not calculated in dragon resists */
+						calculatedVariables.ignoredMountainArmor += resists;
+						calculatedVariables.ignoredMountainMR += resists;
 					}
 				}
 			},
