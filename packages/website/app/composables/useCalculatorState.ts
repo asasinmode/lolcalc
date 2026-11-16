@@ -36,7 +36,7 @@ export interface ICalculatorState {
 	resultSections: ShallowReactive<IDamageResultTableSection[]>;
 	resultsTableFlip: Ref<boolean>;
 	expandedSections: Ref<string[]>;
-	/** custom total row ids formatted like `${sectionId}_${rowId}` */
+	/** custom total row ids formatted like `${sectionId}*${rowId}` */
 	customTotalRowIds: Ref<string[]>;
 	computedCustomTotalRows: ComputedRef<ICustomTotalSectionRow[]>;
 	/** custom total rows must be restored after saved sections have been hydrated, because they reference them and some might be invalid. Restore function is stored here and called either in app onMounted restore or result's table setup */
@@ -587,7 +587,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 						if (section && section.id !== ResultSectionId.Stats && section.id !== ResultSectionId.CustomTotal) {
 							const row = section && toValue(section.rows)[rowIndex];
 							if (row) {
-								const id = `${section.id}_${row.id}`;
+								const id = `${section.id}*${row.id}`;
 								!customTotalRowIds.value.includes(id) && customTotalRowIds.value.push(id);
 							}
 						}

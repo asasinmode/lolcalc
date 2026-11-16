@@ -716,7 +716,7 @@ function removeResultsSection(index: number, force = false) {
 		remove = force || !rows.value.length;
 
 		for (const row of rows.value) {
-			const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}_${row.id}`);
+			const cTotalIndex = customTotalRowIds.value.indexOf(`${ResultSectionId.CustomValue}*${row.id}`);
 			~cTotalIndex && customTotalRowIds.value.splice(cTotalIndex, 1);
 		}
 		rows.value.length = 0;
@@ -1747,7 +1747,7 @@ defineExpose({
 							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 						</td>
 					</tr>
-					<tr v-for="(row, rowIndex) in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : toValue(section.rows)" :key="`${section.id}_${row.id}`" :class="{ unknown: row.isUnknown }">
+					<tr v-for="(row, rowIndex) in section.isCustomTotal ? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : []) : toValue(section.rows)" :key="`${section.id}*${row.id}`" :class="{ unknown: row.isUnknown }">
 						<td v-if="!section.isCustomTotal && section.id !== ResultSectionId.Stats">
 							<label v-if="seenCustomTotalSection">
 								<span>include in custom total</span>
