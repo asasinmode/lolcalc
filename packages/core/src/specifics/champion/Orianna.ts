@@ -1,19 +1,38 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
+import type { IChampion } from '@lolcalc/data/types.ts';
 import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
+import type { IDeriveProgressFn } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Orianna'>): number {
 	return (self.champion.value! as typeof IOrianna).abilities.passive.variants[0]!.dataValues.StackCount[1]!;
 }
 
+function calculateWMS(progress: number, champion: IChampion, abilityLevel: number) {
+	const msPercent = championAbilityVariableValue('HasteAmount', {
+		abilityKey: 'w',
+		abilityVariant: champion.abilities.w.variants[0]!,
+		abilityLevel,
+	});
+
+	if (typeof msPercent.value === 'number') {
+		return msPercent.value * progress;
+	}
+
+	console.warn('[CHAMPION_SPECIFICS orianna] failed to calculate W bonus MS', msPercent);
+	return Number.NaN;
+}
+
 export default {
 	setupData(self) {
 		return {
 			passiveStacksOnTarget: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), passiveMaxStacks(self)),
+			wMSProgress: clamp(0, Math.round(self.internalData.value.wMSProgress ?? 0), 100),
+			applyEResists: clamp(0, Math.round(self.internalData.value.passiveStacksOnTarget ?? 0), 1),
 		};
 	},
 	passive: {
@@ -75,13 +94,28 @@ export default {
 		}),
 	},
 	w: {
+		derivedMS: ((progress, self) => self?.stats.value.variables.oriannaWBonusMS ?? calculateWMS(progress, self.champion.value!, self.abilityLevels.value.w)) satisfies IDeriveProgressFn,
 		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'w'>()({
+			known: {
+				BonusMS: [],
+			},
+			calculate(self) {
+				return {
+					BonusMS: {
+						value: self.stats.value.variables.oriannaWBonusMS ?? 0,
+					},
+				};
+			},
 			meta: {
 				TotalDamage: {
 					type: VariableType.magic,
 				},
 				Slow: {
 					type: VariableType.affectedBySlowResist,
+				},
+				BonusMS: {
+					isCustom: true,
+					resultsIsPercentage: true,
 				},
 			},
 			uninteresting: ['FieldDuration', 'SlowAndHasteDuration'],
@@ -108,5 +142,18 @@ export default {
 				},
 			},
 		}),
+	},
+	calculateHooks: {
+		onChampionPassive: {
+			handler(self, _stats, { calculatedVariables }) {
+				if (self.internalData.value.wMSProgress) {
+					const ms = calculateWMS(self.internalData.value.wMSProgress, self.champion.value!, self.abilityLevels.value.w);
+					if (!Number.isNaN(ms)) {
+						calculatedVariables.oriannaWBonusMS = ms;
+						calculatedVariables.totalBonusPercentMoveSpeed += ms * 0.01;
+					}
+				}
+			},
+		},
 	},
 } satisfies IChampionSpecific<'Orianna'>;

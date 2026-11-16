@@ -228,9 +228,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'Call of the Freljord', true),
 	},
 	Orianna: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.passive.maxStacks, undefined, {
-			tooltip: "in the <i>results table's</i> <b>basic attack</b> section, the damage is calculated for the number of stacks set here",
-		}),
+		extras: [
+			numberExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.passive.maxStacks, undefined, {
+				tooltip: "in the <i>results table's</i> <b>basic attack</b> section, the damage is calculated for the number of stacks set here",
+			}),
+			progressExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'w', 0), 'wMSProgress', 'Dissonance field move speed', CHAMPION_SPECIFICS.Orianna.w.derivedMS),
+		],
 	},
 	Ornn: {
 		extras: ChampionExtrasOrnn,

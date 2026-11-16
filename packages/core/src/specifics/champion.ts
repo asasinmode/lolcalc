@@ -505,7 +505,7 @@ export interface IChampionInternalDataMap {
 	Nasus: { wProgress: number };
 	Nidalee: { passiveVariantActive: number };
 	Nunu: { isPassiveActive: number };
-	Orianna: { passiveStacksOnTarget: number };
+	Orianna: { passiveStacksOnTarget: number; wMSProgress: number; applyEResists: number };
 	Ornn: { _masterworkLevel: number; masterworkItemSlot: number; passiveUpgradedAllies: number };
 	Poppy: { isPassiveActive: number };
 	Rammus: { defensiveCurl: number };

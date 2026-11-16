@@ -1,5 +1,6 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
-import { championAbilityVariableValue, type IGameVariableType, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { ITEMS_BY_NAME, STAT_ICON } from '@lolcalc/data';
 import type IAkali from '@lolcalc/data/files/champion/Akali.json';
 import type { IChampion } from '@lolcalc/data/types.js';
@@ -7,7 +8,7 @@ import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
 import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn, IEffectControlsProps, IGameAbilityData, IInternalItemDataOf } from '../index.ts';
+import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passivePreSnapshotRange(self: DamageSource<'Akali'>): number {
