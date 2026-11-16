@@ -374,9 +374,14 @@ export function imgUrl(url: string, isDDragon = false) {
 	return url.startsWith('http') ? url : isDDragon ? `https://ddragon.leagueoflegends.com/cdn/${PATCH_VERSION.vSemver}/${url}` : `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/${url}`;
 }
 
+/**
+ * some images use a texture, which is multiple images next to each other, and a position at which that image can be found and how large it is
+ * this function accepts a `ITextuer` object and returns html attributes to be `v-binded` on a target <img>
+ */
 export function textureBgImageAttrs(
 	{ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture,
-	targetSize?: number,
+	/** the target size at which the image will be displayed, must be static */
+	targetSize: number,
 ): ImgHTMLAttributes & {
 	['data-sprite-image']: string;
 } {

@@ -39,7 +39,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] items
     - [x] drag between inventories
     - [x] hover tooltip
-    - [ ] move with keyboard, shift + arrows?
   - [x] toggle button aria-controls, aria-expanded
   - [x] expanded
     - [x] stats
@@ -141,7 +140,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] confirm removing/clearing row/scoreboard item, ideally undo
 - [x] header, footer, contact info
 - [x] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
-- [ ] mobile version and make look better
+- [x] mobile version and make look better
   - [x] results sticky horizontal headers, probably unwanted on mobile, headers might be unwanted too with `@media (height < ...)`
   - [x] tooltips
 - [ ] calculations
@@ -184,20 +183,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] dragons
 - [x] disclaimer not endorsed by riot
 - [x] alerts and info texts for stuff not implemented yet
-- [ ] tutorial popups
-  - [ ] dragging scoreboard elements, items, result sections/columns
-  - [ ] right click to sell items
-  - [ ] right click to clear ability level/soul/role quest/others
-  - [ ] difference between "internal effects" (item extras) and "applied effects" (effects dialog)
-  - [ ] in/decrement effects in scoreboard item, refresh effects middle mouse click
-  - [ ] "tutorial library" to review info
-  - [ ] item/passive extra popped up, look here it is, use it
-  - [ ] double click expand/collapse scoreboard item/results section
-- [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
+- [x] tutorial popups
+- [x] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] guide/about page
   - [x] is it accurate? yes except for: no rune paths; no non-passive abilities; displayed health 1 diff due to floating point arithmetics and ceiling (actually might not have to be 1 diff, but probably add disclaimer and settle on acceptable margin of error)
   - [ ] screenshots showing it accurately calculating things
-  - [ ] grievous wounds applies to all heal values detected, like redemption "ally" heal will be reduced by grievous on source, same for shields
   - [ ] items going from X to Y based on level showing 1-18 despite lvl 19 & 20 top quest affecting the displayed value like echoes of helia heal `270 (80 - 250 i:level)`, also mention that solari/redemption/helia/mikael/shieldbow do indeed to above 20 (tested)
   - [ ] describe item description inventory/shop view, possibly add it for runes too
   - [ ] serpent's fang displayed values don't match up, probably test more (was tested on shieldbow, assumedly shieldbow "puts back" hp to the threshold then gives shield and that shield is then reduced)
@@ -205,32 +195,29 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
   - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
   - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
+- [ ] contributing.md
+- [ ] roadmap
 - [ ] github readme
 - [ ] submit feedback on page / report issues
-  - [ ] go server
+  - [ ] rust wasm cloudflare worker server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
-- [ ] future features/roadmap
-- [ ] rewrite css classes to selectors with `@apply`
-- [ ] try to generate specific components from data in specific, like effect are?
+- [x] rewrite css classes to selectors with `@apply`
 - [x] service worker for caching stuff
   - [ ] cache lolcalc files too
-- [ ] try to put the css `url()` using `minorVersion` in one place, as well as urls to other repeated images like gold
 - [x] automatically generate extended equals, ideally on ITEM_SPECIFICS so it doesn't have to do it on every replace, based on itemCalculations/stringCalculations r smth
-- [ ] kind of a code documentation where yap about
-  - [ ] how to use game texture `textureBgImageAttrs`
-- [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
 ### future features
 
-- [ ] formatting wiki style? `{{sti|ad}}` and such
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] detect invalid ability levels
+- [ ] try to generate specific components from data in specific, like effect are?
+- [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
@@ -272,7 +259,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 #### very future
 
-- [ ] combo damage / sequence of things, choose spells/aas in order, apply them to target, show damage
 - [ ] aram
   - item overrides - `DataValuesModeOverride`
   - partial map code removed shortly after `986acda`;
