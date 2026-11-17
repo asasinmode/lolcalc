@@ -31,8 +31,7 @@ export function numberExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
-			const isEffect = abilityId.type === AbilityType.effect;
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { isEffect, onUpdate });
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect, isEffect] = await extraComponentData(abilityId, property, props.damageSource, { onUpdate });
 
 			let localMax = max;
 			if (typeof localMax === 'function') {
@@ -82,6 +81,7 @@ export function numberExtra<T extends IGameAbilityId>(
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId) : props.tooltipTriggerAttrs;
 
 			const computedLabel = computeLabel(label, abilityId);
+			const dataEffectOnTarget = computedLabel.includes('on target');
 
 			return () =>
 				h(
@@ -99,6 +99,7 @@ export function numberExtra<T extends IGameAbilityId>(
 						usedNumberInput,
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
+						'data-effect-on-target': dataEffectOnTarget,
 					},
 					effectControlsProps
 						? {
@@ -145,8 +146,7 @@ export function progressExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
-			const isEffect = abilityId.type === AbilityType.effect;
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { isEffect, onUpdate });
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect, isEffect] = await extraComponentData(abilityId, property, props.damageSource, { onUpdate });
 
 			const effectControlModel = effectControlsProps?.model?.(props.damageSource);
 			function effectControlUpdateValue(val?: boolean | number) {
@@ -177,6 +177,7 @@ export function progressExtra<T extends IGameAbilityId>(
 			const isInactive = computed(() => inactive?.(props.damageSource) || (!isEffect && effectControlsProps && !effectControlModel?.value ? true : undefined));
 
 			const computedLabel = computeLabel(label, abilityId);
+			const dataEffectOnTarget = computedLabel.includes('on target');
 
 			return () =>
 				h(
@@ -192,6 +193,7 @@ export function progressExtra<T extends IGameAbilityId>(
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
 						inactive: isInactive.value,
+						'data-effect-on-target': dataEffectOnTarget,
 					},
 					effectControlsProps
 						? {
@@ -268,6 +270,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 			if (labelAppendOnTarget) {
 				computedLabel = `${computedLabel} on target`;
 			}
+			const dataEffectOnTarget = computedLabel.includes('on target');
 
 			return () =>
 				h(
@@ -281,6 +284,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 						label: computedLabel,
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
+						'data-effect-on-target': dataEffectOnTarget,
 					},
 					effectControlsProps
 						? {
@@ -320,7 +324,7 @@ export function enumExtra<T extends IGameAbilityId>(
 ) {
 	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { variantImgIndex });
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect, isEffect] = await extraComponentData(abilityId, property, props.damageSource, { variantImgIndex });
 
 			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 			function updateEffectSource(value?: DamageSource) {
@@ -335,6 +339,7 @@ export function enumExtra<T extends IGameAbilityId>(
 			const tooltipTriggerAttrs = typeof props.tooltipTriggerAttrs === 'function' ? props.tooltipTriggerAttrs(abilityId, () => ({ damageSource: props.overrideDamageSource })) : props.tooltipTriggerAttrs;
 
 			const computedLabel = computeLabel(label, abilityId);
+			const dataEffectOnTarget = computedLabel.includes('on target');
 
 			return () =>
 				h(
@@ -347,6 +352,7 @@ export function enumExtra<T extends IGameAbilityId>(
 						options: toValue(options),
 						tooltipTriggerAttrs,
 						'onUpdate:modelValue': updateValue,
+						'data-effect-on-target': dataEffectOnTarget,
 					},
 					{
 						default: () => {
@@ -368,15 +374,14 @@ async function extraComponentData(
 	property: PropertyKey,
 	damageSource: DamageSource,
 	{
-		isEffect = abilityId.type === AbilityType.effect,
 		onUpdate,
 		variantImgIndex,
 	}: {
-		isEffect?: boolean;
 		onUpdate?: IExtraOnValueUpdate;
 		variantImgIndex?: IAbilityImgIndexGetter<any>;
 	} = {},
-): Promise<[imgSrc: MaybeRef<IGameImageData>, stringifiedAbilityId: string, value: ComputedRef<any>, updateValue: (value: any) => void, appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined]> {
+): Promise<[imgSrc: MaybeRef<IGameImageData>, stringifiedAbilityId: string, value: ComputedRef<any>, updateValue: (value: any) => void, appliedEffect: ComputedRef<IDamageSourceEffect | undefined> | undefined, isEffect: boolean]> {
+	const isEffect = abilityId.type === AbilityType.effect;
 	const appliedEffect = isEffect ? computed<IDamageSourceEffect | undefined>(() => damageSource?.appliedEffects.value.find((effect) => effect.abilityId.id === abilityId.id)) : undefined;
 
 	const dataProperty: keyof IDamageSource = abilityId.type === AbilityType.champion ? 'internalData' : abilityId.type === AbilityType.dragon ? 'internalDragonData' : 'internalItemData';
@@ -413,6 +418,7 @@ async function extraComponentData(
 			onUpdate?.(value, damageSource);
 		},
 		appliedEffect,
+		isEffect,
 	];
 }
 
