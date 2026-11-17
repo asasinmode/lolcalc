@@ -277,7 +277,7 @@ function removeItem(event: MouseEvent, index: number) {
 		} else {
 			hideItemTooltip();
 		}
-		tutorialEvent('scoreboardItemsInteracted', { damageSource: props.value.id });
+		nextTick(() => tutorialEvent('scoreboardItemsInteracted', { damageSource: props.value.id }));
 	}
 }
 
@@ -900,6 +900,7 @@ function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'so
 		props.value.dragonSoul.value = value;
 	}
 	!value && hideDragonTooltip();
+	nextTick(() => tutorialEvent('dragonsUpdated', { damageSource: props.value.id }));
 }
 
 const activeEffects = computed<[IComputedAppliedEffect, number][]>(() => props.value.computed.effects.value.map((effect, index) => [effect, index] as unknown as [IComputedAppliedEffect, number]).filter(([effect]) => effect.isActive));

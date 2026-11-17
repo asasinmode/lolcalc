@@ -76,6 +76,7 @@ export interface TutorialEvents {
 	/** moved/removed */
 	resultsSectionAdjusted: void;
 	flipResultsEntered: void;
+	dragonsUpdated: void;
 }
 
 export type ITutorialEvent = keyof TutorialEvents;

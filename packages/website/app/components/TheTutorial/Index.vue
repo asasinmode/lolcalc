@@ -44,6 +44,7 @@ const repositionEvents: Partial<Record<ITutorialStepDef['type'], ITutorialEvent[
 	resultSection: ['resultsSectionAdjusted', 'resultsSectionAdjusted'],
 	resultColumn: ['resultsColumnAdded', 'resultsColumnMoved', 'resultsColumnRemoved'],
 };
+const applyOnTargetEffectRepositionEvents: ITutorialEvent[] = ['damageSourceChampionLoaded', 'itemShopClosed', 'scoreboardItemsInteracted', 'champSelectClosed', 'dragonsUpdated'];
 
 function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, data: any) {
 	if ('damageSource' in eventSourceIds) lastInteractedIds.damageSource = eventSourceIds.damageSource;
@@ -66,7 +67,12 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 	}
 
 	/* special case here for swap scoreboard group - its type is `global` but needs to reposition when scoreboard layout changes */
-	if (currentStepId.value && (repositionEvents[tutorialSteps[currentStepId.value].type]?.includes(name) || (name === 'scoreboardLayoutChanged' && currentStepId.value === 'swapScoreboardGroup'))) {
+	if (
+		currentStepId.value &&
+		(repositionEvents[tutorialSteps[currentStepId.value].type]?.includes(name) ||
+			(name === 'scoreboardLayoutChanged' && currentStepId.value === 'swapScoreboardGroup') ||
+			(currentStepId.value === 'applyOnTargetEffect' && applyOnTargetEffectRepositionEvents.includes(name)))
+	) {
 		repositionCurrentStep(name === 'scoreboardLayoutChanged');
 	}
 

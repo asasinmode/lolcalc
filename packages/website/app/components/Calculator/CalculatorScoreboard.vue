@@ -251,6 +251,7 @@ function onItemDrop(event: DragEvent, target: DamageSource, slotIndex?: number) 
 		}
 	}
 	itemDragData = undefined;
+	nextTick(() => tutorialEvent('scoreboardItemsInteracted', { damageSource: target.id }));
 }
 
 const expandOnMounted = computed(() => damageSources.length === 1 && damageTargets.length === 1);
