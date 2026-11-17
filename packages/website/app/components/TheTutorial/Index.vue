@@ -87,7 +87,7 @@ function onEvent(name: ITutorialEvent, eventSourceIds: ITutorialEventSourceIds, 
 			const stepDef = tutorialSteps[stepId];
 			const pendingIndex = pendingGeneralSteps.indexOf(stepId);
 			const showOn = stepDef.showOn![name];
-			const show = typeof showOn === 'function' ? showOn(data as never) : showOn;
+			const show = typeof showOn === 'function' ? showOn(data as never, calculatorState) : showOn;
 			if (show) {
 				pendingIndex === -1 && pendingGeneralSteps.push(stepId);
 			} else if (~pendingIndex && show === false) {
@@ -187,19 +187,35 @@ let effectsDialog: HTMLElement | null = null;
 /** returned `false` means step wanted an anchor but it wasn't found. Most likely shouldn't be displayed */
 function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | false {
 	if (!stepDef.anchor) return;
+
 	let queryTarget: HTMLElement | Document | null | undefined;
+	/** only used for damage sources atm. Needed to, after trying the step anchor query in the last interacted with scoreboard item, try the whole scoreboard */
+	let fallbackQueryTarget: HTMLElement | null | undefined;
 	if (stepDef.type === 'damageSource') {
-		queryTarget = lastInteractedIds.damageSource ? document.getElementById(`si-${lastInteractedIds.damageSource}`) : null;
+		if (lastInteractedIds.damageSource) {
+			queryTarget = document.getElementById(`si-${lastInteractedIds.damageSource}`);
+			fallbackQueryTarget = scoreboardEl;
+		} else {
+			queryTarget = null;
+		}
+
 		if (scoreboardSeparateGroupLayoutMQ?.matches) {
 			const visibleGroup = scoreboardIsDisplayingTargets.value ? scoreboardTargets : scoreboardSources;
 			if (visibleGroup) {
-				if (!visibleGroup?.contains(queryTarget)) {
-					queryTarget = visibleGroup;
-				} else if (!queryTarget) {
+				if (queryTarget) {
+					if (!visibleGroup?.contains(queryTarget)) {
+						queryTarget = visibleGroup;
+					} else if (!queryTarget) {
+						queryTarget = visibleGroup;
+					} else {
+						fallbackQueryTarget = visibleGroup;
+					}
+				} else {
 					queryTarget = visibleGroup;
 				}
 			} else {
 				console.warn('[TheTutorial findStepAnchor] damage sources group not found', { isDisplayingTargets: scoreboardIsDisplayingTargets, scoreboardSources, scoreboardTargets }, stepDef);
+				fallbackQueryTarget = null;
 			}
 		} else {
 			queryTarget ??= scoreboardEl;
@@ -221,17 +237,25 @@ function findStepAnchor(stepDef: ITutorialStepDef): IPickedStep['anchor'] | fals
 	}
 
 	queryTarget ??= document;
-	if (typeof stepDef.anchor === 'string') {
-		const targets = queryTarget.querySelectorAll<HTMLElement>(stepDef.anchor);
+	const rv = findStepAnchorInTarget(stepDef.anchor, queryTarget);
+	if (rv === false && fallbackQueryTarget) {
+		return findStepAnchorInTarget(stepDef.anchor, fallbackQueryTarget);
+	}
+	return rv;
+}
+
+function findStepAnchorInTarget(anchorQuery: NonNullable<ITutorialStepDef['anchor']>, target: HTMLElement | Document): HTMLElement | false {
+	if (typeof anchorQuery === 'string') {
+		const targets = target.querySelectorAll<HTMLElement>(anchorQuery);
 		for (const target of targets) {
 			if (target.checkVisibility()) {
 				return target;
 			}
 		}
 	} else {
-		const targets = queryTarget.querySelectorAll<HTMLElement>(stepDef.anchor[0]);
+		const targets = target.querySelectorAll<HTMLElement>(anchorQuery[0]);
 		for (const target of targets) {
-			const refinedTarget = stepDef.anchor[1](target);
+			const refinedTarget = anchorQuery[1](target);
 			if (refinedTarget?.checkVisibility()) {
 				return refinedTarget;
 			}
