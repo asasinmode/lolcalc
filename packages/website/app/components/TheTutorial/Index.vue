@@ -433,6 +433,10 @@ onBeforeUnmount(() => {
 			> b {
 				--at-apply: 'font-500 text-white';
 			}
+
+			> .alert {
+				--at-apply: 'my-3';
+			}
 		}
 
 		#tutorial-ok {

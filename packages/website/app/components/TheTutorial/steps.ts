@@ -93,7 +93,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	applyOnTargetEffect: {
 		title: 'apply on target effect',
 		type: 'damageSource',
-		text: 'some effects say <strong>"apply X <u>on target</u>"</strong>. Configuring them applies that effect to all <i>targets</i> this <i>source</i> is calculated against in the <i>results table</i>. <lifesteal>It\'s not reflected in the scoreboard</lifesteal><br><br> for example, every <i>target</i> this <i>source</i> hits could have 5 stacks of Black Cleaver\'s Carve, without having to add it to all of them manually <br><rules>all effects can be applied individually in the <i>effects dialog</i> (opened with the <b>"effects"</b> button)</rules>',
+		text: 'some effects say <strong>"apply X <u>on target</u>"</strong>. Configuring them applies that effect to all <i>targets</i> this <i>source</i> is calculated against in the <i>results table</i>. <lifesteal>It\'s not reflected in the scoreboard</lifesteal><br><br> for example, every <i>target</i> this <i>source</i> hits could have 5 stacks of Black Cleaver\'s Carve, without having to add it to all of them manually <p class="alert warning">configuring an effect here <strong>overrides</strong> that effect on a target. Even if the target has 2 Carve stacks, if a non-empty value is set here, it will be used instead (only in the <i>results table</i>)</p> <rules>all effects can be applied individually in the <i>effects dialog</i> (opened with the <b>"effects"</b> button)</rules>',
 		anchor: ".extras > [data-effect-on-target='true']",
 		pendingIf: () => true,
 	},
