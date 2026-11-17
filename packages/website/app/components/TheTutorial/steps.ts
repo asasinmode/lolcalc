@@ -5,7 +5,7 @@ import { CHAMPION_COMPONENTS } from '~/components/Champion/index.ts';
 import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
 
 type ITutorialStepTriggers = {
-	[K in ITutorialEvent]?: true | ((data: TutorialEvents[K]) => boolean);
+	[K in ITutorialEvent]?: true | ((data: TutorialEvents[K], calculatorState: ICalculatorState) => boolean);
 };
 
 export interface ITutorialStepDef {
@@ -221,13 +221,13 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			true,
 		),
 		anchor: '.effects > ul:not(:empty)',
-		pendingIf: (calculatorState) => calculatorState.damageSources.some((source) => source.appliedEffects.value.length) || calculatorState.damageTargets.some((source) => source.appliedEffects.value.length),
+		pendingIf: anySourceWithAppliedEffects,
 		showOn: {
-			scoreboardItemExpanded([, damageSource]) {
-				return !!damageSource.appliedEffects.value.length;
+			scoreboardItemExpanded(_, calculatorState) {
+				return anySourceWithAppliedEffects(calculatorState);
 			},
-			effectsDialogClosed(damageSource) {
-				return !!damageSource.appliedEffects.value.length;
+			effectsDialogClosed(_, calculatorState) {
+				return anySourceWithAppliedEffects(calculatorState);
 			},
 		},
 		completeOn: ['scoreboardEffectModified'],
@@ -330,3 +330,7 @@ export const TUTORIAL_STEP_PRIORITIES = Object.fromEntries(
 		return [id, def.within ? 1 : !tutorialStepKinds[id] ? 2 : 3];
 	}),
 ) as Record<ITutorialStepId, number>;
+
+function anySourceWithAppliedEffects(state: ICalculatorState) {
+	return state.damageSources.some((source) => source.appliedEffects.value.length) || state.damageTargets.some((source) => source.appliedEffects.value.length);
+}
