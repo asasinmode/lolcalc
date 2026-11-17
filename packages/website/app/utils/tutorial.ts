@@ -10,6 +10,7 @@ export const tutorialStepKinds = {
 	openChampSelect: 0,
 	swapScoreboardGroup: 1,
 	viewExtraComponent: 1,
+	applyOnTargetEffect: 1,
 	changeChampionLevel: 0,
 	openRunesDialog: 0,
 	openItemShop: 0,
