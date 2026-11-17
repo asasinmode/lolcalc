@@ -1,3 +1,4 @@
+import { simpleDescriptionFormatting, linkedFormattedItemImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect.ts';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect.ts';
 import { CHAMPION_COMPONENTS } from '~/components/Champion/index.ts';
@@ -93,7 +94,10 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	applyOnTargetEffect: {
 		title: 'apply on target effect',
 		type: 'damageSource',
-		text: 'some effects say <strong>"apply X <u>on target</u>"</strong>. Configuring them applies that effect to all <i>targets</i> this <i>source</i> is calculated against in the <i>results table</i>. <lifesteal>It\'s not reflected in the scoreboard</lifesteal><br><br> for example, every <i>target</i> this <i>source</i> hits could have 5 stacks of Black Cleaver\'s Carve, without having to add it to all of them manually <p class="alert warning">configuring an effect here <strong>overrides</strong> that effect on a target. Even if the target has 2 Carve stacks, if a non-empty value is set here, it will be used instead (only in the <i>results table</i>)</p> <rules>all effects can be applied individually in the <i>effects dialog</i> (opened with the <b>"effects"</b> button)</rules>',
+		text: await simpleDescriptionFormatting(
+			`some effects say <strong>"apply X <u>on target</u>"</strong>. Configuring them applies that effect to all <i>targets</i> this <i>source</i> is calculated against in the <i>results table</i>. <lifesteal>It's not reflected in the scoreboard</lifesteal><br><br> for example, every <i>target</i> this <i>source</i> hits could have 5 stacks of ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} Carve, without having to add it to all of them manually <p class="alert warning">configuring an effect here <strong>overrides</strong> that effect on a target. Even if the target has 2 Carve stacks, if a non-empty value is set here, it will be used instead (only for the <i>results table</i>)<span class="icon i-ph:warning-fill" aria-hidden="true"></span></p> <rules>all effects can be applied individually in the <i>effects dialog</i> (opened with the <b>"effects"</b> button)</rules>`,
+			true,
+		),
 		anchor: ".extras > [data-effect-on-target='true']",
 		pendingIf: () => true,
 	},
@@ -200,7 +204,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'effect source',
 		type: 'effectsDialog',
 		within: 'dialog-effects',
-		text: "some effects' strength depends on who's applying them. If applicable, the source of the effect can be selected by clicking on the champion icon in the corner of the effect's image<br> <rules>right click to clear</rules>",
+		text: "some effects' strength depends on who's applying them. If applicable, the source of the effect can be selected by clicking on the champion icon in the corner of the effect's image<br> <rules>right click when a source is selected to clear</rules>",
 		anchor: '.effect-src-select',
 		showOn: {
 			effectDialogExtraEntered(effectObjectName) {
@@ -212,8 +216,11 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	modifyEffectIcons: {
 		title: 'modify effects',
 		type: 'damageSource',
-		text: "applied effects can be modified through their icons, displayed next to the stats panel. Left click an icon to increment the effect's value (like increase Black Cleaver stacks) or right click to decrement it <br><rules>Holding [<kbd>Ctrl</kbd>] while clicking changes the value by 10 instead of 1</rules>",
-		anchor: '.effects > ul',
+		text: await simpleDescriptionFormatting(
+			`applied effects can be modified through their icons, displayed next to the stats panel. Left click an icon to increment the effect's value (like increase ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} stacks) or right click to decrement it <br><rules>Holding [<kbd>Ctrl</kbd>] while clicking changes the value by 10 instead of 1</rules>`,
+			true,
+		),
+		anchor: '.effects > ul:not(:empty)',
 		pendingIf: (calculatorState) => calculatorState.damageSources.some((source) => source.appliedEffects.value.length) || calculatorState.damageTargets.some((source) => source.appliedEffects.value.length),
 		showOn: {
 			scoreboardItemExpanded([, damageSource]) {

@@ -131,7 +131,7 @@ export function linkedFormattedChampionImage(championId: IChampionId, name?: str
 	return `[%c:${championId}%${name ?? champion.name}](https://wiki.leagueoflegends.com/en-us/${champion.name.replaceAll(' ', '_')})`;
 }
 
-export async function simpleDescriptionFormatting(text: string, addAlt?: boolean, textureSize?: number) {
+export async function simpleDescriptionFormatting(text: string, addAlt?: boolean, textureSize?: number): Promise<string> {
 	const parts = replaceGameIcons(text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')).split(/(%[ac]:[^%]+%)/g);
 
 	for (let i = 1; i < parts.length; i += 2) {
