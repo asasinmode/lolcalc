@@ -4,11 +4,18 @@ This file is basically a to-do list of everything I thought might be cool to add
 
 Most of the features listed here aren't set in stone and may be discarded. If you'd like to suggest a feature, feel free to contact me/open a [discussion on github](https://github.com/asasinmode/lolcalc/discussions). Make sure it's not already listed here/mentioned on the [lolcalc about page](https://lolcalc.app/about#roadmap).
 
+## definitely not planned ATM
+
+- combos, like full damage of a `Q + W + aa + aa + R`. Most likely will not be implemented, they are out of the scope for this project
+- [nemesis quests](https://wiki.leagueoflegends.com/en-us/Nemesis_Quest). Might be implemented but not before anything below
+
 ## future features
+
+If something has 🔨 next to it, it's being worked on currently/will be worked on shortly.
 
 ### game/feature related
 
-- [ ] champion abilities
+- [ ] 🔨 champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
   - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] aphelios abilities
