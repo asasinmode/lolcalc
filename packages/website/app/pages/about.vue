@@ -270,6 +270,10 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			img {
 				--at-apply: 'inline-block size-5 me-[0.5ch] -translate-y-px';
 			}
+
+			.code-like img {
+				--at-apply: 'me-0';
+			}
 		}
 	}
 

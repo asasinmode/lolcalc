@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
-// TODO contents subsection links
+import { STAT_ICON } from '@lolcalc/data/index';
 import { resetTutorialStep } from '~/utils/tutorial';
 
 function resetTutorial(event: MouseEvent) {
@@ -29,6 +29,10 @@ const exampleSpellCrit = useSimpleDescription(
 const example2026WorldsAkali = useSimpleDescription(
 	'guide-example-2026-worlds-akali',
 	`during his costream LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
+);
+const qaItemsScalingWithLevels = useSimpleDescription(
+	'guide-qa-items-scaling-with-levels',
+	`Some items, like ${linkedFormattedItemImage('solariLocket')}, ${linkedFormattedItemImage('immortalShieldbow')} or ${linkedFormattedItemImage('redemption')}, in their description show their current value and the min/max it goes to depending on the champion level. As of patch 26.17, all of them have been tested to scale up to level 20 (that can be reached with the top lane role quest). If you see something like <span class="code-like">Restore <healing>374 = (<scalelevel>150 - 350</scalelevel>) (ally %i:${STAT_ICON.level}%) Health</healing></span>, while it looks weird, it's normal.`,
 );
 </script>
 
@@ -63,35 +67,44 @@ const example2026WorldsAkali = useSimpleDescription(
 		</ul>
 
 		<TextPageHeading id="definitions" text="definitions" />
+		<p>
+			List and short description of the <strong>lolcalc</strong> UI elements. Throughout the website, they will be referred to by the names shown here. The next section, <b>tutorials</b>, has more hands-on guides that showcase their usage.
+		</p>
 		<dl>
 			<dt>configuration scoreboard</dt>
 			<dd>
-				the first section of the calculator where you can configure <i>damage sources</i> and
-				<i>damage targets</i>
+				the first section of the calculator where you can configure <i>damage sources</i> and <i>damage targets</i>. If you want to change something, do it here. The <i>results</i> (described below) should be thought of as
+				<b>"view only"</b> - no changes to champions can be made in them.
 			</dd>
-			<dt>source (damage source)</dt>
-			<dd>the champion configured on the <b>left</b> side of the <i>configuration scoreboard</i></dd>
-			<dt>target (damage target)</dt>
-			<dd>the champion configured on the <b>right</b> side of the <i>configuration scoreboard</i></dd>
+			<dt>scoreboard item (damage source/target)</dt>
+			<dd>everything pertaining to a single champion. Their level and abilities, items, runes. The layout shifts depending on the screen size.</dd>
 			<dt>results table</dt>
-			<dd>the table found below the <i>configuration scoreboard</i> where you can see and compare most of the calculated values</dd>
-			<dt>results table column (results column)</dt>
 			<dd>
-				the <i>results table</i> allows for adding multiple columns. Each of these can contain a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs (hitting)
-				<i>target</i>
+				the table found below the <i>configuration scoreboard</i> where you can see and compare most of the calculated values
+				<dl>
+					<dt>results table column (results column)</dt>
+					<dd>
+						the <i>results table</i> allows for adding multiple columns. Each of these can contain a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs
+						(hitting)
+						<i>target</i>
+					</dd>
+					<dt>results table section (results section)</dt>
+					<dd>
+						the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the
+						<i>add section</i> form in the top left corner of the table
+					</dd>
+					<dt>flip target vs source (flip results)</dt>
+					<dd>
+						the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the
+						<i>add section</i> form in the top left corner of the table
+					</dd>
+				</dl>
 			</dd>
-			<dt>results table section (results section)</dt>
-			<dd>
-				the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the <i>add section</i> form
-				in the top left corner of the table
-			</dd>
-			<dt>flip target vs source (flip results)</dt>
-			<dd>
-				the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the <i>add section</i> form
-				in the top left corner of the table
-			</dd>
+			<dt>champ select, item shop, runes dialog</dt>
+			<dd>all of these function roughly the same way their in-game counterparts do</dd>
+			<dt>effects dialog</dt>
+			<dd>TODO</dd>
 		</dl>
-		<p>Read the next section, <b>tutorials</b>, for more in-depth guide on how to use these</p>
 
 		<TextPageHeading id="tutorials" text="tutorials" />
 		<p>
@@ -197,6 +210,8 @@ const example2026WorldsAkali = useSimpleDescription(
 			<dd>It's a puzzle.</dd>
 			<dt>Why are the stun/slow duration and values in the results table? They don't change</dt>
 			<dd>They are affected by target's tenacity and slow resists.</dd>
+			<dt>Items scaling with levels 1-18</dt>
+			<dd class="game-description" v-html="qaItemsScalingWithLevels" />
 		</dl>
 	</main>
 </template>
