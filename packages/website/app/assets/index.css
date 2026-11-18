@@ -296,7 +296,7 @@
 		justify-self: center;
 	}
 
-	/* for scoreboard items tooltip from extra component. Needs a different offset to align with the bottom border of extra components */
+	/* for scoreboard items tooltip from config elements. Needs a different offset to align with the bottom border of extra components */
 	@position-try --scoreboard-extra-tooltip-flip-block {
 		inset-block-end: auto;
 		inset-block-start: calc(anchor(end) - 1px);

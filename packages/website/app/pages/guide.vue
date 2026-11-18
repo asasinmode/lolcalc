@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
+import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
+import { linkedFormattedItemImage, linkedFormattedChampionImage, simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { STAT_ICON } from '@lolcalc/data/index';
+import { AbilityType } from '@lolcalc/shared/index';
 import { resetTutorialStep } from '~/utils/tutorial';
 
 function resetTutorial(event: MouseEvent) {
@@ -29,6 +31,10 @@ const exampleSpellCrit = useSimpleDescription(
 const example2026WorldsAkali = useSimpleDescription(
 	'guide-example-2026-worlds-akali',
 	`during his costream LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
+);
+const tutorialExternalEffectExtraExample = useSimpleDescription(
+	'guide-tutorial-external-effect-extra-example',
+	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}passive effect - <b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect.`,
 );
 const qaItemsScalingWithLevels = useSimpleDescription(
 	'guide-qa-items-scaling-with-levels',
@@ -73,23 +79,32 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 		<dl>
 			<dt>configuration scoreboard</dt>
 			<dd>
-				the first section of the calculator where you can configure <i>damage sources</i> and <i>damage targets</i>. If you want to change something, do it here. The <i>results</i> (described below) should be thought of as
+				The first section of the calculator where you can configure <i>damage sources</i> and <i>damage targets</i>. If you want to change something, do it here. The <i>results</i> (described below) should be thought of as
 				<b>"view only"</b> - no changes to champions can be made in them.
 				<div class="tmp-image" />
 			</dd>
 			<dt>scoreboard item (damage source/target)</dt>
 			<dd>
-				everything pertaining to a single champion. Their level and abilities, items, runes. The layout shifts depending on the screen size.
+				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest
 				<div class="tmp-image" />
+				<dl>
+					<dt>config element</dt>
+					<dd>
+						If an ability, item or an effect can be configured (and is implemented, beware that most champion abilities are not as of now), a dedicated <i>config element</i> will appear at the bottom of a <i>scoreboard item</i>. These could
+						be grouped into 2 categories. Ones that directly affect the <i>source</i> they are on, and ones that affect the <i>target</i> the source will be hitting. For the latter, the effects will be visible in the <i>results</i>. Read
+						the <NuxtLink to="#apply-x-on-target">apply x on target</NuxtLink> tutorial section for more details
+						<div class="tmp-image" />
+					</dd>
+				</dl>
 			</dd>
-			<dt>results table</dt>
+			<dt>results table (results)</dt>
 			<dd>
-				the table found below the <i>configuration scoreboard</i> where you can see and compare most of the calculated values
+				The table found below the <i>configuration scoreboard</i> where you can see and compare most of the calculated values
 				<div class="tmp-image" />
 				<dl>
 					<dt>results table column (results column)</dt>
 					<dd>
-						the <i>results table</i> allows for adding multiple columns. Each of these can contain a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs
+						The <i>results table</i> allows for adding multiple columns. Each of these can contain a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs
 						(hitting)
 						<i>target</i>
 					</dd>
@@ -101,7 +116,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 					<dt>flip target vs source (flip results)</dt>
 					<dd>
 						In the top left corner of the table there's a checkbox saying <b>"flip target vs source"</b>. It can be very useful, but might be a bit unintuitive. Make sure to read its tooltip and the
-						<a href="#apply-x-on-target">guide showcasing using it</a>.
+						<NuxtLink to="#apply-x-on-target">guide showcasing using it</NuxtLink>.
 					</dd>
 				</dl>
 			</dd>
@@ -127,6 +142,12 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 		<details id="apply-external-effect">
 			<summary><h3>applying external effects</h3></summary>
 			<p>Effects can be applied using the <button>effects</button> button</p>
+			<p class="alert warning">
+				An effect set with the dedicated <i>config element</i> will override that same effect applied through the <i>effects dialog</i>, if it's set to a non-empty value.
+				<Icon class="i-ph:warning-light" />
+			</p>
+			<p v-html="tutorialExternalEffectExtraExample" class="game-description" />
+			<div class="tmp-image" />
 		</details>
 		<details id="apply-x-on-target">
 			<summary><h3>"apply X on target" items or abilities and "flip results"</h3></summary>

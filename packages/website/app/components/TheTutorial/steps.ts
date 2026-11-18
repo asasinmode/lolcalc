@@ -73,7 +73,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			},
 		},
 	},
-	viewExtraComponent: {
+	viewConfigEl: {
 		title: 'configuring passives',
 		type: 'damageSource',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',

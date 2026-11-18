@@ -516,7 +516,7 @@ export interface IChampionInternalDataMap {
 	Nami: {
 		passiveMSProgress: number;
 		/**
-		 * passive MS needs total AP. Snapshot it on extra component `calculate/recalculate` press, then use it in calculation
+		 * passive MS needs total AP. Snapshot it on the config element's `calculate/recalculate` press, then use it in calculation
 		 * basically lets you do something like: apply passive -> you gain stats -> apply passive again with the stats you have from the previous application
 		 */
 		passiveMSTotalAP?: number;

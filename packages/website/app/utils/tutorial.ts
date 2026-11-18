@@ -9,7 +9,7 @@ export const tutorialStepKinds = {
 	beforeYouStart: 1,
 	openChampSelect: 0,
 	swapScoreboardGroup: 1,
-	viewExtraComponent: 1,
+	viewConfigEl: 1,
 	applyOnTargetEffect: 1,
 	changeChampionLevel: 0,
 	openRunesDialog: 0,

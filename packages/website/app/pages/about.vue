@@ -233,7 +233,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'mbs-[1em]';
 		}
 
-		> p + p {
+		> p + p,
+		> details > p + p {
 			--at-apply: 'mbs-[1em]';
 		}
 

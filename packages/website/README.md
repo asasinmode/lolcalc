@@ -37,7 +37,6 @@ pnpm generate
   - [ ] describe item description inventory/shop view
   - [ ] more examples
   - [ ] add screenshots to examples
-  - [ ] effect from champion overrides external one (also tries to remove it if present, like Nami)
   - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
   - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
   - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?

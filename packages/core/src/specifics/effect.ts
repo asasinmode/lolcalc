@@ -1483,9 +1483,9 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	setupDataFromInternalData?: (damageSource: DamageSource, self: DamageSource) => NoInfer<T> | undefined;
 	watch?: IDamageSourceEffect['watch'];
 	/**
-	 * based on this and `maxValue` VExtra components are created.
-	 * - both `undefined` = `VExtraBoolean`
-	 * - `minValue` or `maxValue` specified = `VExtraNumber`
+	 * based on this and `maxValue` ConfigEl components are created.
+	 * - both `undefined` = `ConfigElBoolean`
+	 * - `minValue` or `maxValue` specified = `ConfigElNumber`
 	 * @default 0
 	 */
 	minValue?: number;
@@ -1498,7 +1498,7 @@ export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	enumOptions?: Record<string, number>;
 	/** if present, component for this will be `VExtraProgress` */
 	deriveProgressValue?: IDeriveProgressFn<true>;
-	/** will be called when the value is updated through the extra component */
+	/** will be called when the value is updated through the config element */
 	onValueUpdate?: IExtraOnValueUpdate;
 	componentTooltip?: string;
 	progressComponentSymbol?: string;
