@@ -155,7 +155,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 @layer page {
 	#about,
 	#guide {
-		--at-apply: 'grid grid-cols-[1fr_minmax(0,calc(216*var(--spacing)))_1fr] auto-rows-auto text-lg leading-8 mx-auto pbs-[--fluid-12-32] mbe-[--fluid-28-40] text-neutral-200';
+		--at-apply: 'grid grid-cols-[1fr_minmax(0,calc(216*var(--spacing)))_1fr] auto-rows-auto text-lg leading-8 mx-auto pbs-[--fluid-12-32] mbe-[--fluid-28-60] text-neutral-200';
 
 		> * {
 			--at-apply: 'col-start-2 col-span-1';
@@ -220,12 +220,20 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'list-disc';
 
 			> li {
-				--at-apply: 'ms-5 my-[0.5em]';
+				--at-apply: 'ms-5';
+			}
+
+			> li + li {
+				--at-apply: 'mbs-[0.5em]';
 			}
 		}
 
-		> p {
-			--at-apply: 'my-[1em]';
+		> p + ul {
+			--at-apply: 'mbs-[1em]';
+		}
+
+		> p + p {
+			--at-apply: 'mbs-[1em]';
 		}
 
 		> h2 + p {
@@ -244,19 +252,38 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		> dl {
 			> dt {
 				--at-apply: 'text-[length:--fluid-19-22] font-600 text-white mbs-[1em] mbe-[0.33em]';
+			}
 
-				&:first-child {
-					--at-apply: 'mbs-0';
+			dl {
+				> dt {
+					--at-apply: 'text-[length:--fluid-15-18] font-600 text-white mbs-[1em] mbe-[0.25em]';
 				}
 			}
 		}
 
+		> h2 + dl > dt:first-child {
+			--at-apply: 'mbs-0';
+		}
+
+		#roadmap + p {
+			--at-apply: 'mbe-[1em]';
+		}
+
 		.alert {
-			--at-apply: 'my-6';
+			--at-apply: 'mx-auto';
 		}
 
 		.error-margin {
 			--at-apply: 'underline decoration-2 decoration-red-600';
+		}
+
+		.tmp-image {
+			--at-apply: 'bg-rose-900 rounded-lg block-12 mx-auto mbs-3 grid place-items-center';
+
+			&::before {
+				--at-apply: 'font-600 text-neutral-950 uppercase text-sm';
+				content: 'todo image';
+			}
 		}
 	}
 }

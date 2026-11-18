@@ -41,6 +41,7 @@ pnpm generate
   - [ ] results effects applied from target to source override the ones present on source (W from nasus applied to target overrides the Wither effect already present on target)
   - [ ] no individual interactions like belveth/jax or aatrox/kayle+morgana
   - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
+  - [ ] tutorials
 - [ ] readme.md
 - [ ] contributing.md
 - [ ] submit feedback on page / report issues

@@ -235,7 +235,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 
 @layer overrides {
 	#reset-tutorial {
-		--at-apply: 'inline-32 mx-auto text-center';
+		--at-apply: 'inline-32 mx-auto text-center mbs-[1em]';
 
 		> span:last-child {
 			--at-apply: 'hidden';
