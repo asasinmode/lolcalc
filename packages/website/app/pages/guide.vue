@@ -24,6 +24,20 @@ function clearResetTutorialButton(event: Event) {
 	button.removeAttribute('data-clicked');
 }
 
+const guideDefinitionConfigElSource = useSimpleDescription(
+	'guide-definition-config-el-source',
+	`Some effects support configuring their source. For example, ${linkedFormattedChampionImage('Ashe', "Ashe's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0))}<b>Frost Shot</b> scales with her level. You can select an Ashe you've configured and the effect will be applied as if it was from her (using her configured level).`,
+);
+const guideDefinitionConfigElSnapshot = useSimpleDescription(
+	'guide-definition-config-el-snapshow',
+	`Other effects scale off of a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot a value they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Additionally, when you hover it you will see the underlying values currently used by the effect.`,
+);
+
+const tutorialExternalEffectExtraExample = useSimpleDescription(
+	'guide-tutorial-external-effect-extra-example',
+	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect.`,
+);
+
 const exampleSpellCrit = useSimpleDescription(
 	'guide-example-shadowflame-ie-randuin',
 	`showcasing the interaction between ${linkedFormattedItemImage('shadowflame')}, ${linkedFormattedItemImage('infinityEdge')} and ${linkedFormattedItemImage('randuinsOmen')}`,
@@ -32,10 +46,7 @@ const example2026WorldsAkali = useSimpleDescription(
 	'guide-example-2026-worlds-akali',
 	`during his costream LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
 );
-const tutorialExternalEffectExtraExample = useSimpleDescription(
-	'guide-tutorial-external-effect-extra-example',
-	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}passive effect - <b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect.`,
-);
+
 const qaItemsScalingWithLevels = useSimpleDescription(
 	'guide-qa-items-scaling-with-levels',
 	`Some items, like ${linkedFormattedItemImage('solariLocket')}, ${linkedFormattedItemImage('immortalShieldbow')} or ${linkedFormattedItemImage('redemption')}, in their description show their current value and the min/max it goes to depending on the champion level. As of patch 26.17, all of them have been tested to scale up to level 20 (that can be reached with the top lane role quest). If you see something like <span class="code-like">Restore <healing>374 = (<scalelevel>150 - 350</scalelevel>) (ally %i:${STAT_ICON.level}%) Health</healing></span>, while it looks weird, it's normal.`,
@@ -87,15 +98,20 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<dd>
 				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest
 				<div class="tmp-image" />
-				<dl>
-					<dt>config element</dt>
-					<dd>
-						If an ability, item or an effect can be configured (and is implemented, beware that most champion abilities are not as of now), a dedicated <i>config element</i> will appear at the bottom of a <i>scoreboard item</i>. These could
-						be grouped into 2 categories. Ones that directly affect the <i>source</i> they are on, and ones that affect the <i>target</i> the source will be hitting. For the latter, the effects will be visible in the <i>results</i>. Read
-						the <NuxtLink to="#apply-x-on-target">apply x on target</NuxtLink> tutorial section for more details
-						<div class="tmp-image" />
-					</dd>
-				</dl>
+			</dd>
+			<dt id="config-element">config element</dt>
+			<dd>
+				<p>
+					These appear both in <i>scoreboard items</i> and the <i>effects dialog</i>. If an ability, item or an effect can be configured (and is implemented, beware that most champion abilities are not as of now), a dedicated
+					<i>config element</i> will appear at the bottom of a <i>scoreboard item</i>. These could be grouped into 2 categories. Ones that directly affect the <i>source</i> they are on, and ones that affect the <i>target</i> the source will
+					be hitting. For the latter, the effects will be visible in the <i>results</i>. Read the <NuxtLink to="#apply-x-on-target">apply x on target</NuxtLink> tutorial section for more details
+				</p>
+				<!-- image showcasing different kinds of config els -->
+				<div class="tmp-image" />
+				<p v-html="guideDefinitionConfigElSource" class="game-description" />
+				<p v-html="guideDefinitionConfigElSnapshot" class="game-description" />
+				<!-- image showcasing source config el + one with snapshot and the snapshot value tooltip -->
+				<div class="tmp-image" />
 			</dd>
 			<dt>results table (results)</dt>
 			<dd>
@@ -124,8 +140,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<dd>All of these function roughly the same way their in-game counterparts do</dd>
 			<dt>effects dialog</dt>
 			<dd>
-				All effects currently implemented in <strong>lolcalc</strong> can be applied in the <i>effects dialog</i>, opened with the <b>"effects"</b> button found next to the <i>stats panel</i>. Effects that have been configured will be
-				duplicated at the top of the dialog for quicker access
+				All effects currently implemented in <strong>lolcalc</strong> can be applied in the <i>effects dialog</i>, opened with the <b>"effects"</b> button found next to the <i>stats panel</i>. Inside, you will find
+				<i><NuxtLink to="#config-element">config elements</NuxtLink></i> of every effect. Effects that have been configured will be duplicated at the top of the dialog for quicker access
 				<div class="tmp-image" />
 			</dd>
 		</dl>
