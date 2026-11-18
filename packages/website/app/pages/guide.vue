@@ -75,12 +75,17 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<dd>
 				the first section of the calculator where you can configure <i>damage sources</i> and <i>damage targets</i>. If you want to change something, do it here. The <i>results</i> (described below) should be thought of as
 				<b>"view only"</b> - no changes to champions can be made in them.
+				<div class="tmp-image" />
 			</dd>
 			<dt>scoreboard item (damage source/target)</dt>
-			<dd>everything pertaining to a single champion. Their level and abilities, items, runes. The layout shifts depending on the screen size.</dd>
+			<dd>
+				everything pertaining to a single champion. Their level and abilities, items, runes. The layout shifts depending on the screen size.
+				<div class="tmp-image" />
+			</dd>
 			<dt>results table</dt>
 			<dd>
 				the table found below the <i>configuration scoreboard</i> where you can see and compare most of the calculated values
+				<div class="tmp-image" />
 				<dl>
 					<dt>results table column (results column)</dt>
 					<dd>
@@ -90,20 +95,24 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 					</dd>
 					<dt>results table section (results section)</dt>
 					<dd>
-						the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the
-						<i>add section</i> form in the top left corner of the table
+						The <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added by selecting a section and pressing the
+						<b>"add"</b> button in the top left corner of the table
 					</dd>
 					<dt>flip target vs source (flip results)</dt>
 					<dd>
-						the <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added on-demand using the
-						<i>add section</i> form in the top left corner of the table
+						In the top left corner of the table there's a checkbox saying <b>"flip target vs source"</b>. It can be very useful, but might be a bit unintuitive. Make sure to read its tooltip and the
+						<a href="#apply-x-on-target">guide showcasing using it</a>.
 					</dd>
 				</dl>
 			</dd>
 			<dt>champ select, item shop, runes dialog</dt>
-			<dd>all of these function roughly the same way their in-game counterparts do</dd>
+			<dd>All of these function roughly the same way their in-game counterparts do</dd>
 			<dt>effects dialog</dt>
-			<dd>TODO</dd>
+			<dd>
+				All effects currently implemented in <strong>lolcalc</strong> can be applied in the <i>effects dialog</i>, opened with the <b>"effects"</b> button found next to the <i>stats panel</i>. Effects that have been configured will be
+				duplicated at the top of the dialog for quicker access
+				<div class="tmp-image" />
+			</dd>
 		</dl>
 
 		<TextPageHeading id="tutorials" text="tutorials" />
@@ -188,12 +197,12 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 
 		<TextPageHeading id="q-a" text="q&a" />
 		<dl>
-			<dt>How can I save multiple configurations?</dt>
+			<dt>how can I save multiple configurations?</dt>
 			<dd>
 				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
 				built-in way of managing multiple configurations is planned, see the <NuxtLink to="/about#roadmap">roadmap</NuxtLink>.
 			</dd>
-			<dt>There's an ability that slows, but it doesn't have a thing I can click</dt>
+			<dt>there's an ability that slows, but it doesn't have a thing I can click</dt>
 			<dd>
 				There are a lot of slows in the game and they vary only be strength and duration. A few common ones have a dedicated element for applying them - mostly items and champion passives. Adding all would be too much work (for now).
 				<strong>Arbitrary slows values can be applied in the <i>effects dialog</i>.</strong>
@@ -206,11 +215,11 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 					>wiki</a
 				>). As of right now, <strong>lolcalc</strong> doesn't implement these ability level restrictions and adding them is not planned.
 			</dd>
-			<dt>How can I delete the last results column?</dt>
+			<dt>how can I delete the last results column?</dt>
 			<dd>It's a puzzle.</dd>
-			<dt>Why are the stun/slow duration and values in the results table? They don't change</dt>
+			<dt>why are the stun/slow duration and values in the results table? They don't change</dt>
 			<dd>They are affected by target's tenacity and slow resists.</dd>
-			<dt>Items scaling with levels 1-18</dt>
+			<dt>items scaling with levels 1-18</dt>
 			<dd class="game-description" v-html="qaItemsScalingWithLevels" />
 		</dl>
 	</main>
