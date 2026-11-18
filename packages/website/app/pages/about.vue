@@ -100,7 +100,13 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<p>If you have any questions, feel free to contact me through the platforms listed at the bottom of this page.</p>
 
 		<TextPageHeading id="roadmap" text="roadmap" />
-		<p>TODO</p>
+		<p>
+			Below is the list of _few_ things that are already being worked on/will be worked on the soonest. For full list of planned features and ideas, see the
+			<a href="https://github.com/asasinmode/lolcalc/blob/ROADMAP.md" target="_blank">ROADMAP.md</a> on the project's github page
+		</p>
+		<ul>
+			<li>all champion abilities - their passives, effects, calculating their cooldowns, cleaning up their results <i>(also v1, end of the beta version)</i></li>
+		</ul>
 
 		<TextPageHeading id="acknowledgements" text="acknowledgements" />
 		<p>
