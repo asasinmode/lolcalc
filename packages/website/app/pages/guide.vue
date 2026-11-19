@@ -80,7 +80,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			</ul>
 		</nav>
 
-		<TextPageHeading id="qol-tipes" text="qol tips" />
+		<TextPageHeading id="qol-tips" text="qol tips" />
 		<ul>
 			<li>pin a tooltip by pressing [<kbd>K</kbd>] when hovering over it</li>
 			<li>scoreboard items can be expanded/collapsed by double clicking the background. The same works for result sections but you need to click on their headers</li>
@@ -167,8 +167,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<span>reset tutorial</span>
 			<span>reset done <Icon class="i-ph:check-bold" /></span>
 		</button>
-		<details id="apply-external-effect">
-			<summary>applying external effects</summary>
+		<details>
+			<summary id="apply-external-effect">applying external effects</summary>
 			<p>
 				With a champion selected, press the <b>"effects"</b> button to open the <i><NuxtLink to="#effects-dialog">effects dialog</NuxtLink></i
 				>.
@@ -197,8 +197,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<p v-html="tutorialExternalEffectExtraExample" class="game-description" />
 			<div class="tmp-image" />
 		</details>
-		<details id="apply-x-on-target">
-			<summary>"apply X on target" items or abilities and "flip results"</summary>
+		<details>
+			<summary id="apply-x-on-target">"apply X on target" items or abilities and "flip results"</summary>
 			<p>
 				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for
 				<i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i>, won't apply that effect onto the source,
@@ -238,10 +238,11 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<p>It's complicated</p>
 		</details>
 
-		<TextPageHeading id="examples" text="examples" />
+		<TextPageHeading id="example-configurations" text="example configurations" />
+		<p>Below you fill find a list of configurations that could be interesting to look at. It's rather short for now but more entries will be added to it as I come across anything worth sharing.</p>
 		<p>
-			Note that the links to the configurations will be for the current patch. The results shown may not be applicable to the situation they are for anymore. As of right now the only version to view <strong>lolcalc</strong> for a different
-			patch version is to run the source code yourself. Either an older version of it or having updated the underlying values.
+			Note that the links to the configurations will be for the current patch. The results shown may not be applicable to the situation they are for anymore. Right now the only way to view <strong>lolcalc</strong> for a different patch
+			version is to run the source code yourself. Either an older version of it, or with manually updated underlying values.
 		</p>
 		<ul>
 			<li>
