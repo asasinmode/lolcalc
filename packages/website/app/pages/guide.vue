@@ -37,7 +37,7 @@ const guideDefinitionConfigElSnapshot = useSimpleDescription(
 
 const tutorialApplyEffectSelectEffect = useSimpleDescription(
 	'tutorial-apply-effect-select-effect',
-	`Either find or search for ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and select any non-0 number of stacks. Then close close the dialog. You will see the applied effects' icons appear above the stats panel.`,
+	`Either find or search for ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and set a non-0 number of stacks. Then close close the dialog. You will see the applied effects' icons appear above the stats panel.`,
 );
 const tutorialApplyEffectChampionModified = useSimpleDescription(
 	'tutorial-apply-effect-champion-modified',
@@ -75,7 +75,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<h2>contents</h2>
 			<ul>
 				<li><NuxtLink to="#qol-tips">qol tips</NuxtLink></li>
-				<li><NuxtLink to="#definitions">definitions</NuxtLink></li>
+				<li><NuxtLink to="#ui-guide">UI guide</NuxtLink></li>
 				<li><NuxtLink to="#tutorials">tutorials</NuxtLink></li>
 				<li><NuxtLink to="#example-configurations">example configurations</NuxtLink></li>
 				<li><NuxtLink to="#q-a">q&a</NuxtLink></li>
@@ -96,7 +96,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<li>right click an item, dragon stack/soul, role quest or ability levels to clear them</li>
 		</ul>
 
-		<TextPageHeading id="definitions" text="definitions" />
+		<TextPageHeading id="ui-guide" text="UI guide" />
 		<p>
 			List and short description of the <strong>lolcalc</strong> UI elements. Throughout the website, they will be referred to by the names shown here. The next section, <b>tutorials</b>, has more hands-on guides that showcase their usage.
 		</p>
