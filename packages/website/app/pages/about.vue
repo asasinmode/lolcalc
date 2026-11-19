@@ -115,8 +115,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<NuxtLink to="https://communitydragon.org/" target="_blank">Community Dragon</NuxtLink> and I want to thank its contributors, as well as people on their discord server that helped me during the development.
 		</p>
 		<p>
-			Some of the <u>code</u> in this project was written using LLMs. I'd estimate it to make up less than 10% of the codebase. That said, it would've taken me a few more months to get to where it is without them. The ability to paste into
-			one the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful. Also I used only what's available for free.
+			All of the text that's not from the game itself is written by me. Some of the <u>code</u> in this project was written using LLMs. I'd estimate it to make up less than 10% of the codebase. That said, it would've taken me a few more
+			months to get to where it is without them. The ability to paste into one the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful. Also I used only what's available for free.
 		</p>
 		<p>Thanks to my homies who helped me test the website and verify the results in game.</p>
 		<p>Thanks to Riot Games for not chronobreaking this project (🤞) and for their policy that allowed me to make it.</p>
@@ -315,7 +315,45 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 	}
 
 	.hash-target {
-		--at-apply: 'bg-pink-200';
+		--hash-target-opacity: 0%;
+		outline: 0.2em solid color-mix(in srgb, var(--ui-btn-border-clr) var(--hash-target-opacity), transparent);
+		outline-offset: 0.15em;
+		animation: hash-target-highlight-blink 1s ease-in 2;
+
+		@media (prefers-reduced-motion: no-preference) {
+			/* this animation is the same one [Adrian Roselli](https://adrianroselli.com/), as of 19.11.2026, has for his links. His blog is awesome, I recommend checking it out */
+			animation-name: hash-target-highlight-grow;
+			animation-timing-function: ease-out;
+		}
+	}
+
+	@property --hash-target-opacity {
+		syntax: '<percentage>';
+		inherits: false;
+		initial-value: 0%;
+	}
+
+	@keyframes hash-target-highlight-blink {
+		0% {
+			--hash-target-opacity: 0%;
+		}
+		100% {
+			--hash-target-opacity: 100%;
+		}
+	}
+
+	@keyframes hash-target-highlight-grow {
+		from {
+			--hash-target-opacity: 100%;
+			outline-width: 0.1em;
+			outline-offset: 0;
+		}
+
+		to {
+			--hash-target-opacity: 0%;
+			outline-width: 0.75em;
+			outline-offset: 1em;
+		}
 	}
 }
 

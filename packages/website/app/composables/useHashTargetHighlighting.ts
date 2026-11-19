@@ -4,7 +4,6 @@ export function useHashTargetHighlighting() {
 	let previousHashTarget: HTMLElement | null;
 
 	function highlightHash() {
-		console.log('highlighting');
 		previousHashTarget?.classList.remove('hash-target');
 		const el = document.querySelector<HTMLElement>(location.hash);
 		previousHashTarget = el;
@@ -17,5 +16,5 @@ export function useHashTargetHighlighting() {
 	let highlightHashTargetWatch: (() => void) | undefined;
 
 	onMounted(() => (highlightHashTargetWatch = watch(() => route.hash, highlightHash, { immediate: true })));
-	onBeforeUnmount(highlightHashTargetWatch);
+	onBeforeUnmount(() => highlightHashTargetWatch?.());
 }
