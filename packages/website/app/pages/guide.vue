@@ -56,7 +56,10 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 <template>
 	<main id="guide">
 		<h1>guide</h1>
-		<p>Instructions on how to use it, for info about what it is, check the <NuxtLink to="/about">about page</NuxtLink></p>
+		<p>
+			Instructions on how to use it, for info about what it is, check the <NuxtLink to="/about">about page</NuxtLink>. Also I recommend using <strong>lolcalc</strong> on PC. I tried to make it usable on small screens but it's really hard to
+			fit everything
+		</p>
 
 		<nav>
 			<h2>contents</h2>
@@ -96,7 +99,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			</dd>
 			<dt>scoreboard item (damage source/target)</dt>
 			<dd>
-				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest
+				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest.
+				<strong>Note that the layout shifts considerably on small screens to fit everything</strong>
 				<div class="tmp-image" />
 			</dd>
 			<dt id="config-element">config element</dt>
@@ -242,7 +246,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<dt>there's an ability that slows, but it doesn't have a thing I can click</dt>
 			<dd>
 				There are a lot of slows in the game and they vary only be strength and duration. A few common ones have a dedicated element for applying them - mostly items and champion passives. Adding all would be too much work (for now).
-				<strong>Arbitrary slows values can be applied in the <i>effects dialog</i>.</strong>
+				<strong>Arbitrary slow values can be applied in the <i>effects dialog</i>.</strong>
 			</dd>
 			<dt>Azir/Zeri/Xayah/others ability levels</dt>
 			<dd>
