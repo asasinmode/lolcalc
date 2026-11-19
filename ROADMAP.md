@@ -46,7 +46,7 @@ If something has 🔨 next to it, it's being worked on currently/will be worked 
 - [ ] keyboard navigation
   - [ ] somehow right clicks, like clearing selects/removing items
   - [ ] show hover tooltips when navigated to with keyboard
-  - [ ] skip links around busy areas (scoreboard, item shop?)
+  - [ ] skip links around busy areas (scoreboard, item shop?, results)
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components like effects are
 

@@ -14,8 +14,8 @@ withDefaults(
 <template>
 	<component :is="tag" :id>
 		{{ text }}
-		<a :href="`#${id}`"
-			><span aria-hidden="true">#</span><span>link to the "{{ text }}" section</span></a
-		>
+		<NuxtLink :to="`#${id}`">
+			<span aria-hidden="true">#</span><span>link to the "{{ text }}" section</span>
+		</NuxtLink>
 	</component>
 </template>

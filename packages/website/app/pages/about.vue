@@ -10,7 +10,7 @@ const { reportAnIssue } = useReportIssueDialog();
 
 const discrepancyMaxHealthMana = useSimpleDescription(
 	'about-discrepancy-1',
-	`Max <scalehealth>%i:${STAT_ICON.hp}%health</scalehealth> and <scalemana>%i:${STAT_ICON.mana}%mana</scalemana>/<scaleenergy>ability resource</scaleenergy> have a <span class="error-margin">margin of error of <strong>1</strong></span>. Most of the differences should be coming from floating point arithmetic and the in game ui rounding the displayed <scalehealth>hp</scalehealth> up and <scalemana>mana</scalemana> down. This means that the game displays something like <span class="code-like">2773.0000001</span> as <span class="code-like">2774</span>, even though it's effectively <span class="code-like">2773</span> ([example config](#TODO)).`,
+	`Max <scalehealth>%i:${STAT_ICON.hp}%health</scalehealth> and <scalemanNuxtLink>%i:${STAT_ICON.mana}%mana</scalemanNuxtLink>/<scaleenergy>ability resource</scaleenergy> have a <span class="error-margin">margin of error of <strong>1</strong></span>. Most of the differences should be coming from floating point arithmetic and the in game ui rounding the displayed <scalehealth>hp</scalehealth> up and <scalemanNuxtLink>mana</scalemanNuxtLink> down. This means that the game displays something like <span class="code-like">2773.0000001</span> as <span class="code-like">2774</span>, even though it's effectively <span class="code-like">2773</span> ([example config](#TODO)).`,
 );
 const discrepancyAttackRangeRfc = useSimpleDescription(
 	'about-discrepancy-2',
@@ -50,8 +50,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 
 		<TextPageHeading id="what-is-it" text="what is it?" />
 		<p>
-			<strong>lolcalc</strong> is intended to be a tool for <a href="https://www.leagueoflegends.com/" target="_blank">League of Legends</a> that shows the same numbers the game does. The currently aimed for numbers are items, runes,
-			champion abilities and their + some other common effects/buffs/debuffs, for any combination of them.
+			<strong>lolcalc</strong> is intended to be a tool for <NuxtLink to="https://www.leagueoflegends.com/" target="_blank">League of Legends</NuxtLink> that shows the same numbers the game does. The currently aimed for numbers are items,
+			runes, champion abilities and their + some other common effects/buffs/debuffs, for any combination of them.
 		</p>
 		<p><u>It's not a game simulation</u> and there is currently no timeline for implementing one. Something like the damage of a <span class="code-like">Q + W + aa + aa + E + R</span> combo is currently out of the scope of this project.</p>
 		<p><u>The main goal is build comparison</u>. <strong>lolcalc</strong> should, fairly accurately, show the difference between the damage and stats of various champion builds, making it easier to find the best one.</p>
@@ -59,7 +59,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<TextPageHeading id="does-it-work" text="does it work?" />
 		<p>
 			While it's impossible for me to check all 172+ champions with every item/rune/dragon/quest/buff/debuff combination, I tried my best to make it work and
-			<NuxtLink to="/guide#examples">here are some examples of it</NuxtLink>. If you encounter a configuration that's not calculated correctly (<NuxtLink href="#known-discrepancies">known discrepancies</NuxtLink>), please
+			<NuxtLink to="/guide#examples">here are some examples of it</NuxtLink>. If you encounter a configuration that's not calculated correctly (<NuxtLink to="#known-discrepancies">known discrepancies</NuxtLink>), please
 			<button class="link-like" @click="reportAnIssue">report it</button>
 		</p>
 		<p class="alert info">
@@ -67,7 +67,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<Icon class="i-ph:info" />
 		</p>
 		<p class="game-description" v-html="nonPassiveAbilitiesDisclaimer" />
-		<p>For when these and other features will be implemented, check <NuxtLink href="#roadmap">the roadmap</NuxtLink>.</p>
+		<p>For when these and other features will be implemented, check <NuxtLink to="#roadmap">the roadmap</NuxtLink>.</p>
 
 		<TextPageHeading id="known-discrepancies" text="known calculation discrepancies" />
 		<ul>
@@ -94,15 +94,15 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		</p>
 		<p>
 			The second best way is to contribute to the codebase, which you can start with by reading the
-			<a href="https://github.com/asasinmode/lolcalc/tree/feat/v2?tab=contributing-ov-file" target="_blank">CONTRIBUTING</a>
-			and <a href="https://github.com/asasinmode/lolcalc/" target="_blank">README</a> files.
+			<NuxtLink to="https://github.com/asasinmode/lolcalc/tree/feat/v2?tab=contributing-ov-file" target="_blank">CONTRIBUTING</NuxtLink>
+			and <NuxtLink to="https://github.com/asasinmode/lolcalc/" target="_blank">README</NuxtLink> files.
 		</p>
 		<p>If you have any questions, feel free to contact me through the platforms listed at the bottom of this page.</p>
 
 		<TextPageHeading id="roadmap" text="roadmap" />
 		<p>
 			Below is the list of <i>few</i> things that are currently being worked on/will be worked on the soonest. For full list of planned features and ideas, see the
-			<a href="https://github.com/asasinmode/lolcalc/blob/ROADMAP.md" target="_blank">ROADMAP</a> on the project's github page
+			<NuxtLink to="https://github.com/asasinmode/lolcalc/blob/ROADMAP.md" target="_blank">ROADMAP</NuxtLink> on the project's github page
 		</p>
 		<ul>
 			<li>all champion abilities - their passives, effects, calculating their cooldowns, cleaning up their results <i>(also v1, end of the beta version)</i></li>
@@ -111,7 +111,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<TextPageHeading id="acknowledgements" text="acknowledgements" />
 		<p>
 			This project would not exist without
-			<a href="https://communitydragon.org/" target="_blank">Community Dragon</a> and I want to thank its contributors, as well as people on their discord server that helped me during the development.
+			<NuxtLink to="https://communitydragon.org/" target="_blank">Community Dragon</NuxtLink> and I want to thank its contributors, as well as people on their discord server that helped me during the development.
 		</p>
 		<p>
 			Some of the <u>code</u> in this project was written using LLMs. I'd estimate it to make up less than 10% of the codebase. That said, it would've taken me a few more months to get to where it is without them. The ability to paste into
@@ -124,9 +124,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<dl>
 			<dt>league new dawn (next)</dt>
 			<dd>
-				As of writing this (<time datetime="2026-11-15">11.15.2026</time>), a <a href="https://youtu.be/vs3p3mNhRXo?si=7V1_qM-P3ocWsVYF" target="_blank">teaser for League of Legends: New Dawn</a>. From the looks of it, a lot of systems will
-				be updated/reworked. As details of what exactly is being changed come out, I will update <NuxtLink to="#roadmap">the roadmap</NuxtLink> to say which, and in what ways, parts of <strong>lolcalc</strong> are affected. Personally, man
-				that's a lot of work
+				As of writing this (<time datetime="2026-11-15">11.15.2026</time>), a <NuxtLink to="https://youtu.be/vs3p3mNhRXo?si=7V1_qM-P3ocWsVYF" target="_blank">teaser for League of Legends: New Dawn</NuxtLink>. From the looks of it, a lot of
+				systems will be updated/reworked. As details of what exactly is being changed come out, I will update <NuxtLink to="#roadmap">the roadmap</NuxtLink> to say which, and in what ways, parts of <strong>lolcalc</strong> are affected.
+				Personally, man that's a lot of work
 			</dd>
 			<dt>alpha/beta/release versions</dt>
 			<dd>
@@ -137,7 +137,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<dt>ads and paywalling</dt>
 			<dd>
 				I will try my best to keep the calculator and all of its features free (+ it's
-				<a href="https://github.com/asasinmode/lolcalc" target="_blank">open source</a>). That said, hosting costs money and maintaining it takes a lot of my time and effort. Please consider
+				<NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank">open source</NuxtLink>). That said, hosting costs money and maintaining it takes a lot of my time and effort. Please consider
 				<NuxtLink to="#support">supporting the project</NuxtLink>
 			</dd>
 		</dl>
@@ -146,8 +146,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<p>
 			<strong>lolcalc</strong> doesn't collect or store any personal data. Your configuration is stored in the browser's local storage and never leaves your device. Configurations can be shared by the users with a link generated by the
 			<b>share</b> button. If you report an issue, its: title, category, message, your contact information (optional, <span>will be publicly visible</span>), current configuration link (optional) and the <strong>lolcalc</strong> version you
-			are using; will be sent to the <a href="https://github.com/asasinmode/lolcalc" target="_blank">project's Github repository</a> and are subject to
-			<a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" target="_blank">Github's TOS</a>.
+			are using; will be sent to the <NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank">project's Github repository</NuxtLink> and are subject to
+			<NuxtLink to="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" target="_blank">Github's TOS</NuxtLink>.
 		</p>
 	</main>
 </template>

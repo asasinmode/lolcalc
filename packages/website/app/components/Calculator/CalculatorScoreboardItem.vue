@@ -1306,7 +1306,7 @@ defineExpose({ el });
 							aria-hidden="true"
 							v-bind="bindChampionAbilityTooltipAttrs({ key: 'passive' })"
 						/>
-						<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
+						<NuxtLink v-show="value.champion.value" class="wiki-link" :to="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank">wiki</NuxtLink>
 					</div>
 					<div
 						v-for="abilityKey in ['q', 'w', 'e', 'r'] satisfies INonPassiveAbilityKey[]"

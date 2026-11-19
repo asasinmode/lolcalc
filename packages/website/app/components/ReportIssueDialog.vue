@@ -57,7 +57,7 @@ function submitIssue(_event: SubmitEvent) {
 			</div>
 			<div>
 				<label for="issue-contact">
-					where can I contact you? <span>(will be publicly visible on <a href="https://github.com/asasinmode/lolcalc" target="_blank">github</a>)</span>
+					where can I contact you? <span>(will be publicly visible on <NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank">github</NuxtLink>)</span>
 				</label>
 				<input id="issue-contact" placeholder="discord: username, email: example@email.com" />
 			</div>
@@ -67,8 +67,8 @@ function submitIssue(_event: SubmitEvent) {
 			</label>
 			<label for="issue-disclaimer">
 				<input id="issue-disclaimer" type="checkbox" required />
-				<span>*</span>I understand that submitting this form will open an issue on the <a href="https://github.com/asasinmode/lolcalc/issues" target="_blank">project's github page</a>. Images or further comments can be added there later,
-				but require an account. If you already have an account, consider opening an issue on github directly.
+				<span>*</span>I understand that submitting this form will open an issue on the <NuxtLink to="https://github.com/asasinmode/lolcalc/issues" target="_blank">project's github page</NuxtLink>. Images or further comments can be added
+				there later, but require an account. If you already have an account, consider opening an issue on github directly.
 			</label>
 			<button class="other-ui-btn">submit</button>
 		</form>

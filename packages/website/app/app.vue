@@ -71,8 +71,8 @@ const navEmailEl = useTemplateRef('emailLinkNav');
 
 onMounted(() => {
 	const email = cipheredEmail.map((n) => String.fromCharCode(n)).join('');
-	emailEl.value?.append(email);
-	emailEl.value?.setAttribute('href', `mailto:${email}`);
+	emailEl.value?.$el.append(email);
+	emailEl.value?.$el.setAttribute('href', `mailto:${email}`);
 	navEmailEl.value?.append(email);
 	navEmailEl.value?.parentElement?.setAttribute('href', `mailto:${email}`);
 });
@@ -218,15 +218,15 @@ onMounted(() => {
 		<div>
 			<h1>
 				<span>lolcalc</span>
-				<a :href="runtimeConfig.app.baseURL"> <span>link to the lolcalc home page</span> </a>
+				<NuxtLink :to="runtimeConfig.app.baseURL"> <span>link to the lolcalc home page</span> </NuxtLink>
 				<img src="/logo_dark.webp" width="192" height="192" alt="lolcalc logo - the letter L with a calculator icon next to it" />
 			</h1>
 			<span>26{{ vSemver.slice(vSemver.indexOf('.')) }}</span>
 			<span id="by-asasinmode">
 				by
-				<a href="https://asasinmode.com" target="_blank" title="asasinmode">
+				<NuxtLink to="https://asasinmode.com" target="_blank" title="asasinmode">
 					<img src="/asasinmode.webp" width="200" height="200" alt="asasinmode avatar - a white outline of a cupcake with a smily face on a background looking like a galaxy" />
-				</a>
+				</NuxtLink>
 			</span>
 			<nav id="page-nav" ref="pageNav" popover @focusout="closeMenuIfOutside" @toggle="toggleClickEater">
 				<button id="menu-close-btn" title="zamknij menu" popovertargetaction="hide" popovertarget="page-nav">
@@ -259,34 +259,34 @@ onMounted(() => {
 				</ul>
 				<ul>
 					<li>
-						<a target="_blank">
+						<NuxtLink target="_blank">
 							<span ref="emailLinkNav" />
 							<Icon class="i-logos:google-gmail" />
-						</a>
+						</NuxtLink>
 					</li>
 					<li>
-						<a href="https://www.reddit.com/user/asasinmode/" target="_blank">
+						<NuxtLink to="https://www.reddit.com/user/asasinmode/" target="_blank">
 							<span>asasinmode</span>
 							<Icon class="i-logos:reddit-icon" />
-						</a>
+						</NuxtLink>
 					</li>
 					<li>
-						<a href="https://discord.com/channels/@me" target="_blank">
+						<NuxtLink to="https://discord.com/channels/@me" target="_blank">
 							<span>asasinmode</span>
 							<Icon class="i-logos:discord-icon" />
-						</a>
+						</NuxtLink>
 					</li>
 					<li>
-						<a href="https://x.com/asasinmode" target="_blank">
+						<NuxtLink to="https://x.com/asasinmode" target="_blank">
 							<span>asasinmode</span>
 							<Icon class="i-logos:x" />
-						</a>
+						</NuxtLink>
 					</li>
 					<li>
-						<a href="https://github.com/asasinmode/lolcalc" target="_blank">
+						<NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank">
 							<span>lolcalc</span>
 							<Icon class="i-logos:github-icon" />
-						</a>
+						</NuxtLink>
 					</li>
 				</ul>
 			</nav>
@@ -303,26 +303,26 @@ onMounted(() => {
 	<footer>
 		<ul>
 			<li>
-				<a ref="emailLink" target="_blank">
+				<NuxtLink ref="emailLink" target="_blank">
 					<Icon class="i-logos:google-gmail" />
-				</a>
+				</NuxtLink>
 			</li>
 			<li>
-				<a href="https://www.reddit.com/user/asasinmode/" target="_blank"> <Icon class="i-logos:reddit-icon" /> asasinmode </a>
+				<NuxtLink to="https://www.reddit.com/user/asasinmode/" target="_blank"> <Icon class="i-logos:reddit-icon" /> asasinmode </NuxtLink>
 			</li>
 			<li>
-				<a href="https://discord.com/channels/@me" target="_blank"> <Icon class="i-logos:discord-icon" /> asasinmode </a>
+				<NuxtLink to="https://discord.com/channels/@me" target="_blank"> <Icon class="i-logos:discord-icon" /> asasinmode </NuxtLink>
 			</li>
 			<li>
-				<a href="https://x.com/asasinmode" target="_blank"> <Icon class="i-logos:x" /> asasinmode </a>
+				<NuxtLink to="https://x.com/asasinmode" target="_blank"> <Icon class="i-logos:x" /> asasinmode </NuxtLink>
 			</li>
 			<li>
-				<a href="https://github.com/asasinmode/lolcalc" target="_blank"> <Icon class="i-logos:github-icon" /> lolcalc </a>
+				<NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank"> <Icon class="i-logos:github-icon" /> lolcalc </NuxtLink>
 			</li>
 		</ul>
 		<p>
 			<strong>lolcalc</strong> was created under Riot Games'
-			<a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener"> "<span>Legal Jibber Jabber</span>" </a>
+			<NuxtLink to="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener"> "<span>Legal Jibber Jabber</span>" </NuxtLink>
 			policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.
 		</p>
 		<p>v{{ appVersion }}</p>

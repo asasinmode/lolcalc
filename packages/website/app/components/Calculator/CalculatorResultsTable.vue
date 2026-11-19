@@ -1459,7 +1459,6 @@ defineExpose({
 				<tr>
 					<td :width="`${colW.controls + colW.header}px`" colspan="2">
 						<div>
-							<a href="#results-header-aa" class="skip-link"> skip column controls </a>
 							<label for="results-table-values-for" @mouseenter="tutorialEvent('flipResultsEntered', {})">
 								<input id="results-table-values-for" v-model="flipResults" type="checkbox" @change="recalculateAllColumns" @focus="tutorialEvent('flipResultsEntered', {})" />
 								flip target vs source
@@ -1609,29 +1608,8 @@ defineExpose({
 								</button>
 								<button style="display: none">restore</button>
 							</template>
-							<!-- <button -->
-							<!-- 	class="pretend-ui-btn" -->
-							<!-- 	:disabled="columnAddableOptions[index]?.championOptionIndex === undefined" -->
-							<!-- 	@click="addColumnAbilities(index)" -->
-							<!-- > -->
-							<!-- 	add abilities -->
-							<!-- </button> -->
-							<!-- <button -->
-							<!-- 	class="pretend-ui-btn" -->
-							<!-- 	:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length" -->
-							<!-- 	@click="addColumnItems(index)" -->
-							<!-- > -->
-							<!-- 	add items -->
-							<!-- </button> -->
 						</div>
 					</td>
-					<!-- TODO figure out where to put these -->
-					<!-- <a href="#results-header" class="skip-link"> -->
-					<!-- 	skip back to results start -->
-					<!-- </a> -->
-					<!-- <a id="results-table-skip-rows" href="#results-table-row-new-section-ability" class="skip-link"> -->
-					<!-- 	skip result rows -->
-					<!-- </a> -->
 				</tr>
 			</thead>
 			<template v-for="(section, index) in resultSections" :key="section.id">

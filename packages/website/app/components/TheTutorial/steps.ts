@@ -278,7 +278,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	flipResults: {
 		title: 'flip results',
 		type: 'global',
-		text: 'when the <b>"flip target vs source"</b> is checked, values shown in the <i>result columns</i> are flipped. Instead of <i>column\'s source</i> hitting <i>column\'s target</i>, the other way around - target hitting source - is displayed.<br> <rules>note that this is not equivalent to swapping <i>scoreboard\'s</i> <i>sources</i> with the <i>targets</i>. The main difference is that anything that applies an effect onto the target won\'t do so (like Black Cleaver stacks or Frozen Heart effect).<br> <b>If you want to check the damage of X on Y, just put the X in <i>scoreboard sources</i> and Y in <i>scoreboard targets</i>.</b><br> Check the <a href="guide#apply-x-on-target" target="_blank">guide page</a> for a more detailed explanation</rules>',
+		text: 'when the <b>"flip target vs source"</b> is checked, values shown in the <i>result columns</i> are flipped. Instead of <i>column\'s source</i> hitting <i>column\'s target</i>, the other way around - target hitting source - is displayed.<br> <rules>note that this is not equivalent to swapping <i>scoreboard\'s</i> <i>sources</i> with the <i>targets</i>. The main difference is that anything that applies an effect onto the target won\'t do so (like Black Cleaver stacks or Frozen Heart effect).<br> <b>If you want to check the damage of X on Y, just put the X in <i>scoreboard sources</i> and Y in <i>scoreboard targets</i>.</b><br> Check the <a href="/guide#apply-x-on-target" target="_blank">guide page</a> for a more detailed explanation</rules>',
 		anchor: "[for='results-table-values-for']",
 		showOn: {
 			flipResultsEntered: true,

@@ -107,7 +107,7 @@ defineExpose({ header });
 		</span>
 		<span>{{ computedDescription?.subtitleLeft }}</span>
 		<span>{{ computedDescription?.subtitleRight }}</span>
-		<a v-if="!hoverTooltip" v-show="computedDescription?.item" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${computedDescription?.item.name.replaceAll(' ', '_')}`" target="_blank" @click.stop=""> wiki </a>
+		<NuxtLink v-if="!hoverTooltip" v-show="computedDescription?.item" class="wiki-link" :to="`https://wiki.leagueoflegends.com/en-us/${computedDescription?.item.name.replaceAll(' ', '_')}`" target="_blank" @click.stop="">wiki</NuxtLink>
 	</component>
 	<div class="item-description">
 		<p v-if="damageSource && (isMidQuestBoots ? damageSource.roleQuest.value !== 'mid' : isSupportItem ? damageSource.roleQuest.value !== 'support' : false)">

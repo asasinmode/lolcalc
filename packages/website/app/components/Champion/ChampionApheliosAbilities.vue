@@ -83,7 +83,7 @@ const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromExtras: 
 			aria-hidden="true"
 			v-bind="passiveTooltipTriggerBind"
 		/>
-		<a v-show="value.champion.value" class="wiki-link" :href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank"> wiki </a>
+		<NuxtLink v-show="value.champion.value" class="wiki-link" :to="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank">wiki</NuxtLink>
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
 	<div class="aphelios-q" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">

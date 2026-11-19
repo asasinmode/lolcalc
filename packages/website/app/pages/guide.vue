@@ -65,8 +65,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 	<main id="guide">
 		<h1>guide</h1>
 		<p>
-			Instructions on how to use it, for info about what it is, check the <NuxtLink to="/about">about page</NuxtLink>. Also I recommend using <strong>lolcalc</strong> on PC. I tried to make it usable on small screens but it's really hard to
-			fit everything
+			Instructions on how to use it, for info about what it is, check the <a href="/about">about page</a>. Also I recommend using <strong>lolcalc</strong> on PC. I tried to make it usable on small screens but it's really hard to fit
+			everything
 		</p>
 
 		<nav>
@@ -279,10 +279,10 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			</dd>
 			<dt>Azir/Zeri/Xayah/others ability levels</dt>
 			<dd>
-				These and other champions start with a specific ability leveled on level 1, or cannot level an ability X until they leveled ability Y (<a
-					href="https://wiki.leagueoflegends.com/en-us/Champion_ability#Ranking_order_&_rules"
+				These and other champions start with a specific ability leveled on level 1, or cannot level an ability X until they leveled ability Y (<NuxtLink
+					to="https://wiki.leagueoflegends.com/en-us/Champion_ability#Ranking_order_&_rules"
 					target="_blank"
-					>wiki</a
+					>wiki</NuxtLink
 				>). As of right now, <strong>lolcalc</strong> doesn't implement these ability level restrictions and adding them is not planned.
 			</dd>
 			<dt>how can I delete the last results column?</dt>

@@ -132,7 +132,7 @@ export function linkedFormattedChampionImage(championId: IChampionId, name?: str
 }
 
 export async function simpleDescriptionFormatting(text: string, addAlt?: boolean, textureSize?: number): Promise<string> {
-	const parts = replaceGameIcons(text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')).split(/(%[ac]:[^%]+%)/g);
+	const parts = replaceGameIcons(text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')).split(/(%[ac]:[^%]+%)/g);
 
 	for (let i = 1; i < parts.length; i += 2) {
 		const token = parts[i]!;
