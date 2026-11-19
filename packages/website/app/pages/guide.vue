@@ -5,6 +5,8 @@ import { STAT_ICON } from '@lolcalc/data/index';
 import { AbilityType } from '@lolcalc/shared/index';
 import { resetTutorialStep } from '~/utils/tutorial';
 
+useHashTargetHighlighting();
+
 function resetTutorial(event: MouseEvent) {
 	const button = event.currentTarget as HTMLElement;
 	if (button.hasAttribute('data-clicked')) {

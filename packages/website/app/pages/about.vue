@@ -5,6 +5,7 @@ import { IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion.js';
 import { STAT_ICON, CHAMPIONS, CHAMPION_IMAGES } from '@lolcalc/data/index';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared/index';
 
+useHashTargetHighlighting();
 const { championImageSize, championImage } = CHAMPION_IMAGES;
 const { reportAnIssue } = useReportIssueDialog();
 
@@ -311,6 +312,10 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 				content: 'todo image';
 			}
 		}
+	}
+
+	.hash-target {
+		--at-apply: 'bg-pink-200';
 	}
 }
 
