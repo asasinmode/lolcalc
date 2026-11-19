@@ -241,7 +241,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 		</details>
 
 		<TextPageHeading id="example-configurations" text="example configurations" />
-		<p>Below you fill find a list of configurations that could be interesting to look at. It's rather short for now but more entries will be added to it as I come across anything worth sharing.</p>
+		<p>Below you will find a list of configurations that could be interesting to look at. It's rather short for now but more entries will be added as I come across anything worth sharing.</p>
 		<p>
 			Note that the links to the configurations will be for the current patch. The results shown may not be applicable to the situation they are for anymore. Right now the only way to view <strong>lolcalc</strong> for a different patch
 			version is to run the source code yourself. Either an older version of it, or with manually updated underlying values.
