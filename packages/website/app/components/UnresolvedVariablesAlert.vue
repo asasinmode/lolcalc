@@ -10,6 +10,7 @@ const { reportAnIssue } = useReportIssueDialog();
 </template>
 
 <style>
+/* general .alert styles */
 @layer components {
 	.alert {
 		--at-apply: 'b relative w-fit rounded-md py-2 ps-2 text-wrap of-hidden';
@@ -40,6 +41,10 @@ const { reportAnIssue } = useReportIssueDialog();
 			.icon {
 				--at-apply: 'text-amber-950';
 			}
+
+			i {
+				--at-apply: 'text-amber-600';
+			}
 		}
 
 		&.error {
@@ -52,6 +57,10 @@ const { reportAnIssue } = useReportIssueDialog();
 			.icon {
 				--at-apply: 'text-red-950';
 			}
+
+			i {
+				--at-apply: 'text-red-500';
+			}
 		}
 
 		&.info {
@@ -63,6 +72,10 @@ const { reportAnIssue } = useReportIssueDialog();
 
 			.icon {
 				--at-apply: 'text-blue-950';
+			}
+
+			i {
+				--at-apply: 'text-blue-400';
 			}
 		}
 	}
