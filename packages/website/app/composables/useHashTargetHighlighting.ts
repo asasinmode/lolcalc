@@ -5,7 +5,8 @@ export function useHashTargetHighlighting() {
 
 	function highlightHash() {
 		previousHashTarget?.classList.remove('hash-target');
-		const el = document.querySelector<HTMLElement>(location.hash);
+		if (!route.hash) return;
+		const el = document.querySelector<HTMLElement>(route.hash);
 		previousHashTarget = el;
 		if (el) {
 			void el.offsetWidth;
