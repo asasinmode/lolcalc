@@ -252,9 +252,14 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			}
 		}
 
+		> dl > dt,
+		> details > summary {
+			--at-apply: 'text-[length:--fluid-19-22] font-600 text-white';
+		}
+
 		> dl {
 			> dt {
-				--at-apply: 'text-[length:--fluid-19-22] font-600 text-white mbs-[1em] mbe-[0.33em]';
+				--at-apply: 'mbs-[1em] mbe-[0.33em]';
 			}
 
 			dl {
@@ -266,6 +271,16 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 
 		> h2 + dl > dt:first-child {
 			--at-apply: 'mbs-0';
+		}
+
+		> details {
+			> summary {
+				--at-apply: 'mbs-[--fluid-10-22]';
+			}
+
+			&[open] > summary {
+				--at-apply: 'mbe-[0.33em]';
+			}
 		}
 
 		#roadmap + p {

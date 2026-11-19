@@ -160,7 +160,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<span>reset done <Icon class="i-ph:check-bold" /></span>
 		</button>
 		<details id="apply-external-effect">
-			<summary><h3>applying external effects</h3></summary>
+			<summary>applying external effects</summary>
 			<p>Effects can be applied using the <button>effects</button> button</p>
 			<p class="alert warning">
 				An effect set with the dedicated <i>config element</i> will override that same effect applied through the <i>effects dialog</i>, if it's set to a non-empty value.
@@ -170,7 +170,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<div class="tmp-image" />
 		</details>
 		<details id="apply-x-on-target">
-			<summary><h3>"apply X on target" items or abilities and "flip results"</h3></summary>
+			<summary>"apply X on target" items or abilities and "flip results"</summary>
 			<p>
 				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for
 				<i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i>, won't apply that effect onto the source,
@@ -206,7 +206,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			</p>
 		</details>
 		<details>
-			<summary><h3>Rell passive resist drain</h3></summary>
+			<summary>Rell passive resist drain</summary>
 			<p>It's complicated</p>
 		</details>
 
@@ -285,7 +285,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 
 @layer overrides {
 	#reset-tutorial {
-		--at-apply: 'inline-32 mx-auto text-center mbs-[1em]';
+		--at-apply: 'inline-32 mx-auto text-center mbs-[1em] mbe-[0.4em]';
 
 		> span:last-child {
 			--at-apply: 'hidden';
