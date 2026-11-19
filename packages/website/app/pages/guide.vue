@@ -33,6 +33,14 @@ const guideDefinitionConfigElSnapshot = useSimpleDescription(
 	`Other effects scale off of a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot a value they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Additionally, when you hover it you will see the underlying values currently used by the effect.`,
 );
 
+const tutorialApplyEffectSelectEffect = useSimpleDescription(
+	'tutorial-apply-effect-select-effect',
+	`Either find or search for ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and select any non-0 number of stacks. Then close close the dialog. You will see the applied effects' icons appear above the stats panel.`,
+);
+const tutorialApplyEffectChampionModified = useSimpleDescription(
+	'tutorial-apply-effect-champion-modified',
+	`At this point you should already see your champion's <attackspeed>%i:${STAT_ICON.attackSpeed}%attack speed</attackspeed> and <scalearmor>%i:${STAT_ICON.armor}%armor modified</scalearmor>. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You can make a copy of the champion you are working with on the other side of the <i>scoreboard</i> for easier comparison of the stats without the effects.`,
+);
 const tutorialExternalEffectExtraExample = useSimpleDescription(
 	'guide-tutorial-external-effect-extra-example',
 	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect.`,
@@ -99,8 +107,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			</dd>
 			<dt>scoreboard item (damage source/target)</dt>
 			<dd>
-				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest.
-				<strong>Note that the layout shifts considerably on small screens to fit everything</strong>
+				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest. A whole of champion and everything they can have configured
+				might be referred to as a <strong>source</strong>. <i>Note that the layout shifts considerably on small screens to fit everything</i>
 				<div class="tmp-image" />
 			</dd>
 			<dt id="config-element">config element</dt>
@@ -130,8 +138,8 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 					</dd>
 					<dt>results table section (results section)</dt>
 					<dd>
-						The <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added by selecting a section and pressing the
-						<b>"add"</b> button in the top left corner of the table
+						The <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added by selecting a section in the
+						<i>new section select</i> and pressing the <b>"add"</b> button in the top left corner of the table
 					</dd>
 					<dt>flip target vs source (flip results)</dt>
 					<dd>
@@ -142,7 +150,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			</dd>
 			<dt>champ select, item shop, runes dialog</dt>
 			<dd>All of these function roughly the same way their in-game counterparts do</dd>
-			<dt>effects dialog</dt>
+			<dt id="effects-dialog">effects dialog</dt>
 			<dd>
 				All effects currently implemented in <strong>lolcalc</strong> can be applied in the <i>effects dialog</i>, opened with the <b>"effects"</b> button found next to the <i>stats panel</i>. Inside, you will find
 				<i><NuxtLink to="#config-element">config elements</NuxtLink></i> of every effect. Effects that have been configured will be duplicated at the top of the dialog for quicker access
@@ -161,7 +169,27 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 		</button>
 		<details id="apply-external-effect">
 			<summary>applying external effects</summary>
-			<p>Effects can be applied using the <button>effects</button> button</p>
+			<p>
+				With a champion selected, press the <b>"effects"</b> button to open the <i><NuxtLink to="#effects-dialog">effects dialog</NuxtLink></i
+				>.
+			</p>
+			<!-- 2 images, first highlighting the effects button then second of the effects dialog -->
+			<div class="tmp-image" />
+			<p class="game-description" v-html="tutorialApplyEffectSelectEffect" />
+			<!-- image of the applied effect icons -->
+			<div class="tmp-image" />
+			<p class="game-description" v-html="tutorialApplyEffectChampionModified"></p>
+			<p class="alert info">
+				The effects can be quickly (but in limited manner) modified by clicking on their icons above the stat panel. Left click increments the effect's value, right click decrements it. Holding [<kbd>Ctrl</kbd>] while clicking changes the
+				value by +/- 10 (if possible).
+				<Icon class="i-ph:info" />
+			</p>
+			<p>
+				Few effects have their own <i>result sections</i>. If you scroll down to the <i>results table</i>, you should be able to find both effects in the <i>new section select</i>. Add both to see how much of their corresponding stats they
+				reduce on your configured champion.
+			</p>
+			<!-- image of both effect values in results -->
+			<div class="tmp-image" />
 			<p class="alert warning">
 				An effect set with the dedicated <i>config element</i> will override that same effect applied through the <i>effects dialog</i>, if it's set to a non-empty value.
 				<Icon class="i-ph:warning-light" />

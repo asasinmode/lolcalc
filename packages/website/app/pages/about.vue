@@ -178,6 +178,10 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			}
 		}
 
+		i {
+			--at-apply: 'text-neutral-400';
+		}
+
 		@media (width >= 1504px) {
 			> nav {
 				--at-apply: 'col-start-3 sticky inset-bs-[--fluid-12-32] row-start-1 -mbe-[calc(100%+var(--fluid-12-32))]';
