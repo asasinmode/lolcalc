@@ -2,10 +2,10 @@ import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import { championAbilityVariableValue, type IGameVariableValueParameters } from '@lolcalc/core/variables/game.ts';
 import type IOrianna from '@lolcalc/data/files/champion/Orianna.json';
 import type { IChampion } from '@lolcalc/data/types.ts';
-import { VariableType } from '@lolcalc/shared';
+import { EffectObjectName, VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
-import type { IDeriveProgressFn } from '../index.ts';
+import type { IDeriveProgressFn, IExtraOnValueUpdate } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 function passiveMaxStacks(self: DamageSource<'Orianna'>): number {
@@ -138,6 +138,12 @@ export default {
 	},
 	e: {
 		calculateResists: calculateEBonusResists,
+		onComponentUpdateValue: ((_value, self) => {
+			const effect = self.getEffect(EffectObjectName.oriannaETheBall)?.[0];
+			if (effect) {
+				effect.data.value[0] = 0;
+			}
+		}) as IExtraOnValueUpdate,
 		variables: defineChampionVariables<'Orianna', typeof IOrianna, 'e'>()({
 			meta: {
 				TotalDamageTooltip: {
@@ -169,8 +175,8 @@ export default {
 						calculatedVariables.totalBonusPercentMoveSpeed += ms * 0.01;
 					}
 				}
-				if (self.abilityLevels.value.e && self.internalData.value.applyEResists) {
-					const resists = calculateEBonusResists(self.champion.value!, self.abilityLevels.value.e);
+				if (self.internalData.value.applyEResists) {
+					const resists = calculateEBonusResists(self.champion.value!, self.abilityLevels.value.e || 1);
 					if (!Number.isNaN(resists)) {
 						championPassiveStats.armor = resists;
 						championPassiveStats.magicResist = resists;
