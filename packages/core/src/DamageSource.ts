@@ -1397,6 +1397,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		),
 	};
 
+	basicAttackHooks = {
+		item: computed((): IBasicAttackVarsHook[] => this.items.value.map((item) => (item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.basicAttackVars)!).filter(Boolean)),
+		// todo champion & effect hooks, return concated
+		all: computed((): IBasicAttackVarsHook[] => this.basicAttackHooks.item.value),
+	};
+
 	appliedEffectsModifyVariableFunctions = computed((): [VariableType, [IModifyVariableFunction, priority: number][]][] => {
 		const rv: [VariableType, [IModifyVariableFunction, priority: number][]][] = [];
 
@@ -2719,6 +2725,10 @@ export interface IEffectOntoTargetVarsHook<Id extends IChampionId | undefined = 
 
 export interface IDamageOutputVarsHook<Id extends IChampionId | undefined = any> {
 	(self: DamageSource<Id>, vars: IDamageOutputVars, damageTarget?: DamageSource): void;
+}
+
+export interface IBasicAttackVarsHook<Id extends IChampionId | undefined = any> {
+	(self: DamageSource<Id>, raw: IBasicAttackVars['raw'], damageTarget?: DamageSource): void;
 }
 
 export type IDamageSourceModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;

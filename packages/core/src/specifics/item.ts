@@ -11,7 +11,7 @@ import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IDamageOutputVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IDamageOutputVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData, IBasicAttackVarsHook } from '../DamageSource';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import type { DetectItemVariables } from '../types';
@@ -2998,6 +2998,9 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f4'],
 		}),
+		basicAttackVars(_self, vars) {
+			vars.magic += ITEMS_BY_NAME.witsEnd?.stats.FlatSpellBlockMod;
+		},
 	},
 	[ITEM_NAME_TO_ID.redemption]: {
 		internalDataProperties: ['aLevel'],
@@ -3074,6 +3077,16 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2'],
 		}),
+		basicAttackVars(self, vars) {
+			const computed = self.computed.items.value.find((item) => item?.item.id === ITEM_NAME_TO_ID.nashorsTooth);
+			const value = computed?.variables.get('TotalOnHitDamage' satisfies DetectItemVariables<(typeof ITEMS_BY_NAME)['nashorsTooth']>)?.baseValue;
+
+			if (typeof value === 'number') {
+				vars.magic += value;
+			} else {
+				console.warn("[ITEM_SPECIFICS nashor's tooth] failed to find TotalOnHitDamage", computed);
+			}
+		},
 	},
 	[ITEM_NAME_TO_ID.malignance]: {
 		internalDataProperties: ['hatefog'],
@@ -4395,6 +4408,7 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 		variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
 		effectOntoTargetVars?: IEffectOntoTargetVarsHook;
 		damageOutputVars?: IDamageOutputVarsHook;
+		basicAttackVars?: IBasicAttackVarsHook;
 		modifyVariable?: IItemModifyVariable[];
 		/**
 		 * called in `scripts/updateData`, if present the inventory text will be added/replaced based on the returned by this `textShop` (that's passed as the `value`)

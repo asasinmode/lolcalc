@@ -1,4 +1,4 @@
-import { type IChampionStats, type IEffectOntoTargetVars, type IDamageOutputVars, type IBasicAttackVars, VariableType } from '@lolcalc/shared';
+import { type IEffectOntoTargetVars, type IDamageOutputVars, type IBasicAttackVars, VariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
@@ -46,6 +46,7 @@ export function calculateSourceDamageOuputVars(self: DamageSource): IDamageOutpu
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 	const rv: IDamageOutputVars = {};
 
+	// store damage output vars in computed then loop over them here instead of every time this is reran
 	for (const item of self.items.value) {
 		item && (ITEM_SPECIFICS as Record<string, IItemSpecific>)[item.id]?.damageOutputVars?.(self, rv, self.calculationDamageTarget.value);
 	}
@@ -70,6 +71,11 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 		true: 0,
 		dps: 0,
 	};
+
+	for (const hook of self.basicAttackHooks.all.value) {
+		hook(self, raw, target);
+	}
+
 	raw.total = raw.physical + raw.magic + raw.true;
 	raw.dps = raw.total / totalStats.attackSpeed;
 
