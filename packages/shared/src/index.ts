@@ -1,3 +1,4 @@
+import type { IVariableModifyMeta } from '@lolcalc/core/variables/game';
 import type { IItemStat } from '@lolcalc/data/types';
 
 /** order should be preserved when new ones are added because it's used for stringifying the type - `champion` will become 0. If order were to be changed, it would probably be a breaking change to parsing & stringifying */
@@ -464,6 +465,17 @@ export interface IStatsCalculationEffectVars extends Pick<
 export interface IDamageOutputVars {
 	/** whether magic, true and adaptive (when it's magic) damage vars should be treated as crits from shadowflame */
 	shadowflameCrit?: boolean;
+}
+
+type IBasicAttackDamageType = 'physical' | 'magic' | 'true';
+
+export interface IBasicAttackVars {
+	raw: Record<'total' | IBasicAttackDamageType, number>;
+	meta: Record<IBasicAttackDamageType, IVariableModifyMeta>;
+	total: number;
+	physical: number;
+	magic: number;
+	true: number;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

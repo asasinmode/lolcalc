@@ -293,7 +293,7 @@ interface IGlobalModifyVariableFunction {
 	(value: number, meta: IVariableModifyMeta, self: DamageSource, damageTarget?: DamageSource): number;
 }
 
-const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVariableFunction>> = {
+export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, _meta, _self, damageTarget) {
 		return Math.max(CONSTS.minCCDuration, value * (1 - (damageTarget?.stats.value.total.tenacity ?? 0)));
 	},
@@ -306,6 +306,7 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVari
 	[VariableType.shield](value, _meta, self) {
 		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
 	},
+	/* used directly in the `sourceDamageBasicAttackVars`, will throw if doesn't exist */
 	[VariableType.magic](value, _meta, self, damageTarget) {
 		const { percentMagicPen, flatMagicPen } = self.stats.value.total;
 		const magicResist = damageTarget?.stats.value.total.magicResist ?? 0;
@@ -313,6 +314,7 @@ const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVari
 		const effectiveResists = Math.max(Math.min(magicResist, 0), magicResist * (1 - percentMagicPen) - flatMagicPen);
 		return value / (1 + effectiveResists / 100);
 	},
+	/* used directly in the `sourceDamageBasicAttackVars`, will throw if doesn't exist */
 	[VariableType.physical](value, _meta, self, damageTarget) {
 		const { percentArmorPen, lethality } = self.stats.value.total;
 		const armor = damageTarget?.stats.value.total.armor ?? 0;

@@ -3240,7 +3240,6 @@ export const ITEM_SPECIFICS = {
 			},
 			meta: {
 				ShieldAmountCalc: {
-					// TODO check if is reduced by shield reaver
 					type: VariableType.shield,
 				},
 				AttackDamageReduced: {

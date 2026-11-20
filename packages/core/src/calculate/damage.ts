@@ -1,7 +1,8 @@
-import type { IChampionStats, IEffectOntoTargetVars, IDamageOutputVars } from '@lolcalc/shared';
+import { type IChampionStats, type IEffectOntoTargetVars, type IDamageOutputVars, type IBasicAttackVars, VariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
+import { GLOBAL_MODIFY_VARIABLE_FNS } from '../specifics/index.ts';
 import type { IItemSpecific } from '../specifics/item.ts';
 import { ITEM_SPECIFICS } from '../specifics/item.ts';
 
@@ -52,14 +53,38 @@ export function calculateSourceDamageOuputVars(self: DamageSource): IDamageOutpu
 	return rv;
 }
 
-/** TODO basic aa calc? not sure about the interface yet */
-export function basicAttack() {
-	// stuff from championDamage
+export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVars {
+	const raw: IBasicAttackVars['raw'] = {
+		total: 0,
+		physical: 0,
+		magic: 0,
+		true: 0,
+	};
+	const meta: IBasicAttackVars['meta'] = {
+		physical: {},
+		magic: {},
+		true: {},
+	};
+	// stuff from calculateSourceDamageOuputVars
 	// kraken slayer
 	// check tiamat items damage
 	// randuin's omen
 	// warden's mail
 	// steelcaps/armored advance
+
+	const physical = GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value);
+	const magic = GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value);
+	const trueDmg = raw.true;
+	const total = physical + magic + trueDmg;
+
+	return {
+		raw,
+		meta,
+		physical,
+		magic,
+		true: trueDmg,
+		total,
+	};
 }
 
 export function calculateDamage(rawDamage: number, type: IDamageType, target: IDamageTarget, penetration: Pick<IChampionStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>): IDamageResults {

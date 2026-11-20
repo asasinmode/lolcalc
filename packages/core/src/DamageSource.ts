@@ -15,6 +15,7 @@ import type {
 	IStatsCalculationResult,
 	IStatsCalculationVariables,
 	VariableType,
+	IBasicAttackVars,
 } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_ABILITY_KEYS, ALL_CHAMPION_STATS, CHAMPION_STAT_META, EffectObjectName, RANGED_ONLY_ITEMS, UPGRADED_SUPPORT_ITEMS } from '@lolcalc/shared';
 import type { IChampionRole } from '@lolcalc/shared/types';
@@ -22,7 +23,7 @@ import { roundNumber } from '@lolcalc/shared/utils.ts';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import { computed, markRaw, ref, shallowRef, toRaw, triggerRef, watch } from 'vue';
 import { calculateChampionStats, isMasterworkSlot } from './calculate/championStats.ts';
-import { calculateEffectsOntoTargetVars, calculateSourceDamageOuputVars } from './calculate/damage.ts';
+import { sourceDamageBasicAttackVars, calculateEffectsOntoTargetVars, calculateSourceDamageOuputVars } from './calculate/damage.ts';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
 import type { IGameImageData } from './misc.ts';
@@ -83,6 +84,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	/** variables of effects applied onto the damage target, like slow applied onto target from this damage source's hextech soul */
 	effectsOntoTargetVars = computed((): IEffectOntoTargetVars => calculateEffectsOntoTargetVars(this));
 	damageOutputVars = computed((): IDamageOutputVars => calculateSourceDamageOuputVars(this));
+	basicAttackVars = computed((): IBasicAttackVars => sourceDamageBasicAttackVars(this));
 
 	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed((): boolean => runesEmpty(this.runes.value));
