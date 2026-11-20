@@ -4,6 +4,20 @@ This file is basically a to-do list of everything I thought might be cool to add
 
 Most of the features listed here aren't set in stone and may be discarded. If you'd like to suggest a feature, feel free to contact me/open a [discussion on github](https://github.com/asasinmode/lolcalc/discussions). Make sure it's not already listed here/mentioned on the [lolcalc about page](https://lolcalc.app/about#roadmap).
 
+## finish beta (first release)
+
+With these done, `v1.0.0` will release and the beta will end.
+
+- [ ] 🔨 champion abilities
+  - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
+  - [ ] extendedVariable values, resolve cooldown & cost
+  - [ ] aphelios abilities
+- [ ] keyboard navigation
+  - [ ] somehow right clicks, like clearing selects/removing items
+  - [ ] show hover tooltips when navigated to with keyboard
+  - [ ] skip links around busy areas (scoreboard, item shop?, results)
+- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
+
 ## definitely not planned ATM
 
 - combos, like full damage of a `Q + W + aa + aa + R`. Most likely will not be implemented, they are out of the scope for this project
@@ -11,14 +25,10 @@ Most of the features listed here aren't set in stone and may be discarded. If yo
 
 ## future features
 
-If something has 🔨 next to it, it's being worked on currently/will be worked on shortly.
+No clear timeline on any of these and order is random, more of a to-do list.
 
 ### game/feature related
 
-- [ ] 🔨 champion abilities
-  - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
-  - [ ] extendedVariable values, resolve cooldown & cost
-  - [ ] aphelios abilities
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
@@ -43,11 +53,6 @@ If something has 🔨 next to it, it's being worked on currently/will be worked 
 - [ ] explicit calculation formulas you can look at
 - [ ] color blind mode
 - [ ] alternative mode of configuration, step by step choose champion -> runes -> items -> level...
-- [ ] keyboard navigation
-  - [ ] somehow right clicks, like clearing selects/removing items
-  - [ ] show hover tooltips when navigated to with keyboard
-  - [ ] skip links around busy areas (scoreboard, item shop?, results)
-- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components like effects are
 
 ## more future features
@@ -62,9 +67,8 @@ Stuff I vaguely thought about but is definitely not being prioritized before the
 
 ## misc pages
 
-Additional, dedicated pages for
+Additional, dedicated pages I'd like to add
 
-- [ ] ornnaments stats + gold value
 - [ ] migrate & update [senna souls](https://asasinmode.github.io/lolmode/champions/senna-souls.html)
 - [ ] wave gold/xp at minute
 - [ ] champion & build guess recaptcha

@@ -8,7 +8,7 @@ If you are unsure about something, [open a discussion](discussions) on the proje
 
 ### features
 
-Currently the project has a clear roadmap for planned features. It can be found in the [website package's README](packages/website/README.md). If there's a feature not listed there that you'd like to see implemented, open a [discussion](discussions) for it first. Alternatively, feel free to fork the project and run it with any changes you want.
+Currently the project has a clear roadmap for planned features. It can be found in the [ROADMAP.md](ROADMAP.md). If there's a feature not listed there that you'd like to see implemented, open a [discussion](discussions) for it first. Alternatively, feel free to fork the project and run it with any changes you want.
 
 ### bug fixes
 
@@ -31,3 +31,31 @@ This project consists of 4 main packages + mini scripts package.
 - **scripts** self explanatory
 
 The overall structure is: _update data script_ pulls game data, _core package_ contains logic that turns that data into `DamageSources`, the _website_ is an interface for interacting with them.
+
+## scripts
+
+The root `scripts` directory contains the following
+
+### updateTestFixture
+
+Used for updating game data test fixtures with specific properties
+
+```sh
+node .\scripts\updateTestFixture.ts [patch] -i [item id or search query] -c [champion id]:[ability keys separated by commas] -d [dragon name]:[stack|soul] -e [effect object name]
+
+# add vladimir and his Q and passive
+node .\scripts\updateTestFixture.ts 16.16 -c Vladimir:passive,q
+
+# add shadowflame and randuin
+node .\scripts\updateTestFixture.ts 16.16 -i shadowflame -i 3143
+
+# add infernal stack & mountain soul
+node .\scripts\updateTestFixture.ts 16.16 -d infernal:stack -d mountain:stack
+
+# add ghost and botrk slow effects
+node .\scripts\updateTestFixture.ts 16.16 -e SummonerHaste -e 3153
+```
+
+### updateData
+
+TODO
