@@ -59,6 +59,7 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 		physical: 0,
 		magic: 0,
 		true: 0,
+		dps: 0,
 	};
 	const meta: IBasicAttackVars['meta'] = {
 		physical: {},
@@ -77,22 +78,26 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 		magic: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value),
 		true: raw.true,
 		total: 0,
+		dps: 0,
 	};
 	const crit: IBasicAttackVars['normal'] = {
 		physical: 1,
 		magic: 2,
 		true: 3,
 		total: 4,
+		dps: 0,
 	};
 	const average: IBasicAttackVars['normal'] = {
 		physical: 4,
 		magic: 3,
 		true: 2,
 		total: 1,
+		dps: 0,
 	};
 
 	for (const obj of [normal, crit, average]) {
 		obj.total = obj.physical + obj.magic + obj.true;
+		obj.dps = obj.total / 5;
 	}
 
 	return { raw, meta, normal, crit, average };

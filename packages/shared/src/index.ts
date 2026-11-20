@@ -467,14 +467,14 @@ export interface IDamageOutputVars {
 	shadowflameCrit?: boolean;
 }
 
-type IBasicAttackDamageType = 'physical' | 'magic' | 'true';
+type IBasicAttackDamageType = 'total' | 'physical' | 'magic' | 'true' | 'dps';
 
 export interface IBasicAttackVars {
-	raw: Record<'total' | IBasicAttackDamageType, number>;
-	meta: Record<IBasicAttackDamageType, IVariableModifyMeta>;
-	normal: Record<'total' | IBasicAttackDamageType, number>;
-	crit: Record<'total' | IBasicAttackDamageType, number>;
-	average: Record<'total' | IBasicAttackDamageType, number>;
+	raw: Record<IBasicAttackDamageType, number>;
+	meta: Record<Exclude<IBasicAttackDamageType, 'total' | 'dps'>, IVariableModifyMeta>;
+	normal: Record<IBasicAttackDamageType, number>;
+	crit: Record<IBasicAttackDamageType, number>;
+	average: Record<IBasicAttackDamageType, number>;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';

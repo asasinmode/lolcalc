@@ -6,7 +6,7 @@ import { IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion';
 import type { IVariableModifyMeta } from '@lolcalc/core/variables/game.js';
 import { ICON_GOLD, imgUrl, PATCH_VERSION, STAT_ICON } from '@lolcalc/data';
 import type { IDragonName } from '@lolcalc/data/types';
-import type { EffectObjectName, IChampionStatName } from '@lolcalc/shared';
+import type { EffectObjectName, IBasicAttackVars, IChampionStatName } from '@lolcalc/shared';
 import { AbilityType, ALL_CHAMPION_STATS_ENTRIES, ALL_VARIABLE_TYPES, CHAMPION_STAT_META } from '@lolcalc/shared';
 import { roundNumber } from '@lolcalc/shared/utils.js';
 import type { ShallowRef, ShallowReactive } from 'vue';
@@ -113,36 +113,42 @@ export function initCalculatorState(): ICalculatorState {
 			rows: [
 				{
 					name: 'total',
-					id: 'total',
+					id: 'total' satisfies keyof IBasicAttackVars['normal'],
 				},
 				{
 					name: 'physical damage',
-					id: 'physicalDamage',
+					id: 'physical' satisfies keyof IBasicAttackVars['normal'],
 				},
 				{
 					name: 'magic damage',
-					id: 'magicDamage',
+					id: 'magic' satisfies keyof IBasicAttackVars['normal'],
 				},
 				{
 					name: 'true damage',
-					id: 'trueDamage',
+					id: 'true' satisfies keyof IBasicAttackVars['normal'],
 				},
 				{
 					name: 'DPS',
-					id: 'dps',
+					id: 'dps' satisfies keyof IBasicAttackVars['normal'],
 				},
 			],
-			getCellValue() {
-				return { value: 'TODO' };
+			getCellValue(section, row, source) {
+				if (source) {
+					const value = source.basicAttackVars.value[section.selectValue as 'normal' | 'crit' | 'average'][row.id as keyof IBasicAttackVars['normal']];
+					return {
+						value,
+						numberValue: value,
+					};
+				}
 			},
 			selectValue: 'normal',
 			selectOptions: markRaw([
 				['normal', 'normal'],
-				['critical', 'critical'],
+				['crit', 'critical'],
 				['average', 'average'],
 			]),
 			selectLabel: 'attack type',
-			hoverTooltipData: useSimpleDescription('results-basic-attack', `TODO aa hover tooltip<br> <rules>the lolcalc will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
+			hoverTooltipData: useSimpleDescription('results-basic-attack', `TODO aa hover tooltip<br> <rules><b>lolcalc</b> will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
 		},
 		customTotal: {
 			id: ResultSectionId.CustomTotal,
