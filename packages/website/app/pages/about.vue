@@ -141,6 +141,11 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 				<NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank">open source</NuxtLink>). That said, hosting costs money and maintaining it takes a lot of my time and effort. Please consider
 				<NuxtLink to="#support">supporting the project</NuxtLink>
 			</dd>
+			<dt>discord? telegram? whatsapp group chat?</dt>
+			<dd>
+				These and other chat platforms are cool but anything discussed there doesn't show up when I google it. If you think other people might find whatever you want to discuss/need help with useful, open a
+				<NuxtLink to="https://github.com/asasinmode/lolcalc/discussions" target="_blank">discussion on the project's github page</NuxtLink>. You can message me directly as well, contact info at the bottom of the page.
+			</dd>
 		</dl>
 
 		<TextPageHeading id="privacy-policy" text="privacy policy" />
