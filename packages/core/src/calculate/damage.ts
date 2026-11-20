@@ -72,19 +72,30 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 	// warden's mail
 	// steelcaps/armored advance
 
-	const physical = GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value);
-	const magic = GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value);
-	const trueDmg = raw.true;
-	const total = physical + magic + trueDmg;
-
-	return {
-		raw,
-		meta,
-		physical,
-		magic,
-		true: trueDmg,
-		total,
+	const normal: IBasicAttackVars['normal'] = {
+		physical: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value),
+		magic: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value),
+		true: raw.true,
+		total: 0,
 	};
+	const crit: IBasicAttackVars['normal'] = {
+		physical: 1,
+		magic: 2,
+		true: 3,
+		total: 4,
+	};
+	const average: IBasicAttackVars['normal'] = {
+		physical: 4,
+		magic: 3,
+		true: 2,
+		total: 1,
+	};
+
+	for (const obj of [normal, crit, average]) {
+		obj.total = obj.physical + obj.magic + obj.true;
+	}
+
+	return { raw, meta, normal, crit, average };
 }
 
 export function calculateDamage(rawDamage: number, type: IDamageType, target: IDamageTarget, penetration: Pick<IChampionStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>): IDamageResults {

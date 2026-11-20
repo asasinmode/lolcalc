@@ -472,10 +472,9 @@ type IBasicAttackDamageType = 'physical' | 'magic' | 'true';
 export interface IBasicAttackVars {
 	raw: Record<'total' | IBasicAttackDamageType, number>;
 	meta: Record<IBasicAttackDamageType, IVariableModifyMeta>;
-	total: number;
-	physical: number;
-	magic: number;
-	true: number;
+	normal: Record<'total' | IBasicAttackDamageType, number>;
+	crit: Record<'total' | IBasicAttackDamageType, number>;
+	average: Record<'total' | IBasicAttackDamageType, number>;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
