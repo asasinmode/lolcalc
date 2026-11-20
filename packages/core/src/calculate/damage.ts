@@ -53,83 +53,65 @@ export function calculateSourceDamageOuputVars(self: DamageSource): IDamageOutpu
 	return rv;
 }
 
+// stuff from calculateSourceDamageOuputVars
+// kraken slayer
+// check tiamat items damage
+// randuin's omen
+// warden's mail
+// steelcaps/armored advance
 export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVars {
+	const target = self.calculationDamageTarget.value;
+	const { total: totalStats } = self.stats.value;
+
 	const raw: IBasicAttackVars['raw'] = {
 		total: 0,
-		physical: 0,
+		physical: totalStats.attackDamage,
 		magic: 0,
 		true: 0,
 		dps: 0,
 	};
+	raw.total = raw.physical + raw.magic + raw.true;
+	raw.dps = raw.total / totalStats.attackSpeed;
+
+	/** not used for anything currently, maybe also shouldn't be shared between different aa type calls */
 	const meta: IBasicAttackVars['meta'] = {
 		physical: {},
 		magic: {},
 		true: {},
 	};
-	// stuff from calculateSourceDamageOuputVars
-	// kraken slayer
-	// check tiamat items damage
-	// randuin's omen
-	// warden's mail
-	// steelcaps/armored advance
 
 	const normal: IBasicAttackVars['normal'] = {
-		physical: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value),
-		magic: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(raw.physical, meta.physical, self, self.calculationDamageTarget.value),
+		physical: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical, meta.physical, self, target),
+		magic: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(raw.magic, meta.magic, self, target),
 		true: raw.true,
 		total: 0,
 		dps: 0,
 	};
-	const crit: IBasicAttackVars['normal'] = {
-		physical: 1,
-		magic: 2,
-		true: 3,
-		total: 4,
+
+	const crit: IBasicAttackVars['crit'] = {
+		physical: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical * totalStats.critDamageMultiplier, meta.physical, self, target),
+		magic: normal.magic,
+		true: normal.true,
+		total: 0,
 		dps: 0,
 	};
-	const average: IBasicAttackVars['normal'] = {
-		physical: 4,
-		magic: 3,
-		true: 2,
-		total: 1,
+
+	const average: IBasicAttackVars['average'] = {
+		physical: normal.physical * (1 - totalStats.critChance) + crit.physical * totalStats.critChance,
+		magic: normal.magic,
+		true: normal.true,
+		total: 0,
 		dps: 0,
 	};
 
 	for (const obj of [normal, crit, average]) {
 		obj.total = obj.physical + obj.magic + obj.true;
-		obj.dps = obj.total / 5;
+		obj.dps = obj.total * totalStats.attackSpeed;
 	}
 
 	return { raw, meta, normal, crit, average };
 }
 
-export function calculateDamage(rawDamage: number, type: IDamageType, target: IDamageTarget, penetration: Pick<IChampionStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>): IDamageResults {
-	if (type === 'true') {
-		return { postMitigationDamage: rawDamage, effectiveResists: 0 };
-	}
-
-	const [resists, flatPen, percentPen] = type === 'physical' ? [target.stats.armor, penetration.lethality, penetration.percentArmorPen] : [target.stats.magicResist, penetration.flatMagicPen, penetration.percentMagicPen];
-
-	const effectiveResists = Math.max(0, resists * (1 - percentPen) - flatPen);
-	const postMitigationDamage = rawDamage / (1 + effectiveResists / 100);
-
-	return {
-		effectiveResists,
-		postMitigationDamage,
-	};
-}
-
 export function calculateResistPercentageReduction(resists: number): number {
 	return resists / (resists + 100);
-}
-
-interface IDamageResults {
-	postMitigationDamage: number;
-	effectiveResists: number;
-}
-
-type IDamageType = 'physical' | 'magical' | 'true';
-
-export interface IDamageTarget {
-	stats: Pick<IChampionStats, 'hp' | 'armor' | 'magicResist'>;
 }

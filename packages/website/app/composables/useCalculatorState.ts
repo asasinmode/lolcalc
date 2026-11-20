@@ -136,7 +136,7 @@ export function initCalculatorState(): ICalculatorState {
 				if (source) {
 					const value = source.basicAttackVars.value[section.selectValue as 'normal' | 'crit' | 'average'][row.id as keyof IBasicAttackVars['normal']];
 					return {
-						value,
+						value: roundNumber(value),
 						numberValue: value,
 					};
 				}
