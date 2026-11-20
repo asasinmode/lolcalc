@@ -8,7 +8,7 @@ If you are unsure about something, [open a discussion](discussions) on the proje
 
 ### features
 
-Currently the project has a clear roadmap for planned features. It can be found in the [ROADMAP.md](ROADMAP.md). If there's a feature not listed there that you'd like to see implemented, open a [discussion](discussions) for it first. Alternatively, feel free to fork the project and run it with any changes you want.
+Currently the project has a [list of planned features](ROADMAP.md). If there's a feature not listed there that you'd like to see implemented, open a [discussion](discussions) for it first. Alternatively, feel free to fork the project and run it with any changes you want.
 
 ### bug fixes
 
