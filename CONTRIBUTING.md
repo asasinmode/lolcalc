@@ -20,6 +20,10 @@ If the code produces a value different from what the game shows (and it doesn't 
 
 Both clankers and people can produce code that's fit for this project and one that isn't. If you spam the repository with the unwanted one, you will be blocked.
 
+### creating pull requests
+
+Pull requests are currently available only to collaborators. While you can't open one directly, if you have something ready to go you can always link to the fork with changes in an issue.
+
 ## project guide
 
 This project consists of 4 main packages + mini scripts package.
