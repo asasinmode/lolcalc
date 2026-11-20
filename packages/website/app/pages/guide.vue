@@ -47,6 +47,10 @@ const tutorialExternalEffectExtraExample = useSimpleDescription(
 	'guide-tutorial-external-effect-extra-example',
 	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect. Remember this if the result values don't look right, double check to make sure no unintended effect is being applied.`,
 );
+const tutorialBasicAttackDoubleCounting = useSimpleDescription(
+	'guide-tutorial-basic-attack-double-counting',
+	`Adding basic attack rows to <i>custom total</i> section (with the checkbox on the left) should be done carefully. The values shown here already include some of the variables you could independently sum. For example, if you add to <i>custom total</i> ${linkedFormattedItemImage('witsEnd', "Wit's End's")} <span class="code-like">OnHitDamage</span> and <i>basic attack total</i>, the <b>Wit's End's</b> damage would be double counted.`,
+);
 
 const exampleSpellCrit = useSimpleDescription(
 	'guide-example-shadowflame-ie-randuin',
@@ -235,9 +239,18 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 				<Icon class="i-ph:info" />
 			</p>
 		</details>
+		<details id="tutorial-custom-result-sections">
+			<summary>custom result sections</summary>
+			<p>There are 4 custom <i>result section</i> options. TODO describe each section, basic attack link to next tutorial</p>
+		</details>
+		<details id="tutorial-basic-attack">
+			<summary>basic attacks</summary>
+			<p class="game-description" v-html="tutorialBasicAttackDoubleCounting" />
+			TODO
+		</details>
 		<details>
 			<summary>Rell passive resist drain</summary>
-			<p>It's complicated</p>
+			<p>TODO it's complicated</p>
 		</details>
 
 		<TextPageHeading id="example-configurations" text="example configurations" />
