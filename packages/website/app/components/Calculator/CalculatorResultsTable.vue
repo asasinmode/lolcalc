@@ -2441,6 +2441,17 @@ defineExpose({
 					}
 				}
 			}
+
+			/* basic attack hover tooltip has a list of things included, style them */
+			#results-header-a-ba > div > .hover-tooltip {
+				ul {
+					--at-apply: 'flex';
+
+					li {
+						--at-apply: 'list-none m-0';
+					}
+				}
+			}
 		}
 
 		&:not([inert]) {

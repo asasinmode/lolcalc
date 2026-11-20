@@ -148,7 +148,10 @@ export function initCalculatorState(): ICalculatorState {
 				['average', 'average'],
 			]),
 			selectLabel: 'attack type',
-			hoverTooltipData: useSimpleDescription('results-basic-attack', `TODO aa hover tooltip<br> <rules><b>lolcalc</b> will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`),
+			hoverTooltipData: useSimpleDescription(
+				'results-basic-attack',
+				`Basic attack damage including every on-hit effect and modifier. Make sure to read its <a href="/guide#tutorial-basic-attack" target="_blank">guide page tutorial</a>. DPS is <var>total * attack speed</var><br><br> Calculations are currently being implemented, list of things included in the calculations:<ul><li>&lt;empty&gt;</li></ul><br> <rules><b>lolcalc</b> will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`,
+			),
 		},
 		customTotal: {
 			id: ResultSectionId.CustomTotal,
@@ -184,7 +187,7 @@ export function initCalculatorState(): ICalculatorState {
 			},
 			hoverTooltipData: useSimpleDescription(
 				'results-custom-value',
-				`This section lets you add custom values for some variable types.<br> For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a ${linkedFormattedChampionImage('Briar')} receives, factoring in her passive. Or add a <magicdamage>magic damage</magicdamage> value and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} passive) against column target's <scalemr>resists</scalemr>.
+				`This section lets you add custom values for some variable types. For example you could have a ${linkedFormattedItemImage('redemption')} <healing>heal</healing> value from a different champion that a ${linkedFormattedChampionImage('Briar')} receives, factoring in her passive. Or add a <magicdamage>magic damage</magicdamage> value and it will be calculated with column source's effects (like ${linkedFormattedItemImage('shadowflame', "Shadowflame's")} passive) against column target's <scalemr>resists</scalemr>.
 `,
 			),
 		},
