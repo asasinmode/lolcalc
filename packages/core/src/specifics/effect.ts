@@ -1455,6 +1455,7 @@ for (const [effectObjectName, effectSpecific] of Object.entries(EFFECT_SPECIFICS
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
 export type IHypotheticalEffectSpecifics = Record<EffectObjectName, IEffectSpecific<any>>;
 
+/** note that while most of the properties on a specific are meant to be for its component, not all of them have been connected yet. If something's not working as expected, make sure it's passed to the component */
 export interface IEffectSpecific<T extends (number | undefined)[] = [number]> {
 	sourceAbility: IGameAbilityId;
 	/** used when an effect is applied by multiple items, overrides `sourceAbility` when creating EFFECTS_APPLIED_BY_ITEMS_TO_TARGET */

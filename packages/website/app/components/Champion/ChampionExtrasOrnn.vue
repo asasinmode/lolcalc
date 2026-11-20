@@ -2,23 +2,37 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { CHAMPION_SPECIFICS } from '@lolcalc/core/specifics/champion';
-import { AbilityType } from '@lolcalc/shared';
+import { AbilityType, EffectObjectName } from '@lolcalc/shared';
 import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<IExtraComponentProps>();
 
 const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.passive.calculateMaxUpgradedAllies(props.damageSource));
 
-const SlotIndexComponent = enumExtra(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', [
-	[-1, '-1 (no amp, no masterwork item)'],
-	[0, '0 (+amp but no masterwork item)'],
-	[1, '1'],
-	[2, '2'],
-	[3, '3'],
-	[4, '4'],
-	[5, '5'],
-	[6, '6'],
-]);
+/* the `-1` value is set when the applied effect is  */
+const SlotIndexComponent = enumExtra(
+	GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
+	'masterworkItemSlot',
+	'Masterwork item slot',
+	[
+		[-1, '-1 (no amp, no masterwork item)'],
+		[0, '0 (+amp but no masterwork item)'],
+		[1, '1'],
+		[2, '2'],
+		[3, '3'],
+		[4, '4'],
+		[5, '5'],
+		[6, '6'],
+	],
+	{
+		onUpdate(_value, self) {
+			const effect = self.getEffect(EffectObjectName.ornnPLivingForge)?.[0];
+			if (effect) {
+				effect.data.value[0] = 0;
+			}
+		},
+	},
+);
 const UpgradedAlliesComponent = enumExtra(
 	GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
 	'passiveUpgradedAllies',

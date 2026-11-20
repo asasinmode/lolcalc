@@ -45,7 +45,7 @@ const tutorialApplyEffectChampionModified = useSimpleDescription(
 );
 const tutorialExternalEffectExtraExample = useSimpleDescription(
 	'guide-tutorial-external-effect-extra-example',
-	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect.`,
+	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect. Remember this if the result values don't look right, double check to make sure no unintended effect is being applied.`,
 );
 
 const exampleSpellCrit = useSimpleDescription(

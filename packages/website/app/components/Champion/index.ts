@@ -404,6 +404,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 					Object.entries(enumOptions).map(([key, value]) => [value, key]),
 					{
 						selectEffectSourceProps: effectSpecific.sourceControls,
+						onUpdate: effectSpecific.onValueUpdate,
 					},
 				)
 			: deriveProgressValue

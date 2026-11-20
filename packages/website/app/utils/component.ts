@@ -316,15 +316,17 @@ export function enumExtra<T extends IGameAbilityId>(
 	{
 		selectEffectSourceProps,
 		variantImgIndex,
+		onUpdate,
 	}: {
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		/** will be computed and watched, then passed to `gameAbilityImage` */
 		variantImgIndex?: IAbilityImgIndexGetter<any, any>;
+		onUpdate?: IExtraOnValueUpdate;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
-			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect, isEffect] = await extraComponentData(abilityId, property, props.damageSource, { variantImgIndex });
+			const [imgSrc, stringifiedAbilityId, modelValue, updateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { variantImgIndex, onUpdate });
 
 			const selectEffectSourceInvalidMessage = selectEffectSourceProps?.invalidMessage && computed(() => appliedEffect?.value?.source.value && selectEffectSourceProps.invalidMessage(appliedEffect?.value?.source.value));
 			function updateEffectSource(value?: DamageSource) {
