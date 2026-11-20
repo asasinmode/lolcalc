@@ -11,6 +11,10 @@ export default defineNuxtConfig({
 	future: {
 		compatibilityVersion: 5,
 	},
+	prerender: {
+		/* should be saved to remove when moving off of github pages */
+		ignore: ['/lolcalc/'],
+	},
 	vite: {
 		build: {
 			target: 'esnext',
