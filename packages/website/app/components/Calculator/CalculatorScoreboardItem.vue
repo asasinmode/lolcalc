@@ -53,6 +53,7 @@ const emit = defineEmits<{
 	itemListDrop: [event: DragEvent, slotIndex: number | undefined];
 	itemDragstart: [event: DragEvent, slotIndex: number];
 	mounted: [];
+	roleQuestFocused: [];
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
@@ -845,6 +846,11 @@ function updateRoleQuest(value?: IChampionRole) {
 	!value && hideQuestTooltip();
 }
 
+function onRoleQuestFocusIn() {
+	emit('role-quest-focused');
+	tutorialEvent('roleQuestFocused', { damageSource: props.value.id });
+}
+
 const roleQuestDescription = computed(() => {
 	if (!props.value.roleQuest.value) {
 		return;
@@ -1399,7 +1405,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<div class="role-quest-dragons" :inert="value.isLoading.value">
-				<section ref="roleQuest" class="role-quest" data-text="role quest" @focusin="tutorialEvent('roleQuestFocused', { damageSource: value.id })">
+				<section ref="roleQuest" class="role-quest" data-text="role quest" @focusin="onRoleQuestFocusIn">
 					<h4>role quest</h4>
 					<VSelect
 						:id="`${idSuffix}-role-quest`"

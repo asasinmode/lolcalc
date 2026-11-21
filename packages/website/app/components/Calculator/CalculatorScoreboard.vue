@@ -1,6 +1,7 @@
 <script setup vapor lang="ts">
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';
+import { imgUrl, MISC } from '@lolcalc/data';
 import type { IItem } from '@lolcalc/data/types';
 
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -301,6 +302,15 @@ onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateSmallScreenScrollX);
 	separateGroupLayoutMQ?.removeEventListener('change', notifyTutorialLayoutChanged);
 });
+
+let roleQuestImagesLoaded = false;
+
+function loadRoleQuestImages() {
+	if (!roleQuestImagesLoaded) {
+		roleQuestImagesLoaded = true;
+		useLoadImages(Object.keys(MISC.roleQuests).flatMap((quest) => [imgUrl(`game/assets/ux/lol/rolequest_icon${quest}_complete.png`), imgUrl(`game/assets/ux/lol/rolequest_icon${quest}32.png`)]));
+	}
+}
 </script>
 
 <template>
@@ -346,6 +356,7 @@ onBeforeUnmount(() => {
 					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
 					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
+					@role-quest-focused="loadRoleQuestImages"
 				/>
 				<li>
 					<button class="pretend-ui-btn" :disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value" @click="add(damageSources)">add damage source</button>
@@ -386,6 +397,7 @@ onBeforeUnmount(() => {
 					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
 					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
+					@role-quest-focused="loadRoleQuestImages"
 				/>
 				<li>
 					<button class="pretend-ui-btn" :disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value" @click="add(damageTargets)">add damage target</button>
