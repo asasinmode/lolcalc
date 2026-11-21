@@ -169,7 +169,7 @@ export async function simpleDescriptionFormatting(text: string, addAlt?: boolean
 
 function formatImageHtml(imageInfo: any, addAlt?: boolean, textureSize = 20) {
 	if (Array.isArray(imageInfo)) {
-		return `<img src="${imageInfo[0]}" width="${imageInfo[1]}" height="${imageInfo[2] ?? imageInfo[1]}"${addAlt ? ` alt="${imageInfo[3] ?? 'unknown'} icon"` : ''}>`;
+		return `<img src="${imageInfo[0]}" width="${imageInfo[1]}" height="${imageInfo[2] ?? imageInfo[1]}"${addAlt ? ` title="${imageInfo[3] ?? 'unknown'}" alt="${imageInfo[3] ?? 'unknown'} icon"` : ''}>`;
 	} else {
 		const nameAttr = imageInfo.abilityName ?? imageInfo.championName ?? imageInfo.name ?? 'unknown';
 		return `<img ${Object.entries(textureBgImageAttrs(imageInfo, textureSize))
