@@ -847,7 +847,7 @@ function updateRoleQuest(value?: IChampionRole) {
 }
 
 function onRoleQuestFocusIn() {
-	emit('role-quest-focused');
+	emit('roleQuestFocused');
 	tutorialEvent('roleQuestFocused', { damageSource: props.value.id });
 }
 
