@@ -1,6 +1,7 @@
+import { IMPLEMENTED_BASIC_ATTACK_THINGS } from '@lolcalc/core/calculate/damage';
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
-import { linkedFormattedItemImage, linkedFormattedChampionImage } from '@lolcalc/core/misc';
+import { linkedFormattedItemImage, linkedFormattedChampionImage, simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import type { IGameImageData } from '@lolcalc/core/misc';
 import { IMPLEMENTED_CHAMPION_IDS } from '@lolcalc/core/specifics/champion';
 import type { IVariableModifyMeta } from '@lolcalc/core/variables/game.js';
@@ -150,7 +151,7 @@ export function initCalculatorState(): ICalculatorState {
 			selectLabel: 'attack type',
 			hoverTooltipData: useSimpleDescription(
 				'results-basic-attack',
-				`Basic attack damage including every on-hit effect and modifier. Make sure to read its <a href="/guide#tutorial-basic-attack" target="_blank">guide page tutorial</a>. DPS is <var>total * attack speed</var><br><br> Calculations are currently being implemented, list of things included in the calculations:<ul><li>&lt;empty&gt;</li></ul><br> <rules><b>lolcalc</b> will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`,
+				`Basic attack damage including every on-hit effect and modifier. Make sure to read its <a href="/guide#tutorial-basic-attack" target="_blank">guide page tutorial</a>. DPS is <var>total * attack speed</var><br><br> Calculations are currently being implemented, list of things included in the calculations:<ul>${IMPLEMENTED_BASIC_ATTACK_THINGS.map((id) => `<li>${simpleFormattingGameAbilityImage(id)}</li>`).join('')}</ul><br> <rules><b>lolcalc</b> will enter beta version once auto attack damage is calculated for all champion and item passives</rules>`,
 			),
 		},
 		customTotal: {

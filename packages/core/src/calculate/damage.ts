@@ -1,5 +1,8 @@
-import { type IEffectOntoTargetVars, type IDamageOutputVars, type IBasicAttackVars, VariableType } from '@lolcalc/shared';
+import type { IEffectOntoTargetVars, IDamageOutputVars, IBasicAttackVars } from '@lolcalc/shared';
+import { AbilityType, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
+import { GameAbilityId } from '../GameAbilityId.ts';
+import type { IGameAbilityId } from '../GameAbilityId.ts';
 import type { IHypotheticalDragonSpecifics } from '../specifics/dragon.ts';
 import { DRAGON_SPECIFICS } from '../specifics/dragon.ts';
 import { GLOBAL_MODIFY_VARIABLE_FNS } from '../specifics/index.ts';
@@ -117,6 +120,8 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 
 	return { raw, meta, normal, crit, average };
 }
+
+export const IMPLEMENTED_BASIC_ATTACK_THINGS: IGameAbilityId[] = [GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.witsEnd), GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.nashorsTooth)];
 
 export function calculateResistPercentageReduction(resists: number): number {
 	return resists / (resists + 100);
