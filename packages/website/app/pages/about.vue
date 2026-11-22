@@ -77,7 +77,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<li class="game-description" v-html="discrepancyBloodmailRetribution" />
 		</ul>
 
-		<TextPageHeading id="implemented-champions" text="implemented champions" />
+		<TextPageHeading id="implemented-champions" :text="`implemented champions (${IMPLEMENTED_CHAMPION_IDS.length}/${Object.keys(CHAMPIONS).length - 1})`" />
 		<p>
 			These champions have been fully implemented so far. All of their abilities' passives are expected to calculate correctly and their variables in the <i>results table</i> should factor in things like target resists or item passives.
 		</p>
