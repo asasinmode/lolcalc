@@ -1,7 +1,7 @@
 <script setup vapor lang="ts">
 import { DamageSource } from '@lolcalc/core/DamageSource';
 import { itemBuyability } from '@lolcalc/core/specifics/item';
-import { imgUrl, MISC } from '@lolcalc/data';
+import { imgUrl, MISC, UI } from '@lolcalc/data';
 import type { IItem } from '@lolcalc/data/types';
 
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -304,11 +304,19 @@ onBeforeUnmount(() => {
 });
 
 let roleQuestImagesLoaded = false;
+let dragonImagesLoaded = false;
 
 function loadRoleQuestImages() {
 	if (!roleQuestImagesLoaded) {
 		roleQuestImagesLoaded = true;
 		useLoadImages(Object.keys(MISC.roleQuests).flatMap((quest) => [imgUrl(`game/assets/ux/lol/rolequest_icon${quest}_complete.png`), imgUrl(`game/assets/ux/lol/rolequest_icon${quest}32.png`)]));
+	}
+}
+
+function loadDragonImages() {
+	if (!dragonImagesLoaded) {
+		dragonImagesLoaded = true;
+		useLoadImages([imgUrl(`game/${UI.dragons.Chemtech.stack.spriteSheet}`)]);
 	}
 }
 </script>
@@ -357,6 +365,7 @@ function loadRoleQuestImages() {
 					@item-list-dragleave="onItemDragLeave"
 					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
 					@role-quest-focused="loadRoleQuestImages"
+					@dragons-focused="loadDragonImages"
 				/>
 				<li>
 					<button class="pretend-ui-btn" :disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value" @click="add(damageSources)">add damage source</button>
@@ -398,6 +407,7 @@ function loadRoleQuestImages() {
 					@item-list-dragleave="onItemDragLeave"
 					@item-list-drop="(event, slotIndex) => onItemDrop(event, value, slotIndex)"
 					@role-quest-focused="loadRoleQuestImages"
+					@dragons-focused="loadDragonImages"
 				/>
 				<li>
 					<button class="pretend-ui-btn" :disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value" @click="add(damageTargets)">add damage target</button>

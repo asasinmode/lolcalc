@@ -24,8 +24,6 @@ pnpm generate
 
 ### before submitting to riot
 
-- [ ] fetch images for buttons after load when chilling
-  - [ ] dragons
 - [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
 - [ ] actualizer, might need separate in/out going heal & shield
 - [ ] minimal basic attack damage implementation

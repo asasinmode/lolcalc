@@ -54,6 +54,7 @@ const emit = defineEmits<{
 	itemDragstart: [event: DragEvent, slotIndex: number];
 	mounted: [];
 	roleQuestFocused: [];
+	dragonsFocused: [];
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
@@ -851,6 +852,11 @@ function onRoleQuestFocusIn() {
 	tutorialEvent('roleQuestFocused', { damageSource: props.value.id });
 }
 
+function onDragonsFocusIn() {
+	emit('dragonsFocused');
+	tutorialEvent('dragonsFocused', { damageSource: props.value.id });
+}
+
 const roleQuestDescription = computed(() => {
 	if (!props.value.roleQuest.value) {
 		return;
@@ -1427,7 +1433,7 @@ defineExpose({ el });
 						<UnresolvedVariablesAlert v-show="roleQuestDescription?.anyUnknown" />
 					</article>
 				</section>
-				<section ref="dragons" class="dragons" @focusin="tutorialEvent('dragonsFocused', { damageSource: value.id })">
+				<section ref="dragons" class="dragons" @focusin="onDragonsFocusIn">
 					<h4>dragons</h4>
 					<VSelect
 						v-for="i in 4"
