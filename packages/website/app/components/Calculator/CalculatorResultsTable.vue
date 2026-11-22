@@ -519,7 +519,7 @@ function submitResultsSection(event: SubmitEvent) {
 	const ability = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!.abilities[Number.parseInt(rawAbilityIndex!)]!;
 	const section = addResultsSection(ability.id, ability.name);
 	debouncedSaveState();
-	section && nextTick(() => tutorialEvent('resultsSectionAdded', { resultSection: section.id }));
+	section && nextTick(() => tutorialEvent('resultsSectionAdded', { resultSection: section.id }, section));
 }
 
 /** to be used for removing a section that was eagerly added but during full resolve turned out to be incorrect */

@@ -1,8 +1,10 @@
 import { simpleDescriptionFormatting, linkedFormattedItemImage } from '@lolcalc/core/misc';
 import { EFFECT_SPECIFICS } from '@lolcalc/core/specifics/effect.ts';
 import type { IHypotheticalEffectSpecifics } from '@lolcalc/core/specifics/effect.ts';
+import { AbilityType } from '@lolcalc/shared/index';
 import { CHAMPION_COMPONENTS } from '~/components/Champion/index.ts';
 import type { ITutorialStepId, TutorialEvents } from '~/utils/tutorial';
+import type { IDamageResultTableSection } from '~/utils/types';
 
 type ITutorialStepTriggers = {
 	[K in ITutorialEvent]?: true | ((data: TutorialEvents[K], calculatorState: ICalculatorState) => boolean);
@@ -264,9 +266,9 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		type: 'resultSection',
 		text: 'result sections have modified hover tooltips<span class="touch-only"> (long press section title to show them)</span>. Values that can be compared (like an ability\'s <magicdamage>magic damage</magicdamage>) have their names displayed instead and the values for each <i>column source</i> can be found below<br> <rules>The names of the <i>variables</i> are currently extracted from game data. Row names might not make what they are describing obvious, reference where they are in the tooltip to make sense of them</rules>',
 		anchor: "th[scope='colgroup'] > [data-tooltip-trigger]",
-		pendingIf: (calculatorState) => !!calculatorState.resultSections.length,
+		pendingIf: (calculatorState) => calculatorState.resultSections.some(isSectionWithTooltipableHoverTooltip),
 		showOn: {
-			resultsSectionAdded: true,
+			resultsSectionAdded: isSectionWithTooltipableHoverTooltip,
 		},
 	},
 	resultColumns: {
@@ -333,4 +335,9 @@ export const TUTORIAL_STEP_PRIORITIES = Object.fromEntries(
 
 function anySourceWithAppliedEffects(state: ICalculatorState) {
 	return state.damageSources.some((source) => source.appliedEffects.value.length) || state.damageTargets.some((source) => source.appliedEffects.value.length);
+}
+
+/** the section hover tooltip tutorial step only makes sense for sections with variable names */
+function isSectionWithTooltipableHoverTooltip(section: IDamageResultTableSection): boolean {
+	return section.abilityId.type === AbilityType.champion || section.abilityId.type === AbilityType.item;
 }

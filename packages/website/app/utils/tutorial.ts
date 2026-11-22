@@ -2,6 +2,7 @@ import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type { IChampionId } from '@lolcalc/data/types.ts';
 import type { EffectObjectName } from '@lolcalc/shared';
 import { shallowRef } from 'vue';
+import type { IDamageResultTableSection } from './types';
 
 /** map of step id to step kind, where `0` means guided, `1` means general. Also the order in which they will be shown */
 export const tutorialStepKinds = {
@@ -72,7 +73,7 @@ export interface TutorialEvents {
 	resultsColumnAdded: void;
 	resultsColumnRemoved: void;
 	resultsColumnMoved: void;
-	resultsSectionAdded: void;
+	resultsSectionAdded: IDamageResultTableSection;
 	/** moved/removed */
 	resultsSectionAdjusted: void;
 	flipResultsEntered: void;
