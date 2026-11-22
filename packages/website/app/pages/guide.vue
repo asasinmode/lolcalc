@@ -58,7 +58,7 @@ const exampleSpellCrit = useSimpleDescription(
 );
 const example2026WorldsAkali = useSimpleDescription(
 	'guide-example-2026-worlds-akali',
-	`during his costream LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
+	`during his costream, LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
 );
 
 const qaItemsScalingWithLevels = useSimpleDescription(
@@ -264,18 +264,16 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 					to="/?v=1&src=8_1_4645_0__000_841_2_0000_00000_______&src=8_1_4645-3031_0__000_841_2_0000_00000_______&tgt=-1_1__0___1000_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1__0___97_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___1350_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tgt=-1_1_3143_0___199_500_1111_00000___1000*500*0*0*0*0*0*0*0*0*0*200*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0*0____&tblCol=1-0&tblCol=1-1&tblCol=1-2&tblCol=1-3&tblSct=0-8-1-0_1&tblSct=a-stats_&tblSct=a-ba_1&tblSct=a-cTtl_1"
 					target="_blank"
 				>
-					spell crit
-				</NuxtLink>
-				- <span class="game-description" v-html="exampleSpellCrit" />
+					spell crit</
+				NuxtLink> - <span class="game-description" v-html="exampleSpellCrit" />
 			</li>
 			<li>
 				<NuxtLink
 					to="/?v=1&src=84_18_3157-4645-3152-3135-3173-1082_0__000_3088_200_0000_00000___0*0*0_glory-2___2&src=84_18_3157-4645-3152-3089-3173-1082_0__000_3088_200_0000_00000___0*0*0_glory-2___2&tgt=887_20_3157-4633-2510-3111-1058_0___3532_1116_0000_00000_______0&tgt=56_17_6631-3026-3073-3155-3111_0___3254_825_0000_00000____sBShockwave-100___&tgt=4_18_3157-3100-3094-6657-2065-3173_0___2890_1796_0000_00000____eternity-10___2&tgt=804_18_3156-3033-6672-2523-3085-3008_0___2460_1040_0000_00000____slay-7___3&tgt=518_13_3152-3110-3158-1057-3067-3869_0___2499_1178_0000_00000_______4&tblCol=0-0&tblCol=1-0&tblCol=0-1&tblCol=1-1&tblCol=0-2&tblCol=1-2&tblCol=0-3&tblCol=1-3&tblCol=0-4&tblCol=1-4&tblSct=a-cTtl_1&tblSct=0-84-4-0_1&tblSct=0-84-1-0_1&tblSct=0-84-3-0_1&tblSct=0-84-0-0_1&tblCTtl=3-1*3-0*2-0*1-0*1-2*1-1*4-1"
 					target="_blank"
 				>
-					worlds 2026 finals Akali Rabadon vs Void Staff
-				</NuxtLink>
-				- <span class="game-description" v-html="example2026WorldsAkali" />
+					worlds 2026 finals Akali Rabadon vs Void Staff</
+				NuxtLink> - <span class="game-description" v-html="example2026WorldsAkali" />
 			</li>
 		</ul>
 
