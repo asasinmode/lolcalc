@@ -1,7 +1,7 @@
 import type { IVariableModifyMeta } from '@lolcalc/core/variables/game';
 import type { IItemStat } from '@lolcalc/data/types';
 
-/** order should be preserved when new ones are added because it's used for stringifying the type - `champion` will become 0. If order were to be changed, it would probably be a breaking change to parsing & stringifying */
+/** order should be preserved when new ones are added because it's used for stringifying the type - `champion` will become 0. If order changes, the lolcalc string state version must be updated */
 export const AbilityType = {
 	champion: 'champion',
 	item: 'item',
@@ -815,6 +815,7 @@ export const GRIEVOUS_WOUND_ITEMS = [
 /**
  * `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
  * `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`
+ * @note the order of the keys here is used for stringifying effects. If it changes, the lolcalc string state version must be updated
  *
  * for finding either
  *		1. in game, when the effect is applied check the its text
@@ -853,6 +854,17 @@ export const EffectObjectName = {
 	bloodsongSpellbladed: 'lolcalc3877Spellbladed',
 	seryldaBitterCold: 'lolcalc6694BitterCold',
 	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
+	/* other */
+	ghost: 'summonerHaste',
+	cleanse: 'summonerCleanse',
+	heal: 'summonerHeal',
+	exhaust: 'summonerExhaust',
+	grievousWounds: 'lolcalcGrievousWounds',
+	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
+	stun: 'lolcalcStun',
+	slowFlat: 'lolcalcSlowFlat',
+	slowPercent: 'lolcalcSlowPercent',
+	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 	/* champion passives */
 	apheliosGravitumSlow: 'ApheliosGravitumDebuff' /* effects dialog targets its element to round the img borders based on this value, update if it changes */,
 	ashePFrostShot: 'AshePassiveSlow',
@@ -868,17 +880,6 @@ export const EffectObjectName = {
 	lissandraPIcebornSubjugation: 'lolcalcLissandraPassive',
 	oriannaWMS: 'OrianaDissonanceAlly',
 	oriannaETheBall: 'OrianaGhost',
-	/* other */
-	ghost: 'summonerHaste',
-	cleanse: 'summonerCleanse',
-	heal: 'summonerHeal',
-	exhaust: 'summonerExhaust',
-	grievousWounds: 'lolcalcGrievousWounds',
-	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
-	stun: 'lolcalcStun',
-	slowFlat: 'lolcalcSlowFlat',
-	slowPercent: 'lolcalcSlowPercent',
-	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 } as const;
 
 export type EffectObjectName = (typeof EffectObjectName)[keyof typeof EffectObjectName];
