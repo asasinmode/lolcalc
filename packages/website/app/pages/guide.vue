@@ -168,7 +168,13 @@ const applyXOnTargetStepConfigs = {
 				</dl>
 			</dd>
 			<dt>champ select, item shop, runes dialog</dt>
-			<dd>All of these function roughly the same way their in-game counterparts do</dd>
+			<dd>
+				All of these function roughly the same way their in-game counterparts do. One difference is that the item tooltips have an additional functionality. Some of them, when hovered, in the footer at the bottom have text saying
+				<b>"Press [<kbd>Ctrl</kbd>] to switch to Shop/Inventory view"</b>. As the text suggests, in game the tooltips are slightly different based on whether you are hovering them from the scoreboard or your inventory vs when you look at
+				them in the item shop. This lets you swap between the two whenever you feel like.
+				<!-- image of the same item shop vs inventory view -->
+				<div class="tmp-image" />
+			</dd>
 			<dt id="effects-dialog">effects dialog</dt>
 			<dd>
 				All effects currently implemented in <strong>lolcalc</strong> can be applied in the <i>effects dialog</i>, opened with the <b>"effects"</b> button found next to the <i>stats panel</i>. Inside, you will find
