@@ -48,7 +48,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	beforeYouStart: {
 		title: 'avoid skill issues',
 		type: 'global',
-		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press [<kbd>K</kbd>] to pin a tooltip that's currently visible (not needed on phones)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
+		text: "<li>if you're using a phone, long press something to show its tooltip (if it has one)</li> <li>press [<kbd>K</kbd>] to pin a tooltip that's currently visible (not needed on touch screens)</li><li>change page's zoom using <kbd>ctrl +/-</kbd> to find the scale you like best</li>",
 		pendingIf: () => true,
 	},
 	openChampSelect: {

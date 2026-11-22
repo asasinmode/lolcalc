@@ -32,7 +32,7 @@ const guideDefinitionConfigElSource = useSimpleDescription(
 );
 const guideDefinitionConfigElSnapshot = useSimpleDescription(
 	'guide-definition-config-el-snapshow',
-	`Other effects scale off of a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot a value they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Additionally, when you hover it you will see the underlying values currently used by the effect.`,
+	`Other effects scale with a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot what they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Hovering (or long pressing on phone) the buttons shows the underlying values currently used by the effect.`,
 );
 
 const tutorialApplyEffectSelectEffect = useSimpleDescription(
@@ -95,14 +95,14 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 				always update 1:1 with the value
 			</li>
 			<li>drag <i>scoreboard items</i> by their champion images or manipulate buttons (the arrows for moving it)</li>
-			<li>items can be dragged between damage sources</li>
+			<li>items can be dragged between <i>damage sources</i></li>
 			<li>hold alt while dragging an item or a <i>scoreboard item</i> to duplicate it when dropped</li>
 			<li>right click an item, dragon stack/soul, role quest or ability levels to clear them</li>
 		</ul>
 
 		<TextPageHeading id="ui-guide" text="UI guide" />
 		<p>
-			List and short description of the <strong>lolcalc</strong> UI elements. Throughout the website, they will be referred to by the names shown here. The next section, <b>tutorials</b>, has more hands-on guides that showcase their usage.
+			List and short description of the <strong>lolcalc</strong> UI elements. Throughout the website, they will be referred to by the names used here. The next section, <b>tutorials</b>, has more hands-on guides that showcase their usage.
 		</p>
 		<dl>
 			<dt>configuration scoreboard</dt>
@@ -114,7 +114,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<dt>scoreboard item (damage source/target)</dt>
 			<dd>
 				The elements inside the <i>scoreboard</i>. They have everything pertaining to a champion - their level, abilities, items, runes, active effects, dragons and role quest. A whole of champion and everything they can have configured
-				might be referred to as a <strong>source</strong>. <i>Note that the layout shifts considerably on small screens to fit everything</i>
+				might be referred to as a <i>source</i>. <i>Note that the layout shifts considerably on small screens to fit everything</i>
 				<div class="tmp-image" />
 			</dd>
 			<dt id="config-element">config element</dt>
@@ -122,7 +122,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 				<p>
 					These appear both in <i>scoreboard items</i> and the <i>effects dialog</i>. If an ability, item or an effect can be configured (and is implemented, beware that most champion abilities are not as of now), a dedicated
 					<i>config element</i> will appear at the bottom of a <i>scoreboard item</i>. These could be grouped into 2 categories. Ones that directly affect the <i>source</i> they are on, and ones that affect the <i>target</i> the source will
-					be hitting. For the latter, the effects will be visible in the <i>results</i>. Read the <NuxtLink to="#apply-x-on-target">apply x on target</NuxtLink> tutorial section for more details
+					be hitting. For the latter, the effects will be visible in the <i>results</i>. Read the <NuxtLink to="#apply-x-on-target">apply x on target</NuxtLink> tutorial for more details
 				</p>
 				<!-- image showcasing different kinds of config els -->
 				<div class="tmp-image" />
@@ -138,19 +138,19 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 				<dl>
 					<dt>results table column (results column)</dt>
 					<dd>
-						The <i>results table</i> allows for adding multiple columns. Each of these can contain a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs
+						The <i>results table</i> lets you add any number of columns. Each one has a <i>damage source</i> and a <i>damage target</i>. The values in the columns are displayed for the respective column's <i>source</i> vs
 						(hitting)
 						<i>target</i>
 					</dd>
 					<dt>results table section (results section)</dt>
 					<dd>
-						The <i>results table</i> can display variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added by selecting a section in the
+						In the table you can compare variables found in any number of things like <b>items</b>, <b>champion abilities</b>, <b>effects</b> and <b>runes</b> (coming soon). These can be added by selecting a section in the
 						<i>new section select</i> and pressing the <b>"add"</b> button in the top left corner of the table
 					</dd>
 					<dt>flip target vs source (flip results)</dt>
 					<dd>
 						In the top left corner of the table there's a checkbox saying <b>"flip target vs source"</b>. It can be very useful, but might be a bit unintuitive. Make sure to read its tooltip and the
-						<NuxtLink to="#apply-x-on-target">guide showcasing using it</NuxtLink>.
+						<b><NuxtLink to="#apply-x-on-target">"apply X on target"</NuxtLink></b> guide that showcases using it.
 					</dd>
 				</dl>
 			</dd>
