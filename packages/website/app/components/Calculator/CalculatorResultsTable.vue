@@ -30,10 +30,6 @@ import { gameImageAttrs } from '~/utils/image';
 import { tutorialEvent } from '~/utils/tutorial';
 import type { IChampionAbilityHoverTooltipProps, ICustomTotalSectionRow, IDamageResultTableColumn, IDamageResultTableSection, IDamageResultTableSectionRow, IDamageResultTableSectionCustomValueRow } from '~/utils/types';
 
-defineProps<{
-	showResults: boolean;
-}>();
-
 const { damageSources, damageTargets, resultSections, resultColumns, expandedSections, resultsTableFlip: flipResults, customTotalRowIds, computedCustomTotalRows, restoreSavedCustomTotalRows, customSections } = useCalculatorState();
 const { debouncedSaveState } = useManageCalculatorState();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = CHAMPION_IMAGES;
@@ -1436,7 +1432,7 @@ defineExpose({
 
 <template>
 	<ClientOnly>
-		<table id="results-table" :inert="!showResults" :aria-busy="anyColumnsLoading" :data-flip-results="flipResults || undefined">
+		<table id="results-table" :aria-busy="anyColumnsLoading" :data-flip-results="flipResults || undefined">
 			<caption>
 				comparison table
 			</caption>
@@ -1490,7 +1486,7 @@ defineExpose({
 										</option>
 									</optgroup>
 								</select>
-								<button id="add-section" class="pretend-ui-btn" :class="{ 'rotating-glow': showResults && !resultSections.length }" type="submit" :disabled="!damageSectionOptions.length">add</button>
+								<button id="add-section" class="pretend-ui-btn" :class="{ 'rotating-glow': !resultSections.length }" type="submit" :disabled="!damageSectionOptions.length">add</button>
 							</form>
 						</div>
 					</td>
@@ -1844,7 +1840,7 @@ defineExpose({
 			</tfoot>
 		</table>
 		<template #fallback>
-			<table id="results-table" inert>
+			<table id="results-table">
 				<caption>
 					comparison table
 				</caption>
@@ -1933,11 +1929,6 @@ defineExpose({
 		--section-header-row-pb: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
 		--manipulate-icon-size: calc(5.5 * var(--spacing));
-
-		&[inert],
-		&[inert] > caption {
-			--at-apply: 'blur-3';
-		}
 
 		> caption {
 			--at-apply: 'sr-only';
@@ -2454,11 +2445,9 @@ defineExpose({
 			}
 		}
 
-		&:not([inert]) {
-			> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
-			> tbody[aria-labelledby] > tr > td.highlighted {
-				background-image: linear-gradient(to right, oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.12), oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.12));
-			}
+		> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
+		> tbody[aria-labelledby] > tr > td.highlighted {
+			background-image: linear-gradient(to right, oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.12), oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.12));
 		}
 
 		> thead > tr:nth-child(2) > td,

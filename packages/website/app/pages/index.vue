@@ -42,8 +42,7 @@ defineExpose({ resultsTable });
 		<section id="results">
 			<h2 id="results-header">results</h2>
 			<div id="results-table-scroll-wrapper">
-				<p v-show="!showResults">configure a damage source to view results</p>
-				<CalculatorResultsTable ref="resultsTable" :show-results />
+				<CalculatorResultsTable ref="resultsTable" />
 			</div>
 		</section>
 	</main>
