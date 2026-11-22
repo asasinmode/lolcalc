@@ -139,8 +139,8 @@ onMounted(() => {
 					for (const v of value) {
 						v && params.append(key, v.toString());
 					}
-				} else if (value) {
-					params.set(key, value.toString());
+				} else {
+					params.set(key, value?.toString() ?? '');
 				}
 			}
 		}
