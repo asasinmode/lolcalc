@@ -88,15 +88,15 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 
 		<TextPageHeading id="qol-tips" text="qol tips" />
 		<ul>
-			<li>pin a tooltip by pressing [<kbd>K</kbd>] when hovering over it</li>
-			<li>scoreboard items can be expanded/collapsed by double clicking the background. The same works for result sections but you need to click on their headers</li>
+			<li>pin a tooltip by pressing [<kbd>K</kbd>] when it's visible</li>
+			<li><i>scoreboard items</i> can be expanded/collapsed by double clicking the background. The same works for <i>result sections</i> but you need to click on their header row</li>
 			<li>
 				in/decrement an effect's value from scoreboard by left/right clicking its icon. Holding [<kbd>Ctrl</kbd>] while doing so changes the value by 10 (when possible). Note that the text that's displayed on some effect icons might not
 				always update 1:1 with the value
 			</li>
-			<li>drag scoreboard items by their champion images or manipulate buttons (the arrows for moving it)</li>
+			<li>drag <i>scoreboard items</i> by their champion images or manipulate buttons (the arrows for moving it)</li>
 			<li>items can be dragged between damage sources</li>
-			<li>hold alt while dragging item/scoreboard item to duplicate it when dropped</li>
+			<li>hold alt while dragging an item or a <i>scoreboard item</i> to duplicate it when dropped</li>
 			<li>right click an item, dragon stack/soul, role quest or ability levels to clear them</li>
 		</ul>
 
