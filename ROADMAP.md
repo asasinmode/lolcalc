@@ -8,7 +8,7 @@ Most of the features listed here aren't set in stone and may be discarded. If yo
 
 With these done, `v1.0.0` will release and the beta will end.
 
-- [ ] 🔨 champion abilities
+- [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
   - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] aphelios abilities

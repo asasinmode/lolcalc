@@ -166,8 +166,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 
 		<TextPageHeading id="tutorials" text="tutorials" />
 		<p>
-			Below you can find some step by step guides to doing things in <strong>lolcalc</strong>. Additionally, you can use the "reset tutorial" button to do <i>you-won't-guess-what</i> (will take effect when you visit the
-			<NuxtLink to="/">main page</NuxtLink>)
+			A few step by step guides to doing things in <strong>lolcalc</strong>. Additionally, you can use the "reset tutorial" button to do <i>you-won't-guess-what</i> (will take effect when you visit the <NuxtLink to="/">main page</NuxtLink>)
 		</p>
 		<button id="reset-tutorial" class="pretend-ui-btn remove" @click="resetTutorial" aria-live="polite">
 			<span>reset tutorial</span>
@@ -254,7 +253,7 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 		</details>
 
 		<TextPageHeading id="example-configurations" text="example configurations" />
-		<p>Below you will find a list of configurations that could be interesting to look at. It's rather short for now but more entries will be added as I come across anything worth sharing.</p>
+		<p>A couple of configurations that could be interesting to look at. It's rather short for now, but more entries will be added as I come across things worth sharing.</p>
 		<p>
 			Note that the links to the configurations will be for the current patch. The results shown may not be applicable to the situation they are for anymore. Right now the only way to view <strong>lolcalc</strong> for a different patch
 			version is to run the source code yourself. Either an older version of it, or with manually updated underlying values.
@@ -284,21 +283,20 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 		<dl>
 			<dt>how can I save multiple configurations?</dt>
 			<dd>
-				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>Share</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
+				At the moment the recommended way is to, after setting one up, copy the url in the browser (or use the <b>"Share"</b> button) and save it in a notepad or something similar. Then you should be able to revisit it whenever. Adding a
 				built-in way of managing multiple configurations is planned, see the <NuxtLink to="/about#roadmap">roadmap</NuxtLink>.
 			</dd>
 			<dt>there's an ability that slows, but it doesn't have a thing I can click</dt>
 			<dd>
-				There are a lot of slows in the game and they vary only be strength and duration. A few common ones have a dedicated element for applying them - mostly items and champion passives. Adding all would be too much work (for now).
-				<strong>Arbitrary slow values can be applied in the <i>effects dialog</i>.</strong>
+				There are a lot of slows in the game and they vary mostly by strength and duration. A few common ones have a dedicated <i>config element</i> for applying them - mostly items and champion passives. Adding them for every slow would be too much work (for now). <strong>Arbitrary slow values can be applied in the <i>effects dialog</i>.</strong>
 			</dd>
-			<dt>Azir/Zeri/Xayah/others ability levels</dt>
+			<dt>Azir/Zeri/Xayah ability levels</dt>
 			<dd>
 				These and other champions start with a specific ability leveled on level 1, or cannot level an ability X until they leveled ability Y (<NuxtLink
 					to="https://wiki.leagueoflegends.com/en-us/Champion_ability#Ranking_order_&_rules"
 					target="_blank"
 					>wiki</NuxtLink
-				>). As of right now, <strong>lolcalc</strong> doesn't implement these ability level restrictions and adding them is not planned.
+				>). At the moment <strong>lolcalc</strong> doesn't implement these restrictions and adding them is not a priority.
 			</dd>
 			<dt>how can I delete the last results column?</dt>
 			<dd>It's a puzzle.</dd>
