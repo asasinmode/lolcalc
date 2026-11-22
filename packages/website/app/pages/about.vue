@@ -235,7 +235,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'list-decimal';
 		}
 
-		ol, ul:not(nav > ul) {
+		ol,
+		ul:not(nav > ul) {
 			> li {
 				--at-apply: 'ms-5';
 			}
@@ -245,12 +246,15 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			}
 		}
 
-		p + ul, p + ol {
+		p + ul,
+		p + ol {
 			--at-apply: 'mbs-[1em]';
 		}
 
 		> p + p,
 		> dl p + p,
+		ul + p,
+		ol + p,
 		> details > p + p {
 			--at-apply: 'mbs-[1em]';
 		}
