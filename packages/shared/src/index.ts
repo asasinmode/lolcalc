@@ -830,6 +830,17 @@ export const GRIEVOUS_WOUND_ITEMS = [
  *		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
  */
 export const EffectObjectName = {
+	/* other */
+	ghost: 'summonerHaste',
+	cleanse: 'summonerCleanse',
+	heal: 'summonerHeal',
+	exhaust: 'summonerExhaust',
+	grievousWounds: 'lolcalcGrievousWounds',
+	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
+	stun: 'lolcalcStun',
+	slowFlat: 'lolcalcSlowFlat',
+	slowPercent: 'lolcalcSlowPercent',
+	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 	/* items */
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
@@ -854,17 +865,6 @@ export const EffectObjectName = {
 	bloodsongSpellbladed: 'lolcalc3877Spellbladed',
 	seryldaBitterCold: 'lolcalc6694BitterCold',
 	gunbladeLightningBolt: 'lolcalc3146LightningBolt',
-	/* other */
-	ghost: 'summonerHaste',
-	cleanse: 'summonerCleanse',
-	heal: 'summonerHeal',
-	exhaust: 'summonerExhaust',
-	grievousWounds: 'lolcalcGrievousWounds',
-	grievousWoundsPercent: 'lolcalcGrievousWoundsPercent',
-	stun: 'lolcalcStun',
-	slowFlat: 'lolcalcSlowFlat',
-	slowPercent: 'lolcalcSlowPercent',
-	hextechSoulSlow: 'SRX_DragonSoulBuffHextech_Slow',
 	/* champion passives */
 	apheliosGravitumSlow: 'ApheliosGravitumDebuff' /* effects dialog targets its element to round the img borders based on this value, update if it changes */,
 	ashePFrostShot: 'AshePassiveSlow',
