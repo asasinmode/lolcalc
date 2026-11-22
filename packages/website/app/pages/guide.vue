@@ -32,16 +32,16 @@ const guideDefinitionConfigElSource = useSimpleDescription(
 );
 const guideDefinitionConfigElSnapshot = useSimpleDescription(
 	'guide-definition-config-el-snapshow',
-	`Other effects scale with a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot what they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Hovering (or long pressing on phone) the buttons shows the underlying values currently used by the effect.`,
+	`Other effects scale with a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot what they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Hovering (or long pressing when using a touch device) the buttons shows the underlying values currently used by the effect.`,
 );
 
 const tutorialApplyEffectSelectEffect = useSimpleDescription(
 	'tutorial-apply-effect-select-effect',
-	`Either find or search for ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and set a non-0 number of stacks. Then close close the dialog. You will see the applied effects' icons appear above the stats panel.`,
+	`Either search for or find ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and set a non-0 number of stacks. Close the dialog and the applied effects' icons will appear above the stats panel.`,
 );
 const tutorialApplyEffectChampionModified = useSimpleDescription(
 	'tutorial-apply-effect-champion-modified',
-	`At this point you should already see your champion's <attackspeed>%i:${STAT_ICON.attackSpeed}%attack speed</attackspeed> and <scalearmor>%i:${STAT_ICON.armor}%armor modified</scalearmor>. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You can make a copy of the champion you are working with on the other side of the <i>scoreboard</i> for easier comparison of the stats without the effects.`,
+	`At this point, the champion's modified <attackspeed>%i:${STAT_ICON.attackSpeed}%attack speed</attackspeed> and <scalearmor>%i:${STAT_ICON.armor}%armor</scalearmor> should already be visible. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the other side of the <i>scoreboard</i> for easier comparison. `,
 );
 const tutorialExternalEffectExtraExample = useSimpleDescription(
 	'guide-tutorial-external-effect-extra-example',
@@ -66,12 +66,16 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 	`Some items, like ${linkedFormattedItemImage('solariLocket')}, ${linkedFormattedItemImage('immortalShieldbow')} or ${linkedFormattedItemImage('redemption')}, in their description show their current value and the min/max it goes to depending on the champion level. As of patch 26.17, all of them have been tested to scale up to level 20 (that can be reached with the top lane role quest). If you see something like <span class="code-like">Restore <healing>374 = (<scalelevel>150 - 350</scalelevel>) (ally %i:${STAT_ICON.level}%) Health</healing></span>, while it looks weird, it's normal.`,
 );
 
+const applyExternalEffectsStepConfigs = {
+	sourceWithEffects: '/?v=1&src=31_1__0___644_270_0000_00000___0___15*1l21*2_',
+	targetForComparison: '/?v=1&src=31_1__0___644_270_0000_00000___0___15*1l21*2_&tgt=31_1__0___644_270_0000_00000___0____'
+}
+
 const applyXOnTargetStepConfigs = {
 	serpentSource: '/?v=1&src=799_1_6695_0___650_0_0000_00000____sVenom-1___',
 	configuredTarget: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___',
 	configuredColumns: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&tblCol=0-0&tblCol=-0',
 	addedSterakSection: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&tblCol=0-0&tblCol=-0&tblSct=1-3053_1',
-	// TODO flip table is lost when opening
 	resultsFlipped: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&flpTbl=&tblCol=0-0&tblCol=-0&tblSct=1-3053_1',
 	sourceStatsAttackSpeed: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&tblCol=0-0&tblCol=-0&tblSct=a-stats_1'
 }
@@ -184,25 +188,27 @@ const applyXOnTargetStepConfigs = {
 		</button>
 		<details>
 			<summary id="apply-external-effect">applying external effects</summary>
-			<p>
-				With a champion selected, press the <b>"effects"</b> button to open the <i><NuxtLink to="#effects-dialog">effects dialog</NuxtLink></i
-				>.
-			</p>
-			<!-- 2 images, first highlighting the effects button then second of the effects dialog -->
-			<div class="tmp-image" />
-			<p class="game-description" v-html="tutorialApplyEffectSelectEffect" />
-			<!-- image of the applied effect icons -->
-			<div class="tmp-image" />
-			<p class="game-description" v-html="tutorialApplyEffectChampionModified"></p>
-			<p class="alert info">
-				The effects can be quickly (but in limited manner) modified by clicking on their icons above the stat panel. Left click increments the effect's value, right click decrements it. Holding [<kbd>Ctrl</kbd>] while clicking changes the
-				value by +/- 10 (if possible).
-				<Icon class="i-ph:info" />
-			</p>
-			<p>
-				Few effects have their own <i>result sections</i>. If you scroll down to the <i>results table</i>, you should be able to find both effects in the <i>new section select</i>. Add both to see how much of their corresponding stats they
-				reduce on your configured champion.
-			</p>
+			<ol>
+				<li>Select a champion, then press the <b>"effects"</b> button to open the <i>effects dialog</i>.</li>
+				<li>
+					<span class="game-description" v-html="tutorialApplyEffectSelectEffect" /> <NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
+					<!-- configured effects in the effects dialog -->
+					<div class="tmp-image" />
+				</li>
+				<li>
+					<span class="game-description" v-html="tutorialApplyEffectChampionModified"  />
+					<NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
+					<p class="alert info">
+						The effects can be quickly (but in limited manner) modified by clicking on their icons above the stat panel. Left click increments the effect's value, right click decrements it. Holding [<kbd>Ctrl</kbd>] while clicking changes the
+						value by +/- 10 (if possible).
+						<Icon class="i-ph:info" />
+					</p>
+				</li>
+				<li>
+					A few effects have their own <i>result sections</i>. If you scroll down to the <i>results table</i>, you should be able to find both <b>Winter's Caress</b> and <b>Carve</b> in the <i>new section select</i>. Add both to see how much of their corresponding stats they
+					reduce on your configured champion.
+				</li>
+			</ol>
 			<!-- image of both effect values in results -->
 			<div class="tmp-image" />
 			<p class="alert warning">
@@ -234,7 +240,7 @@ const applyXOnTargetStepConfigs = {
 					In the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <b>Serpent's Fang</b> and the <i>target</i> set to the one with <b>Frozen Heart</b> and <b>Sterak's Gage</b>. Additionally, add a second column and set <u>only its target</u> to the same one the first column has. <NuxtLink :to="applyXOnTargetStepConfigs.configuredColumns" target="_blank">config</NuxtLink>
 				</li>
 				<li>
-						Use the <i>new section select</i> to add <b>Sterak's Gage</b>. <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink>
+						<p>Use the <i>new section select</i> to add <b>Sterak's Gage</b>. <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink></p>
 						<!-- results with 2 columns and sterak section -->
 						<div class="tmp-image" />
 						<p>
@@ -278,7 +284,7 @@ const applyXOnTargetStepConfigs = {
 		</details>
 
 		<TextPageHeading id="example-configurations" text="example configurations" />
-		<p>A couple of configurations that could be interesting to look at. It's rather short for now, but more entries will be added as I come across things worth sharing.</p>
+		<p>A couple of configurations that could be interesting to look at. The list is rather short for now. More entries will be added as I come across things worth sharing.</p>
 		<p>
 			Note that the links to the configurations will be for the current patch. The results shown may not be applicable to the situation they are for anymore. Right now the only way to view <strong>lolcalc</strong> for a different patch
 			version is to run the source code yourself. Either an older version of it, or with manually updated underlying values.

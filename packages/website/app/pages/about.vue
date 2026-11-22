@@ -180,7 +180,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			}
 
 			> ul {
-				--at-apply: 'ps-3 ms-2 b-s b-neutral-700';
+				--at-apply: 'ps-3 ms-2 b-s b-neutral-700 list-none';
 			}
 		}
 
@@ -235,7 +235,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'list-decimal';
 		}
 
-		ol, ul {
+		ol, ul:not(nav > ul) {
 			> li {
 				--at-apply: 'ms-5';
 			}
