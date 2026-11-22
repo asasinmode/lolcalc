@@ -65,6 +65,16 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 	'guide-qa-items-scaling-with-levels',
 	`Some items, like ${linkedFormattedItemImage('solariLocket')}, ${linkedFormattedItemImage('immortalShieldbow')} or ${linkedFormattedItemImage('redemption')}, in their description show their current value and the min/max it goes to depending on the champion level. As of patch 26.17, all of them have been tested to scale up to level 20 (that can be reached with the top lane role quest). If you see something like <span class="code-like">Restore <healing>374 = (<scalelevel>150 - 350</scalelevel>) (ally %i:${STAT_ICON.level}%) Health</healing></span>, while it looks weird, it's normal.`,
 );
+
+const applyXOnTargetStepConfigs = {
+	serpentSource: '/?v=1&src=799_1_6695_0___650_0_0000_00000____sVenom-1___',
+	configuredTarget: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___',
+	configuredColumns: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&tblCol=0-0&tblCol=-0',
+	addedSterakSection: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&tblCol=0-0&tblCol=-0&tblSct=1-3053_1',
+	// TODO flip table is lost when opening
+	resultsFlipped: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&flpTbl=&tblCol=0-0&tblCol=-0&tblSct=1-3053_1',
+	sourceStatsAttackSpeed: '/?v=1&src=799_1_6695_0___630_200_0000_00000___0_sVenom-1___&tgt=_1_3110-3053_0___400_400_0000_00000____wCaress-1___&tblCol=0-0&tblCol=-0&tblSct=a-stats_1'
+}
 </script>
 
 <template>
@@ -206,35 +216,50 @@ const qaItemsScalingWithLevels = useSimpleDescription(
 			<summary id="apply-x-on-target">"apply X on target" items or abilities and "flip results"</summary>
 			<p>
 				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for
-				<i>source</i> or <i>target</i>, it's important to note that <strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i>, won't apply that effect onto the source,
-				regardless of if the results are flipped
+				<i>source</i> or <i>target</i>, it's important to note that
 			</p>
-			<p>For example, both <b>Serpent's Fang</b> and <b>Frozen Heart</b> allow for applying its effect to the target. If you were to</p>
+			<p class="alert info">
+				<strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i> won't apply that effect onto the source, regardless of if the results are flipped
+				<Icon class="i-ph:info" />
+			</p>
+			<p>For example, both <b>Serpent's Fang</b> and <b>Frozen Heart</b> allow for applying its effect to the target. If you were to:</p>
 			<ol>
-				<li>configure a <i>damage source</i> with any champion and <b>Serpent's Fang</b>, then check the <b>apply Shield Reave on target</b></li>
-				<li>configure a <i>damage target</i> with <b>Frozen Heart</b> and <b>Sterak's Gage</b> (so we can see reduced shield value), then similarly check <b>apply Winter's Caress</b></li>
-				<li>in the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <b>Serpent's Fang</b> and the <i>target</i> set to the one with <b>Frozen Heart</b> and <b>Sterak's Gage</b></li>
-				<li>use the <i>add section</i> form to add <b>Sterak's Gage</b></li>
+				<li>Configure a <i>damage source</i> with any champion and <b>Serpent's Fang</b>, then check the <b>"apply Serpent's Venom on target"</b>. <NuxtLink :to="applyXOnTargetStepConfigs.serpentSource" target="_blank">config</NuxtLink></li>
 				<li>
-					while the <i>flip results</i> is <u>unchecked</u>, the <span class="code-like">ShieldSize</span> variable's value will be <span class="code-like">n/a</span> as the results are being shown for our <i>damage source</i>, which only
-					has Serpent's Fang
+					Configure a <i>damage target</i> with <b>Frozen Heart</b> and <b>Sterak's Gage</b> (so we can see reduced shield value), then check its <b>"apply Winter's Caress on target"</b>. <NuxtLink :to="applyXOnTargetStepConfigs.configuredTarget" target="_blank">config</NuxtLink>
+					<!-- image of both source and the target configured, maybe source in its own image in first step if hard to see -->
+						<div class="tmp-image" />
 				</li>
 				<li>
-					now <u>check</u> the <i>flip results</i> in the top left corner and the displayed <span class="code-like">ShieldSize</span> value is the one <strong>reduced</strong> by the <i>damage target's</i> <b>Serpent's Fang</b>. If you
-					scroll back up to the <i>configuration scoreboard</i> and uncheck the <b>apply Shield Reave on target</b> you should see the <span class="code-like">ShieldSize</span> change to its base value
+					In the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <b>Serpent's Fang</b> and the <i>target</i> set to the one with <b>Frozen Heart</b> and <b>Sterak's Gage</b>. Additionally, add a second column and set <u>only its target</u> to the same one the first column has. <NuxtLink :to="applyXOnTargetStepConfigs.configuredColumns" target="_blank">config</NuxtLink>
 				</li>
 				<li>
-					finally, <u>uncheck</u> the <i>flip results</i> checkbox and find and expand the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row and the value there should be the same as the one in the
-					<i>stats panel</i> of our configured <i>damage source</i>, even though the <i>target</i> has <b>Frozen Heart</b> with its passive, <b>Winter's Caress</b> checked to apply
+						Use the <i>new section select</i> to add <b>Sterak's Gage</b>. <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink>
+						<!-- results with 2 columns and sterak section -->
+						<div class="tmp-image" />
+						<p>
+							While the <i>flip results</i> is <u>unchecked</u>, the <span class="code-like">ShieldSize</span> variable's value in the first column will be <span class="code-like">n/a</span>, as the results are being shown for the <i>damage source</i>, which only has <b>Serpent's Fang</b>. In the second column, the value will be <span class="code-like">-</span> as it has no <i>source</i> set.
+						</p>
+				</li>
+				<li>
+					<u>Check</u> the <i>flip results</i> in the top left corner. The value of <span class="code-like">ShieldSize</span> in the first column with <b>Serpent's Fang</b> will be smaller than the one in the second. The first column has a <i>source</i> actively applying <b>Serpent's Venom</b>, the second is the original, unmodified <b>Lifeline</b> shield. <NuxtLink :to="applyXOnTargetStepConfigs.resultsFlipped" target="_blank">config</NuxtLink>
+						<!-- same image as the previous one but flipped, hovering over the shieldsize var -->
+						<div class="tmp-image" />
+				</li>
+				<li>
+					Finally, <u>uncheck</u> the <i>flip results</i> checkbox, then add the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row. The value it shows is the same one the
+					<i>stats panel</i> of the configured <i>damage source</i> has, even though the <i>target</i> has <b>Frozen Heart's</b> passive checked to apply. <NuxtLink :to="applyXOnTargetStepConfigs.sourceStatsAttackSpeed" target="_blank">config</NuxtLink>
+						<!-- only stats section scrolled to attack speed, arrow pointing to ambesa having the same -->
+						<div class="tmp-image" />
 				</li>
 			</ol>
 			<p>
 				Again, this is because <strong>applying an effect on target works only in one direction</strong>. <i>Source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against. <i>Target's</i> "apply
-				X to target" are ignored, even with <i>table results</i> are flipped.
+				X to target" are ignored, even with <i>table results</i> flipped.
 			</p>
 			<p class="alert info">
-				<span id="tutorial-apply-x-takeaway">think of <i>flip target vs source</i> as a quick look into what the target looks like while being hit by the source.</span>
-				For example if your <i>source</i> applies <b>Winter's Caress</b>, flip results and check the <b>stats</b> section to see the <i>target's</i> reduced attack speed
+				<span id="tutorial-apply-x-takeaway">Think of <i>flip target vs source</i> as a quick look into what the target looks like while being hit by the source.</span>
+				For example if your <i>source</i> applies <b>Winter's Caress</b>, flip the results and check the <b>stats</b> section to see the <i>target's</i> reduced attack speed
 				<Icon class="i-ph:info" />
 			</p>
 		</details>

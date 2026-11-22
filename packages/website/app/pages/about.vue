@@ -227,9 +227,15 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'font-mono text-white bg-slate-900 px-1 py-0.5 -mx-0.5 -my-0.5 rounded-sm';
 		}
 
-		> ul {
+		ul {
 			--at-apply: 'list-disc';
+		}
 
+		ol {
+			--at-apply: 'list-decimal';
+		}
+
+		ol, ul {
 			> li {
 				--at-apply: 'ms-5';
 			}
@@ -239,7 +245,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			}
 		}
 
-		> p + ul {
+		p + ul, p + ol {
 			--at-apply: 'mbs-[1em]';
 		}
 

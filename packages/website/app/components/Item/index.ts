@@ -105,7 +105,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart), 'wCaress', "Winter's Caress", undefined, true),
 	},
 	[ITEM_NAME_TO_ID.serpentsFang]: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang), 'sVenom', 'Shield Reave', undefined, true),
+		extras: booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang), 'sVenom', "Serpent's Venom", undefined, true),
 	},
 	[ITEM_NAME_TO_ID.rylaisScepter]: {
 		extras: booleanExtra(GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.rylaisScepter), 'rimefrost', 'Rimefrost', undefined, true),
