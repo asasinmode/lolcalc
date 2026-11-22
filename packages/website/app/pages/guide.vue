@@ -254,7 +254,7 @@ const applyXOnTargetStepConfigs = {
 				</li>
 			</ol>
 			<p>
-				Again, this is because <strong>applying an effect on target works only in one direction</strong>. <i>Source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against. <i>Target's</i> "apply
+				Again, this is because <strong>applying an effect on target works only in one direction</strong>. A <i>source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against. <i>Target's</i> "apply
 				X to target" are ignored, even with <i>table results</i> flipped.
 			</p>
 			<p class="alert info">
