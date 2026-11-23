@@ -3583,7 +3583,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					f2: {
-						value: self.stats.value.variables.dawncoreAp === undefined ? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen : self.stats.value.variables.dawncoreAp,
+						value: self.stats.value.variables.dawncoreAp ?? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.APPerManaRegen,
 						calculatesFrom: [
 							{
 								stat: 'manaRegen',
@@ -3594,7 +3594,7 @@ export const ITEM_SPECIFICS = {
 						],
 					},
 					f3: {
-						value: self.stats.value.variables.dawncoreHsp === undefined ? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen : self.stats.value.variables.dawncoreHsp,
+						value: self.stats.value.variables.dawncoreHsp ?? self.stats.value.variables.baseItemManaRegenPercent * ITEMS_BY_NAME.dawncore?.dataValues.HSPowerPerManaRegen,
 						calculatesFrom: [
 							{
 								stat: 'manaRegen',
@@ -3618,7 +3618,12 @@ export const ITEM_SPECIFICS = {
 		}),
 		calculateHooks: {
 			preItemTotal: {
-				handler(_self, { itemBaseStats }, { calculatedVariables }) {
+				handler(self, { itemBaseStats }, { calculatedVariables }) {
+					if (!self.hasMana.value) {
+						calculatedVariables.dawncoreAp = 0;
+						calculatedVariables.dawncoreHsp = 0;
+						return;
+					}
 					const { APPerManaRegen, HSPowerPerManaRegen } = ITEMS_BY_NAME.dawncore?.dataValues ?? {};
 					calculatedVariables.dawncoreAp = APPerManaRegen * calculatedVariables.baseItemManaRegenPercent;
 					calculatedVariables.dawncoreHsp = HSPowerPerManaRegen * calculatedVariables.baseItemManaRegenPercent;
