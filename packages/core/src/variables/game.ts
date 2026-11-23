@@ -726,7 +726,7 @@ export function replaceGameVariables(
 
 			const baseValue = [isV1Number ? roundNumber((variable[0] as number) * multiplier) : variable[0], isV2Number ? roundNumber((variable[1] as number) * multiplier) : variable[1]] as [string | number, string | number];
 
-			if (modifyVariableFns) {
+			if (modifyVariableFns?.length) {
 				if (isV1Number) {
 					variable[0] = modifyVariableFns.reduce((acc, modify) => modify(acc as number, modifyMeta) as number, variable[0]!);
 				} else {
@@ -766,7 +766,7 @@ export function replaceGameVariables(
 
 		const baseValue = roundNumber(variable * multiplier);
 
-		if (modifyVariableFns) {
+		if (modifyVariableFns?.length) {
 			variable = modifyVariableFns.reduce((acc, modify) => modify(acc, modifyMeta) as number, variable);
 		}
 

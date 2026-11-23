@@ -97,7 +97,8 @@ export const HOOK_PRIORITIES = {
 /* same as hook priorities - higher = runs later */
 export const MODIFY_VARIABLE_PRIORITIES = {
 	items: {
-		[ITEM_NAME_TO_ID.randuinsOmen]: 1,
+		[ITEM_NAME_TO_ID.randuinsOmen]: 10,
+		[ITEM_NAME_TO_ID.infinityEdge]: 5,
 	},
 } satisfies {
 	items: Record<string, number>;

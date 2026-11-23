@@ -4370,6 +4370,7 @@ export const ITEM_SPECIFICS = {
 		modifyVariable: [
 			{
 				type: [VariableType.magic, VariableType.true, VariableType.adaptive],
+				priority: MODIFY_VARIABLE_PRIORITIES.items[ITEM_NAME_TO_ID.infinityEdge],
 				handler(value, meta, self) {
 					// TODO probably should be done always, not just when IE is present but atm it's only for cinderbloom crit magic damage
 					if (meta.critAdditionalDamage) {
