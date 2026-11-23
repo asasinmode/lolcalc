@@ -491,7 +491,7 @@ export interface IChampionInternalDataMap {
 	Jinx: { passiveStacks: number; passiveMSProgress: number; qBuff: number };
 	Kaisa: { passiveStacksOnTarget: number; eBuff: number };
 	Kayle: { passiveStacks: number };
-	Kayn: { form: number };
+	Kayn: { form: number; shadowDmgAmp: number };
 	Khazix: { rEvolvesMask: number };
 	Kindred: { passiveStacks: number };
 	Kled: {

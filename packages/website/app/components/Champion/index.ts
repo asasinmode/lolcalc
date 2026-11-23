@@ -5,7 +5,7 @@ import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect'
 import { ITEMS_BY_NAME } from '@lolcalc/data/index';
 import type { IChampionId } from '@lolcalc/data/types';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor, ChampionExtrasMilio } from '#components';
+import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor, ChampionExtrasMilio, ChampionExtrasKayn } from '#components';
 import type { ISpecificComponents } from '~/utils/types';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
@@ -152,13 +152,16 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Kayn: {
-		config: enumConfigEl(
-			GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0),
-			'form',
-			'Form',
-			Object.entries(CHAMPION_SPECIFICS.Kayn.passive.formOptions).map(([key, value]) => [value, key]),
-			{ variantImgIndex: CHAMPION_SPECIFICS.Kayn.passive.abilityImgVariantIndex },
-		),
+		config: [
+			enumConfigEl(
+				GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0),
+				'form',
+				'Form',
+				Object.entries(CHAMPION_SPECIFICS.Kayn.passive.formOptions).map(([key, value]) => [value, key]),
+				{ variantImgIndex: CHAMPION_SPECIFICS.Kayn.passive.abilityImgVariantIndex },
+			),
+			ChampionExtrasKayn,
+		],
 	},
 	Kindred: {
 		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),

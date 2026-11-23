@@ -23,6 +23,7 @@ export default {
 	setupData(self) {
 		return {
 			form: clamp(0, Math.round(self.internalData.value.form ?? 0), passiveFormOptions.rhaast),
+			shadowDmgAmp: clamp(0, Math.round(self.internalData.value.shadowDmgAmp ?? 0), 1),
 		};
 	},
 	variables: defineChampionVariables<'Kayn', typeof IKayn>()({
