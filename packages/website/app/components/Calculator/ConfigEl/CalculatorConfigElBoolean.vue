@@ -1,0 +1,51 @@
+<script setup vapor lang="ts">
+import type { IGameImageData } from '@lolcalc/core/misc';
+import { gameImageAttrs } from '~/utils/image';
+
+defineProps<{
+	idSuffix: string;
+	imgSrc: IGameImageData;
+	label: string;
+	tooltip?: string;
+	inactive?: boolean;
+	tooltipTriggerAttrs?: any;
+}>();
+
+const value = defineModel<number>();
+</script>
+
+<template>
+	<article class="config-el-boolean" :data-inactive="inactive || undefined">
+		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
+		<input :id="`xtrbln-${idSuffix}`" v-model="value" type="checkbox" :true-value="1" :false-value="0" />
+		<label :for="`xtrbln-${idSuffix}`">
+			{{ label }}
+			<InfoTooltip id-prefix="xtrbln" :id-suffix :tooltip />
+		</label>
+		<slot />
+	</article>
+</template>
+
+<style>
+@layer components {
+	.config-el-boolean {
+		--at-apply: 'grid grid-cols-[max-content_auto_minmax(0,1fr)] grid-rows-1 items-center relative';
+
+		> input {
+			--at-apply: 'mt-px';
+		}
+	}
+}
+
+@layer overrides {
+	:is(.config-el-boolean, .config-el-progress)[data-inactive='true'] > label {
+		--at-apply: 'text-neutral-400';
+	}
+
+	.config-el-boolean {
+		> label {
+			--at-apply: 'ps-[0.5ch] pbe-0 mbe-0 leading-none';
+		}
+	}
+}
+</style>
