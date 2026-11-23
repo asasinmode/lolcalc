@@ -293,6 +293,10 @@ interface IGlobalModifyVariableFunction {
 	(value: number, meta: IVariableModifyMeta, self: DamageSource, damageTarget?: DamageSource): number;
 }
 
+function modifyValueByHSP(value: number, _meta: any, self: DamageSource): number {
+	return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.healMult ?? 1);
+}
+
 export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, _meta, _self, damageTarget) {
 		return Math.max(CONSTS.minCCDuration, value * (1 - (damageTarget?.stats.value.total.tenacity ?? 0)));
@@ -300,15 +304,9 @@ export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalMod
 	[VariableType.affectedBySlowResist](value, _meta, _self, damageTarget) {
 		return value * (1 - (damageTarget?.stats.value.total.slowResist ?? 0));
 	},
-	[VariableType.heal](value, _meta, self) {
-		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.healMult ?? 1);
-	},
-	[VariableType.shield](value, _meta, self) {
-		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
-	},
-	[VariableType.magicShield](value, _meta, self) {
-		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
-	},
+	[VariableType.heal]: modifyValueByHSP,
+	[VariableType.shield]: modifyValueByHSP,
+	[VariableType.magicShield]: modifyValueByHSP,
 	/* used directly in the `sourceDamageBasicAttackVars`, will throw if doesn't exist */
 	[VariableType.magic](value, _meta, self, damageTarget) {
 		const { percentMagicPen, flatMagicPen } = self.stats.value.total;

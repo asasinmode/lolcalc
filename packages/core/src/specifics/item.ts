@@ -4194,6 +4194,11 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.kaenicRookern]: {
 		variables: defineVariables({
+			meta: {
+				ShieldCalc: {
+					type: VariableType.magicShield,
+				},
+			},
 			uninteresting: ['OutOfCombatDuration'],
 		}),
 	},
