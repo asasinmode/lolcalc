@@ -9,6 +9,7 @@ defineProps<{
 	tooltip?: string;
 	inactive?: boolean;
 	tooltipTriggerAttrs?: any;
+	disabled?: boolean;
 }>();
 
 const value = defineModel<number>();
@@ -17,10 +18,10 @@ const value = defineModel<number>();
 <template>
 	<article class="config-el-boolean" :data-inactive="inactive || undefined">
 		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
-		<input :id="`xtrbln-${idSuffix}`" v-model="value" type="checkbox" :true-value="1" :false-value="0" />
+		<input :id="`xtrbln-${idSuffix}`" v-model="value" type="checkbox" :true-value="1" :false-value="0" :disabled />
 		<label :for="`xtrbln-${idSuffix}`">
 			{{ label }}
-			<InfoTooltip id-prefix="xtrbln" :id-suffix :tooltip />
+			<InfoTooltip id-prefix="xtrbln" :id-suffix :tooltip :tabindex="disabled ? -1 : undefined" />
 		</label>
 		<slot />
 	</article>

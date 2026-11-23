@@ -229,16 +229,18 @@ export function booleanConfigEl<T extends IGameAbilityId>(
 		effectControlsProps,
 		selectEffectSourceProps,
 		inactive,
+		variantImgIndex,
 	}: {
 		onUpdate?: IExtraOnValueUpdate;
 		effectControlsProps?: IEffectControlsProps<any>;
 		selectEffectSourceProps?: ISelectEffectSourceProps;
 		inactive?: IExtraInactiveFn;
+		variantImgIndex?: IAbilityImgIndexGetter<any, any>;
 	} = {},
 ) {
 	return defineComponent<IExtraComponentProps>(
 		async (props, ctx) => {
-			const [imgSrc, stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { onUpdate });
+			const [imgSrc, stringifiedAbilityId, modelValue, extraUpdateValue, appliedEffect] = await extraComponentData(abilityId, property, props.damageSource, { onUpdate, variantImgIndex });
 
 			const isInactive = inactive ? computed(() => inactive(props.damageSource)) : false;
 

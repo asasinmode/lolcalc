@@ -30,7 +30,7 @@ const value = defineModel<number>();
 		<img v-bind="{ ...gameImageAttrs(imgSrc, 56), ...tooltipTriggerAttrs }" aria-hidden="true" />
 		<label :for="`xtrnmbr-${idSuffix}`">
 			{{ label }}
-			<InfoTooltip id-prefix="xtrnmbr" :id-suffix :tooltip />
+			<InfoTooltip id-prefix="xtrnmbr" :id-suffix :tooltip :tabindex="disabled ? -1 : undefined" />
 		</label>
 		<slot />
 		<input :id="`xtrnmbr-${idSuffix}`" :value="value ?? 0" type="number" :min :max :step :disabled @input="usedNumberInput" />

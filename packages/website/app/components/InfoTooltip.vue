@@ -1,11 +1,17 @@
 <script setup vapor lang="ts">
 import { simpleDescriptionFormatting } from '@lolcalc/core/misc';
 
-const props = defineProps<{
-	idPrefix: string;
-	idSuffix: string;
-	tooltip?: string;
-}>();
+const props = withDefaults(
+	defineProps<{
+		idPrefix: string;
+		idSuffix: string;
+		tooltip?: string;
+		tabindex?: number;
+	}>(),
+	{
+		tabindex: 0,
+	},
+);
 
 const computedTooltip = ref<string>();
 if (props.tooltip) {
@@ -17,7 +23,7 @@ const { bind, bindPopover } = useInfoTooltip();
 
 <template>
 	<template v-if="tooltip">
-		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" tabindex="0" v-bind="bind(undefined, true)">
+		<span :aria-describedby="`${idPrefix}-tooltip-${idSuffix}`" class="info-tooltip-trigger" :tabindex v-bind="bind(undefined, true)">
 			<slot name="trigger">
 				<span>additional info</span>
 			</slot>
