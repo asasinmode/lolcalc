@@ -116,7 +116,7 @@ const applyXOnTargetStepConfigs = {
 
 		<TextPageHeading id="ui-guide" text="UI guide" />
 		<p>
-			List and short description of the <strong>lolcalc</strong> UI elements. Throughout the website, they will be referred to by the names used here. The next section, <b>tutorials</b>, has more hands-on guides that showcase their usage.
+			List of the <strong>lolcalc</strong> UI elements with short descriptions. Throughout the website, they will be referred to by the names used here. The next section, <b>tutorials</b>, has more hands-on guides that showcase their usage.
 		</p>
 		<dl>
 			<dt>configuration scoreboard</dt>

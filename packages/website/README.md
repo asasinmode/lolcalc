@@ -4,15 +4,9 @@
 
 ## dev
 
-For more specific instructions, see [contributing.md](CONTRIBUTING.md)
+For more about the codebase see [contributing.md](CONTRIBUTING.md)
 
 ```bash
-# install dependencies
-pnpm install
-
-# fetch latest game data
-node ./scripts/updateGameData.ts
-
 # start dev server
 pnpm dev
 
@@ -26,13 +20,11 @@ pnpm generate
 
 - [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
 - [ ] actualizer, might need separate in/out going heal & shield
-- [ ] minimal basic attack damage implementation
-- [ ] basic attack hover tooltip
 - [ ] guide/about page
   - [ ] guide/about add subheadings to toc
   - [ ] finish ui guide
   - [ ] more examples
-  - [ ] add screenshots to examples
+  - [ ] add screenshots
   - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
   - [ ] tutorials
 - [ ] readme.md
@@ -42,6 +34,7 @@ pnpm generate
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] cleanup git history
+- [ ] check if .md links work
 - [ ] start doing releases
 
 ### after submitting

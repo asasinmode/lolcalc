@@ -26,7 +26,7 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 /** TODO intended to be a computed with everything related to source (and maybe takes in the target too, or that might be another separate thing) damage dealing */
 export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 	// total damage multipliers. known multiplicative - haunting guise and items it builds into. immortal path somewhere
-	// actualizer
+	// actualizer, "ability damage" champion on hits?
 	// exhaust effect
 	// knight's vow damage reduction
 	// blessing of the mountain damage reduction
