@@ -78,7 +78,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 	viewConfigEl: {
 		title: 'configuring passives',
 		type: 'damageSource',
-		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration',
+		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration<br> <rules>if you\'re unsure of what a config element\'s part does, take a look at their <a href="/guide#config-element" target="_blank">guide page entry</a></rules>',
 		anchor: '.extras > :first-child',
 		pendingIf: (calculatorState) =>
 			calculatorState.damageSources.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS) ||
