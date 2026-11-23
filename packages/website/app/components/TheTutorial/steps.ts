@@ -91,7 +91,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 				return championId in CHAMPION_COMPONENTS;
 			},
 		},
-		completeOn: ['extraComponentFocused'],
+		completeOn: ['configElFocused'],
 	},
 	applyOnTargetEffect: {
 		title: 'apply on target effect',
@@ -209,7 +209,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		text: "some effects' strength depends on who's applying them. If applicable, the source of the effect can be selected by clicking on the champion icon in the corner of the effect's image<br> <rules>right click when a source is selected to clear</rules>",
 		anchor: '.effect-src-select',
 		showOn: {
-			effectDialogExtraEntered(effectObjectName) {
+			effectDialogConfigElEntered(effectObjectName) {
 				return !!(EFFECT_SPECIFICS as IHypotheticalEffectSpecifics)[effectObjectName].sourceControls;
 			},
 		},

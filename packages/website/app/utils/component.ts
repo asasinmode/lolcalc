@@ -5,10 +5,10 @@ import { gameAbilityImage, replaceGameIcons, type IGameImageData } from '@lolcal
 import type { IEffectControlsProps, IExtraInactiveFn, IAbilityImgIndexGetter, IExtraOnValueUpdate, IGameAbilityData, ISelectEffectSourceProps } from '@lolcalc/core/specifics';
 import { AbilityType } from '@lolcalc/shared';
 import type { ComputedRef, SlotsType } from 'vue';
-import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorExtraBoolean, CalculatorExtraEnum, CalculatorExtraNumber, CalculatorExtraProgress } from '#components';
+import { CalculatorEffectControls, CalculatorEffectSourceSelect, CalculatorConfigElBoolean, CalculatorConfigElEnum, CalculatorConfigElNumber, CalculatorConfigElProgress } from '#components';
 import type { IExtraComponentProps } from './types';
 
-export function numberExtra<T extends IGameAbilityId>(
+export function numberConfigEl<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -85,7 +85,7 @@ export function numberExtra<T extends IGameAbilityId>(
 
 			return () =>
 				h(
-					CalculatorExtraNumber,
+					CalculatorConfigElNumber,
 					{
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -123,7 +123,7 @@ export function numberExtra<T extends IGameAbilityId>(
 	);
 }
 
-export function progressExtra<T extends IGameAbilityId>(
+export function progressConfigEl<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -181,7 +181,7 @@ export function progressExtra<T extends IGameAbilityId>(
 
 			return () =>
 				h(
-					CalculatorExtraProgress,
+					CalculatorConfigElProgress,
 					{
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -217,7 +217,7 @@ export function progressExtra<T extends IGameAbilityId>(
 	);
 }
 
-export function booleanExtra<T extends IGameAbilityId>(
+export function booleanConfigEl<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -274,7 +274,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 
 			return () =>
 				h(
-					CalculatorExtraBoolean,
+					CalculatorConfigElBoolean,
 					{
 						modelValue: computedValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -308,7 +308,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 	);
 }
 
-export function enumExtra<T extends IGameAbilityId>(
+export function enumConfigEl<T extends IGameAbilityId>(
 	abilityId: T,
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
@@ -345,7 +345,7 @@ export function enumExtra<T extends IGameAbilityId>(
 
 			return () =>
 				h(
-					CalculatorExtraEnum,
+					CalculatorConfigElEnum,
 					{
 						modelValue: modelValue.value,
 						idSuffix: `${props.idSuffix}-${stringifiedAbilityId}-${property as string}`,
@@ -452,7 +452,7 @@ type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
 type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 
-export function ExtraLoading() {
+export function LoadingConfigEl() {
 	return h('article', { class: 'loading', 'aria-busy': 'true' }, 'loading...');
 }
 

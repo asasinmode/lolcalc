@@ -10,12 +10,12 @@ import type { ISpecificComponents } from '~/utils/types';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	TargetDummy: {
-		extras: ChampionExtrasTargetDummy,
+		config: ChampionExtrasTargetDummy,
 	},
 	Akali: {
-		extras: [
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'MS active (towards/after crossing the ring)'),
-			booleanExtra(
+		config: [
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0), 'isPassiveMSActive', 'MS active (towards/after crossing the ring)'),
+			booleanConfigEl(
 				GameAbilityId.build(AbilityType.champion, 'Akali', 'passive', 0),
 				'passiveRangeSnapshot',
 				'attack range active (after crossing the ring)',
@@ -26,17 +26,17 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 					effectControlsProps: CHAMPION_SPECIFICS.Akali.passive.extraControls,
 				},
 			),
-			progressExtra(GameAbilityId.build(AbilityType.champion, 'Akali', 'w', 0), 'wMSProgress', 'Twilight Shroud move speed (after cast)', CHAMPION_SPECIFICS.Akali.w.derivedMS),
+			progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Akali', 'w', 0), 'wMSProgress', 'Twilight Shroud move speed (after cast)', CHAMPION_SPECIFICS.Akali.w.derivedMS),
 		],
 	},
 	Akshan: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Akshan', 'passive', 0), 'passiveMSProgress', 'additional shot cancel MS', CHAMPION_SPECIFICS.Akshan.passive.derivedMS, { derivedSymbolSuffix: '' }),
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Akshan', 'passive', 0), 'passiveMSProgress', 'additional shot cancel MS', CHAMPION_SPECIFICS.Akshan.passive.derivedMS, { derivedSymbolSuffix: '' }),
 	},
 	Ambessa: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
 	},
 	Amumu: {
-		extras: booleanExtra(
+		config: booleanConfigEl(
 			GameAbilityId.build(AbilityType.champion, 'Amumu', 'passive', 0),
 			'applyPassive',
 			'Cursed Touch',
@@ -46,83 +46,83 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		),
 	},
 	Anivia: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Anivia', 'passive', 0), 'isEgg', 'is egg', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Anivia', 'passive', 0), 'isEgg', 'is egg', false),
 	},
 	Aphelios: {
-		extras: ChampionExtrasAphelios,
+		config: ChampionExtrasAphelios,
 	},
 	Ashe: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0), 'frostShot', 'apply Frost Shot on target', CHAMPION_SPECIFICS.Ashe.passive.derivedSlow),
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0), 'frostShot', 'apply Frost Shot on target', CHAMPION_SPECIFICS.Ashe.passive.derivedSlow),
 	},
 	AurelionSol: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'AurelionSol', 'passive', 0), 'passiveStacks', 'Cosmic Creator stacks'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'AurelionSol', 'passive', 0), 'passiveStacks', 'Cosmic Creator stacks'),
 	},
 	Bard: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'passiveStacks', 'Chimes collected'),
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'chimeMoveSpeed', 'Chime move speed', 0, CHAMPION_SPECIFICS.Bard.passive.maxChimeMS),
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'passiveStacks', 'Chimes collected'),
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Bard', 'passive', 0), 'chimeMoveSpeed', 'Chime move speed', 0, CHAMPION_SPECIFICS.Bard.passive.maxChimeMS),
 		],
 	},
 	Belveth: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Belveth', 'passive', 0), 'passiveStacks', 'Lavender stacks'),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Belveth', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Belveth', 'passive', 0), 'passiveStacks', 'Lavender stacks'),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Belveth', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
 		],
 	},
 	Chogath: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Chogath', 'r', 0), 'ultStacks', 'Feast stacks'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Chogath', 'r', 0), 'ultStacks', 'Feast stacks'),
 	},
 	Darius: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Darius', 'passive', 0), 'isChampionAtMaxBleed', 'is champion at max bleed stacks', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Darius', 'passive', 0), 'isChampionAtMaxBleed', 'is champion at max bleed stacks', false),
 	},
 	Diana: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Diana', 'passive', 0), 'isPassiveEmpowered', 'empowered Moonsilver Blade', true),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Diana', 'passive', 0), 'isPassiveEmpowered', 'empowered Moonsilver Blade', true),
 	},
 	Draven: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
 	},
 	Ekko: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Ekko', 'passive', 0), 'isPassiveMSActive', 'is MS active (3 hits)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Ekko', 'passive', 0), 'isPassiveMSActive', 'is MS active (3 hits)', false),
 	},
 	Ezreal: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Spell Force stacks', 0, CHAMPION_SPECIFICS.Ezreal.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Spell Force stacks', 0, CHAMPION_SPECIFICS.Ezreal.passive.maxStacks),
 	},
 	Fiora: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', "Duelist's Dance move speed", CHAMPION_SPECIFICS.Fiora.passive.derivedMS),
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Fiora', 'passive', 0), 'passiveMSProgress', "Duelist's Dance move speed", CHAMPION_SPECIFICS.Fiora.passive.derivedMS),
 	},
 	Gangplank: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Gangplank', 'passive', 0), 'isPassiveMSActive', 'is MS active', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Gangplank', 'passive', 0), 'isPassiveMSActive', 'is MS active', false),
 	},
 	Garen: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'apply HP regen (not hit recently)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'apply HP regen (not hit recently)', false),
 	},
 	Graves: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Graves', 'e', 0), 'eStacks', 'True Grit stacks', 0, CHAMPION_SPECIFICS.Graves.e.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Graves', 'e', 0), 'eStacks', 'True Grit stacks', 0, CHAMPION_SPECIFICS.Graves.e.maxStacks),
 	},
 	Heimerdinger: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Heimerdinger', 'passive', 0), 'isPassiveMSActive', 'is MS active (close to turret)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Heimerdinger', 'passive', 0), 'isPassiveMSActive', 'is MS active (close to turret)', false),
 	},
 	Irelia: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Irelia', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Irelia.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Irelia', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Irelia.passive.maxStacks),
 	},
 	Jax: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Jax', 'passive', 0), 'passiveStacks', 'Relentless Assault stacks', 0, CHAMPION_SPECIFICS.Jax.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Jax', 'passive', 0), 'passiveStacks', 'Relentless Assault stacks', 0, CHAMPION_SPECIFICS.Jax.passive.maxStacks),
 	},
 	Jayce: {
-		extras: [
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after form swap)', false),
-			progressExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'e', 1), 'eMSProgress', 'Acceleration Gate MS', CHAMPION_SPECIFICS.Jayce.e.derivedMS),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jayce', 'r', 0), 'applyRShred', 'resists shred', true, true),
+		config: [
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Jayce', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after form swap)', false),
+			progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Jayce', 'e', 1), 'eMSProgress', 'Acceleration Gate MS', CHAMPION_SPECIFICS.Jayce.e.derivedMS),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Jayce', 'r', 0), 'applyRShred', 'resists shred', true, true),
 		],
 	},
 	Jhin: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
 	},
 	Jinx: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.passive.maxStacks),
-			progressExtra(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveMSProgress', 'Get Excited MS value', CHAMPION_SPECIFICS.Jinx.passive.derivedMS),
-			enumExtra(
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.passive.maxStacks),
+			progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Jinx', 'passive', 0), 'passiveMSProgress', 'Get Excited MS value', CHAMPION_SPECIFICS.Jinx.passive.derivedMS),
+			enumConfigEl(
 				GameAbilityId.build(AbilityType.champion, 'Jinx', 'q', 0),
 				'qBuff',
 				'gun buff',
@@ -138,12 +138,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Kayle: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Kayle', 'passive', 0), 'passiveStacks', 'Divine Ascent stacks', 0, CHAMPION_SPECIFICS.Kayle.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Kayle', 'passive', 0), 'passiveStacks', 'Divine Ascent stacks', 0, CHAMPION_SPECIFICS.Kayle.passive.maxStacks),
 	},
 	Kaisa: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.passive.maxStacks),
-			enumExtra(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'e', 0), 'eBuff', 'Supercharge buff', [
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.passive.maxStacks),
+			enumConfigEl(GameAbilityId.build(AbilityType.champion, 'Kaisa', 'e', 0), 'eBuff', 'Supercharge buff', [
 				[CHAMPION_SPECIFICS.Kaisa.e.buffOptions.none, 'none'],
 				[CHAMPION_SPECIFICS.Kaisa.e.buffOptions.attackSpeed, 'attack speed'],
 				[CHAMPION_SPECIFICS.Kaisa.e.buffOptions.moveSpeed, 'move speed'],
@@ -152,7 +152,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Kayn: {
-		extras: enumExtra(
+		config: enumConfigEl(
 			GameAbilityId.build(AbilityType.champion, 'Kayn', 'passive', 0),
 			'form',
 			'Form',
@@ -161,106 +161,106 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		),
 	},
 	Kindred: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
 	},
 	Khazix: {
-		extras: ChampionExtrasKhaZix,
+		config: ChampionExtrasKhaZix,
 	},
 	Kled: {
-		extras: [
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'runningTowardsEnemy', 'running towards enemy (dismounted)', false, undefined, undefined, {
+		config: [
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'runningTowardsEnemy', 'running towards enemy (dismounted)', false, undefined, undefined, {
 				inactive: CHAMPION_SPECIFICS.Kled.dismountedComponentsInactive,
 			}),
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'enemiesNearby', 'enemies nearby (dismounted)', 0, 5, undefined, {
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Kled', 'passive', 0), 'enemiesNearby', 'enemies nearby (dismounted)', 0, 5, undefined, {
 				inactive: CHAMPION_SPECIFICS.Kled.dismountedComponentsInactive,
 			}),
 		],
 	},
 	KogMaw: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'KogMaw', 'passive', 0), 'passiveMSProgress', 'apply Icathian Surprise MS (dead)', CHAMPION_SPECIFICS.KogMaw.passive.derivedMS),
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'KogMaw', 'passive', 0), 'passiveMSProgress', 'apply Icathian Surprise MS (dead)', CHAMPION_SPECIFICS.KogMaw.passive.derivedMS),
 	},
 	LeeSin: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'LeeSin', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'LeeSin', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
 	},
 	Lissandra: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Lissandra', 'passive', 0), 'applyZombieSlow', 'zombie slow', true, true),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Lissandra', 'passive', 0), 'applyZombieSlow', 'zombie slow', true, true),
 	},
 	Locke: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Locke', 'r', 0), 'rStacks', 'Enemies sealed'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Locke', 'r', 0), 'rStacks', 'Enemies sealed'),
 	},
 	Lucian: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Lucian', 'w', 0), 'isWMSActive', 'Vigilance (attacked W target)'),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Lucian', 'w', 0), 'isWMSActive', 'Vigilance (attacked W target)'),
 	},
 	Malphite: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Malphite', 'passive', 0), 'isPassiveActive', 'Granite Shield (used for W calc)'),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Malphite', 'passive', 0), 'isPassiveActive', 'Granite Shield (used for W calc)'),
 	},
 	Mel: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Mel', 'w', 0), 'wMSTotalAP', 'Rebuttal move speed', true, undefined, undefined, {
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Mel', 'w', 0), 'wMSTotalAP', 'Rebuttal move speed', true, undefined, undefined, {
 			effectControlsProps: CHAMPION_SPECIFICS.Mel.w.extraControls,
 		}),
 	},
 	Milio: {
-		extras: ChampionExtrasMilio,
+		config: ChampionExtrasMilio,
 	},
 	Mordekaiser: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'active (3 hits)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'active (3 hits)', false),
 	},
 	Naafiri: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.passive.maxStacks),
 	},
 	Nami: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, {
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0), 'passiveMSProgress', 'Surging Tides move speed', CHAMPION_SPECIFICS.Nami.passive.derivedMS, {
 			effectControlsProps: CHAMPION_SPECIFICS.Nami.passive.effectControls,
 			derivedSymbolSuffix: '',
 		}),
 	},
 	Nasus: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither on target', CHAMPION_SPECIFICS.Nasus.w.derivedSlow),
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Nasus', 'w', 0), 'wProgress', 'apply Wither on target', CHAMPION_SPECIFICS.Nasus.w.derivedSlow),
 	},
 	Nidalee: {
-		extras: enumExtra(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', [
+		config: enumConfigEl(GameAbilityId.build(AbilityType.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', [
 			[CHAMPION_SPECIFICS.Nidalee.passive.shapeshiftOptions.none, 'none'],
 			[CHAMPION_SPECIFICS.Nidalee.passive.shapeshiftOptions.justBush, 'in bush'],
 			[CHAMPION_SPECIFICS.Nidalee.passive.shapeshiftOptions.towardsChampion, 'towards champions'],
 		]),
 	},
 	Nunu: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'Call of the Freljord', true),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'Call of the Freljord', true),
 	},
 	Orianna: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.passive.maxStacks, undefined, {
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.passive.maxStacks, undefined, {
 				tooltip: "in the <i>results table's</i> <b>basic attack</b> section, the damage is calculated for the number of stacks set here",
 			}),
-			progressExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'w', 0), 'wMSProgress', 'Dissonance field move speed', CHAMPION_SPECIFICS.Orianna.w.derivedMS),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Orianna', 'e', 0), 'applyEResists', 'The Ball (bonus resists)', undefined, undefined, undefined, { onUpdate: CHAMPION_SPECIFICS.Orianna.e.onComponentUpdateValue }),
+			progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Orianna', 'w', 0), 'wMSProgress', 'Dissonance field move speed', CHAMPION_SPECIFICS.Orianna.w.derivedMS),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Orianna', 'e', 0), 'applyEResists', 'The Ball (bonus resists)', undefined, undefined, undefined, { onUpdate: CHAMPION_SPECIFICS.Orianna.e.onComponentUpdateValue }),
 		],
 	},
 	Ornn: {
-		extras: ChampionExtrasOrnn,
+		config: ChampionExtrasOrnn,
 	},
 	Poppy: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Poppy', 'passive', 0), 'isPassiveActive', 'Iron Ambassador active', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Poppy', 'passive', 0), 'isPassiveActive', 'Iron Ambassador active', false),
 	},
 	Rammus: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rammus', 'w', 0), 'defensiveCurl', 'Defensive Curl'),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Rammus', 'w', 0), 'defensiveCurl', 'Defensive Curl'),
 	},
 	Rell: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.passive.maxStacks, undefined, {
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.passive.maxStacks, undefined, {
 			tooltip: 'the stolen stats will be shown in the results table (needs target)',
 		}),
 	},
 	Rengar: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Rengar', 'passive', 0), 'passiveStacks', 'Bonetooth Necklace stacks', 0, CHAMPION_SPECIFICS.Rengar.passive.maxStacks),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rengar', 'passive', 0), 'isPassiveMSActive', 'MS active (after empowered ability)', false),
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Rengar', 'passive', 0), 'passiveStacks', 'Bonetooth Necklace stacks', 0, CHAMPION_SPECIFICS.Rengar.passive.maxStacks),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Rengar', 'passive', 0), 'isPassiveMSActive', 'MS active (after empowered ability)', false),
 		],
 	},
 	Rumble: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Rumble', 'passive', 0), 'isOverheated', 'overheated', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Rumble', 'passive', 0), 'isOverheated', 'overheated', false),
 	},
 	Samira: {
-		extras: enumExtra(
+		config: enumConfigEl(
 			GameAbilityId.build(AbilityType.champion, 'Samira', 'passive', 0),
 			'passiveStacks',
 			'Grade',
@@ -268,78 +268,78 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		),
 	},
 	Sejuani: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Sejuani', 'passive', 0), 'isPassiveActive', 'Fury of the North active', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Sejuani', 'passive', 0), 'isPassiveActive', 'Fury of the North active', false),
 	},
 	Senna: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStacks', 'Absolution stacks'),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStealTargetMS', "grant % of attacked target's MS", false, undefined, 'the move speed will be shown in the results table (needs target)'),
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStacks', 'Absolution stacks'),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Senna', 'passive', 0), 'passiveStealTargetMS', "grant % of attacked target's MS", false, undefined, 'the move speed will be shown in the results table (needs target)'),
 		],
 	},
 	Seraphine: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Seraphine', 'passive', 0), 'passiveStacks', 'Notes collected', 0, CHAMPION_SPECIFICS.Seraphine.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Seraphine', 'passive', 0), 'passiveStacks', 'Notes collected', 0, CHAMPION_SPECIFICS.Seraphine.passive.maxStacks),
 	},
 	Shyvana: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Shyvana', 'passive', 0), 'passiveStacks', 'Scalemail stacks'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Shyvana', 'passive', 0), 'passiveStacks', 'Scalemail stacks'),
 	},
 	Sion: {
-		extras: [
-			progressExtra(GameAbilityId.build(AbilityType.champion, 'Sion', 'q', 1), 'passiveMSProgress', 'Death Surge MS', CHAMPION_SPECIFICS.Sion.passive.bonusMS, {
+		config: [
+			progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Sion', 'q', 1), 'passiveMSProgress', 'Death Surge MS', CHAMPION_SPECIFICS.Sion.passive.bonusMS, {
 				inactive: CHAMPION_SPECIFICS.Sion.passive.deathSurgeComponentInactive,
 			}),
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Sion', 'w', 0), 'wStacks', 'Soul Furnace stacks'),
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Sion', 'w', 0), 'wStacks', 'Soul Furnace stacks'),
 		],
 	},
 	Singed: {
-		extras: [
-			numberExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.passive.maxStacks),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Singed', 'r', 0), 'isRActive', 'Insanity Potion'),
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Singed', 'passive', 0), 'passiveStacks', 'Slipstream stacks', 0, CHAMPION_SPECIFICS.Singed.passive.maxStacks),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Singed', 'r', 0), 'isRActive', 'Insanity Potion'),
 		],
 	},
 	Sivir: {
-		extras: progressExtra(GameAbilityId.build(AbilityType.champion, 'Sivir', 'passive', 0), 'passiveMSProgress', 'Fleet of Foot MS', CHAMPION_SPECIFICS.Sivir.passive.bonusMS, { derivedSymbolSuffix: '' }),
+		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Sivir', 'passive', 0), 'passiveMSProgress', 'Fleet of Foot MS', CHAMPION_SPECIFICS.Sivir.passive.bonusMS, { derivedSymbolSuffix: '' }),
 	},
 	Smolder: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Smolder', 'passive', 0), 'passiveStacks', 'Dragon Practice stacks'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Smolder', 'passive', 0), 'passiveStacks', 'Dragon Practice stacks'),
 	},
 	Sona: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Sona', 'passive', 0), 'passiveStacks', 'Accelerando stacks', 0, CHAMPION_SPECIFICS.Sona.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Sona', 'passive', 0), 'passiveStacks', 'Accelerando stacks', 0, CHAMPION_SPECIFICS.Sona.passive.maxStacks),
 	},
 	Soraka: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Soraka', 'passive', 0), 'isPassiveMSActive', 'moving towards low health ally', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Soraka', 'passive', 0), 'isPassiveMSActive', 'moving towards low health ally', false),
 	},
 	Swain: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Swain', 'passive', 0), 'passiveStacks', 'Soul Fragments collected'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Swain', 'passive', 0), 'passiveStacks', 'Soul Fragments collected'),
 	},
 	Sylas: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Sylas', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Sylas', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
 	},
 	Syndra: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Syndra', 'passive', 0), 'passiveStacks', 'Splinters collected', 0, CHAMPION_SPECIFICS.Syndra.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Syndra', 'passive', 0), 'passiveStacks', 'Splinters collected', 0, CHAMPION_SPECIFICS.Syndra.passive.maxStacks),
 	},
 	Taliyah: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Taliyah', 'passive', 0), 'isPassiveMSActive', 'MS active (next to wall OOC)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Taliyah', 'passive', 0), 'isPassiveMSActive', 'MS active (next to wall OOC)', false),
 	},
 	Taric: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Taric', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Taric', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
 	},
 	Teemo: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Teemo', 'passive', 0), 'isPassiveASActive', 'AS active (exiting invisibility)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Teemo', 'passive', 0), 'isPassiveASActive', 'AS active (exiting invisibility)', false),
 	},
 	Thresh: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Thresh', 'passive', 0), 'passiveStacks', 'Souls collected'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Thresh', 'passive', 0), 'passiveStacks', 'Souls collected'),
 	},
 	Tristana: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Tristana', 'q', 0), 'isQActive', 'active', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Tristana', 'q', 0), 'isQActive', 'active', false),
 	},
 	Trundle: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Trundle', 'q', 0), 'isQActive', 'gain AD (chomped something)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Trundle', 'q', 0), 'isQActive', 'gain AD (chomped something)', false),
 	},
 	Udyr: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has stack (from using an ability)', false),
 	},
 	Varus: {
-		extras: enumExtra(
+		config: enumConfigEl(
 			GameAbilityId.build(AbilityType.champion, 'Varus', 'passive', 0),
 			'passiveVariantActive',
 			'buff from enemy',
@@ -347,45 +347,45 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		),
 	},
 	Vayne: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vayne', 'passive', 0), 'isPassiveMSActive', 'moving towards enemy', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Vayne', 'passive', 0), 'isPassiveMSActive', 'moving towards enemy', false),
 	},
 	Veigar: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},
 	Vi: {
-		extras: [
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0), 'isWASActive', '3 hit attack speed', false),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0), 'applyWPen', 'armor reduction', true, true),
+		config: [
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0), 'isWASActive', '3 hit attack speed', false),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Vi', 'w', 0), 'applyWPen', 'armor reduction', true, true),
 		],
 	},
 	Viktor: {
-		extras: ChampionExtrasViktor,
+		config: ChampionExtrasViktor,
 	},
 	Volibear: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Volibear', 'passive', 0), 'passiveStacks', 'Relentless Storm stacks', 0, CHAMPION_SPECIFICS.Volibear.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Volibear', 'passive', 0), 'passiveStacks', 'Relentless Storm stacks', 0, CHAMPION_SPECIFICS.Volibear.passive.maxStacks),
 	},
 	XinZhao: {
-		extras: booleanExtra(GameAbilityId.build(AbilityType.champion, 'XinZhao', 'e', 0), 'isEASActive', 'active', false),
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'XinZhao', 'e', 0), 'isEASActive', 'active', false),
 	},
 	Warwick: {
-		extras: [
-			enumExtra(
+		config: [
+			enumConfigEl(
 				GameAbilityId.build(AbilityType.champion, 'Warwick', 'w', 0),
 				'wVariantActive',
 				'apply Blood Hunt',
 				Object.entries(CHAMPION_SPECIFICS.Warwick.w.options).map(([key, value]) => [value, key]),
 			),
-			booleanExtra(GameAbilityId.build(AbilityType.champion, 'Warwick', 'e', 0), 'isEActive', 'active', false, undefined, 'TODO not implemented yet'),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Warwick', 'e', 0), 'isEActive', 'active', false, undefined, 'TODO not implemented yet'),
 		],
 	},
 	MonkeyKing: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.passive.maxStacks),
 	},
 	Zeri: {
-		extras: [booleanExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rActive', 'active', false), numberExtra(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rStacks', 'Overdrive stacks')],
+		config: [booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rActive', 'active', false), numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Zeri', 'r', 0), 'rStacks', 'Overdrive stacks')],
 	},
 	Zaahen: {
-		extras: numberExtra(GameAbilityId.build(AbilityType.champion, 'Zaahen', 'passive', 0), 'passiveStacks', 'Determination stacks', 0, CHAMPION_SPECIFICS.Zaahen.passive.maxStacks),
+		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Zaahen', 'passive', 0), 'passiveStacks', 'Determination stacks', 0, CHAMPION_SPECIFICS.Zaahen.passive.maxStacks),
 	},
 };
 
@@ -397,7 +397,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= {};
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects![effectObjectName] = enumOptions
-			? enumExtra(
+			? enumConfigEl(
 					abilityId,
 					0,
 					label,
@@ -408,24 +408,24 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 					},
 				)
 			: deriveProgressValue
-				? progressExtra(abilityId, 0, label, deriveProgressValue, {
+				? progressConfigEl(abilityId, 0, label, deriveProgressValue, {
 						selectEffectSourceProps: effectSpecific.sourceControls,
 						effectControlsProps: effectSpecific.effectControls,
 						derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
 						onUpdate: effectSpecific.onValueUpdate,
 					})
 				: maxValue !== 1
-					? numberExtra(abilityId, 0, label, minValue, maxValue, undefined, {
+					? numberConfigEl(abilityId, 0, label, minValue, maxValue, undefined, {
 							effectControlsProps: effectSpecific.effectControls,
 							selectEffectSourceProps: effectSpecific.sourceControls,
 						})
-					: booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate, selectEffectSourceProps: effectSpecific.sourceControls });
+					: booleanConfigEl(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate, selectEffectSourceProps: effectSpecific.sourceControls });
 	}
 }
 
 for (const key in CHAMPION_COMPONENTS) {
-	const { extras, effects } = CHAMPION_COMPONENTS[key as keyof typeof CHAMPION_COMPONENTS]!;
-	extras && (Array.isArray(extras) ? extras.forEach((component) => markRaw(component)) : markRaw(extras));
+	const { config, effects } = CHAMPION_COMPONENTS[key as keyof typeof CHAMPION_COMPONENTS]!;
+	config && (Array.isArray(config) ? config.forEach((component) => markRaw(component)) : markRaw(config));
 	for (const key in effects) {
 		markRaw(effects[key]!);
 	}

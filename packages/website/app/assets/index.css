@@ -144,8 +144,8 @@
 		--venmbr-gap-x: calc(2 * var(--spacing));
 		--venmbr-btn-w: calc(10 * var(--spacing));
 
-		--extra-item-min-w: calc(60 * var(--spacing));
-		--extra-item-max-w: calc(64 * var(--spacing));
+		--config-el-min-w: calc(60 * var(--spacing));
+		--config-el-max-w: calc(64 * var(--spacing));
 
 		--transition-duration: 150ms;
 	}
@@ -296,8 +296,8 @@
 		justify-self: center;
 	}
 
-	/* for scoreboard items tooltip from config elements. Needs a different offset to align with the bottom border of extra components */
-	@position-try --scoreboard-extra-tooltip-flip-block {
+	/* for scoreboard items tooltip from config elements. Needs a different offset to align with the bottom border of configelements */
+	@position-try --scoreboard-config-el-tooltip-flip-block {
 		inset-block-end: auto;
 		inset-block-start: calc(anchor(end) - 1px);
 	}

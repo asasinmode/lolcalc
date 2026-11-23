@@ -11,7 +11,7 @@ import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
-import { ExtraLoading } from '~/utils/component';
+import { LoadingConfigEl } from '~/utils/component';
 import { tutorialEvent } from '~/utils/tutorial';
 
 const damageSource = defineModel<DamageSource>();
@@ -303,8 +303,8 @@ defineExpose({
 						:data-ability-id="effect.abilityId.id"
 						id-suffix="effects-dialog-applied"
 						:tooltip-trigger-attrs="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: true, appliedEffect: effect })"
-						@mouseenter="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
-						@focusin="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
+						@mouseenter="tutorialEvent('effectDialogConfigElEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
+						@focusin="tutorialEvent('effectDialogConfigElEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
 					>
 						<button class="pretend-ui-btn remove" title="remove" @click="damageSource?.removeEffect(effect.abilityId.id)">
 							<span>remove</span>
@@ -312,7 +312,7 @@ defineExpose({
 						</button>
 					</component>
 					<template #fallback>
-						<ExtraLoading />
+						<LoadingConfigEl />
 					</template>
 				</Suspense>
 			</li>
@@ -329,11 +329,11 @@ defineExpose({
 							id-suffix="effects-dialog-all"
 							:data-ability-id="effect.abilityId.id"
 							:tooltip-trigger-attrs="bindTooltipAttrs({ effectId: effect.abilityId, isApplied: false })"
-							@mouseenter="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
-							@focusin="tutorialEvent('effectDialogExtraEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
+							@mouseenter="tutorialEvent('effectDialogConfigElEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
+							@focusin="tutorialEvent('effectDialogConfigElEntered', { effectId: effect.abilityId.id }, effect.abilityId.id)"
 						/>
 						<template #fallback>
-							<ExtraLoading />
+							<LoadingConfigEl />
 						</template>
 					</Suspense>
 				</li>
@@ -346,7 +346,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-effects {
-		--at-apply: 'bg-[--cyan-bg] flex-col inline-[calc(4*var(--extra-item-max-w)+3*var(--gap-x))] max-inline-[90vw] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] block-200 of-y-auto box-content';
+		--at-apply: 'bg-[--cyan-bg] flex-col inline-[calc(4*var(--config-el-max-w)+3*var(--gap-x))] max-inline-[90vw] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] block-200 of-y-auto box-content';
 		anchor-scope: all;
 		--pt: calc(2 * var(--spacing));
 		--gap-x: calc(3 * var(--spacing));
@@ -399,7 +399,7 @@ defineExpose({
 		}
 
 		> ul {
-			--at-apply: 'grid grid-cols-[repeat(auto-fill,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-x-[--gap-x] gap-y-2 mb-3 block-min last-of-type:mb-0';
+			--at-apply: 'grid grid-cols-[repeat(auto-fill,minmax(var(--config-el-min-w),1fr))] auto-rows-min gap-x-[--gap-x] gap-y-2 mb-3 block-min last-of-type:mb-0';
 
 			&::before {
 				--at-apply: 'col-span-full text-neutral-300 font-500 text-lg';

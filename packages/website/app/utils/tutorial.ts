@@ -55,7 +55,7 @@ export interface TutorialEvents {
 	champSelectClosed: IChampionId | undefined;
 	sourceLevelSelectFocused: void;
 	abilityLevelFocused: void;
-	extraComponentFocused: void;
+	configElFocused: void;
 	runeSelectOpened: void;
 	/** doesn't trigger/complete any steps, but is needed so that tutorial resumes after the dialog is closed */
 	runeSelectClosed: void;
@@ -67,7 +67,7 @@ export interface TutorialEvents {
 	scoreboardItemsInteracted: void;
 	effectsDialogOpened: void;
 	effectsDialogClosed: DamageSource;
-	effectDialogExtraEntered: EffectObjectName;
+	effectDialogConfigElEntered: EffectObjectName;
 	effectDialogSourceControlsFocused: void;
 	scoreboardEffectModified: void;
 	resultsColumnAdded: void;

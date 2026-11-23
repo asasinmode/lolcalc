@@ -21,7 +21,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 const { gravitum: gravitumVariantIndex } = CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX;
 const showGravitumComponent = computed(() => props.damageSource.abilityVariantsIndexes.value.q === gravitumVariantIndex || props.damageSource.abilityVariantsIndexes.value.w === gravitumVariantIndex);
 
-const GravitumSlowComponent = progressExtra(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'e', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
+const GravitumSlowComponent = progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Aphelios', 'e', gravitumVariantIndex), 'gravitumSlowProgress', 'apply Gravitum slow on target', CHAMPION_SPECIFICS.Aphelios.q.derivedGravitumSlow);
 
 const gravitumDamageSource = shallowRef<DamageSource>(props.damageSource);
 

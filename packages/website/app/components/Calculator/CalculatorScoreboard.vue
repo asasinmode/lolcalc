@@ -422,15 +422,15 @@ function loadDragonImages() {
 @layer components {
 	#scoreboard {
 		--at-apply: 'b-b b-neutral-700 mbs-[--fluid-8-20-t768] relative mx-auto';
-		--extras-gap: calc(2 * var(--spacing));
-		--extra-cols: 3;
+		--config-els-gap: calc(2 * var(--spacing));
+		--config-els-cols: 3;
 		--scoreboard-gap-x: var(--fluid-f1092-18-40-t1114);
 		--scoreboard-item-base-px: var(--fluid-f540-10-16-t600);
 		--scoreboard-item-ps: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-pe: var(--fluid-f1126-10-16-t1194);
 		--scoreboard-item-b-w: 0.25rem;
-		/* 3 extras columns starting from `1680px` that go up to 256px */
-		--scoreboard-item-max-w: calc(var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--extra-item-max-w) + 2 * var(--extras-gap) + var(--scoreboard-item-b-w));
+		/* 3 config el columns starting from `1680px` that go up to 256px */
+		--scoreboard-item-max-w: calc(var(--scoreboard-item-ps) + var(--scoreboard-item-pe) + 3 * var(--config-el-max-w) + 2 * var(--config-els-gap) + var(--scoreboard-item-b-w));
 		--runes-stats-img-w: calc(5 * var(--spacing));
 		--runes-stats-text-w: calc(20 * var(--spacing));
 		--runes-stats-px: calc(0.5 * var(--spacing));
@@ -528,8 +528,8 @@ function loadDragonImages() {
 
 			@media (width < 1680px) {
 				& {
-					--extra-cols: 2;
-					grid-template-columns: repeat(2, minmax(calc(var(--extra-cols) * var(--extra-item-min-w) + var(--extras-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)), auto));
+					--config-els-cols: 2;
+					grid-template-columns: repeat(2, minmax(calc(var(--config-els-cols) * var(--config-el-min-w) + var(--config-els-gap) + var(--scoreboard-item-pe) + var(--scoreboard-item-ps) + var(--scoreboard-item-b-w)), auto));
 				}
 			}
 

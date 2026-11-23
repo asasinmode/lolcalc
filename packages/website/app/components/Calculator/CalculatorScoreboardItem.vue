@@ -25,7 +25,7 @@ import type { IScoreboardItemChampionAbilityTooltipShowData } from '@/utils/type
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { DRAGON_COMPONENTS } from '~/components/Dragon';
 import { ITEM_COMPONENTS } from '~/components/Item';
-import { ExtraLoading } from '~/utils/component';
+import { LoadingConfigEl } from '~/utils/component';
 import { gameImageAttrs } from '~/utils/image';
 import { tutorialEvent } from '~/utils/tutorial';
 
@@ -241,10 +241,10 @@ const abiltiesEl = useTemplateRef('abilities');
 const healthAbilityResourceEl = useTemplateRef('healthAbilityResource');
 const roleQuestEl = useTemplateRef('roleQuest');
 const dragonsEl = useTemplateRef('dragons');
-const extrasEl = useTemplateRef('extras');
+const configEls = useTemplateRef('configEls');
 
 function doubleClickToggle(event: MouseEvent) {
-	if ([event.currentTarget, headerEl.value, detailsContainer.value, effectsEl.value, effectsListEl.value, abiltiesEl.value, healthAbilityResourceEl.value, roleQuestEl.value, dragonsEl.value, extrasEl.value].includes(event.target)) {
+	if ([event.currentTarget, headerEl.value, detailsContainer.value, effectsEl.value, effectsListEl.value, abiltiesEl.value, healthAbilityResourceEl.value, roleQuestEl.value, dragonsEl.value, configEls.value].includes(event.target)) {
 		toggleExpanded(true);
 		event.preventDefault();
 	}
@@ -253,18 +253,18 @@ function doubleClickToggle(event: MouseEvent) {
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItemIndex = ref<number>();
-const itemTooltipFromExtras = ref(false);
+const itemTooltipFromConfig = ref(false);
 
 const {
 	bind: bindItemTooltip,
 	show: showItemTooltip,
 	hide: hideItemTooltip,
-} = useHoverTooltip<{ index: number; fromExtras?: boolean }>({
+} = useHoverTooltip<{ index: number; fromConfig?: boolean }>({
 	el: itemHoverTooltip,
 	beforeShow: ({ index }) => !!props.value.items.value[index],
-	onShow({ index, fromExtras = false }) {
+	onShow({ index, fromConfig = false }) {
 		hoveredItemIndex.value = index;
-		itemTooltipFromExtras.value = fromExtras;
+		itemTooltipFromConfig.value = fromConfig;
 		addItemTooltipViewListeners();
 	},
 	onHide: removeItemTooltipViewListeners,
@@ -289,19 +289,19 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
-const championExtra = computed<Component[]>((): Component[] => {
+const championConfigEls = computed<Component[]>((): Component[] => {
 	if (props.value.champion.value) {
-		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras;
+		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.config;
 		return component ? (Array.isArray(component) ? component : [component]) : [];
 	}
 	return [];
 });
 
 type IDragonComponent = [Component, IDragonAbilityId, abilityComponentIndex: number];
-const dragonExtras = computed<IDragonComponent[]>((): IDragonComponent[] => {
+const dragonConfigEls = computed<IDragonComponent[]>((): IDragonComponent[] => {
 	const components: IDragonComponent[] = [];
 	for (const stack of new Set(props.value.dragonStacks.value)) {
-		const stackComponents = stack && DRAGON_COMPONENTS[stack]?.stack?.extras;
+		const stackComponents = stack && DRAGON_COMPONENTS[stack]?.stack?.config;
 		if (stackComponents) {
 			const abilityId = GameAbilityId.build(AbilityType.dragon, stack, 'stack');
 			if (Array.isArray(stackComponents)) {
@@ -314,7 +314,7 @@ const dragonExtras = computed<IDragonComponent[]>((): IDragonComponent[] => {
 		}
 	}
 	if (props.value.dragonSoul.value) {
-		const soulComponents = DRAGON_COMPONENTS[props.value.dragonSoul.value]?.soul?.extras;
+		const soulComponents = DRAGON_COMPONENTS[props.value.dragonSoul.value]?.soul?.config;
 		if (soulComponents) {
 			const abilityId = GameAbilityId.build(AbilityType.dragon, props.value.dragonSoul.value, 'soul');
 			if (Array.isArray(soulComponents)) {
@@ -330,9 +330,9 @@ const dragonExtras = computed<IDragonComponent[]>((): IDragonComponent[] => {
 });
 
 type IItemComponent = [is: Component, itemId: string, itemIndex: number, itemComponentIndex: number];
-const itemExtras = computed<IItemComponent[]>(() =>
+const itemConfgEls = computed<IItemComponent[]>(() =>
 	props.value.items.value.flatMap((item, index): IItemComponent[] => {
-		const component = item && ITEM_COMPONENTS[item.id]?.extras;
+		const component = item && ITEM_COMPONENTS[item.id]?.config;
 		if (component) {
 			const components = Array.isArray(component) ? component : [component];
 			return components.map((c, i) => [c, item.id, index, i]);
@@ -800,35 +800,35 @@ const hoveredAbilityKey = ref<IChampionAbilityKey>();
 const hoveredAbilityVariantIndex = ref<number>();
 const hoveredAbilityDamageSource = shallowRef<DamageSource>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
-const abilityTooltipFromExtras = ref(false);
+const abilityTooltipFromConfig = ref(false);
 
 const { bind: bindChampionAbilityTooltipAttrs, show: showChampionAbilityTooltip } = useHoverTooltip<IScoreboardItemChampionAbilityTooltipShowData>({
 	el: () => abilityHoverTooltipEl.value?.el,
 	beforeShow() {
 		return !!props.value.champion.value;
 	},
-	onShow({ key, variantIndex, fromExtras = false, damageSource }) {
+	onShow({ key, variantIndex, fromConfig = false, damageSource }) {
 		hoveredAbilityKey.value = key;
 		hoveredAbilityDamageSource.value = damageSource;
 		hoveredAbilityVariantIndex.value = variantIndex ?? props.value.abilityVariantsIndexes.value[key];
-		abilityTooltipFromExtras.value = fromExtras;
+		abilityTooltipFromConfig.value = fromConfig;
 	},
 });
 
-function extraBindChampionAbilityTooltipAttrs(abilityId: IGameAbilityId, additionalData?: MaybeRefOrGetter<Partial<IScoreboardItemChampionAbilityTooltipShowData>>) {
+function configElBindChampionAbilityTooltipAttrs(abilityId: IGameAbilityId, additionalData?: MaybeRefOrGetter<Partial<IScoreboardItemChampionAbilityTooltipShowData>>) {
 	const { abilityKey, abilityVariantIndex } = abilityId as IChampionAbilityId;
 	return bindChampionAbilityTooltipAttrs(
 		typeof additionalData === 'function'
 			? () => ({
 					key: abilityKey,
 					variantIndex: abilityVariantIndex,
-					fromExtras: true,
+					fromConfig: true,
 					...additionalData(),
 				})
 			: {
 					key: abilityKey,
 					variantIndex: abilityVariantIndex,
-					fromExtras: true,
+					fromConfig: true,
 					...toValue(additionalData),
 				},
 	);
@@ -883,13 +883,13 @@ const dragonOptions = ALL_DRAGON_NAMES.map((name) => [name, name.toLowerCase()])
 type IHoveredDragonThing = [IDragonName, IDragonAbilityId['subtype']];
 const hoveredDragonThing = shallowRef<IHoveredDragonThing>();
 const dragonHoverTooltipEl = useTemplateRef('dragonHoverTooltip');
-const dragonTooltipFromExtras = shallowRef(false);
+const dragonTooltipFromConfig = shallowRef(false);
 
 const { bind: bindDragonTooltipAttrs, hide: hideDragonTooltip } = useHoverTooltip<{
 	stackIndex?: number;
 	dragonName?: IDragonName;
 	subtype: IDragonAbilityId['subtype'];
-	fromExtras?: boolean;
+	fromConfig?: boolean;
 }>({
 	el: () => dragonHoverTooltipEl.value?.el,
 	beforeShow({ stackIndex, dragonName }) {
@@ -899,9 +899,9 @@ const { bind: bindDragonTooltipAttrs, hide: hideDragonTooltip } = useHoverToolti
 			return !!dragonName;
 		}
 	},
-	onShow({ dragonName, subtype, fromExtras = false }) {
+	onShow({ dragonName, subtype, fromConfig = false }) {
 		hoveredDragonThing.value = [dragonName!, subtype];
-		dragonTooltipFromExtras.value = fromExtras;
+		dragonTooltipFromConfig.value = fromConfig;
 	},
 });
 
@@ -1180,7 +1180,7 @@ defineExpose({ el });
 					</component>
 				</li>
 			</ul>
-			<article ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item" :data-from-extras="itemTooltipFromExtras || undefined" :data-expanded="isTooltipExpanded || undefined">
+			<article ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item" :data-from-config="itemTooltipFromConfig || undefined" :data-expanded="isTooltipExpanded || undefined">
 				<LolItemDescription :precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined" source="Inventory" show-masterwork hover-tooltip />
 			</article>
 			<button ref="undoRemoveButton" class="restore" style="display: none" @click="undoRemove">
@@ -1304,7 +1304,7 @@ defineExpose({ el });
 					:id-suffix
 					:value
 					:is-loading="value.isLoading.value"
-					:tooltip-trigger-attrs="extraBindChampionAbilityTooltipAttrs"
+					:tooltip-trigger-attrs="configElBindChampionAbilityTooltipAttrs"
 					:show-tooltip="showChampionAbilityTooltip"
 				/>
 				<template v-else>
@@ -1363,7 +1363,7 @@ defineExpose({ el });
 				</button>
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
-					:data-from-extras="abilityTooltipFromExtras || undefined"
+					:data-from-config="abilityTooltipFromConfig || undefined"
 					:group
 					:precomputed-description="hoveredAbilityKey && (hoveredAbilityDamageSource ?? value).computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
@@ -1479,7 +1479,7 @@ defineExpose({ el });
 						ref="dragonHoverTooltip"
 						check-if-valid
 						:id-suffix
-						:data-from-extras="dragonTooltipFromExtras || undefined"
+						:data-from-config="dragonTooltipFromConfig || undefined"
 						:precomputed-description="hoveredDragonThing?.[1] === 'soul' ? value.computed.dragonSoulAbility.value : undefined"
 						:dragon="hoveredDragonThing?.[0]"
 						:type="hoveredDragonThing?.[1]"
@@ -1487,30 +1487,30 @@ defineExpose({ el });
 					/>
 				</section>
 			</div>
-			<section ref="extras" class="extras" :inert="value.isLoading.value" @focusin="tutorialEvent('extraComponentFocused', { damageSource: value.id })">
-				<Suspense v-for="(is, componentIndex) in championExtra" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
-					<component :is :id-suffix :damage-source="value" :tooltip-trigger-attrs="extraBindChampionAbilityTooltipAttrs" />
+			<section ref="configEls" class="config-els" :inert="value.isLoading.value" @focusin="tutorialEvent('configElFocused', { damageSource: value.id })">
+				<Suspense v-for="(is, componentIndex) in championConfigEls" :key="`${value.champion.value?.id ?? ''}-${componentIndex}`">
+					<component :is :id-suffix :damage-source="value" :tooltip-trigger-attrs="configElBindChampionAbilityTooltipAttrs" />
 					<template #fallback>
-						<ExtraLoading />
+						<LoadingConfigEl />
 					</template>
 				</Suspense>
 				<component
 					:is
-					v-for="[is, abilityId, componentIndex] in dragonExtras"
+					v-for="[is, abilityId, componentIndex] in dragonConfigEls"
 					:key="`${abilityId.id}-${abilityId.subtype}-${componentIndex}`"
 					:id-suffix
 					:damage-source="value"
 					:ability-id
-					:tooltip-trigger-attrs="bindDragonTooltipAttrs({ dragonName: abilityId.id, subtype: abilityId.subtype, fromExtras: true })"
+					:tooltip-trigger-attrs="bindDragonTooltipAttrs({ dragonName: abilityId.id, subtype: abilityId.subtype, fromConfig: true })"
 				/>
 				<component
 					:is
-					v-for="[is, itemId, itemIndex, componentIndex] in itemExtras"
+					v-for="[is, itemId, itemIndex, componentIndex] in itemConfgEls"
 					:key="`${itemId}-${componentIndex}`"
 					:id-suffix
 					:damage-source="value"
 					:ability-id="GameAbilityId.build(AbilityType.item, itemId)"
-					:tooltip-trigger-attrs="bindItemTooltip({ index: itemIndex, fromExtras: true })"
+					:tooltip-trigger-attrs="bindItemTooltip({ index: itemIndex, fromConfig: true })"
 				/>
 			</section>
 		</details>
@@ -2501,7 +2501,7 @@ defineExpose({ el });
 					}
 				}
 
-				.hover-tooltip.champion-ability:not([data-from-extras]) {
+				.hover-tooltip.champion-ability:not([data-from-config]) {
 					--tooltip-offset-y: -1px;
 					position-anchor: --scoreboard-item-abilities;
 				}
@@ -2796,9 +2796,9 @@ defineExpose({ el });
 				}
 			}
 
-			.extras {
-				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fill,minmax(var(--extra-item-min-w),1fr))] auto-rows-min gap-x-[--extras-gap] gap-y-[calc(var(--extras-gap)-0.5*var(--spacing))] pt-3 inline-full';
-				anchor-name: --scoreboard-item-extras;
+			.config-els {
+				--at-apply: 'col-span-full grid grid-cols-[repeat(auto-fill,minmax(var(--config-el-min-w),1fr))] auto-rows-min gap-x-[--config-els-gap] gap-y-[calc(var(--config-els-gap)-0.5*var(--spacing))] pt-3 inline-full';
+				anchor-name: --scoreboard-item-config-els;
 
 				&:empty {
 					--at-apply: 'hidden';
@@ -2824,12 +2824,12 @@ defineExpose({ el });
 		}
 	}
 
-	[data-scoreboard-item] > details[open]:not(:has(> .extras:empty)) {
+	[data-scoreboard-item] > details[open]:not(:has(> .config-els:empty)) {
 		--at-apply: 'pb-2';
 	}
 
 	[data-scoreboard-item] .abilities > :is([data-ability]:not([data-ability='passive'])),
-	[data-scoreboard-item='Aphelios'] .extras-aphelios-ability-levels {
+	[data-scoreboard-item='Aphelios'] .config-els-aphelios-ability-levels {
 		> [role='radiogroup'] {
 			--at-apply: 'flex justify-center';
 
@@ -2868,12 +2868,12 @@ defineExpose({ el });
 	}
 
 	#dialog-effects > ul > li,
-	[data-scoreboard-item] .extras {
+	[data-scoreboard-item] .config-els {
 		> article {
 			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 			--p: calc(2 * var(--spacing));
-			anchor-scope: --extra-container, --parent;
-			anchor-name: --extra-container;
+			anchor-scope: --config-els-container, --parent;
+			anchor-name: --config-els-container;
 			--ctl-btn-size: var(--fluid-28-22-t600);
 			--glow-duration: 3s;
 
@@ -2951,11 +2951,11 @@ defineExpose({ el });
 }
 
 @layer overrides {
-	[data-scoreboard-item] .hover-tooltip[data-from-extras] {
-		position-anchor: --scoreboard-item-extras;
+	[data-scoreboard-item] .hover-tooltip[data-from-config] {
+		position-anchor: --scoreboard-item-config-els;
 		inset-block-start: auto;
 		inset-block-end: calc(anchor(start) + var(--tooltip-offset-y, 0px));
-		position-try-fallbacks: --scoreboard-extra-tooltip-flip-block, --hover-tooltip-sheet;
+		position-try-fallbacks: --scoreboard-config-el-tooltip-flip-block, --hover-tooltip-sheet;
 	}
 
 	[data-scoreboard-item='Yone'] {
@@ -3095,7 +3095,7 @@ defineExpose({ el });
 		}
 
 		> :where(details) {
-			> .extras {
+			> .config-els {
 				direction: rtl;
 
 				> * {

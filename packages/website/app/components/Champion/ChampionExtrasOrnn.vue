@@ -10,7 +10,7 @@ const props = defineProps<IExtraComponentProps>();
 const maxUpgradedAllies = computed(() => CHAMPION_SPECIFICS.Ornn.passive.calculateMaxUpgradedAllies(props.damageSource));
 
 /* the `-1` value is set when the applied effect is  */
-const SlotIndexComponent = enumExtra(
+const SlotIndexComponent = enumConfigEl(
 	GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
 	'masterworkItemSlot',
 	'Masterwork item slot',
@@ -33,7 +33,7 @@ const SlotIndexComponent = enumExtra(
 		},
 	},
 );
-const UpgradedAlliesComponent = enumExtra(
+const UpgradedAlliesComponent = enumConfigEl(
 	GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0),
 	'passiveUpgradedAllies',
 	'Allies with masterwork item',

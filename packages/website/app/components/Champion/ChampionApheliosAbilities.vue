@@ -50,7 +50,7 @@ function swapMainOffhand(event: MouseEvent) {
 	abilityVariantsIndexes.w = abilityVariantsIndexes.q - abilityVariantsIndexes.w;
 	abilityVariantsIndexes.q -= abilityVariantsIndexes.w;
 
-	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w, fromExtras: false });
+	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w, fromConfig: false });
 }
 
 function replaceMainWithNext(event: MouseEvent) {
@@ -62,15 +62,15 @@ function replaceMainWithNext(event: MouseEvent) {
 	abilityVariantsIndexes.q = abilityVariantsIndexes.e;
 	abilityVariantsIndexes.e = newE;
 
-	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w, fromExtras: false });
+	props.showTooltip(event, { key: 'e', variantIndex: abilityVariantsIndexes.w, fromConfig: false });
 }
 
-const passiveTooltipTriggerBind = props.tooltipTriggerAttrs(passiveAbilityId, { fromExtras: false });
-const mainWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.q, fromExtras: false }));
-const qTooltipTriggerBind = props.tooltipTriggerAttrs(qAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.q, fromExtras: false }));
-const offhandWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.w, fromExtras: false }));
-const nextWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.e, fromExtras: false }));
-const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromExtras: false });
+const passiveTooltipTriggerBind = props.tooltipTriggerAttrs(passiveAbilityId, { fromConfig: false });
+const mainWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.q, fromConfig: false }));
+const qTooltipTriggerBind = props.tooltipTriggerAttrs(qAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.q, fromConfig: false }));
+const offhandWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.w, fromConfig: false }));
+const nextWeaponTooltipTriggerBind = props.tooltipTriggerAttrs(eAbilityId, () => ({ variantIndex: props.value.abilityVariantsIndexes.value.e, fromConfig: false }));
+const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromConfig: false });
 </script>
 
 <template>

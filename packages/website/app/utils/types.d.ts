@@ -149,13 +149,13 @@ export interface IExtraComponentProps<BindData = unknown> {
 }
 
 export interface ISpecificComponents {
-	extras?: Component | Component[];
+	config?: Component | Component[];
 	effects?: Partial<Record<EffectObjectName, Component>>;
 }
 
 export interface IScoreboardItemChampionAbilityTooltipShowData {
 	key: IChampionAbilityKey;
 	variantIndex?: number;
-	fromExtras?: boolean;
+	fromConfig?: boolean;
 	damageSource?: DamageSource;
 }

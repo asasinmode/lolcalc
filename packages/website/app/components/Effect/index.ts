@@ -11,25 +11,25 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue, maxValue, enumOptions, deriveProgressValue } = effectSpecific;
 
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] = enumOptions
-			? enumExtra(
+			? enumConfigEl(
 					abilityId,
 					0,
 					label,
 					Object.entries(enumOptions).map(([key, value]) => [value, key]),
 				)
 			: deriveProgressValue
-				? progressExtra(abilityId, 0, label, deriveProgressValue, {
+				? progressConfigEl(abilityId, 0, label, deriveProgressValue, {
 						selectEffectSourceProps: effectSpecific.sourceControls,
 						effectControlsProps: effectSpecific.effectControls,
 						derivedSymbolSuffix: effectSpecific.progressComponentSymbol,
 						onUpdate: effectSpecific.onValueUpdate,
 					})
 				: minValue !== undefined || maxValue !== undefined
-					? numberExtra(abilityId, 0, label, minValue, maxValue, undefined, {
+					? numberConfigEl(abilityId, 0, label, minValue, maxValue, undefined, {
 							onUpdate: effectSpecific.onValueUpdate,
 							effectControlsProps: effectSpecific.effectControls,
 						})
-					: booleanExtra(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate, selectEffectSourceProps: effectSpecific.sourceControls });
+					: booleanConfigEl(abilityId, 0, label, false, undefined, effectSpecific.componentTooltip, { onUpdate: effectSpecific.onValueUpdate, selectEffectSourceProps: effectSpecific.sourceControls });
 	}
 }
 

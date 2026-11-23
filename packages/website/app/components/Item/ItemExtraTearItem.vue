@@ -6,7 +6,7 @@ import type { IItemSpecific } from '@lolcalc/core/specifics/item';
 import type { TItems } from '@lolcalc/data';
 import { imgUrl, ITEMS, ITEMS_BY_NAME } from '@lolcalc/data';
 import { ITEM_NAME_TO_ID, TEAR_ITEM_TRANSFORMATIONS, TRANSFORMED_TEAR_ITEM_IDS, UNTRANSFORMED_TEAR_ITEM_IDS } from '@lolcalc/shared';
-import { CalculatorExtraNumber } from '#components';
+import { CalculatorConfigElNumber } from '#components';
 import type { IExtraComponentProps } from '~/utils/types';
 
 const props = defineProps<
@@ -50,7 +50,7 @@ const usedNumberInput = useNumberInput([props.damageSource.internalItemData as R
 </script>
 
 <template>
-	<CalculatorExtraNumber
+	<CalculatorConfigElNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
 		:img-src="[imgUrl(`img/item/${abilityId.id}.png`, true), 64]"
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
@@ -67,5 +67,5 @@ const usedNumberInput = useNumberInput([props.damageSource.internalItemData as R
 			<span> transform </span>
 			<Icon class="i-ph:arrows-clockwise-bold" />
 		</button>
-	</CalculatorExtraNumber>
+	</CalculatorConfigElNumber>
 </template>

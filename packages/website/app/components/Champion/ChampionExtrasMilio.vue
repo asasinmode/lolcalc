@@ -30,7 +30,7 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 </script>
 
 <template>
-	<article class="calc-extra-enum extras-milio-passive-ally">
+	<article class="config-el-enum extras-milio-passive-ally">
 		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="tooltipTriggerBind" />
 		<label :for="`milio-passive-ally-${idSuffix}`"> Fired Up! target ally </label>
 		<select ref="select" :id="`milio-passive-ally-${idSuffix}`" :value="allySourceId" @change="updateAllyId">
