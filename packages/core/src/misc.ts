@@ -6,6 +6,7 @@ import { ITEM_STAT_META } from '@lolcalc/data/meta.ts';
 import type { IChampionId } from '@lolcalc/data/types.js';
 import { AbilityType, CHAMPION_STAT_META, CUSTOM_EFFECT_IMAGES, ITEM_NAME_TO_ID, type TItemNameToId } from '@lolcalc/shared';
 import type { ITexture } from '@lolcalc/shared/types.d.ts';
+import type { ImgHTMLAttributes } from 'vue';
 import type { IGameAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { EFFECTS_META } from './specifics/effectsMeta.ts';
@@ -101,20 +102,6 @@ export async function gameAbilityImage(abilityId: IGameAbilityId, imgIndex?: num
 	];
 }
 
-export async function gameAbilityImgAttrs(abilityId: IGameAbilityId) {
-	const img = await gameAbilityImage(abilityId);
-
-	if (Array.isArray(img)) {
-		return {
-			src: img[0],
-			width: img[1],
-			height: img[2] ?? img[1],
-		};
-	} else {
-		return img;
-	}
-}
-
 /** used for creating a _game ability_ image string that will be parsed by `simpleDescriptionFormatting` */
 export function simpleFormattingGameAbilityImage(abilityId: IGameAbilityId) {
 	return `%a:${GameAbilityId.stringify(abilityId)}%`;
@@ -167,22 +154,32 @@ export async function simpleDescriptionFormatting(text: string, addAlt?: boolean
 	return parts.join('');
 }
 
-function formatImageHtml(imageInfo: any, addAlt?: boolean, textureSize = 20) {
+function formatImageHtml(imageInfo: IGameImageData, addAlt?: boolean, textureSize = 20) {
+	return `<img ${Object.entries(formatImageAttrs(imageInfo, addAlt, textureSize))
+		.map(
+			([attr, value]) =>
+				`${attr}="${
+					typeof value === 'object'
+						? Object.entries(value)
+								.map(([k, v]) => `${k}: ${v}`)
+								.join('; ')
+						: value
+				}"`,
+		)
+		.join(' ')}>`;
+}
+
+export function formatImageAttrs(imageInfo: IGameImageData, addAlt = true, textureSize = 20): ImgHTMLAttributes {
 	if (Array.isArray(imageInfo)) {
-		return `<img src="${imageInfo[0]}" width="${imageInfo[1]}" height="${imageInfo[2] ?? imageInfo[1]}"${addAlt ? ` title="${imageInfo[3] ?? 'unknown'}" alt="${imageInfo[3] ?? 'unknown'} icon"` : ''}>`;
-	} else {
-		const nameAttr = imageInfo.abilityName ?? imageInfo.championName ?? imageInfo.name ?? 'unknown';
-		return `<img ${Object.entries(textureBgImageAttrs(imageInfo, textureSize))
-			.map(
-				([attr, value]) =>
-					`${attr}="${
-						typeof value === 'string'
-							? value
-							: Object.entries(value)
-									.map(([vAttr, vValue]) => `${vAttr}: ${vValue}`)
-									.join('; ')
-					}"`,
-			)
-			.join(' ')}${addAlt ? ` alt="${nameAttr} icon"` : ''}>`;
+		const name = imageInfo[3] ?? 'unknown';
+		return {
+			src: imageInfo[0],
+			width: imageInfo[1],
+			height: imageInfo[2] ?? imageInfo[1],
+			...(addAlt && { title: name, alt: `${name} icon` }),
+		};
 	}
+
+	const name = imageInfo.abilityName ?? 'unknown';
+	return Object.assign(textureBgImageAttrs(imageInfo, textureSize), addAlt ? { title: name, alt: `${name} icon` } : undefined);
 }
