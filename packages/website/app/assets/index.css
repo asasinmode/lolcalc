@@ -296,7 +296,13 @@
 		justify-self: center;
 	}
 
-	/* for scoreboard items tooltip from config elements. Needs a different offset to align with the bottom border of configelements */
+	/* for scoreboard items champion ability tooltip. Needs a different offset to align with the bottom border of the stats panel */
+	@position-try --scoreboard-champion-ability-tooltip-flip-block {
+		inset-block-start: auto;
+		inset-block-end: calc(anchor(start) - 1px);
+	}
+
+	/* for scoreboard items tooltip from config elements. Needs a different offset to align with the bottom border of config elements */
 	@position-try --scoreboard-config-el-tooltip-flip-block {
 		inset-block-end: auto;
 		inset-block-start: calc(anchor(end) - 1px);

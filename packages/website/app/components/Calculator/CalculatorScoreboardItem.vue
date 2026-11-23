@@ -2502,8 +2502,8 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.champion-ability:not([data-from-config]) {
-					--tooltip-offset-y: -1px;
 					position-anchor: --scoreboard-item-abilities;
+					position-try: --scoreboard-champion-ability-tooltip-flip-block, --hover-tooltip-sheet;
 				}
 			}
 
