@@ -1397,9 +1397,15 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		),
 	};
 
+	damageOutputVarsHooks = {
+		item: computed((): IDamageOutputVarsHook[] => this.items.value.map((item) => (item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.damageOutputVars)!).filter(Boolean)),
+		// TODO champion & effect hooks, return concated
+		all: computed((): IDamageOutputVarsHook[] => this.damageOutputVarsHooks.item.value),
+	};
+
 	basicAttackHooks = {
 		item: computed((): IBasicAttackVarsHook[] => this.items.value.map((item) => (item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.basicAttackVars)!).filter(Boolean)),
-		// todo champion & effect hooks, return concated
+		// TODO champion & effect hooks, return concated
 		all: computed((): IBasicAttackVarsHook[] => this.basicAttackHooks.item.value),
 	};
 

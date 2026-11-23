@@ -34,8 +34,8 @@ export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 	// horizon focus dmg amp
 	// imperial mandate dmg amp
 	// bloodsong dmg amp
-	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// ldr & custom variable from it
+	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// champion passives - ashe, akshan, braum, corki, graves, irelia, jinx, locke, orianna, tahm kench, volibear, warwick
 	// sion passive
 	// amumu passive
@@ -49,9 +49,8 @@ export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 	const rv: IDamageOutputVars = {};
 
-	// store damage output vars in computed then loop over them here instead of every time this is reran
-	for (const item of self.items.value) {
-		item && (ITEM_SPECIFICS as Record<string, IItemSpecific>)[item.id]?.damageOutputVars?.(self, rv, self.calculationDamageTarget.value);
+	for (const hook of self.damageOutputVarsHooks.all.value) {
+		hook(self, rv, self.calculationDamageTarget.value);
 	}
 
 	return rv;
