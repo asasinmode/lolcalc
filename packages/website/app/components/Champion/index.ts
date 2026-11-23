@@ -5,12 +5,12 @@ import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '@lolcalc/core/specifics/effect'
 import { ITEMS_BY_NAME } from '@lolcalc/data/index';
 import type { IChampionId } from '@lolcalc/data/types';
 import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared';
-import { ChampionExtrasAphelios, ChampionExtrasKhaZix, ChampionExtrasOrnn, ChampionExtrasTargetDummy, ChampionExtrasViktor, ChampionExtrasMilio, ChampionExtrasKayn } from '#components';
+import { ChampionConfigAphelios, ChampionConfigKhaZix, ChampionConfigOrnn, ChampionConfigTargetDummy, ChampionConfigViktor, ChampionConfigMilio, ChampionConfigKayn } from '#components';
 import type { ISpecificComponents } from '~/utils/types';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	TargetDummy: {
-		config: ChampionExtrasTargetDummy,
+		config: ChampionConfigTargetDummy,
 	},
 	Akali: {
 		config: [
@@ -49,7 +49,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Anivia', 'passive', 0), 'isEgg', 'is egg', false),
 	},
 	Aphelios: {
-		config: ChampionExtrasAphelios,
+		config: ChampionConfigAphelios,
 	},
 	Ashe: {
 		config: progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0), 'frostShot', 'apply Frost Shot on target', CHAMPION_SPECIFICS.Ashe.passive.derivedSlow),
@@ -160,14 +160,14 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 				Object.entries(CHAMPION_SPECIFICS.Kayn.passive.formOptions).map(([key, value]) => [value, key]),
 				{ variantImgIndex: CHAMPION_SPECIFICS.Kayn.passive.abilityImgVariantIndex },
 			),
-			ChampionExtrasKayn,
+			ChampionConfigKayn,
 		],
 	},
 	Kindred: {
 		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
 	},
 	Khazix: {
-		config: ChampionExtrasKhaZix,
+		config: ChampionConfigKhaZix,
 	},
 	Kled: {
 		config: [
@@ -203,7 +203,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		}),
 	},
 	Milio: {
-		config: ChampionExtrasMilio,
+		config: ChampionConfigMilio,
 	},
 	Mordekaiser: {
 		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'active (3 hits)', false),
@@ -240,7 +240,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Ornn: {
-		config: ChampionExtrasOrnn,
+		config: ChampionConfigOrnn,
 	},
 	Poppy: {
 		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Poppy', 'passive', 0), 'isPassiveActive', 'Iron Ambassador active', false),
@@ -362,7 +362,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		],
 	},
 	Viktor: {
-		config: ChampionExtrasViktor,
+		config: ChampionConfigViktor,
 	},
 	Volibear: {
 		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Volibear', 'passive', 0), 'passiveStacks', 'Relentless Storm stacks', 0, CHAMPION_SPECIFICS.Volibear.passive.maxStacks),
