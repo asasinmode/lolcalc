@@ -907,6 +907,7 @@ export const VariableType = {
 	hpRegen: 'hpRegen',
 	affectedByTenacity: 'affectedByTenacity',
 	affectedBySlowResist: 'affectedBySlowResist',
+	magicShield: 'magicShield',
 } as const;
 
 export type VariableType = (typeof VariableType)[keyof typeof VariableType];

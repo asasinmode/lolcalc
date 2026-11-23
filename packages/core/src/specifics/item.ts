@@ -3193,6 +3193,11 @@ export const ITEM_SPECIFICS = {
 					f5: { value: 0 },
 				};
 			},
+			meta: {
+				ShieldAmountCalc: {
+					type: VariableType.magicShield,
+				},
+			},
 			uninteresting: ['f5', 'ShieldDuration'],
 		}),
 	},

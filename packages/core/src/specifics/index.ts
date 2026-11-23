@@ -306,6 +306,9 @@ export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalMod
 	[VariableType.shield](value, _meta, self) {
 		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
 	},
+	[VariableType.magicShield](value, _meta, self) {
+		return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.shieldMult ?? 1);
+	},
 	/* used directly in the `sourceDamageBasicAttackVars`, will throw if doesn't exist */
 	[VariableType.magic](value, _meta, self, damageTarget) {
 		const { percentMagicPen, flatMagicPen } = self.stats.value.total;
