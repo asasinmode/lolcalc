@@ -251,11 +251,9 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'mbs-[1em]';
 		}
 
-		> p + p,
-		> dl p + p,
+		p + p,
 		ul + p,
-		ol + p,
-		> details > p + p {
+		ol + p {
 			--at-apply: 'mbs-[1em]';
 		}
 
@@ -377,12 +375,16 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 	#guide {
 		.game-description {
 			--at-apply: 'text-neutral-200';
+		}
 
-			img {
+		.game-description,
+		li,
+		p {
+			img[title] {
 				--at-apply: 'inline-block size-5 me-[0.5ch] -translate-y-px';
 			}
 
-			.code-like img {
+			.code-like img[title] {
 				--at-apply: 'me-0';
 			}
 		}

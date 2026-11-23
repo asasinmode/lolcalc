@@ -8,15 +8,15 @@ import { AbilityType } from '@lolcalc/shared/index';
 const props = defineProps<{
 	abilityId: IGameAbilityId;
 	name?: string;
-	link?: boolean;
+	noLink?: boolean;
 }>();
 
 const { data: attrs } = useAsyncData(`game-ability-img-${GameAbilityId.stringify(props.abilityId)}`, async () => formatImageAttrs(await gameAbilityImage(props.abilityId)));
 
 const name = props.abilityId.type === AbilityType.item ? ITEMS[props.abilityId.id]?.name : props.abilityId.type === AbilityType.champion ? CHAMPIONS[props.abilityId.id].name : undefined;
-const Name = () => name ?? h('unknown', 'unknown');
+const Name = () => (name ? (props.name ?? name) : h('unknown', 'unknown'));
 
-const href = name && props.link ? `https://wiki.leagueoflegends.com/en-us/${name.replaceAll(' ', '_')}` : undefined;
+const href = !name || props.noLink ? undefined : `https://wiki.leagueoflegends.com/en-us/${name.replaceAll(' ', '_')}`;
 </script>
 
 <template>

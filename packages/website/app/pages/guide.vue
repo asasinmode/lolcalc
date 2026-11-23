@@ -2,10 +2,16 @@
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { linkedFormattedItemImage, linkedFormattedChampionImage, simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { STAT_ICON } from '@lolcalc/data/index';
-import { AbilityType } from '@lolcalc/shared/index';
+import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared/index';
 import { resetTutorialStep } from '~/utils/tutorial';
 
 useHashTargetHighlighting();
+
+const abilityId = {
+	serpentsFang: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
+	frozenHeart: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart),
+	steraksGage: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.steraksGage),
+};
 
 function resetTutorial(event: MouseEvent) {
 	const button = event.currentTarget as HTMLElement;
@@ -38,10 +44,6 @@ const guideDefinitionConfigElSnapshot = useSimpleDescription(
 const tutorialApplyEffectSelectEffect = useSimpleDescription(
 	'tutorial-apply-effect-select-effect',
 	`Either search for or find ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and set a non-0 number of stacks. Close the dialog and the applied effects' icons will appear above the stats panel.`,
-);
-const tutorialApplyEffectChampionModified = useSimpleDescription(
-	'tutorial-apply-effect-champion-modified',
-	`At this point, the champion's modified <attackspeed>%i:${STAT_ICON.attackSpeed}%attack speed</attackspeed> and <scalearmor>%i:${STAT_ICON.armor}%armor</scalearmor> should already be visible. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the other side of the <i>scoreboard</i> for easier comparison. `,
 );
 const tutorialExternalEffectExtraExample = useSimpleDescription(
 	'guide-tutorial-external-effect-extra-example',
@@ -201,8 +203,11 @@ const applyXOnTargetStepConfigs = {
 					<div class="tmp-image" />
 				</li>
 				<li>
-					<span class="game-description" v-html="tutorialApplyEffectChampionModified" />
-					<NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
+					<p class="game-description">
+						At this point, the champion's modified <attackspeed><StatIcon :icon="STAT_ICON.attackSpeed" />attack speed</attackspeed> and <scalearmor><StatIcon :icon="STAT_ICON.armor" />armor</scalearmor> should already be visible. If you're
+						not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the
+						other side of the <i>scoreboard</i> for easier comparison. <NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
+					</p>
 					<p class="alert info">
 						The effects can be quickly (but in limited manner) modified by clicking on their icons above the stat panel. Left click increments the effect's value, right click decrements it. Holding [<kbd>Ctrl</kbd>] while clicking changes
 						the value by +/- 10 (if possible).
@@ -227,52 +232,57 @@ const applyXOnTargetStepConfigs = {
 		<details>
 			<summary id="apply-x-on-target">"apply X on target" items or abilities and "flip results"</summary>
 			<p>
-				Some items, like <b>Serpent's Fang</b> can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for
-				<i>source</i> or <i>target</i>, it's important to note that
+				Some items, like <GameAbilityImg :ability-id="abilityId.serpentsFang" />, can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle
+				between displaying values for <i>source</i> or <i>target</i>, it's important to note that
 			</p>
 			<p class="alert info">
 				<strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i> won't apply that effect onto the source, regardless of if the results are flipped
 				<Icon class="i-ph:info" />
 			</p>
-			<p>For example, both <b>Serpent's Fang</b> and <b>Frozen Heart</b> allow for applying its effect to the target. If you were to:</p>
+			<p>For example, both <GameAbilityImg :ability-id="abilityId.serpentsFang" /> and <GameAbilityImg :ability-id="abilityId.frozenHeart" /> allow for applying its effect to the target. If you were to:</p>
 			<ol>
 				<li>
-					Configure a <i>damage source</i> with any champion and <b>Serpent's Fang</b>, then check the <b>"apply Serpent's Venom on target"</b>. <NuxtLink :to="applyXOnTargetStepConfigs.serpentSource" target="_blank">config</NuxtLink>
+					Configure a <i>damage source</i> with any champion and <GameAbilityImg :ability-id="abilityId.serpentsFang" />, then check the <b>"apply Serpent's Venom on target"</b>.
+					<NuxtLink :to="applyXOnTargetStepConfigs.serpentSource" target="_blank">config</NuxtLink>
 				</li>
 				<li>
-					Configure a <i>damage target</i> with <b>Frozen Heart</b> and <b>Sterak's Gage</b> (so we can see reduced shield value), then check its <b>"apply Winter's Caress on target"</b>.
+					Configure a <i>damage target</i> with <GameAbilityImg :ability-id="abilityId.frozenHeart" /> and <GameAbilityImg :ability-id="abilityId.steraksGage" /> (to later see the reduced shield value), then check its
+					<b>"apply Winter's Caress on target"</b>.
 					<NuxtLink :to="applyXOnTargetStepConfigs.configuredTarget" target="_blank">config</NuxtLink>
 					<!-- image of both source and the target configured, maybe source in its own image in first step if hard to see -->
 					<div class="tmp-image" />
 				</li>
 				<li>
-					In the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <b>Serpent's Fang</b> and the <i>target</i> set to the one with <b>Frozen Heart</b> and <b>Sterak's Gage</b>.
-					Additionally, add a second column and set <u>only its target</u> to the same one the first column has. <NuxtLink :to="applyXOnTargetStepConfigs.configuredColumns" target="_blank">config</NuxtLink>
+					In the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <GameAbilityImg :ability-id="abilityId.serpentsFang" />, and the <i>target</i> set to the one with
+					<GameAbilityImg :ability-id="abilityId.frozenHeart" /> and <GameAbilityImg :ability-id="abilityId.steraksGage" />. Additionally, add a second column and set <u>only its target</u> to the same one the first column has.
+					<NuxtLink :to="applyXOnTargetStepConfigs.configuredColumns" target="_blank">config</NuxtLink>
 				</li>
 				<li>
-					<p>Use the <i>new section select</i> to add <b>Sterak's Gage</b>. <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink></p>
+					<p>Use the <i>new section select</i> to add <GameAbilityImg :ability-id="abilityId.steraksGage" />. <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink></p>
 					<!-- results with 2 columns and sterak section -->
 					<div class="tmp-image" />
 					<p>
 						While the <i>flip results</i> is <u>unchecked</u>, the <span class="code-like">ShieldSize</span> variable's value in the first column will be <span class="code-like">n/a</span>, as the results are being shown for the
-						<i>damage source</i>, which only has <b>Serpent's Fang</b>. In the second column, the value will be <span class="code-like">-</span> as it has no <i>source</i> set.
+						<i>damage source</i>, which only has <GameAbilityImg :ability-id="abilityId.serpentsFang" />. In the second column, the value will be <span class="code-like">-</span> as it has no <i>source</i> set.
 					</p>
 				</li>
 				<li>
-					<u>Check</u> the <i>flip results</i> in the top left corner. The value of <span class="code-like">ShieldSize</span> in the first column with <b>Serpent's Fang</b> will be smaller than the one in the second. The first column has a
-					<i>source</i> actively applying <b>Serpent's Venom</b>, the second is the original, unmodified <b>Lifeline</b> shield. <NuxtLink :to="applyXOnTargetStepConfigs.resultsFlipped" target="_blank">config</NuxtLink>
+					<u>Check</u> the <i>flip results</i> in the top left corner. The value of <span class="code-like">ShieldSize</span> in the first column with <GameAbilityImg :ability-id="abilityId.serpentsFang" /> will be smaller than the one in
+					the second. The first column has a <i>source</i> actively applying <b>Serpent's Venom</b>, the second is the original, unmodified <b>Lifeline</b> shield.
+					<NuxtLink :to="applyXOnTargetStepConfigs.resultsFlipped" target="_blank">config</NuxtLink>
 					<!-- same image as the previous one but flipped, hovering over the shieldsize var -->
 					<div class="tmp-image" />
 				</li>
 				<li>
 					Finally, <u>uncheck</u> the <i>flip results</i> checkbox, then add the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row. The value it shows is the same one the <i>stats panel</i> of the configured
-					<i>damage source</i> has, even though the <i>target</i> has <b>Frozen Heart's</b> passive checked to apply. <NuxtLink :to="applyXOnTargetStepConfigs.sourceStatsAttackSpeed" target="_blank">config</NuxtLink>
+					<i>damage source</i> has, even though the <i>target</i> has <GameAbilityImg :ability-id="abilityId.frozenHeart" name="Frozen Heart's" /> passive checked to apply.
+					<NuxtLink :to="applyXOnTargetStepConfigs.sourceStatsAttackSpeed" target="_blank">config</NuxtLink>
 					<!-- only stats section scrolled to attack speed, arrow pointing to ambesa having the same -->
 					<div class="tmp-image" />
 				</li>
 			</ol>
 			<p>
-				Again, this is because <strong>applying an effect on target works only in one direction</strong>. A <i>source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against.
+				Again, this is because <span class="error-margin">applying an effect on target works only in one direction</span>. A <i>source</i> can apply its items' and abilities' effects to every <i>target</i> it's being calculated against.
 				<i>Target's</i> "apply X to target" are ignored, even with <i>table results</i> flipped.
 			</p>
 			<p class="alert info">
