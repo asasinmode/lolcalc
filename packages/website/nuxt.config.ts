@@ -1,3 +1,5 @@
+import { KNOWN_GAME_DESCRIPTION_TAGS } from './external.ts';
+
 export default defineNuxtConfig({
 	compatibilityDate: '2025-07-15',
 	devtools: { enabled: true },
@@ -41,7 +43,7 @@ export default defineNuxtConfig({
 	vue: {
 		vapor: true,
 		compilerOptions: {
-			isCustomElement: (tag) => ['unknown', 'rules'].includes(tag.toLowerCase()),
+			isCustomElement: (tag) => KNOWN_GAME_DESCRIPTION_TAGS.concat(['unknown', 'rules']).includes(tag.toLowerCase()),
 		},
 	},
 	typescript: {
