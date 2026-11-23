@@ -28,7 +28,7 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 </script>
 
 <template>
-	<article class="extras-viktor-passive-ability-upgrades">
+	<article class="config-el-khazix-evolves">
 		<img :src="abilityImage(damageSource.computed.abilities.value.r[damageSource.abilityVariantsIndexes.value.r]!.image, 'Khazix')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="tooltipTriggerBind" />
 		<h5>abilities evolved</h5>
 		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">
@@ -40,7 +40,7 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='Khazix'] .extras-viktor-passive-ability-upgrades {
+	[data-scoreboard-item='Khazix'] .config-el-khazix-evolves {
 		--at-apply: 'grid grid-cols-[auto_1fr_1fr] grid-rows-[auto_1fr_1fr]';
 
 		> h5 {

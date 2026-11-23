@@ -79,7 +79,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 		title: 'configuring passives',
 		type: 'damageSource',
 		text: 'some abilities, items or effects are configurable through elements that will be shown below the general configuration<br> <rules>if you\'re unsure of what a config element\'s part does, take a look at their <a href="/guide#config-element" target="_blank">guide page entry</a></rules>',
-		anchor: '.extras > :first-child',
+		anchor: '.config-els > :first-child',
 		pendingIf: (calculatorState) =>
 			calculatorState.damageSources.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS) ||
 			calculatorState.damageTargets.some((source) => source.champion.value?.id && source.champion.value.id in CHAMPION_COMPONENTS),
@@ -100,7 +100,7 @@ export const tutorialSteps: Record<ITutorialStepId, ITutorialStepDef> = {
 			`some effects say <strong>"apply X <u>on target</u>"</strong>. Configuring them applies that effect to all <i>targets</i> this <i>source</i> is calculated against in the <i>results table</i>. <lifesteal>It's not reflected in the scoreboard</lifesteal><br><br> for example, every <i>target</i> this <i>source</i> hits could have 5 stacks of ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} Carve, without having to add it to all of them manually <p class="alert warning">configuring an effect here <strong>overrides</strong> that effect on a target. Even if the target has 2 Carve stacks, if a non-empty value is set here, it will be used instead (only for the <i>results table</i>)<span class="icon i-ph:warning-fill" aria-hidden="true"></span></p> <rules>all effects can be applied individually in the <i>effects dialog</i> (opened with the <b>"effects"</b> button)</rules>`,
 			true,
 		),
-		anchor: ".extras > [data-effect-on-target='true']",
+		anchor: ".config-els > [data-effect-on-target='true']",
 		pendingIf: () => true,
 	},
 	changeChampionLevel: {

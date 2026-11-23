@@ -37,7 +37,7 @@ const passiveTooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraCo
 </script>
 
 <template>
-	<article class="extras-viktor-passive-ability-upgrades">
+	<article class="config-el-viktor-passive-ability-upgrades">
 		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Viktor')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="passiveTooltipTriggerBind" />
 		<h5>abilities evolved</h5>
 		<label v-for="(abilityKey, abilityIndex) in ['q', 'w', 'e', 'r'] satisfies IChampionAbilityKey[]" :key="abilityKey" :for="`evolve-${abilityKey}-${idSuffix}`">
@@ -49,7 +49,7 @@ const passiveTooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraCo
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='Viktor'] .extras-viktor-passive-ability-upgrades {
+	[data-scoreboard-item='Viktor'] .config-el-viktor-passive-ability-upgrades {
 		--at-apply: 'grid grid-cols-[auto_1fr_1fr] grid-rows-[auto_1fr_1fr]';
 
 		> h5 {

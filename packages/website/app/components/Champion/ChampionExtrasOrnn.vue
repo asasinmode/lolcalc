@@ -54,7 +54,7 @@ const masterworkLevel = (props.damageSource as DamageSource<'Ornn'>).internalDat
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='Ornn'] .extras > :nth-child(-n + 2) {
+	[data-scoreboard-item='Ornn'] .config-els > :nth-child(-n + 2) {
 		> p {
 			--at-apply: 'col-start-2 row-start-2 col-span-3 z-1 relative text-center h-9 grid-center -mt-1 whitespace-nowrap bg-black/20 backdrop-blur-2 -mx-1 font-500';
 			paint-order: stroke fill;

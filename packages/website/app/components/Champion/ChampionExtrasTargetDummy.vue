@@ -109,7 +109,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 </script>
 
 <template>
-	<article ref="el" class="extras-target-dummy-stats">
+	<article ref="el" class="config-el-target-dummy-stats">
 		<header>
 			<form @submit.prevent="copyFrom">
 				<label :for="`copy-from-${idSuffix}`"> copy from </label>
@@ -143,7 +143,7 @@ function updateStat(statName: IChampionStatName | undefined, value: number, inpu
 
 <style>
 @layer overrides {
-	[data-scoreboard-item='TargetDummy'] .extras-target-dummy-stats {
+	[data-scoreboard-item='TargetDummy'] .config-el-target-dummy-stats {
 		--at-apply: 'col-span-full max-inline-none grid grid-cols-[repeat(auto-fill,minmax(135px,1fr))] auto-rows-min gap-x-3.5 gap-y-2.5 py-[--p]';
 
 		> header {

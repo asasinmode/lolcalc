@@ -45,7 +45,7 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 </script>
 
 <template>
-	<article class="extras-aphelios-ability-levels">
+	<article class="config-el-aphelios-ability-levels">
 		<img :src="abilityImage(damageSource.computed.abilities.value.passive[damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')" :width="imgSize" :height="imgSize" aria-hidden="true" v-bind="tooltipTriggerBind" />
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup
@@ -71,13 +71,13 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 		</VButtonRadiogroup>
 		<span aria-hidden="true">ability levels</span>
 	</article>
-	<GravitumSlowComponent v-if="showGravitumComponent" v-bind="$props" :override-damage-source="gravitumDamageSource" class="extras-aphelios-gravitum-slow" />
+	<GravitumSlowComponent v-if="showGravitumComponent" v-bind="$props" :override-damage-source="gravitumDamageSource" class="config-el-aphelios-gravitum-slow" />
 </template>
 
 <style>
 @layer overrides {
 	[data-scoreboard-item='Aphelios'] {
-		.extras-aphelios-ability-levels {
+		.config-el-aphelios-ability-levels {
 			--at-apply: 'grid grid-cols-[auto_max-content_minmax(0,1fr)] grid-rows-[1fr_auto_1fr] gap-y-0.75 relative grid-flow-col';
 
 			> img {
@@ -109,7 +109,7 @@ const tooltipTriggerBind = (props.tooltipTriggerAttrs as Extract<IExtraComponent
 			}
 		}
 
-		.extras-aphelios-gravitum-slow {
+		.config-el-aphelios-gravitum-slow {
 			> img {
 				--at-apply: 'rounded-full';
 			}
