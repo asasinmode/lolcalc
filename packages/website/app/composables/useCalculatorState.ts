@@ -588,7 +588,7 @@ export function useManageCalculatorState(state = useCalculatorState()) {
 		const savedCustomTotalRows = params.get('tblCTtl');
 		if (savedCustomTotalRows?.length) {
 			restoreSavedCustomTotalRows.value = () => {
-				for (const totalRow of savedCustomTotalRows.split('_')) {
+				for (const totalRow of savedCustomTotalRows.split('*')) {
 					const [rawSectionIndex, rawRowIndex] = totalRow.split('-');
 					const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
 					const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
