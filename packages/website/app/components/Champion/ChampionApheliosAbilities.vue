@@ -21,7 +21,6 @@ const qAbilityId = GameAbilityId.build('champion', 'Aphelios', 'q', 0);
 const eAbilityId = GameAbilityId.build('champion', 'Aphelios', 'e', 0);
 const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);
 
-const enableUnimplementedUi = useEnableUnimplementedUi();
 const { abilityImage, abilityImageSize } = CHAMPION_IMAGES;
 
 const abilitySize = abilityImageSize('Aphelios');
@@ -86,7 +85,7 @@ const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromConfig: 
 		<NuxtLink v-show="value.champion.value" class="wiki-link" :to="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`" target="_blank">wiki</NuxtLink>
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
-	<div class="aphelios-q" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
+	<div class="aphelios-q" :data-level="value.level.value >= 2 ? 1 : undefined">
 		<h5 v-html="`main weapon: ${weaponNames.main}`" />
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
@@ -104,7 +103,7 @@ const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromConfig: 
 			v-bind="qTooltipTriggerBind"
 		/>
 	</div>
-	<div class="aphelios-w" :inert="!enableUnimplementedUi">
+	<div class="aphelios-w">
 		<h5>W</h5>
 		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
 		<button title="swap with main" @click="swapMainOffhand" v-bind="offhandWeaponTooltipTriggerBind">
@@ -127,7 +126,7 @@ const rTooltipTriggerBind = props.tooltipTriggerAttrs(rAbilityId, { fromConfig: 
 			/>
 		</button>
 	</div>
-	<div class="aphelios-r" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
+	<div class="aphelios-r" :data-level="value.abilityLevels.value.r || undefined">
 		<h5>R</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.computed.abilities.value.r[value.abilityVariantsIndexes.value.r]!.image, 'Aphelios') : undefined"

@@ -57,7 +57,7 @@ const emit = defineEmits<{
 	dragonsFocused: [];
 }>();
 
-const enableUnimplementedUi = useEnableUnimplementedUi();
+const enableRunePaths = useEnableRunePaths();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { championImage, abilityImage, abilityImageSize, championImageSize } = CHAMPION_IMAGES;
 const { vSemver, vMinor } = PATCH_VERSION;
@@ -131,7 +131,7 @@ const runePathSecondary = computed(() => {
 	return undefined;
 });
 
-const areRunesInvalid = computed(() => (enableUnimplementedUi.value ? props.value.runesInvalid.value : props.value.runeShardsInvalid.value));
+const areRunesInvalid = computed(() => (enableRunePaths.value ? props.value.runesInvalid.value : props.value.runeShardsInvalid.value));
 
 const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
 
@@ -1217,11 +1217,11 @@ defineExpose({ el });
 				<h4>runes</h4>
 				<dl @click="openRuneSelect">
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
-						<dt :inert="!enableUnimplementedUi && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
+						<dt :inert="!enableRunePaths && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
 							<img v-if="championRune" :src="championRune.icon" :width="championRune.iconDimensions || 80" :height="championRune.iconDimensions || 80" loading="lazy" />
 						</dt>
-						<dd :inert="!enableUnimplementedUi && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
+						<dd :inert="!enableRunePaths && runeIndex !== 6" v-bind="bindRuneTooltipAttrs(championRune)">
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>

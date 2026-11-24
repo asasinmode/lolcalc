@@ -6,11 +6,22 @@ import { PATCH_VERSION, RUNES, TEXT } from '@lolcalc/data';
 import type { IChampionRunes, IRune, IRuneShard, IRuneShardSlotName, IRuneSlotName } from '@lolcalc/data/types';
 import type { StyleValue, UnwrapRef } from 'vue';
 
-const enableUnimplementedUi = useEnableUnimplementedUi();
+const enableRunePaths = useEnableRunePaths();
 const { vMinor } = PATCH_VERSION;
 
 const value = defineModel<IChampionRunes>();
 const vDialog = useTemplateRef('vDialog');
+
+onMounted(() => {
+	const savedValue = localStorage.getItem('lolcalc-enable-rune-paths');
+	if (savedValue === 'false') {
+		enableRunePaths.value = false;
+	}
+});
+
+function setLocalEnableRunePaths(event: Event) {
+	localStorage.setItem('lolcalc-enable-rune-paths', (event.target as HTMLInputElement).checked.toString());
+}
 
 const pathOptions = Object.values(RUNES.paths).map((path) => {
 	const { name, tooltip } = TEXT.runes.paths[path.name]!;
@@ -221,7 +232,7 @@ const { bind: bindRuneTooltipAttrs } = useHoverTooltip<IHoveredRuneOption>({
 	},
 });
 
-const configurationInvalid = computed(() => value.value && (enableUnimplementedUi.value ? runesInvalid(value.value) : runeShardsInvalid(value.value.shards)));
+const configurationInvalid = computed(() => value.value && (enableRunePaths.value ? runesInvalid(value.value) : runeShardsInvalid(value.value.shards)));
 
 const { bind: bindUnimplementedTriggerAttrs, bindPopover: bindUnimplementedPopoverAttrs } = useInfoTooltip();
 
@@ -245,7 +256,7 @@ defineExpose({
 				</button>
 			</form>
 			<label for="scoreboard-enable-unimplemented-ui" aria-describedby="unimplemented-ui-tooltip">
-				<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox" />
+				<input id="scoreboard-enable-unimplemented-ui" v-model="enableRunePaths" type="checkbox" @change="setLocalEnableRunePaths" />
 				enable rune paths UI
 				<Icon class="i-ph:question-fill" tabindex="0" v-bind="bindUnimplementedTriggerAttrs(undefined, true)" />
 				<p id="unimplemented-ui-tooltip" popover="hint" class="hover-tooltip custom game-description" v-bind="bindUnimplementedPopoverAttrs()">
@@ -255,7 +266,7 @@ defineExpose({
 			</label>
 		</header>
 		<ComingSoonCover style="grid-area: primary" feature="Primary path" />
-		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
+		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableRunePaths">
 			<h2>Primary</h2>
 			<VButtonRadiogroup
 				id="rune-select-primary-path"
@@ -293,7 +304,7 @@ defineExpose({
 			</VButtonRadiogroup>
 		</section>
 		<ComingSoonCover style="grid-area: secondary" feature="Secondary path" />
-		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length" :inert="!enableUnimplementedUi">
+		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length" :inert="!enableRunePaths">
 			<h2>Secondary</h2>
 			<VButtonRadiogroup
 				id="rune-select-secondary-path"

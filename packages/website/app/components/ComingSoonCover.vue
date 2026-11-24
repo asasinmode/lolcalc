@@ -3,11 +3,11 @@ defineProps<{
 	feature: string;
 }>();
 
-const enableUnimplementedUi = useEnableUnimplementedUi();
+const enableRunePaths = useEnableRunePaths();
 </script>
 
 <template>
-	<div v-if="!enableUnimplementedUi" class="coming-soon-cover">
+	<div v-if="!enableRunePaths" class="coming-soon-cover">
 		<span>{{ feature }}</span>
 		<p>
 			not implemented <br />
