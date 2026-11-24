@@ -37,14 +37,28 @@ export default {
 			uninteresting: ['MaxStackAmount', 'MarkDuration', 'PassiveMarkCooldown', 'PassiveStacksPerLevel', 'StackPerSiege', 'CapstoneAPPerc'],
 		}),
 	},
+	q: {
+		variables: defineChampionVariables<'Syndra', typeof ISyndra, 'q'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+			},
+			/* `Q1UpgradeThreshold` is from passive */
+			uninteresting: ['SphereDuration', 'Q1UpgradeThreshold' as any, 'Upgrade1MaxAmmo'],
+		}),
+	},
 	w: {
 		variables: defineChampionVariables<'Syndra', typeof ISyndra, 'w'>()({
 			known: {
 				f2: [],
 				f3: [0, 1],
+				EvolvedBonusTrueDamage: [],
 			},
 			calculate(self) {
 				let f3 = Number.NaN;
+				let EvolvedBonusTrueDamage = Number.NaN;
+
 				const wUpgradeThreshold = championAbilityVariableValue('WUpgradeThreshold', {
 					abilityKey: 'passive',
 					abilityVariant: self.champion.value!.abilities.passive.variants[0]!,
@@ -57,6 +71,15 @@ export default {
 					console.warn('[CHAMPION_SPECIFICS syndra] failed to calculate w upgrade threshold', wUpgradeThreshold);
 				}
 
+				const wParams: IGameVariableValueParameters['championAbility'] = { abilityKey: 'w', abilityVariant: self.champion.value!.abilities.w.variants[0]!, damageSource: self };
+				const baseDmg = championAbilityVariableValue('ThrowDamage', wParams);
+				const bonusTruePercent = championAbilityVariableValue('TOOLTIPONLYPassiveBonusPercent', wParams);
+				if (typeof baseDmg.value === 'number' && typeof bonusTruePercent.value === 'number') {
+					EvolvedBonusTrueDamage = baseDmg.value * bonusTruePercent.value;
+				} else {
+					console.warn('[CHAMPION_SPECIFICS syndra] failed to calculate w true damage vars', { baseDmg, bonusTruePercent });
+				}
+
 				return {
 					f2: championAbilityVariableValue('SlowDuration', {
 						abilityKey: 'w',
@@ -66,6 +89,9 @@ export default {
 					f3: {
 						value: f3,
 					},
+					EvolvedBonusTrueDamage: {
+						value: EvolvedBonusTrueDamage,
+					},
 				};
 			},
 			meta: {
@@ -74,7 +100,45 @@ export default {
 					type: VariableType.affectedByTenacity,
 					roundReplaced: 2,
 				},
+				ThrowDamage: {
+					type: VariableType.magic,
+				},
+				TotalSlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				SlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				EvolvedBonusTrueDamage: {
+					type: VariableType.true,
+					isCustom: true,
+				},
+				TOOLTIPONLYPassiveBonusPercent: {
+					displayedName: 'BonusTruePercent',
+				},
 			},
+			/* `WUpgradeThreshold` is from passive */
+			uninteresting: ['WUpgradeThreshold' as any],
+		}),
+	},
+	e: {
+		variables: defineChampionVariables<'Syndra', typeof ISyndra, 'e'>()({
+			meta: {
+				TotalDamage: {
+					type: VariableType.magic,
+				},
+				StunDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+				UpgradedSlowAmount: {
+					type: VariableType.affectedBySlowResist,
+				},
+				UpgradedSlowDuration: {
+					type: VariableType.affectedByTenacity,
+				},
+			},
+			/* `EUpgradeThreshold` is from passive */
+			uninteresting: ['EUpgradeThreshold' as any],
 		}),
 	},
 	r: {
