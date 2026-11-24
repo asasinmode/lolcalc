@@ -2,16 +2,10 @@
 import { GameAbilityId } from '@lolcalc/core/GameAbilityId';
 import { linkedFormattedItemImage, linkedFormattedChampionImage, simpleFormattingGameAbilityImage } from '@lolcalc/core/misc';
 import { STAT_ICON } from '@lolcalc/data/index';
-import { AbilityType, ITEM_NAME_TO_ID } from '@lolcalc/shared/index';
+import { AbilityType } from '@lolcalc/shared/index';
 import { resetTutorialStep } from '~/utils/tutorial';
 
 useHashTargetHighlighting();
-
-const abilityId = {
-	serpentsFang: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.serpentsFang),
-	frozenHeart: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.frozenHeart),
-	steraksGage: GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.steraksGage),
-};
 
 function resetTutorial(event: MouseEvent) {
 	const button = event.currentTarget as HTMLElement;
@@ -32,36 +26,83 @@ function clearResetTutorialButton(event: Event) {
 	button.removeAttribute('data-clicked');
 }
 
-const guideDefinitionConfigElSource = useSimpleDescription(
-	'guide-definition-config-el-source',
-	`Some effects support configuring their source. For example, ${linkedFormattedChampionImage('Ashe', "Ashe's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0))}<b>Frost Shot</b> scales with her level. You can select an Ashe you've configured and the effect will be applied as if it was from her (using her configured level).`,
-);
-const guideDefinitionConfigElSnapshot = useSimpleDescription(
-	'guide-definition-config-el-snapshow',
-	`Other effects scale with a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot what they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Hovering (or long pressing when using a touch device) the buttons shows the underlying values currently used by the effect.`,
-);
+const definitions = {
+	configElSource: useSimpleDescription(
+		'guide-definition-config-el-source',
+		`Some effects support configuring their source. For example, ${linkedFormattedChampionImage('Ashe', "Ashe's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ashe', 'passive', 0))}<b>Frost Shot</b> scales with her level. You can select an Ashe you've configured and the effect will be applied as if it was from her (using her configured level).`,
+	),
+	configElSnapshot: useSimpleDescription(
+		'guide-definition-config-el-snapshow',
+		`Other effects scale with a value that <strong>lolcalc</strong> cannot deterministically calculate. They allow you to snapshot what they scale off of and <u>must be manually refreshed</u> when its <i>source</i> changes. For example, ${linkedFormattedChampionImage('Nami', "Nami's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Nami', 'passive', 0))}<b>Surging Tides</b> scales with her <scaleap>ability power %i:${STAT_ICON.abilityPower}%</scaleap>. When the effect's <i>source</i> is selected, its current <scaleap>AP</scaleap> will be saved and the effect will be calculated using it. If at any point the <scaleap>AP</scaleap> changes, it must be manually refreshed using the rotating arrow button in the top right corner. Hovering (or long pressing if using a touch device) the buttons shows the underlying values currently used by the effect.`,
+	),
+};
 
-const tutorialApplyEffectSelectEffect = useSimpleDescription(
-	'tutorial-apply-effect-select-effect',
-	`Either search for or find ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and set a non-0 number of stacks. Close the dialog and the applied effects' icons will appear above the stats panel.`,
-);
-const tutorialExternalEffectExtraExample = useSimpleDescription(
-	'guide-tutorial-external-effect-extra-example',
-	`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect. If the result values don't look right, make sure no unwanted effect is being applied.`,
-);
+const tutorialExternalEffect = {
+	selectEffect: useSimpleDescription(
+		'tutorial-apply-effect-select-effect',
+		`Either search for or find ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive effect - <b>Winter's Caress</b>. Check to apply it, then find ${linkedFormattedItemImage('blackCleaver', "Black Cleaver's")} <b>Carve</b> and set a non-0 number of stacks. Close the dialog and the applied effects' icons will appear above the stats panel.`,
+	),
+	modifiedStatsVisible: useSimpleDescription(
+		'guide-tutorial-external-effect',
+		`At this point, the champion's modified <attackspeed><StatIcon :icon="STAT_ICON.attackSpeed" />attack speed</attackspeed> and <scalearmor><StatIcon :icon="STAT_ICON.armor" />armor</scalearmor> should already be visible. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the other side of the <i>scoreboard</i> for easier comparison.`,
+	),
+	extraExample: useSimpleDescription(
+		'guide-tutorial-external-effect-extra-example',
+		`For example, if you give a champion ${linkedFormattedChampionImage('Ornn', "Ornn's")} passive effect - ${simpleFormattingGameAbilityImage(GameAbilityId.build(AbilityType.champion, 'Ornn', 'passive', 0))}<b>Masterwork item slot</b> and set the value to <span class="code-like">1</span>, but then make the champion ${linkedFormattedChampionImage('Ornn')} themselves, changing the slot on his dedicated <i>config element</i> will override the one set from the external effect. If the result values don't look right, make sure no unwanted effect is being applied.`,
+	),
+};
+
+const tutorialApplyOnTarget = {
+	info: useSimpleDescription(
+		'guide-tutorial-apply-on-target-info',
+		`Some items, like ${linkedFormattedItemImage('serpentsFang', "Serpent's Fang")}, can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle between displaying values for <i>source</i> or <i>target</i>, it's important to note that`,
+	),
+	example: useSimpleDescription(
+		'guide-tutorial-apply-on-target-example',
+		`For example, both ${linkedFormattedItemImage('serpentsFang', "Serpent's Fang")} and ${linkedFormattedItemImage('frozenHeart', 'Frozen Heart')} allow for applying their effect to the target. If you were to:`,
+	),
+	source: useSimpleDescription(
+		'guide-tutorial-apply-on-target-source',
+		`Configure a <i>damage source</i> with any champion and ${linkedFormattedItemImage('serpentsFang', "Serpent's Fang")}, then check the <b>"apply Serpent's Venom on target"</b>.`,
+	),
+	target: useSimpleDescription(
+		'guide-tutorial-apply-on-target-target',
+		`Configure a <i>damage target</i> with ${linkedFormattedItemImage('frozenHeart', 'Frozen Heart')} and ${linkedFormattedItemImage('steraksGage', "Sterak's Gage")} (to later see the reduced shield value), then check its <b>"apply Winter's Caress on target"</b>.`,
+	),
+	columns: useSimpleDescription(
+		'guide-tutorial-apply-on-target-columns',
+		`In the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with ${linkedFormattedItemImage('serpentsFang', "Serpent's Fang")}, and the <i>target</i> set to the one with ${linkedFormattedItemImage('frozenHeart', 'Frozen Heart')} and ${linkedFormattedItemImage('steraksGage', "Sterak's Gage")}. Additionally, add a second column and set <u>only its target</u> to the same one the first column has.`,
+	),
+	addSection: useSimpleDescription('guide-tutorial-apply-on-target-add-section', `Use the <i>new section select</i> to add ${linkedFormattedItemImage('steraksGage', "Sterak's Gage")}.`),
+	sourceResults: useSimpleDescription(
+		'guide-tutorial-apply-on-target-source-results',
+		`While the <i>flip results</i> is <u>unchecked</u>, the <span class="code-like">ShieldSize</span> variable's value in the first column will be <span class="code-like">n/a</span>, as the results are being shown for the <i>damage source</i>, which only has ${linkedFormattedItemImage('serpentsFang', "Serpent's Fang")}. In the second column, the value will be <span class="code-like">-</span> as it has no <i>source</i> set.`,
+	),
+	flippedResults: useSimpleDescription(
+		'guide-tutorial-apply-on-target-flipped-results',
+		`<u>Check</u> the <i>flip results</i> in the top left corner. The value of <span class="code-like">ShieldSize</span> in the first column with ${linkedFormattedItemImage('serpentsFang', "Serpent's Fang")} will be smaller than the one in the second. The first column has a <i>source</i> actively applying <b>Serpent's Venom</b>, the second is the original, unmodified <b>Lifeline</b> shield.`,
+	),
+	stats: useSimpleDescription(
+		'guide-tutorial-apply-on-target-stats',
+		`Finally, <u>uncheck</u> the <i>flip results</i> checkbox, then add the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row. The value it shows is the same one the <i>stats panel</i> of the configured <i>damage source</i> has, even though the <i>target</i> has ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} passive checked to apply.`,
+	),
+};
+
 const tutorialBasicAttackDoubleCounting = useSimpleDescription(
 	'guide-tutorial-basic-attack-double-counting',
 	`Adding basic attack rows to <i>custom total</i> section (with the checkbox on the left) should be done carefully. The values shown here already include some of the variables you could independently sum. For example, if you add to <i>custom total</i> ${linkedFormattedItemImage('witsEnd', "Wit's End's")} <span class="code-like">OnHitDamage</span> and <i>basic attack total</i>, the <b>Wit's End's</b> damage would be double counted.`,
 );
 
-const exampleSpellCrit = useSimpleDescription(
-	'guide-example-shadowflame-ie-randuin',
-	`showcasing the interaction between ${linkedFormattedItemImage('shadowflame')}, ${linkedFormattedItemImage('infinityEdge')} and ${linkedFormattedItemImage('randuinsOmen')}`,
-);
-const example2026WorldsAkali = useSimpleDescription(
-	'guide-example-2026-worlds-akali',
-	`during his costream, LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
-);
+const example = {
+	spellCrit: useSimpleDescription(
+		'guide-example-shadowflame-ie-randuin',
+		`showcasing the interaction between ${linkedFormattedItemImage('shadowflame')}, ${linkedFormattedItemImage('infinityEdge')} and ${linkedFormattedItemImage('randuinsOmen')}`,
+	),
+	worldsAkali2026: useSimpleDescription(
+		'guide-example-2026-worlds-akali',
+		`during his costream, LS asked which 4th item would deal more damage on Akali - ${linkedFormattedItemImage('voidStaff')} (which Chovy chose) or ${linkedFormattedItemImage('rabadon')}. The configuration has champion builds from this moment of the game and 2 ${linkedFormattedChampionImage('Akali')} builds for comparison. <a href="https://youtu.be/TfdHzkOyQ7w?t=25001" target="_blank">VOD</a>, <a href="https://gol.gg/game/stats/83725/page-game/" target="_blank">game's gol.gg</a>. <rules>Neither runes nor dragons are set, but none of them should be impactful (no Mountain/Conditioning was in the game)</rules>`,
+	),
+};
 
 const qaItemsScalingWithLevels = useSimpleDescription(
 	'guide-qa-items-scaling-with-levels',
@@ -142,8 +183,8 @@ const applyXOnTargetStepConfigs = {
 				</p>
 				<!-- image showcasing different kinds of config els -->
 				<div class="tmp-image" />
-				<p v-html="guideDefinitionConfigElSource" class="game-description" />
-				<p v-html="guideDefinitionConfigElSnapshot" class="game-description" />
+				<p v-html="definitions.configElSource.value" class="game-description" />
+				<p v-html="definitions.configElSnapshot.value" class="game-description" />
 				<!-- image showcasing source config el + one with snapshot and the snapshot value tooltip -->
 				<div class="tmp-image" />
 			</dd>
@@ -198,16 +239,12 @@ const applyXOnTargetStepConfigs = {
 			<ol>
 				<li>Select a champion, then press the <b>"effects"</b> button to open the <i>effects dialog</i>.</li>
 				<li>
-					<span class="game-description" v-html="tutorialApplyEffectSelectEffect" /> <NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
+					<span class="game-description" v-html="tutorialExternalEffect.selectEffect.value" /> <NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
 					<!-- configured effects in the effects dialog -->
 					<div class="tmp-image" />
 				</li>
 				<li>
-					<p class="game-description">
-						At this point, the champion's modified <attackspeed><StatIcon :icon="STAT_ICON.attackSpeed" />attack speed</attackspeed> and <scalearmor><StatIcon :icon="STAT_ICON.armor" />armor</scalearmor> should already be visible. If you're
-						not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the
-						other side of the <i>scoreboard</i> for easier comparison. <NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
-					</p>
+					<span v-html="tutorialExternalEffect.modifiedStatsVisible.value" class="game-description" /> <NuxtLink :to="applyExternalEffectsStepConfigs.sourceWithEffects" target="_blank">config</NuxtLink>
 					<p class="alert info">
 						The effects can be quickly (but in limited manner) modified by clicking on their icons above the stat panel. Left click increments the effect's value, right click decrements it. Holding [<kbd>Ctrl</kbd>] while clicking changes
 						the value by +/- 10 (if possible).
@@ -225,59 +262,40 @@ const applyXOnTargetStepConfigs = {
 				An effect set with its dedicated <i>config element</i> will override that same effect applied through the <i>effects dialog</i>, if it's set to a non-empty value.
 				<Icon class="i-ph:warning-light" />
 			</p>
-			<p v-html="tutorialExternalEffectExtraExample" class="game-description" />
+			<p v-html="tutorialExternalEffect.extraExample" class="game-description" />
 			<!-- image showing ornn overriding its effect -->
 			<div class="tmp-image" />
 		</details>
 		<details>
 			<summary id="apply-x-on-target">"apply X on target" items or abilities and "flip results"</summary>
-			<p>
-				Some items, like <GameAbilityImg :ability-id="abilityId.serpentsFang" />, can apply effects to every <i>target</i>. These effects are then applied to the values shown in the <i>results</i>. While the results allow you to toggle
-				between displaying values for <i>source</i> or <i>target</i>, it's important to note that
-			</p>
+			<p class="game-description" v-html="tutorialApplyOnTarget.info.value" />
 			<p class="alert info">
 				<strong>applying an effect works only in one direction</strong>. Checking "apply to target" on a <i>scoreboard damage target</i> won't apply that effect onto the source, regardless of if the results are flipped
 				<Icon class="i-ph:info" />
 			</p>
-			<p>For example, both <GameAbilityImg :ability-id="abilityId.serpentsFang" /> and <GameAbilityImg :ability-id="abilityId.frozenHeart" /> allow for applying its effect to the target. If you were to:</p>
+			<p class="game-description" v-html="tutorialApplyOnTarget.example.value" />
 			<ol>
+				<li><span class="game-description" v-html="tutorialApplyOnTarget.source.value" /> <NuxtLink :to="applyXOnTargetStepConfigs.serpentSource" target="_blank">config</NuxtLink></li>
 				<li>
-					Configure a <i>damage source</i> with any champion and <GameAbilityImg :ability-id="abilityId.serpentsFang" />, then check the <b>"apply Serpent's Venom on target"</b>.
-					<NuxtLink :to="applyXOnTargetStepConfigs.serpentSource" target="_blank">config</NuxtLink>
-				</li>
-				<li>
-					Configure a <i>damage target</i> with <GameAbilityImg :ability-id="abilityId.frozenHeart" /> and <GameAbilityImg :ability-id="abilityId.steraksGage" /> (to later see the reduced shield value), then check its
-					<b>"apply Winter's Caress on target"</b>.
-					<NuxtLink :to="applyXOnTargetStepConfigs.configuredTarget" target="_blank">config</NuxtLink>
+					<span class="game-description" v-html="tutorialApplyOnTarget.target.value" /> <NuxtLink :to="applyXOnTargetStepConfigs.configuredTarget" target="_blank">config</NuxtLink>
 					<!-- image of both source and the target configured, maybe source in its own image in first step if hard to see -->
 					<div class="tmp-image" />
 				</li>
+				<li><span class="game-description" v-html="tutorialApplyOnTarget.columns.value" /> <NuxtLink :to="applyXOnTargetStepConfigs.configuredColumns" target="_blank">config</NuxtLink></li>
 				<li>
-					In the <i>results table</i>, make sure the <i>results table column</i> has the <i>source</i> set to the one with <GameAbilityImg :ability-id="abilityId.serpentsFang" />, and the <i>target</i> set to the one with
-					<GameAbilityImg :ability-id="abilityId.frozenHeart" /> and <GameAbilityImg :ability-id="abilityId.steraksGage" />. Additionally, add a second column and set <u>only its target</u> to the same one the first column has.
-					<NuxtLink :to="applyXOnTargetStepConfigs.configuredColumns" target="_blank">config</NuxtLink>
-				</li>
-				<li>
-					<p>Use the <i>new section select</i> to add <GameAbilityImg :ability-id="abilityId.steraksGage" />. <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink></p>
+					<span class="game-description" v-html="tutorialApplyOnTarget.addSection.value" /> <NuxtLink :to="applyXOnTargetStepConfigs.addedSterakSection" target="_blank">config</NuxtLink>
 					<!-- results with 2 columns and sterak section -->
 					<div class="tmp-image" />
-					<p>
-						While the <i>flip results</i> is <u>unchecked</u>, the <span class="code-like">ShieldSize</span> variable's value in the first column will be <span class="code-like">n/a</span>, as the results are being shown for the
-						<i>damage source</i>, which only has <GameAbilityImg :ability-id="abilityId.serpentsFang" />. In the second column, the value will be <span class="code-like">-</span> as it has no <i>source</i> set.
-					</p>
+					<p class="game-description" v-html="tutorialApplyOnTarget.sourceResults.value" />
 				</li>
 				<li>
-					<u>Check</u> the <i>flip results</i> in the top left corner. The value of <span class="code-like">ShieldSize</span> in the first column with <GameAbilityImg :ability-id="abilityId.serpentsFang" /> will be smaller than the one in
-					the second. The first column has a <i>source</i> actively applying <b>Serpent's Venom</b>, the second is the original, unmodified <b>Lifeline</b> shield.
-					<NuxtLink :to="applyXOnTargetStepConfigs.resultsFlipped" target="_blank">config</NuxtLink>
+					<span class="game-description" v-html="tutorialApplyOnTarget.flippedResults.value" /> <NuxtLink :to="applyXOnTargetStepConfigs.resultsFlipped" target="_blank">config</NuxtLink>
 					<!-- same image as the previous one but flipped, hovering over the shieldsize var -->
 					<div class="tmp-image" />
 				</li>
 				<li>
-					Finally, <u>uncheck</u> the <i>flip results</i> checkbox, then add the <strong>stats</strong> <i>results section</i>. Find the <b>Attack Speed</b> row. The value it shows is the same one the <i>stats panel</i> of the configured
-					<i>damage source</i> has, even though the <i>target</i> has <GameAbilityImg :ability-id="abilityId.frozenHeart" name="Frozen Heart's" /> passive checked to apply.
-					<NuxtLink :to="applyXOnTargetStepConfigs.sourceStatsAttackSpeed" target="_blank">config</NuxtLink>
-					<!-- only stats section scrolled to attack speed, arrow pointing to ambesa having the same -->
+					<span class="game-description" v-html="tutorialApplyOnTarget.stats.value" /> <NuxtLink :to="applyXOnTargetStepConfigs.sourceStatsAttackSpeed" target="_blank">config</NuxtLink>
+					<!-- only stats section scrolled to attack speed, arrow pointing to ambessa's AS -->
 					<div class="tmp-image" />
 				</li>
 			</ol>
@@ -301,7 +319,7 @@ const applyXOnTargetStepConfigs = {
 			TODO
 		</details>
 		<details>
-			<summary>Rell passive resist drain</summary>
+			<summary>Rell passive resists drain</summary>
 			<p>TODO it's complicated</p>
 		</details>
 
@@ -319,7 +337,7 @@ const applyXOnTargetStepConfigs = {
 				>
 					spell crit</NuxtLink
 				>
-				- <span class="game-description" v-html="exampleSpellCrit" />
+				- <span class="game-description" v-html="example.spellCrit.value" />
 			</li>
 			<li>
 				<NuxtLink
@@ -328,7 +346,7 @@ const applyXOnTargetStepConfigs = {
 				>
 					worlds 2026 finals Akali Rabadon vs Void Staff</NuxtLink
 				>
-				- <span class="game-description" v-html="example2026WorldsAkali" />
+				- <span class="game-description" v-html="example.worldsAkali2026.value" />
 			</li>
 		</ul>
 
@@ -375,6 +393,10 @@ const applyXOnTargetStepConfigs = {
 
 		#tutorial-apply-x-takeaway {
 			--at-apply: 'text-center block mbe-[0.33em] text-blue-100';
+		}
+
+		#tutorials + p i {
+			--at-apply: 'text-inherit';
 		}
 	}
 }

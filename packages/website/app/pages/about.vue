@@ -377,9 +377,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			--at-apply: 'text-neutral-200';
 		}
 
-		.game-description,
-		li,
-		p {
+		.game-description {
 			img:is([title], [aria-hidden]) {
 				--at-apply: 'inline-block size-5 me-[0.5ch] -translate-y-px';
 			}
