@@ -49,6 +49,7 @@ export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
 	const rv: IDamageOutputVars = {
 		totalDamageMult: 1,
+		tracking: {},
 	};
 
 	for (const hook of self.damageOutputVarsHooks.all.value) {

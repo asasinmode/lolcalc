@@ -243,7 +243,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					BonusDamage: {
-						value: self.stats.value.variables.hauntingGuiseBonusDamagePercent ?? 0,
+						value: self.damageOutputVars.value.tracking.hauntingGuiseBonusDamagePercent ?? 0,
 					},
 				};
 			},
@@ -257,7 +257,8 @@ export const ITEM_SPECIFICS = {
 			uninteresting: ['DamageIncreasePerSecond', 'DamageIncreaseMax'],
 		}),
 		damageOutputVars(self, vars) {
-			vars.totalDamageMult += ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
+			vars.tracking.hauntingGuiseBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
+			vars.totalDamageMult += vars.tracking.hauntingGuiseBonusDamagePercent;
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
