@@ -44,7 +44,7 @@ const tutorialExternalEffect = {
 	),
 	modifiedStatsVisible: useSimpleDescription(
 		'guide-tutorial-external-effect',
-		`At this point, the champion's modified <attackspeed><StatIcon :icon="STAT_ICON.attackSpeed" />attack speed</attackspeed> and <scalearmor><StatIcon :icon="STAT_ICON.armor" />armor</scalearmor> should already be visible. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the other side of the <i>scoreboard</i> for easier comparison.`,
+		`At this point, the champion's modified <attackspeed>%i:${STAT_ICON.attackSpeed}%attack speed</attackspeed> and <scalearmor>%i:${STAT_ICON.armor}%armor</scalearmor> should already be visible. If you're not sure, toggle the effects on and off or adjust their strength (like number of <b>Carve</b> stacks) and watch for changes. You could also make a copy of the champion you are working with without any effects and put it on the other side of the <i>scoreboard</i> for easier comparison.`,
 	),
 	extraExample: useSimpleDescription(
 		'guide-tutorial-external-effect-extra-example',
@@ -262,7 +262,7 @@ const applyXOnTargetStepConfigs = {
 				An effect set with its dedicated <i>config element</i> will override that same effect applied through the <i>effects dialog</i>, if it's set to a non-empty value.
 				<Icon class="i-ph:warning-light" />
 			</p>
-			<p v-html="tutorialExternalEffect.extraExample" class="game-description" />
+			<p v-html="tutorialExternalEffect.extraExample.value" class="game-description" />
 			<!-- image showing ornn overriding its effect -->
 			<div class="tmp-image" />
 		</details>
