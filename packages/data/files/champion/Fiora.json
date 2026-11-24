@@ -109,7 +109,6 @@
 					},
 					"spellCalculations": {
 						"StabDamage": {
-							"tooltipOnly": true,
 							"mFormulaParts": [
 								{
 									"mDataValue": "BaseDamage",

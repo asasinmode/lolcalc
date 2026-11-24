@@ -1,5 +1,5 @@
 {
-	"version": "16.22.1",
+	"version": "16.23.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -9361,8 +9361,8 @@
 				"PhysicalLethality": 10
 			},
 			"dataValues": {
-				"PercentCurrentHPMelee": 9,
-				"PercentCurrentHPRanged": 7,
+				"PercentCurrentHPMelee": 8,
+				"PercentCurrentHPRanged": 6,
 				"LethalityBonusModMelee": 15,
 				"LethalityBonusModRanged": 12,
 				"LethalityBonusDuration": 4,

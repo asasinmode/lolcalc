@@ -54,9 +54,9 @@
 					"dataValues": {
 						"Count": [5, 6, 7, 8, 9, 10, 11],
 						"BaseDamageInitial": [60, 60, 60, 60, 60, 60, 60],
-						"BaseDamageSubsequent": [0, 5, 10, 15, 20, 25, 30],
+						"BaseDamageSubsequent": [1, 6, 11, 16, 21, 26, 31],
 						"APRatioInitial": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
-						"APRatioSubsuquent": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"APRatioSubsuquent": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
 						"Radius": [200, 200, 200, 200, 200, 200, 200],
 						"PostCastTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
@@ -181,7 +181,7 @@
 					"image": "assets/characters/mel/hud/icons2d/mel_w.png",
 					"mana": [80, 60, 40, 20, 0, 0],
 					"cooldownTime": [38, 38, 35, 33, 29, 26, 26],
-					"tooltip": "Mel unleashes a refraction nova that destroys enemy projectiles it collides with, retaliating for <magicDamage>@InitialDamage@ magic damage</magicDamage>. Subsequent retaliations against the same enemy deal <magicDamage>@SubsequentDamage@ magic damage</magicDamage> instead.<br><br>The nova also grants <shield>@TotalShield@ Shield</shield> and <speed>@TotalMS@ Move Speed</speed> for @BuffDuration@s to Mel and her allies.",
+					"tooltip": "Mel unleashes a refraction nova that destroys enemy projectiles it collides with, retaliating for <magicDamage>@InitialDamage@ magic damage</magicDamage>. Subsequent retaliations against the same enemy deal <magicDamage>@SubsequentDamage@ magic damage</magicDamage> instead.<br><br>The nova also grants <shield>@TotalShield@ Shield</shield> and <speed>@TotalMS@ Move Speed</speed> for @BuffDuration@ seconds to Mel and her allies.",
 					"tooltipExtendedBelowLine": "<rules>Cannot retaliate more than @MaxRetaliation@ times against each individual enemy</rules>",
 					"abilityLevelVars": [
 						{
@@ -205,8 +205,8 @@
 						"Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"BuffDuration": [2, 2, 2, 2, 2, 2, 2],
 						"Radius": [400, 400, 400, 400, 400, 400, 400],
-						"BaseShield": [20, 50, 80, 110, 140, 170, 200],
-						"BaseDamageInitial": [30, 35, 40, 45, 50, 55, 60],
+						"BaseShield": [10, 50, 90, 130, 170, 210, 250],
+						"BaseDamageInitial": [25, 35, 45, 55, 65, 75, 85],
 						"BaseDamageSubsequent": [0, 5, 10, 15, 20, 25, 30],
 						"MaxRetaliation": [7, 7, 7, 7, 7, 7, 7]
 					},

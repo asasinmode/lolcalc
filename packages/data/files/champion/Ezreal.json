@@ -99,7 +99,7 @@
 						"BaseDamage": [25, 80, 135, 190, 245, 300, 355],
 						"ManaReturn": [60, 60, 60, 60, 60, 60, 60],
 						"DetonationTimeout": [4, 4, 4, 4, 4, 4, 4],
-						"APRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+						"APRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -112,7 +112,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 1,
+									"mCoefficient": 1.15,
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{
@@ -198,10 +198,10 @@
 						}
 					],
 					"dataValues": {
-						"BaseDamage": [150, 350, 550, 750, 950, 1150, 1350],
+						"BaseDamage": [100, 350, 600, 850, 1100, 1350, 1600],
 						"DamageReductionPerHit": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"MinimumDamagePercent": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-						"RAPRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"RAPRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
 						"BaseDamageMinionMonster": [75, 150, 225, 300, 375, 450, 525]
 					},
 					"spellCalculations": {
@@ -215,7 +215,7 @@
 								{
 									"mStat": 2,
 									"mStatFormula": 2,
-									"mCoefficient": 1,
+									"mCoefficient": 1.1,
 									"__type": "StatByCoefficientCalculationPart"
 								},
 								{

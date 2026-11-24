@@ -343,7 +343,7 @@
 						"YorickGhoulDamageReductionVsTowers": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"YorickGhoulLeashRange": [1600, 1600, 1600, 1600, 1600, 1600, 1600],
 						"YorickGhoulSpawnDelay": [1, 1, 1, 1, 1, 1, 1],
-						"CherryGhoulHPMod": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"CherryGhoulHPMod": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
 						"GhoulADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
 						"GraveDuration": [300, 300, 300, 300, 300, 300, 300],
 						"MinionMoveBonus": [40, 40, 40, 40, 40, 40, 40],

@@ -222,8 +222,8 @@
 					],
 					"dataValues": {
 						"InitialDamage": [25, 150, 275, 400, 525, 650, 775],
-						"AuraDamage": [4, 8, 12, 16, 20, 24, 28],
-						"TibbersAttackDamage": [15, 30, 45, 60, 75, 90, 105],
+						"AuraDamage": [5, 10, 15, 20, 25, 30, 35],
+						"TibbersAttackDamage": [10, 30, 50, 70, 90, 110, 130],
 						"TibbersAttackSpeedDecay": [-0.1, -0.1, -0.1, -0.1, -0.1, -0.1, -0.1],
 						"TibbersAttackAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"MovespeedBurst": [1, 1, 1, 1, 1, 1, 1],
@@ -275,19 +275,19 @@
 							"mFormulaParts": [
 								{
 									"mPart1": {
-										"mLevel1Value": 1150,
+										"mLevel1Value": 1275,
 										"mBreakpoints": [
 											{
 												"mLevel": 7,
-												"mBonusPerLevelAtAndAfter": 50
+												"mBonusPerLevelAtAndAfter": 75
 											},
 											{
 												"mLevel": 11,
-												"mBonusPerLevelAtAndAfter": 250
+												"mBonusPerLevelAtAndAfter": 275
 											},
 											{
 												"mLevel": 16,
-												"mBonusPerLevelAtAndAfter": 300
+												"mBonusPerLevelAtAndAfter": 350
 											}
 										],
 										"__type": "ByCharLevelBreakpointsCalculationPart"
@@ -300,6 +300,12 @@
 								},
 								{
 									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 1.5,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

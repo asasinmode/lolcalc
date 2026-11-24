@@ -1,5 +1,5 @@
 {
-	"version": "16.22.1",
+	"version": "16.23.1",
 	"data": {
 		"TargetDummy": {
 			"id": "TargetDummy",
@@ -493,7 +493,8 @@
 			"name": "Jayce",
 			"image": "Jayce.png",
 			"roles": {
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Jhin": {
@@ -718,8 +719,8 @@
 			"name": "Lux",
 			"image": "Lux.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"Malphite": {
@@ -917,8 +918,8 @@
 			"name": "Pantheon",
 			"image": "Pantheon.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Poppy": {
@@ -955,6 +956,7 @@
 			"name": "Quinn",
 			"image": "Quinn.png",
 			"roles": {
+				"top": true,
 				"jungle": true
 			}
 		},
@@ -1217,8 +1219,8 @@
 			"name": "Tahm Kench",
 			"image": "TahmKench.png",
 			"roles": {
-				"support": true,
-				"top": true
+				"top": true,
+				"support": true
 			}
 		},
 		"Taliyah": {
@@ -1399,7 +1401,6 @@
 			"name": "Viktor",
 			"image": "Viktor.png",
 			"roles": {
-				"bot": true,
 				"mid": true
 			}
 		},
@@ -1454,8 +1455,8 @@
 			"name": "Xerath",
 			"image": "Xerath.png",
 			"roles": {
-				"support": true,
-				"mid": true
+				"mid": true,
+				"support": true
 			}
 		},
 		"XinZhao": {
@@ -1473,9 +1474,9 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"bot": true,
 				"mid": true,
-				"top": true
+				"top": true,
+				"bot": true
 			}
 		},
 		"Yone": {

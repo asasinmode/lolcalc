@@ -85,7 +85,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 1.25,
+									"mCoefficient": 1.35,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -106,7 +106,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 1.4,
+									"mCoefficient": 1.5,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -140,7 +140,7 @@
 								},
 								{
 									"mStat": 2,
-									"mCoefficient": 1.4,
+									"mCoefficient": 1.5,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
