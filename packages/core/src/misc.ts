@@ -21,39 +21,22 @@ const championGameIcons: (string | [string, string])[] = ['asolstackicon', 'kind
 
 const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
 
-export function gameIconAttrs(icon: (typeof STAT_ICON)[keyof typeof STAT_ICON], subpath?: string, addAlt = false): ImgHTMLAttributes {
-	const key = Array.isArray(icon) ? icon[0] : icon.toLowerCase();
-
-	let altSource;
-	if (addAlt) {
-		const stat = STAT_ICON_VALUE_TO_STAT[key];
-		// @ts-expect-error accessing is chill
-		altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
-	}
-	const attrs: ImgHTMLAttributes = altSource ? { alt: `icon representing ${altSource.name}` } : { 'aria-hidden': 'true' };
-
-	if (Array.isArray(icon)) {
-		const [src, width, height = width] = icon;
-		return { src, width, height, ...attrs };
-	}
-
-	const championIconRename = championGameIcons.findLast((el) => el[0] === key);
-	const isChampionIcon = championIconRename ?? championGameIcons.includes(key);
-	const folder = statIconNameValues.includes(key) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'));
-
-	return {
-		src: `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${folder}/${championIconRename?.[1] ?? key}.png`,
-		width: 20,
-		height: 20,
-		...attrs,
-	};
-}
-
 export function replaceGameIcons(text: string, subpath?: string, addAlt = false): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
-			const attrs = gameIconAttrs(name, subpath, addAlt);
-			return `<img src="${attrs.src}" width="20" height="20" ${'alt' in attrs ? `alt="${attrs.alt}"` : 'aria-hidden="true"'}>`;
+			let altSource;
+			if (addAlt) {
+				const stat = STAT_ICON_VALUE_TO_STAT[name];
+				// @ts-expect-error accessing is chill
+				altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
+			}
+
+			const championIconRename = championGameIcons.findLast((el) => el[0] === name);
+			const isChampionIcon = championIconRename ?? championGameIcons.includes(name);
+			const folder = statIconNameValues.includes(name) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'));
+			const src = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${folder}/${championIconRename?.[1] ?? name}.png`;
+
+			return `<img src="${src}" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }
@@ -168,7 +151,7 @@ function formatImageHtml(imageInfo: IGameImageData, addAlt?: boolean, textureSiz
 		.join(' ')}>`;
 }
 
-export function formatImageAttrs(imageInfo: IGameImageData, addAlt = true, textureSize = 20): ImgHTMLAttributes {
+function formatImageAttrs(imageInfo: IGameImageData, addAlt = true, textureSize = 20): ImgHTMLAttributes {
 	if (Array.isArray(imageInfo)) {
 		const name = imageInfo[3] ?? 'unknown';
 		return {
