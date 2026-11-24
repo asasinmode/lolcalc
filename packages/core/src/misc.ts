@@ -24,6 +24,10 @@ const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map
 export function replaceGameIcons(text: string, subpath?: string, addAlt = false): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
+			name = name.toLocaleLowerCase();
+			const championIconRename = championGameIcons.findLast((el) => el[0] === name);
+			const isChampionIcon = championIconRename || championGameIcons.includes(name);
+
 			let altSource;
 			if (addAlt) {
 				const stat = STAT_ICON_VALUE_TO_STAT[name];
@@ -31,12 +35,9 @@ export function replaceGameIcons(text: string, subpath?: string, addAlt = false)
 				altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
 			}
 
-			const championIconRename = championGameIcons.findLast((el) => el[0] === name);
-			const isChampionIcon = championIconRename ?? championGameIcons.includes(name);
-			const folder = statIconNameValues.includes(name) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'));
-			const src = `https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${folder}/${championIconRename?.[1] ?? name}.png`;
-
-			return `<img src="${src}" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
+			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${
+				statIconNameValues.includes(name) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'))
+			}/${championIconRename?.[1] ?? name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }
