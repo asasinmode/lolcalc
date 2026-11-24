@@ -183,8 +183,6 @@ export interface IStatsCalculationVariables {
 	// TODO move these to damage calc computed
 	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */
 	liandryBonusDamagePercent?: number;
-	/** bonus damage % gained from haunting guise's passive stacks, doesn't affect stats but is kept here */
-	hauntingGuiseBonusDamagePercent?: number;
 	/** bonus damage % gained from riftmaker's passive stacks, doesn't affect stats but is kept here */
 	riftmakerBonusDamagePercent?: number;
 	/** bonus damage % gained from immortal path's passive, doesn't affect stats but is kept here */
@@ -465,6 +463,8 @@ export interface IStatsCalculationEffectVars extends Pick<
 export interface IDamageOutputVars {
 	/** whether magic, true and adaptive (when it's magic) damage vars should be treated as crits from shadowflame */
 	shadowflameCrit?: boolean;
+	/** starts at `1`. modified by things like haunting guise, immortal path, chemtech soul */
+	totalDamageMult: number;
 }
 
 type IBasicAttackDamageType = 'total' | 'physical' | 'magic' | 'true' | 'dps';

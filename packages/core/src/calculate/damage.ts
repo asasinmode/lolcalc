@@ -23,7 +23,7 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 	return rv;
 }
 
-/** TODO intended to be a computed with everything related to source (and maybe takes in the target too, or that might be another separate thing) damage dealing */
+/** everything related to source damage output */
 export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 	// total damage multipliers. known multiplicative - haunting guise and items it builds into. immortal path somewhere
 	// actualizer, "ability damage" champion on hits?
@@ -47,7 +47,9 @@ export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 	// amumu E, can be marked as fully implemented then
 	// ekko W, Jinx Q
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
-	const rv: IDamageOutputVars = {};
+	const rv: IDamageOutputVars = {
+		totalDamageMult: 1,
+	};
 
 	for (const hook of self.damageOutputVarsHooks.all.value) {
 		hook(self, rv, self.calculationDamageTarget.value);
@@ -62,6 +64,7 @@ export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 // randuin's omen
 // warden's mail
 // steelcaps/armored advance
+/** everything needed for basic attacks results section */
 export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVars {
 	const target = self.calculationDamageTarget.value;
 	const { total: totalStats } = self.stats.value;

@@ -256,12 +256,8 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['DamageIncreasePerSecond', 'DamageIncreaseMax'],
 		}),
-		calculateHooks: {
-			preItemTotal: {
-				handler(self, _args, { calculatedVariables }) {
-					calculatedVariables.hauntingGuiseBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
-				},
-			},
+		damageOutputVars(self, vars) {
+			vars.totalDamageMult += ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
