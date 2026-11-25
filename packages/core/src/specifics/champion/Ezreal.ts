@@ -1,5 +1,6 @@
 import type { DamageSource } from '@lolcalc/core/DamageSource.ts';
 import type IEzreal from '@lolcalc/data/files/champion/Ezreal.json';
+import { VariableType } from '@lolcalc/shared';
 import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
 import { defineChampionVariables } from './shared.ts';
@@ -46,6 +47,47 @@ export default {
 				},
 			},
 			uninteresting: ['StackDuration', 'MaxStacks', 'AttackSpeedPerStack'],
+		}),
+	},
+	q: {
+		variables: defineChampionVariables<'Ezreal', typeof IEzreal, 'q'>()({
+			meta: {
+				Damage: {
+					type: VariableType.physical,
+				},
+			},
+			uninteresting: ['CDRefund'],
+		}),
+	},
+	w: {
+		variables: defineChampionVariables<'Ezreal', typeof IEzreal, 'w'>()({
+			meta: {
+				Damage: {
+					type: VariableType.magic,
+				},
+			},
+			uninteresting: ['DetonationTimeout', 'ManaReturn'],
+		}),
+	},
+	e: {
+		variables: defineChampionVariables<'Ezreal', typeof IEzreal, 'e'>()({
+			meta: {
+				Damage: {
+					type: VariableType.magic,
+				},
+			},
+		}),
+	},
+	r: {
+		variables: defineChampionVariables<'Ezreal', typeof IEzreal, 'r'>()({
+			meta: {
+				Damage: {
+					type: VariableType.magic,
+				},
+				DamageMinionMonster: {
+					type: VariableType.magic,
+				},
+			},
 		}),
 	},
 } satisfies IChampionSpecific<'Ezreal'>;

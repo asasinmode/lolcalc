@@ -199,6 +199,7 @@ export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = [
 	'Akali',
 	'Orianna',
 	'Syndra',
+	'Ezreal',
 ];
 IMPLEMENTED_CHAMPION_IDS.sort((a, b) => CHAMPIONS[a].name.localeCompare(CHAMPIONS[b].name));
 
