@@ -119,8 +119,8 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<p>
 			All of the text that's not from the game itself is written by me. Some of the <u>code</u> in this project was written using LLMs, as well as I have used them in debugging/coming up with solutions. It would've taken me a few more
 			months to get to where it is without them. The ability to paste into one the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.<br />
-			Additionally, up to the end of November of 2026 (11 months of work), I used only what's available for free. You are welcome to check the github's repository and the commits to judge for yourself if it's slop. I'm open to most
-			improvement suggestions to reduce said slop.
+			Additionally, up to and including November of 2026 (11 months of work), I used only what's available for free. You are welcome to check the
+			<NuxtLink to="https://github.com/asasinmode/lolcalc" target="_blank">project's github repository</NuxtLink> and the commits to judge for yourself if it's slop. I'm open to most improvement suggestions to reduce said slop.
 		</p>
 
 		<TextPageHeading id="misc" text="misc" />
