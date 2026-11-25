@@ -1421,6 +1421,15 @@ function removeCustomValueRow(rowIndex: number) {
 
 const anyColumnsLoading = computed(() => resultColumns.some((column) => column.source.value?.listedChampion.value && column.source.value.listedChampion.value.id !== column.source.value.champion.value?.id));
 
+const { openDebugDialog } = useDamageSourceDebug();
+
+function openDebugOnDblclick(event: MouseEvent, damageSource?: DamageSource) {
+	if (damageSource && (event.ctrlKey || event.metaKey)) {
+		openDebugDialog(damageSource);
+		event.preventDefault();
+	}
+}
+
 defineExpose({
 	recomputeCustomTotal,
 	hydrateResultSection,
@@ -1515,6 +1524,7 @@ defineExpose({
 								clearable
 								:tooltip-trigger-attrs="bindThumbnailTriggerAttrs({ index, isTarget: false })"
 								@update:model-value="setColumnChampion(column, damageSources, $event)"
+								@dblclick="openDebugOnDblclick($event, column._computedSource)"
 							>
 								<img
 									v-if="toValue(column.source)?.listedChampion.value"
@@ -1541,6 +1551,7 @@ defineExpose({
 								clearable
 								:tooltip-trigger-attrs="bindThumbnailTriggerAttrs({ index, isTarget: true })"
 								@update:model-value="setColumnChampion(column, damageTargets, $event)"
+								@dblclick="openDebugOnDblclick($event, column._computedTarget)"
 							>
 								<img
 									v-if="toValue(column.target)?.listedChampion.value"

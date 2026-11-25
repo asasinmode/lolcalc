@@ -1057,6 +1057,12 @@ watch(
 
 const hpResourceBarTutorialViable = computed(() => props.value.maxAbilityResource.value || (props.value.anythingFilled.value && props.value.maxHealth.value !== 0));
 
+function openDebugOnDblclick(event: MouseEvent) {
+	if (event.ctrlKey || event.metaKey) {
+		openDebugDialog(props.value);
+	}
+}
+
 defineExpose({ el });
 </script>
 
@@ -1233,7 +1239,7 @@ defineExpose({ el });
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</article>
 			</section>
-			<section class="stats" :inert="value.isLoading.value" @dblclick.ctrl.prevent="openDebugDialog(value)">
+			<section class="stats" :inert="value.isLoading.value" @dblclick.prevent="openDebugOnDblclick">
 				<h4>stats</h4>
 				<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex">
 					<template v-for="stat in stats" :key="stat.name">
