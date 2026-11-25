@@ -451,7 +451,6 @@ export interface IDamageIOVars {
 	shadowflameCrit?: boolean;
 	/** starts at `1`. modified by things like haunting guise, immortal path, chemtech soul */
 	totalDamageMult: number;
-	/** stuff not used in calculations but displayed in stuff like results */
 	tracking: {
 		hauntingGuiseBonusDamagePercent?: number;
 		liandryBonusDamagePercent?: number;

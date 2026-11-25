@@ -60,7 +60,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 		<TextPageHeading id="does-it-work" text="does it work?" />
 		<p>
 			While it's impossible for me to check all 172+ champions with every item/rune/dragon/quest/buff/debuff combination, I tried my best to make it work and
-			<NuxtLink to="/guide#examples">here are some examples of it</NuxtLink>. If you encounter a configuration that's not calculated correctly (<NuxtLink to="#known-discrepancies">known discrepancies</NuxtLink>), please
+			<NuxtLink to="/guide#example-configurations">here are some examples of it</NuxtLink>. If you encounter a configuration that's not calculated correctly (<NuxtLink to="#known-discrepancies">known discrepancies</NuxtLink>), please
 			<button class="link-like" @click="reportAnIssue">report it</button>
 		</p>
 		<p class="alert info">
