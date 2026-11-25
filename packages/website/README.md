@@ -18,9 +18,11 @@ pnpm generate
 
 ### before submitting to riot
 
-- [ ] damage multipliers (immortal path, haunting guise items, chemtech soul - try to merge vars)
+- [ ] damage multipliers
   - [ ] warwick heal mult calculates off of multed/non multed dmg?
-- [ ] actualizer, might need separate in/out going heal & shield
+  - [ ] actualizer
+    - [ ] separate in/out going heal & shield
+    - [ ] item damage? says only ability
 - [ ] guide/about page
   - [ ] guide/about add subheadings to toc
   - [ ] finish ui guide

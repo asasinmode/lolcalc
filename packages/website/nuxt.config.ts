@@ -22,7 +22,8 @@ export default defineNuxtConfig({
 		css: {
 			transformer: 'lightningcss',
 			lightningcss: {
-				/* most advanced used feature [field-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/field-sizing#specifications) */
+				/* most advanced used feature [field-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/field-sizing#specifications)
+				 * `app.vue` has a `CSS.supports` check for some of the things the targets listed here should support and shows an alert if the requirements aren't met. Make sure to keep it in sync if any targets change */
 				targets: {
 					chrome: 125,
 					edge: 125,
