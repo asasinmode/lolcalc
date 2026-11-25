@@ -85,8 +85,6 @@ export const HOOK_PRIORITIES = {
 		[ITEM_NAME_TO_ID.overlordsBloodmail]: 15,
 		/** must be after bloodmail */
 		[ITEM_NAME_TO_ID.endlessHunger]: 20,
-		/** must be after Ryze */
-		[ITEM_NAME_TO_ID.actualizer]: 10,
 		/** must be last, needs final total hp */
 		[ITEM_NAME_TO_ID.immortalPath]: 100,
 		/** not used in calculations, just for keeping track of things to display them/use in other computeds */

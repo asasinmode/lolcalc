@@ -23,18 +23,26 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 	return rv;
 }
 
+// damage multipliers
+//   "passive" riftmaker, liandry, haunting guise, immortal path, shojin, chemtech soul
+//   "conditional" LDR, hexoptics
+//   "active" horizon focus, actualizer
+// damage taken multipliers
+//   abyssal mask
+//   mandate, bloodsong
+// damage taken reductions
+//   knight's vow
+//   celestial opposition
+//   chemtech soul
+// damage dealt reductions
+//   exhaust
+// aa specific
+//   randuin
+//   steelcaps
+
+// TODO check how item variables are accessed, if there isn't a circular dependency
 /** everything related to source damage output */
 export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
-	// total damage multipliers. known multiplicative - haunting guise and items it builds into. immortal path somewhere
-	// actualizer, "ability damage" champion on hits?
-	// exhaust effect
-	// knight's vow damage reduction
-	// blessing of the mountain damage reduction
-	// abyssal mask dmg amp
-	// horizon focus dmg amp
-	// imperial mandate dmg amp
-	// bloodsong dmg amp
-	// ldr & custom variable from it
 	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
 	// champion passives - ashe, akshan, braum, corki, graves, irelia, jinx, locke, orianna, tahm kench, volibear, warwick
 	// sion passive
@@ -62,9 +70,7 @@ export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
 // stuff from calculateSourceDamageOuputVars
 // kraken slayer
 // check tiamat items damage
-// randuin's omen
 // warden's mail
-// steelcaps/armored advance
 /** everything needed for basic attacks results section */
 export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVars {
 	const target = self.calculationDamageTarget.value;

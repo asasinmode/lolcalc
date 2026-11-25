@@ -179,20 +179,6 @@ export interface IStatsCalculationVariables {
 	ignoredMountainArmor: number;
 	/** magic resists present in the stats the dragon mutliplier affects that shouldn't be included */
 	ignoredMountainMR: number;
-	// TODO if all bonus damage percents are treated the same, store them under the same variable
-	// TODO move these to damage calc computed
-	/** bonus damage % gained from liandry's passive stacks, doesn't affect stats but is kept here */
-	liandryBonusDamagePercent?: number;
-	/** bonus damage % gained from riftmaker's passive stacks, doesn't affect stats but is kept here */
-	riftmakerBonusDamagePercent?: number;
-	/** bonus damage % gained from immortal path's passive, doesn't affect stats but is kept here */
-	immortalPathBonusDamagePercent?: number;
-	/** % increase of stuff from actualizer's passive, doesn't affect stats but is kept here */
-	actualizerBuffPercent?: number;
-	/** bonus damage % gained from shojin's passive stacks, doesn't affect stats but is kept here */
-	shojinBonusDamagePercent?: number;
-	/** bonus damage % from hexoptics, doesn't affect stats but is kept here */
-	hexopticsBonusDamagePercent?: number;
 	/** ap gained from blackfire torch's passive */
 	blackfireTorchBBlazeAP?: number;
 	/** multiplier value from blackfire torch's passive */
@@ -299,7 +285,7 @@ export interface IStatsCalculationVariables {
 	terminusResists?: number;
 	/** heal, shield and regen mult from spirit visage's passive */
 	spiritVisageHSMult?: number;
-	/** healing multiplier from Briar's passive, TODO check how it works on life steal/heals */
+	/** healing multiplier from Briar's passive */
 	briarHealingMult?: number;
 	/** movement speed gained from dead man's plate passive */
 	deadMansMoveSpeed?: number;
@@ -468,6 +454,12 @@ export interface IDamageOutputVars {
 	/** stuff not used in calculations but displayed in stuff like results */
 	tracking: {
 		hauntingGuiseBonusDamagePercent?: number;
+		liandryBonusDamagePercent?: number;
+		riftmakerBonusDamagePercent?: number;
+		immortalPathBonusDamagePercent?: number;
+		actualizerBuffPercent?: number;
+		shojinBonusDamagePercent?: number;
+		hexopticsBonusDamagePercent?: number;
 	};
 }
 
