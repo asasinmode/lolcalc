@@ -1,4 +1,4 @@
-import type { IEffectOntoTargetVars, IDamageOutputVars, IBasicAttackVars } from '@lolcalc/shared';
+import type { IEffectOntoTargetVars, IDamageIOVars, IBasicAttackVars } from '@lolcalc/shared';
 import { AbilityType, ITEM_NAME_TO_ID, VariableType } from '@lolcalc/shared';
 import type { DamageSource } from '../DamageSource';
 import { GameAbilityId } from '../GameAbilityId.ts';
@@ -30,10 +30,13 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 // damage taken multipliers
 //   abyssal mask
 //   mandate, bloodsong
+//   amumu passive
 // damage taken reductions
 //   knight's vow
 //   celestial opposition
 //   chemtech soul
+// flat dmg reduction
+//   fizz, amumu E
 // damage dealt reductions
 //   exhaust
 // aa specific
@@ -42,35 +45,30 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 
 // TODO check how item variables are accessed, if there isn't a circular dependency
 /** everything related to source damage output */
-export function sourceDamageOutputVars(self: DamageSource): IDamageOutputVars {
-	// on hit damage - ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
-	// champion passives - ashe, akshan, braum, corki, graves, irelia, jinx, locke, orianna, tahm kench, volibear, warwick
-	// sion passive
-	// amumu passive
-	// jhin passive
-	// senna passive
-	// kayn passive assassin at the start of combat
-	// fizz passive
-	// elise spider form aa
-	// amumu E, can be marked as fully implemented then
-	// ekko W, Jinx Q
+export function sourceDamageIOVars(self: DamageSource): IDamageIOVars {
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
-	const rv: IDamageOutputVars = {
+	const rv: IDamageIOVars = {
 		totalDamageMult: 1,
 		tracking: {},
 	};
 
-	for (const hook of self.damageOutputVarsHooks.all.value) {
+	for (const hook of self.damageIOVarsHooks.all.value) {
 		hook(self, rv, self.calculationDamageTarget.value);
 	}
 
 	return rv;
 }
 
-// stuff from calculateSourceDamageOuputVars
-// kraken slayer
-// check tiamat items damage
+// stuff from calculateDamageIOVars
 // warden's mail
+// item on hit
+//   kraken slayer
+//   ardent censer, fiendhunter bolts, nashor's tooth, guinsoo, terminus, botrk, manamune/muramana, recurve bow, wit's end
+//   check tiamat items damage
+// champions
+//   sion passive, ashe passive, akshan passive, braum passive, corki passive, graves passive, irelia passive, jinx Q, locke passive, orianna passive, tahm kench passive, volibear passive, warwick passive, ekko W, elise passive
+//   jhin passive, senna passive
+//   kayn passive assassin at the start of combat
 /** everything needed for basic attacks results section */
 export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVars {
 	const target = self.calculationDamageTarget.value;

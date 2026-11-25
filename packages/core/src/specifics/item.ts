@@ -11,7 +11,7 @@ import { clamp, roundNumber } from '@lolcalc/shared/utils.ts';
 import { computed } from 'vue';
 import type { IDeriveProgressFn, IEffectControlsProps, IInternalItemDataOf, ISpecificVariables, IVariableValueResult } from '.';
 import { addMultiplicative, combineCompounding, combineRecursive } from '../calculate/util.ts';
-import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IDamageOutputVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData, IBasicAttackVarsHook } from '../DamageSource';
+import type { DamageSource, ICalculateChampionStatsHookSource, IEffectOntoTargetVarsHook, IDamageIOVarsHook, IProviderGroupImageText, IProviderGroupInternalItemData, IBasicAttackVarsHook } from '../DamageSource';
 import { GameAbilityId } from '../GameAbilityId.ts';
 import { simpleFormattingGameAbilityImage } from '../misc.ts';
 import type { DetectItemVariables } from '../types';
@@ -243,7 +243,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					BonusDamage: {
-						value: self.damageOutputVars.value.tracking.hauntingGuiseBonusDamagePercent ?? 0,
+						value: self.damageIOVars.value.tracking.hauntingGuiseBonusDamagePercent ?? 0,
 					},
 				};
 			},
@@ -256,7 +256,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['DamageIncreasePerSecond', 'DamageIncreaseMax'],
 		}),
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			vars.tracking.hauntingGuiseBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'hauntingGuise'>).madness ?? 0) * ITEMS_BY_NAME.hauntingGuise?.dataValues.DamageIncreasePerSecond;
 			vars.totalDamageMult += vars.tracking.hauntingGuiseBonusDamagePercent;
 		},
@@ -424,7 +424,7 @@ export const ITEM_SPECIFICS = {
 					/** damage dealt to champions */
 					f2: { value: 0 },
 					BonusDamage: {
-						value: self.damageOutputVars.value.tracking.liandryBonusDamagePercent ?? 0,
+						value: self.damageIOVars.value.tracking.liandryBonusDamagePercent ?? 0,
 					},
 					PerSecondBurn: {
 						value: PerSecondBurn,
@@ -444,7 +444,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2', 'BurnPercentHealthDamage', 'BurnDuration', 'DamageIncreasePerSecond', 'DamageIncreaseMax'],
 		}),
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			vars.tracking.liandryBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'liandry'>).madness ?? 0) * ITEMS_BY_NAME.liandry?.dataValues.DamageIncreasePerSecond;
 		},
 	},
@@ -519,7 +519,7 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Focused Will ability damage increase',
 		imgText(self) {
-			const { shojinBonusDamagePercent } = self.damageOutputVars.value.tracking;
+			const { shojinBonusDamagePercent } = self.damageIOVars.value.tracking;
 			return shojinBonusDamagePercent ? `${Math.round(shojinBonusDamagePercent * 100)}%` : '';
 		},
 		variables: defineVariables({
@@ -540,7 +540,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			vars.tracking.shojinBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'shojin'>).fWill ?? 0) * ITEMS_BY_NAME.shojin?.dataValues.SpellDamageIncrease;
 		},
 	},
@@ -581,7 +581,7 @@ export const ITEM_SPECIFICS = {
 						value: [VampAmountMelee, VampAmountRanged],
 					},
 					BonusDamage: {
-						value: self.damageOutputVars.value.tracking.riftmakerBonusDamagePercent ?? 0,
+						value: self.damageIOVars.value.tracking.riftmakerBonusDamagePercent ?? 0,
 					},
 				};
 			},
@@ -636,7 +636,7 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.preBonus[ITEM_NAME_TO_ID.riftmaker],
 			},
 		},
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			vars.tracking.riftmakerBonusDamagePercent = ((self.internalItemData.value as IInternalItemDataOf<'riftmaker'>).corruption ?? 0) * ITEMS_BY_NAME.riftmaker?.dataValues.EternityDamageIncreasePerSecond;
 		},
 	},
@@ -1443,7 +1443,7 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['Duration', 'ManaCostIncrease', 'CooldownTick'],
 		}),
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			if ((self.internalItemData.value as IInternalItemDataOf<'actualizer'>).empowered) {
 				const bonusPercent = itemVariableValue('ManaCalc', {
 					item: ITEMS_BY_NAME.actualizer,
@@ -1468,7 +1468,7 @@ export const ITEM_SPECIFICS = {
 		},
 		imgTextLabel: 'Magnification % damage increase',
 		imgText(self) {
-			const { hexopticsBonusDamagePercent } = self.damageOutputVars.value.tracking;
+			const { hexopticsBonusDamagePercent } = self.damageIOVars.value.tracking;
 			return hexopticsBonusDamagePercent && `${roundNumber(hexopticsBonusDamagePercent * 100, 1)}%`;
 		},
 		variables: defineVariables({
@@ -1478,7 +1478,7 @@ export const ITEM_SPECIFICS = {
 			calculate(self) {
 				return {
 					DamageAmp: {
-						value: self.damageOutputVars.value.tracking.hexopticsBonusDamagePercent ?? 0,
+						value: self.damageIOVars.value.tracking.hexopticsBonusDamagePercent ?? 0,
 					},
 				};
 			},
@@ -1501,7 +1501,7 @@ export const ITEM_SPECIFICS = {
 				},
 			},
 		},
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			const {
 				dataValues: { MaxRange, MaxDamageAmp },
 			} = ITEMS_BY_NAME.hexoptics ?? {};
@@ -2088,7 +2088,7 @@ export const ITEM_SPECIFICS = {
 				priority: HOOK_PRIORITIES.postTotal[ITEM_NAME_TO_ID.immortalPath],
 			},
 		},
-		damageOutputVars(self, vars) {
+		damageIOVars(self, vars) {
 			if (self.currentHealth.value < Math.ceil(self.stats.value.total.hp / 2)) {
 				vars.tracking.immortalPathBonusDamagePercent = ITEMS_BY_NAME.immortalPath?.dataValues.DamageMod;
 			}
@@ -4332,14 +4332,14 @@ export const ITEM_SPECIFICS = {
 		variables: defineVariables({
 			uninteresting: ['HealthThreshold', 'SpellItemDamageAmp'],
 		}),
-		damageOutputVars(_self, vars, damageTarget) {
+		damageIOVars(_self, vars, damageTarget) {
 			vars.shadowflameCrit = damageTarget && Math.min(damageTarget.currentHealth.value, damageTarget.stats.value.total.hp) / (damageTarget.stats.value.total.hp || 1) < ITEMS_BY_NAME.shadowflame?.dataValues.HealthThreshold;
 		},
 		modifyVariable: [
 			{
 				type: [VariableType.magic, VariableType.true],
 				handler(value, meta, self) {
-					if (self.damageOutputVars.value.shadowflameCrit) {
+					if (self.damageIOVars.value.shadowflameCrit) {
 						meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
 						meta.critAdditionalDamage = value * ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
 						return value + meta.critAdditionalDamage;
@@ -4352,7 +4352,7 @@ export const ITEM_SPECIFICS = {
 				/* 26.21 verified on aery to crit */
 				type: [VariableType.adaptive],
 				handler(value, meta, self) {
-					if (self.stats.value.meta.adaptiveDamageType === VariableType.magic && self.damageOutputVars.value.shadowflameCrit) {
+					if (self.stats.value.meta.adaptiveDamageType === VariableType.magic && self.damageIOVars.value.shadowflameCrit) {
 						meta.critMultiplier = ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
 						meta.critAdditionalDamage = value * ITEMS_BY_NAME.shadowflame?.dataValues.SpellItemDamageAmp;
 						return value + meta.critAdditionalDamage;
@@ -4420,7 +4420,7 @@ export type IItemSpecific<T extends keyof TItems = keyof TItems> = IProviderGrou
 		calculateHooks?: ICalculateChampionStatsHookSource;
 		variables?: ISpecificVariables<Exclude<DetectItemVariables<TItems[T]>, 'Cooldown'>, any, IChampionId, 'item'>;
 		effectOntoTargetVars?: IEffectOntoTargetVarsHook;
-		damageOutputVars?: IDamageOutputVarsHook;
+		damageIOVars?: IDamageIOVarsHook;
 		basicAttackVars?: IBasicAttackVarsHook;
 		modifyVariable?: IItemModifyVariable[];
 		/**

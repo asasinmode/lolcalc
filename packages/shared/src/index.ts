@@ -446,7 +446,7 @@ export interface IStatsCalculationEffectVars extends Pick<
 	oriannaWBonusMS?: number;
 }
 
-export interface IDamageOutputVars {
+export interface IDamageIOVars {
 	/** whether magic, true and adaptive (when it's magic) damage vars should be treated as crits from shadowflame */
 	shadowflameCrit?: boolean;
 	/** starts at `1`. modified by things like haunting guise, immortal path, chemtech soul */

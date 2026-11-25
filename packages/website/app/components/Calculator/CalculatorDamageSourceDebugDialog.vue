@@ -36,10 +36,18 @@ defineExpose({
 				</div>
 			</details>
 			<details open>
-				<summary>damageOutputVars</summary>
+				<summary>damage IO vars</summary>
 				<div>
 					<code class="whitespace-pre">
-						{{ JSON.stringify(damageSource?.damageOutputVars.value, null, 2) }}
+						{{ JSON.stringify(damageSource?.damageIOVars.value, null, 2) }}
+					</code>
+				</div>
+			</details>
+			<details open>
+				<summary>basic attack vars</summary>
+				<div>
+					<code class="whitespace-pre">
+						{{ JSON.stringify(damageSource?.basicAttackVars.value, null, 2) }}
 					</code>
 				</div>
 			</details>

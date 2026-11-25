@@ -7,7 +7,7 @@ import type {
 	IChampionAbilityKey,
 	IChampionStatName,
 	IEffectOntoTargetVars,
-	IDamageOutputVars,
+	IDamageIOVars,
 	INonPassiveAbilityKey,
 	IStatsCalculationDebuffs,
 	IStatsCalculationEffectVars,
@@ -23,7 +23,7 @@ import { roundNumber } from '@lolcalc/shared/utils.ts';
 import type { ComputedRef, MaybeRefOrGetter, Ref, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 import { computed, markRaw, ref, shallowRef, toRaw, triggerRef, watch } from 'vue';
 import { calculateChampionStats, isMasterworkSlot } from './calculate/championStats.ts';
-import { sourceDamageBasicAttackVars, calculateEffectsOntoTargetVars, sourceDamageOutputVars } from './calculate/damage.ts';
+import { sourceDamageBasicAttackVars, calculateEffectsOntoTargetVars, sourceDamageIOVars } from './calculate/damage.ts';
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './GameAbilityId';
 import { GameAbilityId } from './GameAbilityId.ts';
 import type { IGameImageData } from './misc.ts';
@@ -83,7 +83,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	stats = computed((): IStatsCalculationResult => calculateChampionStats(this));
 	/** variables of effects applied onto the damage target, like slow applied onto target from this damage source's hextech soul */
 	effectsOntoTargetVars = computed((): IEffectOntoTargetVars => calculateEffectsOntoTargetVars(this));
-	damageOutputVars = computed((): IDamageOutputVars => sourceDamageOutputVars(this));
+	damageIOVars = computed((): IDamageIOVars => sourceDamageIOVars(this));
 	basicAttackVars = computed((): IBasicAttackVars => sourceDamageBasicAttackVars(this));
 
 	runes: Ref<IChampionRunes>;
@@ -1397,10 +1397,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		),
 	};
 
-	damageOutputVarsHooks = {
-		item: computed((): IDamageOutputVarsHook[] => this.items.value.map((item) => (item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.damageOutputVars)!).filter(Boolean)),
+	damageIOVarsHooks = {
+		item: computed((): IDamageIOVarsHook[] => this.items.value.map((item) => (item && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[item.id as keyof IHypotheticalItemSpecifics]?.damageIOVars)!).filter(Boolean)),
 		// TODO champion & effect hooks, return concated
-		all: computed((): IDamageOutputVarsHook[] => this.damageOutputVarsHooks.item.value),
+		all: computed((): IDamageIOVarsHook[] => this.damageIOVarsHooks.item.value),
 	};
 
 	basicAttackHooks = {
@@ -2729,8 +2729,8 @@ export interface IEffectOntoTargetVarsHook<Id extends IChampionId | undefined = 
 	(self: DamageSource<Id>, vars: IEffectOntoTargetVars): void;
 }
 
-export interface IDamageOutputVarsHook<Id extends IChampionId | undefined = any> {
-	(self: DamageSource<Id>, vars: IDamageOutputVars, damageTarget?: DamageSource): void;
+export interface IDamageIOVarsHook<Id extends IChampionId | undefined = any> {
+	(self: DamageSource<Id>, vars: IDamageIOVars, damageTarget?: DamageSource): void;
 }
 
 export interface IBasicAttackVarsHook<Id extends IChampionId | undefined = any> {
