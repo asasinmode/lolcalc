@@ -16,7 +16,7 @@ allowBuilds:
   unrs-resolver: true
 
 overrides:
-  typescript: npm:typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2
+  typescript: npm:typescript-native-bridge@6.0.3-bridge.19.tsgo.7.0.2
 
 catalog:
   '@types/node': ^26.6.4
@@ -26,8 +26,8 @@ catalog:
   oxlint: ^1.87.0
   oxlint-tsgolint: ^7.0.2003
   simple-git-hooks: ^2.14.0
-  typescript: npm:typescript-native-bridge@6.0.3-bridge.18.tsgo.7.0.2
-  vue: ^3.6.0-rc.13
+  typescript: npm:typescript-native-bridge@6.0.3-bridge.19.tsgo.7.0.2
+  vue: ^3.6.0-rc.16
   vue-component-type-helpers: ^3.3.12
   vue-tsc: ^3.3.12
 
@@ -39,9 +39,9 @@ catalogs:
   website:
     '@iconify-json/logos': ^1.2.15
     '@iconify-json/ph': ^1.2.2
-    '@nuxt/kit': ^4.6.3
+    '@nuxt/kit': ^4.7.0
     '@unocss/nuxt': ^66.10.5
     lightningcss: ^1.33.0
-    nuxt: ^4.6.3
+    nuxt: ^4.7.0
     unocss: ^66.10.5
     vue-router: ^5.4.0
