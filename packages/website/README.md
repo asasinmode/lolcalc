@@ -23,6 +23,7 @@ pnpm generate
   - [ ] actualizer
     - [ ] separate in/out going heal & shield
     - [ ] item damage? says only ability
+- [ ] item shop filters TODO check if tenacity counts to movement speed
 - [ ] guide/about page
   - [ ] guide/about add subheadings to toc
   - [ ] finish ui guide

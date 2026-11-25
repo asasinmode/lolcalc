@@ -129,7 +129,6 @@ export const ITEM_SHOP_STAT_FILTERS = {
 	},
 	movement: {
 		name: 'Movement',
-		// TODO check if tenacity counts + check other filters
 		filter: (item) => !!(item.stats.FlatMovementSpeedMod || item.stats.PercentMovementSpeedMod || item.stats.PercentTenacityMod),
 	},
 	vamp: {

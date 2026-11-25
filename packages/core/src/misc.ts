@@ -21,23 +21,32 @@ const championGameIcons: (string | [string, string])[] = ['asolstackicon', 'kind
 
 const STAT_ICON_VALUE_TO_STAT = Object.fromEntries(Object.entries(STAT_ICON).map(([key, value]) => [value, key])) as Record<string, any>;
 
-export function replaceGameIcons(text: string, subpath?: string, addAlt = false): string {
+const STAT_ICON_ALT_SOURCES: Partial<Record<keyof typeof STAT_ICON, string>> = {
+	level: 'level',
+};
+
+export function replaceGameIcons(text: string, subpath?: string, addAlt = true): string {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
 			const championIconRename = championGameIcons.findLast((el) => el[0] === name);
 			const isChampionIcon = championIconRename || championGameIcons.includes(name);
 
-			let altSource;
+			let altSource: string | undefined;
 			if (addAlt) {
 				const stat = STAT_ICON_VALUE_TO_STAT[name];
-				// @ts-expect-error accessing is chill
-				altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat]);
+				const dedicatedAlt = STAT_ICON_ALT_SOURCES[stat as keyof typeof STAT_ICON];
+				if (dedicatedAlt) {
+					altSource = dedicatedAlt;
+				} else {
+					// @ts-expect-error accessing is chill
+					altSource = stat && (CHAMPION_STAT_META[stat] ?? ITEM_STAT_META[stat])?.name;
+				}
 			}
 
 			return `<img src="https://raw.communitydragon.org/${PATCH_VERSION.vMinor}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${
 				statIconNameValues.includes(name) ? 'statsicon' : (subpath ?? (isChampionIcon ? 'champion' : 'gameplay'))
-			}/${championIconRename?.[1] ?? name}.png" width="20" height="20" ${altSource ? `alt="icon representing ${altSource.name}"` : 'aria-hidden="true"'}>`;
+			}/${championIconRename?.[1] ?? name}.png" width="20" height="20" ${altSource ? `alt="${altSource} icon"` : 'aria-hidden="true"'}>`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${ICON_ON_HIT_IMG} <onhit>On-Hit</onhit>`);
 }
@@ -137,7 +146,7 @@ export async function simpleDescriptionFormatting(text: string, addAlt?: boolean
 	return parts.join('');
 }
 
-function formatImageHtml(imageInfo: IGameImageData, addAlt?: boolean, textureSize = 20) {
+function formatImageHtml(imageInfo: IGameImageData, addAlt = true, textureSize = 20) {
 	return `<img ${Object.entries(formatImageAttrs(imageInfo, addAlt, textureSize))
 		.map(
 			([attr, value]) =>
