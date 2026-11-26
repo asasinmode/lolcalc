@@ -27,7 +27,7 @@ pnpm generate
 - [ ] guide/about page
   - [ ] guide/about add subheadings to toc
   - [ ] finish ui guide
-  - [ ] more examples
+  - [ ] more examples (corki crit/bruiser)
   - [ ] add screenshots
   - [ ] heal values shown on top of character can lie? 16.16 amumu redemption/visage/immortal path screen?
   - [ ] tutorials
@@ -48,3 +48,4 @@ pnpm generate
 - [ ] PWA
 - [ ] move to lolcalc.app
 - [ ] build github actions CI/CD
+- [ ] example images

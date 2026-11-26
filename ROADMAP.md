@@ -74,5 +74,6 @@ Additional, dedicated pages I'd like to add
 - [ ] champion & build guess recaptcha
 - [ ] chess like puzzles, guess from screenshot what to do, choose option
 - [ ] scorch vs gathering storm damage comparison, pick champion, show 10, 20, 30... minutes
+- [ ] ad/ap damage needed to kill melee/cannon/ranged minion over game time
 
 Maybe [nuxt multiapp](https://nuxt.com/docs/4.x/guide/going-further/features#multiapp) would be appropriate
