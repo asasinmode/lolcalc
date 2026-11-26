@@ -194,11 +194,13 @@ export function itemVariableValue(
 	} else if (variable.startsWith('Effect')) {
 		rv.value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	} else if (item.itemCalculations?.[variable]) {
-		const value = variableResolveFn(item.itemCalculations?.[variable])?.(item.itemCalculations[variable], item, {
+		const target = item.itemCalculations?.[variable];
+		const value = variableResolveFn(target)?.(target, item, {
 			variableValueFn: itemVariableValue,
 			variableValueParams: params,
 			accessedVariables: params.accessedVariables?.getOrInsert(accessedFrom ?? variable, new Set()),
 		});
+
 		if (value) {
 			for (const key in value) {
 				if (key === 'calculatesFrom') {
@@ -207,6 +209,17 @@ export function itemVariableValue(
 					(rv as any)[key] = value[key as keyof typeof value];
 				}
 			}
+
+			if (target.mPrecision > 0) {
+				rv.roundReplaced = target.mPrecision;
+			} else if (target.mPrecision === -1) {
+				if (rv.roundReplaced === true) {
+					rv.roundReplaced = 2;
+				} else {
+					rv.roundReplaced ??= 2;
+				}
+			}
+
 			if (Array.isArray(rv.value)) {
 				if (isRanged === undefined) {
 					rv.isMeleeRanged = true;
