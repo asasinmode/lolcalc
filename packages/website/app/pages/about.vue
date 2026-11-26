@@ -115,7 +115,7 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			<NuxtLink to="https://communitydragon.org/" target="_blank">Community Dragon</NuxtLink> and I want to thank its contributors, as well as people on their discord server that helped me during the development.
 		</p>
 		<p>Thanks to my homies who helped me test the website and verify the results in game.</p>
-		<p>Thanks to Riot Games for not chronobreaking this project (🤞) and for their policy that allowed me to make it.</p>
+		<p>Thanks to Riot Games for not chronobreaking this project (🤞) and for their policy that allowed me to make it. <i>Please add setting your dragon soul in practice tool</i></p>
 		<p>
 			All of the text that's not from the game itself is written by me. Some of the <u>code</u> in this project was written using LLMs, as well as I have used them in debugging/coming up with solutions. It would've taken me a few more
 			months to get to where it is without them. The ability to paste into one the stats/variables and have it guess formulas for what Riot is doing under the hood was very helpful.<br />

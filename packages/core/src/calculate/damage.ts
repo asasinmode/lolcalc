@@ -25,35 +25,34 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 
 // damage multipliers
 //  passive
-//   riftmaker, liandry, haunting guise - "deal % bonus damage up to X"
-//   immortal path - "deal % increased damage"
-//   shojin - "increases your champion's ability and passive damage by %"
-//   chemtech soul - "deal % increased damage"
+//   riftmaker 8%, liandry 6%, haunting guise 6% - "deal % bonus damage up to X"
+//   immortal path 4% - "deal % increased damage"
+//   shojin 12% - "increases your champion's ability and passive damage by %"
+//   chemtech soul 13% - "deal % increased damage"
 //  conditional
-//   LDR - "deal up to % bonus damage against champions"
-//   hexoptics - "deal up to % increased damage with attacks" (assuming bacis attacks)
+//   LDR 15% - "deal up to % bonus damage against champions"
+//   hexoptics 10% - "deal up to % increased damage with attacks" (assuming bacis attacks)
 //  active
-//   horizon focus - "deal % increased damage to enemies"
-//   actualizer - "you gain % increased ability damage"
+//   horizon focus 10% - "deal % increased damage to enemies"
+//   actualizer 16.5% but depends on mana. If it's different a specific test, I add a note about it - "you gain % increased ability damage"
 // damage taken multipliers
-//   abyssal mask - "nearby enemy champions take % more magic damage"
-//   mandate - "mark as % vulnerable" vulnerable desc: "take % increased damage from all sources"
-//   bloodsong - "they take % increased damage"
-//   amumu passive - "curse his enemies [...] causing them to take an additional 10% true damage from all magic damage they take"
+//   abyssal mask 12% - "nearby enemy champions take % more magic damage"
+//   mandate 7% - "mark as % vulnerable" vulnerable desc: "take % increased damage from all sources"
+//   bloodsong 8% - "they take % increased damage"
+//   amumu passive 10% - "curse his enemies [...] causing them to take an additional 10% true damage from all magic damage they take"
 // damage taken reductions
-//   knight's vow - "paraphrased[while near an ally marked by this item], take 14% of the damage they receive"
-//   celestial opposition - "reduce incoming champion damage by %"
-//   chemtech soul - "gain % damage resist"
+//   knight's vow 14% - "paraphrased[while near an ally marked by this item], take 14% of the damage they receive"
+//   celestial opposition 35% - "reduce incoming champion damage by %"
+//   chemtech soul 13% - "gain % damage resist"
 // flat dmg reduction
 //   fizz passive - "takes [flat number] reduced damage from all sources"
 //   amumu E - "takes [flat number] reduced physical damage"
 // damage dealt reductions
-//   exhaust - "reduces their damage dealt by 40%"
+//   exhaust 35% - "reduces their damage dealt by 40%"
 // aa specific
-//   randuin - reduces crits by % (works both for basic attack and ability crits)
-//   steelcaps - "reduces incoming damage from attacks by %" (assuming basic attacks)
+//   randuin - "receive 30% less damage from Critical Strikes" (works both for basic attack and ability crits)
+//   steelcaps - "reduces incoming damage from attacks by 10%" (assuming basic attacks)
 
-// TODO check how item variables are accessed, if there isn't a circular dependency
 /** everything related to source damage output */
 export function sourceDamageIOVars(self: DamageSource): IDamageIOVars {
 	// check if crit damage multiplier stat should be reduced & used for jhin/senna on shadowflame crit
