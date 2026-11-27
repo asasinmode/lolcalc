@@ -296,6 +296,11 @@ function modifyValueByHSP(value: number, _meta: any, self: DamageSource): number
 	return value * (1 + (self?.stats.value.total.healShieldPower ?? 0)) * (self?.stats.value.variables.healMult ?? 1);
 }
 
+export function modifyByResists(value: number, flatPen: number, percentPen: number, resists = 0) {
+	const effectiveResists = Math.max(Math.min(resists, 0), resists * (1 - percentPen) - flatPen);
+	return value / (1 + effectiveResists / 100);
+}
+
 export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalModifyVariableFunction>> = {
 	[VariableType.affectedByTenacity](value, _meta, _self, damageTarget) {
 		return Math.max(CONSTS.minCCDuration, value * (1 - (damageTarget?.stats.value.total.tenacity ?? 0)));
@@ -306,21 +311,13 @@ export const GLOBAL_MODIFY_VARIABLE_FNS: Partial<Record<VariableType, IGlobalMod
 	[VariableType.heal]: modifyValueByHSP,
 	[VariableType.shield]: modifyValueByHSP,
 	[VariableType.magicShield]: modifyValueByHSP,
-	/* used directly in the `sourceDamageBasicAttackVars`, will throw if doesn't exist */
 	[VariableType.magic](value, _meta, self, damageTarget) {
 		const { percentMagicPen, flatMagicPen } = self.stats.value.total;
-		const magicResist = damageTarget?.stats.value.total.magicResist ?? 0;
-
-		const effectiveResists = Math.max(Math.min(magicResist, 0), magicResist * (1 - percentMagicPen) - flatMagicPen);
-		return value / (1 + effectiveResists / 100);
+		return modifyByResists(value, flatMagicPen, percentMagicPen, damageTarget?.stats.value.total.magicResist);
 	},
-	/* used directly in the `sourceDamageBasicAttackVars`, will throw if doesn't exist */
 	[VariableType.physical](value, _meta, self, damageTarget) {
 		const { percentArmorPen, lethality } = self.stats.value.total;
-		const armor = damageTarget?.stats.value.total.armor ?? 0;
-
-		const effectiveResists = Math.max(Math.min(armor, 0), armor * (1 - percentArmorPen) - lethality);
-		return value / (1 + effectiveResists / 100);
+		return modifyByResists(value, lethality, percentArmorPen, damageTarget?.stats.value.total.armor);
 	},
 	[VariableType.adaptive](value, meta, self, damageTarget) {
 		return GLOBAL_MODIFY_VARIABLE_FNS[self.stats.value.meta.adaptiveDamageType]!(value, meta, self, damageTarget);

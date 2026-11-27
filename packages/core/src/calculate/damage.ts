@@ -92,6 +92,8 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 	};
 	const onHit: IBasicAttackVars['onHit'] = { total: 0, physical: 0, magic: 0, true: 0, dps: 0 };
 
+	// TODO need to fit shadowflame ie here somewhere
+	// also maybe instead of using global modify var fns use `modifyByResists`. Depends on where the damage mults end up
 	for (const hook of self.basicAttackHooks.all.value) {
 		hook(self, { raw, onHit }, target);
 	}
@@ -105,6 +107,9 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 		magic: {},
 		true: {},
 	};
+
+	onHit.physical = GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(onHit.physical, meta.physical, self, target);
+	onHit.magic = GLOBAL_MODIFY_VARIABLE_FNS[VariableType.magic]!(onHit.magic, meta.magic, self, target);
 
 	const normal: IBasicAttackVars['normal'] = {
 		physical: GLOBAL_MODIFY_VARIABLE_FNS[VariableType.physical]!(raw.physical, meta.physical, self, target),
