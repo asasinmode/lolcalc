@@ -33,6 +33,18 @@ export default {
 		}),
 	},
 	w: {
+		calculateCd(_value, cdr, abilityVariant, abilityLevel) {
+			let rv = Number.NaN;
+
+			const cd = abilityVariant.ammoRechargeTime?.[abilityLevel || 1];
+			if (typeof cd === 'number') {
+				rv = cd * cdr;
+			} else {
+				console.warn('[CHAMPION_SPECIFICS ivern] failed to calculate W cd', cd);
+			}
+
+			return rv;
+		},
 		variables: defineChampionVariables<'Ivern', typeof IIvern, 'w'>()({
 			meta: {
 				TotalDamage: {
