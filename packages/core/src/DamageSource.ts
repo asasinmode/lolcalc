@@ -2734,7 +2734,7 @@ export interface IDamageIOVarsHook<Id extends IChampionId | undefined = any> {
 }
 
 export interface IBasicAttackVarsHook<Id extends IChampionId | undefined = any> {
-	(self: DamageSource<Id>, raw: IBasicAttackVars['raw'], damageTarget?: DamageSource): void;
+	(self: DamageSource<Id>, vars: Pick<IBasicAttackVars, 'raw' | 'onHit'>, damageTarget?: DamageSource): void;
 }
 
 export type IDamageSourceModifyVariableFunctions = Partial<Record<VariableType, IModifyVariableFunction[]>>;

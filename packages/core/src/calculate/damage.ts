@@ -26,9 +26,9 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 // damage multipliers
 //  passive
 //   riftmaker 8%, liandry 6%, haunting guise 6% - "deal % bonus damage up to X"
-//   immortal path 4% - "deal % increased damage"
+//   immortal path 4% - "while above half health, deal % increased damage" - EXCLUSIVE WITH CHEMTECH SOUL DUE TO CONDITION
 //   shojin 12% - "increases your champion's ability and passive damage by %"
-//   chemtech soul 13% - "deal % increased damage"
+//   chemtech soul 13% - "while below 50% health, deal % increased damage" - EXCLUSIVE WITH IMMORTAL PATH DUE TO CONDITION
 //  conditional
 //   LDR 15% - "deal up to % bonus damage against champions"
 //   hexoptics 10% - "deal up to % increased damage with attacks" (assuming bacis attacks)
@@ -48,7 +48,7 @@ export function calculateEffectsOntoTargetVars(self: DamageSource): IEffectOntoT
 //   fizz passive - "takes [flat number] reduced damage from all sources"
 //   amumu E - "takes [flat number] reduced physical damage"
 // damage dealt reductions
-//   exhaust 35% - "reduces their damage dealt by 40%"
+//   exhaust 35% - "reduces their damage dealt by 35%"
 // aa specific
 //   randuin - "receive 30% less damage from Critical Strikes" (works both for basic attack and ability crits)
 //   steelcaps - "reduces incoming damage from attacks by 10%" (assuming basic attacks)
@@ -90,9 +90,10 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 		true: 0,
 		dps: 0,
 	};
+	const onHit: IBasicAttackVars['onHit'] = { total: 0, physical: 0, magic: 0, true: 0, dps: 0 };
 
 	for (const hook of self.basicAttackHooks.all.value) {
-		hook(self, raw, target);
+		hook(self, { raw, onHit }, target);
 	}
 
 	raw.total = raw.physical + raw.magic + raw.true;
@@ -129,12 +130,12 @@ export function sourceDamageBasicAttackVars(self: DamageSource): IBasicAttackVar
 		dps: 0,
 	};
 
-	for (const obj of [normal, crit, average]) {
+	for (const obj of [normal, crit, average, onHit]) {
 		obj.total = obj.physical + obj.magic + obj.true;
 		obj.dps = obj.total * totalStats.attackSpeed;
 	}
 
-	return { raw, meta, normal, crit, average };
+	return { raw, meta, normal, crit, average, onHit };
 }
 
 export const IMPLEMENTED_BASIC_ATTACK_THINGS: IGameAbilityId[] = [GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.witsEnd), GameAbilityId.build(AbilityType.item, ITEM_NAME_TO_ID.nashorsTooth)];

@@ -2995,8 +2995,9 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f4'],
 		}),
-		basicAttackVars(_self, vars) {
-			vars.magic += ITEMS_BY_NAME.witsEnd?.stats.FlatSpellBlockMod;
+		basicAttackVars(_self, { raw, onHit }) {
+			raw.magic += ITEMS_BY_NAME.witsEnd?.stats.FlatSpellBlockMod;
+			onHit.magic += ITEMS_BY_NAME.witsEnd?.stats.FlatSpellBlockMod;
 		},
 	},
 	[ITEM_NAME_TO_ID.redemption]: {
@@ -3074,12 +3075,13 @@ export const ITEM_SPECIFICS = {
 			},
 			uninteresting: ['f2'],
 		}),
-		basicAttackVars(self, vars) {
+		basicAttackVars(self, { raw, onHit }) {
 			const computed = self.computed.items.value.find((item) => item?.item.id === ITEM_NAME_TO_ID.nashorsTooth);
 			const value = computed?.variables.get('TotalOnHitDamage' satisfies DetectItemVariables<(typeof ITEMS_BY_NAME)['nashorsTooth']>)?.baseValue;
 
 			if (typeof value === 'number') {
-				vars.magic += value;
+				raw.magic += value;
+				onHit.magic += value;
 			} else {
 				console.warn("[ITEM_SPECIFICS nashor's tooth] failed to find TotalOnHitDamage", computed);
 			}

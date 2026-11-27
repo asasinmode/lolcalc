@@ -463,13 +463,16 @@ export interface IDamageIOVars {
 }
 
 type IBasicAttackDamageType = 'total' | 'physical' | 'magic' | 'true' | 'dps';
+type IBasicAttackResultVar = Record<IBasicAttackDamageType, number>;
 
 export interface IBasicAttackVars {
-	raw: Record<IBasicAttackDamageType, number>;
+	raw: IBasicAttackResultVar;
 	meta: Record<Exclude<IBasicAttackDamageType, 'total' | 'dps'>, IVariableModifyMeta>;
-	normal: Record<IBasicAttackDamageType, number>;
-	crit: Record<IBasicAttackDamageType, number>;
-	average: Record<IBasicAttackDamageType, number>;
+	normal: IBasicAttackResultVar;
+	crit: IBasicAttackResultVar;
+	average: IBasicAttackResultVar;
+	/** damage of on hit effects present */
+	onHit: IBasicAttackResultVar;
 }
 
 export type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
