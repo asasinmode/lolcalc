@@ -42,13 +42,14 @@ function submitIssue(_event: SubmitEvent) {
 				<label for="issue-category">category<span>*</span></label>
 				<select id="issue-category" v-model="category" required>
 					<option selected value="calculations">calculations wrong</option>
-					<option value="ui">ui broken/bad</option>
 					<option value="feature">feature suggestion</option>
+					<option value="ui">ui broken</option>
 					<option value="other">something else</option>
 				</select>
 			</div>
-			<p v-show="category === 'calculations'" class="alert info">
-				calculation issues without an image/video showcasing the incorrect setup in game will be ignored. Learn how to attach images by reading the checkbox at the end of this form
+			<p v-show="category === 'calculations' || category === 'feature'" class="alert info">
+				<template v-if="category === 'calculations'"> calculation issues without an image/video showcasing the incorrect setup in game will be ignored. Learn how to attach images by reading the checkbox at the end of this form </template>
+				<template v-else> please read the <NuxtLink to="/about#roadmap" target="_blank">about page's roadmap section</NuxtLink> before suggesting a feature </template>
 				<Icon class="i-ph:info" />
 			</p>
 			<div>
@@ -115,7 +116,11 @@ function submitIssue(_event: SubmitEvent) {
 			--at-apply: 'pbs-3 grid grid-cols-3 auto-rows-auto gap-x-5 text-lg gap-y-2.5';
 
 			.alert {
-				--at-apply: 'bg-blue-950 text-blue-300';
+				--at-apply: 'bg-blue-950 text-blue-300 mx-auto';
+
+				> a {
+					--at-apply: 'text-blue-400 hoverable:underline';
+				}
 			}
 
 			@media (width < 640px) {
