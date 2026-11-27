@@ -102,11 +102,13 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 
 		<TextPageHeading id="roadmap" text="roadmap" />
 		<p>
-			Below is the list of <i>few</i> things that are currently being worked on/will be worked on the soonest. For full list of planned features and ideas, see the
+			Below is the list of <i>a few</i> things that are currently being worked on/will be worked on the soonest. For full list of planned features and ideas, see the
 			<NuxtLink to="https://github.com/asasinmode/lolcalc/blob/ROADMAP.md" target="_blank">ROADMAP</NuxtLink> on the project's github page
 		</p>
 		<ul>
-			<li>all champion abilities - their passives, effects, calculating their cooldowns, cleaning up their results <i>(also v1, end of the beta version)</i></li>
+			<li>all champion abilities - their passives, effects, calculating their cooldowns, cleaning up their results <i>(also the target for version 1.0, end of beta)</i></li>
+			<li>keyboard navigation improvements</li>
+			<li>better screen reader experience</li>
 		</ul>
 
 		<TextPageHeading id="acknowledgements" text="acknowledgements" />
@@ -301,10 +303,6 @@ const nonPassiveAbilitiesDisclaimer = useSimpleDescription(
 			&[open] > summary {
 				--at-apply: 'mbe-[0.33em]';
 			}
-		}
-
-		#roadmap + p {
-			--at-apply: 'mbe-[1em]';
 		}
 
 		#privacy-policy + p > span {

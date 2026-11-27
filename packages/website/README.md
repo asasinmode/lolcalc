@@ -49,3 +49,5 @@ pnpm generate
 - [ ] move to lolcalc.app
 - [ ] build github actions CI/CD
 - [ ] example images
+- [ ] vladimir hemoplague effect
+- [ ] corki, gragas, katarina, sion, volibear ability vars
