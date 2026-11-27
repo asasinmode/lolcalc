@@ -79,7 +79,11 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Diana', 'passive', 0), 'isPassiveEmpowered', 'empowered Moonsilver Blade', true),
 	},
 	Draven: {
-		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
+		config: [
+			numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
+			progressConfigEl(GameAbilityId.build(AbilityType.champion, 'Draven', 'w', 0), 'wMSProgress', 'Blood Rush MS', CHAMPION_SPECIFICS.Draven.w.derivedMS),
+			booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Draven', 'w', 0), 'applyWAS', 'Blood Rush attack speed', false),
+		],
 	},
 	Ekko: {
 		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Ekko', 'passive', 0), 'isPassiveMSActive', 'is MS active (3 hits)', false),

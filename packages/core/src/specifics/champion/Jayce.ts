@@ -207,7 +207,7 @@ export default {
 				const bonusMS = eCalculateMS(self.internalData.value.eMSProgress, self.champion.value!, self.abilityLevels.value.e);
 				if (!Number.isNaN(bonusMS)) {
 					calculatedVariables.jayceEBonusMS = bonusMS;
-					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.jayceEBonusMS / 100;
+					calculatedVariables.totalBonusPercentMoveSpeed += calculatedVariables.jayceEBonusMS * 0.01;
 				}
 			},
 		},

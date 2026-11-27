@@ -202,6 +202,7 @@ export const IMPLEMENTED_CHAMPION_IDS: IChampionId[] = [
 	'Ezreal',
 	'Shen',
 	'Ivern',
+	'Draven',
 ];
 IMPLEMENTED_CHAMPION_IDS.sort((a, b) => CHAMPIONS[a].name.localeCompare(CHAMPIONS[b].name));
 
@@ -480,7 +481,7 @@ export interface IChampionInternalDataMap {
 	Chogath: { ultStacks: number };
 	Darius: { isChampionAtMaxBleed: number };
 	Diana: { isPassiveEmpowered: number };
-	Draven: { passiveStacks: number };
+	Draven: { passiveStacks: number; wMSProgress: number; applyWAS: number };
 	Ekko: { isPassiveMSActive: number };
 	Ezreal: { passiveStacks: number };
 	Fiora: { passiveMSProgress: number };

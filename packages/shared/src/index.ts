@@ -304,6 +304,8 @@ export interface IStatsCalculationVariables {
 	jayceEBonusMS?: number;
 	/** bonus ms % from Akali's W */
 	akaliWBonusMS?: number;
+	/** bonus ms % from Draven's W */
+	dravenWBonusMS?: number;
 	/** bonus ms % from Orianna's W */
 	oriannaWBonusMS?: number;
 	/** ap gained from Vladimir's passive */
