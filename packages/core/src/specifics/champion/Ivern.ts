@@ -1,4 +1,5 @@
 import { linkedFormattedItemImage } from '@lolcalc/core/misc.ts';
+import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import { STAT_ICON } from '@lolcalc/data';
 import type IIvern from '@lolcalc/data/files/champion/Ivern.json';
 import { VariableType } from '@lolcalc/shared';
@@ -67,19 +68,10 @@ export default {
 		variables: defineChampionVariables<'Ivern', typeof IIvern, 'r'>()({
 			known: {
 				DaisyTotalBasicAttackDamage: [],
-				DaisyTotalBasicAttackDPS: [],
 			},
-			calculate(self, target) {
-				const DaisyTotalBasicAttackDamage = Number.NaN;
-				const DaisyTotalBasicAttackDPS = Number.NaN;
-
+			calculate(self) {
 				return {
-					DaisyTotalBasicAttackDamage: {
-						value: DaisyTotalBasicAttackDamage,
-					},
-					DaisyTotalBasicAttackDPS: {
-						value: DaisyTotalBasicAttackDPS,
-					},
+					DaisyTotalBasicAttackDamage: championAbilityVariableValue('TotalDaisyAD', { abilityKey: 'r', abilityVariant: self.champion.value!.abilities.q.variants[0]!, damageSource: self }),
 				};
 			},
 			meta: {
@@ -87,13 +79,9 @@ export default {
 					type: VariableType.magic,
 				},
 				DaisyTotalBasicAttackDamage: {
-					additionalInfo: `Daisy's <var>TotalDaisyAD</var> plus the <onhit>%i:${STAT_ICON.OnHit}% On-Hit</onhit>, damage from Ivern's items. Affected by the <i>column target's</i> resists`,
 					isCustom: true,
 					type: VariableType.physical,
-				},
-				DaisyTotalBasicAttackDPS: {
-					isCustom: true,
-					additionalInfo: `<var>DaisyTotalBasicAttackDamage</var> times Daisy's attack speed. Affected by ${linkedFormattedItemImage('frozenHeart', "Frozen Heart's")} <b>Winter's Caress</b> if Ivern is`,
+					additionalInfo: `This row is just <var>TotalDaisyAD</var> but affected by the <i>column target's</i> <scalearmor>armor</scalearmor>. To compare Daisy's total basic attack damage, try adding it to the <b>custom total</b> results section with Ivern's total <onhit>%i:${STAT_ICON.OnHit}% On-Hit</onhit> damage from the <b>basic attack</b> results section.<br> <rules>No attempt at DPS since it doesn't really make sense with her pausing every 3rd hit to shockwave</rules>`,
 				},
 			},
 			uninteresting: ['DaisyDuration', 'ShockwaveCCDuration', 'ShockwaveCD'],
