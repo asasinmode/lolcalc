@@ -1873,6 +1873,10 @@ export function computeAbilityDescription(champion: IChampion, gameAbilityId: IC
 
 	const reducedCd = abilitySpecific?.calculateCd?.(cooldown, cdr, variant, abilityLevel, damageSource) ?? (cooldown !== undefined && cooldown !== null ? cooldown * cdr : cooldown);
 
+	if (Number.isNaN(reducedCd)) {
+		anyUnknownVariables ||= true;
+	}
+
 	let isDisabled: boolean | number | undefined;
 	if (damageSource && abilitySpecific?.isDisabled) {
 		isDisabled = abilitySpecific.isDisabled(damageSource);

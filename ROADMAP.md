@@ -11,6 +11,7 @@ With these done, `v1.0.0` will release and the beta will end.
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift), `mSpell.{210f9ec0}` instead of `mSpell.mana`? Maybe passives can have cd? Check gragas
   - [ ] extendedVariable values, resolve cooldown & cost
+  - [ ] `updateData` script report unknown CD/cost
   - [ ] aphelios abilities
 - [ ] keyboard navigation
   - [ ] somehow right clicks, like clearing selects/removing items
