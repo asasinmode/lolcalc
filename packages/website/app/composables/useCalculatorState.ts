@@ -129,13 +129,17 @@ export function initCalculatorState(): ICalculatorState {
 					id: 'true' satisfies keyof IBasicAttackVars['normal'],
 				},
 				{
+					name: 'total on-hit',
+					id: 'onHit',
+				},
+				{
 					name: 'DPS',
 					id: 'dps' satisfies keyof IBasicAttackVars['normal'],
 				},
 			],
 			getCellValue(section, row, source) {
 				if (source) {
-					const value = source.basicAttackVars.value[section.selectValue as 'normal' | 'crit' | 'average'][row.id as keyof IBasicAttackVars['normal']];
+					const value = row.id === 'onHit' ? source.basicAttackVars.value.onHit.total : source.basicAttackVars.value[section.selectValue as 'normal' | 'crit' | 'average'][row.id as keyof IBasicAttackVars['normal']];
 					return {
 						value: roundNumber(value),
 						numberValue: value,
