@@ -198,4 +198,8 @@ export const EFFECTS_META: Record<
 		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Orianna', 'e', 0),
 		label: 'The Ball',
 	},
+	[EffectObjectName.vladimirRHemoplague]: {
+		sourceAbility: GameAbilityId.build(AbilityType.champion, 'Vladimir', 'r', 0),
+		label: 'Hemoplague',
+	},
 };

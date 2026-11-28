@@ -286,6 +286,10 @@
 			"description": "This champion is being watched over by the Ball, gaining additional defenses.",
 			"dataKey": "Characters/Orianna/Spells/OrianaGhost"
 		},
+		"VladimirHemoplagueDebuff": {
+			"description": "This unit will take additional damage from all sources until Hemoplague detonates.",
+			"dataKey": "Characters/Vladimir/Spells/VladimirHemoplagueDebuff"
+		},
 		"lolcalc6694BitterCold": {
 			"description": "This unit is slowed.",
 			"dataKey": "lolcalc6694BitterCold"

@@ -2,11 +2,17 @@ import type { IGameVariableValueParameters } from '@lolcalc/core/variables/game.
 import { championAbilityVariableValue } from '@lolcalc/core/variables/game.ts';
 import type IVladimir from '@lolcalc/data/files/champion/Vladimir.json';
 import { VariableType } from '@lolcalc/shared';
+import { clamp } from '@lolcalc/shared/utils.ts';
 import type { IChampionSpecific } from '../champion.ts';
 import { HOOK_PRIORITIES } from '../index.ts';
 import { defineChampionVariables } from './shared.ts';
 
 export default {
+	setupData(self) {
+		return {
+			applyR: clamp(0, Math.round(self.internalData.value.applyR ?? 0), 1),
+		};
+	},
 	q: {
 		variables: defineChampionVariables<'Vladimir', typeof IVladimir, 'q'>()({
 			known: {

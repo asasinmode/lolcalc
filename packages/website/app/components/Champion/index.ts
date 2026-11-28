@@ -368,6 +368,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Viktor: {
 		config: ChampionConfigViktor,
 	},
+	Vladimir: {
+		config: booleanConfigEl(GameAbilityId.build(AbilityType.champion, 'Vladimir', 'r', 0), 'applyR', 'Hemoplague', true, true, 'TODO - not implemented yet'),
+	},
 	Volibear: {
 		config: numberConfigEl(GameAbilityId.build(AbilityType.champion, 'Volibear', 'passive', 0), 'passiveStacks', 'Relentless Storm stacks', 0, CHAMPION_SPECIFICS.Volibear.passive.maxStacks),
 	},

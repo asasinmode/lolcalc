@@ -1446,6 +1446,14 @@ export const EFFECT_SPECIFICS = {
 			},
 		},
 	}),
+	[EffectObjectName.vladimirRHemoplague]: defineEffectSpecific<[hemoplague: number]>({
+		setupData(data) {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		setupDataFromInternalData(damageSource) {
+			return [(damageSource.internalData.value as IInternalDataOf<'Vladimir'>).applyR];
+		},
+	}),
 } satisfies IHypotheticalEffectSpecifics;
 
 for (const [effectObjectName, effectSpecific] of Object.entries(EFFECT_SPECIFICS)) {

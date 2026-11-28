@@ -880,6 +880,7 @@ export const EffectObjectName = {
 	lissandraPIcebornSubjugation: 'lolcalcLissandraPassive',
 	oriannaWMS: 'OrianaDissonanceAlly',
 	oriannaETheBall: 'OrianaGhost',
+	vladimirRHemoplague: 'VladimirHemoplagueDebuff',
 } as const;
 
 export type EffectObjectName = (typeof EffectObjectName)[keyof typeof EffectObjectName];
