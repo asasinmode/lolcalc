@@ -50,4 +50,4 @@ pnpm generate
 - [ ] build github actions CI/CD
 - [ ] example images
 - [ ] vladimir hemoplague effect
-- [ ] corki, gragas, katarina, sion, volibear ability vars
+- [ ] gragas, katarina, sion, volibear, vel'koz, pantheon ability vars
